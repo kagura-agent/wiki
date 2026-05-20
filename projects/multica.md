@@ -424,3 +424,13 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Approach**: Manual edit (small surgical fix, 2 files, +38/-9 lines). No acpx needed.
 - **Pattern**: When an API returns both ID and display Name, use ID for machine-to-machine communication, Name for human display. OpenClaw uses the `--agent` flag for ID lookup, not name search.
 - **Cross-repo insight**: Understanding openclaw's `normalizeAgentId` in `src/routing/session-key.ts` was key — `VALID_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/i`, spaces are INVALID_CHARS replaced with "-"
+
+## 2026-05-20 PR #2941: fix(realtime): check WriteMessage errors in WebSocket auth path
+- **Issue**: #2933 — WebSocket auth error frame write silently ignored in hub.go
+- **PR**: #2941
+- **Status**: PENDING (backend CI ✅, frontend Vercel auth pending — expected for external PRs)
+- **Root cause**: 4 `conn.WriteMessage()` calls in the first-message auth path (lines 680/686/691/697) ignored return values. Write failures (network congestion, premature client close) silently discarded.
+- **Fix**: Wrapped all 4 calls with error check + `slog.Warn` logging. `auth_ack` path also closes connection on write failure (client can't confirm auth succeeded). 1 file, +14/-4 lines.
+- **Approach**: Manual edit (simple error wrapping, no need for acpx). `go vet` clean.
+- **Pattern**: Follows existing writePump pattern at lines 892/898 which already check WriteMessage errors.
+- **Note**: Clean, minimal fix — no competition, no upstream branch conflict.
