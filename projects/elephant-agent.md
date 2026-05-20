@@ -5,7 +5,7 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 318
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-19
+last_verified: 2026-05-20
 ---
 
 # Elephant Agent
@@ -156,9 +156,12 @@ This "single gateway with guaranteed side-effects" is a pattern we should consid
 
 ## Update 2026-05-19: Prefix-Cache Stabilization + Tool-Group-Safe Compaction
 
-**Star growth:** 318⭐ (+31 in 1 day from 287). Accelerating again after brief plateau.
+**Star growth:** 353⭐ (+35 from 318 on 05-19). Sustained growth.
 
-**Key changes (05-17 → 05-19): 10 PRs merged in 3 days**
+**Key changes (05-19 → 05-20):**
+- PR#40: keep/replace API key UX improvement
+- Daemon lifecycle hardening (heartbeat refresh in loop checkpoint)
+- Prefix-cache PR#39 now merged and stable
 
 ### Prefix-Cache Reuse (PR #39, +90/-45 in kernel)
 

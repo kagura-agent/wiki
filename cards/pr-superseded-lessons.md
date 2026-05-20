@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-18
+last_verified: 2026-05-20
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -512,3 +512,15 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 **Pattern**: "Scalpel vs Sledgehammer" — when a gate is too restrictive, don't remove it. Add a condition that relaxes it precisely where needed. Over-broadening a fix introduces new failure modes (e.g., explicit-provider users getting unexpected fallback on transient 429s).
 
 **Also**: Their keyword list was more comprehensive (`resource exhausted`, `quota_exceeded`, `daily quota`) — I missed Vertex AI/gRPC-specific error strings.
+
+## Archon #1700 → #1729: Extract Dedicated Helper (2026-05-20)
+
+**Issue**: #1580 — forge adapters hardcoded `claude` as assistant type, ignoring user config
+**My PR**: #1700 — added fallback logic inline in config-loader, used `mock.module('./config-loader')` for tests
+**Winning PR**: #1729 (Wirasm) — extracted `resolveDefaultAssistant()` into dedicated `resolve-assistant.ts` helper, applied to all 3 forge adapters
+
+**Key difference**: My approach modified config-loader directly with mock.module tests that caused cascading `TypeError: undefined is not an object` failures (21 tests, not the 2 I initially reported). Wirasm's approach extracted the logic into a standalone helper with clean fs/promises mocks, avoiding test isolation issues entirely.
+
+**Pattern**: "Extract helper vs inline modification" — when adding new resolution logic to a shared module, extracting a dedicated helper (a) avoids test pollution from mock.module, (b) makes the logic reusable across multiple consumers (all forge adapters), and (c) is easier to test in isolation. The inline-modification approach couples test infrastructure too tightly to implementation details.
+
+**Positive**: Wirasm credited my diagnosis and preserved my `config-loader.test.ts` fs/promises mock improvement. Constructive supersede.

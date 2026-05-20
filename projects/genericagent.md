@@ -697,6 +697,16 @@ Mirrors our wiki management patterns. GenericAgent's approach is more automated 
 - Desktop release = new distribution surface
 - Active weekend development
 
+## Goal Mode Quality Polishing (2026-05-20)
+
+goal_mode prompt rewrite — shifted from "find improvements everywhere" to **quality-focused perspective switching**:
+- Old: "找下一个改进点: 测试/边界case/性能/安全/文档/代码质量" → scattered improvement
+- New: "选你认为最能提升成果质量的方向, 深入打磨" → focused quality polishing
+- **Anti-repetition guard**: "如果多轮都是同类型的小修——换一个完全不同的角度重新审视"
+- **Perspective switch technique**: "假装你是第一次看到这个成果的使用者/审阅者/攻击者，找到它最容易出问题的地方"
+
+**Insight**: The user/reviewer/attacker lens trio is a practical heuristic for breaking out of incremental improvement ruts. Worth applying to our own code review / PR quality checks.
+
 ## Goal Hive SOP (2026-05-18)
 
 Multi-agent coordination via shared BBS (bulletin board) server:
