@@ -131,4 +131,14 @@ Links: cli-everything, [[agent-as-router]]
 ## 开发笔记 (补充)
 - PR 模板: 无特殊要求，标准 title + body
 - CI 检查: build (3 OS) + unit-test (2 shards) + bun-test + adapter-test + audit + doc-coverage + docs-build + smoke-test(skip)
-- 已有 PR 中 32 个 test failures 是 article-extract 的，不影响
+- 已有 PR 中 50+ test failures 是 article-extract (missing @mozilla/readability) 的，不影响
+- extension/src/background.ts 是大文件 (1600+ 行)，改动前先 grep 函数名确认位置
+- Chrome extension 代码无法单元测试（chrome.* API），靠 tsc + code review
+
+### PR #1693 — fix(extension): serialize tab group creation to prevent duplicates (2026-05-20)
+- Issue: #1692 — 并发调用 ensureOwnedContainerTabGroup 导致重复 tab group
+- Root cause: 无 promise 序列化保护，并发调用各自 getOwnedContainerGroupId()→null 后创建重复 group
+- Fix: 添加 per-role groupPromise 序列化，复用 ensureOwnedContainerWindow 的已有模式
+- 1 file, +13/-2 lines. CI all green.
+- Pattern: Chrome extension 并发控制 = promise 序列化（同 ensureOwnedContainerWindow）
+- Status: pending review
