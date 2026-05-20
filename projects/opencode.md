@@ -349,3 +349,13 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Diff**: +9/-1 lines, 1 file (config/agent.ts)
 - **Tests**: `bun test test/config/` 163 pass, `bun test test/agent/` 47 pass
 - **Note**: `loadMode()` already handles this correctly via `Schema.decodeUnknownExit` + `Exit.isSuccess`.
+
+### #28412 — fix(llm): coerce all non-string enum types to string for Gemini (2026-05-20)
+- **Status**: PENDING (CI all 4 checks passed ✅, compliance passed ✅)
+- **Issue**: #28397 — Google Provider `.enum: only allowed for STRING type`
+- **Root cause**: `gemini-tool-schema.ts` sanitizer converts integer/number enum properties to string type, but misses boolean and other non-string types. Google's Gemini API rejects `.enum` on any non-STRING property.
+- **Fix**: Generalized the type guard from `result.type === "integer" || result.type === "number"` to `typeof result.type === "string" && result.type !== "string"` — covers boolean, integer, number, and any future non-string types.
+- **Diff**: 2 files, 4 insertions, 2 deletions
+- **Test**: Extended existing sanitize test to include `boolean` enum case, verified coercion to `{ type: "string", enum: ["true", "false"] }`. All 11 Gemini tests pass.
+- **Approach**: Manual edit (1-line fix + test extension), `bun test test/provider/gemini.test.ts` — 11/11 pass.
+- **Key learning**: Bun version must match repo's `packageManager` field — pre-push hook checks version with semver. `bun upgrade` to fix.

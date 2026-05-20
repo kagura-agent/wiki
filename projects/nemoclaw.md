@@ -223,3 +223,8 @@
 - **Pattern**: Build-time vs runtime network context mismatch. Marker files that block retry need runtime clearing if the failure condition is transient.
 - **Lesson**: NemoClaw repo is extremely large (~648MB+). Git operations get OOM-killed. Use shallow clones (`--depth=1 --single-branch --branch <branch>`) for all git ops. Don't try `grep -r` or `git commit --amend` on full clone.
 - **CodeRabbit feedback**: Verify `rm -f` success (may fail silently if marker is root-owned). Adopted with post-removal `[ -f ]` check.
+
+### PR #3722 — Superseded (2026-05-19)
+- Issue #3719 was duplicate of #3704 (filed earlier by laitingsheng)
+- My fix was technically good (wscurran approved), but PR closed because issue was a dup
+- **Lesson**: Before picking an issue, search for duplicates. Check comments for "duplicate" mentions
