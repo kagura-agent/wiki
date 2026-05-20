@@ -5,6 +5,7 @@ source: scout session #1431, deep read of luml-ai/dreamer
 tags: [self-evolving, memory, context, mcp, team, agent-infrastructure]
 stars: 13
 status: brand-new (2026-05-05)
+last_verified: 2026-05-20
 ---
 
 # Dreamer
@@ -86,7 +87,7 @@ Custom types can be declared in config with JSON Schema validation.
 - We already have the two-store pattern (memory/ + AGENTS.md/skills)
 - We already have the periodic consolidation (daily-review)
 - We DON'T have: formalized STM submission types, dream lease concurrency, PR-based governance for DNA changes
-- **Actionable**: The "context phase only touches what changed" principle is something we could adopt — our daily-review currently re-reads everything
+- **Actionable**: ~~The "context phase only touches what changed" principle is something we could adopt — our daily-review currently re-reads everything~~ → **Applied 2026-05-20**: review.yaml tool_review now runs `review-diff-check.sh` pre-check (git-diff last 24h), only deeply inspects changed tools. Unchanged tools get one-line pass.
 
 ## Ecosystem Position
 
