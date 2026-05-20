@@ -99,7 +99,21 @@
 - Changeset: patch for both `@ai-sdk/cerebras` and `@ai-sdk/openai-compatible`
 - TypeScript, Tests, Lint all green. Vercel deploy needs maintainer auth (expected for external PRs)
 
-## 踩坑补充 (2026-05-06)
+### PR #15464 (2026-05-20) — PENDING
+- Fix: accept empty string `role` in streaming delta chunks for openai-compatible provider
+- Issue: anomalyco/opencode#28427 (reported by zhipu/glm-5 user)
+- Root cause: `z.enum(['assistant']).nullish()` rejects `role: ""` in streaming chunks; changed to `z.string().nullish()`
+- Also fixed non-streaming response schema consistency (`z.literal('assistant').nullish()` → `z.string().nullish()`)
+- Test added: streaming with empty string role in delta chunks
+- CI: All green (lint, format, TypeScript, tests). Vercel deploy needs maintainer auth (expected)
+- Changeset: patch for `@ai-sdk/openai-compatible`
+- Lesson: ultracite formatting requires semicolons — first push failed lint, fixed in follow-up commit
+
+## 踩坑补充 (2026-05-20)
+
+- **Lint formatting**: Always add semicolons to test code. First push failed `Lint & Format` because test code was missing semicolons (ultracite/oxfmt requires them)
+- **Schema pattern**: `z.enum(['X']).nullish()` vs `z.literal('X').nullish()` — both reject empty string. For openai-*compatible* provider, `z.string().nullish()` is safer since the whole point is compatibility with diverse backends
+- **Issue cross-referencing**: The bug was reported in opencode's repo but root cause was in vercel/ai. Cross-repo issue tracing is valuable
 
 - **Formatter**: Project uses `ultracite fix` (not prettier). `npx prettier` reformats entire file with different settings (double quotes). Use `npx ultracite fix <file>` for formatting
 - **CI lint-staged**: Checks formatting on changed files only. Even small whitespace differences trigger failures
