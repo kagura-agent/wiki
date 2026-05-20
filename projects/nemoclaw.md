@@ -39,6 +39,15 @@
 - #1703 (enabledChannels → messagingChannels): rebased on main 2026-04-11, aligned with upstream naming
 - #1723 (ARM64 health): wscurran approved ✅, waiting merge
 - #3722 (RequiredArgsError handling): pending review — 1-line fix in oclif-runner.ts
+- #3880 (proxy test conflation): fix M12 to treat ERR_PROXY_TUNNEL as wiring success — 05-20
+
+## Notes (2026-05-20)
+- e2e tests in `test/e2e/` are bash scripts, not vitest — `bash -n` for syntax check, can't unit test
+- M12 test in `test-messaging-providers.sh` line ~1247: Node.js HTTPS probe to api.telegram.org
+- Proxy wiring success != destination reachability: ERR_PROXY_TUNNEL proves traffic routed through proxy
+- Parity docs in `test/e2e/docs/`: `parity-map.yaml` (human-readable) + `parity-inventory.generated.json` (machine-readable)
+- Repo now at 20.5k⭐, very active (multiple pushes/day)
+- 4→5 open PRs after this submission (at limit now)
 
 ## Notes (2026-05-18)
 - CLI has been fully migrated to TypeScript. `bin/nemoclaw.js` just does `require("../dist/nemoclaw")` now
