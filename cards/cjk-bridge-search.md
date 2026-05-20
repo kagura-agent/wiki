@@ -2,7 +2,7 @@
 created: 2026-05-18
 status: active
 depth: applied
-last_verified: 2026-05-18
+last_verified: 2026-05-20
 ---
 # CJK-to-English Bridge for Wiki Search
 
@@ -42,3 +42,15 @@ Full jieba/MeCab tokenization would add a Python dependency to a bash script. Th
 ## Links
 
 [[memex]], [[intent-aware-retrieval]], [[brain-rust]]
+
+## 2026-05-20: Term-Frequency (TF) Weighting Added
+
+Search benchmark regressed 100%→90% (krusch-context-mcp dropped below top-5 cutoff). Root cause: binary word-match scoring + doc-length normalization penalized longer files equally regardless of how densely they covered query terms.
+
+**Fix**: Added `log2(1 + total_occurrences) * 1.5` TF bonus to ranking formula. Files with many occurrences of query terms now score proportionally higher. Combined with a vocabulary fix (adding "exponential" to a note that described `exp()` without using the word).
+
+**Result**: krusch-context-mcp: score 33.8→49.1 (rank 6→4). Benchmark restored to 100%/100%.
+
+**Insight**: The [[temporal-decay-retrieval]] card + slug-match bonus dominate the top of results. For middle-tier results, TF weighting is the differentiator between relevant deep notes and tangentially-related ones. This mirrors the classic BM25 insight: term frequency matters alongside document frequency.
+
+See also: [[progressive-retrieval]], [[intent-aware-retrieval]]
