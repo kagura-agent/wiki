@@ -2,12 +2,12 @@
 title: Photo Agents — Vision-Grounded Self-Evolving Agent
 created: 2026-05-06
 source: https://github.com/jmerelnyc/Photo-agents
-stars: 684
-star_history: "51 (05-04) → 184 (05-06) → 364 (05-10) → 684 (05-13)"
+stars: 995
+star_history: "51 (05-04) → 184 (05-06) → 364 (05-10) → 684 (05-13) → 995 (05-20)"
 status: tracking
-revisit: 2026-05-17
+revisit: 2026-05-27
 tags: [self-evolving, memory-architecture, vision, computer-use]
-last_verified: 2026-05-13
+last_verified: 2026-05-20
 ---
 
 # Photo Agents
