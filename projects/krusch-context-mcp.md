@@ -41,7 +41,7 @@ References [Sentra Technical Report](https://github.com/niashwin/sentra-rag-fail
 | F2 Numeric | Same (keyword tags supplement cosine) | ✅ Real |
 | F3 Role-Swap | Same | ✅ Real |
 | F4 Hubness | Local bias only | ⚠️ Weak |
-| F6 Ebbinghaus Forgetting | Temporal decay: `exp(-0.01 * ageDays)` | ✅ Real (~26% drop/30d) |
+| F6 Ebbinghaus Forgetting | Temporal decay: exponential `exp(-0.01 * ageDays)` | ✅ Real (~26% drop/30d) |
 
 **Insight**: Pure cosine similarity has known failure modes. Hybrid retrieval (cosine + keyword tags) is a practical countermeasure. Most agent memory systems (including ours) use pure cosine or text match — this is a gap.
 
@@ -89,5 +89,5 @@ Created `wiki/search.sh` — a hybrid search that combines memex (cosine similar
 
 **Next steps:**
 - Monitor: does hybrid search change study decisions? (Should reduce "already known" re-discoveries)
-- Consider: temporal decay weighting (Sentra's `exp(-0.01 * ageDays)`) as future enhancement
+- Consider: exponential temporal decay weighting (Sentra's `exp(-0.01 * ageDays)`) as future enhancement
 - Consider: integrating into other workflows (workloop, reflect) that also search wiki

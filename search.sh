@@ -180,12 +180,19 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
   else
     MIN_MATCH=$(( (NUM_WORDS * 3 + 4) / 5 ))  # ceil(60%)
   fi
-  # Score each file by how many query terms it contains
+  # Score each file by how many query terms it contains + term frequency
   declare -A FILE_SCORES
+  declare -A FILE_TF
   for word in "${WORD_ARRAY[@]}"; do
     found=$(grep -rli "$word" "$WIKI_DIR/projects/" "$WIKI_DIR/cards/" 2>/dev/null || true)
     while IFS= read -r f; do
       [[ -n "$f" ]] && FILE_SCORES["$f"]=$(( ${FILE_SCORES["$f"]:-0} + 1 ))
+    done <<< "$found"
+    # Count total occurrences (TF) per file for this word
+    while IFS= read -r f; do
+      [[ -n "$f" ]] || continue
+      count=$(grep -ci "$word" "$f" 2>/dev/null || echo 0)
+      FILE_TF["$f"]=$(( ${FILE_TF["$f"]:-0} + count ))
     done <<< "$found"
   done
   # Filter files meeting minimum match threshold
@@ -227,6 +234,10 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
 
     # Term-match count as primary signal, normalized by document length
     RAW_TERM_SCORE=${FILE_SCORES["$f"]:-1}
+    # Term-frequency bonus: log2(1 + total_occurrences) scaled by 1.5
+    # Rewards files with dense coverage of query terms
+    RAW_TF=${FILE_TF["$f"]:-1}
+    TF_BONUS=$(awk "BEGIN { printf \"%.2f\", log(1 + $RAW_TF) / log(2) * 1.5 }")
     # Document length normalization: log2(lines) penalty for large files
     # Small files (≤50 lines) get no penalty; large files get diminishing returns
     DOC_LINES=$(wc -l < "$f" 2>/dev/null || echo 50)
@@ -246,9 +257,9 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     done
     # Slug-priority boost: 2+ slug-term matches get a large bonus (concept card relevance)
     [[ $SLUG_HITS -ge 2 ]] && SLUG_BONUS=$((SLUG_BONUS + 100))
-    # Combined: term_match * 10 + slug_bonus + decay * maturity
-    SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $SLUG_BONUS + $DECAY * $MATURITY }")
-    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE decay=$DECAY maturity=$MATURITY status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
+    # Combined: term_match * 10 + tf_bonus + slug_bonus + decay * maturity
+    SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $TF_BONUS + $SLUG_BONUS + $DECAY * $MATURITY }")
+    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE decay=$DECAY maturity=$MATURITY tf=$RAW_TF status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
     echo "$SCORE $f"
   done | sort -rn | cut -d' ' -f2- | head -"$LIMIT")
   
