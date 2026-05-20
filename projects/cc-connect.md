@@ -27,6 +27,8 @@
 - #1056 fix(agent): skip bypass-permissions flags when running as root — submitted 2026-05-19
 - #1060 fix(kimi): handle string content in stream-json responses — submitted 2026-05-19, lint ✅, unit-test queued
 
+- #1072 fix(api): validate work_dir exists before creating project — submitted 2026-05-20, lint ✅, unit-test ✅, smoke-test pending
+
 ## Architecture Notes
 - `encodeClaudeProjectKey()` in `agent/claudecode/claudecode.go` — maps abs path to Claude Code's on-disk project dir name
 - `findProjectDir()` tries multiple candidates then falls back to directory scan
