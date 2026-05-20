@@ -1480,6 +1480,48 @@ Open PRs: ~32
 - DNA changes: 0
 - Luna interaction: 0 (Day 7+)
 
+## 🔬 自进化观察日报 2026-05-20 (Day 33)
+
+### 管线活跃度
+- beliefs-candidates: **2 条新增** (collect-before-advise, cron-context-gap) / 5 active candidates (all count=1) / 5 graduated total
+- DNA 变更: **有（主动）** — AGENTS.md +9 行 "建议≠行动" closure rule (commit a74a9d7, Evolve #2402 驱动)
+- nudge 触发: **0 次** (journalctl 0 matches for nudge/system event enqueued today)
+- dreaming: **手动补触发**（quiet hours 跳过的 0df29bb1），daily-review 记录 promote 成功
+
+### 闭环追踪
+- 完整闭环: **1 个** — "安全主线连续 5+ 天观测未行动" → daily-audit 标红 → Evolve #2402 生成 → DNA 写入 "建议≠行动" rule (a74a9d7)。从观察到结构性修复的完整链路
+- 断裂处:
+  - **reflect→gradient**: 2 条新 gradient 打破了连续 3 天 input drought (Issue #9)。但两条均来自 Luna 互动反馈，非自主反思产出
+  - **nudge 0 触发**: 连续 2 天无 nudge。journalctl 无 system event enqueued 记录。原因待查——可能 session 结构不满足 agent_end hook 条件
+  - **dreaming 质量**: 需手动补触发。Light Sleep 仍为 uniform 0.62 (Issue #6 未解)
+
+### 今日发现
+
+1. **Input drought 部分缓解**: 2 条新 gradient 写入 beliefs-candidates.md，终结了 Day 30-32 连续 0 输入。但两条都源自外部反馈（Luna 植物养护 + Alex 邮件能力 hallucination），不是自主从执行中提取的。Issue #9 的核心问题（reflect 不从成功经验提取 gradient）未解
+
+2. **DNA 进化实例**: daily-audit 发现 "安全主线" 建议连写 5+ 天零行动 → 触发 Evolve → 写入 "建议≠行动" 闭环规则。这是管线设计的预期路径：观察→诊断→结构性改进。质量高——规则直接针对反复出现的 pattern
+
+3. **Luna 回归效应**: Luna 05-19 回归后，05-20 出现多项新指令（cove-patrol cron、GTM 调研、植物养护）。2 条新 gradient 都来自 Luna 互动。说明外部反馈仍是 gradient 输入的主要来源，自主反思产出接近 0
+
+4. **执行密度**: 1298 行 memory, 135 sections, 4 workspace commits, ~30 open PRs tracked, opencode#28412 新提交。高执行日但自主 gradient 仍为 0，与 Day 32 观察一致
+
+5. **Nudge 持续静默**: 连续 2 天 journalctl 0 nudge 记录。Issue #5 已关闭（确认机制正常），但实际未触发。需要回查 agent_end hook 触发条件——可能 cron 短 session 不计入
+
+### 原始数据
+- `git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md`: 1 commit (a74a9d7 AGENTS.md +9)
+- `beliefs-candidates.md`: 111 行, 5 graduated, 2 new today (both count=1)
+- `memory/2026-05-20.md`: 1298 行, 135 sections
+- Workspace commits today: 4 (todo, review-diff-check.sh, AGENTS.md closure rule, MEMORY.md cleanup)
+- Dreaming: 手动补触发, Light Sleep 0.62 uniform (Issue #6)
+- Nudge: 0 triggers (journalctl empty)
+- PR activity: opencode#28412 新提交, cove#7/#2 merged, ~30 open tracked
+- New gradients from external feedback: 2 (Luna 驱动)
+- New gradients from self-reflect: 0
+- DNA changes: 1 (AGENTS.md 建议≠行动 rule, 主动/Evolve 驱动)
+- Luna interaction: 活跃（多项指令 + 植物养护 + GTM）
+
+---
+
 ## 🔬 自进化观察日报 2026-05-19 (Day 32)
 
 ### 管线活跃度
