@@ -202,6 +202,19 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     fi
   done
   
+  # Build recall-frequency file from .recall-log (popularity signal)
+  # Source: Orb telemetry + web search CTR boosting pattern, applied 2026-05-20
+  # Capped at +1.5 to prevent rich-get-richer. Log-scaled: log2(1+count)*0.75
+  # Written to temp file because ranking loop runs in subshell pipeline
+  RECALL_FREQ_FILE=$(mktemp)
+  trap "rm -f $RECALL_FREQ_FILE" EXIT
+  _recall_log="$WIKI_DIR/.recall-log"
+  if [[ -f "$_recall_log" ]]; then
+    # Extract all slugs, count occurrences, write slug<tab>count
+    cut -d'|' -f4 "$_recall_log" | tr ',' '\n' | sed 's/^ *//;s/ *$//' | \
+      grep -v '^$' | sort | uniq -c | awk '{print $2"\t"$1}' > "$RECALL_FREQ_FILE"
+  fi
+
   # Merge exact + intersection results, deduplicate, rank by decay-weighted maturity score
   # Insight: AgentOps decay-ranked retrieval (δ=0.17/week) + maturity weights
   # Source: agentops.md (Darr et al. knowledge decay), applied 2026-05-13
@@ -257,9 +270,25 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     done
     # Slug-priority boost: 2+ slug-term matches get a large bonus (concept card relevance)
     [[ $SLUG_HITS -ge 2 ]] && SLUG_BONUS=$((SLUG_BONUS + 100))
-    # Combined: term_match * 10 + tf_bonus + slug_bonus + decay * maturity
-    SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $TF_BONUS + $SLUG_BONUS + $DECAY * $MATURITY }")
-    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE decay=$DECAY maturity=$MATURITY tf=$RAW_TF status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
+    # Recall-frequency boost: notes frequently returned by past searches get a small bonus
+    SLUG_FOR_RECALL=$(basename "$f" .md)
+    # Also check with projects/ prefix for project notes
+    _dir=$(basename "$(dirname "$f")")
+    [[ "$_dir" == "projects" ]] && SLUG_FOR_RECALL="projects/$SLUG_FOR_RECALL"
+    RAW_RECALL=0
+    # Skip index files from recall boost (recalled often due to breadth, not relevance)
+    if [[ "$SLUG_FOR_RECALL" != *"INDEX"* && "$SLUG_FOR_RECALL" != *"index"* ]]; then
+      RAW_RECALL=$(grep -m1 "^${SLUG_FOR_RECALL}	" "$RECALL_FREQ_FILE" 2>/dev/null | cut -f2 || echo 0)
+      [[ -z "$RAW_RECALL" ]] && RAW_RECALL=0
+    fi
+    if [[ $RAW_RECALL -gt 0 ]]; then
+      RECALL_BOOST=$(awk "BEGIN { v = log(1 + $RAW_RECALL) / log(2) * 0.75; printf \"%.2f\", (v > 1.5 ? 1.5 : v) }")
+    else
+      RECALL_BOOST="0.00"
+    fi
+    # Combined: term_match * 10 + tf_bonus + slug_bonus + recall_boost + decay * maturity
+    SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $TF_BONUS + $SLUG_BONUS + $RECALL_BOOST + $DECAY * $MATURITY }")
+    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE decay=$DECAY maturity=$MATURITY tf=$RAW_TF recall=$RAW_RECALL status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
     echo "$SCORE $f"
   done | sort -rn | cut -d' ' -f2- | head -"$LIMIT")
   
