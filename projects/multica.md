@@ -434,3 +434,14 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Approach**: Manual edit (simple error wrapping, no need for acpx). `go vet` clean.
 - **Pattern**: Follows existing writePump pattern at lines 892/898 which already check WriteMessage errors.
 - **Note**: Clean, minimal fix — no competition, no upstream branch conflict.
+
+## 2026-05-20 PR #2945: fix(ws): guard JSON.parse in WSClient.onmessage against malformed frames
+- **Issue**: #2934 — Unguarded JSON.parse can silently swallow auth errors
+- **PR**: #2945
+- **Status**: PENDING (backend CI ✅, installer CI ✅, frontend Vercel deploy pending — normal for external PRs)
+- **Root cause**: `JSON.parse(event.data)` in `WSClient.onmessage` unguarded — malformed frames crash dispatch silently in browser
+- **Fix**: try-catch wrapper, log via existing `this.logger.warn()`, return early. Added test with malformed JSON injection.
+- **Files**: `packages/core/api/ws-client.ts` (7 lines added), `packages/core/api/ws-client.test.ts` (20 lines added)
+- **Pattern**: Issue had minimal fix already described — straightforward defensive coding
+- **Testing**: `npx vitest run packages/core/api/ws-client.test.ts` — 4/4 pass
+- **CI notes**: Backend Go tests + installer tests run. Frontend is Vercel deploy (needs team auth, always pending for external PRs). No DCO/signoff required.
