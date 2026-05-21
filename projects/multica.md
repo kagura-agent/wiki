@@ -445,3 +445,8 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Pattern**: Issue had minimal fix already described — straightforward defensive coding
 - **Testing**: `npx vitest run packages/core/api/ws-client.test.ts` — 4/4 pass
 - **CI notes**: Backend Go tests + installer tests run. Frontend is Vercel deploy (needs team auth, always pending for external PRs). No DCO/signoff required.
+
+### multica#2945 superseded by #2946 (2026-05-21)
+- My PR: client-side JSON.parse guard in WSClient.onmessage
+- Maintainer's PR: same guard + server-side auth_ack/auth-error write swallow from #2933, combined in one pass with stronger regression test
+- Lesson: when two issues share the same test file, maintainer prefers combining fixes to avoid collision. Diagnosis was correct, packaging was too narrow
