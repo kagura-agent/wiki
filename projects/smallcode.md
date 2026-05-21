@@ -1,10 +1,10 @@
 # SmallCode — Coding Agent for Small Local LLMs
 
 - **repo**: Doorman11991/smallcode
-- **stars**: 840 (created 2026-05-18, 3 days old)
+- **stars**: 848 (was 840 at initial read)
 - **lang**: JavaScript (Node.js)
 - **license**: MIT
-- **status**: active | deep-read | ✓2026-05-21
+- **status**: active | deep-read | ✓2026-05-21 (updated)
 
 ## What It Is
 
@@ -62,8 +62,8 @@ Claims 87% single-file task success with Gemma 4 E4B (~4B active params) vs ~75%
 
 1. **Context overflow persists** — user reports "tool calling quickly exceeds 256k context with 9B model" (#10). The budget management isn't fully solving the core problem yet.
 2. **Native dependency hell** — better-sqlite3 build failures on Node 26/macOS. Fixed by making it optional (v0.4.13).
-3. **Solo developer** — all issues answered by owner with brief "fixed" replies. Zero external PRs. 🔴 SOLO (0/6 community health).
-4. **No tests** — only stress tests in bench/, no unit tests. Red flag for reliability claims.
+3. **Community formed** — upgraded from 🔴 SOLO (0/6) to 🟢 THRIVING (5/6) by v0.7.0. External PRs merging.
+4. **No unit tests** — still only stress tests in bench/, but v0.7.0 E2E verified against 5 multi-file projects (Python/TS/Rust/Go/C#).
 
 ## Comparison with Our Tools
 
@@ -85,6 +85,53 @@ Claims 87% single-file task success with Gemma 4 E4B (~4B active params) vs ~75%
 - Competes with: [[opencode]], Pi Agent, Claude Code (different tier)
 - Related concepts: [[context-budget-constraint]], [[forge-guardrails]] (same "make bad models good" thesis)
 - Niche: local-first, privacy-conscious developers who won't use cloud APIs
+
+## v0.7.0 Security Audit (2026-05-21)
+
+Massive 86-bug audit covering security, context overflow, tool schema, and general fixes. +1539/-442 lines across 29 files.
+
+### New: Centralized Security Module (`src/security/sanitize.js`)
+287-line pure-function module providing:
+- **Secret redaction** — 12 regex patterns covering OpenAI/Anthropic/GitHub/AWS/GCP/JWT/Slack/Discord tokens + env-style assignments + private key blocks. `ALWAYS_REDACT_KEYS` set for object property scanning.
+- **Path containment** — `safeResolvePath()` with NUL-byte rejection, sensitive path blocklist (~/.ssh, ~/.gnupg, .env, .password-store, .docker/config.json, .kube/config), optional containment to project root.
+- **Shell escaping** — `escapeShellArg()` cross-platform (POSIX single-quote / CMD double-quote). `buildCommand()` separates trusted prefixes from user args.
+- **ANSI stripping** — comprehensive CSI/OSC/DCS/C1 removal. Used to prevent escape code injection into model context.
+- **Line demuxer** — shared Readable stream listener to avoid EventEmitter accumulation in stdio MCP servers.
+
+**Design principle**: "Stay under 300 lines so audit is feasible" — security code that's too large to audit defeats its purpose.
+
+### SSRF Guard (origin-based)
+- Default: only loopback + RFC1918 allowed
+- **Always blocked** (even with `LLM_ALLOW_PUBLIC_ENDPOINTS=1`): link-local (169.254/16), CGNAT (100.64/10), cloud metadata (169.254.169.254, fd00:ec2::254, metadata.google.internal)
+- Compares **origin** (scheme+host+port), not string prefix — prevents `api.evil.com.attacker.com` bypass
+- Env override: `LLM_ENDPOINT_ALLOWLIST` for specific endpoints, `LLM_ALLOW_PUBLIC_ENDPOINTS=1` for production
+
+### Context Overflow Fixes (20 bugs)
+The context overflow problem (noted in #10) addressed through multiple mechanisms:
+- Mid-turn eviction: `let` instead of `const` for eviction targets, respects tool_call_id pairing
+- File injection capped at **15% of context window** in improvement loop
+- Image base64 only from latest user message (was: every call — huge token waste)
+- References capped at 8000 chars, git stat at 40 lines
+- Compaction triggers at **80% budget**, compression target capped at 1500 tokens
+- **2-stage routing**: sends only selector, not selector + all tools (significant savings for small contexts)
+- Tool_call arguments truncated in old messages during eviction
+
+**Key insight**: context overflow in small models isn't one bug — it's death by a thousand cuts. The fix is a systematic audit of every injection point, not a single compaction algorithm.
+
+### Community Health Transformation
+- **Was**: 🔴 SOLO (0/6) on 05-21 initial assessment
+- **Now**: 🟢 THRIVING (5/6) — 4 unique merged PR authors, 11 issue authors/30d, 6 external PRs
+- Contributors: Zireael (CI + branch fix), trufae (--endpoint flag)
+- ACP integration requested (#20) — someone wants to connect SmallCode to [[openclaw-acp]] via Zed editor
+
+### RTK Integration (v0.6.14)
+"Rust Token Killer" — auto-rewrites bash commands for 60-90% token savings. An optimization layer between the model's shell commands and execution, compressing verbose tool output before feeding back to context.
+
+### What We Can Learn
+1. **Centralized sanitize module pattern** — having one <300-line file that all persistence/export paths use is better than scattering redaction logic. Our workspace also handles secrets ([[pass-sops-credential-management]]) but lacks systematic tool output redaction.
+2. **Context injection auditing** — SmallCode's approach of capping every injection point (15% file, 8000 char refs, 40-line git stat) is systematic. Our subagents don't have equivalent caps.
+3. **SSRF guard with origin comparison** — the insight about comparing URL origins not string prefixes is a common pitfall. Worth checking if our web_fetch/browser tools have similar protections.
+4. **"86-bug audit" framing** — counting and categorizing bugs in a security audit makes progress visible and scope clear. Good practice for our own audits.
 
 ## Broader Scout Findings (2026-05-21)
 
