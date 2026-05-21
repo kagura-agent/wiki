@@ -360,6 +360,15 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Approach**: Manual edit (1-line fix + test extension), `bun test test/provider/gemini.test.ts` — 11/11 pass.
 - **Key learning**: Bun version must match repo's `packageManager` field — pre-push hook checks version with semver. `bun upgrade` to fix.
 
+### #28637 — fix(session): use server timestamps instead of IDs in runLoop exit condition (2026-05-21)
+- **Status**: PENDING (CI all 4 checks passed ✅)
+- **Issue**: #28618 — runLoop fails to exit when client-generated messageID has clock skew ahead of server
+- **Root cause**: `prompt.ts:1272` uses `lastUser.id < lastAssistant.id` for exit condition. IDs encode `Date.now()` in hex. Client-provided messageID uses browser clock; assistant ID uses server clock. If browser is ahead, exit condition fails → spurious second LLM call with `<system-reminder>` wrap.
+- **Fix**: Replace `lastUser.id < lastAssistant.id` with `lastUser.time.created <= lastAssistant.time.created`. Both `time.created` are set server-side.
+- **Diff**: 1 file, 1 line changed
+- **Approach**: Manual edit (1-line surgical fix). Traced data flow to confirm `time.created` is always server-generated.
+- **Key learning**: Never use client-generated IDs for ordering comparisons in server-side logic. Server timestamps are the reliable source of truth.
+
 ### #28584 — fix(command): fetch MCP prompts dynamically instead of caching at init (2026-05-21)
 - **Status**: PENDING (CI all 4 checks passed ✅)
 - **Issue**: #28579 — Regression: MCP prompts no longer listed after connecting MCP server
