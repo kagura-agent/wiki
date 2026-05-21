@@ -382,3 +382,28 @@ Mercury 补上了之前缺失的 **多 agent 协调能力**——之前是纯单
 ### OmniAgent / Orb 对比
 - **OmniAgent** (273★): 最近只有 index.html 更新（04-19），无实质代码变化。项目可能在做 landing page 而非 core 开发。降低关注优先级。
 - **Orb** (52★): 04-20 docs 全面重写，转向 CC CLI native 架构。增长缓慢但方向清晰（self-evolving + Claude Code wrapper）。
+
+## 跟进 2026-05-21: Critical Shell Injection Fix (PR #48)
+
+⭐2397 (up from 2446 tracking entry). Active development.
+
+### Shell Command Injection Vulnerability (CWE-78 / CWE-184)
+
+**PR #48** (merged): Critical security fix discovered by Aeon (aeon-aaron).
+
+**The bug:** `checkShellCommand()` in `permissions.ts` matched blocklist/safelist patterns against the **full command string**. But `run-command.ts` passes the same string to `spawn(command, [], { shell: true })`, which invokes `/bin/sh -c`. The shell parses chains (`;`, `&&`, `||`), pipes (`|`), and substitutions (`$(...)`, backticks) — the matcher does not. Result: an auto-approved prefix like `echo *` (matching `SAFE_READ_PATTERNS`) launders arbitrary chained commands: `echo $(rm -rf ~)` would be auto-approved.
+
+**The fix:** `splitShellSegments(command)` — a recursive shell tokenizer that:
+- Walks the command honoring single/double/backtick quote contexts
+- Extracts `$(...)` and backtick substitutions as separate segments (recursively)
+- Handles substitutions inside double quotes (which sh still expands)
+- Treats `;`, `\n`, `&&`, `||`, `|`, `&`, `()`, `{}` as segment boundaries
+- Returns unparseable segments as-is (conservative fallback)
+
+Then `checkShellCommand()` runs blocklist against **every** segment, and auto-approves only when **every** segment independently matches safe patterns.
+
+**Why this matters for [[OpenClaw]]:** OpenClaw has similar shell execution with permission checks. The same class of bug could exist — where a safe-looking prefix launders a destructive tail through shell chaining. The `splitShellSegments` approach is the right defense: parse what the shell will parse, check each piece independently.
+
+**Pattern:** "Parse-what-you-execute" — if you're checking a string that will be interpreted by another parser (shell, SQL, etc.), your checker must understand that parser's grammar. Checking the raw string is always bypassable.
+
+Links: [[shell-command-injection]], [[agent-security]], [[permission-hardening]]

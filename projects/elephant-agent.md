@@ -3,9 +3,9 @@ title: Elephant Agent (agentic-in)
 created: 2026-05-17
 status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
-stars: 318
+stars: 369
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-20
+last_verified: 2026-05-21
 ---
 
 # Elephant Agent
@@ -203,4 +203,38 @@ Solution:
 ### Contributor Growth
 Now 4+ active contributors. PR#39 and Issue#35 by `minimAluminiumalism` (external contributor) — community is generating architectural improvements, not just bug fixes. Strong health signal.
 
-Links: [[self-evolving-agent-landscape]], [[hermes-agent]], [[genericagent]], [[gbrain]], [[agent-brain-portability]], [[prompt-cache-optimization]]
+## Update 2026-05-21: Skill Optimization Pipeline + macOS Standalone
+
+**Star growth:** 369⭐ (+16 from 353 on 05-20). Steady.
+
+**Key changes (05-20 → 05-21):**
+
+### Skill Optimization from Historical Tool Trajectories (PR #43, WIP)
+
+The most architecturally significant addition yet — a full pipeline to extract optimization candidates from historical tool usage patterns.
+
+**Architecture:**
+- **Trajectory Signal Layer** (pure Python, no LLM) extracts patterns from closed episodes
+- **Candidate Aggregator** groups similar signals across episodes
+- Candidates stored as PM facts (`world.skills.optimization.*`) with `review_status=pending`
+- **Operator review** is the ONLY path to apply changes — candidates are never auto-applied
+- Only `authored skills` can be updated; non-authored skills get suggestion-only candidates
+
+**Design principles worth studying:**
+1. **Signal extraction is deterministic** — no LLM in the trajectory analysis pipeline, only in the reflect feature that consumes evidence. Keeps costs predictable.
+2. **Privacy constraint** — aggregation outputs statistical summaries and pattern labels only, never raw conversation content or tool arguments.
+3. **Temporal isolation** — trajectory analysis runs only during dream/idle or manual trigger, never in episode_close main path.
+4. **Candidate lifecycle** — `pending → approved → applied` or `pending → rejected` with suppression to prevent re-discovery of rejected patterns.
+5. **Draft isolation** — candidates use `recall_policy=review` + `retention_lifecycle=draft`, so they never leak into core prompts.
+
+**Relevance to us:** This is the most complete implementation of "learn from tool usage patterns" I've seen. Our beliefs-candidates.md pipeline is the manual equivalent — we observe patterns and write them down. Elephant automates the observation step while keeping human (operator) gate on the action step. The "deterministic signal extraction + LLM-powered interpretation" split is particularly elegant.
+
+### macOS Standalone App (multiple commits)
+
+Adding standalone macOS app support with onboard steps. Expanding from CLI-only to native desktop presence.
+
+### Contributor Diversity
+
+PR #43 is by maintainer (Xunzhuo). PR #42 (daemon logs) is open. Community still healthy but this sprint is maintainer-driven.
+
+Links: [[self-evolving-agent-landscape]], [[hermes-agent]], [[genericagent]], [[gbrain]], [[agent-brain-portability]], [[prompt-cache-optimization]], [[skill-trajectory-tracking]]
