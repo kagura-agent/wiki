@@ -113,3 +113,6 @@
 2026-05-20T17:49:14+08:00|neutral|GenericAgent goal mode|projects/genericagent,projects/stash,projects/mercury-agent,projects/evomap-evolver-gep,evomap-evolver-gep,metadata-driven-context-injection,supervisor-pattern,stash,manifest
 2026-05-20T17:49:25+08:00|neutral|Elephant Agent prefix cache|projects/elephant-agent,reasonix-cache-first-agent,elephant-agent,agent-isolation
 2026-05-21T08:27:14+08:00|neutral|unapplied insight apply improvement|projects/gbrain,cards/closed-loop-vs-open-pipe,projects/oh-my-kimichan,projects/skvm,projects/wanman-skill-evolution,closed-loop-vs-open-pipe,medusa-skill-framework,cangjie-skill-ecosystem,skvm,forge-guardrails
+2026-05-21T09:44:10+08:00|neutral|nanobot|projects/nanobot,cards/loop-detection-comparison,cards/self-evolving-agent-landscape,nanobot,metadata-driven-context-injection,write-ahead-session-persistence
+2026-05-21T09:44:10+08:00|neutral|html-anything|projects/html-anything,projects/luna-side-hustle,projects/genericagent,html-anything,luna-side-hustle
+2026-05-21T09:44:11+08:00|neutral|eval-view|cards/tool-eval-gh-cli,是什么,cards/eval-driven-self-improvement,cards/evolution-needs-eval
