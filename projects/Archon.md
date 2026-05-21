@@ -49,3 +49,44 @@ Archon 的核心洞察：**structure 是 deterministic 的，intelligence 是 no
 
 ## Tags
 #workflow #agent-coding #determinism #[[flowforge]] #[[skill-evolution]]
+
+## 贡献记录
+
+### PR #1734 — fix(workflows): persist read-only node outputs via bash bridges (2026-05-21)
+- **Issue**: #1477 — archon-refactor-safely workflow silently drops analysis plan
+- **Status**: Pending review
+- **Fix**: Added bash bridge nodes (persist-impact, persist-plan) between read-only AI nodes and downstream consumers
+- **关键发现**:
+  - workflow YAML 中 denied_tools 和 prompt 指令的矛盾是常见设计缺陷
+  - Archon 用 `$node.output` 传递 AI 输出，但执行节点期望读文件
+  - bash 节点是连接 AI 节点和文件系统的正确方式
+- **CI**: Ubuntu/Windows tests + lint 通过（pre-existing test failure in upstream）
+- **CodeRabbit**: No actionable comments
+- **注意事项**:
+  - Branch 必须基于 `dev`（不是 main）
+  - 改 `.archon/workflows/defaults/` 后必须 `bun run generate:bundled`
+  - PR template 必须手动填写完整（有 checklist）
+  - Archon 竞争极其激烈 — 每个 bug issue 都有多个 competing PRs
+
+### PR #1733 — fix(workflows): ensure workflow-builder injects $ARGUMENTS (pending)
+- **Status**: Pending review
+
+## 维护者风格
+- coleam00 是主要维护者，merge 频率高（每天多个）
+- 接受外部 PR，但竞争激烈（大量外部贡献者）
+- bot review: CodeRabbit（CHILL 模式，一般不产出 actionable comments）
+- 测试: `bun run test`（各 package 独立跑），`bun run validate` 全套
+
+## 测试命令
+```bash
+bun run type-check
+bun run test
+bun run lint
+bun run generate:bundled  # 如果改了 workflow/command defaults
+bun run validate  # 全套
+```
+
+## 竞争观察 (2026-05-21)
+- 每个 bug issue 在 24h 内就有 1-3 个 competing PRs
+- 需要选择"冷门但有价值"的 issue（如 workflow design bug vs 常规 code fix）
+- guide#28 的观察完全成立：agent 生态 contributor 饱和

@@ -532,3 +532,10 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 **Pattern**: "Extract helper vs inline modification" — when adding new resolution logic to a shared module, extracting a dedicated helper (a) avoids test pollution from mock.module, (b) makes the logic reusable across multiple consumers (all forge adapters), and (c) is easier to test in isolation. The inline-modification approach couples test infrastructure too tightly to implementation details.
 
 **Positive**: Wirasm credited my diagnosis and preserved my `config-loader.test.ts` fs/promises mock improvement. Constructive supersede.
+
+## 2026-05-21: multica#2945 + #2941 superseded by #2946
+- **My PRs**: #2945 (client-side JSON.parse guard) + #2941 (server-side WriteMessage error check)
+- **Superseding PR**: #2946 — combined both fixes into one PR, touching both client and server
+- **Maintainer feedback**: "your diagnosis and fix direction were exactly right"
+- **Lesson**: When fixing related bugs (same subsystem — WebSocket), check if there are sibling issues that should be fixed together. Maintainer Bohan-J preferred a single cohesive PR over two separate ones. Look at related open issues before splitting into multiple PRs.
+- **Pattern**: Fix direction was right, but scope was too narrow. The maintainer's instinct was to batch related fixes.
