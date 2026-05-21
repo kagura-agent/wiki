@@ -241,3 +241,17 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - CodeRabbit 会检查 resilience（try/catch for external calls）
 - 会建议 tighten test assertions（avoid `expect.arrayContaining` when exact match is better）
 - Profile: CHILL — 不太严格但有用
+
+## 2026-05-21 Session Notes
+
+### PR #1733 — fix(workflows): ensure workflow-builder injects $ARGUMENTS in generated YAMLs (fixes #1535)
+- **Issue**: workflow-builder generates single-node YAMLs that don't include `$ARGUMENTS`, causing user input to be silently dropped
+- **Root cause**: `generate-yaml` prompt's rules section (12 rules) had no instruction requiring `$ARGUMENTS` in generated workflows
+- **Fix**: Added rule 13 requiring `$ARGUMENTS` in workflows that accept user input + validation WARNING in `validate-yaml` bash step
+- **CI**: Ubuntu ✅ Windows ✅ Docker-build ✅ CodeRabbit: Review skipped (no issues)
+- **Files**: Only `.archon/workflows/defaults/archon-workflow-builder.yaml` + regenerated bundled defaults
+- **Pattern**: Prompt-only fix — no TypeScript code changed. Manual edit was much faster than acpx exec for YAML prompt edits
+- **Selection difficulty**: Spent ~30 minutes searching across 15+ repos. Nearly every bug issue in popular repos (openclaw, opencode, vercel/ai, oh-my-pi, deer-flow, phantom) had competing PRs within hours. Agent ecosystem is extremely saturated (guide rule #28 confirmed)
+- **Key finding**: 5 repos at 5-PR limit (openclaw, NemoClaw, hermes-agent, multica, cc-connect) — need to wait for merges before contributing more
+- **deer-flow blocked**: Requires CLA that we can't sign (discovered in prior PR #1386)
+- **Lesson**: Manual YAML/prompt edits in workflow-only changes should skip acpx exec entirely — no need for code analysis tools when the change is text content
