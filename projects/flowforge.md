@@ -128,3 +128,25 @@ Also fixed stale data: two broken symlinks in `~/.flowforge/workflows/` (workloo
 - Without `-w`, behavior is unchanged (most recent instance by ID)
 
 **Effect**: `flowforge next -w study` is unambiguous. Eliminates silent cross-workflow contamination. 80 tests pass.
+
+## Gradient Gate Node (2026-05-21)
+
+**Problem**: Self-evolving observations (Issue #9, Day 33+) showed the reflect→gradient pipeline producing **zero self-generated gradients**. All beliefs-candidates.md entries came from Luna's feedback, none from self-reflection on execution. The reflect node already had a "step 2.5: mandatory gradient" instruction, but it was buried in a 400-word task description and consistently skipped.
+
+**Applied insight**: From [[self-evolving-observations]] Issue #9 (reflect→gradient disconnect) + [[mechanical-enforcement-via-topology]] pattern. Instructions embedded in long task descriptions get rationalized away. Structural enforcement through workflow topology (separate nodes) is more effective than behavioral instructions.
+
+**Implementation**:
+- Added `gradient_gate` node between `reflect` and `done` in workloop.yaml
+- The gate checks `git diff HEAD -- beliefs-candidates.md` for actual modifications
+- If no diff → forces agent to write at least one gradient before completing
+- Two branches both lead to `done` (already written vs. just-now written)
+
+**Bonus fix**: Discovered and fixed a pre-existing YAML parse error — unescaped ASCII `"` inside double-quoted YAML strings in the `study` and `reflect` nodes (`"上次做过"`, `"这轮没什么好写的"`). This had silently broken `flowforge start` for workloop (js-yaml parse error at line 160). The workflow still worked via DB-cached version for `next/status` commands, masking the issue.
+
+**Effect**: 
+- `flowforge start workloop.yaml` now works again (was silently broken)
+- Gradient extraction becomes structurally enforced, not just instructed
+- Addresses the 33-day gap of zero self-generated gradients
+
+**Verification**: YAML valid (js-yaml parse), 84 FlowForge tests pass, `flowforge start` succeeds.
+
