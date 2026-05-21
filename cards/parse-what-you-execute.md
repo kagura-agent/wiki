@@ -44,5 +44,5 @@ Includes: [[OpenClaw]], [[mercury-agent]], [[nanobot]], and any MCP server expos
 ## Related
 
 - [[agent-security]]
-- [[permission-hardening]]
+- [[acp-permission-model]]
 - [[elephant-agent]] — different domain but similar principle: check what you'll actually execute, not the raw input
