@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-20
+last_verified: 2026-05-21
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -35,6 +35,14 @@ last_verified: 2026-05-20
 - 看到 fallback/default 值不对 → 不要直接改数字,要问"为什么代码会走到这个分支?"
 - 看到输出不对 → 不要先调格式,要问"这个分支是不是应该被跳过?"
 - Maintainer 写的代码量通常更多,但更精准--因为他们明确了边界条件
+
+## 批量同类 PR → 自己先合并成 rollup (2026-05-21 新增)
+
+| 我的 PR | 我的做法 | 替代方案 | 差距 |
+|---------|---------|---------|------|
+| hermes-agent #12038 | 24 个独立 PR，每个只改 1 个文件加 `exc_info=True` | #15483: maintainer 把 24 个合成 1 个 rollup PR | 24 个 PR = 24 倍 review 成本，维护者直接替代 |
+
+**教训**: 当你发现同一个 pattern 需要在多处修复时（如 24 个 `logger.error` 都缺 `exc_info=True`），**自己先合成一个 rollup PR**，不要开 24 个。维护者会因为 review 队列成本太高直接关掉你的，然后自己做 rollup。
 
 ## 范围太窄
 

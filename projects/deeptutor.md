@@ -82,6 +82,7 @@
 ## 更新记录
 
 - 2026-04-10: 初次侦察 + 架构深读，v1.0.0-beta.4 发布当天
+- 2026-05-21: v1.3.10 latest. Target branch: `dev`. No CI checks on PRs (linting local only). Maintainer @pancacake responsive, merges within days.
 
 ## 贡献记录
 
@@ -113,3 +114,13 @@
 - **测试**: `test_extract_embeddings.py` 加了 None embedding 场景
 - **CI 注意**: Smoke Tests 的 loguru ModuleNotFoundError 是上游问题（requirements 缺 loguru），不影响我们的 PR
 - **本地测试**: `.venv/bin/python -m pytest tests/services/embedding/ tests/services/rag/ -q`（45 pass，10 pre-existing fail）
+
+### PR #499 — fix(web): reset quiz answer state when new quiz is generated in same chat (2026-05-21)
+- **Issue**: #487 (quiz state inheritance across generations)
+- **Root cause**: React component key based on array index, no state reset when questions prop changes
+- **Fix**: Content-derived key on QuizViewer + defensive useEffect to reset answers/idx/threads
+- **Status**: PENDING (no CI checks on repo, tsc --noEmit ✅)
+- **Files**: web/components/chat/home/ChatMessages.tsx, web/components/quiz/QuizViewer.tsx
+- **Diff**: 13 lines added, 2 files
+- **Pattern**: REACT_STATE_LEAK — index-based keys + useState without reset effect = stale state across prop changes. Fix: content-derived key + defensive useEffect.
+- **Note**: DeepTutor has no CI on PR checks, rely on local tsc. Recent quiz UX PRs (#478) show active maintenance in this area.
