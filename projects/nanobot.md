@@ -524,3 +524,31 @@ Major release. 105 PRs, 33 contributors (20 new).
 - Image generation tool + inline preview
 - Settings/BYOK redesign, localized slash palette
 - LAN access gated by token
+
+## v0.2.0 Update (2026-05-16)
+
+**105 PRs merged, 20 new contributors.** Major release.
+
+### Key Changes
+1. **`/goal` + `long_task` tool** — Mark a thread as sustained objective. Active goal pinned in Runtime Context every turn, survives compaction and long tool chains. `complete_goal` to finish. Wall-clock timeout auto-widens during active goals. This is their answer to "agent forgets what it's doing mid-way."
+   - Relevance: We handle this via FlowForge workflows + plan tool. Their approach is lighter (single tool call vs workflow engine) but less structured.
+
+2. **Image generation built-in** — prompt-to-picture inline in chat via new tool + WebUI mode.
+
+3. **WebUI shipped in wheel** — `pip install nanobot-ai` now bundles WebUI. No separate build step. Settings redesign, BYOK, streamed reasoning, LAN token gate.
+
+4. **5 new providers** — AWS Bedrock Converse, NVIDIA NIM, LongCat, Atomic Chat, MiMo. Plus `fallback_models` for automatic failover.
+
+5. **Core refactor** — `AgentLoop.from_config()`, `_process_message` as functional state machine, tools as self-describing plugin architecture, `ask_user` removed, `GlobTool` retired.
+
+6. **Security** — SSRF blocked in DingTalk, Feishu media path confinement, local media attachment confinement, chat-native pairing for DM approvals.
+
+7. **Model presets** — Named model+provider bundles, runtime switching via `/model`.
+
+### Stars
+- 39,131 (2026-04-12) → 42,865 (2026-05-21). +9.5% in 5 weeks.
+
+### Takeaways
+- `/goal` pattern is interesting: lightweight persistent context injection. Simpler than our FlowForge but less capable (no branching, no multi-step workflow). Good for single sustained objectives.
+- `fallback_models` is a pattern we should watch — automatic provider failover.
+- Their pace: 105 PRs in ~3 weeks from 33 contributors. Community is thriving.
