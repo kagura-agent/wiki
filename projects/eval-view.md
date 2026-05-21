@@ -76,8 +76,13 @@ eval-view dogfoods itself daily — wraps its own chat mode as an HTTP agent and
 - 2 core maintainers
 - Uses Claude Code for development (visible in issue comments)
 
+## Applied
+
+### Goal-Drift Check (2026-05-21)
+Adapted `goal_drift.py` Jaccard baseline into `tools/goal-drift-check.sh` for [[FlowForge]] subagent output validation. Dual-pass: jaccard ≥ 0.15 OR task_coverage ≥ 0.40. Integrated into FlowForge SKILL.md step 3b. Zero LLM cost. See also [[mechanical-verification]].
+
 ## Takeaways
-1. **Goal-drift detection** is a compelling eval primitive we don't have. Simple Jaccard baseline catches obvious drift without LLM cost. Could apply to [[FlowForge]] workflow execution.
+1. **Goal-drift detection** — Applied ✅. `tools/goal-drift-check.sh` adapts Jaccard baseline for FlowForge subagent drift detection.
 2. **Retrieval lineage** could be adapted to evaluate our wiki/memory system — which notes are actually influential? Connects to [[agent-memory-benchmark]].
 3. **"Pure module + judge slot"** pattern is a good template for extensible agent tooling — ship deterministic baseline, let contributors upgrade.
 4. **Chaos injection** with seed-based determinism — reproducible fault testing. Relevant for [[eval-driven-self-improvement]].
