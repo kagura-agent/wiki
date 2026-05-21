@@ -359,3 +359,14 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Test**: Extended existing sanitize test to include `boolean` enum case, verified coercion to `{ type: "string", enum: ["true", "false"] }`. All 11 Gemini tests pass.
 - **Approach**: Manual edit (1-line fix + test extension), `bun test test/provider/gemini.test.ts` — 11/11 pass.
 - **Key learning**: Bun version must match repo's `packageManager` field — pre-push hook checks version with semver. `bun upgrade` to fix.
+
+### #28584 — fix(command): fetch MCP prompts dynamically instead of caching at init (2026-05-21)
+- **Status**: PENDING (CI all 4 checks passed ✅)
+- **Issue**: #28579 — Regression: MCP prompts no longer listed after connecting MCP server
+- **Root cause**: `Command.init()` called `mcp.prompts()` once during `InstanceState.make()` initialization. Results cached in `ScopedCache` with infinite TTL and no invalidation. If MCP servers connected after Command init (e.g., slow HTTP transport, async capability negotiation), their prompts never appeared in the slash command list.
+- **Fix**: Extracted MCP prompt fetching from the cached `init()` into a separate `mcpCommands()` function called dynamically on each `list()` / `get()`. Built-in, config, and skill commands remain cached.
+- **Diff**: 1 file, +34/-23 lines
+- **Approach**: Manual code analysis via GitHub API (repo too large to git fetch locally without timeout). Traced data flow through Command → InstanceState → MCP → collectFromConnected → fetchFromClient.
+- **Key learning**: Effect.ts `InstanceState` (`ScopedCache`) is infinite-TTL by default. When one service caches data from another service that changes at runtime (MCP connections), the cached data goes stale. The fix is to not cache the dynamic portion — keep static data cached, fetch dynamic data live.
+- **Alternative considered**: Bus subscription to `MCP.ToolsChanged` + `InstanceState.invalidate()`, but `ToolsChanged` only fires on SDK tool-list-changed notification (not initial connection), and running Effects from plain callbacks requires extra runtime bridge complexity.
+- **Risk**: Performance — `mcp.prompts()` makes live `listPrompts()` calls on each `Command.list()`. Should be acceptable since slash command listing is infrequent (user typing `/`), but worth monitoring.
