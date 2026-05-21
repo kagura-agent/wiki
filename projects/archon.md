@@ -28,6 +28,19 @@
 - eslint 禁止 unused vars，catch 里不用的 error 要命名为 `_err`
 - `packages/core/src/db/connection.ts` 是 mock 重点 — 测试通过 `mock.module('./connection', ...)` 注入
 - **不能从 cleanup-service 导入 config-loader**：config-loader.ts 有顶层 `import from '@archon/providers'`，导入会在 cleanup-service 测试中触发 module resolution failure。需要读 config 时直接用 `Bun.YAML.parse` + `readFile` 内联读取。
+- PR base branch 始终是 `dev`，不是 `main`
+- `bun run test`（不是 `bun test`）跑全量测试，避免 mock 污染
+- CodeRabbit 自动 review，通常无 actionable comments
+- lint-staged 会在 commit 时自动跑 eslint + prettier
+
+## PR 历史
+| PR | Issue | 状态 | 备注 |
+|---|---|---|---|
+| #1700 | #1580 | pending | use configured provider as fallback in project registration |
+| #1530 | N/A | pending | preserve completed node state across DAG multi-resume cycles |
+| #1733 | N/A | pending | ensure workflow-builder injects $ARGUMENTS in generated YAMLs |
+| #1734 | N/A | pending | persist read-only node outputs via bash bridges |
+| #1739 | #1735 | pending | remove stale attemptController.abort() crash (regression from #1371) |
 - **测试嵌套位置很重要**：describe block 的嵌套决定了 beforeEach 作用域。错嵌会导致 mock 泄漏和 order-dependent failures。
 - CodeRabbit 会认真 review，反馈质量高，值得认真处理
 - CodeRabbit 自动 review，有 pre-merge checks 模板（Description check 会 warn 缺少 template sections 但不 block）
