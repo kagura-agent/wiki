@@ -86,4 +86,4 @@ Adapted `goal_drift.py` Jaccard baseline into `tools/goal-drift-check.sh` for [[
 2. **Retrieval lineage** could be adapted to evaluate our wiki/memory system — which notes are actually influential? Connects to [[agent-memory-benchmark]].
 3. **"Pure module + judge slot"** pattern is a good template for extensible agent tooling — ship deterministic baseline, let contributors upgrade.
 4. **Chaos injection** with seed-based determinism — reproducible fault testing. Relevant for [[eval-driven-self-improvement]].
-5. **Dogfood-as-CI** — they run their own tool against itself daily. We could apply this pattern to our own tools.
+5. **Dogfood-as-CI** — they run their own tool against itself daily. Applied ✅: `tools/tool-selftest.sh` (10 tests), integrated into review.yaml step 0.
