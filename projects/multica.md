@@ -460,3 +460,20 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Pattern**: Issue had suggested fix in body — validated and improved with backslash normalisation for nested paths
 - **Architecture note**: `openclawExec` var hook pattern enables clean test stubbing without spawning real CLI
 - **CI**: `go test ./internal/daemon/execenv/...` — all pass
+
+## 2026-05-22 PR #3059: fix(runtime): inject workspace context into agent brief (fixes #3031)
+- **Issue**: #3031 — Workspace "Context" field not injected into agent prompts
+- **PR**: #3059
+- **Status**: PENDING (backend CI ✅, installer ✅, frontend Vercel pending — expected for external PRs)
+- **Root cause**: `ClaimTaskByRuntime` loaded workspace for repos but ignored `ws.Context`; `TaskContextForEnv` had no `WorkspaceContext` field; `buildMetaSkillContent` never emitted a `## Workspace Context` section
+- **Fix**: Threaded `WorkspaceContext` through 5 layers following existing `RequestingUserProfileDescription` pattern:
+  - handler/agent.go (response struct)
+  - handler/daemon.go (read ws.Context from DB, unified injection after all task-type logic)
+  - daemon/types.go (claimed task struct)
+  - daemon/daemon.go (mapping to TaskContextForEnv)
+  - execenv/execenv.go + runtime_config.go (field + brief section)
+- **Design decision**: Load workspace context once after all task-type-specific logic (not per-type), covers issue/chat/autopilot/quick-create uniformly
+- **Security**: Blockquoted content (same injection prevention as Requesting User)
+- **Tests**: 2 new tests — emits section with multi-line blockquoted content, omits section when empty
+- **Approach**: Manual implementation (no Claude Code needed — surgical, well-scoped, followed existing pattern exactly)
+- **Pattern**: When adding a new field to agent brief, trace the `RequestingUser` path: handler response → daemon types → execenv → runtime_config. All 5 layers must have the field.
