@@ -233,6 +233,14 @@
 - **Lesson**: NemoClaw repo is extremely large (~648MB+). Git operations get OOM-killed. Use shallow clones (`--depth=1 --single-branch --branch <branch>`) for all git ops. Don't try `grep -r` or `git commit --amend` on full clone.
 - **CodeRabbit feedback**: Verify `rm -f` success (may fail silently if marker is root-owned). Adopted with post-removal `[ -f ]` check.
 
+## PR #4037 — Runtime instructions leaking into chat UI (2026-05-22)
+- **Issue**: #4019 — System runtime instructions (`<nemoclaw-runtime>`) displayed in chat UI on third message
+- **Status**: PENDING, CI all pass (check-pr-limit ✅, onboard-entrypoint-budget ✅, assign-linked-issue-author ✅, CodeRabbit skipped)
+- **Root cause**: `registerRuntimeContext()` used `prependContext` (prepends to user-visible conversation prompt) instead of `prependSystemContext` (injects into system prompt, invisible to users)
+- **Fix**: 1 line in `runtime-context.ts`: `prependContext` → `prependSystemContext`, + test updates
+- **Pattern**: CONTEXT_VS_SYSTEM_CONTEXT — OpenClaw plugin hooks have `prependContext` (user-visible) vs `prependSystemContext` (system prompt). System instructions should always use the system prompt variant to prevent leaking to UI.
+- **Lesson**: When fixing prompt injection/leaking bugs, check the OpenClaw plugin API surface — `BeforePromptBuildResult` has 5 fields with different visibility semantics. Pick the right one.
+
 ### PR #3722 — Superseded (2026-05-19)
 - Issue #3719 was duplicate of #3704 (filed earlier by laitingsheng)
 - My fix was technically good (wscurran approved), but PR closed because issue was a dup
