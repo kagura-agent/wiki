@@ -43,6 +43,14 @@
 - #3241 (macOS preparation page): CLOSED by miyoungc 05-22 — deemed low-value; existing prerequisites already covers macOS needs. Lesson: docs PRs adding new pages must add genuine new guidance, not just expand existing content into install commands
 - #3880 (proxy test conflation): fix M12 to treat ERR_PROXY_TUNNEL as wiring success — 05-20
 
+## PR #4054 — ~/.nemoclaw dir permissions (2026-05-22)
+- **Issue**: #4009 — directory and config.json created world-readable (1755/644) instead of 700/600
+- **Status**: PENDING, CI pass (3/3 ✅), CodeRabbit feedback addressed
+- **Scope**: 3 src files + 2 test files, 48 insertions / 3 deletions
+- **Root cause**: Three code paths used `mkdirSync` without `mode` or shell `mkdir -p` without `-m`
+- **Fix**: Add `mode: 0o700` + retroactive chmod (matching existing `config-io.ts` `ensureConfigDir()` pattern)
+- **Pattern**: PERMISSION_CONSISTENCY — when a codebase has a secure helper, all alternative code paths creating the same directories must use equivalent protections
+
 ## Notes (2026-05-20)
 - e2e tests in `test/e2e/` are bash scripts, not vitest — `bash -n` for syntax check, can't unit test
 - M12 test in `test-messaging-providers.sh` line ~1247: Node.js HTTPS probe to api.telegram.org
@@ -247,3 +255,9 @@
 - Issue #3719 was duplicate of #3704 (filed earlier by laitingsheng)
 - My fix was technically good (wscurran approved), but PR closed because issue was a dup
 - **Lesson**: Before picking an issue, search for duplicates. Check comments for "duplicate" mentions
+
+## PR #3309 — Gateway failure classifier (2026-05-22) — SUPERSEDED by #4020
+- **Issue**: #3271 — classify failing layer when gateway probe fails
+- **Status**: CLOSED (superseded by maintainer cjagwani's #4020)
+- **Reason**: Missed AC #2's `docker ps -a` existence check. My classifier only checked running containers, didn't distinguish "container never created" vs "container exited". Maintainer added explicit `dockerExists` runner.
+- **Lesson**: Read ACs as a checklist — each numbered item = must verify coverage

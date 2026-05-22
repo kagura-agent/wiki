@@ -545,3 +545,11 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **Reason**: Maintainer miyoungc closed it. Existing prerequisites page already covers macOS requirements (Node.js, Docker, Xcode CLI tools, runtime combos). My PR mostly expanded existing content into step-by-step install commands — another page to keep in sync without new guidance.
 - **Lesson**: Docs PRs that reorganize/expand existing content into new pages are low-value. Only add a new page when there's a genuine gap — specific missing guidance, not just reformatting. "Smaller targeted update to existing page" > "new standalone page that duplicates".
 - **Pattern**: Before writing docs PRs, check if the information already exists somewhere. If it does, a small edit to the existing page is better than a whole new page.
+
+## 2026-05-22: NemoClaw #3309 superseded by #4020 — missed acceptance criteria
+- **My PR**: #3309 — feat(status): classify failing layer when gateway probe fails (#3271)
+- **Superseding PR**: #4020 by cjagwani (maintainer)
+- **Reason**: My implementation missed AC #2's requirement for `docker ps -a` existence check. I only checked running containers (`docker ps`) before classifying `container_exited`, but the acceptance criteria explicitly required checking if the container existed at all via `docker ps -a`. CodeRabbit flagged this as a major finding.
+- **What they added**: An explicit `dockerExists` runner that uses `docker ps -a` to check container existence before classifying exited state. This distinguishes "container never created" from "container exited".
+- **Lesson**: Read ALL acceptance criteria line by line before implementing. AC #2 specifically said "check docker ps -a" — I implemented the general classifier but skimmed past the specific `docker ps -a` requirement. When an issue lists numbered ACs, treat each as a checklist item and verify coverage 1:1.
+- **Pattern**: Superseded because of incomplete AC coverage, not wrong approach. The architecture was fine — missing one specific check the maintainer explicitly asked for.
