@@ -3,16 +3,16 @@ title: Elephant Agent (agentic-in)
 created: 2026-05-17
 status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
-stars: 369
+stars: 385
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-21
+last_verified: 2026-05-22
 ---
 
 # Elephant Agent
 
 > "Elephants never forget." — Personal-Model-first self-evolving AI agent.
 
-**Repo**: [agentic-in/elephant-agent](https://github.com/agentic-in/elephant-agent) | 287⭐ (2026-05-18, created 05-15) | Python | No license yet
+**Repo**: [agentic-in/elephant-agent](https://github.com/agentic-in/elephant-agent) | 385⭐ (2026-05-22, created 05-15) | Python | No license yet
 
 ## What It Is
 
@@ -231,10 +231,29 @@ The most architecturally significant addition yet — a full pipeline to extract
 
 ### macOS Standalone App (multiple commits)
 
-Adding standalone macOS app support with onboard steps. Expanding from CLI-only to native desktop presence.
+Adding standalone macOS app support with onboard steps. Expanding from CLI-only to native desktop presence. As of 05-21, heavy UX polish: onboarding flow, chat surfaces, evolution status display, "elephant vibe" defaults.
+
+### vLLM Semantic Router Integration (PR #33, merged 05-21)
+
+New model provider that routes through vLLM Semantic Router — a config-driven routing layer between agent and model backends. Key details:
+- OpenAI-compatible transport (`/v1` endpoint)
+- Config-driven routing decisions with semantic model cards
+- Response headers expose routing metadata (`x-vsr-selected-model`, `x-vsr-selected-reasoning`)
+- Local embedding support (`elephant-embeddings-v1-text-small`, 256 dims)
+- External contributor (FroStorM) also contributed Feishu interface fix
+
+**Relevance:** Model routing as infrastructure layer — similar concept to OpenClaw's provider abstraction but adds semantic decision rules. Worth watching if routing becomes more sophisticated (cost-based, capability-based).
+
+### Reflect Runtime in Package (05-21)
+
+Reflect runtime now included in wheel distribution — making self-evolution capabilities available out of the box rather than as optional addon.
 
 ### Contributor Diversity
 
-PR #43 is by maintainer (Xunzhuo). PR #42 (daemon logs) is open. Community still healthy but this sprint is maintainer-driven.
+PR #33 by maintainer (Xunzhuo). External contributor FroStorM submitted Feishu fix (merged+reverted). PR #42 (daemon logs) merged. 30 forks, 21 open issues — healthy engagement.
+
+### Growth Trajectory
+
+287⭐ (05-18) → 385⭐ (05-22) = +98⭐ in 4 days. Fastest growth in our tracking portfolio. macOS app + steady feature development driving adoption.
 
 Links: [[self-evolving-agent-landscape]], [[hermes-agent]], [[genericagent]], [[gbrain]], [[agent-brain-portability]], [[prompt-cache-optimization]], [[skill-trajectory-tracking]]
