@@ -735,3 +735,38 @@ Operationalized capability absorption pattern:
 Key principle: "复刻/照抄只作为理解阶段，不作为交付策略" (copy only for understanding, not delivery).
 
 Relevance: This is basically [[mechanism-vs-evolution]] applied to competitive analysis. Could inform how we evaluate [[poco-claw]] or similar competitors — extract their test suite first, then ask "can we pass the same tests better?"
+
+## Followup 2026-05-22
+
+**Stars**: 11,951 (+42% from 8,401 on 04-30). Explosive growth.
+
+### Desktop App v0.1.0 (2026-05-15)
+Tauri-based desktop app. Windows x64 + macOS Apple Silicon. Not notarized (requires `xattr -cr` on macOS). Ships with portable Python via uv. The move from CLI-only to desktop shows intent to compete for mainstream users, not just developers.
+
+### Lifecycle Hook System (PR #451)
+Clean decorator-based plugin architecture in `plugins/hooks.py` (67 lines):
+- **Events**: `agent_before`, `turn_before`, `llm_before`, `llm_after`, `tool_before`, `tool_after`, `turn_after`, `agent_after`
+- **Registration**: `@register('event_name')` decorator on any function
+- **Execution**: `trigger('event', locals())` — callbacks receive all local variables as context dict
+- **Auto-discovery**: `discover_and_load()` imports all `plugins/*.py` files (skip `_` prefix)
+- **Context mutation**: If callback returns a dict, it replaces the context — enabling middleware-style transforms
+- **Error isolation**: Each callback is try/caught independently, logged to stderr
+
+Comparison with OpenClaw's hook system:
+- OpenClaw has `agent_end` hook (nudge plugin) — single event, post-turn only
+- GenericAgent covers the full lifecycle with 8 events — more granular
+- OpenClaw's approach is simpler but can't intercept pre-LLM or pre-tool events
+- GenericAgent's `locals()` injection is powerful but potentially fragile (depends on variable names in agent_loop.py)
+- Both use auto-discovery from a plugins directory
+
+The langfuse_tracing plugin was refactored (86→62 lines, -28%) to use the new hook system instead of monkey-patching. This validates the architecture — real plugins get cleaner with hooks.
+
+### Other Changes
+- `supergrok_proxy` — new xAI provider support
+- `SecretStr` deep repr masking in keychain — security hardening
+- Feishu interface fix (external PR #455) — community contribution
+- Issue #456: subagent model inheritance request — same problem OpenClaw already solved with session model overrides
+- Issue #449: code quality critique ("all code in one file") — acknowledged pain point of the ultra-compact codebase
+
+### Assessment
+GenericAgent is evolving from minimalist research project to product. Desktop app + 56% star growth in 3 weeks signals breakout. The lifecycle hook system is the most architecturally mature addition — it transforms the codebase from "clever hack" to "extensible framework" without losing the ~3K LOC minimalism.

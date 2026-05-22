@@ -579,3 +579,25 @@ Code-level analysis of the sustained goal system:
 - "Inject from metadata every turn" is the load-bearing architectural insight — makes any state compaction-safe without modifying the compaction logic.
 - `fallback_models` is a pattern we should watch — automatic provider failover.
 - Their pace: 105 PRs in ~3 weeks from 33 contributors. Community is thriving.
+
+### Post-v0.2.0 Development (2026-05-22)
+
+**Coding Workflow Optimization (PR #3923)** — Major tools overhaul:
+- `apply_patch` tool: multi-file unified-diff patches with dry-run, rollback on write failure, closest-match hunk diagnostics
+- `exec` session mode: `yield_time_ms` returns `session_id` for background commands, `write_stdin` for interactive I/O, `list_exec_sessions` for recovery after context shifts
+- `find_files`: first-class file discovery (replaces `GlobTool`)
+- `edit_file` improvements: `occurrence`, `line_hint`, `expected_replacements` safety guards
+- Tool contract prompt moved from workspace `TOOLS.md` → bundled `templates/agent/tool_contract.md`
+
+Comparison with OpenClaw:
+- OpenClaw's `exec` sessions (yield/poll/write) predate this — nanobot is converging on the same pattern
+- OpenClaw's `edit` tool is text-matching based; nanobot's `apply_patch` is unified-diff based — different tradeoffs (text-match is simpler for models; unified-diff is more precise for multi-hunk edits)
+- The `find_files` tool is what OpenClaw handles via `exec` + `find`/`fd` — nanobot wrapping it as a first-class tool reduces shell-out risk
+
+**Other changes:**
+- Novita AI provider added
+- WebUI collapsible sidebar performance improvements
+- Provider `reasoning_effort` handling fixes (Kimi thinking models)
+- Gateway reasoning control centralized
+
+**Stars**: 42,963 (05-22). Still climbing steadily.
