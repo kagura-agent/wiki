@@ -450,3 +450,13 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - My PR: client-side JSON.parse guard in WSClient.onmessage
 - Maintainer's PR: same guard + server-side auth_ack/auth-error write swallow from #2933, combined in one pass with stronger regression test
 - Lesson: when two issues share the same test file, maintainer prefers combining fixes to avoid collision. Diagnosis was correct, packaging was too narrow
+
+## 2026-05-22 PR #3041: fix(execenv): expand Windows tilde-backslash paths (#3030)
+- **Issue**: #3030 — OpenClaw runtime fails on Windows when `openclaw config file` returns `~\.openclaw\openclaw.json`
+- **Root cause**: `openclawActiveConfigPath()` in `server/internal/daemon/execenv/openclaw_config.go` only expanded POSIX `~/` prefix, not Windows `~\`
+- **Fix**: Added `~\` prefix handling alongside `~/`. Backslash separators normalised to `/` before `filepath.Join` for cross-platform correctness.
+- **Test**: Added `TestPrepareOpenclawConfigExpandsTildeBackslash` — mirrors existing `TestPrepareOpenclawConfigExpandsTilde` with Windows-style CLI response
+- **Files**: `openclaw_config.go` (+13/-3), `openclaw_config_test.go` (+42)
+- **Pattern**: Issue had suggested fix in body — validated and improved with backslash normalisation for nested paths
+- **Architecture note**: `openclawExec` var hook pattern enables clean test stubbing without spawning real CLI
+- **CI**: `go test ./internal/daemon/execenv/...` — all pass
