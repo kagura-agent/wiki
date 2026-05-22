@@ -546,6 +546,16 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **Lesson**: Docs PRs that reorganize/expand existing content into new pages are low-value. Only add a new page when there's a genuine gap — specific missing guidance, not just reformatting. "Smaller targeted update to existing page" > "new standalone page that duplicates".
 - **Pattern**: Before writing docs PRs, check if the information already exists somewhere. If it does, a small edit to the existing page is better than a whole new page.
 
+## 2026-05-22: hermes-agent #27351 → #30259: Runtime Recovery > Preemptive Guard
+
+- **Issue**: #27344 — providers rejecting list-type tool content in tool messages (e.g., Xiaomi MiMo)
+- **My PR #27351**: Preemptive capability guard — check provider capabilities before sending multimodal tool content, strip image parts upfront if provider doesn't support list-type content
+- **Winning PR #30259 (teknium1)**: Runtime error recovery — added `FailoverReason.multimodal_tool_content_unsupported` to error classifier, pattern-matched 400 error messages, stripped image parts from tool messages on-the-fly, cached (provider, model) for session to avoid repeating, retry. Plus comprehensive tests (classifier tests, strip tests, cache tests, end-to-end classification).
+- **Key difference**: My approach required a pre-configured list of provider capabilities (fragile, must be updated for every new provider). Their approach discovers capability at runtime via error classification — handles unknown providers automatically. Also: session-level caching means the retry tax is paid only once per (provider, model) pair.
+- **Pattern**: **RUNTIME_RECOVERY_VS_PREEMPTIVE_GUARD** — when dealing with provider heterogeneity (each provider supports different features), runtime error recovery that learns per-session is more robust than preemptive capability lists. The long tail of providers can't be enumerated upfront. Error classification + retry + cache = self-adapting system.
+- **Also**: maintainer closed mine without comment, shipped their own fix within hours. Same CHECK_MAINTAINER_ACTIVITY pattern.
+- **Test gap**: Their PR had ~200 lines of tests covering strip logic, cache behavior, classifier patterns, and end-to-end scenarios. Mine had minimal tests.
+
 ## 2026-05-22: NemoClaw #3309 superseded by #4020 — missed acceptance criteria
 - **My PR**: #3309 — feat(status): classify failing layer when gateway probe fails (#3271)
 - **Superseding PR**: #4020 by cjagwani (maintainer)

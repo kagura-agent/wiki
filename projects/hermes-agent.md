@@ -1440,3 +1440,27 @@ This makes the review fork more disciplined — it can't wander off into web bro
 - Didn't check `gh api repos/NousResearch/hermes-agent/issues/30246/timeline --paginate` for cross-references
 - Didn't search for related PRs: `gh pr list --search "honcho sanitize OR honcho dot OR honcho profile" --state=open` would have found #26478
 - Wasted ~20 min on a duplicate fix
+
+## Workloop 2026-05-22 — PR #30357 (env quote hash)
+
+**Issue**: #30355 — ANTHROPIC_TOKEN containing # character gets truncated in .env file
+**Status**: Pending review (CI passing)
+**Fix**: Added `_quote_env_value()` helper in `hermes_cli/config.py` that wraps values in double quotes when they contain `#`, quotes, or whitespace. Applied to both update and append paths in `save_env_value()`.
+**Scope**: 14 insertions, 2 deletions in config.py + 1 AUTHOR_MAP fix in release.py
+
+### 技术笔记
+- `save_env_value()` at line ~4810 in `hermes_cli/config.py` writes KEY=value to `~/.hermes/.env`
+- python-dotenv 1.2.2 treats unquoted `#` as inline comment → silent truncation
+- `_sanitize_env_lines()` handles corrupted lines on read but doesn't fix the quoting on write
+- AUTHOR_MAP in `scripts/release.py` needs email mapping for CI `check-attribution` check
+- Email `kagura.agent.ai@gmail.com` now mapped alongside old `kagura.chen28@gmail.com`
+
+### 反思
+**What went well**:
+- Clean issue selection: verified #30350 was a false bug (already handled via `_ra()` helper) before pivoting to #30355 (guide rule #31)
+- Small, surgical fix — 14 lines added, clear root cause, backward compatible
+- Verified fix locally with inline test before committing
+
+**Patterns**:
+- Verify bugs exist in HEAD before starting — saved wasting time on #30350
+- Simple quoting fix > complex validation for .env special chars
