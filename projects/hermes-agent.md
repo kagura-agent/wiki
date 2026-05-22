@@ -1421,3 +1421,22 @@ This makes the review fork more disciplined — it can't wander off into web bro
 - `_session_model_overrides` dict stores per-session model overrides (in-memory, survives across turns in same gateway process)
 - Custom providers skip all model catalog validation — any string accepted as model name
 - CI: build-amd64/arm64 failures are upstream (TS type error in `src/i18n/en.ts` re: 'scheduled' property), check-attribution fails for external PRs — both pre-existing
+
+## Workloop 2026-05-22 — PR #30291 (honcho dot-ID sanitization)
+
+**Issue**: #30246 — Honcho memory plugin generates invalid workspace/peer IDs for profile names containing dots
+**Result**: CLOSED — duplicate of #26478 (existing open PR by someone else fixing same root cause via #26459)
+**Key lesson**: Issue #30246 was a duplicate of #26459, and PR #26478 already existed. Failed to check cross-references before starting work (guide rule #35). The `gogetajob feed` didn't flag duplicates.
+
+**CI notes**:
+- `check-attribution` requires email in `scripts/release.py` AUTHOR_MAP. Current email `kagura.agent.ai@gmail.com` was not mapped (old email `kagura.chen28@gmail.com` was). Added both — this will need to be re-added on each new branch since the fix was on the closed PR branch.
+- `pytest-timeout` required for running tests locally (pyproject.toml sets --timeout=30)
+
+**What went well**:
+- Fast implementation: identified root cause, implemented clean fix with 10 tests, all passing
+- Code quality was good — reused existing sanitization pattern from session.py
+
+**What went wrong**:
+- Didn't check `gh api repos/NousResearch/hermes-agent/issues/30246/timeline --paginate` for cross-references
+- Didn't search for related PRs: `gh pr list --search "honcho sanitize OR honcho dot OR honcho profile" --state=open` would have found #26478
+- Wasted ~20 min on a duplicate fix
