@@ -150,3 +150,15 @@ Also fixed stale data: two broken symlinks in `~/.flowforge/workflows/` (workloo
 
 **Verification**: YAML valid (js-yaml parse), 84 FlowForge tests pass, `flowforge start` succeeds.
 
+## Analytics Completion Rate Bug Fix (2026-05-22)
+
+**Problem**: `flowforge-analytics.sh` reported **0% completion rate** across all workflows (2,550+ instances). Discovered via the first run of the analytics tool itself — the tool found its own bug.
+
+**Root cause**: The analytics SQL queried `status = 'completed'`, but the [[flowforge]] engine (`engine.ts`) sets finished instances to `status = 'done'`. Only 14 out of 2,548 finished instances had "completed" status (likely from an earlier code path or manual edits). The status string mismatch meant 99.5% of finished instances were invisible to the analytics.
+
+**Fix**: Changed the SQL predicate from `status = 'completed'` to `status IN ('completed','done')` in `flowforge-analytics.sh`.
+
+**Effect**: Completion rates now accurate — study 100%, workloop 100%, review 100%, etc. Average durations now computed from all finished instances instead of a tiny sample. 13/13 tool self-tests pass.
+
+**Pattern**: [[eat-your-own-dogfood]] — tools that analyze their own data should be run immediately after creation. This bug was caught because we ran the analytics tool and noticed the nonsensical 0% result.
+

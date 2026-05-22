@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-21
+last_verified: 2026-05-22
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -539,3 +539,9 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **Maintainer feedback**: "your diagnosis and fix direction were exactly right"
 - **Lesson**: When fixing related bugs (same subsystem — WebSocket), check if there are sibling issues that should be fixed together. Maintainer Bohan-J preferred a single cohesive PR over two separate ones. Look at related open issues before splitting into multiple PRs.
 - **Pattern**: Fix direction was right, but scope was too narrow. The maintainer's instinct was to batch related fixes.
+
+## 2026-05-22: NemoClaw #3241 closed — docs PR deemed low-value
+- **My PR**: #3241 — add macOS preparation page with install commands + verification checks
+- **Reason**: Maintainer miyoungc closed it. Existing prerequisites page already covers macOS requirements (Node.js, Docker, Xcode CLI tools, runtime combos). My PR mostly expanded existing content into step-by-step install commands — another page to keep in sync without new guidance.
+- **Lesson**: Docs PRs that reorganize/expand existing content into new pages are low-value. Only add a new page when there's a genuine gap — specific missing guidance, not just reformatting. "Smaller targeted update to existing page" > "new standalone page that duplicates".
+- **Pattern**: Before writing docs PRs, check if the information already exists somewhere. If it does, a small edit to the existing page is better than a whole new page.

@@ -20,6 +20,7 @@
 - Pre-existing test failures: preflight tests may detect actual running gateway process
 
 ## Maintainers
+- **miyoungc**: CONTRIBUTOR, closes low-value docs PRs — prefers targeted updates to existing pages over new pages
 - **cv**: responsive, asks for rebase, routes to specialists
 - **brandonpelfrey**: COLLABORATOR, gives substantive UX/security feedback
 - **ericksoa**: UX direction owner (cv routes UX decisions to them)
@@ -39,6 +40,7 @@
 - #1703 (enabledChannels → messagingChannels): rebased on main 2026-04-11, aligned with upstream naming
 - #1723 (ARM64 health): wscurran approved ✅, waiting merge
 - #3722 (RequiredArgsError handling): pending review — 1-line fix in oclif-runner.ts
+- #3241 (macOS preparation page): CLOSED by miyoungc 05-22 — deemed low-value; existing prerequisites already covers macOS needs. Lesson: docs PRs adding new pages must add genuine new guidance, not just expand existing content into install commands
 - #3880 (proxy test conflation): fix M12 to treat ERR_PROXY_TUNNEL as wiring success — 05-20
 
 ## Notes (2026-05-20)
