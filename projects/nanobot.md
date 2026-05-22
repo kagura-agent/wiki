@@ -548,7 +548,34 @@ Major release. 105 PRs, 33 contributors (20 new).
 ### Stars
 - 39,131 (2026-04-12) → 42,865 (2026-05-21). +9.5% in 5 weeks.
 
+### `/goal` Architecture Deep Read (2026-05-22)
+
+Code-level analysis of the sustained goal system:
+
+**Implementation**: Two tools (`long_task`, `complete_goal`) + session metadata + Runtime Context injection.
+- `goal_state.py` (85 lines): Pure functions for reading/writing goal blob in session metadata. Key: `GOAL_STATE_KEY = "goal_state"` stored as JSON in session metadata dict.
+- `long_task.py` (233 lines): Tool definitions. `LongTaskTool.execute()` writes `{status: "active", objective, ui_summary, started_at}` to session metadata. Enforces single-goal constraint (error if goal already active).
+- Context injection: `goal_state_runtime_lines()` produces lines appended to Runtime Context block. Max 4000 chars for objective in context, 600 for WebSocket.
+- Timeout override: `runner_wall_llm_timeout_s()` returns `0.0` (disable timeout) when goal active, `None` (use default) otherwise. Comment: "idle stall is still capped by NANOBOT_STREAM_IDLE_TIMEOUT_S" — so they disable wall-clock but keep idle timeout as safety net.
+
+**Design decisions worth noting:**
+1. **No orchestrator** — Explicit comment: "There is no sub-agent orchestrator and no special WebSocket agent_ui stream." Goals don't change the agent loop, just inject context and widen timeouts.
+2. **Compaction-safe by injection** — Goal is re-injected every turn from session metadata, so even if conversation history is compacted, the goal persists. This is elegant — no need to "protect" messages from compaction.
+3. **Single-goal constraint** — Must `complete_goal` before starting another. Prevents goal drift.
+4. **Legacy key migration** — `_LEGACY_GOAL_STATE_SESSION_KEY = "thread_goal"` shows they iterated on the storage key. Backward compat in metadata is important.
+5. **`/goal` command → prompt injection** — `/goal` doesn't call `long_task` directly; it creates a template prompt that nudges the agent to call `long_task` itself. Indirect but lets the agent refine the objective.
+
+**Comparison with our approaches:**
+- FlowForge: Multi-step branching workflows, external state machine. Heavier, more structured, good for complex multi-phase work.
+- `update_plan`: Session-scoped plan tool, similar lightweight feel but no persistence across sessions.
+- nanobot `/goal`: Session-persistent, compaction-safe, single objective. Sweet spot between ad-hoc and structured.
+- **Key insight**: Their "inject from metadata every turn" pattern is the right way to survive [[context-compaction]]. We should consider this for any state that must persist across compaction boundaries.
+
+### Stars
+- 39,131 (2026-04-12) → 42,963 (2026-05-22). +9.8% in 6 weeks.
+
 ### Takeaways
 - `/goal` pattern is interesting: lightweight persistent context injection. Simpler than our FlowForge but less capable (no branching, no multi-step workflow). Good for single sustained objectives.
+- "Inject from metadata every turn" is the load-bearing architectural insight — makes any state compaction-safe without modifying the compaction logic.
 - `fallback_models` is a pattern we should watch — automatic provider failover.
 - Their pace: 105 PRs in ~3 weeks from 33 contributors. Community is thriving.
