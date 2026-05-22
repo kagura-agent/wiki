@@ -477,3 +477,13 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Tests**: 2 new tests — emits section with multi-line blockquoted content, omits section when empty
 - **Approach**: Manual implementation (no Claude Code needed — surgical, well-scoped, followed existing pattern exactly)
 - **Pattern**: When adding a new field to agent brief, trace the `RequestingUser` path: handler response → daemon types → execenv → runtime_config. All 5 layers must have the field.
+
+## 2026-05-22 PR #3092: fix(agent/cursor): remove obsolete 'chat' subcommand from argv (fixes #3077)
+- **Issue**: #3077 — cursor-agent CLI no longer has 'chat' subcommand, it leaks into prompt text
+- **PR**: #3092
+- **Status**: PENDING (backend CI ✅, installer ✅, frontend Vercel pending — expected for external PRs)
+- **Root cause**: `buildCursorArgs()` hardcoded `"chat"` as first arg in the slice. Current cursor-agent CLI treats it as prompt text
+- **Fix**: Removed `"chat"` from args slice. Updated doc comment. Updated all test files (cursor_test.go, cursor_invocation_test.go, cursor_invocation_windows_test.go)
+- **Approach**: Manual edit (surgical, 4 files, -3 lines net). Smallest possible diff
+- **Test**: `go test ./pkg/agent/... -run Cursor -v` — all pass
+- **Note**: This is a well-scoped fix — the issue was filed by a user with exact CLI output showing the problem. No competition
