@@ -257,3 +257,15 @@ PR #33 by maintainer (Xunzhuo). External contributor FroStorM submitted Feishu f
 287⭐ (05-18) → 385⭐ (05-22) = +98⭐ in 4 days. Fastest growth in our tracking portfolio. macOS app + steady feature development driving adoption.
 
 Links: [[self-evolving-agent-landscape]], [[hermes-agent]], [[genericagent]], [[gbrain]], [[agent-brain-portability]], [[prompt-cache-optimization]], [[skill-trajectory-tracking]]
+
+## Applied: Trajectory Signal Extraction Pattern → flowforge-analytics.sh (2026-05-22)
+
+Adapted PR #43's core principle — **deterministic signal extraction from historical usage data** — to our FlowForge execution history. Their approach uses pure Python on closed episodes; ours uses Node.js + better-sqlite3 on FlowForge's SQLite history table (11,840+ node transitions across 2,550+ instances).
+
+Key implementation differences:
+- Elephant: per-skill optimization candidates → operator review queue
+- Ours: per-workflow bottleneck + branch analytics → direct visibility tool
+
+The "deterministic extraction, no LLM" principle transferred cleanly. One script replaces what would have been ad-hoc `flowforge log` inspection.
+
+See also: [[FlowForge]], [[tool-selftest]]
