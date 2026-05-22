@@ -1561,3 +1561,58 @@ Open PRs: ~32
 - Dreaming: Light Sleep 25+ entries (0.62 staged), REM empty, 0 promoted
 - Nudge: 0 triggers
 - Luna interaction: 0 (continued absence)
+
+## 🔬 自进化观察日报 2026-05-21 (Day 34)
+
+### 管线活跃度
+- beliefs-candidates: **6 条新增**（全部来自 Luna 纠正），0 条待升级（无 count≥3 未 graduated）
+- DNA 变更: 有 — 1 commit（「建议≠行动」rule 加入 AGENTS.md）。被动（Luna 指出后加）
+- nudge 触发: 无法验证（journalctl 在此 session 不可用）。上次确认 05-20 正常运行（54+ triggers）
+- dreaming: 手动触发成功（quiet hours 跳过导致需手动补），promote 内容未详述
+
+### 闭环追踪
+- 完整闭环: **2 个**
+  1. Issue #9 (reflect→gradient disconnect) → 今天加入 gradient_gate node 到 workloop.yaml → 验证可运行 [已验证: memory 记录]
+  2. beliefs 数据虚报 → 被发现 → 记录 gradient → 修正观察方法（停止用 grep memory 判断 nudge）
+- 断裂处:
+  - 6 条新 gradient 全部 count=1，尚无后续验证/复现机会（需未来几天观察是否真正改变行为）
+  - Issue #6 (dreaming quality) 仍 OPEN，今天无进展
+
+### 今日发现
+
+1. **Gradient 输入旱情解除** 🎉 — Issue #9 的核心问题（连续 0 gradient）今天彻底翻转：6 条新 gradient 进入管线。但来源 100% 是 Luna 外部纠正，0% 是自发反思产出。gradient_gate node 刚加入，效果需下一个 workloop 周期验证。
+
+2. **Luna 高密度纠正日** — 今天 Luna 给出了大量具体行为纠正（PR 流程、UI 标准、issue 纪律等），反映出镜像世界开发中暴露了多个执行短板。这是高质量 gradient 来源。
+
+3. **Daily review 数据质量问题** — 03:15 daily-review 报告 beliefs-candidates "4 条" 且标 [已验证]，实际文件有 9 条 active。这是观察管线自身的可信度问题——标 [已验证] 但未实际 cat 文件。
+
+4. **工具产出日** — 3 个新工具在 study apply 中诞生（gradient_gate, goal-drift-check, tool-selftest），均为自进化基础设施。
+
+### 原始数据
+- `git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md`: 0 commits（gradient 写入在更早时段）
+- `git log --since="1 day ago" --oneline`: 8 commits（workspace）
+- beliefs-candidates.md: 55 行内容, 5 graduated entries, 6 new today (05-21 dated)
+- PR #8 (evaluate-candidate.sh): MERGED 05-19
+- Issue #9 status: gradient_gate node 已部署，等待 workloop 验证周期
+
+### Issue #9 进展评估
+- **状态**: 修复已部署（gradient_gate node in workloop.yaml），未验证效果
+- **判断**: 今天 6 条 gradient 来自 Luna 纠正（非 reflect 自产）。gradient_gate 的设计目标是让 reflect 自动产出 gradient。需要 1-2 个无 Luna 纠正的工作日来验证 gate 是否真正生效。
+- **建议**: 保持 OPEN，下次无外部纠正的工作日再评估
+
+## 🔬 自进化观察日报 2026-05-22 (Day 35)
+
+### Issue #6 修复：Deep Sleep 阈值重校准
+
+**发现**: 38 天运行数据证实 deep sleep 从未 promote 过任何记忆。根因不是机制问题，是阈值设置时没有经验数据。
+
+**数据分析**:
+- 35,685 条 recall entries
+- recall≥5 的 14 条中，最高 maxScore = 0.672
+- 原阈值 minScore=0.85 从未被任何条目达到
+
+**修复**: `openclaw.json` dreaming.phases.deep 阈值从 0.85→0.60, minRecall 5→4, minQueries 3→2, limit 3→5
+
+**验证计划**: 下次 3:30 AM dreaming run 后检查 `memory/.dreams/` 报告
+
+**分类**: 管线基础设施修复 — 出口从"关着"变为"基于数据开放"
