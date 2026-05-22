@@ -268,3 +268,17 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - **Key finding**: 5 repos at 5-PR limit (openclaw, NemoClaw, hermes-agent, multica, cc-connect) — need to wait for merges before contributing more
 - **deer-flow blocked**: Requires CLA that we can't sign (discovered in prior PR #1386)
 - **Lesson**: Manual YAML/prompt edits in workflow-only changes should skip acpx exec entirely — no need for code analysis tools when the change is text content
+
+## 2026-05-22 Session Notes
+
+### PR #1746 — fix(db): read DEFAULT_AI_ASSISTANT env var in createCodebase (fixes #1703)
+- **Issue**: `createCodebase()` hardcoded `'claude'` fallback, ignoring user's `DEFAULT_AI_ASSISTANT` env var
+- **Fix**: Changed `data.ai_assistant_type ?? 'claude'` → `data.ai_assistant_type ?? process.env.DEFAULT_AI_ASSISTANT ?? 'claude'`
+- **Status**: PENDING (CI: Ubuntu ✅, CodeRabbit: review skipped)
+- **Diff**: 1 line prod change + 34 lines test = 2 files, minimal
+- **Pattern**: ENV_VAR_FALLBACK — when a function needs a configurable default, prefer reading env vars over importing config-loader to avoid bun mock.module leak across test files
+- **Lesson (CRITICAL)**: bun `mock.module()` leaks across all test files in the same package when run via `bun run test`. First attempt used `loadConfig()` import + mock, which broke `config-loader.test.ts`. Switching to `process.env` reading avoided the leak entirely.
+  - Rule: NEVER mock config-loader at module level in codebases.ts tests — use env vars instead
+  - This is consistent with how `conversations.ts` already does it
+- **Selection difficulty**: Extremely saturated market. Checked 6+ repos, 20+ issues — almost all had competing PRs within hours. Guide rule #28 confirmed again.
+- **What worked**: Targeting Archon (known repo, established trust) + looking for issues without the "bug" label (this was a "feat" label). Bug-labeled issues get sniped faster.
