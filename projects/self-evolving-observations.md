@@ -1616,3 +1616,46 @@ Open PRs: ~32
 **验证计划**: 下次 3:30 AM dreaming run 后检查 `memory/.dreams/` 报告
 
 **分类**: 管线基础设施修复 — 出口从"关着"变为"基于数据开放"
+
+## 🔬 自进化观察日报 2026-05-22 (Day 35)
+
+### 管线活跃度
+- beliefs-candidates: **0 条新增**（最后一批 05-21 写入 9 条，今天无新 gradient）/ 20 条 active / 5 已 graduated
+- DNA 变更: **无** — 0 commits to SOUL.md/AGENTS.md（仅 1 commit 到 beliefs-candidates.md 属于 study followup）
+- nudge 触发: **无法验证** — journalctl 查询返回 0 条 nudge/system-event 记录。可能是 gateway 日志轮转或 nudge 确实未触发，数据不足以判断 [未验证]
+- dreaming: **未运行** — memory/.dreams/ 无 05-22 文件。阈值修复已生效（minScore 0.85→0.60），但今晚 3:30 AM 将是修复后首次运行
+
+### 闭环追踪
+- 完整闭环: **1 个**
+  - Issue #6 dreaming 阈值 bug → 数据分析（35,685 entries, max 0.672）→ 修复 openclaw.json → 等待验证（今晚 3:30 AM）
+- 断裂处:
+  - Issue #9 (reflect→gradient disconnect): gradient_gate node 已部署但今天 **0 条自产 gradient**，无法验证修复效果。05-21 的 9 条全来自 Luna 纠正，非 reflect 自产
+  - 今天高产出（22 PR merged）但 **0 条 gradient 产出** — 典型的"执行多、反思少"模式
+
+### 今日发现
+
+1. **执行爆发 vs 反思荒漠** — 今天 merged 22 个 PR（cove×6, abti×10, finance×2, kagura-mail×2, memory-eval×1, kagura-blog×1），加上 4 个外部 PR 提交。但 beliefs-candidates 零写入。高执行密度下反思管线完全停摆。这不是偶发——Issue #9 的核心症状。
+
+2. **Dreaming 修复待验证** — Issue #6 的阈值修复是基于真实数据的（35,685 entries 中最高 0.672 vs 旧阈值 0.85）。修复方向正确，但 38 天零 promotion 的历史意味着 dreaming 作为记忆固化机制事实上从未工作过。今晚 3:30 是关键验证点。
+
+3. **Nudge 可观测性缺失** — 连续多天无法通过 journalctl 验证 nudge 触发情况。观察管线自身存在盲区——如果我们无法可靠地知道 nudge 是否运行，就无法评估它对 gradient 产出的贡献。
+
+4. **External feedback 未转化** — 今天 NemoClaw #4037/#4054 在 review 中，multica #3092/#3041 也 open，但无任何 reviewer feedback 被转化为 gradient。（注：可能尚未收到 review）
+
+### 原始数据
+- `git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md`: 1 commit (ac20647, study followup, 非 gradient 写入)
+- beliefs-candidates.md: 119 行, 20 active entries (all count=1 except 1 graduated at count=3), 5 graduated total
+- PR activity: 22 merged, 4 new external PRs opened, 2 closed
+- dreaming config: minScore=0.60, minRecall=4, minQueries=2, limit=5 (已修复)
+- memory/.dreams/: 最新文件 May 19, 无 May 22 报告
+
+### Issue 进展
+
+| Issue | 状态 | 今日进展 |
+|-------|------|---------|
+| #9 reflect→gradient disconnect | OPEN | 无进展。gradient_gate 已部署但今天 0 自产 gradient |
+| #6 dreaming quality | OPEN | **阈值修复已部署**，等今晚 3:30 验证 |
+| #4 一周观察 | OPEN | Day 35 报告（本条） |
+| #3 Orb 调研 | OPEN | 无进展 |
+| #2 GenericAgent 调研 | OPEN | study followup commit (ac20647) |
+| #1 Evolver GEP 调研 | OPEN | 无进展 |
