@@ -81,3 +81,5 @@ HN 首页（04-25）说明这个理念正被主流开发者社区认可。
 - [[agentskills-io-standard]] — karpathy-llm-wiki 遵循的 skill 格式
 - [[mercury-agent]] — 同样采纳 Agent Skills 的 soul-driven agent
 - [[agent-skill-standard-convergence]] — skill 标准收敛趋势
+
+See also: [[llm-wiki-karpathy]] (concept card)
