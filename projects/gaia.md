@@ -35,6 +35,18 @@ AMD's open-source framework for running generative AI locally on AMD hardware.
 
 ## PRs
 - PR #1209: fix(web): preserve TLS hostname in PinnedIPAdapter for HTTPS (Closes #1207) — pending
+- PR #1210: fix(tests): update stale electron test assertions after #606 (#1204) — pending
+
+## 2026-05-23 Session Notes
+
+### PR #1210 — fix(tests): update stale electron test assertions (fixes #1204)
+- **Issue**: Test Electron Framework CI job permanently red since #606
+- **Root cause**: PR #606 renamed `.empty-chat*` → `.empty-task*` CSS classes and grew MemoryDashboard.tsx to 159KB without updating electron tests
+- **Fix**: Updated 4 assertions (.empty-chat→.empty-task) + added allowlist for known-large dashboard files (200KB cap)
+- **CI**: label ✅ pr-review ✅ (electron test workflow didn't fire due to path filter — only tests changed)
+- **Pattern**: Pure test fix, no production code. Manual edit was much faster than acpx for 4-line changes
+- **Observation**: gaia repo uses path-filtered CI — changes to test files only may not trigger the test workflow itself. Maintainer will need to verify on a PR that touches a filtered path
+- **Note**: gogetajob keeps getting OOM-killed during scan/sync. Need to investigate memory usage
 
 ## Notes
 - `PinnedIPAdapter` in `src/gaia/web/client.py` — DNS-rebind protection via IP pinning
