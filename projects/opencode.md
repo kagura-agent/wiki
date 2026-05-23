@@ -387,3 +387,13 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Status**: PENDING (CI all green, no reviews yet)
 - **Lesson**: DOMPurify `USE_PROFILES: { html: true }` does NOT include all intuitive attrs — always check the actual allowlist in the dist file
 - **Pre-push hook**: turbo typecheck runs on push; `effect-drizzle-sqlite` has upstream TS errors, use `--no-verify` for unrelated packages
+
+### #28943 — fix(provider): expose reasoning effort variants for Kimi K2.6 and Qwen 3.6 (2026-05-23)
+- **Status**: PENDING (CI all 4 checks passed ✅, compliance template fixed)
+- **Issue**: #28931 — Model variants for Kimi K2.6 and Qwen 3.6 Plus do not appear
+- **Root cause**: `variants()` function had blanket `id.includes("kimi")` / `id.includes("qwen")` exclusion that prevented all Kimi/Qwen reasoning models from getting variants. Newer models (K2.6, Qwen 3.6+) actually support `reasoning_effort` (low/medium/high/none) via their OpenAI-compatible API.
+- **Fix**: Narrowed exclusion to only catch older models. Added negative conditions: `!id.includes("k2.6") && !id.includes("k26") && !id.includes("k2p6")` for kimi, `!id.includes("3.6")` for qwen. 3-line change.
+- **Diff**: 1 file, 3 insertions, 3 deletions
+- **Key learning**: Model family exclusions become stale as new model versions release. When a model family adds API support for a feature (like reasoning_effort), the blanket exclusion needs carve-outs for newer models.
+- **Approach**: Manual edit (3-line change, too small for Claude Code). Deep code trace to understand the variants pipeline.
+- **Note**: PR template compliance bot auto-fires within minutes; must use template from start. Also at 5/5 PR limit now.
