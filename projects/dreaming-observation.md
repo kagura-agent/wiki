@@ -65,3 +65,19 @@
 - 04-21: Re-run eval; run dreaming eval; Cured Tracking audit
 - 04-28: Final evaluation, decide whether to tune deep sleep thresholds
 | 04-21 | ~90%* | ~0.75* | ~0.70* | Partial eval run (4/20 queries, exec timeout). Spot check: dreaming query ✅ (0.57). Metrics stable. |
+
+## 🔬 Dreaming Diagnosis — 2026-05-23
+
+**Finding**: Dreaming pipeline broken for Kagura workspace since May 19, while other workspaces (anan, tester) continue working normally.
+
+**Root cause**: OpenClaw 2026.5.18 has dreaming session cleanup bug. PR #84802 (merged May 21) fixes it in 2026.5.20. The fix introduces stable workspace-and-phase session keys with bounded cleanup, preventing session accumulation that blocks output.
+
+**Evidence**:
+- Kagura recall store: 35,685 entries / 35MB (massive vs anan's 556KB)
+- Cron runs daily, status="ok", but NO_REPLY — process completes without error but produces no output
+- `.tmp` files from Apr 30 and May 2 indicate earlier failed atomic writes (likely related to file size)
+- Post-May-19 restart (2026.5.18 update) coincides with dreaming failure onset
+
+**Impact**: 4 days of dreaming output missing (May 20-23). Deep sleep promotion (the mechanism that graduates memories to MEMORY.md) has been non-functional for Kagura workspace. This directly affects Issue #6 (dreaming quality) — the threshold fix from May 22 cannot be verified because dreaming itself isn't running.
+
+**Fix**: Update to OpenClaw 2026.5.20. See [[openclaw-architecture]].
