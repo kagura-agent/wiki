@@ -5,7 +5,7 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 385
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-22
+last_verified: 2026-05-23
 ---
 
 # Elephant Agent
@@ -269,3 +269,16 @@ Key implementation differences:
 The "deterministic extraction, no LLM" principle transferred cleanly. One script replaces what would have been ad-hoc `flowforge log` inspection.
 
 See also: [[FlowForge]], [[tool-selftest]]
+
+### Applied: Single Close Path for Gradient Pipeline (2026-05-23)
+
+**Source insight**: Episode session boundary unification (PR #30) — all episode close paths through single `close_episode()` with guaranteed side-effects.
+
+**Applied as**: `tools/add-gradient.sh` + `tools/gradient-stats.sh`
+- **add-gradient.sh**: Single entry point for all gradient writes. Guaranteed side-effects: dedup check, formatted write, JSONL log append, summary output.
+- **gradient-stats.sh**: Pipeline observability dashboard — total/active/graduated counts, source breakdown (Luna vs self), 7-day activity histogram, health warnings.
+
+**Before**: Gradient writes scattered across nudge, reflect, workloop, manual — no unified format, no dedup, no observability. Issue #9 symptom: can't tell if gradients are being produced or from where.
+**After**: Single write path with logging enables tracking gradient source, frequency, and pipeline health. JSONL log provides data for future analysis (e.g., "what % of gradients come from reflect vs Luna correction?").
+
+**Connection to [[self-evolving-observations]]**: Directly addresses Issue #9 observability gap. gradient-stats.sh answers "is the pipeline healthy?" in one command. JSONL log enables longitudinal analysis.
