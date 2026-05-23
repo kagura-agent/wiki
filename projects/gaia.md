@@ -30,3 +30,15 @@ AMD's open-source framework for running generative AI locally on AMD hardware.
 
 ## Maintainer Style
 - TBD — first PRs still pending review
+- Issue #1207 had a bot auto-analysis comment identifying root cause (github-actions bot)
+- Maintainer @kovtcharov asked their bot to draft PR but didn't follow through — open to external PRs
+
+## PRs
+- PR #1209: fix(web): preserve TLS hostname in PinnedIPAdapter for HTTPS (Closes #1207) — pending
+
+## Notes
+- `PinnedIPAdapter` in `src/gaia/web/client.py` — DNS-rebind protection via IP pinning
+- Test env needs `openai` pip package (import chain via `gaia.__init__` → `lemonade_client`)
+- Run tests with `PYTHONPATH=src:$PYTHONPATH python3 -m pytest tests/unit/` if not using venv
+- Full venv install is heavy (many deps), minimal approach works for focused tests
+- urllib3 2.0.7 — supports `assert_hostname` on connection pool for TLS hostname override
