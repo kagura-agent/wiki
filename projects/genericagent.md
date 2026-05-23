@@ -437,6 +437,59 @@ This pattern solves a real problem: process-based agent communication via stdio 
 
 See [[self-evolving-agent-landscape]], [[context-budget-constraint]], [[supervisor-pattern]], [[acp-protocol]]
 
+## Followup 2026-05-23: Turn Policy Hooks + TUI v3 + Plan Mode Guard
+
+**Stars:** 11,990 (was 11,951 on 05-22, +0.3% — growth plateauing post-12K)
+
+### Turn Policy Hooks (PR #450, open)
+
+Refactors `turn_end_callback` hardcoded `if/elif` chain into a **pluggable policy chain** — the cleanest architectural change in weeks:
+
+**Before:** 5 interlocked `if turn % N` conditions in `ga.py` (10 lines of coupled logic)
+**After:** `turn_policy.py` (61 lines) — each policy is an independent function:
+- `policy_danger_ask_user` — force ask_user every 75 turns (non-plan)
+- `policy_danger_retry` — warn against futile retries every 7 turns
+- `policy_inject_memory` — inject global memory every 10 turns
+- `policy_plan_limit` — plan mode hints (every 5 turns 10-110) + hard cap at 120
+
+**Registration:** `register_turn_policies(handler, policies=None)` — sets `handler._turn_policies` list. Defaults to `DEFAULT_TURN_POLICIES`. External code can register custom policies.
+
+**Execution:** Simple loop in `turn_end_callback`: `for policy in self._turn_policies: next_prompt += policy(turn, _plan, next_prompt) or ""`
+
+**Design observations:**
+- Each policy returns `""` (no-op) or a string to append — composable, no side effects
+- Policies receive `(turn, _plan, next_prompt)` — minimal interface, but `next_prompt` parameter enables policies that react to other policies' output (though none currently do)
+- The `elif` → `for` change means policies are **additive** not exclusive — multiple policies can fire on the same turn (before, `elif` meant only one could)
+- This is a subtle behavior change: turn 70 (7×10) previously only triggered `policy_danger_retry` (elif), now triggers both `policy_danger_retry` AND `policy_inject_memory`
+
+**Relevance to us:** Our [[flowforge]] workflow nodes have task descriptions that act as implicit policies ("what to check at this step"). GenericAgent's explicit policy chain is more modular. If FlowForge grows node-level hooks (pre/post execution checks), this pattern is a clean reference. Also relevant for [[heartbeat]] — our heartbeat tasks could be factored into independent policy functions rather than a monolithic HEARTBEAT.md.
+
+### Plan Mode Guard Bug (Issue #458)
+
+Critical architectural critique from HamsteRider-m: plan mode is opt-in with no enforcement. Agent can read `plan_sop.md`, understand it should enter plan mode, then just... not. No runtime guard detects "should have entered plan mode but didn't."
+
+**Proposed fix:** Pending-state flag between "plan SOP read" and "plan mode entered" — if next turn hasn't called `enter_plan_mode()`, inject hard guard.
+
+**Pattern:** This is the same problem as our AGENTS.md rules — conventions work until they don't. The fix is a **state machine with transition guards**, not more prompting. Worth noting for our own workflow enforcement.
+
+### TUI v3 (PR #462, merged)
+
+Full v2 feature parity in scrollback-first architecture:
+- Export flows (clipboard + file), per-turn tool folding, ask_user focus-cycle
+- Inline zh/en i18n (single module, no external locale files)
+- Moved from Textual → prompt_toolkit + rich (lighter dependencies)
+- Image paste support via PIL.ImageGrab
+
+### Code Quality Wave (Issues #463-465)
+
+Kailigithub submitting systematic cleanup PRs: bare except → `except Exception`, unused imports, `max_tokens` state mutation. Good community hygiene signal.
+
+### Trend
+
+GenericAgent is in **extensibility maturation** phase — the lifecycle hook system (05-22) + turn policy hooks (05-23) + plan mode guards are all about making the ~3K LOC core pluggable without growing it. The architecture is shifting from "minimal and clever" to "minimal and extensible." This is the right evolution for a 12K⭐ project that now has 10+ external contributors.
+
+See [[self-evolving-agent-landscape]], [[supervisor-pattern]], [[context-budget-constraint]], [[mechanism-vs-evolution]]
+
 ## Followup 2026-05-14: Conductor System + Code Review Principles + Context Budget Tightening
 
 **Stars:** 11,243 (up from 11,027 on 05-12, +2%, steady growth)
