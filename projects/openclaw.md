@@ -245,3 +245,13 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **CI**: All checks pass, including Real behavior proof gate.
 - **Lesson**: When a command supports multiple transport paths (local vs gateway), error handling must be symmetric. The local path had proper validation; the gateway path assumed success. Pattern: search for all transport branches when fixing error handling.
 - **Real behavior proof format**: openclaw requires structured fields: "Behavior addressed", "Real environment tested", "Exact steps or command run after this patch", "Evidence after fix" (needs live `openclaw` commands, not just unit tests), "Observed result after fix", "What was not tested". See `scripts/github/real-behavior-proof-policy.mjs` for exact field names and validation logic.
+
+### 2026-05-23: PR #85705 (PENDING)
+- **Issue**: #85684 — reasoning-only retry short-circuited in group chats by silentReplyPolicy default
+- **Root cause**: `isNonVisibleAssistantTurnEligibleForSilentReply` returned `true` for reasoning-only turns (thinking blocks, no text). In group chats where `allowEmptyAssistantReplyAsSilent=true`, this caused `shouldTreatEmptyAssistantReplyAsSilent` to short-circuit all retry mechanisms. Reasoning-only turns were silently absorbed instead of being retried.
+- **Fix**: Changed `isNonVisibleAssistantTurnEligibleForSilentReply` to return `false` for reasoning-only turns. Truly empty responses still handled by separate `isEmptyResponseAssistantTurn` path.
+- **Files**: `run/incomplete-turn.ts` (1-line fix), `run.incomplete-turn.test.ts` (updated 2 tests)
+- **CI**: All code quality checks pass (208/208 tests). "Real behavior proof" gate fails (no live group chat env).
+- **Pattern**: The `emptyAssistantReplyIsSilent` flag gates ALL retry mechanisms (planning-only, reasoning-only, empty-response) in run.ts lines ~2742-2780. When adding new silent-reply eligibility criteria, always check impact on retry chains.
+- **Code location**: `isNonVisibleAssistantTurnEligibleForSilentReply` is only called from `shouldTreatEmptyAssistantReplyAsSilent`, both in `run/incomplete-turn.ts`. The three retry resolvers (`resolvePlanningOnlyRetryInstruction`, `resolveReasoningOnlyRetryInstruction`, `resolveEmptyResponseRetryInstruction`) are also in this file.
+- **Related**: PR #82460 (superseded by #82905) was in the same area — provider/modelApi gatekeeping for incomplete turns. PR #82075 was in silent reply policy for failure-fallback path.
