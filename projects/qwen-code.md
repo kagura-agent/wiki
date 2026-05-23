@@ -11,6 +11,7 @@
 | PR | Issue | 状态 | 备注 |
 |---|---|---|---|
 | #4456 | #4450 --list-extensions does nothing | pending | First PR, AI disclosure included |
+| #4459 | #4452 Claude plugin install broken for complex plugins | pending | Fix collectResources skip-logic bug |
 
 ## 贡献要求 (CONTRIBUTING.md)
 - Link to existing issue (required, open issue first if none exists)
@@ -46,3 +47,12 @@
 
 ## 踩过的坑
 - (2026-05-23) Full clone OOM on 2GB RAM — use sparse checkout: `git clone --depth 1 --filter=blob:none`, sparse-checkout only needed files
+- (2026-05-23) node_modules on NTFS data disk: vitest works but `npm install` for full monorepo gets OOM-killed. Workaround: don't reinstall, use existing node_modules
+- (2026-05-23) `collectResources()` skip-logic bug: tests already worked around it (line 392 comment). When fixing similar skip/cache bugs, check test workarounds for prior art
+- (2026-05-23) esbuild ETXTBSY on NTFS: retry after brief sleep resolves it
+
+## Extension 系统架构笔记
+- Extensions installed to `~/.qwen/extensions/<name>/`
+- Claude plugins converted via `claude-converter.ts`: marketplace.json → resolvePluginSource → copyDirectory → collectResources → convertClaudeToQwenConfig
+- `qwen-extension.json` intentionally only has name/version/mcpServers/hooks — commands/skills/agents are loaded from directory structure
+- Key files: `packages/core/src/extension/` (extensionManager, claude-converter, gemini-converter, storage, marketplace)
