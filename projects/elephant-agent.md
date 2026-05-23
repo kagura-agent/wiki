@@ -282,3 +282,12 @@ See also: [[FlowForge]], [[tool-selftest]]
 **After**: Single write path with logging enables tracking gradient source, frequency, and pipeline health. JSONL log provides data for future analysis (e.g., "what % of gradients come from reflect vs Luna correction?").
 
 **Connection to [[self-evolving-observations]]**: Directly addresses Issue #9 observability gap. gradient-stats.sh answers "is the pipeline healthy?" in one command. JSONL log enables longitudinal analysis.
+
+### Applied: Workloop Gradient Gate Integration (2026-05-23)
+
+Extended the single-close-path pattern from `add-gradient.sh` into the workloop workflow itself. Both the `gradient_gate` node and the inline step 2.5 now direct agents to use `add-gradient.sh` instead of manual append + format instructions.
+
+**Before**: Workflow described manual format and manual append. No dedup. No logging. Gradient writes in workloop vs nudge vs reflect used inconsistent formats.
+**After**: Unified path through `add-gradient.sh` everywhere. Every gradient write gets automatic dedup check and JSONL logging regardless of source.
+
+**Behavioral change**: Next workloop run, the gradient_gate node will instruct the agent to use `add-gradient.sh --source workloop` instead of raw file append. This closes the last gap in the single-write-path adoption.
