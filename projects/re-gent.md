@@ -1,11 +1,11 @@
 ---
 title: "re_gent — Version Control for AI Agents"
 created: 2026-05-09
-updated: 2026-05-09
+updated: 2026-05-23
 status: active
-stars: 518
+stars: 584
 url: https://github.com/regent-vcs/re_gent
-last_verified: 2026-05-17
+last_verified: 2026-05-23
 ---
 
 # re_gent — Version Control for AI Agents
@@ -195,8 +195,27 @@ The unified `Recorder` in `internal/capture/capture.go` is the core abstraction 
 |------|-------|-------|
 | 2026-05-14 | 473 | v0.2.0 Codex parity. Unified Recorder deep-read. `.agents/skills/` migration. External contributor @adit-chandra |
 | 2026-05-17 | 518 | **v1.0.0!** +9.4% in 3 days. OpenCode integration (PR#36). Interactive multiselect init. 34 forks. Windows colon bug (#37). Codex Desktop sidecar PR#35 (+3114 lines, external). 🟢 THRIVING (6/6) |
+| 2026-05-23 | 584 | +12.7%. **Product Hunt launch** (05-20) drove growth. 4 new harness requests: Hermes (#40), Pi (#41), oh-my-pi (#42), Amp (#43). mdelapenya (Testcontainers maintainer) requesting non-interactive init (#45). Windows colon bug still open (#37) |
 
-## Updates (2026-05-17)
+## Updates (2026-05-23)
+
+**Stars**: 584 (was 518, +12.7%). Growth accelerated by Product Hunt launch.
+
+**Product Hunt Launch (05-20)**: README gained PH banner. This explains the star surge — PH is an effective channel for dev tools.
+
+**New Harness Demand**: 4 issues requesting additional agent support:
+- #40 **Hermes** (NousResearch/hermes-agent) — notably, this references our contributed project. The issue author documented Hermes's hook architecture and gateway API as integration points. Ecosystem convergence signal.
+- #41 **Pi** (Anthropic's Pi)
+- #42 **oh-my-pi** (Pi wrapper)
+- #43 **Amp** (Sourcegraph's coding agent)
+
+All from the same user (LaloLalo1999), suggesting systematic exploration of agent harness coverage. The pattern validates that 3 agents isn't enough — users want comprehensive coverage.
+
+**Notable Issue #45**: mdelapenya (Testcontainers maintainer, well-known Go contributor) requesting non-interactive `rgt init` for CI/CD pipelines. This signals enterprise/CI adoption interest — re_gent is moving from dev-desktop tool toward infrastructure.
+
+**Architectural Assessment Update**: The 4-event lifecycle model (sessionstart/userpromptsubmit/posttooluse/stop) has now been validated across 3 agent hosts without modification. Each new agent adapter is ~500 lines, meaning the `Recorder` abstraction was correctly designed. The thin-adapter pattern is the reusable insight here.
+
+**Connects to**: [[openclaw]] (ACP's tool_call events map to PostToolUse), [[hermes-agent]] (harness request #40 directly references our contributed project), [[agent-brain-portability]] (multi-agent capture → portable audit trail)
 
 **Stars**: 518 (was 473, +9.4% in 3 days). Sustained strong growth.
 
