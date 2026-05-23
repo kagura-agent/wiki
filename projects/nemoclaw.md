@@ -26,6 +26,11 @@
 - **ericksoa**: UX direction owner (cv routes UX decisions to them)
 - **wscurran**: CONTRIBUTOR, auto-triage bot, adds related issue links
 - **ColinM-sys**: writes regression tests, checks version pinning
+- **chengjiew**: requires you to **claim issues first** before starting work — comment on issue to express intent, wait for assignment, then start coding (#3836 教训)
+
+## Contribution Flow
+- **必须先 claim issue**：在 issue 下评论表示想做，等 maintainer assign 后再动手。不要直接开 PR（chengjiew 明确要求，2026-05-23）
+- DCO signoff required: `git commit --signoff`
 
 ## PR Patterns
 - Title: conventional commits (`fix(scope): ...`, `feat(scope): ...`)
