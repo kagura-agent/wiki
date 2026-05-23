@@ -3,7 +3,7 @@ title: Elephant Agent (agentic-in)
 created: 2026-05-17
 status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
-stars: 385
+stars: 415
 repo: agentic-in/elephant-agent
 last_verified: 2026-05-23
 ---

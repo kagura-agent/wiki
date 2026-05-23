@@ -1,28 +1,33 @@
 ---
-title: "semble_rs — Rust Hybrid Code Search for AI Agents"
+title: "semble_rs — Agent-Native Code Search in Rust"
+created: 2026-05-23
 status: noted
-updated: 2026-05-14
-stars: 39
+tags: [code-search, rust, token-optimization, agent-tooling, build-compression]
+stars: 101
 repo: johunsang/semble_rs
-language: Rust
-license: MIT
-last_verified: 2026-05-14
+last_verified: 2026-05-23
 ---
 
-# semble_rs
+# semble_rs — Agent-Native Code Search in Rust
 
-Rust rewrite of MinishLab/semble (Python) — hybrid BM25 + semantic code search designed as a drop-in replacement for `grep`, `cat`, `read`, `ls` when LLMs explore code.
+> "Hybrid BM25 + semantic, Tree-sitter AST chunking, dependency & impact analysis."
 
-## Key Architecture
+**Repo**: [johunsang/semble_rs](https://github.com/johunsang/semble_rs) | 101⭐ (2026-05-23, created 05-12) | Rust | No license yet
 
-- **Tree-sitter AST chunking** (vs line-based in original) — functions/classes/structs as atomic units
-- **Hybrid search**: BM25 (keyword) + model2vec embeddings (semantic) → RRF fusion
-- **Added over original**: dependency graph analysis, impact analysis, line numbers in results
-- Claims **-93% token reduction** (58K → 4K tokens/session)
-- Unicode-aware BM25 tokenizer (Korean/CJK support)
+## What It Is
+
+Single-binary code search CLI designed specifically for AI coding agents. Replaces grep/cat/read/ls with token-efficient alternatives. Three main features:
+
+1. **Hybrid search** — BM25 + Model2Vec static embeddings fused with RRF, code-aware reranking
+2. **Tree command** — Token-cheap codebase overview (4×–747× compression vs ls -R)
+3. **Digest** — Build/CI output compression (up to -98.9% on GitHub Actions logs)
 
 ## Relevance
 
-Niche but well-executed. The token reduction claim is significant for agent cost optimization. AST-aware chunking > line-based chunking is a known-good pattern (see [[code-search-patterns]]). Not directly on our north star but useful reference for anyone building agent-native code tools.
+The `digest` feature overlaps with our TACO-inspired `compress-output.sh` script. semble_rs's approach is more comprehensive (auto-detects cargo, npm, pytest, go test, etc.) but requires a Rust binary. Our shell script is lighter but less capable.
 
-Korean developer (johunsang). Active development (pushed 05-14).
+The hybrid search could be interesting for our wiki search if it ever outgrows memex.
+
+**Not tracking** — useful tool but not in our core direction. Note for tooling reference.
+
+See also: [[worktree-convergence-2026-05]]
