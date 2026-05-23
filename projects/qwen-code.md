@@ -11,7 +11,8 @@
 | PR | Issue | 状态 | 备注 |
 |---|---|---|---|
 | #4456 | #4450 --list-extensions does nothing | pending | First PR, AI disclosure included |
-| #4459 | #4452 Claude plugin install broken for complex plugins | pending | Fix collectResources skip-logic bug |
+| #4459 | #4452 Claude plugin install broken for complex plugins | pending | CI: flaky AppContainer test (upstream) |
+| #4461 | #4448 invalid settings.json silently reset | pending | 11-line fix, stderr warnings before TUI |
 
 ## 贡献要求 (CONTRIBUTING.md)
 - Link to existing issue (required, open issue first if none exists)
@@ -22,6 +23,8 @@
 - Include screenshot/video demo
 - PR template: Summary, Validation (commands, evidence), Scope/Risk
 - No DCO/CLA required
+- External PRs only get `review-pr` check (skips, needs maintainer approval to run)
+- Main CI (Lint, Test, CodeQL) only runs after maintainer triggers
 
 ## 技术细节
 - monorepo with `packages/` — cli, core are main targets
