@@ -49,3 +49,18 @@
 - **状态**: pending review
 - **注意**: 本地 clone 在 NTFS 盘，git checkout 会产生大量 filemode 变化，必须 `git config core.fileMode false`
 - **选题信号**: 简单 CSS bug，1 行修复，零竞争 PR，76% merge rate，ideal for quick contribution
+
+### PR #507 — Harden ExecTool defaults (2026-05-23)
+- **Issue**: #506 — TutorBot ExecTool executes LLM-generated shell commands through WebSocket chat
+- **修复**: `deeptutor/tutorbot/agent/tools/shell.py` — default `restrict_to_workspace=True`, add network/exfiltration/privilege deny patterns
+- **测试**: 32 new tests in `tests/tools/test_shell.py` — deny patterns, workspace restriction, execution
+- **Target**: `dev` branch
+- **CI**: 488/489 passed (1 pre-existing upstream failure in `test_docs_contract.py`)
+- **状态**: pending review
+- **注意**: Python 3.14 deprecates `asyncio.get_event_loop()` — use `@pytest.mark.asyncio` + `async def` for async tests
+- **本地环境**: venv 可能缺 loguru/pytest-asyncio，需手动 pip install
+
+## CI 注意事项
+- v1.4.0 引入了 `tests/cli/test_docs_contract.py::test_deep_research_examples_include_required_config` 持续失败（upstream issue）
+- Python 3.14 不再自动创建 event loop，async 测试必须用 pytest-asyncio
+- pre-commit hooks 是项目要求，但本地网络可能下载 ruff 失败
