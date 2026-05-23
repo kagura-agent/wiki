@@ -602,6 +602,10 @@ Comparison with OpenClaw:
 
 **Stars**: 42,963 (05-22) → 43,013 (05-23). Still climbing steadily.
 
+### Weekend Activity (05-23)
+
+Minimal new development: Windows CI for CLI Apps (#3965), locale key fills. No new features or architectural changes. Consistent with weekend slowdown pattern across tracked repos.
+
 ### CLI Apps: CLI-Anything Integration (PR #3963, merged 2026-05-22)
 
 New first-class **CLI Apps** capability surface:

@@ -315,6 +315,15 @@ Rapid macOS expansion: self-contained runtime bundle (#49), multimodal MCP runti
 
 Growth continues strong. macOS app + skill optimization making it a serious personal-agent contender.
 
+### macOS Multimodal MCP + Signed Releases (2026-05-23)
+
+Continued rapid macOS expansion:
+- `feat(macos): support multimodal MCP runtime` — agents on macOS can now use image/audio MCP tools natively
+- `feat(macos): bundle self-contained runtime (#49)` — no external Python dependency needed
+- CI signing verification for release artifacts — production-grade distribution
+
+This is execution velocity, not new architecture. The "self-contained runtime" direction means Elephant could ship as a consumer macOS app (like a native ChatGPT competitor but with Personal Model + skill optimization). Interesting competitive positioning vs nanobot's web-first approach.
+
 ### Applied: Workloop Gradient Gate Integration (2026-05-23)
 
 Extended the single-close-path pattern from `add-gradient.sh` into the workloop workflow itself. Both the `gradient_gate` node and the inline step 2.5 now direct agents to use `add-gradient.sh` instead of manual append + format instructions.
