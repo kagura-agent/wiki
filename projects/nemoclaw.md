@@ -261,3 +261,15 @@
 - **Status**: CLOSED (superseded by maintainer cjagwani's #4020)
 - **Reason**: Missed AC #2's `docker ps -a` existence check. My classifier only checked running containers, didn't distinguish "container never created" vs "container exited". Maintainer added explicit `dockerExists` runner.
 - **Lesson**: Read ACs as a checklist — each numbered item = must verify coverage
+
+## PR #4105 — fix(cli): apply --tail limit once to merged log sources (2026-05-23)
+- **Issue**: #4100 — `nemoclaw <sandbox> logs --tail N` returns 2×N lines
+- **Root cause**: `showSandboxLogs()` applied `--tail N` independently to each log source (gateway + openshell), then concatenated = 2N
+- **Fix**: Capture both sources → merge lines → apply tail once → print
+- **Status**: Pending review (CI passed, CodeRabbit processing)
+- **Test**: Added `test/sandbox-logs-tail-merge.test.ts` (4 tests)
+- **Learnings**:
+  - `captureOpenshell` captures stdout; `runOpenshell` with `stdio: "inherit"` pipes directly
+  - Pre-existing upstream tsc errors (@aws-sdk missing) — don't block on these
+  - CONTRIBUTING.md: Conventional Commits required, no DCO/CLA
+  - NV QA issues tend to have detailed repro steps — good targets
