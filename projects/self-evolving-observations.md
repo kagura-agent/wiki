@@ -1659,3 +1659,73 @@ Open PRs: ~32
 | #3 Orb 调研 | OPEN | 无进展 |
 | #2 GenericAgent 调研 | OPEN | study followup commit (ac20647) |
 | #1 Evolver GEP 调研 | OPEN | 无进展 |
+
+---
+
+## 🔬 自进化观察日报 2026-05-23 (Day 36)
+
+### 管线活跃度
+- **beliefs-candidates**: 0 条新增 / 1 条毕业 (familiarity-trap → Workflow) / 16 条 count=1 滞留
+- **DNA 变更**: 有（主动）— 1 commit: familiarity-trap belief graduated
+- **nudge 触发**: 无法验证（journalctl 零匹配，与前几天相同）
+- **dreaming**: 🔴 未产出。`.dreams/` 最新文件仍为 May 19。dreaming/light/ 无 May 20+ 文件。平台版本未升级（需 2026.5.20 修复 session cleanup bug），阈值修复 (0.85→0.60) 无法验证
+
+### 闭环追踪
+- **完整闭环: 1 个**
+  - Issue #9 → 识别 gradient 写入分散 → 创建 `add-gradient.sh` + `gradient-stats.sh` → 集成 workloop.yaml gradient_gate → 工具可用 ✅
+- **断裂处**:
+  - 工具已部署但今天 0 条 gradient 产出 → 修复效果未验证
+  - Dreaming 修复 blocked on 平台升级 → 连续 5 天无 dreaming 输出
+
+### gradient-stats.sh 输出
+```
+📊 Total: 19 entries (16 active, 6 graduated, 3 retracted)
+📅 7-day: 05-23:1 | 05-22:0 | 05-21:7 | 05-20:2 | 05-19:2 | 05-18:0 | 05-17:0
+🏥 Health: ⚠️ 16 entries stuck at count=1
+```
+
+### 今日发现
+
+1. **毕业管线首次自主运转** — familiarity-trap 是首个通过 Triple Verification 自主毕业的 candidate（count=3）。graduation 机制可用，但大多数 candidate 卡在 count=1。
+
+2. **Gradient 输入干旱持续** — 1414 行 memory（高执行日）但 0 条新 gradient。add-gradient.sh 工具已就位，但 reflect/nudge 不主动调用，工具本身不解决问题。
+
+3. **Dreaming 持续中断 Day 5** — 根因: OpenClaw 2026.5.18 session cleanup bug（PR #84802 已合并但本地未升级）。
+
+4. **Nudge 可观测性黑洞** — 连续多天 journalctl 搜索不到 nudge。无法评估其对 gradient 的贡献。
+
+5. **工具建设 vs 使用的鸿沟** — 建了 gradient 观测工具，但「建工具」≠「用工具产出 gradient」。
+
+### 趋势判断 (Day 30-36)
+
+| 维度 | 趋势 | 判断 |
+|------|------|------|
+| Gradient 输入 | 7天 12 条（集中 05-21） | ⚠️ 极度不均匀 |
+| Graduation | 6 total, +1 today | ✅ 机制可用但频率低 |
+| Dreaming | 5 天零输出 | 🔴 blocked on 平台升级 |
+| 闭环完成率 | 1/天 | 🟡 有但不够 |
+| 工具建设 | +2 新工具 | ✅ 基建推进 |
+
+### 下步行动
+1. **[P0]** 升级 OpenClaw 到 2026.5.20 解除 dreaming blockage
+2. **[P1]** 下次 workloop 验证 gradient_gate 是否通过 add-gradient.sh 写入
+3. **[P1]** 排查 nudge 可观测性
+
+### 原始数据
+- `git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md`: 1 commit (1ebbc11, familiarity-trap graduation)
+- `git log --since="yesterday 22:30" --all --oneline`: 7 commits
+- `gradient-stats.sh`: 19 entries, 16 active, 6 graduated, 3 retracted
+- memory/2026-05-23.md: 1414 lines
+- dreaming/light/: latest 2026-05-19.md
+- journalctl nudge grep: 0 matches
+- Open issues: #9, #6, #3, #2, #1
+
+### Issue 进展
+
+| Issue | 状态 | 今日进展 |
+|-------|------|--------|
+| #9 reflect→gradient disconnect | OPEN | add-gradient.sh + gradient-stats.sh 已部署，但 0 自产 gradient |
+| #6 dreaming quality | OPEN | 阈值修复待验证，dreaming 连续 5 天无输出 |
+| #3 Orb 调研 | OPEN | 无进展 |
+| #2 GenericAgent 调研 | OPEN | 无进展 |
+| #1 Evolver GEP 调研 | OPEN | 无进展 |
