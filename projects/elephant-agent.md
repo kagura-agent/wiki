@@ -283,6 +283,38 @@ See also: [[FlowForge]], [[tool-selftest]]
 
 **Connection to [[self-evolving-observations]]**: Directly addresses Issue #9 observability gap. gradient-stats.sh answers "is the pipeline healthy?" in one command. JSONL log enables longitudinal analysis.
 
+### Skill Optimization Pipeline (PR #43, merged 2026-05-22)
+
+Major new feature: **end-to-end skill optimization from historical tool trajectories**. This is the most architecturally significant addition since the Personal Model itself.
+
+**Pipeline stages:**
+1. **Signal Extraction** (pure Python, no LLM) — scans closed episodes for recurring tool sequences
+2. **Candidate Aggregation** — deduplicates via SHA1 fingerprint (`optimization_type + target + signal_type + tool_names`), maps signals to target skills via affinity facts
+3. **Lifecycle Management** — candidates stored as PM facts with `review_status: pending → approved → applied` transitions
+4. **Operator Review Gate** — candidates cannot auto-apply; only `approved` candidates can be applied to authored skills
+5. **Skill Update** — approved candidates appended to skill instruction text with HTML comment markers for idempotency
+
+**Key design decisions:**
+- Trajectory analysis runs only during `dream`/idle or manual `skill_review` trigger — never in `episode_close` hot path
+- Aggregation layer outputs statistical summaries only — no raw conversation content leaks (privacy)
+- Candidates use `recall_policy=review` + `retention_lifecycle=draft` — they don't pollute core prompt
+- Only `authored` skills can be updated; hub/installed skills get suggestions only
+- Allowed review transitions are explicit: `pending→{approved,rejected}`, `approved→{applied}`
+
+**Architecture insight:** The `should_suppress_candidate()` function prevents known-rejected patterns from resurfacing — this is their equivalent of our "duplicate gradient" suppression. The `compose_updated_instruction()` uses marker comments (`<!-- skill-optimization:key -->`) for idempotent appends — clever.
+
+**Relevance to us:** Direct parallel to our `beliefs-candidates.md` → DNA upgrade pipeline, but more structured. Their "trajectory signal → candidate → operator review → skill update" maps to our "gradient observation → beliefs-candidates → triple verification → DNA/workflow/wiki". Key difference: theirs is deterministic extraction from tool usage data; ours relies on LLM reflection. Their approach is more scalable but less flexible.
+
+See also: [[skill-trajectory-tracking]], [[self-evolving-observations]], [[FlowForge]]
+
+### macOS Native App + Multimodal MCP (2026-05-22/23)
+
+Rapid macOS expansion: self-contained runtime bundle (#49), multimodal MCP runtime support, signed release artifacts. Moving from CLI-only to native desktop presence with onboarding polish. Browser headless shell (#48) also added — expanding tool surface.
+
+### Stars: 418⭐ (05-23, was 385 on 05-22, +33 in 1 day)
+
+Growth continues strong. macOS app + skill optimization making it a serious personal-agent contender.
+
 ### Applied: Workloop Gradient Gate Integration (2026-05-23)
 
 Extended the single-close-path pattern from `add-gradient.sh` into the workloop workflow itself. Both the `gradient_gate` node and the inline step 2.5 now direct agents to use `add-gradient.sh` instead of manual append + format instructions.

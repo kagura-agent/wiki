@@ -600,4 +600,26 @@ Comparison with OpenClaw:
 - Provider `reasoning_effort` handling fixes (Kimi thinking models)
 - Gateway reasoning control centralized
 
-**Stars**: 42,963 (05-22). Still climbing steadily.
+**Stars**: 42,963 (05-22) → 43,013 (05-23). Still climbing steadily.
+
+### CLI Apps: CLI-Anything Integration (PR #3963, merged 2026-05-22)
+
+New first-class **CLI Apps** capability surface:
+- Users install CLI adapters from a registry (CLI-Anything public + official registries) via Settings
+- Installed apps are mentionable in chat with `@app`
+- Agent gets a `run_cli_app` tool that only executes installed registry CLIs through subprocess
+- Backend service handles registry fetch/merge/cache/status-check
+- 4,338 lines added across 44 files — substantial feature
+
+**Architecture pattern:** Registry-driven tool expansion without modifying core tool loader. Each installed CLI app becomes an addressable tool at runtime. Contrast with OpenClaw's skill system where tools are defined in plugins — nanobot is adding a more dynamic, user-driven tool surface.
+
+**CLI-Anything registry** is an external standard for wrapping arbitrary CLIs into agent-invocable tools. Interesting ecosystem play — they're not building all tools themselves, they're building the adapter layer for the entire CLI world.
+
+**Relevance to us:** ClawHub skill marketplace aimed at similar goal (dynamic tool expansion) but took a different path (SKILL.md packaging vs CLI adapter wrapping). nanobot's approach is more Unix-philosophy (wrap existing CLIs) while OpenClaw's is more structured (purpose-built skills). Both valid tradeoffs.
+
+### Other Changes (05-22)
+- Security fix: redirect target validation in web handler (#3928)
+- Locale expansion: zh-TW, ja keys filled
+- Image provider HTTP handling unified with Gemini image base URLs
+
+See also: [[self-evolving-agent-landscape]], [[agentskills-io-standard]]
