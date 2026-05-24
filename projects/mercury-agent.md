@@ -407,3 +407,22 @@ Then `checkShellCommand()` runs blocklist against **every** segment, and auto-ap
 **Pattern:** "Parse-what-you-execute" — if you're checking a string that will be interpreted by another parser (shell, SQL, etc.), your checker must understand that parser's grammar. Checking the raw string is always bypassable.
 
 Links: [[shell-command-injection]], [[agent-security]], [[permission-hardening]]
+
+## 跟进 2026-05-24: 2,418⭐, Standalone Binaries
+
+Stars: 2,418 (was 2,397 on 05-21). Growth steady.
+
+### Standalone Binary Distribution (PR #61)
+- `bun --compile` based binary builder for darwin/linux/windows x64+arm64
+- POSIX `install.sh` + PowerShell `install.ps1` one-line installers with SHA-256 verification
+- Hero install widget on website: PM tabs (npm/Bun/pnpm/Yarn) with OS pills
+- Runtime `package.json` reads replaced with tsup define-time injection (broke compiled binaries)
+- Distribution maturity signal: moving from "developer tool" to "distributable product"
+
+**Pattern:** Agent frameworks are entering the distribution phase. The transition from `npm install` to standalone binaries signals expectation of non-developer users. Compare with [[nanobot]]'s wheel distribution approach (Python ecosystem equivalent).
+
+### Open Issues Signal
+- Windows + Node 25 compatibility breaking setup wizard
+- CJK input broken in CLI mode (v1.0.x regression)
+- Chinese community engagement growing (i18n README, Chinese issues)
+- No critical architecture concerns from issue tracker
