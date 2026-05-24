@@ -103,3 +103,16 @@ Browser-Use (85k⭐)  →  Stagehand (22k⭐)  →  Playwright MCP (30k⭐)
 - **CI**: manage-external-pr pass, cubic reviewer 5/5 no issues
 - **注意**: 这是 #1997 的重提（#1997 自行关闭因为无 response 7 天）。这次加了 changeset
 - **教训**: 关闭后重提很顺畅——代码没变，一行 fix 不需要重新理解。changeset 是必须的
+
+### PR #2162 — feat(cli): add --chrome-arg flag for extra Chromium flags (fixes #2148)
+- **日期**: 2026-05-24
+- **问题**: browse CLI headed 模式每次命令都抢窗口焦点，因为没法传 `--no-focus-on-navigate` 等 Chrome args
+- **根因**: CLI 的 `LocalBrowserLaunchOptions` 只暴露 `cdpUrl/headless/viewport`，不转发 `args`。但 core 的 schema 和 `launch/local.ts` 已支持 `args` 字段
+- **修复**: CLI 层加 `--chrome-arg` repeatable flag，thread through `runCommand → ensureDaemon → spawn → runDaemon → resolveLocalStrategy → localLaunchOptions.args`
+- **文件**: `packages/cli/src/local-strategy.ts` (+7/-2), `packages/cli/src/index.ts` (+21/-9), `.changeset/` (+5)
+- **CI**: manage-external-pr pass, cubic 3/5 (bot concern: daemon reuse doesn't restart on flag changes — same as existing `--headless` behavior, pre-existing design choice)
+- **方法**: GitHub API blob/tree/commit approach（repo 2G+ 无法 clone，同 #1990 方法）
+- **教训**: 
+  - 大 repo 的 GitHub API 工作流已完全成熟，blob→tree→commit→ref 一条龙
+  - 核心已有能力但上层没暴露时，fix 非常干净——只改调用链，不改核心逻辑
+  - cubic bot 的 concern 虽然合理但需要判断是否 in-scope：daemon 的 flag-aware restart 是独立功能，不应塞进当前 PR
