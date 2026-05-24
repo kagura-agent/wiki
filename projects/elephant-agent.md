@@ -5,7 +5,7 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 415
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-23
+last_verified: 2026-05-24
 ---
 
 # Elephant Agent
@@ -332,3 +332,25 @@ Extended the single-close-path pattern from `add-gradient.sh` into the workloop 
 **After**: Unified path through `add-gradient.sh` everywhere. Every gradient write gets automatic dedup check and JSONL logging regardless of source.
 
 **Behavioral change**: Next workloop run, the gradient_gate node will instruct the agent to use `add-gradient.sh --source workloop` instead of raw file append. This closes the last gap in the single-write-path adoption.
+
+### Applied: Signal Extraction Pattern for Beliefs Pipeline (2026-05-24)
+
+Adapted PR#43's **automated signal extraction from historical episodes** to our [[beliefs-candidates]] pipeline.
+
+**Problem**: 16 beliefs-candidates stuck at count=1. Manual observation is the only way to increment counts, but patterns recur in memory files without being noticed across session boundaries.
+
+**Solution**: Created `tools/gradient-scan.sh` — a keyword-based scanner that:
+1. Extracts pattern tags from beliefs-candidates.md (active candidates only, skips graduated/retracted)
+2. Searches recent memory files (configurable --days window) for keyword matches
+3. Excludes dates already logged for each pattern (avoids double-counting)
+4. Reports hits per pattern with file dates as evidence
+
+**Integration**: Added as step 0 in `review.yaml` beliefs_graduation node — runs before graduation check, so newly discovered evidence feeds into the graduation decision.
+
+**Immediate impact**: First run found `大repo` (1→8+ occurrences across 7 days) and `竞争PR` (1→14+ across 13 days) — both far exceeding the V1 threshold but invisible at count=1 because observations were recorded in memory rather than incremented in beliefs-candidates.
+
+**Design tradeoff**: Keyword-based (not semantic/LLM). First version had broad keywords causing massive false positives (218 hits); tightened to behavior-specific patterns (23 genuine hits). Precision > recall here — false positives erode trust in the tool. Each pattern's keywords should match the *error behavior*, not the *domain context*.
+
+**Connection to Elephant Agent**: Their pipeline uses SHA1 fingerprints for dedup and stores candidates as Personal Model facts with `recall_policy=review`. Ours uses pattern tags and grep — simpler but sufficient for our scale (16 candidates vs their potentially hundreds of skill optimization signals). Key shared principle: **automated extraction from execution history, not manual observation**.
+
+See also: [[self-evolving-observations]], [[add-gradient-sh]]
