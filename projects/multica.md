@@ -478,6 +478,16 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Approach**: Manual implementation (no Claude Code needed — surgical, well-scoped, followed existing pattern exactly)
 - **Pattern**: When adding a new field to agent brief, trace the `RequestingUser` path: handler response → daemon types → execenv → runtime_config. All 5 layers must have the field.
 
+## 2026-05-24 PR #3147: fix(execenv): clean stale Codex memories on env reuse (fixes #3130)
+- **Issue**: #3130 — Reused CODEX_HOME leaks stale memories into unrelated issue tasks
+- **PR**: #3147
+- **Status**: PENDING (backend CI ✅, installer ✅, frontend Vercel pending — expected for external PRs)
+- **Root cause**: `prepareCodexHomeWithOpts()` seeds per-task CODEX_HOME with symlinks/copies but never cleans Codex-generated runtime state (`memories/`). `Prepare` path nukes entire envRoot first so it's fine. But `Reuse` path (when `task.PriorWorkDir` is set) doesn't nuke envRoot, so old `memories/raw_memories.md` persists across tasks
+- **Fix**: Added `os.RemoveAll(memories/)` at start of `prepareCodexHomeWithOpts()`, after `MkdirAll` but before symlink/copy seeding. Harmless no-op on Prepare path, essential on Reuse path
+- **Tests**: 2 new tests — stale memories cleaned on prepare, no error when memories dir doesn't exist
+- **Approach**: Manual edit — surgical 9-line addition, matched existing code style exactly
+- **Pattern**: When env directories are reused, check what runtime-generated state persists that shouldn't. Codex home has: auth (symlinked ✅), sessions (symlinked ✅), config (copied ✅), but memories (generated at runtime) was missed
+
 ## 2026-05-22 PR #3092: fix(agent/cursor): remove obsolete 'chat' subcommand from argv (fixes #3077)
 - **Issue**: #3077 — cursor-agent CLI no longer has 'chat' subcommand, it leaks into prompt text
 - **PR**: #3092
