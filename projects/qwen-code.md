@@ -5,14 +5,20 @@
 - **Stars**: 24,601
 - **方向**: AI coding agent (CLI + VSCode extension)
 - **结构**: packages/ monorepo — cli, core, sdk-*, vscode-ide-companion, webui, zed-extension
-- **关系**: new (first PR 2026-05-23)
+- **关系**: established (wenshao approved 2 PRs, fast review cadence)
+
+## Review 风格
+- **wenshao**: 主要 reviewer，使用 AI review bot (qwen3.7-max via Qwen Code /review)，但人工确认后 approve。响应很快（通常 <24h）
+- external PR 只触发 `review-pr` check（skipped），主 CI 需 maintainer 手动触发
+- merge rate 高，对 AI PR 友好
 
 ## PR 历史
 | PR | Issue | 状态 | 备注 |
 |---|---|---|---|
 | #4456 | #4450 --list-extensions does nothing | pending | First PR, AI disclosure included |
-| #4459 | #4452 Claude plugin install broken for complex plugins | pending | CI: flaky AppContainer test (upstream) |
-| #4461 | #4448 invalid settings.json silently reset | pending | 11-line fix, stderr warnings before TUI |
+| #4459 | #4452 Claude plugin install broken for complex plugins | APPROVED | wenshao approved, waiting merge |
+| #4461 | #4448 invalid settings.json silently reset | APPROVED | wenshao approved, waiting merge |
+| #4474 | #4466 env var substitution from .env files | pending | Ordering fix in loadSettings() |
 
 ## 贡献要求 (CONTRIBUTING.md)
 - Link to existing issue (required, open issue first if none exists)
@@ -59,3 +65,7 @@
 - Claude plugins converted via `claude-converter.ts`: marketplace.json → resolvePluginSource → copyDirectory → collectResources → convertClaudeToQwenConfig
 - `qwen-extension.json` intentionally only has name/version/mcpServers/hooks — commands/skills/agents are loaded from directory structure
 - Key files: `packages/core/src/extension/` (extensionManager, claude-converter, gemini-converter, storage, marketplace)
+
+## 踩过的坑 (2026-05-24)
+- Sparse checkout + shallow clone cannot push to GitHub (missing objects). Use `gh repo sync` + GitHub Contents API for file uploads, or do a full clone if disk allows
+- Large test files (3600+ lines) exceed CLI arg limit for `gh api` — use `--input` with JSON file instead
