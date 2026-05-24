@@ -1232,3 +1232,31 @@ GitHub trending (agent, created past week, sorted by stars):
 - **What**: Automated attack-with-defense platform where LLM-powered agents compete
 - **Why interesting**: Built on OpenClaw — ecosystem growth signal
 - **Added**: 2026-05-15
+
+### smallcode (Doorman11991)
+- **URL**: https://github.com/Doorman11991/smallcode
+- **Stars**: 1313 (2026-05-24)
+- **What**: AI coding agent optimized for small LLMs — 87% benchmark with 4B-active model
+- **Why interesting**: Efficiency-first agent design; proves small models can compete in coding tasks. 1300+ stars in 6 days = strong signal.
+- **Added**: 2026-05-24
+
+### centaur (paradigmxyz)
+- **URL**: https://github.com/paradigmxyz/centaur
+- **Stars**: 431 (2026-05-24)
+- **What**: Multiplayer, self-hosted, secure agents
+- **Why interesting**: From paradigm (Reth/foundry team) — serious infra team doing agents. 24 open issues, 46 forks in 6 days = active community.
+- **Added**: 2026-05-24
+
+### kimi-code (MoonshotAI)
+- **URL**: https://github.com/MoonshotAI/kimi-code
+- **Stars**: 220 (2026-05-24)
+- **What**: Official Moonshot coding agent — "starting point for next-gen agents"
+- **Why interesting**: Official release from major Chinese AI lab. TypeScript. Just launched 05-22.
+- **Added**: 2026-05-24
+
+### ccglass (jianshuo)
+- **URL**: https://github.com/jianshuo/ccglass
+- **Stars**: 134 (2026-05-24)
+- **What**: See what coding agents (Claude Code, Codex, Kimi) send to the model — local transparency tool
+- **Why interesting**: Agent observability/transparency niche. Practical utility for anyone using coding agents.
+- **Added**: 2026-05-24
