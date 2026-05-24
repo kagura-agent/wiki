@@ -109,7 +109,18 @@
 - Changeset: patch for `@ai-sdk/openai-compatible`
 - Lesson: ultracite formatting requires semicolons — first push failed lint, fixed in follow-up commit
 
-## 踩坑补充 (2026-05-20)
+### PR #15584 (2026-05-24) — PENDING
+- Fix: add `gemini-embedding-2` GA model ID to `GoogleEmbeddingModelId` and `GoogleVertexEmbeddingModelId`
+- Issue #15582: gemini-embedding-2 is out of preview, EU multi-region doesn't have preview model
+- Approach: Add model ID to type unions in both packages, update docs tables and examples
+- CI: All green (Lint, Format, TypeScript, Tests 22/24/26). Vercel deploy needs maintainer auth (expected)
+- Changeset: patch for `@ai-sdk/google` and `@ai-sdk/google-vertex`
+- Clean surgical diff: 6 files, +14 -3 lines
+
+## 踩坑补充 (2026-05-24)
+
+- **Gateway already had it**: `packages/gateway/src/gateway-embedding-model-settings.ts` already listed `google/gemini-embedding-2` (without `-preview`), confirming the model is GA. Provider packages were lagging behind.
+- **Type union is soft**: `(string & {})` at end of union means any model ID works at runtime — the named IDs are just for autocompletion/docs. Low risk addition.
 
 - **Lint formatting**: Always add semicolons to test code. First push failed `Lint & Format` because test code was missing semicolons (ultracite/oxfmt requires them)
 - **Schema pattern**: `z.enum(['X']).nullish()` vs `z.literal('X').nullish()` — both reject empty string. For openai-*compatible* provider, `z.string().nullish()` is safer since the whole point is compatibility with diverse backends
