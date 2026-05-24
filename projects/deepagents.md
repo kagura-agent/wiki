@@ -57,4 +57,32 @@ DeepAgents 是 v3 时代的标志。不再是"用我们的框架组装 agent"，
 
 ---
 
+## 贡献记录
+
+### PR #3565 — fix(sdk): handle None base state in _messages_delta_reducer (2026-05-24)
+- **Issue**: #3564 — `_messages_delta_reducer` crashes with TypeError when channel base is `None`
+- **状态**: Auto-closed by check-issue-link bot. 需要 maintainer 先 assign issue 给我，然后 reopen PR
+- **改动**: 1 文件 +6/-1 (reducer) + 1 文件 +9 (test)
+- **教训**: deepagents 要求 PR author 必须被 assign 到 linked issue 才能过 CI gate
+
+## 贡献流程要求
+- **Issue assignment**: PR author 必须先被 assign 到 linked issue，否则 check-issue-link bot 自动关闭 PR
+- **PR title**: Conventional Commits 格式 `fix(sdk): <description>`
+- **PR template**: `Fixes #` 在最顶部
+- **Scopes**: sdk, cli, code, acp, evals 等（见 .github/workflows/pr_lint.yml）
+- **CI**: `make format && make lint && make test`（from libs/deepagents/）
+- **AI disclosure**: PR template 要求标注 AI 生成
+- **不要改 uv.lock 或 pyproject.toml 的 deps**
+- **仓库语言**: Python
+- **Repo 大小**: ~129MB，clone 很慢，用 sparse checkout 或 GitHub API 操作
+
+## 维护者风格
+- 有 check-issue-link bot 自动关闭未 assign 的 PR
+- 有 Corridor Review bot 做自动审查
+- PR lint 要求 Conventional Commits
+- 活跃度极高（每天多次 commit）
+
+---
+
 *侦察时间: 2026-03-22*
+*贡献开始: 2026-05-24*
