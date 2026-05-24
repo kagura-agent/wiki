@@ -148,7 +148,7 @@ else
   # Stats
   total_notes=$(find "$WIKI_DIR/projects" "$WIKI_DIR/cards" -name "*.md" ! -name "INDEX.md" ! -name "backlog.md" 2>/dev/null | wc -l)
   candidate_count=${#RESULTS[@]}
-  local recall_entries=$(wc -l < "$RECALL_LOG" 2>/dev/null || echo 0)
+  recall_entries=$(wc -l < "$RECALL_LOG" 2>/dev/null || echo 0)
   echo "Total notes: $total_notes | Candidates: $candidate_count | Recall log: ${recall_entries} entries, ${LOG_DAYS}d"
   if [[ $RECALL_IMMATURE -eq 1 ]]; then
     echo "⚠️  Recall log immature (<7 days). Recall scores halved. Results improve with more search data."
