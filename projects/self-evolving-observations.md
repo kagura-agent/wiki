@@ -1729,3 +1729,58 @@ Open PRs: ~32
 | #3 Orb 调研 | OPEN | 无进展 |
 | #2 GenericAgent 调研 | OPEN | 无进展 |
 | #1 Evolver GEP 调研 | OPEN | 无进展 |
+
+---
+
+## 🔬 自进化观察日报 2026-05-24 (Day 37)
+
+### 管线活跃度
+- beliefs-candidates: 0 条新增 gradient / 2 条毕业（gradient-scan.sh 自动化首批）/ 16 active / 8 graduated / 3 retracted
+- DNA 变更: 无（SOUL.md, AGENTS.md 无 commit）
+- nudge 触发: 0 次可见（journalctl grep "nudge" = 0 matches） — 可观测性黑洞持续
+- dreaming: **未运行 Day 6**。dreaming/light/ 最新 2026-05-19.md。session-corpus 也停在 05-19。OpenClaw 已 2026.5.20 但 dreaming 仍未恢复
+
+### 闭环追踪
+- 完整闭环: 1 个（gradient-scan.sh 部署 → 用于 graduation → 实际毕业 2 条，当日闭合）
+- 断裂处:
+  - dreaming 观察→升级→仍未恢复（6 天断裂，观察未行动）
+  - nudge 可观测性: 连续标注"黑洞"但无诊断行动（观察→记录 停住）
+
+### 今日发现
+
+1. **gradient-scan.sh 首次实战**：新工具从 PR review/session logs 中自动抽取 signal，促成 2 条 beliefs graduation（大 repo 竞争 PR pattern）。这是工具→使用→效果的完整闭环 ✅
+
+2. **Dreaming Day 6 停摆** 🔴：OpenClaw 已升级到 2026.5.20（修复 session cleanup bug），但 dreaming 仍未产出。`session-corpus/` 最新文件停留 05-19。recall store 文件 10KB（之前报告 35MB 问题似乎已解决，或被 daily-review 备份替换）。需排查：是 cron 未触发、是 session 创建失败、还是新的 blocker？
+
+3. **Nudge 可观测性 Day 4 黑洞**：journalctl 今日 0 条 nudge 相关日志。但 nudge 是 agent_end hook（每 5 次触发），不一定写 "nudge" 关键词到日志。需要换方法验证：查 agent_end hook 配置是否还在、查 systemEvent 注入记录。
+
+4. **Gradient 输入模式分析**：7 天趋势 05-18~05-24 = [0,2,2,7,0,1,2]。05-21 峰值（Luna 大量纠正日），其余天 0-2 条。自生成 gradient 仍然稀少——工具在位但 reflect 环节未养成调用 add-gradient.sh 的习惯。
+
+5. **16/19 条候选停在 count=1**：绝大多数 gradient 写入后再无复现，堵在 graduation 门控前。gradient-scan.sh 可能是解法（从历史数据中找证据补 count），但目前只用了一次。
+
+6. **PR 层面**：vercel/ai#15464 merged 🎉，qwen-code#4459 APPROVED 待 merge。29 个 open PR 全部等 maintainer。无 review feedback 被转化为 gradient（维度 7 缺失）。
+
+### 原始数据
+- `git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md`: 2 commits（f72dc08 graduation, b7d7c6e gradient-scan.sh 部署）
+- `gradient-stats.sh`: 19 entries, 16 active, 8 graduated, 3 retracted
+- `dreaming/light/`: latest 2026-05-19.md
+- `session-corpus/`: latest 2026-05-19.txt
+- `short-term-recall.json`: 10KB, modified today 16:46
+- journalctl nudge: 0 matches
+- memory/2026-05-24.md: ~200+ lines（凌晨班巡检为主）
+- OpenClaw version: 2026.5.20
+
+### Issue 进展
+
+| Issue | 状态 | 今日进展 |
+|-------|------|--------|
+| #9 reflect→gradient disconnect | OPEN | gradient-scan.sh 部署+首次实战（2 条毕业），但 reflect 本身仍不产 gradient |
+| #6 dreaming quality | OPEN | Day 6 停摆。OC 已 2026.5.20 但未恢复。需新一轮诊断 |
+| #3 Orb 调研 | OPEN | 无进展 |
+| #2 GenericAgent 调研 | OPEN | 无进展 |
+| #1 Evolver GEP 调研 | OPEN | 无进展 |
+
+### 下步行动
+1. **[P0]** Dreaming 新诊断：查 dreaming cron 是否存在且 enabled、查最近 5 天 dreaming session 是否有创建记录
+2. **[P1]** Nudge 换验证法：查 agent_end hook 配置、查 systemEvent 注入记录
+3. **[P1]** gradient-scan.sh 常态化：集成到 daily-review 流程，每天跑一次扫描历史 PR/session 找遗漏 gradient
