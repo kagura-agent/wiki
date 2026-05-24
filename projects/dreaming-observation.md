@@ -81,3 +81,20 @@
 **Impact**: 4 days of dreaming output missing (May 20-23). Deep sleep promotion (the mechanism that graduates memories to MEMORY.md) has been non-functional for Kagura workspace. This directly affects Issue #6 (dreaming quality) — the threshold fix from May 22 cannot be verified because dreaming itself isn't running.
 
 **Fix**: Update to OpenClaw 2026.5.20. See [[openclaw-architecture]].
+
+### 🔧 Fix Applied — 2026-05-24
+
+**Actual root cause**: `short-term-recall.json` bloated to 35.9MB (35,685 entries), exceeding OpenClaw's 16MB file size limit for dreaming promotion. This is a data accumulation issue — the recall store grows unboundedly for active workspaces and was never pruned.
+
+**Gateway log evidence** (3:30 AM today):
+```
+[plugins] memory-core: dreaming promotion failed for workspace /home/kagura/.openclaw/workspace: file exceeds limit of 16777216 bytes (got 35899443)
+```
+
+Other workspaces' recall stores are ~554KB (normal). Dreaming ran successfully for all 8 other workspaces but silently skipped ours.
+
+**Fix applied**: Reset `short-term-recall.json` to empty (`{"version":1,"entries":{}}`) with backup. Dreaming should rebuild the store from scratch at next 3:30 AM run. Verification pending 2026-05-25 03:30.
+
+**Upstream**: Issue #84291 already filed (2026-05-20). The real fix should be upstream: either auto-prune old entries or raise/remove the limit. Our 5-day dreaming outage was entirely caused by this one file.
+
+**Correction**: Previous diagnosis (May 23) attributed this to the session cleanup bug (PR #84802). While that bug exists, it was NOT our specific blocker — the file size limit was. The 2026.5.18 → 2026.5.20 upgrade was already done but didn't help because the underlying data file was already too large.
