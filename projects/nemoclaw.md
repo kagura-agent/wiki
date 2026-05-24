@@ -278,3 +278,4 @@
   - Pre-existing upstream tsc errors (@aws-sdk missing) — don't block on these
   - CONTRIBUTING.md: Conventional Commits required, no DCO/CLA
   - NV QA issues tend to have detailed repro steps — good targets
+  - #4105 superseded by #4149: when multiple log sources each have --tail N, must merge streams chronologically first then apply tail once to merged result, not tail each source separately (concat = 2N lines)
