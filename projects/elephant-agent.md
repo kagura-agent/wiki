@@ -349,6 +349,8 @@ Adapted PR#43's **automated signal extraction from historical episodes** to our 
 
 **Immediate impact**: First run found `大repo` (1→8+ occurrences across 7 days) and `竞争PR` (1→14+ across 13 days) — both far exceeding the V1 threshold but invisible at count=1 because observations were recorded in memory rather than incremented in beliefs-candidates.
 
+**Pipeline closure (2026-05-24)**: Both candidates formally graduated via gradient-scan evidence — first automated graduations in the pipeline. Total graduated: 6→8. Proves end-to-end cycle: insight → tool → automated evidence → graduation.
+
 **Design tradeoff**: Keyword-based (not semantic/LLM). First version had broad keywords causing massive false positives (218 hits); tightened to behavior-specific patterns (23 genuine hits). Precision > recall here — false positives erode trust in the tool. Each pattern's keywords should match the *error behavior*, not the *domain context*.
 
 **Connection to Elephant Agent**: Their pipeline uses SHA1 fingerprints for dedup and stores candidates as Personal Model facts with `recall_policy=review`. Ours uses pattern tags and grep — simpler but sufficient for our scale (16 candidates vs their potentially hundreds of skill optimization signals). Key shared principle: **automated extraction from execution history, not manual observation**.
