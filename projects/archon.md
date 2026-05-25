@@ -298,6 +298,12 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - CI 用 bun 1.3.11，本地 1.3.14 — mock.module 行为可能有微妙差异
 - 如果再次 fail 相同 test，考虑在 PR comment 说明本地通过情况
 
+### 结果：SUPERSEDED by #1756
+- 维护者 Wirasm 确认诊断正确（`platform === 'web'` 门控是 root cause）
+- #1756 在我的 fix 基础上增加了 `codebase_id` scoping：`findResumableRunByParentConversation` 新增第三个参数 `codebaseId`，防止同一 chat thread 里多项目交叉 resume（Telegram chat_id、Slack thread 共享时的隐患）
+- **教训**：guide rule #4 的延伸 — 不仅要 fix 直接 bug，还要考虑 fix 后暴露的新攻击面。平台门控去除后，persistent chat ID 共享问题浮现。如果我在 PR 里同时加了 codebase scope，可能就不会被 supersede
+- **Pattern**: SCOPE_EXPANSION — 修一个门控/过滤时，检查移除门控后是否暴露新的 cross-contamination 路径
+
 ### Wiki 笔记更新
 - Archon 的 `orchestrator-agent.ts` 是核心文件（~1700 行），改动时注意 mock 覆盖
 - `orchestrator.test.ts` 和 `orchestrator-agent.test.ts` 是两个不同的测试文件，前者更集成

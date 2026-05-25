@@ -129,3 +129,13 @@
 - **Formatter**: Project uses `ultracite fix` (not prettier). `npx prettier` reformats entire file with different settings (double quotes). Use `npx ultracite fix <file>` for formatting
 - **CI lint-staged**: Checks formatting on changed files only. Even small whitespace differences trigger failures
 - **Pattern**: openai-compatible provider reads responses with `reasoning_content ?? reasoning` (handles both), but input serialization was hardcoded to `reasoning_content`. Symmetric fix = add config option
+
+### PR #15594 (2026-05-25) — PENDING
+- Fix: make `JSONArray` type readonly to accept `readonly` arrays
+- Issue #15593: `readonly T[]` not assignable to `JSONArray = JSONValue[]`
+- Approach: Added `readonly` modifier to `JSONArray` type definition
+- Also fixed `generate-image.ts` line 243 — used `(arr as JSONValue[]).push()` cast for internal mutable build-up
+- CI: All green (TypeScript, Tests 22/24/26, Lint, Build, Bundle Size). Vercel deploy needs maintainer auth (expected)
+- Changeset: patch for `@ai-sdk/provider` and `ai`
+- **Lesson**: Type-level "one-line" changes can have ripple effects — `JSONArray` was used in `generate-image.ts` with `.push()`, which breaks with `readonly`. Always grep for mutation methods (`.push()`, `.pop()`, `.splice()`, `.sort()`, `.reverse()`) on types you're making readonly.
+- **CI iteration**: First push broke TypeScript, second push (spread concat) broke TS2698 (can't spread intersection type), third push (type assertion cast) worked. Should have grep'd for `.push()` usages before the first push.
