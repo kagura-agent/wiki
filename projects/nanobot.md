@@ -626,4 +626,41 @@ New first-class **CLI Apps** capability surface:
 - Locale expansion: zh-TW, ja keys filled
 - Image provider HTTP handling unified with Gemini image base URLs
 
+### MECE Memory & SNIP Consolidation (PR #3952 → #3990, 2026-05-24)
+
+Major memory architecture evolution. PR #3952 (closed, not merged) proposed MECE long-term memory with routing tags. PR #3990 (open, active) adapts the same ideas to a new single-phase Dream architecture.
+
+**Problem identified (3 core issues):**
+1. **Memory duplication bloat** — "user communicates in Chinese" appeared 10+ times across entries. Consolidator was unaware of existing memories
+2. **Non-MECE information ownership** — user preferences scattered across SOUL.md, USER.md, and MEMORY.md simultaneously
+3. **No lifecycle management** — 14-day flat threshold, no importance distinction between "user height" and "today's arxiv done"
+
+**Solutions:**
+- **SNIP principle** for memory eligibility: Signal, Novel, Important, Persistent
+- **Attribute tags**: `[permanent]`/`[durable]`/`[ephemeral]`/`[correction]`/`[skip]`
+- **MECE routing**: `→USER` (preferences) / `→SOUL` (behavior) / `→MEMORY` (knowledge) — facts routed to single canonical location
+- **Dedup context injection**: Consolidator receives current MEMORY.md + USER.md summary, enabling source-level deduplication
+- **Merge operation**: duplicate facts consolidated into one rather than merely flagged for deletion
+
+**Experimental results (426 history entries, 222 lines MEMORY.md):**
+- Enhanced consolidator: 13 entries → 6 (-54%), 100% valid fact rate
+- Successfully marked duplicates as `[skip]`
+- Automatic decay level annotation
+
+**Architecture shift (#3990):** Two-phase Dream merged into single-phase. Phase 1 (pure LLM analysis) eliminated — fact extraction, dedup, expiry, and skill discovery all happen in one AgentRunner pass.
+
+**Relevance to us:**
+- We already have MECE-ish separation (SOUL.md/USER.md/MEMORY.md) but no enforcement mechanism. nanobot is adding what we do by convention as a system feature
+- SNIP principle maps well to our [[beliefs-candidates]] Triple Verification (repeated signal ≈ Signal+Novel, impact ≈ Important, durability ≈ Persistent)
+- Dedup context injection is the key innovation — making the consolidator aware of what's already stored before writing more. Our daily memory entries don't do this
+- `[skip]` tag is elegant: still written to history for audit, but filtered from Dream processing. Audit trail without memory bloat
+
+See also: [[memory-trash-filter]], [[context-compaction]], [[self-evolving-agent-landscape]]
+
+### Per-Subagent Temperature (PR #3975, merged 2026-05-24)
+
+Simple but useful: `spawn` tool now accepts optional `temperature` param. 4 files, 60 lines. Pipeline already existed — just wired into spawn interface.
+
+**Stars**: 43,084 (05-25). Steady growth continues.
+
 See also: [[self-evolving-agent-landscape]], [[agentskills-io-standard]]
