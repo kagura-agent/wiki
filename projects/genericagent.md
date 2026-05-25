@@ -823,3 +823,30 @@ The langfuse_tracing plugin was refactored (86→62 lines, -28%) to use the new 
 
 ### Assessment
 GenericAgent is evolving from minimalist research project to product. Desktop app + 56% star growth in 3 weeks signals breakout. The lifecycle hook system is the most architecturally mature addition — it transforms the codebase from "clever hack" to "extensible framework" without losing the ~3K LOC minimalism.
+
+## 跟进 2026-05-25: 12,049⭐, Community Thriving
+
+Stars: 12,049 (was ~10K). Growth sustained.
+
+### TUI v3 Feature Parity (PR #462, merged 05-23)
+- Scrollback-first TUI reaching v2 parity: `/export` clipboard/file, per-turn tool folding, ask_user focus-cycle, plan card
+- i18n layer inlined into `frontends/tui_v3.py` — ships as single module
+- 2,562 additions by external contributor (nianyucatfish) — significant community investment
+- Pattern: "scrollback-first" design = append-only log with fold/expand, vs v2's panel-based layout. Simpler mental model.
+
+### A3Agent Fork (PR #468, merged 05-23)
+- "A simplified, user-friendly version of GenericAgent" by FroStorM
+- External contributor creating a derivative → ecosystem formation signal
+- GenericAgent becoming a platform others build on, not just a standalone tool
+
+### Community Health Snapshot
+- 6+ distinct external contributors in past week: skydog221, Jeason00011, FroStorM, nianyucatfish, jorzaiy, slowlyo, HYC-hsy, Kailigithub
+- External PRs: QQ app Markdown fix, Python 3.9 compat, venv preference, Grok OAuth, tri-axis scan SOP
+- Issues from users: Windows compat, TUI rendering, feature requests
+- 🟢 **THRIVING** — genuine multi-contributor community, not solo maintainer
+
+### Assessment
+- GenericAgent has crossed the "community flywheel" threshold — external contributors are adding both features and forks
+- The A3Agent fork is the strongest signal: when people build simplified versions of your tool, your complexity has become a platform feature
+- TUI v3's scrollback-first approach is worth noting as a UI pattern — OpenClaw's TUI uses a similar append model
+- Stars 12K puts it firmly in the "established project" tier alongside [[nanobot]] (43K)

@@ -426,3 +426,30 @@ Stars: 2,418 (was 2,397 on 05-21). Growth steady.
 - CJK input broken in CLI mode (v1.0.x regression)
 - Chinese community engagement growing (i18n README, Chinese issues)
 - No critical architecture concerns from issue tracker
+
+## 跟进 2026-05-25: 2,446⭐, Domain Migration
+
+Stars: 2,446 (was 2,418 on 05-24). Steady growth.
+
+### Domain Migration
+- Migrated from `mercury.cosmicstack.org` to `mercuryagent.sh` — brand-owning domain
+- CNAME update in website config
+- Signal: project maturing toward independent brand identity, distancing from parent org namespace
+
+### Security Fix Landed (PR #48, merged 05-20)
+- **CWE-78 / CWE-184**: Shell pattern bypass through command chaining
+- The `splitShellSegments()` function from 05-21 notes is now merged and in production
+- This was an **advisory-reported** vulnerability, suggesting external security review (mature project signal)
+- See [[shell-command-injection]] for the pattern analysis
+
+### Packaging Maturation
+- v1.1.9 released (renumbered from unpublished 1.1.8)
+- Standalone binaries + one-line installers now live
+- pino logger upgrade (v9→v10)
+- Node inspection dialog for graph visualization
+
+### Assessment
+- Mercury is executing the classic "developer tool → distributable product" playbook: security hardening → standalone binaries → brand domain → growth
+- Architectural quality verified: they fixed the shell injection class we noted, not just individual patterns
+- Community: Chinese README merged, CJK issues being addressed
+- **Transfer value**: The `splitShellSegments` approach remains the most directly applicable insight for [[OpenClaw]]'s exec security
