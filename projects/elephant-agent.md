@@ -5,7 +5,7 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 415
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-24
+last_verified: 2026-05-25
 ---
 
 # Elephant Agent
@@ -356,3 +356,15 @@ Adapted PR#43's **automated signal extraction from historical episodes** to our 
 **Connection to Elephant Agent**: Their pipeline uses SHA1 fingerprints for dedup and stores candidates as Personal Model facts with `recall_policy=review`. Ours uses pattern tags and grep — simpler but sufficient for our scale (16 candidates vs their potentially hundreds of skill optimization signals). Key shared principle: **automated extraction from execution history, not manual observation**.
 
 See also: [[self-evolving-observations]], [[add-gradient-sh]]
+
+### Applied: Tool Ordering for Cache Stability (2026-05-25)
+
+**Source**: PR#39 prefix-cache-reuse — tool ordering sorted by ID.
+
+**Applied to OpenClaw**: Submitted [PR #86301](https://github.com/openclaw/openclaw/pull/86301) — sorts `toToolDefinitions()` output by name before it reaches the API. One-line change: `.sort((a, b) => a.name.localeCompare(b.name))`.
+
+**Audit findings**: OpenClaw's core tools have deterministic hardcoded order (array literal in `openclaw-tools.ts`), but plugin tools from `resolvePluginTools()` and MCP tools from `materializeBundleMcpToolsForRun()` are appended from dynamic registries without sorting. The fix ensures all tools reach the Anthropic API in stable alphabetical order regardless of registration order.
+
+**What's different**: Before this change, any session with plugin/MCP tools loaded in a different order would miss the Anthropic prompt cache. After: cache hits are guaranteed as long as the same tools are present, regardless of load order.
+
+**Remaining prongs**: Frozen prefix cache (SHA-256 hash comparison) and explicit `cache_control` breakpoints are not implemented — would be follow-up work if the maintainer is interested.
