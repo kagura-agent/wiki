@@ -1784,3 +1784,34 @@ Open PRs: ~32
 1. **[P0]** Dreaming 新诊断：查 dreaming cron 是否存在且 enabled、查最近 5 天 dreaming session 是否有创建记录
 2. **[P1]** Nudge 换验证法：查 agent_end hook 配置、查 systemEvent 注入记录
 3. **[P1]** gradient-scan.sh 常态化：集成到 daily-review 流程，每天跑一次扫描历史 PR/session 找遗漏 gradient
+
+---
+
+## 🔬 Study Apply: Reflect Workflow Gradient Integration (2026-05-25)
+
+### Problem
+reflect.yaml was the last major workflow without gradient pipeline integration. The `act` node instructed agents to write behavioral lessons directly to SOUL.md/AGENTS.md, completely bypassing beliefs-candidates.md and add-gradient.sh. This meant reflect — theoretically the richest source of behavioral insights — produced zero gradients.
+
+Self-evolving observations (Issue #9) noted "reflect 本身仍不产 gradient" repeatedly (Day 36, 37). The workloop was fixed on 05-23 (Elephant Agent single-close-path pattern), but reflect was missed.
+
+### Fix
+1. Added mandatory `add-gradient.sh --source reflect` call in act node
+2. Changed behavioral lesson routing: beliefs-candidates.md instead of direct DNA edits
+3. Added `gradient_gate` node (same as workloop.yaml) — structurally enforces gradient extraction
+4. Flow changed: act (was terminal) → gradient_gate → done
+
+### Expected Impact
+- All 3 major workflows now feed the gradient pipeline: workloop, reflect, nudge
+- `--source reflect` enables per-workflow gradient tracking via JSONL logs
+- gradient_gate prevents silent skipping (structural > instructional)
+
+### Pipeline Completeness
+| Workflow | Gradient Integration | Gate | Source Tag |
+|----------|---------------------|------|------------|
+| workloop | ✅ 2026-05-23 | ✅ gradient_gate | `--source workloop` |
+| reflect | ✅ 2026-05-25 | ✅ gradient_gate | `--source reflect` |
+| nudge | ✅ inline | ❌ no gate | varies |
+
+### Connection
+- [[elephant-agent]] PR#43 single-close-path pattern → applied to workloop (05-23) → now reflect (05-25)
+- [[self-evolving-observations]] Issue #9 "reflect→gradient disconnect" — partial close (structural fix done, behavioral verification pending next reflect run)

@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-22
+last_verified: 2026-05-25
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -563,3 +563,11 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **What they added**: An explicit `dockerExists` runner that uses `docker ps -a` to check container existence before classifying exited state. This distinguishes "container never created" from "container exited".
 - **Lesson**: Read ALL acceptance criteria line by line before implementing. AC #2 specifically said "check docker ps -a" — I implemented the general classifier but skimmed past the specific `docker ps -a` requirement. When an issue lists numbered ACs, treat each as a checklist item and verify coverage 1:1.
 - **Pattern**: Superseded because of incomplete AC coverage, not wrong approach. The architecture was fine — missing one specific check the maintainer explicitly asked for.
+
+## 2026-05-24: NemoClaw #4105 → #4149 — naive merge vs timestamp-aware sort
+- **Issue**: #4100 — `nemoclaw logs --tail N` returned 2×N lines (each source independently printed N lines)
+- **My PR #4105**: Captured both log sources' stdout, concatenated lines into an array, applied `--tail` slice to the merged array. Used `captureOpenshell` helper. Tests with mocks.
+- **Winning PR #4149 (latenighthackathon)**: Created `mergeTailLogLines()` and `parseLineTimestamp()` utilities. Parsed epoch timestamps (`[1779488798.644]`) and ISO-8601 timestamps from each line, sorted chronologically with stable `(timestamp, sourceIndex, lineIndex)` ordering, then applied tail. Multi-line log entries inherit parent timestamp. Comprehensive test suite.
+- **Key difference**: My approach merged lines in arrival order (gateway first, then openshell). Their approach interleaves lines by actual timestamp — so the output is chronologically correct even when sources have overlapping time ranges. This matters because gateway and openshell logs cover overlapping periods.
+- **Pattern**: **NAIVE_MERGE_VS_ORDERED_MERGE** — when merging multiple log/data sources with timestamps, order by timestamp rather than source. Naive concatenation produces incorrect ordering when sources have overlapping time ranges. The extra complexity of timestamp parsing pays off in correctness.
+- **Also**: Their PR introduced the `mergeTailLogLines` as an exported, tested utility — reusable and independently testable. My PR kept the merge logic inline in the action handler.
