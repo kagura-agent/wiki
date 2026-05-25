@@ -1,17 +1,17 @@
 ---
 title: IronCurtain
 url: https://github.com/provos/ironcurtain
-stars: 391
+stars: 461
 created: 2026-02-21
-last_updated: 2026-05-11
+last_updated: 2026-05-25
 depth: 🔭 scout
 status: active
-last_verified: 2026-05-11
+last_verified: 2026-05-25
 ---
 
 # IronCurtain — Constitutional Security for AI Agents
 
-Apache-2.0, 391⭐, 50 forks, by provos (likely Niels Provos, security researcher). Research prototype, very active (pushing daily).
+Apache-2.0, 461⭐ (+17.9% in 14d), 60 forks, by provos (likely Niels Provos, security researcher). Very active (pushing daily). 🟢 THRIVING (5/6).
 
 ## Core Idea
 
@@ -46,6 +46,46 @@ OpenClaw has a simpler approval model (native approvals for elevated commands). 
 - **No ambient authority**: Agent never inherits user privileges directly
 
 The "compile English intent to deterministic rules" pattern could inspire improvements to OpenClaw's permission system.
+
+## v0.11.0 (2026-05-18) — Major Evolution
+
+IronCurtain has evolved from a security layer into a **full agent workflow orchestration platform**:
+
+### Vulnerability Discovery Workflow
+Marquee feature: orchestrator-driven FSM that hunts memory-safety and logic bugs in native code. Hub-and-spoke architecture with states: `analyze` → `harness_design` → reviewer loop → `harness_build` → `harness_validate` → `discover`/`triage` → LLM `review` → human `report_review` gate. Uses tiered harnesses (Tier 1 isolated function / Tier 2 multi-component / Tier 3 full build) with libFuzzer/AFL++ coverage-feedback gating. Per-hypothesis investigation journal. This is essentially an **automated security researcher**.
+
+### Workflow Web UI (Svelte 5)
+Full lifecycle dashboard: start runs, watch live state-machine graph (dagre+SVG), review gates with artifact browser, handle escalations. The CLI is now secondary — web UI is the intended interface.
+
+### Multi-Agent Workflow Engine
+XState v5 FSM with: typed events, guards, agent/gate/deterministic states, `when:` verdict conditions, `maxVisits` caps, crash-resume via on-disk checkpoints, YAML definitions as directory packages.
+
+### Shared-Container Mode
+One Docker container + one `ToolCallCoordinator` for all agent states in a run. Hot-swaps active `PolicyEngine` between states via Unix domain control socket. Unified audit trail.
+
+### Agent Skills (SKILL.md)
+Drop-in skill packaging at `~/.ironcurtain/skills/<name>/`. Per-state skills in workflow definitions. Read-only bind mount into containers. Compatible with Claude Code and Goose skill discovery.
+
+### Other Notable Additions
+- `ironcurtain doctor` — comprehensive setup diagnostics
+- Real-time LLM token stream observation (Matrix-style data rain)
+- Configurable Docker resource limits with auto-clamp
+- Per-persona/per-job memory opt-in
+- UID/GID remap for non-default Linux hosts
+- Silent builtin fallback removed (explicit mode selection required)
+
+## Architectural Shift
+
+The project has moved from "policy engine that wraps tool calls" to "workflow orchestration platform with constitutional security baked in." The vuln-discovery workflow demonstrates the thesis: multi-hour, multi-agent runs that are both powerful AND auditable. The security layer isn't optional — it's the foundation that makes autonomous long-running workflows trustworthy.
+
+This positions IronCurtain as both a security tool AND a competitor to agent orchestration frameworks. The workflow engine is general-purpose, not limited to security tasks.
+
+## Relevance to OpenClaw (Updated)
+
+- **Workflow engine pattern**: XState FSM with crash-resume, per-state skills, and shared containers is a mature pattern worth studying if OpenClaw ever builds multi-agent workflow orchestration
+- **SKILL.md convergence**: IronCurtain now uses SKILL.md natively, validating the format as an industry standard
+- **Security-first orchestration**: The thesis that "security enables autonomy" (not "limits it") is proven by the vuln-discovery workflow — you can only run multi-hour unattended agents if every tool call is policy-checked
+- **Constitutional approach remains unique**: English intent → deterministic rules → enforcement is now proven at workflow scale, not just single sessions
 
 ## Related
 - [[opensandbox]] — Alibaba's sandbox approach (container-level isolation)

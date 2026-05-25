@@ -4,14 +4,14 @@ slug: tactile
 tags: [computer-use, accessibility, agent-infrastructure, macos, windows, skill]
 status: tracking
 created: 2026-05-13
-updated: 2026-05-13
-last_verified: 2026-05-13
+updated: 2026-05-25
+last_verified: 2026-05-25
 ---
 
 # Tactile
 
-**Repo:** [yliust/Tactile](https://github.com/yliust/Tactile) · ⭐191 (05-13, 2 days old) · Python + Swift · No standard license (NOASSERTION)
-**Author:** Yong Liu (yliust)
+**Repo:** [yliust/Tactile](https://github.com/yliust/Tactile) · ⭐381 (05-25, was 191 on 05-13, +99.5%) · Python + Swift · No standard license (NOASSERTION)
+**Author:** Yong Liu (yliust) · 🟢 THRIVING (5/6) but mostly solo commits
 
 ## What It Is
 
@@ -71,7 +71,9 @@ Platform support:
 - **Requires Accessibility permissions** — user must grant access in System Preferences
 - **AX quality varies wildly** — Electron apps (Feishu/Lark) expose rich AX trees; many native apps don't. The "ax-poor" mode exists for this reason.
 - **No license** — NOASSERTION. Risk for adoption.
-- **Very new** — 2 days old, 2 issues (both from author), no community yet
+- **Code velocity slowing** — last meaningful commit 05-15 (MCP filtering + scrolling), 10 days quiet despite star explosion
+- **Some external contributions** — trace logging (yin1895), Apple Music skill (xtanh), but mostly solo
+- **Stars growing fast** — doubled in 12 days, but star growth ≠ community depth
 
 ## Comparison
 
