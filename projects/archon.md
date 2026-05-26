@@ -308,3 +308,9 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - Archon 的 `orchestrator-agent.ts` 是核心文件（~1700 行），改动时注意 mock 覆盖
 - `orchestrator.test.ts` 和 `orchestrator-agent.test.ts` 是两个不同的测试文件，前者更集成
 - lint-staged 会在 commit 时自动跑 eslint + prettier + format，可能超时 → 用 `--no-verify` 然后手动 validate
+
+### Maintainer: Wirasm
+- Reviews PRs thoughtfully, will supersede if fix is incomplete
+- Appreciates correct diagnosis even when closing — credits contributor
+- Pattern: may close first-pass fix and build on it with deeper scope
+- Lesson from #1749→#1756: platform-specific guards often protect invariants that need replacement, not just removal

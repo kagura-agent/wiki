@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-25
+last_verified: 2026-05-26
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -571,3 +571,10 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **Key difference**: My approach merged lines in arrival order (gateway first, then openshell). Their approach interleaves lines by actual timestamp — so the output is chronologically correct even when sources have overlapping time ranges. This matters because gateway and openshell logs cover overlapping periods.
 - **Pattern**: **NAIVE_MERGE_VS_ORDERED_MERGE** — when merging multiple log/data sources with timestamps, order by timestamp rather than source. Naive concatenation produces incorrect ordering when sources have overlapping time ranges. The extra complexity of timestamp parsing pays off in correctness.
 - **Also**: Their PR introduced the `mergeTailLogLines` as an exported, tested utility — reusable and independently testable. My PR kept the merge logic inline in the action handler.
+
+## 2026-05-25: Archon #1749 → #1756
+
+**My PR**: Removed the `platform === 'web'` gate to enable resume on all platforms.
+**Their PR (#1756)**: Also removed the gate BUT added `codebaseId` scoping to `findResumableRunByParentConversation`. This prevents cross-project resume on persistent chat IDs (Telegram chat_id, Slack thread reuse).
+**Key lesson**: When fixing a platform-specific gate, think about what the gate was *protecting against*. The web platform had unique conversation IDs per interaction; chat platforms reuse IDs. Simply removing the gate without adding alternative scoping creates a new bug (wrong workflow resumes). Always ask: "what invariant does this guard maintain, and how do I preserve it on the new code path?"
+**Pattern**: "Necessary but insufficient fix" — diagnosis was correct, fix was incomplete.

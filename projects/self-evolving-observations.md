@@ -1867,3 +1867,29 @@ Self-evolving observations (Issue #9) noted "reflect 本身仍不产 gradient" r
 | #3 调研 Orb write-time arbitration | Open | 无进展 |
 | #2 调研 GenericAgent | Open | 无进展 |
 | #1 调研 Evolver GEP | Open | 无进展 |
+
+---
+
+## 🔬 Study Apply: Fix study-saturation.sh False Positives (2026-05-26)
+
+### Problem
+`study-saturation.sh` scout count was massively inflated by dreaming candidate lines. Example: 0 actual scout sessions today, script reported 7/3 LOCKED because dreaming output contained mentions of "Scout"/"scout" from previous sessions' summaries. This caused premature mode locking on any day with dreaming output.
+
+### Root Cause
+Scout/quick used `grep -c "Scout\|scout\|quick_scout\|Quick Scan"` matching ANY line with these words. Apply/Followup already correctly used `^## Study Apply` header patterns. Inconsistency = bug.
+
+### Fix
+All counters now use `^## Study <Mode>` header patterns:
+- Scout: `^## Study Scout` + `^## Study Quick`
+- Quick: `^## Study Quick`
+- Apply: `^## Study Apply` (was correct)
+- Followup: `^## Study Followup\|^## Study Follow` (simplified)
+
+Updated study.yaml inline instructions to match.
+
+### Impact
+Eliminates phantom mode locking from dreaming/summary content. Every future saturation check uses accurate counts. This was silently broken since dreaming was introduced — dreaming candidates always contain study mode keywords from prior sessions.
+
+### Connection
+- Pipeline observability fix — the saturation mechanism was broken, leading to premature study termination
+- Pattern: "observability tools that match raw keywords instead of structured markers produce false positives as the system grows"
