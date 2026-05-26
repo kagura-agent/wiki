@@ -155,7 +155,9 @@ Key: the fork-to-upstream pipeline worked. Community contributor surfaced real p
 - `done_guard` policy: hard-fail, not behavioral
 - Inspired by jukefr/itsy (downstream Rust port)
 
-**Why this matters for us**: this is a structural constraint (cf. [[structural-backpressure]]) rather than a behavioral prompt. The agent doesn't "try to remember" to check completion — completion is gated. Our subagent spawns could benefit from similar hard completion gates.
+**Why this matters for us**: this is a structural constraint (cf. [[structural-backpressure]]) rather than a behavioral prompt. The agent doesn't "try to remember" to check completion — completion is gated.
+
+**✅ Applied 2026-05-26**: Added "Definition of Done" structural completion gate to [[team-lead]] SKILL.md. Every task assignment now requires a `Done Contract` with checkable assertions (file scope, test exit codes, PR link). Agent must report each as ✅/❌ — ❌ means fix or escalate, not "done with caveats." Anti-patterns updated.
 
 ### Idempotent-Write Dedup
 - Dedup module for read-only tool calls (sliding window, hash-based)
