@@ -1893,3 +1893,30 @@ Eliminates phantom mode locking from dreaming/summary content. Every future satu
 ### Connection
 - Pipeline observability fix — the saturation mechanism was broken, leading to premature study termination
 - Pattern: "observability tools that match raw keywords instead of structured markers produce false positives as the system grows"
+
+## 🔬 Study Apply: gradient-scan.sh Triple Fix (2026-05-26 17:45)
+
+### Problem
+gradient-scan.sh had 3 structural flaws that undermined the entire pipeline's ability to detect when count=1 candidates accumulate enough cross-context evidence for graduation:
+
+1. **Missing coverage**: 7 of 24 active patterns had no KEYWORDS entries. These candidates could never be found by the scan — invisible to the graduation pipeline.
+2. **Graduated leak**: Section-header-based graduated entries (大repo, 竞争PR) bypassed the pattern:-based status detection and kept showing as false positives.
+3. **Self-referential false positives**: Memory entries that reference gradient names ("dedup correctly flags 'PR closed 先自省質量' pattern") matched as behavioral evidence. The scan was finding its own output, not real error recurrence.
+
+### Fix
+- Added KEYWORDS for all 7 missing patterns (readonly-ripple-check, premature-conclusion, wrong-debug-layer, architecture-misunderstanding, plan-before-act, machine-identity-verification, workflow-enforcement)
+- Added section-aware status tracking: reads ## headers for graduated/retracted markers, plus hardcoded graduated list for Chinese-named patterns
+- Added meta-reference exclusion filter: lines containing "gradient", "beliefs-candidates", "pattern:", "dedup" are filtered out before counting
+
+### Impact
+- Before: 4 false positives in 7-day scan (2 graduated, 2 self-referential), 7 patterns invisible
+- After: 0 false positives in 7-day scan, 3 genuine patterns surfaced in 30-day scan (scout-before-commit 12 hits/10 days, code-review-rounding 7/3, pr-closed-self-reflect 8/2)
+- Those 3 patterns now have enough cross-context evidence for V1 evaluation
+
+### Connection
+- Directly inspired by [[elephant-agent]] `should_suppress_candidate()` — their SHA1 fingerprinting prevents known-rejected patterns from resurfacing. Our version uses regex exclusion for meta-references (simpler but sufficient)
+- Also connects to [[tiered-processing-collapse]]: the scan was technically "running" but structurally unable to produce useful output for 7/24 patterns — similar to claude-soul's deep reflection tier being structurally unreachable
+
+### Next
+- Run `scripts/evaluate-candidate.sh` on scout-before-commit (12 hits/10 days, clearly V1-passing) for potential graduation
+- Future: auto-sync KEYWORDS when `add-gradient.sh` adds new pattern tags (eliminate manual maintenance)
