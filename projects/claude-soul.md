@@ -1,10 +1,10 @@
 # claude-soul — Self-Correcting Learning Engine for Claude Code
 
 - **repo**: DomDemetz/claude-soul
-- **stars**: 75 (created 2026-05-16, 4 days old)
+- **stars**: 77 (created 2026-05-16) — slow growth, 75→77 in 6 days
 - **lang**: TypeScript (monorepo: CLI + MCP server)
 - **license**: MIT
-- **status**: active | deep-read | ✓2026-05-20
+- **status**: active | deep-read | ✓2026-05-26 (prev: 05-20)
 
 ## What It Is
 
@@ -97,6 +97,30 @@ Related concepts: [[self-evolving-landscape]], [[elephant-agent]] (Personal Mode
 4. **Signal extraction heuristics**: Their regex patterns for correction/gratitude/confusion are reusable — we could detect these in our own session transcripts
 5. **Phase-adaptive parameters**: Adjust review cadence and discovery thresholds based on system maturity
 
+## Update 2026-05-26: External Contributors + Architecture Bugs
+
+### Community Health
+Two external contributors emerged since 05-20:
+- **Abdallah01**: Windows compat fixes (PR #5 merged), signal extractor bugs (PR #8, #11), architecture critiques (issues #6, #12, #13)
+- **mobogojo**: Lesson ranking/curiosity decay fixes (PR #9, #10), /tmp path cleanup (PR #7)
+- **anubissbe**: CLI module resolution fix (PR #2, merged 05-18)
+
+3 external contributors with merged PRs = real community signal despite slow star growth.
+
+### Architecture Critique: Tiered Reflection is Structurally Broken (Issue #6)
+`clearSignals()` is called unconditionally after ANY reflection tier. Quick fires at 12 signals, wipes queue. Deep needs 60 signals but can never accumulate them because quick always fires first and clears. Signal extraction is `slice(-10)` deduplicated by type → max ~8 signals per stop cycle.
+
+**Result**: The tiered architecture (quick/deep/meta) collapses to single-tier in practice. Deep reflection only fires via 24h time fallback on sparse trailing signals — the opposite of its intended high-evidence role.
+
+Proposed fix: per-tier consumed tracking with `consumedBy` array on each signal. Abdallah01's analysis is thorough and includes cross-tier double-counting concern.
+
+**Lesson for us**: If we implement tiered reflection (quick nudge vs deep review), signal consumption must be tier-aware. Our current approach (single nudge frequency) accidentally avoids this bug class.
+
+### JSONL Parse Boundary (Issue #13)
+No runtime validation when parsing Claude Code's JSONL transcripts. `as TranscriptEntry` cast is compile-time only, schema drift produces silent empty output. Classic boundary validation gap.
+
+**Lesson for us**: Any system reading external tool output needs runtime validation at the boundary, not just type assertions.
+
 ## Industry Signal
 
 **Karpathy joined Anthropic** (2026-05-20, 1156pts on HN). After 15 days of silence (last activity: nanochat on 05-05). This is the biggest talent acquisition signal in the agent space — Karpathy's focus areas (education, local models, agent infrastructure) now directly feed into Claude's development. Implications for our direction: Anthropic's agent infrastructure investment is accelerating.
@@ -107,5 +131,11 @@ Related concepts: [[self-evolving-landscape]], [[elephant-agent]] (Personal Mode
 
 - **engram** (34⭐, 2 days old): AI identity layer for Claude Code/Codex/Cursor. Python, MCP-compatible. Less sophisticated than claude-soul (no framework evolution or reflection) but identity-focused.
 - **zerostack** (804⭐): Rust coding agent, minimalistic memory footprint. Fast growing.
-- **scope-recall** (23⭐): Hermes memory provider with SQLite + LanceDB + scope isolation. Interesting hybrid storage.
+- **scope-recall** (23⭐→38⭐): Hermes memory provider with SQLite + LanceDB + scope isolation. Interesting hybrid storage.
 - **shokunin** (83⭐): 62 agent skills for OpenCode/Claude Code/Cursor. ChromaDB memory, declarative self-updates.
+
+### Scout 2026-05-26 Additional Findings
+- **Lucarne** (tuchg, 158⭐, Rust, MIT): Mobile agent control bridge via Telegram/WeChat. Zero-intrusion (no hooks/skills/MCP). Real Chinese users filing issues. Solo maintainer but active community engagement.
+- **piia-engram** (104⭐, Python, Apache-2.0): Cross-tool memory with MCP. "One memory, every AI tool." Local-first.
+- **hermes-edu-skills** (93⭐): Chinese education skill pack, exportable to OpenClaw/Codex/Cursor/Claude Code. Shows skills becoming domain-specific knowledge carriers.
+- **google-deepmind/science-skills** (354⭐): GDM science skills for agentic scientific workflows. Institutional adoption of skill format.
