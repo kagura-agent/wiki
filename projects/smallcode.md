@@ -133,6 +133,53 @@ The context overflow problem (noted in #10) addressed through multiple mechanism
 3. **SSRF guard with origin comparison** — the insight about comparing URL origins not string prefixes is a common pitfall. Worth checking if our web_fetch/browser tools have similar protections.
 4. **"86-bug audit" framing** — counting and categorizing bugs in a security audit makes progress visible and scope clear. Good practice for our own audits.
 
+## v1.0→v1.2 Breakout (2026-05-26 followup)
+
+1,426⭐ (was 848 on 05-21, **+68% in 5 days**). Crossed v1.0 milestone.
+
+### v1.0.0 — Production Baseline
+Five reliability fixes from [mebassett fork](https://github.com/mebassett/smallcode):
+- **Executor argument validation** — malformed tool calls no longer crash agent process
+- **Poisoned history fix** — when all tool calls fail, bad messages spliced out to prevent death-spiral (model seeing own malformed output → producing more)
+- **5xx retry** — llama-server transient failures handled
+- **Max output tokens 4096→8192** — reasoning models emit 2k-6k `<think>` tokens before tool calls
+- **Tool result truncation 4000→8000 chars** — real files fit in one `read_file`
+
+Key: the fork-to-upstream pipeline worked. Community contributor surfaced real production issues.
+
+### v1.1.0 — Contract / Definition of Done ⭐
+**Most interesting feature.** MarrowScript-declared contract system:
+- Per-project assertion list the agent commits to up-front
+- Model **physically cannot** deliver "I'm done" while any assertion is `pending` or `failed`
+- State persists to `.smallcode/contracts/<id>/state.json` with rendered markdown + `log.jsonl` audit trail
+- `done_guard` policy: hard-fail, not behavioral
+- Inspired by jukefr/itsy (downstream Rust port)
+
+**Why this matters for us**: this is a structural constraint (cf. [[structural-backpressure]]) rather than a behavioral prompt. The agent doesn't "try to remember" to check completion — completion is gated. Our subagent spawns could benefit from similar hard completion gates.
+
+### Idempotent-Write Dedup
+- Dedup module for read-only tool calls (sliding window, hash-based)
+- Handles "small model spiral" — e.g., `memory_remember(same key)` called 36 times in one turn
+- PURE_TOOLS whitelist (read_file, search, etc.) + separate idempotent-tools set (mutating but effect-idempotent within a turn)
+- Configuration: `SMALLCODE_DEDUP=false`, `SMALLCODE_DEDUP_WINDOW=5`
+
+### SSRF Hardening (External PR #39 by aaronjmars)
+- IPv4-mapped IPv6 bypass closed (`::ffff:169.254.169.254`)
+- Browser redirect bypass closed
+- Both under "incomplete coverage of every representation the OS routes to the same destination"
+
+### Community Explosion
+- External PRs: security (aaronjmars), Willow skill pack (rudi193-cmd), path resolution (dmdeemer), mebassett fork fixes
+- Issues: Chinese users (ollama), OpenWebUI users, TUI/UX feedback
+- From 🔴 SOLO to 🟢 THRIVING 6/6 in ~2 weeks
+
+### Relevance Update
+- **Contract/DoD** pattern: HIGH relevance. Our subagent completion detection is behavioral ("agent says done"). SmallCode's is structural.
+- **Dedup**: LOW for frontier models (don't spiral as much), but relevant for ACP sessions where tool calls can loop
+- **Fork-to-upstream pipeline**: validation that community fork → upstream merge works as growth mechanism
+
+---
+
 ## Broader Scout Findings (2026-05-21)
 
 ### Identity Layer Explosion
