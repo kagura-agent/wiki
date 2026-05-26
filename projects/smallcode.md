@@ -199,3 +199,19 @@ No code (lang: null), pushed only on creation day. Likely just a SKILL.md/prompt
 
 ### DCP (Device Context Protocol)
 25⭐, 3 days old. Bridge LLM agents to physical devices. Sub-50-byte frames, <16KB MCU footprint. Complementary to MCP. Early but interesting direction — agents controlling hardware.
+
+## Contract/DoD Evaluation for OpenClaw (2026-05-26)
+
+Evaluated whether SmallCode's Contract/Definition-of-Done hard-gate pattern applies to our subagent completion detection.
+
+**SmallCode approach**: Per-project assertion list declared up-front in `.marrow` files. Model physically cannot claim "done" while any assertion is `pending` or `failed`. State persists to `.smallcode/contracts/<id>/state.json` with full audit trail. This is [[structural-backpressure]], not behavioral prompt compliance.
+
+**Assessment for OpenClaw**:
+- Our `sessions_spawn` + `sessions_yield` already provides **structural completion** — subagent runs to completion and pushes result back through the runtime
+- The gap is **quality**: subagent can "complete" without actually verifying its work (tests pass, lint clean, PR validates)
+- Contract/DoD would help for complex multi-step tasks where we spawn [[Claude Code]] but want to ensure pre-defined assertions pass before accepting "done"
+- Implementation path: pre-completion hook in ACP/subagent runtime checking declared assertion list
+
+**Verdict**: NOT NOW. Our runtime handles structural completion; the quality gap is real but not yet a recurring enough problem to justify the infrastructure. When subagent quality becomes a pattern (3+ incidents of "completed but broken"), revisit.
+
+**v1.2.1 status (05-26)**: 1,426⭐, pushed 05-24. 🟢 THRIVING (6/6). Community explosion continues.
