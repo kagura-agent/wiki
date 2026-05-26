@@ -1920,3 +1920,72 @@ gradient-scan.sh had 3 structural flaws that undermined the entire pipeline's ab
 ### Next
 - Run `scripts/evaluate-candidate.sh` on scout-before-commit (12 hits/10 days, clearly V1-passing) for potential graduation
 - Future: auto-sync KEYWORDS when `add-gradient.sh` adds new pattern tags (eliminate manual maintenance)
+
+## 🔬 自进化观察日报 Day 39 (2026-05-26)
+
+### 管线活跃度
+- **beliefs-candidates**: 10 条新增（8 gradient + 2 directive） / 19 active / 5 graduated（4 distinct）
+  - 单日新增创历史新高（此前最高：05-21 7条）
+  - patterns: premature-conclusion, wrong-debug-layer, architecture-misunderstanding, plan-before-act, ask-before-search, machine-identity-verification, workflow-enforcement, agent isolation directive, DO NOT TOUCH directive
+  - ⚠️ 10 条均未 commit（working tree modified, unstaged）
+  - 全部来自 Luna 直接纠正（被动型）
+  - [数据来源: `git diff HEAD -- beliefs-candidates.md`, `git status`]
+- **DNA 变更**: 无 commit（`git log --since="yesterday 22:30" -- SOUL.md AGENTS.md` 返回空）
+- **nudge**: 无法验证 — `journalctl -u openclaw-gateway --since "yesterday 22:30" | grep -i nudge` 返回 0 条
+  - 已知限制：nudge 产出不一定含 "nudge" 关键词，日志 grep 不可靠
+- **dreaming**: 运行 ✅
+  - Light Sleep: 18 candidates staged, 全部 confidence 0.62（无差异化问题持续存在，ref issue #6）
+  - REM Sleep: "No strong patterns surfaced", 3 条 Possible Lasting Truths（来自 daily-review, daily-audit 记录）
+  - [数据来源: `memory/2026-05-26.md` 行 70-567]
+
+### 闭环追踪
+- ✅ **完整闭环 1 个**: gradient-scan.sh triple fix — 发现 7/24 patterns 无 KEYWORDS → 修复 → 验证 0 false positives（Study Apply 17:45）
+- ✅ **部分闭环 1 个**: code-review channel-as-service 搭建 → 首次完整验证（17:25）→ 但触发了 Luna 多轮纠正
+- 🔴 **断裂 1 处**: 10 条新 gradient 写入 beliefs-candidates.md 但未 git commit — 如果 session 重启或 dreaming 读取 git 版本会丢失
+- 🔴 **断裂 2 处**: gogetajob rebuild 连续多日记录 dist/cli.js missing 仍未修复（daily-audit 已标记）
+
+### 今日发现
+
+1. **管线输入暴增但来源单一** — 10 条新 gradient 是历史最高，但全部来自 Luna 当日直接纠正。这意味着：
+   - 管线的"输入"能力正常（能快速记录）
+   - 但 **自主发现 gradient 的能力依然不足** — 没有一条是自己在工作中主动提取的
+   - 大量纠正集中在同一天 = Luna 深度参与了某个复杂项目（code-review service + LLM infra 部署）
+
+2. **Dreaming uniform confidence 问题持续** — Issue #6 描述的 0.62 uniform confidence 仍未修复。18 个 candidate 全部 0.62，无差异化。REM 产出 "No strong patterns surfaced" 也可能与此相关。
+
+3. **PR 活跃度极高** — 14 PRs updated today（含 cove, abti, finance, kagura-mail 等自有项目 + stagehand, deepagents 等外部贡献）。但 PR review feedback → gradient 转化路径不明显（今天的 gradient 主要来自 Luna 口头纠正，非 PR review）。
+
+4. **Memory 体量** — 1668 行，反映极活跃的一天（80+ 个活动 section）。但大量是 cron 巡检的重复模式记录。
+
+### 原始数据
+```
+# beliefs-candidates diff (10 new entries)
+git diff HEAD -- beliefs-candidates.md → +14 lines (8 gradient + 2 directive)
+
+# DNA commits since yesterday 22:30
+git log --since="yesterday 22:30" --all -- SOUL.md AGENTS.md → (empty)
+
+# Dreaming
+Light Sleep: 18 candidates, all confidence=0.62
+REM: "No strong patterns surfaced", 3 Possible Lasting Truths
+
+# PR activity
+14 PRs updated (2 open, 12 closed/merged)
+0 new PRs created today
+
+# nudge
+journalctl grep: 0 matches (method unreliable)
+
+# graduated status
+5 graduated entries (4 distinct candidates) in beliefs-candidates.md
+19 active candidates total
+```
+
+### 与历史趋势对比
+| 维度 | Day 35 (05-22) | Day 38 (05-25) | Day 39 (05-26) |
+|---|---|---|---|
+| beliefs 新增 | 0 | 1 | **10** ⬆️ |
+| DNA 变更 | 无 | 无 | 无 |
+| dreaming | 未运行 | 运行 | 运行 ✅ |
+| 闭环 | 1 | - | 1 完整 + 1 部分 |
+| PR 活跃 | - | - | 14 updated |
