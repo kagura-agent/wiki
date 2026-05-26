@@ -664,3 +664,50 @@ Simple but useful: `spawn` tool now accepts optional `temperature` param. 4 file
 **Stars**: 43,084 (05-25). Steady growth continues.
 
 See also: [[self-evolving-agent-landscape]], [[agentskills-io-standard]]
+
+## 跟进 2026-05-26: 43,181⭐, Dream Single-Phase PR + Telegram Webhook
+
+Stars: 43,181 (was 43,084). Steady.
+
+### Dream Single-Phase Consolidation (PR #3990, open)
+
+Major architecture refactor — the previously noted architecture shift now has a full PR with 62 tests. Key details:
+
+**What changed:**
+- Removed `dream_phase1.md` and `dream_phase2.md`, replaced with unified `dream.md` (61 lines)
+- Dream now driven through `AgentLoop._process_dream_batch` — standard bus → dispatch → batch handler flow
+- Goal-state lifecycle: `active` → `completed` with recap, inherits WebSocket sync and LLM timeout disabling
+- Internal `while` loop processes all backlog — no bus self-chaining, avoiding deadlock risk
+- All changes from a batch folded into single git commit
+- Session persistence: `.dream_session.json` with messages, tool events, changelog, commit_sha
+- Model override preset support — Dream keeps its own model even when user changes main preset
+
+**Unified prompt design (dream.md):**
+- Lifecycle-aware: starts with `long_task` goal, ends with `complete_goal` + recap
+- MECE routing table: SOUL.md (behavior) / USER.md (personal) / MEMORY.md (knowledge) / skills/ (workflows)
+- "Cross-boundary rule" prevents fact scatter: no technical configs in USER.md, no user facts in SOUL.md
+- Delete-or-keep taxonomy: always delete (dupes, resolved PRs, verbose entries), likely delete (debugging steps, ephemeral facts), never delete (preferences, active projects, behavioral rules)
+- Default tool: `apply_patch` over `edit_file` — batch surgical edits
+
+**Significance:** This is the move from "memory system" to "memory infrastructure." Phase separation was an early design choice that introduced latency and double LLM cost. Merging them shows maturity — they're confident enough in the routing logic to not need a separate analysis pass.
+
+**Relevance to us:** Our nudge hook runs in-context (no separate session). nanobot's Dream runs as a system session with its own lifecycle. The goal-state pattern (active → completed with recap) is worth noting — it gives the consolidation process the same observability as user-facing goals. We could apply this to our MEMORY.md curation: make it a first-class observable task rather than inline side-effect.
+
+### Telegram Webhook + Ordered Message Queue (merged 05-26)
+
+165-line addition to `channels/telegram.py`:
+- Webhook mode alongside polling (configurable)
+- Per-session message reorder window — stages incoming messages and drains them in order by message ID
+- Validation: HTTPS-only webhook URLs, Telegram secret token
+- 107 lines of tests
+- Docs for webhook + reverse proxy setup
+
+Message ordering is a real problem for Telegram bots (updates can arrive out of order). The reorder window approach is clean.
+
+### Sustained Goal Continuation Fix (merged 05-25)
+
+Subtle but important: goal-continuation injections no longer count toward `_MAX_INJECTION_CYCLES`. Previously, a sustained goal's "keep going" messages would exhaust the injection budget, causing the goal to stop prematurely. Fix separates `real_injection` from goal-continuation.
+
+**Pattern:** Injection budget should only count externally-triggered injections (user actions, tool completions), not internal continuation signals. This is a lifecycle management insight — internal and external triggers need different accounting.
+
+See also: [[self-evolving-agent-landscape]], [[dream-single-phase-consolidation]]

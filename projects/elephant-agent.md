@@ -3,7 +3,7 @@ title: Elephant Agent (agentic-in)
 created: 2026-05-17
 status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
-stars: 415
+stars: 483
 repo: agentic-in/elephant-agent
 last_verified: 2026-05-26
 ---
@@ -369,19 +369,27 @@ See also: [[self-evolving-observations]], [[add-gradient-sh]]
 
 **Remaining prongs**: Frozen prefix cache (SHA-256 hash comparison) and explicit `cache_control` breakpoints are not implemented — would be follow-up work if the maintainer is interested.
 
-### Followup: 60x Startup Performance (2026-05-26)
+### Followup 2026-05-26: Performance + Reflect Unification + macOS Polish
 
-**Source**: PR #50 merged — `perf(wake): eliminate startup and per-turn performance bottlenecks`
+**Stars**: 483⭐ (was 415 on 05-23, +16%). Total growth since initial deep-read: 247→483 (+96% in 11 days).
 
-**Key changes**:
-1. Removed `_planning_recall_evidence_recovery` from `inspect_continuity` — it scanned all 30K evidence records (~28s) for a telemetry tuple with zero downstream consumers
+**PR #50 merged — 60x Startup Performance** (by haowu1234, external contributor):
+1. Removed `_planning_recall_evidence_recovery` from `inspect_continuity` — scanned all 30K evidence records (~28s) for a telemetry tuple with zero downstream consumers
 2. Simplified `_derive_session_epoch_focus` to read elephant state directly instead of full `inspect_continuity` chain
 3. Added `episode_ids` batch parameter to `list_steps` — single SQL IN query instead of N+1 per-episode queries
 
-**Results** (1,253 episodes, 29,868 steps):
-- Startup: 84s → 1.4s (60x improvement)
-- Per-turn recall: 27s → 3.5s (8x improvement)
+Results (1,253 episodes, 29,868 steps):
+- Startup: 84s → 1.4s (60x)
+- Per-turn recall: 27s → 3.5s (8x)
 
 **Pattern**: Classic N+1 query elimination + dead code removal. The `_planning_recall_evidence_recovery` case is instructive — expensive code that persists because it once had consumers but nobody cleaned up when they were removed. **Lesson for us**: periodic "who calls this?" audit on expensive paths.
 
-**Also notable**: `feat(reflect): unify reflect learning jobs` — consolidating background reflection into unified jobs. Stars: 483 (was 318 at initial deep-read, +52%).
+**Reflect unification**: `feat(reflect): unify reflect learning jobs` — consolidating background reflection into unified jobs. + `fix(cli): preserve wake growth experience summaries` — ensuring growth metrics survive wake cycles.
+
+**macOS polish sprint** (05-25→05-26): Heavy UX iteration — onboarding letter prompt refinement (3 iterations), question reply loop fix, herd UI polish, copilot/hermes adapter enablement, CI codesign retry. Execution velocity is impressive.
+
+**Community health**: haowu1234 (7 PRs) now exceeds maintainer Xunzhuo (6 PRs) in PR count. 5 external contributors total. 59 forks. Still no license.
+
+**Assessment**: Project entering maturation phase — performance optimization, UX polish, and reflect consolidation indicate post-MVP stabilization. The 60x perf PR by an external contributor is a strong community health signal. Growth trajectory (96% in 11 days) remains exceptional in our portfolio.
+
+**Revisit**: 06-02 (weekly cadence — project is mature enough to space out).

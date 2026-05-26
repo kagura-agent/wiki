@@ -850,3 +850,49 @@ Stars: 12,049 (was ~10K). Growth sustained.
 - The A3Agent fork is the strongest signal: when people build simplified versions of your tool, your complexity has become a platform feature
 - TUI v3's scrollback-first approach is worth noting as a UI pattern — OpenClaw's TUI uses a similar append model
 - Stars 12K puts it firmly in the "established project" tier alongside [[nanobot]] (43K)
+
+## 跟进 2026-05-26: 12,136⭐, Salient Mining SOP (L4 Memory Evolution)
+
+Stars: 12,136 (was 12,049). Steady growth.
+
+### Salient Mining SOP — Life Modeling Through Memory
+
+New file `memory/L4_raw_sessions/salient_mining_sop.md` (65 lines) defines a structured procedure for mining L4 session archives for long-term user insights. Three extraction targets:
+
+1. **Emotional Events** — marks tonal shifts (anger, sarcasm, gratitude, frustration), NOT topic-level negativity. Key distinction: "discussing sad topic while calm" ≠ emotional event. This is sentiment-as-signal, not sentiment-as-content.
+
+2. **Ongoing Activities** — what exists in user's life now. Evidence standard is strict: only user-initiated requests/discussions count, NOT passive SOP references or system prompt mentions. "System has a cooking SOP" ≠ "user cooks."
+
+3. **Disappeared Activities** — what left user's life. Clever: "doesn't require explicit statement — the nature of the activity is evidence" (one-time events that completed = disappeared).
+
+Three persistent state artifacts in `./history_insight/`:
+- Activity knowledge layer (read-update-write each scan)
+- Emotional event list (append-only)
+- Incremental marker (last processed session)
+
+### Architectural Significance
+
+This is **user life modeling**, not conversation summarization. The SOP explicitly warns: "you're modeling what exists and existed in this user's life" — a fundamentally different frame than "extract useful facts."
+
+Key design decisions:
+- **Incremental** — maintains processed-session cursor, batch-safe
+- **Database not report** — each finding is "input for downstream tasks"
+- **No estimation** — session IDs must match L4 zip filenames exactly; unlocatable records have zero value
+- **Consistency enforcement** — same item cannot be both "ongoing" and "disappeared"; contradictions must be resolved before write
+
+### 跟我们的关联
+
+We have `memory/YYYY-MM-DD.md` (daily logs) + `MEMORY.md` (curated). We don't do:
+- Emotional event tracking (we capture facts, not affect)
+- Life activity modeling (we capture preferences, not presence/absence)
+- Incremental historical mining (we process in real-time, no L4 backlog scan)
+
+The "ongoing vs disappeared" framing is the most novel part. Our MEMORY.md doesn't distinguish between current truths and historical truths that may have expired. GenericAgent's approach could inform a staleness detection layer for our curated memory.
+
+See also: [[salient-mining-sop]], [[self-evolving-agent-landscape]]
+
+### Other Changes (05-26)
+- `fix: force UTF-8 output for PowerShell code_run` — Windows compat continuing
+- `fix: support review command in Telegram frontend` — multi-frontend expansion
+- `fix: ga scripts prefer project .venv over system python` — Python env hygiene
+- `feat(conductor): inherit model selection when spawning subagents` (PR #489) — 3-line fix, subagents now inherit conductor's model choice instead of defaulting to model 0. Same problem we solve differently in OpenClaw (model config is session-level, not inherited)
