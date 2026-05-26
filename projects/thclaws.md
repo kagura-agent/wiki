@@ -5,10 +5,10 @@ stars: 879
 created: 2026-04-20
 language: Rust
 license: MIT OR Apache-2.0
-last_checked: 2026-05-13
+last_checked: 2026-05-26
 status: active
 tags: [agent-harness, rust, multi-provider, local-first, desktop-app]
-last_verified: 2026-05-14
+last_verified: 2026-05-26
 ---
 
 # thClaws — Rust-Native Agent Harness Platform
@@ -266,3 +266,35 @@ The most architecturally interesting development. thClaws implements messaging p
 
 ---
 *Update: 2026-05-14. Source: GitHub API (commits, releases, issues, PRs, community stats)*
+
+## v0.20.0 Update (2026-05-26): Telegram Full Stack + 1K⭐ Milestone
+
+1,043⭐ (+138 since last check, +15.3%). **Crossed 1,000⭐** — first major milestone for a 36-day-old project.
+
+### Release Velocity (05-20 → 05-26)
+
+- **v0.19.0** (05-25): Telegram bot adapter Tier 1
+- **v0.20.0** (05-26): Telegram channels + forum topics + streaming preview
+- Shell-aware bash seatbelts vs shell-quoting bypasses (#125)
+- Grapheme-aware Backspace for Thai/combining-mark input (#126)
+
+**Telegram integration** follows the same relay pattern as LINE bridge — messaging platform as remote control surface. Now supports channels, forum topics, and streaming preview. This brings thClaws to 3 messaging surfaces (GUI, LINE, Telegram) — converging with [[openclaw]]'s multi-channel approach.
+
+### Community Health: 🟢 THRIVING (6/6)
+
+4+ unique external contributors in last 3 days (modtanoii, gobikom, ultramcu, mozeal). PRs merged quickly. 143 forks. Community is no longer single-person — genuine multi-contributor project.
+
+### Growth Trajectory
+
+| Date | Stars | Δ% | Key Event |
+|------|-------|-----|----------|
+| 04-29 | 612 | — | Initial deep read |
+| 05-05 | 805 | +31.5% | v0.8.0 /goal system |
+| 05-13 | 879 | +9.2% | LINE bridge + SSO |
+| 05-20 | 949 | +8.0% | Approaching 1K |
+| 05-26 | 1,043 | +9.9% | 1K⭐, Telegram, v0.20.0 |
+
+Sustained ~30⭐/day growth over 5+ weeks. Rare for a non-VC-backed project. ThaiGPT's community + multi-provider pitch continues to resonate.
+
+---
+*Update: 2026-05-26. Source: GitHub API (commits, releases, PRs)*
