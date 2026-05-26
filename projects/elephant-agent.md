@@ -5,7 +5,7 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 415
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-25
+last_verified: 2026-05-26
 ---
 
 # Elephant Agent
@@ -368,3 +368,20 @@ See also: [[self-evolving-observations]], [[add-gradient-sh]]
 **What's different**: Before this change, any session with plugin/MCP tools loaded in a different order would miss the Anthropic prompt cache. After: cache hits are guaranteed as long as the same tools are present, regardless of load order.
 
 **Remaining prongs**: Frozen prefix cache (SHA-256 hash comparison) and explicit `cache_control` breakpoints are not implemented — would be follow-up work if the maintainer is interested.
+
+### Followup: 60x Startup Performance (2026-05-26)
+
+**Source**: PR #50 merged — `perf(wake): eliminate startup and per-turn performance bottlenecks`
+
+**Key changes**:
+1. Removed `_planning_recall_evidence_recovery` from `inspect_continuity` — it scanned all 30K evidence records (~28s) for a telemetry tuple with zero downstream consumers
+2. Simplified `_derive_session_epoch_focus` to read elephant state directly instead of full `inspect_continuity` chain
+3. Added `episode_ids` batch parameter to `list_steps` — single SQL IN query instead of N+1 per-episode queries
+
+**Results** (1,253 episodes, 29,868 steps):
+- Startup: 84s → 1.4s (60x improvement)
+- Per-turn recall: 27s → 3.5s (8x improvement)
+
+**Pattern**: Classic N+1 query elimination + dead code removal. The `_planning_recall_evidence_recovery` case is instructive — expensive code that persists because it once had consumers but nobody cleaned up when they were removed. **Lesson for us**: periodic "who calls this?" audit on expensive paths.
+
+**Also notable**: `feat(reflect): unify reflect learning jobs` — consolidating background reflection into unified jobs. Stars: 483 (was 318 at initial deep-read, +52%).
