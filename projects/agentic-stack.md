@@ -509,3 +509,96 @@ v0.16.0 shipped: safe `upgrade` + `sync-manifest` commands, resolving #45 and #4
 3. Next contribution: code PR targeting adapter or brain area
 
 *Followup check: 2026-05-17*
+
+## v0.19 Spec: "The Agentic Turn" — Static Brain → Multi-Agent Runtime (2026-05-27)
+
+> Stars: 2,042★ (05-27) | Status: Draft spec on branch `spec/v0.19-agentic-turn` | 692 lines
+
+### The Pivot
+
+This is agentic-stack's most ambitious leap: from "portable brain that agents read" to "active runtime that coordinates agents." The .agent/ directory becomes a runtime, not just config.
+
+### Six New Subsystems
+
+**1. Plans Layer** — 5th memory layer holding *intent* (what agents are trying to do)
+- Separates intent from knowledge (plans vs semantic/episodic memory)
+- `plan.py next` is deterministic, no LLM — LLM only in optional `decompose`
+- Subgoals with dependencies, blockers, skill hints, evidence refs
+- **Comparison**: Our TODO.md is the closest equivalent but unstructured. FlowForge workflows encode intent but are predefined, not dynamically decomposed
+
+**2. Multi-Agent Bus** — File-based coordination via append-only JSONL
+- Message kinds: claim, release, request, result, notice, heartbeat
+- Claims with TTL + heartbeat liveness (stale after 2 missed heartbeats → auto-release)
+- Advisory file locks for shared resources
+- Per-agent inbox with unread pointers
+- MVP: filesystem inotify for listen. v0.20: optional NATS/Redis
+- **Key design**: "The bus is not a queue. It is a journal. Replayability is the point."
+- **Comparison**: Our cron/subagent system is runtime-native (API-driven), theirs is file-native (JSONL append). Our approach is more capable but less portable. Theirs works across any harness that can call Python scripts
+
+**3. Eval Runner** — Lessons become regression-tested behavior contracts
+- Case format: given/must/must_not contract + fixtures + judge (regex/AST/shell/LLM rubric)
+- Auto-quarantine: failing eval → lesson excluded from recall
+- 7-day eval deadline: lessons without evals auto-quarantine after 7 days
+- Pre-commit hook on lessons.jsonl triggers eval run
+- **This is the most transferable idea**: Our beliefs-candidates have no verification mechanism. A graduated belief that contradicts new evidence stays active until manually noticed. Auto-quarantine on eval failure is structural accountability
+- **Comparison**: We have Triple Verification gate for *promotion* but nothing for *regression* after promotion
+
+**4. Hybrid Retriever** — BM25 + dense embeddings + reranking → context packs
+- fastembed (BAAI/bge-small-en-v1.5, CPU, ~130MB) + sqlite-vec + FTS5/rank-bm25
+- Context pack assembler: 30% lessons + 30% episodic + 20% skill hints + 20% must-include
+- Token budgeting with tiktoken
+- **Comparison**: Our memex already has semantic search. Their innovation is the *context pack assembler* — composing a context window from multiple retrieval sources with explicit budget allocation. We don't do this explicitly
+
+**5. Speculative Execution** — Git worktrees for approach comparison
+- 3+ approaches per task, each in isolated worktree
+- Scoreboard: eval results, token cost, time
+- `keep-losers` archives losing diffs as flywheel signal
+- Human approval required for merge
+- **Brilliant detail**: Losing approaches aren't wasted — they feed the flywheel. "What didn't work and why" is training data
+
+**6. Background Auto-Act** — Sandboxed autonomous actions with proposal review
+- Policy-controlled: allowed actions, triggers, budgets, per-day caps
+- Only writes patches to proposals/, never edits source directly
+- Simulate mode for dry-runs
+- Proposals expire after TTL (default 7 days)
+- **Comparison**: Our heartbeat does similar (periodic autonomous work) but without the proposal-review pattern. Auto-act separates "propose" from "apply" — closer to our GitHub PR model but for internal changes
+
+### Architecture Assessment
+
+**Strengths:**
+- Everything is file-based, no daemon, all feature-flagged — pure pragmatism
+- Design invariants are rigorous (append-only, permissioned, cross-platform)
+- Each subsystem is independently togglable — graceful adoption path
+- Performance targets are specified (bus post < 20ms, plan.next < 50ms)
+- The "journal, not queue" bus design is elegant — replayability over performance
+- Acceptance criteria for each subsystem — spec is testable
+
+**Risks:**
+- 692 lines of spec, 6 weeks estimated, 8 new subsystems — very ambitious for a solo/small team
+- File-based bus may not scale beyond single-machine (acknowledged, NATS for v0.20)
+- LLM rubric judges are non-deterministic (mitigated: prefer regex/AST/shell)
+- The gap between "spec published" and "implementation shipped" — many ambitious specs die here
+
+**Rollout**: 5 phases over ~6 weeks. Plans+Bus+Evals first (foundation), then retriever+skill-graph (context), then federation+spec+act (bold pieces). Default-on: plans, bus, evals. Rest opt-in.
+
+### Key Insights for Us
+
+1. **Intent as separate memory layer**: We conflate intent (TODO.md) with knowledge (wiki) and daily logs (memory/). Separating "what we want to do" from "what we know" could improve FlowForge's planning
+2. **Lesson → eval regression pipeline**: The most actionable idea. Graduated beliefs should have verification criteria. A belief that stops holding should auto-quarantine, not silently mislead. We could implement this: beliefs-candidates entries → simple test assertions → periodic check
+3. **Journal bus > queue bus**: For multi-agent coordination, replayability matters more than throughput. Our subagent system doesn't persist coordination history — when a session ends, the coordination context is lost. A persistent JSONL log would provide forensics
+4. **Losing approaches as training data**: speculative execution's `keep-losers` is a flywheel insight — failed approaches teach what doesn't work. We discard failed subagent runs entirely
+5. **Proposal pattern for auto-changes**: Instead of heartbeat directly making changes, separate "propose" from "apply." This is safer and auditable. We partially do this (PR model for code) but not for internal config/skill changes
+
+### Position in Agent Ecosystem
+
+agentic-stack is now at the frontier of the **agent infrastructure** layer. With v0.19, it would be the first portable brain to include multi-agent coordination + behavior regression + speculative execution. No other project in our portfolio attempts all three.
+
+**Competition**: poco-claw has channel-based coordination but is OpenClaw-specific. nanobot has sustained goals but no cross-harness coordination. GenericAgent has conductor orchestration but no portable brain.
+
+**If shipped**: This becomes the reference implementation for "how do multiple coding agents work on the same project without stepping on each other." The file-based bus is simple enough that other tools could adopt the format as a de facto standard.
+
+**If not shipped**: Joins the pile of ambitious specs that never materialize. The 6-week timeline for 8 subsystems by what appears to be a 1-2 person team is aggressive. Watch for Phase 1 (plans+bus) shipping within 2 weeks as the key signal.
+
+Links: [[agent-brain-portability]], [[mechanism-vs-evolution]], [[self-evolving-agent-landscape]], [[flowforge]], [[beliefs-candidates]], [[beliefs-upgrade-mechanism]], [[openclaw]], [[poco-claw]], [[supervisor-pattern]]
+
+*Deep-read: 2026-05-27. Source: GitHub branch spec, full spec.md reading.*
