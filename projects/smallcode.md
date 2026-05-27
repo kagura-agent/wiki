@@ -1,7 +1,7 @@
 # SmallCode — Coding Agent for Small Local LLMs
 
 - **repo**: Doorman11991/smallcode
-- **stars**: 848 (was 840 at initial read)
+- **stars**: 1479 (05-27, was 848 on 05-21 — +74% in 6 days, breakout growth)
 - **lang**: JavaScript (Node.js)
 - **license**: MIT
 - **status**: active | deep-read | ✓2026-05-21 (updated)
