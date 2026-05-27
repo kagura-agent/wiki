@@ -85,7 +85,25 @@ Text-only agents have no affect substrate. LLM-judged "importance" (Park et al. 
 | Forgetting | Never delete, curate | ✅ Right approach per article |
 
 ## Action Items
-- [ ] Consider condition-based prospective memory (e.g., "when user next mentions X, do Y"). Could be a memory_search at session start with a "pending triggers" store.
+- [x] Condition-based prospective memory implemented: `tools/prospective-triggers.sh` (check/add/list/fire/remove). Integrated into AGENTS.md session startup. Store: `memory/triggers.jsonl`. Applied 2026-05-27.
 - [ ] Evaluate retrieval improvements: presupposition checks, time-aware ranking
 
-[[agent-memory-taxonomy]] [[beliefs-upgrade-mechanism]] [[git-backed-agent-memory]] [[nudge-over-workflow]] [[dreaming]]
+## Applied: Prospective Memory (2026-05-27)
+
+Implemented the "condition-based prospective memory" gap identified in this article:
+- **Tool**: `tools/prospective-triggers.sh` — keyword-matching trigger system
+- **Store**: `memory/triggers.jsonl` (JSONL, one trigger per line)
+- **Operations**: add (keyword conditions + action + optional expiry), check (scan input text), fire (mark used), remove
+- **Integration**: AGENTS.md session startup → check incoming messages against pending triggers
+- **Pattern**: Closes the gap between time-based (cron) and condition-based prospective memory
+- **Design decision**: Keyword match (not semantic) because triggers need to be debuggable and predictable. Semantic matching would require embedding computation per message.
+- **Limitation**: Only fires when actively checked — requires behavioral discipline (unlike cron which fires autonomously). Could integrate into heartbeat for autonomous scanning.
+
+This independently validates the article's taxonomy — our system now covers all four memory kinds plus both prospective memory subtypes:
+- Episodic ✅ (daily logs)
+- Semantic ✅ (wiki/MEMORY.md)
+- Procedural ✅ (DNA files)
+- Prospective-time ✅ (cron)
+- Prospective-condition ✅ (triggers.jsonl) ← NEW
+
+[[beliefs-upgrade-mechanism]] [[nudge-over-workflow]]

@@ -65,7 +65,7 @@ Also adds **authority scoring** (source + score 0-100) — a Dynamics dimension 
 
 [[agent-memory-anatomy-brgsk]] identifies **prospective memory** — remembering to do something in the future — as an underexplored fifth kind:
 - **Time-based**: "do Y at time T" → solved by cron/scheduled triggers
-- **Condition-based**: "do Y when condition X next appears" → **unsolved in production**
+- **Condition-based**: "do Y when condition X next appears" → **implemented 2026-05-27** via `tools/prospective-triggers.sh` (keyword-match triggers stored in `memory/triggers.jsonl`)
 
 No production memory library ships condition-based prospective memory. Our cron covers time-based; condition-based is genuinely missing.
 
