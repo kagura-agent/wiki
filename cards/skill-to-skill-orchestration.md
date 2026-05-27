@@ -23,6 +23,12 @@ Most skill ecosystems treat skills as isolated tools. Skill-to-skill orchestrati
 - **Error propagation**: If an upstream skill fails, downstream skills need graceful fallback (text-to-cad: "report failure, let owning skill continue with non-GUI validation")
 - **Session reuse**: Persistent viewer sessions avoid spawning duplicate processes (CAD Explorer's `dev:ensure` pattern)
 
+## Applied Internally (2026-05-27)
+
+- **graduation-pipeline.sh**: chains `gradient-scan.sh` → `evaluate-candidate.sh` into an automated pipeline that surfaces beliefs-candidates ready for promotion. Previously these tools existed in isolation — gradient-scan found evidence but nobody triggered evaluate-candidate. The pipeline bridge closes this gap.
+- Integrated into `review.yaml` beliefs_graduation node for systematic weekly execution.
+- First result: graduated `scout-before-commit` (12 hits, 10 days).
+
 ## Related
 - [[text-to-cad]] — primary exemplar
 - [[agentskills-io-standard]] — skill packaging standard that enables this
