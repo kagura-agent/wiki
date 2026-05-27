@@ -1989,3 +1989,71 @@ journalctl grep: 0 matches (method unreliable)
 | dreaming | 未运行 | 运行 | 运行 ✅ |
 | 闭环 | 1 | - | 1 完整 + 1 部分 |
 | PR 活跃 | - | - | 14 updated |
+
+---
+
+## 🔬 自进化观察日报 2026-05-27 (Day 40)
+
+### 管线活跃度
+- **beliefs-candidates**: 3 条新增 (3 gradient/directive from Luna corrections)，19 active candidates total
+- **graduated**: 1 新 graduation today (Scout-before-commit → Workflow), 累计 9 graduated / 3 retracted
+- **DNA 变更**: 无 — SOUL.md / AGENTS.md 无 commit
+- **nudge 触发**: 0 matches in gateway logs (journalctl grep unreliable, not conclusive)
+- **dreaming**: ✅ 运行 — light sleep file 05-27 生成 (29KB, 03:15), REM 产出存在。连续 3 天 dreaming 正常
+
+### beliefs-candidates 详情
+新增 3 条 (05-27):
+1. `[gradient] premature-diagnosis` — 诊断问题时不要停在第一个异常，看系统全貌 (第1次)
+2. `[directive] spawn delivery routing` — 长任务 spawn 必须加 delivery announce 到发起 channel
+3. `[gradient] Discord UI 理解错误` — 做 UI 前先截图对照原版 (第1次)
+
+另有 05-26 批量 commit (10 entries from Luna corrections) 在昨晚 22:33 入库。
+
+积累状态：19 active candidates, 无明显到 3 次需升级评估的。
+
+### Dreaming 详情
+- Light Sleep: 大量 staged candidates (全部 confidence=0.62, 无差异化) — 已知问题 (issue #6)
+- REM: 有产出（daily-review promote）
+- 连续运行天数: 3 (05-25, 05-26, 05-27)
+- Dreaming 此前 05-19~05-24 断档 6 天，05-25 恢复
+
+### 闭环追踪
+- **完整闭环**: 1 — Scout-before-commit gradient 从 candidate → graduated (05-27), 目标 Workflow study.yaml
+- **部分闭环**: graduation-pipeline 工具化 commit (a3f7497) — skill-to-skill orchestration applied to beliefs-candidates.md
+- **断裂处**: 新增的 3 条 gradient 均标"第1次"，需后续 cross-context 积累才能推进
+
+### 今日发现
+1. **Gradient 输入节奏健康**: 05-26 批量 10 条 + 05-27 新增 3 条 = 近 24h 内 13 条 gradient 入库。这是 issue #9 (reflect→gradient pipeline disconnect) 修复后的积极信号——Luna correction 场景 gradient 捕获率显著提升
+2. **Dreaming 恢复稳定**: 连续 3 天运行，但 confidence 0.62 uniformity 问题未解 (issue #6 仍 open)
+3. **DNA 变更缺席**: 连续多天无 SOUL.md/AGENTS.md 变更。graduated candidates 走向 Workflow 而非 DNA，说明当前进化偏向流程优化而非核心原则调整
+4. **Nudge 观测盲区**: journalctl grep 0 结果——可能是 nudge 关键词不在日志中，或者 nudge 确实未触发。观测方法需改进
+
+### 与历史趋势对比
+| 维度 | Day 38 (05-25) | Day 39 (05-26) | Day 40 (05-27) |
+|---|---|---|---|
+| beliefs 新增 | 1 | **10** ⬆️ | 3 |
+| DNA 变更 | 无 | 无 | 无 |
+| dreaming | 运行 ✅ | 运行 ✅ | 运行 ✅ |
+| graduated | 0 | 0 | 1 (scout-before-commit) |
+| 闭环 | — | 1 完整 + 1 部分 | 1 完整 |
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+a3f7497 2026-05-27 10:23:35 +0800 apply: graduation-pipeline tool (skill-to-skill orchestration)
+3d55906 2026-05-26 22:33:00 +0800 gradient: 10 new entries from 2026-05-26 Luna corrections
+
+# dreaming/light/ latest files
+2026-05-25.md (26KB), 2026-05-26.md (29KB), 2026-05-27.md (30KB)
+
+# beliefs-candidates.md stats
+Total graduated: 9 | retracted: 3 | active candidates: ~19
+
+# workspace commits since yesterday 22:30
+7af57eb contacts: add 6 new contacts
+6f85bef Study 05-27: track ai-memory, update SmallCode
+326b2c6 study: followup + agentic-stack v0.19 spec deep-read + reflect
+a3f7497 apply: graduation-pipeline tool
+9347e98 daily-review 05-27: MEMORY.md disk update
+3d55906 gradient: 10 new entries from 2026-05-26 Luna corrections
+```
