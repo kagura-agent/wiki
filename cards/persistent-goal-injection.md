@@ -2,7 +2,7 @@
 title: Persistent Goal Injection
 created: 2026-05-21
 tags: [agent-architecture, context-management, long-running-tasks]
-last_verified: 2026-05-21
+last_verified: 2026-05-27
 ---
 
 # Persistent Goal Injection
@@ -28,6 +28,17 @@ Pattern where an agent's active objective is stored in session metadata and auto
 - Goal text has a size limit (nanobot: 4000 chars in runtime context) — complex objectives may need truncation
 - No sub-goal decomposition — agent must self-organize work within the single objective
 - `fallback_models` pattern (also from nanobot v0.2.0) complements this by ensuring provider failures don't kill long-running goals
+
+## Runner Exit Guard (added 2026-05-27)
+
+nanobot PR#3999 reveals that persistent goal injection alone isn't sufficient — the runner itself must cooperate:
+
+- **Problem**: LLM produces final text response without calling `complete_goal`. Runner exits with `stop_reason="completed"` even though goal is still active.
+- **Solution**: `AgentRunSpec` gains `goal_active_predicate: Callable[[], bool]` — checked before exit. If True, injects `SUSTAINED_GOAL_CONTINUE_PROMPT` and loops.
+- **Key detail**: Goal continuation injections don't count toward `_MAX_INJECTION_CYCLES`. Otherwise a long goal would exhaust the injection budget and die anyway.
+- **Design pattern**: Predicate-based exit guard is generic — works for any "don't exit yet" condition, not just goals.
+
+Related architecture critique (Issue #2576): runner also needs a "Deterministic Finalization Protocol" for the opposite case — when it *should* exit but the LLM returns blank content after tool calls. Auto-synthesize action summary vs. forced summary round.
 
 ## Related
 - [[metadata-driven-context-injection]] — the underlying mechanism

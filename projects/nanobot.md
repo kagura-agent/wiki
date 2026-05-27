@@ -708,6 +708,19 @@ Message ordering is a real problem for Telegram bots (updates can arrive out of 
 
 Subtle but important: goal-continuation injections no longer count toward `_MAX_INJECTION_CYCLES`. Previously, a sustained goal's "keep going" messages would exhaust the injection budget, causing the goal to stop prematurely. Fix separates `real_injection` from goal-continuation.
 
+**Architecture (from code, 05-27):**
+- `AgentRunSpec` gets `goal_active_predicate: Callable[[], bool]` and `goal_continue_message: str | None`
+- In `_try_drain_injections`, after checking real injections, if `allow_goal_continue=True` and predicate returns True, injects a continuation prompt
+- Only the final-response exit path passes `allow_goal_continue=True` — mid-turn tool calls don't trigger it
+- `SUSTAINED_GOAL_CONTINUE_PROMPT`: "You have an active sustained goal. Please continue working toward the objective using your tools, or call complete_goal if the work is truly finished."
+- 211 lines of tests: mock LLM returns text (would normally exit) → predicate returns True → runner injects continuation and loops
+
 **Pattern:** Injection budget should only count externally-triggered injections (user actions, tool completions), not internal continuation signals. This is a lifecycle management insight — internal and external triggers need different accounting.
+
+**Design insight:** The predicate-based approach decouples goal state from run-loop logic. The runner doesn't know what a "goal" is — it just checks a boolean. This makes the pattern reusable for any "don't exit yet" condition (e.g., pending file edits, active background tasks).
+
+**Related issues (architecture critiques):**
+- Issue #2576: "Deterministic Finalization Protocol" — user reports runner exits with blank response after successful tool calls. Proposes: (1) auto-synthesize action summary when LLM returns empty, (2) forced summary round via system prompt injection, (3) enhanced state observability. 4 comments, active discussion. The sustained goal fix (PR#3999) is the flip side: preventing premature exit when work remains. Together they define the runner exit contract.
+- Dream Hunger issue: Dream system starves because Consolidator only writes to history.jsonl when token budget exceeded. Short sessions never trigger → Dream has nothing to process. Proposes: (1) lower consolidation threshold, (2) session-end flush. Relevant because sustained goals + Dream interact — a sustained goal that runs long enough triggers consolidation, but short goal sessions don't.
 
 See also: [[self-evolving-agent-landscape]], [[dream-single-phase-consolidation]]

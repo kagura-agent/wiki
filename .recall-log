@@ -334,3 +334,6 @@
 2026-05-27T09:49:50+08:00|neutral|text-to-cad|projects/text-to-cad,projects/backlog,2026-05-10 Quick Scan (15:21),cards/oh-story-claudecode,text-to-cad,backlog
 2026-05-27T10:16:47+08:00|neutral|dreaming confidence uniform 0.62|projects/self-evolving-observations,projects/openclaw-architecture,cards/dreaming,projects/dreaming-observation,cards/pr-superseded-lessons,self-evolving-observations,openclaw-architecture
 2026-05-27T11:25:00+08:00|neutral|agentic-stack|projects/agentic-stack,cards/jaccard-belief-clustering,cards/agent-brain-portability,cards/agent-context-portability-approaches,cards/dreaming-vs-beliefs-candidates,agentic-stack,git-backed-agent-memory,agent-brain-portability,agent-context-portability-approaches,progressive-retrieval
+2026-05-27T11:47:48+08:00|neutral|GenericAgent|cards/self-evolving-agent-landscape,cards/skill-crystallization-vs-design,cards/supervisor-pattern,context-budget-constraint,supervisor-pattern,genericagent
+2026-05-27T11:47:49+08:00|neutral|nanobot|projects/nanobot,cards/loop-detection-comparison,cards/self-evolving-agent-landscape,nanobot,write-ahead-session-persistence,metadata-driven-context-injection
+2026-05-27T11:51:19+08:00|neutral|runner exit predicate goal|projects/nanobot,cards/persistent-goal-injection,projects/cursor-sdk,nanobot

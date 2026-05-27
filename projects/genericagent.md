@@ -896,3 +896,10 @@ See also: [[salient-mining-sop]], [[self-evolving-agent-landscape]]
 - `fix: support review command in Telegram frontend` — multi-frontend expansion
 - `fix: ga scripts prefer project .venv over system python` — Python env hygiene
 - `feat(conductor): inherit model selection when spawning subagents` (PR #489) — 3-line fix, subagents now inherit conductor's model choice instead of defaulting to model 0. Same problem we solve differently in OpenClaw (model config is session-level, not inherited)
+
+### Slash-Command Bundle + TUI Polish (05-27)
+- PR#495 (+592/-7): `frontends/slash_cmds.py` — centralized prompt builders and launcher helpers for both TUIs. `/scheduler` picker now aligned with `hub.pyw discover_services()`.
+- PR#496: TUI continue picker polish, stash freeze prevention
+- PR#493: Cloudflare 520-527 codes added to `_RETRYABLE` retry set (production resilience)
+- External contributor shenhao-stu continues to be the main TUI contributor. yumengv also active.
+- 12,167⭐ (was ~12K). Steady growth, healthy community.
