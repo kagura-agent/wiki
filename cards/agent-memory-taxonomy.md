@@ -2,6 +2,7 @@
 title: Agent Memory Taxonomy (Forms-Functions-Dynamics)
 created: 2026-03-25
 source: "Memory in the Age of AI Agents" (arxiv 2512.13564, 47 authors, HF Daily Paper #1)
+last_verified: 2026-05-27
 ---
 
 > Agent memory taxonomy and comparison framework. Three dimensions for analyzing agent memory systems: Forms (token/parametric/latent), Functions (factual/experiential/working), Dynamics (formation/evolution/retrieval).
@@ -60,4 +61,14 @@ source: "Memory in the Age of AI Agents" (arxiv 2512.13564, 47 authors, HF Daily
 
 Also adds **authority scoring** (source + score 0-100) — a Dynamics dimension element missing from the survey: not just *what* to remember, but *how much to trust* each memory.
 
-[[self-evolving-agent-landscape]] [[beliefs-upgrade-mechanism]] [[agent-perception-gap]] [[git-backed-agent-memory]]
+## 2026-05-27 Update: Prospective Memory Gap
+
+[[agent-memory-anatomy-brgsk]] identifies **prospective memory** — remembering to do something in the future — as an underexplored fifth kind:
+- **Time-based**: "do Y at time T" → solved by cron/scheduled triggers
+- **Condition-based**: "do Y when condition X next appears" → **unsolved in production**
+
+No production memory library ships condition-based prospective memory. Our cron covers time-based; condition-based is genuinely missing.
+
+Also introduces the **Extractor → Store → Retriever** anatomy as a simpler framework than Forms/Functions/Dynamics for comparing libraries. And identifies **procedural memory** as the cleanest litmus test: LangMem actually implements it (system prompt evolution from trajectories), most others just label semantic entries.
+
+[[self-evolving-agent-landscape]] [[beliefs-upgrade-mechanism]] [[agent-perception-gap]] [[git-backed-agent-memory]] [[agent-memory-anatomy-brgsk]]
