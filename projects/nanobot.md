@@ -724,3 +724,17 @@ Subtle but important: goal-continuation injections no longer count toward `_MAX_
 - Dream Hunger issue: Dream system starves because Consolidator only writes to history.jsonl when token budget exceeded. Short sessions never trigger → Dream has nothing to process. Proposes: (1) lower consolidation threshold, (2) session-end flush. Relevant because sustained goals + Dream interact — a sustained goal that runs long enough triggers consolidation, but short goal sessions don't.
 
 See also: [[self-evolving-agent-landscape]], [[dream-single-phase-consolidation]]
+
+### Followup 2026-05-27: Codex Transport + WebUI Fixes
+
+**Stars**: 43,214⭐ (was ~43,181 on 05-26, steady).
+
+**Codex transport error handling** (+450/-11): Handles blank Codex transport errors — likely related to streaming timeouts when Codex API returns empty responses. Same class of problem as the Copilot 60s idle timeout we know about.
+
+**WebUI maintenance**: rollup libc selectors restored, ESLint enabled for WebUI.
+
+**Kagi search API integration fix**: Updated search integration.
+
+**Assessment**: Incremental maintenance. The Codex transport fix is a signal that nanobot is adding Codex as a supported backend alongside their existing model integrations. No major architectural changes.
+
+**Revisit**: 06-02.

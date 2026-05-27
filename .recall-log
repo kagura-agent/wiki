@@ -337,3 +337,6 @@
 2026-05-27T11:47:48+08:00|neutral|GenericAgent|cards/self-evolving-agent-landscape,cards/skill-crystallization-vs-design,cards/supervisor-pattern,context-budget-constraint,supervisor-pattern,genericagent
 2026-05-27T11:47:49+08:00|neutral|nanobot|projects/nanobot,cards/loop-detection-comparison,cards/self-evolving-agent-landscape,nanobot,write-ahead-session-persistence,metadata-driven-context-injection
 2026-05-27T11:51:19+08:00|neutral|runner exit predicate goal|projects/nanobot,cards/persistent-goal-injection,projects/cursor-sdk,nanobot
+2026-05-27T12:19:33+08:00|neutral|GenericAgent|cards/self-evolving-agent-landscape,cards/skill-crystallization-vs-design,cards/supervisor-pattern,context-budget-constraint,supervisor-pattern,genericagent
+2026-05-27T12:19:33+08:00|neutral|nanobot HKUDS|projects/nanobot,cards/self-evolving-agent-landscape,cards/write-ahead-session-persistence,nanobot,write-ahead-session-persistence,DeepTutor
+2026-05-27T12:19:35+08:00|neutral|elephant agent|projects/elephant-agent,cards/semantic-model-routing,cards/auto-retire-pattern,elephant-agent,auto-retire-pattern,semantic-model-routing

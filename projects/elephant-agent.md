@@ -5,7 +5,7 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 483
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-26
+last_verified: 2026-05-27
 ---
 
 # Elephant Agent
@@ -393,3 +393,55 @@ Results (1,253 episodes, 29,868 steps):
 **Assessment**: Project entering maturation phase — performance optimization, UX polish, and reflect consolidation indicate post-MVP stabilization. The 60x perf PR by an external contributor is a strong community health signal. Growth trajectory (96% in 11 days) remains exceptional in our portfolio.
 
 **Revisit**: 06-02 (weekly cadence — project is mature enough to space out).
+
+### Followup 2026-05-27: Sandbox Integration + Product Vision Docs
+
+**Stars**: 500⭐ (was 483 on 05-26, +3.5%). Hit the 500 milestone — 2x from 247 in ~12 days.
+
+**PR #51 merged — Complete Sandbox Integration** (+11,813/-133 across 82 files):
+- `SandboxPathMapper`: single authoritative host↔sandbox path translation, replacing inconsistent `/home/user/workspaces/` vs `/home/user/` paths
+- `TencentCloudBrowserProvider`: browser sandbox via CDP with `--cloud-browser-template` CLI option
+- Full tool coverage in sandbox: `tool.file.search` and `tool.file.patch` now intercepted in cloud mode
+- Fixed `file.write` 100% failure — E2B SDK renamed `.filesystem` → `.files`; added base64 fallback
+- `_runtime_path_artifact` outputs sandbox remote paths without prompt cache impact
+- 187 unit tests passed (8 skipped, pre-existing Python 3.10 compat)
+
+**Pattern: Unified Path Mapper**. The core insight is that sandbox environments create a path mapping problem — host paths and sandbox paths differ, and every tool needs consistent translation. A single `PathMapper` class is the right abstraction (vs ad-hoc path fixups scattered across tool implementations). We have a similar challenge in OpenClaw with sandbox exec paths.
+
+**Product vision docs** (3 commits, 05-27):
+- "Learning summary loop" — docs describing how elephant processes learning
+- "L4 paths and herd" — framing advanced features
+- Homepage title/slogan updates ("human-first")
+
+**Assessment**: Sandbox is a maturity signal — moving from local-only to cloud execution. E2B + Tencent Cloud providers show multi-cloud strategy. The 82-file PR is large but well-scoped (single concern: sandbox path unification). Generated with Claude Code per PR description.
+
+**Revisit**: 06-02.
+
+#### Sandbox Architecture Deep-Read (PR #51 + sandbox-design.md)
+
+**Core design principle**: "Sandbox should be an execution backend layer inserted into the existing tool runtime, not a rewrite of existing tool handler business semantics."
+
+The design doc explicitly references Hermes + OpenClaw as inspirations. Key architectural decisions:
+
+1. **Phased approach**: 1A (terminal exec foreground) → 1B (code.execute subprocess) → 1C (file.write/read cloud routing). Background exec and process management deferred.
+
+2. **SandboxToolExecutor** wraps `InMemoryToolExecutor` — delegating pattern, not replacement. Must implement `bind/unbind/execute` to preserve handler registration.
+
+3. **SandboxPathMapper** (frozen dataclass, 5 rules in priority order):
+   - Already remote (→ pass through)
+   - Relative (→ resolve under sandbox_home)
+   - Under workspaces_dir (→ strip prefix)
+   - Under startup_cwd (→ map to project/)
+   - Fallback (→ basename only)
+   
+   Tests verify consistency: executor and backend agree on paths, no duplicate `workspaces/` segments.
+
+4. **SecurityGuard** enforces env whitelist + secret filtering — explicitly rejects "only exclude secret names" approach.
+
+5. **Multi-backend**: local (setrlimit), Docker (cgroup), E2B SDK, Tencent Cloud, seatbelt (macOS), SSH.
+
+**Pattern value for OpenClaw**: Our sandbox exec has similar path-mapping needs. The frozen-dataclass PathMapper with prioritized rules is cleaner than ad-hoc path fixups. The "delegating executor" pattern (wrap existing, intercept eligible) is what OpenClaw's sandbox already does but less formally.
+
+**Issue #17 insight**: External contributor proposed OpenTelemetry for tracing instead of custom solution. Maintainer instantly approved. OTel's GenAI semantic conventions (`invoke_agent`, `execute_tool`, `chat` span types) map to Elephant's Episode→Loop→Step model. Relevant for our own observability story.
+
+See also: [[sandbox-path-mapping]], [[delegating-executor-pattern]]
