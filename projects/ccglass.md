@@ -4,7 +4,7 @@ created: 2026-05-25
 updated: 2026-05-25
 status: active
 depth: deep-dive
-stars: 239
+stars: 317
 last_verified: 2026-05-28
 ---
 
@@ -90,8 +90,44 @@ Rapid evolution from proxy → full observability dashboard:
 - Solo dev (jianshuo) shipping at very high velocity. 142 tests now (up from ~100).
 - Positioning shift: "see what your agent sends" → "know what your agent costs and how it performs"
 
+### 2026-05-28 — Community Explosion & Auto-Fix Pipeline (317⭐)
+
+**Star growth**: 239→317 in 3 days (+33%). Hitting critical mass.
+
+**Community signal — THRIVING**: 3+ external contributors (KorenKrita 4 commits, marcuslannister 3, ivanberry 1) merging substantial features in v0.5–v0.6. Rare for a ~300⭐ project. Multiple external PRs merged in 48h.
+
+**Key new features (v0.5.0–v0.6.0)**:
+- **Latency tracking**: TTFT (time-to-first-token), gen window, tok/s sparklines per request
+- **Session rollups**: total tokens, cache-hit %, USD cost estimate per session
+- **Cross-session usage summary**: per-model and per-session aggregation across all captures
+- **Content-addressed storage** (PR#45): git-style SHA256 blob dedup for captured traffic. System prompts/tools repeated every turn → stored once as `sha256:<hex>` refs. Sharded 2-char prefix dirs.
+- **Model filter + light/dark theme** in dashboard
+- 142 tests (up from ~100 at first contact)
+
+**Auto-Fix Pipeline Architecture** (the real insight):
+The `.github/workflows/claude.yml` workflow is a textbook example of Claude Code CI:
+1. Every new issue triggers Claude Code Action
+2. Claude TRIAGES first (worth doing? aligned with direction? small+low-risk?)
+3. Only opens a fix PR if triage passes; otherwise comments explaining why not
+4. Human merges — Claude never pushes to main or bumps version
+5. `allowed_non_write_users: "*"` — works for external users too (via `CLAUDE_TRIGGER_PAT`)
+6. `@claude` mention in any issue/PR comment triggers iterative response
+
+This is why external contributors are flowing in: the bar to contribute is "open an issue → Claude may auto-fix it → maintainer merges". External contributors also submit their own PRs (KorenKrita, marcuslannister) which suggests the project has earned enough trust for direct contributions.
+
+**Content-addressed blob store** (`src/blobs.js`) — elegant pattern:
+- `blobRef(value)` → SHA256 hash of JSON.stringify
+- `writeBlob(root, value)` → write-once to `blobs/<ab>/<sha256>.json` (atomic via tmp+rename)
+- `packRecord()` splits a full request into: system/tools/each message → blob refs, small metadata stays inline
+- Directly analogous to git object storage. Massive dedup for agent traffic where system prompt + tools repeat every turn.
+
+**Relevance to us**:
+- The auto-fix CI pattern is directly applicable to our repos. [[OpenClaw]] could benefit from Claude Code Action for issue triage.
+- Content-addressed capture storage is a pattern we could use for [[session-logs]] dedup (system prompts repeat across turns).
+- TTFT/tok-per-sec metrics in dashboard — we track this at gateway level but ccglass's per-request breakdown is more granular.
+
 ## Verdict
 
-**Worth tracking.** 316⭐ (was 239 at first contact), steady growth with real architectural merit. Evolving from capture proxy → full observability platform. The per-model cost tracking and cross-session aggregation fill a genuine gap in coding agent tooling.
+**Worth tracking — upgraded to THRIVING.** 317⭐ (was 239 at first contact), 33% growth in 3 days. Community health excellent: multiple external contributors shipping features. Auto-fix CI pipeline is a force multiplier for both velocity and contributor onboarding. Evolving from capture proxy → full observability platform with cost analytics.
 
-**Contribution opportunity**: Low — the codebase is clean and small, issues are being auto-triaged by Claude. But if we wanted OpenClaw support (intercept OpenClaw ACP traffic), that would be a meaningful PR.
+**Contribution opportunity**: Low (Claude handles most issues), but the auto-fix pipeline itself is the real takeaway — worth replicating in our repos.
