@@ -262,11 +262,22 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
       TERM_SCORE=$(awk "BEGIN { printf \"%.1f\", $RAW_TERM_SCORE * (50.0 / $DOC_LINES) ^ 0.3 }")
     fi
     # Slug-match bonus: if filename contains query terms, boost relevance
+    # Uses stem-aware matching: checks both exact substring and common stem prefixes
+    # (e.g. "evolve" matches "evolution" via shared stem "evolv")
     SLUG_NAME=$(basename "$f" .md)
     SLUG_BONUS=0
     SLUG_HITS=0
     for sw in $WORDS; do
-      [[ ${#sw} -ge 3 ]] && [[ "$SLUG_NAME" == *"$sw"* ]] && { SLUG_BONUS=$((SLUG_BONUS + 20)); SLUG_HITS=$((SLUG_HITS + 1)); }
+      [[ ${#sw} -ge 3 ]] || continue
+      _hit=0
+      # Exact substring match
+      [[ "$SLUG_NAME" == *"$sw"* ]] && _hit=1
+      # Stem-prefix match: first 4 chars as stem (catches evolve/evolution, improve/improvement etc)
+      if [[ $_hit -eq 0 && ${#sw} -ge 5 ]]; then
+        _stem="${sw:0:4}"
+        [[ "$SLUG_NAME" == *"$_stem"* ]] && _hit=1
+      fi
+      [[ $_hit -eq 1 ]] && { SLUG_BONUS=$((SLUG_BONUS + 20)); SLUG_HITS=$((SLUG_HITS + 1)); }
     done
     # Slug-priority boost: 2+ slug-term matches get a large bonus (concept card relevance)
     [[ $SLUG_HITS -ge 2 ]] && SLUG_BONUS=$((SLUG_BONUS + 100))
