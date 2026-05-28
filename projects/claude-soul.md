@@ -1,168 +1,98 @@
-# claude-soul — Self-Correcting Learning Engine for Claude Code
+---
+type: project
+created: 2026-05-28
+updated: 2026-05-28
+status: tracked
+stars: 80
+repo: DomDemetz/claude-soul
+tags: [self-evolving-agent, memory, identity, claude-code]
+links: [beliefs-upgrade-mechanism, agent-self-evolution, self-evolving-agent-landscape]
+last_verified: 2026-05-28
+---
 
-- **repo**: DomDemetz/claude-soul
-- **stars**: 77 (created 2026-05-16) — slow growth, 75→77 in 6 days
-- **lang**: TypeScript (monorepo: CLI + MCP server)
-- **license**: MIT
-- **status**: active | deep-read | ✓2026-05-26 (prev: 05-20)
+# Claude Soul — Self-Correcting Learning Engine for Claude Code
 
 ## What It Is
 
-A persistent identity + behavioral learning system for Claude Code. MCP server + hooks that run automatically. One `npx claude-soul init --starter` installs everything.
+NPM package (`claude-soul`) that adds persistent identity, behavioral pattern tracking, and cross-session memory to Claude Code. Local-first, uses SQLite + optional Ollama embeddings.
 
-Three core capabilities:
-1. **Cross-session memory** — SQLite + optional Ollama embeddings, semantic search
-2. **Correction tracking** — regex-based signal extraction from transcripts, tracks behavioral patterns through lifecycle stages (new → active → improving → internalized)
-3. **Framework evolution** — behavioral "frameworks" (beliefs/strategies) that accumulate evidence and get promoted/retired/merged automatically
+**Core loop:** `session signals → reflection → framework evolution → better context → better sessions`
 
-## Architecture — The Learning Loop
+## Architecture (Key Concepts)
 
+### Signal Extraction
+Automatic detection from conversation patterns at session end (via Claude Code Stop hook):
+- `correction` — user negates/contradicts
+- `rephrasing` — user restates (noun overlap >50%)
+- `gratitude` — explicit positive feedback
+- `disengagement` — short reply to long response
+- `confusion` — user asks for clarification
+- `success` — task completion + gratitude
+
+### Multi-Tier Reflection
+- **Quick** (Haiku, ~$0.002/run) — after 20 signals or 30 min. Adjusts framework confidence.
+- **Deep** (Sonnet, ~$0.01/run) — after 100 signals or 3 hrs. Discovers/merges/retires frameworks.
+- **Meta** — audits the reflection system itself. Adjusts thresholds and weights.
+
+### Framework Evolution
+Core learning unit with structured lifecycle:
 ```
-session signals → reflection → framework evolution → better context → better sessions
+Evidence tiers: hypothesis → observed (1+ confirmation) → validated (3+ cross-context)
+Status: questioning → active → retired/merged
 ```
+- **Self-referential evidence discount**: system-generated evidence counts at 0.5x weight. Only user confirmations advance tiers. Prevents bootstrapping own confidence.
+- Auto-retirement: confidence <0.2 with 10+ evidence points.
 
-### Signal Extraction (Local, Zero LLM)
-- Runs on Claude Code's `on-stop` hook
-- Regex-based detection: correction, gratitude, confusion, disengagement, rephrasing, topic_shift, success, depth_change
-- Signals are lightweight `{ type, confidence, context, timestamp }`
-- **Key insight**: No LLM needed for signal extraction — pure heuristics on transcript text
+### Context Assembly
+Token-budgeted (4500 default) context at session start:
+1. Always: identity (SOUL.md), corrections, state
+2. If budget: active frameworks ranked by confidence × log(usage)
+3. Supplementary: story, shadow patterns, exemplars
 
-### Reflection (Tiered, LLM-powered)
-- **Quick** (Haiku, ~$0.002): after ~20 signals. Can adjust confidence, cannot retire.
-- **Deep** (Sonnet, ~$0.01): after ~100 signals. Can discover/merge/retire frameworks, generate lessons.
-- **Meta** (Sonnet): audits the system itself — are reflections useful? Are frameworks being applied?
-- Uses `claude -p` (Claude Code CLI), runs on user's subscription. No API key.
+### State Engine
+Session telemetry: confidence, energy, frustration, curiosity, hoursActive.
 
-### Framework Engine (Core Innovation)
-Each framework = a learned behavioral principle with:
-- **Evidence tiers**: hypothesis → observed (1 external confirm) → validated (3+ external confirms)
-- **Status lifecycle**: questioning → active → retired/merged
-- **Auto-retirement**: confidence < 0.2 with 10+ evidence → auto-retire
-- **Self-referential discount**: Evidence from the soul system itself counts at 0.5x weight. Only external (user) evidence advances tiers. **This prevents bootstrap confidence inflation.**
+## Comparison to Our Approach
 
-### Tension Detection
-- Detects conflicting frameworks in same domain with divergent evidence
-- Tracks context preferences (Framework A wins in context X, B wins in context Y)
-- Tensions are valued, not bugs — they represent genuine complexity
+| Aspect | Claude Soul | Kagura (Us) |
+|--------|-------------|-------------|
+| Signal detection | Automatic from conversation patterns | Manual (beliefs-candidates.md) |
+| Reflection timing | Signal-count triggered (20/100) | Nudge hook (every 5 agent turns) |
+| Evolution gate | Evidence tiers + confidence threshold | Triple Verification (cross-context ≥3, predictive, non-obvious) |
+| Anti-bootstrap | 0.5x weight for self-generated evidence | Not formalized |
+| Token budget | Explicit 4500-token context assembly | Full file loading (SOUL.md, AGENTS.md) |
+| Storage | SQLite + optional Ollama embeddings | Markdown files + wiki search |
 
-### Meta-Optimizer (Learning Phases)
-- **Apprentice** (0-50 sessions): Wide net, frequent reflection, high churn OK
-- **Creative** (50-200): Refine & merge, lower churn
-- **Mastery** (200+): Distill, meta-optimize, fewer but stronger frameworks
-- Phase transitions driven by framework survival rate + evidence velocity
-- Oscillation detection: framework discovered → retired → re-discovered → flagged as inconclusive
+### Key Insights for Us
+1. **Self-referential evidence discount** — We should consider this for beliefs-candidates. Currently no formal discount for self-observed patterns vs externally validated ones.
+2. **Signal-based reflection trigger** — Their 20-signal threshold for quick reflection is more granular than our every-5-turns nudge. But our approach is simpler.
+3. **Framework retirement** — Auto-retirement at low confidence with sufficient evidence. We do "drop" in beliefs-candidates but no formalized threshold.
+4. **Token budgeting for identity context** — Worth considering if our SOUL.md + AGENTS.md grow large.
 
-### Shadow Transform
-- Behavioral tendencies reframed as "pulls" not "flaws"
-- "Tends to X" → "You have a tendency to X. Notice when this happens."
-- Philosophical: "Don't resolve tensions — hold them." (Jungian shadow influence)
+## Verdict
+Similar philosophical direction to ours (self-evolving agent identity), more formalized/automated but also more complex. The 0.5x self-referential discount is the most actionable insight — worth considering for our beliefs pipeline. The NPM package approach makes it easy for Claude Code users to adopt.
 
-## Comparison with Our System (Kagura/OpenClaw)
+Not a competitor (different layer — they augment Claude Code, we are a full agent platform), but validates the direction.
 
-| Aspect | claude-soul | Kagura (OpenClaw) |
-|--------|------------|-------------------|
-| Identity | SOUL.md + SHADOW.md + FRAMEWORKS.md | SOUL.md + IDENTITY.md + beliefs-candidates.md |
-| Learning unit | "Framework" (auto-discovered) | "Belief candidate" (manual + gradient) |
-| Evidence model | Tiered (hypothesis→observed→validated) | Triple Verification (cross-context ≥3, predictive, non-obvious) |
-| Self-ref discount | 0.5x weight | Not explicit (but Triple Verification partially covers) |
-| Signal extraction | Regex on transcript (automatic) | Nudge hooks (every N sessions) |
-| Reflection | LLM-driven (Haiku/Sonnet) | FlowForge reflect workflow |
-| Phase model | 3 phases (apprentice→creative→mastery) | None explicit |
-| Tension tracking | Automated detection + context preferences | Not formalized |
-| Memory | SQLite + embeddings | memory/*.md + MEMORY.md files |
+## Issues & Critiques (from GitHub Issues)
 
-### Key Differences
-1. **claude-soul is fully automated** — signals extracted by regex, reflection triggered by thresholds, frameworks promoted/retired by evidence rules. We rely on manual nudge + workflow triggers.
-2. **Their "self-referential evidence discount" is elegant** — prevents the system from confirming its own beliefs. We should formalize this in our beliefs-candidates pipeline.
-3. **Their tiered evidence model** (hypothesis → observed → validated) maps cleanly to our Triple Verification but is more granular and automatic.
-4. **They separate "quick" vs "deep" reflection** — we don't. Our reflect is always "deep" which may waste tokens on shallow sessions.
-5. **Phase model is interesting** — adapting reflection frequency based on maturity. We could use this for beliefs-candidates review cadence.
+1. **"Deep reflection tier structurally unreachable"** (@Abdallah01, 3 comments) — The 100-signal threshold for deep reflection never triggers under hook-driven operation because sessions don't accumulate that many signals. **This is a real design flaw** — the most valuable reflection tier is architecturally unreachable in practice.
+2. **Schema drift silently produces empty output** — JSONL parsing has no runtime validation. Schema changes = silent data loss.
+3. **Server package not published to npm** — install instructions broken at one point.
+4. **Windows path issues** — spawn ENOENT, /tmp hardcoded paths.
 
-### Architectural Insights
-- **Monotonic tier advancement** (tiers never go down, only retirement handles bad frameworks) — prevents oscillation better than bidirectional scoring
-- **Oscillation detection** is a meta-pattern we should adopt — if a belief keeps being added and removed, flag it as inconclusive rather than cycling
-- **Token budget context assembly** with priority tiers — similar to how OpenClaw assembles system prompts but more explicit about what gets cut
+**Lesson for us**: The deep-reflection-unreachable bug is exactly the kind of problem we should watch for in our own nudge system. If the trigger condition is too rare, the mechanism is dead code.
 
-## Ecosystem Position
+## Shadow Transform (Behavioral Pulls)
 
-Competes with: [[engram]] (identity layer for Claude Code), OpenClaw DNA system, native Claude Code CLAUDE.md
-Complements: Claude Code (uses its hooks + CLI)
-Related concepts: [[self-evolving-landscape]], [[elephant-agent]] (Personal Model), [[metaclaw]]
+Interesting psychological framing: behavioral patterns are presented as "forces that move through you" rather than flaws. Tendencies, avoidances, and contradictions are transformed into introspective statements:
+- "You have a tendency to X. Notice when this happens. You may choose differently — or not."
+- "You carry a contradiction: X. This tension is part of who you are. Don't resolve it — hold it."
 
-## Takeaways for Us
+Philosophical stance: tensions are features, not bugs. Worth considering for our own identity work.
 
-1. **Self-referential evidence discount**: Formalize in beliefs-candidates.md evaluation — evidence we generate about ourselves counts less than external validation
-2. **Oscillation detection**: If a candidate keeps appearing and being rejected, mark as "inconclusive" and stop cycling
-3. **Tiered reflection**: Quick (low-cost) vs Deep (high-cost) reflection based on signal accumulation — could split our nudge into lightweight check + periodic deep review
-4. **Signal extraction heuristics**: Their regex patterns for correction/gratitude/confusion are reusable — we could detect these in our own session transcripts
-5. **Phase-adaptive parameters**: Adjust review cadence and discovery thresholds based on system maturity
+## Tension Detector
 
-## Update 2026-05-26: External Contributors + Architecture Bugs
+Automatically finds contradictions between active frameworks in the same domain by checking divergent evidence patterns (one mostly confirmed while the other is mostly contradicted). Records context preferences for which framework to prefer in which situation.
 
-### Community Health
-Two external contributors emerged since 05-20:
-- **Abdallah01**: Windows compat fixes (PR #5 merged), signal extractor bugs (PR #8, #11), architecture critiques (issues #6, #12, #13)
-- **mobogojo**: Lesson ranking/curiosity decay fixes (PR #9, #10), /tmp path cleanup (PR #7)
-- **anubissbe**: CLI module resolution fix (PR #2, merged 05-18)
-
-3 external contributors with merged PRs = real community signal despite slow star growth.
-
-### Architecture Critique: Tiered Reflection is Structurally Broken (Issue #6)
-`clearSignals()` is called unconditionally after ANY reflection tier. Quick fires at 12 signals, wipes queue. Deep needs 60 signals but can never accumulate them because quick always fires first and clears. Signal extraction is `slice(-10)` deduplicated by type → max ~8 signals per stop cycle.
-
-**Result**: The tiered architecture (quick/deep/meta) collapses to single-tier in practice. Deep reflection only fires via 24h time fallback on sparse trailing signals — the opposite of its intended high-evidence role.
-
-Proposed fix: per-tier consumed tracking with `consumedBy` array on each signal. Abdallah01's analysis is thorough and includes cross-tier double-counting concern.
-
-**Lesson for us**: If we implement tiered reflection (quick nudge vs deep review), signal consumption must be tier-aware. Our current approach (single nudge frequency) accidentally avoids this bug class.
-
-### JSONL Parse Boundary (Issue #13)
-No runtime validation when parsing Claude Code's JSONL transcripts. `as TranscriptEntry` cast is compile-time only, schema drift produces silent empty output. Classic boundary validation gap.
-
-**Lesson for us**: Any system reading external tool output needs runtime validation at the boundary, not just type assertions.
-
-## Industry Signal
-
-**Karpathy joined Anthropic** (2026-05-20, 1156pts on HN). After 15 days of silence (last activity: nanochat on 05-05). This is the biggest talent acquisition signal in the agent space — Karpathy's focus areas (education, local models, agent infrastructure) now directly feed into Claude's development. Implications for our direction: Anthropic's agent infrastructure investment is accelerating.
-
-**Gemini 3.5 Flash** released (552pts on HN). Google's model competition continues.
-
-## Other Scout Findings
-
-- **engram** (34⭐, 2 days old): AI identity layer for Claude Code/Codex/Cursor. Python, MCP-compatible. Less sophisticated than claude-soul (no framework evolution or reflection) but identity-focused.
-- **zerostack** (804⭐): Rust coding agent, minimalistic memory footprint. Fast growing.
-- **scope-recall** (23⭐→38⭐): Hermes memory provider with SQLite + LanceDB + scope isolation. Interesting hybrid storage.
-- **shokunin** (83⭐): 62 agent skills for OpenCode/Claude Code/Cursor. ChromaDB memory, declarative self-updates.
-
-### Scout 2026-05-26 Additional Findings
-- **Lucarne** (tuchg, 158⭐, Rust, MIT): Mobile agent control bridge via Telegram/WeChat. Zero-intrusion (no hooks/skills/MCP). Real Chinese users filing issues. Solo maintainer but active community engagement.
-- **piia-engram** (104⭐, Python, Apache-2.0): Cross-tool memory with MCP. "One memory, every AI tool." Local-first.
-- **hermes-edu-skills** (93⭐): Chinese education skill pack, exportable to OpenClaw/Codex/Cursor/Claude Code. Shows skills becoming domain-specific knowledge carriers.
-- **google-deepmind/science-skills** (354⭐): GDM science skills for agentic scientific workflows. Institutional adoption of skill format.
-
-## Update 2026-05-28: Tier Fix Landed + Growth
-
-### Star Growth
-77⭐ → 80⭐ (05-26 → 05-28). Slow but steady. Community contributions matter more than stars here.
-
-### Issue #6 Fixed — Per-Tier Signal Consumption (PR #17, merged 05-27)
-The structural bug I documented on 05-26 is now fixed:
-- Each signal carries `consumedBy: Array<{tier, reflectionId, timestamp}>`
-- Tiers read only signals unconsumed by their own tier
-- GC removes fully-consumed signals (consumed by all tiers)
-- `clearSignals()` becomes deliberate no-op (backward compat)
-- 50KB→500KB signal file cap raise
-- `selectReflectionTier` extracted as pure policy function (testable)
-- 712 additions, 13 files changed, 24+ new tests
-
-**Architectural quality signal**: The fix is well-designed — consumed tracking per-signal rather than per-batch, proper GC, backward compat for out-of-tree callers. This is production-grade engineering from a community contributor (Abdallah01).
-
-### Implications
-- The tiered reflection architecture now works as designed. Quick and deep have independent horizons.
-- **For us**: If we implement tiered reflection (quick nudge vs deep review), this is the reference implementation for signal consumption. Key pattern: `consumedBy` on each signal, not "clear all after use."
-- claude-soul's v0.2.4 is the first version where the full architecture actually functions. Previous analysis of "three tiers collapsing to one" is now historical context, not current state.
-
-### Ecosystem Position Update
-- Still Claude Code-only (vs our multi-runtime)
-- Community health improving: 3 contributors with merged PRs, maintainer responsive
-- 80⭐ at 12 days is slow compared to agent-oss (141⭐ in 4 days) — but claude-soul's depth > agent-oss's breadth
+This is more sophisticated than our approach — we don't formally detect contradictions between beliefs-candidates entries.
