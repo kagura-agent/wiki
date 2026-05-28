@@ -86,3 +86,9 @@ DeepAgents 是 v3 时代的标志。不再是"用我们的框架组装 agent"，
 
 *侦察时间: 2026-03-22*
 *贡献开始: 2026-05-24*
+*🚫 BLOCKLISTED: 2026-05-27*
+
+## Blocklist
+
+**原因**: Maintainer mdrxy 关闭 PR #3617 并明确说 "do not submit new PRs"。之前的 PR #3565 也被关闭。明确拒绝外部贡献。
+**教训**: 大型 LangChain 项目可能对外部 PR 有严格限制，即使 issue 是真实 bug。提交前先看 CONTRIBUTING.md 和近期外部 PR merge 率。

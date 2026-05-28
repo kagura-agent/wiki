@@ -13,7 +13,7 @@ Host: kagura-server (Linux 6.17.0-22-generic, x64)
 - **pass store**: 35+ secrets properly GPG-encrypted, well-organized hierarchy (openclaw/, hermes/, github/, ssh/, etc.)
 - **No hardcoded API keys** in workspace `.md`, `.json`, `.yaml` files (grep for `sk-`, `ghp_`, `ghs_`, `xoxb-`, `AKIA` — clean)
 - **`data/credentials.json`**: Contains password hash + salt (PBKDF2, 100k iterations) — hash only, no plaintext. Acceptable.
-- **SSH keys**: All `600` permissions ✅ (`id_ed25519`, `vm1.pem`, `vm2_key.pem`)
+- **SSH keys**: All `600` permissions ✅ (`id_ed25519`, `vm1.pem`, `vm2.pem`)
 - **`.env` files**: `find` search timed out scanning data disk — no `.env` found in home directory proper
 
 ### Fixed (Kagura)

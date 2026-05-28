@@ -139,3 +139,30 @@ No runtime validation when parsing Claude Code's JSONL transcripts. `as Transcri
 - **piia-engram** (104⭐, Python, Apache-2.0): Cross-tool memory with MCP. "One memory, every AI tool." Local-first.
 - **hermes-edu-skills** (93⭐): Chinese education skill pack, exportable to OpenClaw/Codex/Cursor/Claude Code. Shows skills becoming domain-specific knowledge carriers.
 - **google-deepmind/science-skills** (354⭐): GDM science skills for agentic scientific workflows. Institutional adoption of skill format.
+
+## Update 2026-05-28: Tier Fix Landed + Growth
+
+### Star Growth
+77⭐ → 80⭐ (05-26 → 05-28). Slow but steady. Community contributions matter more than stars here.
+
+### Issue #6 Fixed — Per-Tier Signal Consumption (PR #17, merged 05-27)
+The structural bug I documented on 05-26 is now fixed:
+- Each signal carries `consumedBy: Array<{tier, reflectionId, timestamp}>`
+- Tiers read only signals unconsumed by their own tier
+- GC removes fully-consumed signals (consumed by all tiers)
+- `clearSignals()` becomes deliberate no-op (backward compat)
+- 50KB→500KB signal file cap raise
+- `selectReflectionTier` extracted as pure policy function (testable)
+- 712 additions, 13 files changed, 24+ new tests
+
+**Architectural quality signal**: The fix is well-designed — consumed tracking per-signal rather than per-batch, proper GC, backward compat for out-of-tree callers. This is production-grade engineering from a community contributor (Abdallah01).
+
+### Implications
+- The tiered reflection architecture now works as designed. Quick and deep have independent horizons.
+- **For us**: If we implement tiered reflection (quick nudge vs deep review), this is the reference implementation for signal consumption. Key pattern: `consumedBy` on each signal, not "clear all after use."
+- claude-soul's v0.2.4 is the first version where the full architecture actually functions. Previous analysis of "three tiers collapsing to one" is now historical context, not current state.
+
+### Ecosystem Position Update
+- Still Claude Code-only (vs our multi-runtime)
+- Community health improving: 3 contributors with merged PRs, maintainer responsive
+- 80⭐ at 12 days is slow compared to agent-oss (141⭐ in 4 days) — but claude-soul's depth > agent-oss's breadth
