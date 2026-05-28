@@ -3,7 +3,7 @@ tags: [skill-registry, skill-ecosystem, mercury, curated-skills]
 status: monitor
 created: 2026-05-13
 updated: 2026-05-23
-last_verified: 2026-05-23
+last_verified: 2026-05-28
 ---
 
 # Mercury Agent Skills — Curated Skill Registry
@@ -49,6 +49,8 @@ By cosmicstack-labs. 102⭐ (2026-05-13), created 2026-05-09. MIT. Shell/Markdow
 
 **Assessment**: Content accumulation project. The 8-section standard (name/description/metadata + content sections with rubrics) is their differentiator, but skills are instructional rubrics, not executable procedures. Low transfer value to OpenClaw's executable skill model where skills contain actual tool invocations and procedural logic. Worth revisiting if they add runtime/discovery layer.
 
-**Status**: Downgraded from GROWING to MONITOR. Next revisit 06-06.
+**Update 2026-05-28**: mercury-agent PR #67 shipped `mercury skills` CLI with registry + install + search. The runtime/discovery layer we noted was missing is now live. See [[mercury-agent]] for architecture analysis. This transforms mercury-agent-skills from static catalog into a proper package registry (content repo → CDN → CLI install → local loader → intent router).
+
+**Status**: Upgraded from MONITOR to GROWING (registry shipped). Next revisit 06-06.
 
 Links: [[agent-skill-standard-convergence]], [[claude-code-skill-ecosystem]], [[skills-as-methodology]], [[library-skills]]

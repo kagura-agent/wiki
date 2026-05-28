@@ -453,3 +453,58 @@ Stars: 2,446 (was 2,418 on 05-24). Steady growth.
 - Architectural quality verified: they fixed the shell injection class we noted, not just individual patterns
 - Community: Chinese README merged, CJK issues being addressed
 - **Transfer value**: The `splitShellSegments` approach remains the most directly applicable insight for [[OpenClaw]]'s exec security
+
+## Update 2026-05-28 — Skills Registry Shipped (PR #67)
+
+- Stars: 2,467 (was ~1,214 on 04-26). Growth accelerating (+100% in ~30 days)
+- **Major feature**: `mercury skills` CLI subcommand with full registry lifecycle
+
+### Architecture of Skills Registry
+
+**Three-layer design:**
+1. **RegistryClient** (`registry.ts`) — Read-only HTTP client against `skills.mercuryagent.sh`. CDN-cached JSON feed + per-skill detail endpoints. ETag-based cache with 600s TTL. Pure functions, only state is on-disk feed cache.
+2. **SkillStore** (`store.ts`) — Local skill manager. Atomic writes (tmp+rename). Path traversal guards (regex `^[a-z0-9-]+/[a-z0-9-]+$`). JSON index (`.index.json`) as source of truth. Supports install/update/uninstall/force-reinstall lifecycle.
+3. **SkillLoader** (`loader.ts`) — Runtime discovery. Walks two layouts: flat (`<name>/SKILL.md`) and nested (`<category>/<slug>/SKILL.md`). Parses YAML frontmatter for metadata. Feeds into IntentRouter.
+
+**IntentRouter** (`intent-router.ts`) — Keyword/intent-based skill matching:
+- Builds three indexes: intent phrases, tags, keywords (words >2 chars from intents)
+- No embedding/semantic search — pure string matching
+- Registered per-skill via `registerSkillMeta()` during discovery
+
+**SkillBatcher** (`batcher.ts`) — Multi-skill parallel execution:
+- Groups matched skills by category into batches
+- Three strategies: parallel (default), sequential (>3 skills in one category), hybrid (>3 categories)
+- Each batch dispatched to a sub-agent with `use_skill` tool calls
+- Results aggregated with per-skill status tracking
+
+**CLI** (`cli.ts`) — `mercury skills {info|list|search|browse|install|update|uninstall}`
+- `--json` flag for structured output
+- `--registry` override for custom registries
+- `browse` opens the web registry in browser
+
+### Key Design Decisions
+
+1. **Registry is read-only CDN** — no auth, no write API. Publishing goes through the `mercury-agent-skills` repo (GitHub PR → CI build → CDN deploy). npm-lite approach.
+2. **SKILL.md as transfer format** — Skills reconstructed from registry detail JSON into SKILL.md with frontmatter on install. SKILL.md is the only on-disk artifact.
+3. **ID format is `<category-slug>/<skill-slug>`** — two-level namespace. Validates with regex, no traversal possible.
+4. **Intent routing is keyword-based, not semantic** — simple but brittle. Works for ~130 skills but will need embedding search at scale.
+5. **Security: path traversal well-handled** — `assertValidSkillId()` + `resolve()` + prefix check. Test coverage for traversal attacks.
+
+### Comparison to OpenClaw ClawHub
+
+| Aspect | Mercury Skills | OpenClaw ClawHub |
+|--------|---------------|------------------|
+| Registry | CDN static JSON | npm-like CLI registry |
+| Discovery | Keyword intent matching | available_skills in system prompt |
+| Multi-skill | SkillBatcher (sub-agents) | One skill per turn |
+| Namespace | `category/slug` | Flat names |
+| Auth | None (read-only) | npm auth |
+| Publish | GitHub PR to catalog repo | `clawhub publish` |
+
+### Transfer Value
+
+- **SkillBatcher pattern**: when multiple skills match, dispatch to sub-agents in parallel by category. OpenClaw currently selects one skill per turn. Worth evaluating when skill count grows.
+- **Intent routing via keyword index**: simpler than semantic search but effective for curated catalogs. Our `available_skills` approach (list in system prompt) is even simpler but doesn't scale past ~40 skills.
+- **Two-level namespace** (`category/slug`) cleaner than flat naming for large catalogs.
+
+**Status**: GROWING → stars doubling monthly, major features shipping. Skills registry closes the gap between mercury-agent and mercury-agent-skills repos. Revisit 06-04.
