@@ -2103,3 +2103,35 @@ The **intended design** is that entries differentiate via **search recall signal
 - REM confidence is slightly better but still clustered — differentiation requires high search volume
 - Deep sleep promotion will only activate if we dramatically increase search recall activity
 - **Conclusion**: Our self-evolution pipeline should not rely on dreaming for memory curation. Our manual MEMORY.md curation + wiki notes remain the primary memory quality mechanism.
+
+## 🔬 自进化观察日报 2026-05-28
+
+### 管线活跃度
+- **beliefs-candidates**: 6 条新增（全部来自 Luna corrections — code-discipline, pr-hygiene, source-of-truth, deploy-path-verify, rebuild-safety, observation-without-investigation）。32 active / ~9 graduated。0 达毕业阈值（全部第1次）
+- **DNA 变更**: 2 commits（`gradient: observation-without-investigation pattern` + `daily-review 05-28`）。变更为主动写入（gradient 记录），无 SOUL.md/AGENTS.md 结构性改动
+- **nudge 触发**: 0 次可观测（journalctl 无 nudge 相关日志）。⚠️ nudge hook 可能未触发或日志未记录。`tools/nudge-health.sh` 今天创建但未产出可见触发记录
+- **dreaming**: Light Sleep 运行 ✅，27 candidates staged（全部 confidence=0.62，已知 upstream 硬编码问题 — issue openclaw#87485）。REM 运行 ✅，"No strong patterns surfaced"，3 条 Possible Lasting Truths（均来自历史 daily-review）。Deep Sleep promote: 0 条
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. gogetajob broken → 连续 4 天审计标 P0 → 05-28 修复 → 06:00 审计确认 `which gogetajob` ✅ — **闭环终于关闭**
+  2. dreaming uniform 0.62 → 源码分析确认硬编码 → upstream issue openclaw#87485 → 关闭内部 issue #6 — **闭环完成（交给上游）**
+- **断裂处**:
+  1. beliefs-candidates 计数脚本 gradient vs directive 区分 — 连续第 2 天发现同一问题，仅写 TODO 未修
+  2. nudge 触发 0 次可观测 — nudge-health.sh 工具已创建但实际触发数据仍不可见
+
+### 今日发现
+1. **Gradient 来源高度集中**: 6 条新 gradient 中 5 条来自单一 session（Luna Cove 协作），1 条来自自我反思（observation-without-investigation）。自发 gradient 占比 17%，被动纠正占比 83%
+2. **Gradient 质量提升**: 今天的 gradient 都附带了 Trigger 条件（如 "When an issue stays open for 3+ days"），比早期纯文本描述更可执行
+3. **dreaming pipeline 实质性进展**: 不再停留在 "confidence 为什么一样" 的表层，深入到源码确认了架构限制，并提交了 upstream issue。这是 observation-without-investigation gradient 的即时应用
+4. **study 饱和机制成熟**: 27 轮 study，saturation check 正确拦截低收益循环。scout/apply/followup 各到上限后自动停止
+5. **新工具**: nudge-health.sh（nudge 可观测性）、graduation-pipeline.sh（beliefs 毕业编排）— 自产工具链在扩展
+
+### 原始数据
+- `git log --since="yesterday 22:30" -- beliefs-candidates.md`: 2 commits (9e2176a, 385016b)
+- `beliefs-candidates.md`: 164 lines, 32 active, ~9 graduated
+- `memory/2026-05-28.md`: 1739 lines
+- Light Sleep candidates: 27 staged, all 0.62 confidence
+- REM: "No strong patterns", 3 lasting truths (historical)
+- Nudge: 0 observable triggers (journalctl empty)
+- New gradients today: observation-without-investigation, code-discipline, pr-hygiene, source-of-truth, deploy-path-verify, rebuild-safety
