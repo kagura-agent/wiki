@@ -98,3 +98,27 @@ Other workspaces' recall stores are ~554KB (normal). Dreaming ran successfully f
 **Upstream**: Issue #84291 already filed (2026-05-20). The real fix should be upstream: either auto-prune old entries or raise/remove the limit. Our 5-day dreaming outage was entirely caused by this one file.
 
 **Correction**: Previous diagnosis (May 23) attributed this to the session cleanup bug (PR #84802). While that bug exists, it was NOT our specific blocker — the file size limit was. The 2026.5.18 → 2026.5.20 upgrade was already done but didn't help because the underlying data file was already too large.
+
+### 2026-05-28 — Issue #6 Root Cause Identified
+
+**Finding**: Uniform 0.62 confidence is **by design**, not a bug.
+
+**Source code proof** (dreaming-phases-CC9r0Vso.js:779):
+```js
+const DAILY_INGESTION_SCORE = .62;  // hardcoded for all memory chunks
+const SESSION_INGESTION_SCORE = .58;  // hardcoded for all session chunks
+```
+
+`entryAverageScore = totalScore / signalCount = (N × constant) / N = constant`
+
+**Store analysis** (4049 entries, 6 weeks active):
+- 0.58 score: 3360 entries (session corpus, all uniform)
+- 0.62 score: 635 entries (daily memory, all uniform)
+- With search recall signals: 55 (1.4%) — the ONLY differentiator
+- REM confidence: 77% at 0.49 (near-zero spread)
+
+**Design intent**: Differentiation comes from **search recall feedback loop** — entries gain `recallCount` when returned by search queries. But organic recall volume is too low (55/4049 after 6 weeks).
+
+**Conclusion**: Light sleep confidence is not a quality signal. It's a threshold gate (≥0.45 = candidate). True memory curation happens via manual MEMORY.md + wiki notes, not dreaming's automated pipeline.
+
+**Action**: Filed upstream issue [[openclaw/openclaw#87485]] proposing content-dependent ingestion scoring.

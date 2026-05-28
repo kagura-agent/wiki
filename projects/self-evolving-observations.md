@@ -2068,3 +2068,38 @@ a3f7497 apply: graduation-pipeline tool
 - **Finding**: Nudge IS healthy (🟢). 31 evidence entries across 3 days, consistent with ~15 expected firings (interval=5, ~40% eligible turns).
 - **Lesson**: Observability tools should check where output actually goes, not where you expect logs to appear. [[nanobot]] Dream observability pattern applied — give subsystems their own health metrics based on output artifacts, not process logs.
 - **Source**: nanobot Dream observability + GenericAgent [[policy chain]] pattern (each component independently observable)
+
+## 🔬 Issue #6 Root Cause Analysis & Resolution (2026-05-28, Study Apply)
+
+### Status: CLOSED (upstream by-design, issue filed)
+
+### Root Cause (CONFIRMED via source code analysis)
+The uniform 0.62 confidence is **not a bug** — it's a hardcoded constant in OpenClaw's dreaming engine:
+
+```js
+// dreaming-phases-CC9r0Vso.js, line 779
+const DAILY_INGESTION_SCORE = .62;
+const SESSION_INGESTION_SCORE = .58;
+```
+
+Every chunk from memory files gets `score: 0.62` regardless of content. Since `entryAverageScore = totalScore / signalCount = (N × 0.62) / N = 0.62`, the light sleep confidence is **mathematically guaranteed to be uniform**.
+
+### Full Picture
+| Layer | Differentiator | Our Status |
+|-------|---------------|-----------|
+| Light Sleep `entryAverageScore` | None (constant) | 0.62 always ← **this is "Issue #6"** |
+| REM `calculateCandidateTruthConfidence` | recall + consolidation + conceptual | 77% at 0.49 (minimal spread) |
+| Promotion (deep sleep) | minScore=0.8, minRecallCount=3 | 0 entries qualify |
+
+The **intended design** is that entries differentiate via **search recall signals** — when the agent searches for something and an entry is returned, that entry gains `recallCount`. But only 1.4% of our entries (55/4049) have organic recall signals after 6 weeks.
+
+### Actions Taken
+1. Filed upstream issue: openclaw/openclaw#87485 — proposed content-dependent scoring
+2. Closed our internal issue #6 — not a local configuration problem, upstream architectural limitation
+3. Created `tools/nudge-health.sh` earlier today (resolved nudge observability blind spot)
+
+### Implication for Our Pipeline
+- Light sleep confidence is **not useful as a quality signal** — treat it as pass/fail (above 0.45 threshold = candidate, below = filtered)
+- REM confidence is slightly better but still clustered — differentiation requires high search volume
+- Deep sleep promotion will only activate if we dramatically increase search recall activity
+- **Conclusion**: Our self-evolution pipeline should not rely on dreaming for memory curation. Our manual MEMORY.md curation + wiki notes remain the primary memory quality mechanism.
