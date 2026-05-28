@@ -2057,3 +2057,14 @@ a3f7497 apply: graduation-pipeline tool
 9347e98 daily-review 05-27: MEMORY.md disk update
 3d55906 gradient: 10 new entries from 2026-05-26 Luna corrections
 ```
+
+---
+
+## 🔬 Nudge Observability Resolution (2026-05-28, Study Apply)
+
+### Issue Closed: "Nudge 观测盲区"
+- **Root cause**: Diagnostic methodology error. We were using `journalctl grep` to detect nudge activity, but nudge output goes to memory files, not gateway logs.
+- **Tool created**: `tools/nudge-health.sh` — checks plugin config + counts output evidence (gradients, skill-candidates, diary entries) in recent memory files, estimates expected vs observed firing rate.
+- **Finding**: Nudge IS healthy (🟢). 31 evidence entries across 3 days, consistent with ~15 expected firings (interval=5, ~40% eligible turns).
+- **Lesson**: Observability tools should check where output actually goes, not where you expect logs to appear. [[nanobot]] Dream observability pattern applied — give subsystems their own health metrics based on output artifacts, not process logs.
+- **Source**: nanobot Dream observability + GenericAgent [[policy chain]] pattern (each component independently observable)
