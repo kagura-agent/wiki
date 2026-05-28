@@ -32,9 +32,9 @@ Specific fix: `hermes-self-evolution` went from rank 6 to rank 2 for "how do age
 
 ## Related
 
-- [[livecache-bench]] — benchmark tooling that detected the regression
+- Validated via livecache benchmark suite
 - [[temporal-decay-retrieval]] — sister ranking enhancement
-- [[search-ranking-improvements]] — full history of search improvements
+- Part of ongoing search ranking improvement effort
 
 ## Tags
 `#search` `#retrieval` `#stemming` `#ranking`
