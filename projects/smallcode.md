@@ -217,3 +217,59 @@ Evaluated whether SmallCode's Contract/Definition-of-Done hard-gate pattern appl
 **Verdict**: NOT NOW. Our runtime handles structural completion; the quality gap is real but not yet a recurring enough problem to justify the infrastructure. When subagent quality becomes a pattern (3+ incidents of "completed but broken"), revisit.
 
 **v1.2.1 status (05-26)**: 1,426⭐, pushed 05-24. 🟢 THRIVING (6/6). Community explosion continues.
+
+## Plugin System (v1.2.2, PR#28+29, 2026-05-27)
+
+1,495⭐. Major architecture addition: full plugin system shipped in 2 stacked PRs.
+
+### Architecture
+
+**PluginLoader** (~270 LOC, `src/plugins/loader.js`):
+- Two plugin scopes: project (`.smallcode/plugins/`) + user (`~/.config/smallcode/plugins/`)
+- Each plugin = directory with `plugin.json` manifest + JS handler files
+- Single-file plugins also supported (JSON-only for prompt injection)
+- Load order: project-level first, then user-level (project can override global)
+
+**Extension points (6):**
+1. **Tools** — custom tool definitions with handler functions, injected into model's tool list
+2. **Commands** — `/slash` commands (e.g., `/provider` for runtime provider switching)
+3. **Prompts** — system prompt injection (scoped: always/backend/coding/debugging)
+4. **Hooks** — 7 lifecycle events: `pre_tool`, `post_tool`, `session_start`, `session_end`, `pre_request`, `post_request`, `on_error`. Filter by tool name.
+5. **Providers** — `ProviderRegistry` singleton. Plugins register `IModelProvider` instances with capability declarations (tools/streaming/vision/tokenCounting). Runtime resolution: plugin → built-in → OpenAI-compat fallback.
+6. **MCP Servers** — declare stdio MCP servers in manifest, lifecycle managed by plugin system
+
+**Permission model** (declared but not yet enforced):
+```json
+{ "read": true, "write": true, "execute": false, "network": true }
+```
+TODO comment indicates enforcement not wired into tool execution pipeline yet.
+
+### Provider Wizard (PR#29)
+- Interactive `/provider` command for runtime provider switching
+- Per-tier endpoint routing (PR#51): route requests to different endpoints by model tier
+- Auth-header isolation: OpenAI keys not sent to DeepSeek when both configured
+
+### Comparison with [[openclaw-plugin-nudge]]
+
+| Aspect | SmallCode Plugins | OpenClaw Plugins |
+|--------|------------------|------------------|
+| Scope | Project + User | Per-gateway |
+| Format | Directory + plugin.json | npm package + manifest |
+| Safety | Declared permissions (unenforced) | Sandboxed hooks + approval model |
+| Extension | Tools, commands, prompts, hooks, providers, MCP | Hooks, tools, channels, MCP |
+| Model awareness | Prompt injection scoping | System event injection |
+
+**Key insight**: SmallCode's plugin system is simpler (no sandboxing, synchronous require() loading, no approval model) — appropriate for a local-first tool where the user trusts their own plugins. The ProviderRegistry pattern (register at load, resolve by name at runtime, declare capabilities) is clean and minimal.
+
+**Relevance to us**: LOW for direct adoption (different trust model), but validates the "manifest + handler files" pattern as sufficient for a plugin system. The prompt injection scoping (always/backend/coding/debugging) is more granular than our system event approach.
+
+### Elephant Agent Parallel: Seatbelt Sandbox Hardening
+
+Elephant Agent (PR#52) took the opposite approach to plugin safety — hardening the execution sandbox rather than the plugin load path:
+- `SeatbeltPolicyBuilder`: composable macOS sandbox policy generation
+- `.git/hooks` write-protect (prevents [[sandbox-escape-via-git-hooks]])
+- Credential deny-read (~/.ssh, ~/.aws, ~/.gnupg, ~/.kube, ~/.docker)
+- mach-lookup restricted to 4 essential services (was unlimited)
+- IPC narrowed from all System V to POSIX semaphores only
+
+This is complementary to SmallCode's approach: SmallCode trusts plugins but limits what the *model* can do; Elephant trusts the model but limits what the *sandbox* exposes. Different threat models, both valid.
