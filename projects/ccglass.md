@@ -5,7 +5,7 @@ updated: 2026-05-25
 status: active
 depth: deep-dive
 stars: 239
-last_verified: 2026-05-25
+last_verified: 2026-05-28
 ---
 
 # ccglass — See What Your Coding Agent Sends
@@ -81,8 +81,17 @@ Fills the **coding agent observability** gap. Competes with browser devtools and
 
 Related: [[agentops]] (operational layer, different scope — fleet-level vs single-session), [[eval-view]] (eval framework, complementary)
 
+## Update Log
+
+### 2026-05-28 (316⭐, 142 tests)
+Rapid evolution from proxy → full observability dashboard:
+- **v0.5.0**: Latency tracking (TTFT, gen window, tok/s sparklines), session rollups (tokens, cache-hit %, USD est), model filter, light/dark theme, copy-as-cURL
+- **v0.6.0**: Cross-session usage summary — per-model and per-session aggregation across all captures for a project
+- Solo dev (jianshuo) shipping at very high velocity. 142 tests now (up from ~100).
+- Positioning shift: "see what your agent sends" → "know what your agent costs and how it performs"
+
 ## Verdict
 
-**Worth tracking.** 239⭐ in 3 days with real architectural merit (not a wrapper or tutorial). The base-URL interception pattern is clever and widely applicable. The MCP self-inspection is genuinely novel. Growth rate suggests real demand for coding agent observability. Revisit in 1 week.
+**Worth tracking.** 316⭐ (was 239 at first contact), steady growth with real architectural merit. Evolving from capture proxy → full observability platform. The per-model cost tracking and cross-session aggregation fill a genuine gap in coding agent tooling.
 
 **Contribution opportunity**: Low — the codebase is clean and small, issues are being auto-triaged by Claude. But if we wanted OpenClaw support (intercept OpenClaw ACP traffic), that would be a meaningful PR.

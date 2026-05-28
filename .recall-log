@@ -407,3 +407,6 @@
 2026-05-28T09:47:03+08:00|neutral|nanobot|projects/nanobot,cards/loop-detection-comparison,cards/self-evolving-agent-landscape,nanobot,write-ahead-session-persistence,metadata-driven-context-injection
 2026-05-28T09:50:50+08:00|neutral|smallcode plugin|projects/smallcode,cards/claude-code-vs-codex-plugin-systems,cards/memory-read-write-loop-hooks,核心思路,projects/claude-hud,概况,projects/openclaw-plugin-nudge,backlog
 2026-05-28T10:17:58+08:00|neutral|unapplied insight apply improvement|projects/gbrain,cards/closed-loop-vs-open-pipe,projects/oh-my-kimichan,projects/self-evolving-observations,projects/skvm,closed-loop-vs-open-pipe,medusa-skill-framework,cangjie-skill-ecosystem,skvm,forge-guardrails
+2026-05-28T11:16:55+08:00|neutral|GenericAgent|cards/self-evolving-agent-landscape,cards/skill-crystallization-vs-design,cards/supervisor-pattern,context-budget-constraint,supervisor-pattern,genericagent
+2026-05-28T11:46:14+08:00|neutral|ccglass|projects/ccglass,projects/backlog,2026-05-10 Quick Scan (15:21),ccglass,backlog
+2026-05-28T11:46:14+08:00|neutral|bux browser-use|projects/bux,projects/browser-harness,projects/byob-chrome-reuse-mcp,bux,backlog
