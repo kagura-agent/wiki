@@ -5,14 +5,14 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 483
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-27
+last_verified: 2026-05-28
 ---
 
 # Elephant Agent
 
 > "Elephants never forget." — Personal-Model-first self-evolving AI agent.
 
-**Repo**: [agentic-in/elephant-agent](https://github.com/agentic-in/elephant-agent) | 385⭐ (2026-05-22, created 05-15) | Python | No license yet
+**Repo**: [agentic-in/elephant-agent](https://github.com/agentic-in/elephant-agent) | 540⭐ (2026-05-28, created 05-15) | Python | No license yet
 
 ## What It Is
 
