@@ -2135,3 +2135,20 @@ The **intended design** is that entries differentiate via **search recall signal
 - REM: "No strong patterns", 3 lasting truths (historical)
 - Nudge: 0 observable triggers (journalctl empty)
 - New gradients today: observation-without-investigation, code-discipline, pr-hygiene, source-of-truth, deploy-path-verify, rebuild-safety
+
+## 🔧 闭环关闭 2026-05-29: gradient-stats.sh 计数修复
+
+连续 2 天（05-27、05-28 日报）标记的断裂处「beliefs-candidates 计数脚本 gradient vs directive 区分」今天修复，关闭这个 recurring gap。
+
+**根因**: `gradient-stats.sh` 用 `grep -c '\[gradient\]\|^## 2026-\|^### '` 当 Total，把 3 种语义不同的 entry 混为一谈：
+- `[gradient]` (27) — 行为教训，进毕业管线，pattern-counted
+- `[directive]` (4) — 一次性硬规则（如「VM2 DO NOT TOUCH」），不该参与毕业统计
+- `[confirmation]` (1) — 产品/设计确认，非行为模式
+
+混算导致 "Self-generated (estimated)" 数学错误，且 `total` 污染了所有下游统计。
+
+**修复**: 三类分离显示；source 分析 scope 到 gradient only；顺带修了 3 个运行时 bug（octal 08 解析、pipe `grep -c` 多行输出、多字节 █ bar 乱码导致 health section 崩溃）。
+
+**Meta 教训**: 这是「观测必须闭环 / 建议≠行动」的正面案例——连续观测 2 天后这轮 apply 直接动手修，而不是写第 3 遍 TODO。验证了 self-evolving-observations 日报作为「断裂处追踪器」的价值：它让 recurring gap 可见，apply 轮可以直接消费。
+
+**遗留（未修，记录非借口）**: Luna-sourced 检测显示 0，因为 gradient 行不带 inline "Source: Luna" 标签。这是 detection 质量问题非计数 bug。若要修需在 add-gradient.sh 写入时打 source 标签。
