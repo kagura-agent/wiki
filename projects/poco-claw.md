@@ -3,15 +3,15 @@ title: Poco-Claw
 url: https://github.com/poco-ai/poco-claw
 stars: 1318
 created: 2026-01-08
-last_updated: 2026-05-11
+last_updated: 2026-05-29
 depth: 🔬 deep-dive
 status: active
-last_verified: 2026-05-13
+last_verified: 2026-05-29
 ---
 
 # Poco-Claw — OpenClaw's Direct Competitor
 
-MIT, 1,318⭐, 121 forks. 3-core-dev team (qychen2001: 502, ffy6511: 344, Phil-Fan: 190 commits). Very active, pushing daily. Self-describes as "a more beautiful and easier-to-use alternative to OpenClaw."
+MIT, 1,328⭐, 121 forks. 3-core-dev team (qychen2001: 502, ffy6511: 344, Phil-Fan: 190 commits). Very active, pushing daily. Self-describes as "a more beautiful and easier-to-use alternative to OpenClaw."
 
 ## Architecture
 
@@ -119,3 +119,54 @@ Codified the single-writer rule as a **Concurrent Work Guard** in `skills/team-l
 - Serialization rule: shared output paths → sequential assignment
 
 Merged insights from three sources: Poco-claw single-writer, [[concurrent-agent-file-coordination]] (Hermes), and [[worktree-convergence-2026-05]] (paragents preflight intent).
+
+## Update 2026-05-29: Entity-First Structured Channel Mentions
+
+PR #119-120 (merged 05-25): Major architectural shift from text-based `@mention` scanning to **structured entity protocol**.
+
+### The Problem
+Text-based mention detection is fragile:
+- Display name collisions (test explicitly verifies: `@Reviewer` ≠ handle `api-specialist` even when display_name is "Reviewer")
+- Regex-scan false positives when message text happens to contain `@token` patterns
+- No typed context — agent gets a string, has to parse it to find referenced artifacts/tasks
+
+### The Solution: `content.entities` Protocol
+
+Messages now carry structured entity lists:
+```python
+content = {
+    "text": "Review this @api-specialist #artifact-42",
+    "entities": [
+        {"kind": "agent", "action": "mention", "target_id": "<uuid>"},
+        {"kind": "artifact", "action": "reference", "target_id": "<uuid>"},
+        {"kind": "task", "action": "reference", "target_id": "<uuid>"},
+        {"kind": "message", "action": "reference", "target_id": "<uuid>"},
+    ]
+}
+```
+
+Key design:
+- **`@` = mention** (user/agent) — triggers agent execution
+- **`#` = reference** (artifact/task/thread) — injected as `TriggerReferences` in the trigger envelope
+- **`TriggerReferences`**: typed UUID lists (`message_ids`, `artifact_ids`, `task_ids`) passed to agent, not text
+- **Dedupe**: `channel-trigger:{message_id}:{agent_id}` prevents double-triggering
+- **Versioned envelope**: `version: 1` field for protocol evolution
+- **Fallback**: Old messages still regex-scanned; new messages use entities
+
+### Architectural Insight
+
+This is the same evolution pattern as major chat platforms:
+- Telegram: `message.entities[]` with typed offsets
+- Discord: interactions + resolved mentions
+- Slack: blocks + parsed mentions
+
+Moving from "text is the message" to "text is one layer of a structured document" — necessary when messages trigger programmatic actions (agent dispatch), not just human reading.
+
+### Relevance to OpenClaw
+
+OpenClaw uses gateway-level text mention detection for channel dispatch. The structured entity approach would:
+1. Eliminate false trigger from display name collisions
+2. Enable typed context injection (agent receives artifact IDs, not text references)
+3. Support multi-agent coordination with precise handoff metadata
+
+Not immediately actionable (different architecture — OpenClaw is gateway-based, Poco-claw is server-based), but the principle of **entity-first dispatch** vs **text-scan dispatch** is worth internalizing. See [[entity-first-dispatch]] as a potential concept card.
