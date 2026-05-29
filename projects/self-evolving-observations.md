@@ -2152,3 +2152,20 @@ The **intended design** is that entries differentiate via **search recall signal
 **Meta 教训**: 这是「观测必须闭环 / 建议≠行动」的正面案例——连续观测 2 天后这轮 apply 直接动手修，而不是写第 3 遍 TODO。验证了 self-evolving-observations 日报作为「断裂处追踪器」的价值：它让 recurring gap 可见，apply 轮可以直接消费。
 
 **遗留（未修，记录非借口）**: Luna-sourced 检测显示 0，因为 gradient 行不带 inline "Source: Luna" 标签。这是 detection 质量问题非计数 bug。若要修需在 add-gradient.sh 写入时打 source 标签。
+
+## 🔧 闭环关闭 2026-05-29: add-gradient.sh source labeling
+
+断裂处「Luna-sourced 检测显示 0」修复。
+
+**根因**: add-gradient.sh 的 `--source` 参数只写入 JSONL 日志，不写入 beliefs-candidates.md 的 gradient 行。gradient-stats.sh 从 beliefs 文件 grep "Source.*Luna" 自然找不到。
+
+**修复** (两处改动):
+1. **add-gradient.sh**: source 非 manual 时，在 gradient 行末尾追加 `(Source: <source>)` 标签
+2. **gradient-stats.sh**: 
+   - 新格式: grep -ci "Source.*luna" 匹配内联标签
+   - 旧格式: grep -A 3 匹配 `**Source**: Luna` 详情行
+   - JSONL 补充: 显示 JSONL 日志中的 source 分布
+
+**效果**: 新 gradient 通过 `add-gradient.sh --source luna` 写入时，beliefs-candidates.md 中会有 `(Source: luna)` 标签，gradient-stats.sh 能正确检测。
+
+**历史数据**: 25 条早期 Luna-sourced gradient 未补标签（backfill 成本 > 收益）。JSONL 日志从 05-23 开始记录，作为补充数据源。
