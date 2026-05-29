@@ -1,62 +1,48 @@
-# Quarq Agent (agent-oss) — Memory-First AI Agent
+---
+title: "Quarq Agent OSS"
+created: 2026-05-29
+updated: 2026-05-29
+status: scout
+last_verified: 2026-05-29
+---
 
-- **repo**: quarqlabs/agent-oss
-- **stars**: 141 (created 2026-05-24) — fast growth, 141⭐ in 4 days
-- **lang**: Python (LangGraph)
-- **license**: Apache-2.0
-- **status**: scout | ✓2026-05-28
+# Quarq Agent OSS
 
-## What It Is
+**Repo**: [quarqlabs/agent-oss](https://github.com/quarqlabs/agent-oss) | 171⭐ (2026-05-29, created 05-24) | Python | MIT
+**Status**: 🔭 Scout. 5 days old, 171⭐, 14 forks. Solo project.
 
-A memory-first AI agent positioning itself as "open alternative to Hermes/OpenClaw." Focus on retrieval quality, temporal reasoning, and benchmark performance.
+## Core Idea
+
+Memory-first personal AI agent using LangGraph orchestration + FAISS vector storage. Positions itself as "open alternative to [[Hermes]] or [[OpenClaw]]" — interesting that they name us as competition.
+
+Claims 99.6% recall on LongMemEval-S (256/257 correct at checkpoint, full 500-question run in progress).
 
 ## Architecture
 
-```
-User → LangGraph StateGraph → retrieve_memories → route_tools → generate
-                                    ↓
-                              HyDE query expansion
-                              semantic FAISS search
-                              episodic FAISS search
-                              keyword search
-                              procedural rule routing
-```
-
-### Key Features
-- **Three memory types**: semantic facts, episodic events, procedural rules
-- **FAISS-backed retrieval**: normalized OpenAI embeddings, IndexFlatIP cosine similarity
-- **Hybrid search**: vector + keyword on every retrieval pass
-- **HyDE query optimizer**: rewrites user prompt into multiple retrieval probes
-- **Dynamic thresholds**: "deep" mode for aggregation, "standard" for point facts
-- **Required-data fallback**: model can request second retrieval pass when evidence missing
-- **Temporal truth protocol**: separates storage time from narrative event time
-- **Quantitative fidelity**: numbers stored with owner, property, item, exactness
-- **Background learning**: user gets response while memory extraction runs async
-- **Progressive tool loading**: tool docs injected only when skill selected
-
-### Benchmark Claims
-- LongMemEval-S: 99.6% (256/257 correct, full 500 run in progress)
-- This is the differentiator — benchmark-grade recall as marketing
-
-## Comparison with Our Direction
-
-| Aspect | Quarq | Kagura/OpenClaw |
-|--------|-------|-----------------|
-| Focus | Memory retrieval quality | Identity + self-evolution |
-| Memory | FAISS + LangGraph | Files + memex (slug-based) |
-| Identity layer | None | DNA system (SOUL.md, beliefs) |
-| Self-improvement | None | Gradient → belief → DNA pipeline |
-| Benchmark focus | Yes (LongMemEval) | No (functional focus) |
-| Deployment | Standalone agent | Agent infra platform |
+- **LangGraph** state graph (StateGraph → START → END)
+- **FAISS** local vector memory with OpenAI embeddings
+- **Three memory types**: semantic, episodic, procedural (separated)
+- **HyDE-style query expansion** for retrieval
+- **Hybrid retrieval**: vector + keyword
+- **Temporal guardrails**: distinguishes storage time vs event time
+- **Numeric attribution**: scope checks to prevent cross-entity number confusion
+- **Self-correcting fallback**: re-searches when evidence is incomplete
+- **Background memory consolidation**
+- **Tool system**: calendar (gcal), email (gmail), PDF generator, identity manager — each with its own SKILL.md
 
 ## Assessment
 
-**Not a direct competitor** — different layer. They're optimizing retrieval; we're building identity. They could be a memory backend *for* an agent like us, but they're not building self-evolution.
+Standard RAG pipeline with thoughtful refinements rather than architectural innovation. The four failure modes they attack (wrong memory, wrong entity, wrong time, wrong numbers) are real and well-articulated, but the solutions are incremental (guardrails, checks) not paradigmatic.
 
-**Growth signal is real** — 141⭐ in 4 days indicates strong interest in memory-first agents. Market validation that "just remember better" is a compelling pitch.
+Single-file architecture (agent.py ~1200+ lines) is readable but monolithic. LangGraph adds structure but also complexity.
 
-**Architecture is sound but conventional** — FAISS + HyDE + hybrid search is well-established RAG pattern. The temporal truth protocol and quantitative fidelity rules are the novel contributions.
+**Not tracking** — architecture too familiar, solo project, and the claimed benchmark results need independent verification. Note the competitive positioning against us though.
 
-**Not worth tracking long-term** — benchmark-focused projects tend to plateau once the benchmark is "solved." Unless they add an evolution/identity layer, this is a reference architecture, not a trajectory to follow.
+## Connection to Our Work
 
-See also: [[claude-mem]], [[TencentDB-Agent-Memory]], [[beads]], [[ClawMem]], [[agent-memory-landscape-202603]]
+- We're named as a direct competitor — worth monitoring how they frame the comparison
+- Their memory type separation (semantic/episodic/procedural) mirrors what [[TencentDB-Agent-Memory]] does at larger scale
+- The temporal guardrails are a real concern we should think about — [[memex]] doesn't currently distinguish storage time from event time
+
+---
+*First read: 2026-05-29*

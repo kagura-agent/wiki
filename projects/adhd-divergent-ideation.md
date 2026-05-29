@@ -1,7 +1,7 @@
 # ADHD — Parallel Divergent Ideation Skill
 
-**Repo**: [UditAkhourii/adhd](https://github.com/UditAkhourii/adhd) | 378⭐ (2026-05-28, created 05-25) | TypeScript | MIT
-**Status**: 3-day viral growth (378⭐, 19 forks). Built on Claude Agent SDK. Ships as skill, npm lib, and CLI.
+**Repo**: [UditAkhourii/adhd](https://github.com/UditAkhourii/adhd) | 473⭐ (2026-05-29, created 05-25) | TypeScript | MIT
+**Status**: 4-day viral growth (473⭐, 23 forks). Built on Claude Agent SDK. Ships as skill, npm lib, and CLI.
 
 ## Core Idea
 
@@ -37,5 +37,9 @@ Treats premature convergence in CoT as an **architectural problem**, not a promp
 - Preprint gives academic credibility
 - Fills a real gap: brainstorming/creative work in coding agents
 
+## Updates
+
+- **05-29**: 473⭐ (+25% in 1d). repowire is first external adopter (PR #313). Oblique Strategies fork PR (211-card Brian Eno frame deck as divergence source) — closed but creative reuse pattern. README restructured, deep content moved to documentation/.
+
 ---
-*First read: 2026-05-28*
+*First read: 2026-05-28 | Updated: 2026-05-29*
