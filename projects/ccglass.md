@@ -5,7 +5,7 @@ updated: 2026-05-25
 status: active
 depth: deep-dive
 stars: 317
-last_verified: 2026-05-28
+last_verified: 2026-05-29
 ---
 
 # ccglass — See What Your Coding Agent Sends
@@ -131,3 +131,18 @@ This is why external contributors are flowing in: the bar to contribute is "open
 **Worth tracking — upgraded to THRIVING.** 317⭐ (was 239 at first contact), 33% growth in 3 days. Community health excellent: multiple external contributors shipping features. Auto-fix CI pipeline is a force multiplier for both velocity and contributor onboarding. Evolving from capture proxy → full observability platform with cost analytics.
 
 **Contribution opportunity**: Low (Claude handles most issues), but the auto-fix pipeline itself is the real takeaway — worth replicating in our repos.
+
+## 2026-05-29 Followup
+
+**v1.0.0 reached!** (349⭐, was ~317 on 05-25)
+
+4 releases in 3 days (0.4→0.5→0.6→1.0):
+- Live stream view with tool_use/tool_result pairing (#53)
+- Cross-session usage summary toggle (#52)
+- Latency, theme, model filter, session stats (#50)
+- Reasonix CLI provider support (#49)
+- Token usage summary across sessions (#48)
+
+Dashboard now has real-time observability — SSE-driven live timeline, pattern detection for user-side envelopes (system-reminder, hook, slash, memory, etc.), hover popovers for tag explanation.
+
+Velocity is high — 100% Claude Code generated PRs. jianshuo is sole maintainer but throughput is impressive.
