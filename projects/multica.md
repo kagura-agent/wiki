@@ -487,6 +487,7 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Tests**: 2 new tests — stale memories cleaned on prepare, no error when memories dir doesn't exist
 - **Approach**: Manual edit — surgical 9-line addition, matched existing code style exactly
 - **Pattern**: When env directories are reused, check what runtime-generated state persists that shouldn't. Codex home has: auth (symlinked ✅), sessions (symlinked ✅), config (copied ✅), but memories (generated at runtime) was missed
+- **⚠️ SUPERSEDED (2026-05-29)**: Closed by maintainer Bohan-J, replaced by #3202. Their approach: disable Codex memory subsystem via managed `config.toml` blocks instead of cleaning up artifacts. Covers both per-task and user-level `~/.codex/memories/` leak paths. See `wiki/cards/pr-superseded-lessons.md` for full analysis.
 
 ## 2026-05-22 PR #3092: fix(agent/cursor): remove obsolete 'chat' subcommand from argv (fixes #3077)
 - **Issue**: #3077 — cursor-agent CLI no longer has 'chat' subcommand, it leaks into prompt text

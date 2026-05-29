@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-26
+last_verified: 2026-05-29
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -578,3 +578,12 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 **Their PR (#1756)**: Also removed the gate BUT added `codebaseId` scoping to `findResumableRunByParentConversation`. This prevents cross-project resume on persistent chat IDs (Telegram chat_id, Slack thread reuse).
 **Key lesson**: When fixing a platform-specific gate, think about what the gate was *protecting against*. The web platform had unique conversation IDs per interaction; chat platforms reuse IDs. Simply removing the gate without adding alternative scoping creates a new bug (wrong workflow resumes). Always ask: "what invariant does this guard maintain, and how do I preserve it on the new code path?"
 **Pattern**: "Necessary but insufficient fix" — diagnosis was correct, fix was incomplete.
+
+## 2026-05-29: Multica #3147 → #3202 — cleanup vs config-level disable
+
+**Issue**: #3130 — Codex CLI's native auto-memory leaking stale context across Multica tasks.
+**My PR #3147**: Clear `memories/` directory on env reuse in `Reuse()` function. Targeted the per-task leak path.
+**Their PR #3202 (Bohan-J)**: Disable Codex's entire memory subsystem via managed blocks in per-task `config.toml` — sets `features.memories=false`, `memories.generate_memories=false`, `memories.use_memories=false`. New `codex_memory.go` with 343 lines of robust TOML injection (handles existing `[features]`/`[memories]` tables, idempotent managed blocks, escape hatch via `MULTICA_CODEX_MEMORY=1` env var).
+**Key difference**: My fix handled one leak path (per-task `codex-home/memories/`). Their fix handled both leak paths (per-task AND user-level `~/.codex/memories/`) by disabling the feature at config level. Also: config-level disable is forward-compatible — any new memory paths Codex adds in the future are automatically covered.
+**Pattern**: **CONFIG_DISABLE_VS_RUNTIME_CLEANUP** — when a third-party tool has an unwanted feature, disabling it at config level is more robust than cleaning up its artifacts at runtime. Runtime cleanup chases symptoms (new paths, new file formats); config disable kills the root cause. Also: their fix included extensive documentation (background rationale, escape hatch, layout notes) and careful TOML manipulation — production-quality vs my tactical patch.
+**Maintainer note**: Bohan-J's closing comment was positive ("root-cause analysis spot on, tests were a great touch") — they valued the analysis even though they went a different direction.
