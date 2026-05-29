@@ -2179,3 +2179,72 @@ The **intended design** is that entries differentiate via **search recall signal
 **修复**: 补齐 9 条 KEYWORDS + 拓宽 4 条已有 KEYWORDS。覆盖率 74% → 100%。
 
 **待评估**: 在 add-gradient.sh 中加一致性检查——写入新 pattern 时 grep gradient-scan.sh 检查是否有对应 KEYWORDS，无则 warn。这能从根本上防止此类断裂复发。
+
+## 🔬 自进化观察日报 2026-05-29
+
+### 管线活跃度
+- **beliefs-candidates**: 6 条新增（05-29），6 条新增（05-28）。连续 2 天高输入，issue #9 "input drought" 已彻底逆转
+  - 05-29 新增: ci-respect, record-only-no-chat(第3次), premature-assumption(第4+5次), storytelling-guide(confirmation), 狭隘活动定义
+  - 05-28 新增: observation-without-investigation, code-discipline, pr-hygiene, source-of-truth, deploy-path-verify, rebuild-safety
+  - 来源: 多为 Luna 直接纠正（旅行中天台山国清寺互动 + Cove 部署），1 条 cron 自发现
+- **活跃库存**: 34 active gradients + 4 directives + 6 graduated（5 distinct candidates）
+- **待升级**: `premature-assumption` 已达第 5 次，是当前最接近 graduation 的候选
+- **DNA 变更**: 仅 `memory/2026-05-29.md` 有 1 commit（study scout + reflect），SOUL.md/AGENTS.md/IDENTITY.md 无变更
+  - 变更性质: 无 DNA 改动日。daily-review 报告 0 candidates at graduation threshold
+- **nudge 触发**: 0 次可见（journalctl grep 无输出）
+  - ⚠️ 注意方法论限制：grep 不到不等于没触发，参见文件头方法论修正
+  - 但 `system event enqueued` 也为 0，nudge 今天大概率未触发
+- **dreaming**: Light sleep 段存在于 memory/2026-05-29.md，包含 ~25 candidates，全部 confidence=0.62、recalls=0
+  - dreaming/light/2026-05-29.md 文件不存在（dreaming/ 目录本身不存在）
+  - 内容仍以 patrol/操作记录为主（workloop 状态、GitHub Patrol、虾信巡检）
+  - issue #6 root cause 已找到: `DAILY_INGESTION_SCORE = 0.62` 硬编码常量，已 filed upstream openclaw#87485
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. add-gradient.sh source labeling — Luna-sourced 检测断裂 → 诊断 → 修复 add-gradient.sh + gradient-stats.sh
+  2. gradient-scan.sh KEYWORDS coverage gap — 9/27 patterns 失明 → 补齐至 100%
+  3. record-only-no-chat pattern — 第 3 次复现被记录，计数 increment 正确
+- **断裂处**: 
+  1. `premature-assumption` 已 5 次但未触发 graduation 评估（差 graduation threshold 检查）
+  2. nudge 观测仍不确定 — 无可靠方法区分"未触发"和"触发了但 grep 没命中"
+  3. dreaming 文件路径断裂 — memory 中有 dreaming 段但 dreaming/ 目录不存在，说明 dreaming 产物没持久化到独立文件
+
+### 今日发现
+
+1. **Input drought 彻底逆转** — issue #9 记录"3+ 天 0 gradient"。05-28 和 05-29 连续各 6 条，来源以 Luna 纠正为主。旅行场景（天台山国清寺）是 gradient 高产场景：实时互动中错误被即时指出，转化路径短
+2. **Dreaming 质量问题已定位但未修** — issue #6 root cause 是 openclaw 源码硬编码 0.62 confidence。upstream issue #87485 已提，修复取决于 openclaw 维护者。短期内 dreaming 产出质量不会改善
+3. **Gradient 质量分层明显** — 今天 6 条中：
+   - `record-only-no-chat` 和 `premature-assumption` 是 high-count 的复现记录（行为确认）
+   - `ci-respect` 和 `狭隘活动定义` 是新 pattern（系统行为纠正）
+   - `storytelling-guide` 是 confirmation（正向强化），不同于常规 gradient
+4. **工具链 2 个断裂被修复** — add-gradient source label 和 gradient-scan KEYWORDS 覆盖，pipeline 完整性显著提升
+
+### 原始数据
+```
+# Git commits (workspace, since yesterday 22:30)
+52251df guide: add rule #44 — resolve CHANGES_REQUESTED before opening new PRs in same repo
+6663895 fix: add 9 missing KEYWORDS + widen 4 narrow patterns in gradient-scan
+4a26277 memory: 2026-05-29 study scout + reflect
+ec07605 daily handoff 05-29: update MEMORY.md
+
+# beliefs-candidates.md stats
+Total lines: ~164
+Active gradients: 34
+Directives: 4
+Graduated: 6 entries (5 distinct candidates)
+New today (05-29): 6 entries
+New yesterday (05-28): 6 entries
+
+# memory/2026-05-29.md
+Sections: 136
+Lines: 2008
+
+# Dreaming
+Light sleep candidates in memory: ~25 (all confidence=0.62, recalls=0)
+REM entries: 2 (from 05-25 and 05-26 daily-reviews)
+Standalone dreaming files: not generated (directory missing)
+
+# Nudge
+journalctl grep "nudge": 0 hits
+journalctl grep "system event enqueued": 0 hits
+```
