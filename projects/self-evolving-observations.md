@@ -2169,3 +2169,13 @@ The **intended design** is that entries differentiate via **search recall signal
 **效果**: 新 gradient 通过 `add-gradient.sh --source luna` 写入时，beliefs-candidates.md 中会有 `(Source: luna)` 标签，gradient-stats.sh 能正确检测。
 
 **历史数据**: 25 条早期 Luna-sourced gradient 未补标签（backfill 成本 > 收益）。JSONL 日志从 05-23 开始记录，作为补充数据源。
+
+## 🔧 闭环关闭 2026-05-29: gradient-scan.sh KEYWORDS coverage gap
+
+**问题**: 9/27 active patterns 在 [[gradient-scan]] 中无 KEYWORDS，graduation pipeline 对它们完全失明。所有 05-26~05-28 新增的 gradient 都受影响。
+
+**根因**: add-gradient.sh 写入 beliefs-candidates.md 后，没有后续步骤提醒"同步更新 gradient-scan.sh KEYWORDS"。这是一个 pipeline 断裂：gradient 入库 ✅ → 但 scan 检测 ❌。
+
+**修复**: 补齐 9 条 KEYWORDS + 拓宽 4 条已有 KEYWORDS。覆盖率 74% → 100%。
+
+**待评估**: 在 add-gradient.sh 中加一致性检查——写入新 pattern 时 grep gradient-scan.sh 检查是否有对应 KEYWORDS，无则 warn。这能从根本上防止此类断裂复发。
