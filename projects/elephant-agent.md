@@ -3,16 +3,16 @@ title: Elephant Agent (agentic-in)
 created: 2026-05-17
 status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
-stars: 483
+stars: 560
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-28
+last_verified: 2026-05-29
 ---
 
 # Elephant Agent
 
 > "Elephants never forget." — Personal-Model-first self-evolving AI agent.
 
-**Repo**: [agentic-in/elephant-agent](https://github.com/agentic-in/elephant-agent) | 540⭐ (2026-05-28, created 05-15) | Python | No license yet
+**Repo**: [agentic-in/elephant-agent](https://github.com/agentic-in/elephant-agent) | 560⭐ (2026-05-29, created 05-15) | Python | No license yet
 
 ## What It Is
 
@@ -445,3 +445,24 @@ The design doc explicitly references Hermes + OpenClaw as inspirations. Key arch
 **Issue #17 insight**: External contributor proposed OpenTelemetry for tracing instead of custom solution. Maintainer instantly approved. OTel's GenAI semantic conventions (`invoke_agent`, `execute_tool`, `chat` span types) map to Elephant's Episode→Loop→Step model. Relevant for our own observability story.
 
 See also: [[sandbox-path-mapping]], [[delegating-executor-pattern]]
+
+### Followup 2026-05-29: Sandbox UX + Path Orchestration
+
+**Stars**: 560⭐ (was 500 on 05-27, +12%). Forks: 60. 🟢 THRIVING (6/6 community health).
+
+**PR #57 merged — Sandbox Mode Abstraction & Declarative CLI** (+1,435/-40):
+- 4-level mode hierarchy: `readonly < safe < dev < open` — maps to seatbelt policy automatically
+- New CLI: `elephant sandbox on/off/status/allow/deny` with persistent config
+- Non-negotiable protected paths enforced regardless of mode (prevents sandbox escape)
+- Fixed `protected_paths`: only blocks `.git/hooks` (not entire `.git`) so `git commit` works
+- Backward compatibility with legacy config format (`mode: "all"`, `backend: "seatbelt"`)
+
+**Pattern: Mode + Delta Abstraction**. Instead of exposing raw policy knobs (file-read, file-write, network), define high-level modes that compose sensible defaults, then let users apply allow/deny deltas on top. This is cleaner than either "expose everything" or "one-size-fits-all". The key insight is the mode *hierarchy* — `readonly` is a strict subset of `safe`, which is a subset of `dev`, etc. This makes reasoning about security posture much simpler.
+
+**Other recent commits**:
+- `feat(paths): mother-managed path orchestration` — centralizing path management under a "mother" process
+- `feat(tools): RTK terminal optimizer controls` (PRs #54, #55) — observability for tool execution
+
+**Relevance to OpenClaw**: OpenClaw's `tools.exec.security` has a flat allow/ask/deny model per command. Elephant's tiered mode approach (`readonly→safe→dev→open`) is more user-friendly for the common case while still supporting fine-grained overrides. Worth considering if OpenClaw ever adds sandbox profiles.
+
+**Revisit**: 06-04.
