@@ -1,7 +1,7 @@
-name: wiki-ops
+name: wiki-patrol
 description: |
-  Wiki 维护循环 — 检查健康、修复问题、反思改进方法。
-  每轮维护完反思节点可以改这个 workflow 本身。
+  Wiki 巡检 — 发现问题，开 issue，不修。
+  修复由 wiki-fix workflow 负责。
 start: health-check
 nodes:
   health-check:
@@ -10,7 +10,7 @@ nodes:
       ```
       cd ~/.openclaw/workspace/wiki && python3 scripts/wiki-lint.py
       ```
-      记录：orphan 数、broken links、collisions、总卡片数。
+      记录：orphan 数、broken links、collisions、index drift、总卡片数。
       把结果写入 .ops/last-health.json（覆盖上次的）。
     executor: subagent
     next: diff
@@ -19,44 +19,43 @@ nodes:
     task: |
       对比本次和上次的 wiki 健康数据（.ops/last-health.json vs .ops/prev-health.json）。
       分析趋势：
-      - 哪些指标变好了？为什么？
-      - 哪些变差了？为什么？
+      - 哪些指标变好了？
+      - 哪些变差了？
       - 有没有反复出现的 pattern？
       如果是首次跑（没有 prev），跳过对比，直接描述当前状态。
       输出变化摘要。
-    next: fix
+    next: file-issues
 
-  fix:
+  file-issues:
     task: |
-      根据 health-check 和 diff 的结果，修能修的问题：
-      - Orphan 卡片：判断是该补 wikilink 还是该删除/合并
-      - Broken links：修复指向或创建缺失卡片
-      - 薄卡片（<3行内容）：充实或合并到相关卡片
-      - 过时内容：标记或更新
-      每修一个记录修了什么、为什么。
-      不确定的不动，记到报告里让 Luna 决定。
-      修完后 git commit + push。
-    executor: subagent
-    next: reflect
+      根据 health-check 的结果，为值得修的问题开 GitHub issue。
 
-  reflect:
-    task: |
-      反思本轮维护：
-      1. 这次发现的问题，上次为什么没发现？要不要加检测规则？
-      2. 有没有反复出现的 pattern？说明什么？
-      3. 哪些手动步骤可以自动化？
-      4. 这个 workflow 本身需要改吗？（节点顺序、任务描述、新增/删除节点）
-      如果需要改 workflow → 直接改 wiki/.ops/workflow.yaml 并 commit。
-      把反思记录写入 wiki/.ops/reflections.md（追加，带日期）。
+      **去重规则（必须严格执行）：**
+      1. 先拉所有 open issues：`gh issue list -R kagura-agent/wiki --state open --limit 100 --json number,title,labels`
+      2. 对每个待开的 issue，检查是否已有同类 open issue（标题/内容重叠）
+      3. 已有 → 跳过，不开重复的
+      4. 如果某类问题可以合并成一个 batch issue（例如"5 orphan cards need linking"），合并开
+
+      **开 issue 规则：**
+      - 每个 issue 有明确的 label：orphan / broken-link / thin-card / index-drift / frontmatter / stale
+      - 都加 auto-patrol label（标记来源）
+      - title 要具体：包含文件名或数量，不要泛泛的"fix orphans"
+      - body 里列出具体文件路径和建议修法
+      - 优先级高的（broken-link、index-drift）加 next label
+
+      **不开 issue 的情况：**
+      - 问题数量没变化且已有 open issue 覆盖
+      - 纯噪音（stale 但内容仍有效的文件）
+
+      环境：proxy: export https_proxy=http://127.0.0.1:1083
     executor: subagent
     next: report
 
   report:
     task: |
-      在 #wiki-ops channel 发送本轮维护报告：
-      - 健康数据 + 趋势
-      - 本轮修复了什么
-      - 未解决的问题（需要 Luna 决定的）
-      - 反思要点
-      简洁，用 bullet list，不要长篇大论。
+      发送本轮巡检报告：
+      - 健康数据快照（关键指标 + 趋势箭头 ↑↓→）
+      - 本轮新开了几个 issue（列 issue 号）
+      - 当前 open issue 总数
+      简洁，bullet list，不超过 15 行。
     terminal: true

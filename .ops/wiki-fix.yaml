@@ -1,0 +1,72 @@
+name: wiki-fix
+description: |
+  Wiki 修复循环 — 从 issue backlog 挑一个修，关 issue。
+  发现问题由 wiki-patrol 负责。
+start: pick-issue
+nodes:
+  pick-issue:
+    task: |
+      从 kagura-agent/wiki 的 open issues 中挑一个来修。
+
+      ```
+      export https_proxy=http://127.0.0.1:1083
+      gh issue list -R kagura-agent/wiki --state open --label auto-patrol --json number,title,labels,body --limit 20
+      ```
+
+      **选择优先级：**
+      1. 有 `next` label 的优先
+      2. broken-link > index-drift > orphan > frontmatter > thin-card > stale
+      3. 同优先级选最老的
+
+      **如果没有 open issue → 输出"无待修 issue"并结束（不要硬找工作）。**
+
+      输出选中的 issue 号、标题、内容。
+    next: fix
+    branches:
+      - condition: "no open issues"
+        next: done-quiet
+
+  fix:
+    task: |
+      修复选中的 issue。
+
+      **修复规则：**
+      - 代码/内容改动用 Claude Code：`cd ~/.openclaw/workspace/wiki && claude --print --permission-mode bypassPermissions "任务描述"`
+      - orphan：判断该补 wikilink 还是合并/删除，执行对应操作
+      - broken-link：修复指向或创建缺失卡片
+      - thin-card：从已有知识充实，或合并到相关卡片
+      - index-drift：重新运行 gen-index.sh 或手动修 L1.md
+      - frontmatter：补全缺失字段
+      - stale：更新内容或标记 archive
+
+      **不确定的不动，在 issue 里留评论说明为什么跳过。**
+
+      修完后 `cd ~/.openclaw/workspace/wiki && git add -A && git commit -m "fix: <具体描述> (closes #N)" && git push`
+
+      环境：proxy: export https_proxy=http://127.0.0.1:1083
+    executor: subagent
+    next: close-issue
+
+  close-issue:
+    task: |
+      确认修复已 push，关闭 issue：
+      ```
+      export https_proxy=http://127.0.0.1:1083
+      gh issue close <N> -R kagura-agent/wiki -c "Fixed in <commit hash>"
+      ```
+      如果修复不完整，不关 issue，留评论说明剩余工作。
+    next: report
+
+  report:
+    task: |
+      发送修复报告：
+      - 修了哪个 issue（#号 + 标题）
+      - 做了什么改动
+      - 剩余 open issue 数
+      简洁，3-5 行。
+    terminal: true
+
+  done-quiet:
+    task: |
+      没有待修 issue，静默结束。不发消息。
+    terminal: true
