@@ -435,7 +435,7 @@ This pattern solves a real problem: process-based agent communication via stdio 
 - Before: `plan → implement` (self-approved)
 - After: `plan → plan_review → implement` (independently validated)
 
-See [[self-evolving-agent-landscape]], [[context-budget-constraint]], [[supervisor-pattern]], [[acp-protocol]]
+See [[self-evolving-agent-landscape]], [[context-budget-constraint]], [[supervisor-pattern]], [[acp]]
 
 ## Followup 2026-05-23: Turn Policy Hooks + TUI v3 + Plan Mode Guard
 
@@ -566,7 +566,7 @@ Community member proposed MQTT-based message bus for inter-agent communication. 
 - TUI v2 keybinding improvements (debounce resize, input history)
 - Community contributing fixes for Telegram, DingTalk, QQ adapters
 
-See [[self-evolving-agent-landscape]], [[supervisor-pattern]], [[context-budget-constraint]], [[acp-protocol]], [[mechanism-vs-evolution]], [[mechanism-vs-evolution]]
+See [[self-evolving-agent-landscape]], [[supervisor-pattern]], [[context-budget-constraint]], [[acp]], [[mechanism-vs-evolution]], [[mechanism-vs-evolution]]
 
 ## Followup 2026-05-09: 10K Stars + /btw Side-Question Subagent
 
@@ -624,7 +624,7 @@ Massive spike on 05-09. Likely triggered by 10K psychological milestone + TUI la
 2. **Unified retry counters**: Simple but effective — share one counter across all "something went wrong" paths. Worth applying to our FlowForge retry logic.
 3. **Community health indicator**: 15 WeChat groups worth of users, 49 unique issue authors in 14 days — this is the largest CN agent community.
 
-See [[self-evolving-agent-landscape]], [[supervisor-pattern]], [[acp-protocol]]
+See [[self-evolving-agent-landscape]], [[supervisor-pattern]], [[acp]]
 
 ## Followup 2026-05-12
 

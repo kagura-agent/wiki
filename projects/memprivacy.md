@@ -5,7 +5,7 @@ updated: 2026-05-12
 stars: 29
 repo: MemTensor/MemPrivacy
 status: new
-last_verified: 2026-05-12
+last_verified: 2026-05-30
 ---
 
 # MemPrivacy
@@ -15,7 +15,7 @@ last_verified: 2026-05-12
 
 ## What It Solves
 
-Cloud-based agents that use memory systems ([[mem0]], LangMem, Memobase) send user data to remote LLMs and store conversation traces. This creates a large privacy attack surface — PII, medical/financial data, credentials all end up in cloud storage.
+Cloud-based agents that use memory systems ([[mem0-letta]], LangMem, Memobase) send user data to remote LLMs and store conversation traces. This creates a large privacy attack surface — PII, medical/financial data, credentials all end up in cloud storage.
 
 Naïve mitigation (masking with `***`) destroys task semantics. MemPrivacy's insight: **typed placeholders** preserve semantic roles while hiding raw values.
 

@@ -123,7 +123,7 @@ Signal: Cursor is building management tooling around their agent API — moving 
 
 - **DAG execution pattern**: We could add parallel node execution to FlowForge (ranks within a step). Currently all sequential.
 - **Canvas-as-monitoring**: Interesting for IDE-integrated agents. Not applicable to our Discord/Feishu channels, but the "state-as-file" pattern is worth noting.
-- **Model routing by complexity**: Similar to our provider selection but more explicit. Could inform [[skill-ecosystems]] metadata.
+- **Model routing by complexity**: Similar to our provider selection but more explicit. Could inform [[skill-ecosystem]] metadata.
 
 ## Connections
 

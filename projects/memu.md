@@ -5,7 +5,7 @@
 - **Language**: Python 3.13+ (with Rust core via maturin/PyO3)
 - **License**: Apache 2.0
 - **Latest**: v1.5.1 (2026-03-23), last push 2026-04-22
-- **Focus**: [[agent-memory-research]], [[skill-ecosystems]]
+- **Focus**: [[agent-memory-research]], [[skill-ecosystem]]
 
 ## What It Does
 

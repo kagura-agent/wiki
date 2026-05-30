@@ -158,4 +158,4 @@ NirDiamant published Agent_Memory_Techniques (245⭐ in 5 days) — 30 Jupyter n
 ### Revised Position
 mnem's v0.1.x "ship and market" phase continues. No architectural changes since last read. The roadmap reveals ambition (CRDT, WASM, cross-lang) but execution is solo. **Watch for**: first external contributor, v0.2.0 release with remote sync, or star growth inflection point. Current trajectory suggests a solid niche tool rather than ecosystem standard.
 
-Links: [[git-backed-agent-memory]], [[agent-memory-landscape]]
+Links: [[git-backed-agent-memory]], [[agent-memory-landscape-202603]]

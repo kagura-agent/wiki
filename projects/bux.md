@@ -235,7 +235,7 @@ PR #75's auto-allow had two paths:
 
 **Pattern**: Trust escalation via social engineering (luring the owner into replying). The fix applies the principle of "explicit action > implicit inference" for security-critical state changes. Relevant to any multi-chat agent that auto-admits based on user activity.
 
-See [[agent-security-patterns]]
+See [[agent-security]]
 
 *Field note: 2026-05-04*
 
@@ -296,6 +296,6 @@ This mirrors the broader trend toward agents that don't just wait for instructio
 
 **Next revisit: 05-09** (unchanged, tracking items not yet due)
 
-See [[openclaw]], [[agent-security-patterns]], [[agent-proactivity]]
+See [[openclaw]], [[agent-security]], [[agent-proactivity]]
 
 *Field note: 2026-05-05*
