@@ -58,18 +58,45 @@ echo "$LOG_DATA" | cut -d'|' -f2 | sort | uniq -c | sort -rn | while read count 
   echo "  $count × $intent"
 done
 
-# Show cold notes (never recalled) if requested
+# Get all note slugs and recalled slugs for cold analysis
+ALL_SLUGS=$(find "$WIKI_DIR/projects" "$WIKI_DIR/cards" -name "*.md" 2>/dev/null | xargs -I{} basename {} .md | sort -u)
+TOTAL_NOTES=$(echo "$ALL_SLUGS" | wc -l)
+RECALLED=$(echo "$LOG_DATA" | cut -d'|' -f4 | tr ',' '\n' | sed 's/^ *//' | sort -u)
+RECALLED_COUNT=$(echo "$RECALLED" | grep -c .)
+COLD_SLUGS=$(comm -23 <(echo "$ALL_SLUGS") <(echo "$RECALLED"))
+COLD_COUNT=$(echo "$COLD_SLUGS" | grep -c .)
+COLD_PCT=$(( COLD_COUNT * 100 / TOTAL_NOTES ))
+
+echo ""
+echo "📦 Coverage: $RECALLED_COUNT/$TOTAL_NOTES recalled ($((100 - COLD_PCT))%) | $COLD_COUNT never recalled ($COLD_PCT%)"
+
+# Show cold notes with context if requested
 if [[ $SHOW_COLD -eq 1 ]]; then
   echo ""
-  echo "❄️ Never recalled (exist in wiki but never returned by search):"
+  echo "❄️ Never recalled — sorted by staleness (oldest first):"
+  echo "  Age  | Status     | Slug"
+  echo "  -----|------------|------"
   
-  # Get all note slugs
-  ALL_SLUGS=$(find "$WIKI_DIR/projects" "$WIKI_DIR/cards" -name "*.md" 2>/dev/null | xargs -I{} basename {} .md | sort -u)
-  # Get recalled slugs
-  RECALLED=$(echo "$LOG_DATA" | cut -d'|' -f4 | tr ',' '\n' | sed 's/^ *//' | sort -u)
+  # Build cold notes with age and status
+  NOW_EPOCH=$(date +%s)
+  echo "$COLD_SLUGS" | while read slug; do
+    [[ -z "$slug" ]] && continue
+    # Find the file
+    FILE=$(find "$WIKI_DIR/projects" "$WIKI_DIR/cards" -name "${slug}.md" 2>/dev/null | head -1)
+    [[ -z "$FILE" ]] && continue
+    
+    # Get age in days
+    FILE_EPOCH=$(stat -c %Y "$FILE" 2>/dev/null || echo "$NOW_EPOCH")
+    AGE_DAYS=$(( (NOW_EPOCH - FILE_EPOCH) / 86400 ))
+    
+    # Get status from frontmatter
+    STATUS=$(grep -m1 '^status:' "$FILE" 2>/dev/null | sed 's/status: *//' | tr -d '"' | head -c 10)
+    [[ -z "$STATUS" ]] && STATUS="none"
+    
+    printf "  %3dd | %-10s | %s\n" "$AGE_DAYS" "$STATUS" "$slug"
+  done | sort -t'|' -k1 -rn
   
-  # Diff
-  comm -23 <(echo "$ALL_SLUGS") <(echo "$RECALLED") | while read slug; do
-    echo "  ❄️ $slug"
-  done
+  echo ""
+  echo "  Legend: Age = days since last modified"
+  echo "  Tip: Notes >30d old with status=dropped/none are strong retire candidates"
 fi
