@@ -851,6 +851,44 @@ Stars: 12,049 (was ~10K). Growth sustained.
 - TUI v3's scrollback-first approach is worth noting as a UI pattern — OpenClaw's TUI uses a similar append model
 - Stars 12K puts it firmly in the "established project" tier alongside [[nanobot]] (43K)
 
+## Followup 2026-05-30: 12,292⭐, Goal Hive Master Duty Refinement
+
+Stars: 12,292 (was 12,136 on 05-26, +1.3%). Steady.
+
+### Goal Hive Master Duty SOP v2 — Control Theory for Multi-Agent Coordination
+
+The 111-line SOP is the most structured multi-agent coordination document in the ecosystem. Key refinements:
+
+**§2 J Construction Method** (most transferable):
+- Reverse from user action: "What does user do first with deliverable?" → extract 3-5 quality dimensions → dictionary-order ranking
+- "Delivery reasonableness" as hard J dimension: deliverables must be ready-to-use, no process evidence polluting products
+- Diminishing returns detection: "same dimension improved 2 rounds with no J lift → saturated, switch direction"
+- Improvement heuristics when "good enough": user/reviewer/attacker perspective switch + usage scenario walkthrough
+
+**§6 Five-Element Fact Tracking**:
+- Every key fact carries: value, source, time, confidence, TTL
+- TTL-expired conclusions must be re-verified before dependency
+- Uncertainty in deliverables: "verify or delete, never leave, never push to user"
+- Compare with our [[data-discipline]]: similar spirit but GenericAgent's TTL concept is more explicit
+
+**§7 Instability Signals** — structured failure detection:
+1. Workers busy but J not rising (busy-but-unproductive)
+2. Many parts but whole unusable (fragmentation)
+3. Process proof replacing user value (means-become-ends) — cf. our "讨好模式"
+4. Master pulled into details (role sinking)
+5. Recovery sequence: pause → realign J → check interfaces → contract scope → resume
+
+**§9 Pre-construction & Externalization** (NEW):
+- `master_state.md` — "write to think clearly" (validates our memory-first principle)
+- Pre-play scenarios: "what will workers converge to? what will user criticize?"
+- "Externalize acceptance criteria into executable test artifacts early"
+
+**Minor changes**: response history window 100→70 lines (continuing context-budget tightening trend)
+
+**Community:** External contributors active (nianyucatfish TUI v3 exit-boundary fix, flhoildy CommonStack gateway). skarL007 contributing to [[statewave]].
+
+See [[supervisor-pattern]], [[context-budget-constraint]], [[mechanism-vs-evolution]], [[persistent-goal-injection]]
+
 ## 跟进 2026-05-26: 12,136⭐, Salient Mining SOP (L4 Memory Evolution)
 
 Stars: 12,136 (was 12,049). Steady growth.

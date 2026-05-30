@@ -507,4 +507,19 @@ Stars: 2,446 (was 2,418 on 05-24). Steady growth.
 - **Intent routing via keyword index**: simpler than semantic search but effective for curated catalogs. Our `available_skills` approach (list in system prompt) is even simpler but doesn't scale past ~40 skills.
 - **Two-level namespace** (`category/slug`) cleaner than flat naming for large catalogs.
 
-**Status**: GROWING → stars doubling monthly, major features shipping. Skills registry closes the gap between mercury-agent and mercury-agent-skills repos. Revisit 06-04.
+### PR #68: Skill Routing Anti-Fan-Out (05-29)
+
+Fixed critical issue where intent routing matched ~10 skills on single request. Root cause: generic verbs (download, send, get) gave 0.70 confidence on single keyword match, causing parallel sub-agent fan-out.
+
+**Fixes applied:**
+1. Keyword stoplist — generic verbs excluded from index
+2. Tiered confidence — single shared word capped at 0.55 (was 0.70); ≥2 words = 0.75
+3. Bigram threshold 0.3→0.6, min word length 4 chars
+4. Whole-word tag matching with regex boundaries
+5. `analyzeMatch()` API — returns clearWinner/ambiguous/closeContenders
+6. User disambiguation prompt on ambiguous matches (replaces parallel fan-out)
+7. `#skill-name` explicit picker — user bypasses matcher entirely
+
+**Transfer value:** Our skill routing is LLM-based (available_skills in system prompt), not keyword-indexed, so fan-out isn't our problem. But the **ambiguity prompt pattern** and **explicit skill picker** concepts are relevant when we reach 40+ skills (per functional-area-resolver evaluation, sweet spot is 40-50+).
+
+**Status**: GROWING → 2,483⭐ (05-30). Major features shipping. Revisit 06-04.
