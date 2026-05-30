@@ -522,4 +522,12 @@ Fixed critical issue where intent routing matched ~10 skills on single request. 
 
 **Transfer value:** Our skill routing is LLM-based (available_skills in system prompt), not keyword-indexed, so fan-out isn't our problem. But the **ambiguity prompt pattern** and **explicit skill picker** concepts are relevant when we reach 40+ skills (per functional-area-resolver evaluation, sweet spot is 40-50+).
 
+**Code-level observations (05-30 diff read):**
+- `KEYWORD_STOPLIST` is a curated Set of ~30 generic verbs/connectives/URL parts — this is the same problem as TF-IDF stopwords, applied to skill intent matching. Pragmatic solution.
+- The `analyzeMatch()` API introduces a clean decision surface: `clearWinner` (conf ≥ 0.85 + 0.15 gap over runner-up) vs `ambiguous` (multiple contenders clustered). This factoring separates matching from decision-making — good API design.
+- `#skill-name` explicit routing is parsed with a simple regex `^#([a-z0-9_:.-]+)\b` and short-circuits all matching. Injected as a `[Routing]` system message to the LLM. Clean but fragile if user text naturally contains `#` (e.g. "fix issue #123").
+- Fan-out was O(n) sub-agent spawns per matched skill — at 130+ skills with loose matching, this is a real cost problem. Mercury's keyword approach exposed it faster than LLM-based routing would.
+
+**Broader pattern**: keyword/intent routing hits a precision cliff around 50-100+ skills when skill descriptions overlap in common terms. Mercury hit it at ~130. Our LLM-based approach (system prompt list) defers this problem to the LLM's judgment, but will face a different cliff: context window bloat. The [[functional-area-resolver]] dispatcher is the likely solution when we hit 40-50+ skills.
+
 **Status**: GROWING → 2,483⭐ (05-30). Major features shipping. Revisit 06-04.

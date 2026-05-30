@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-29
+last_verified: 2026-05-30
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -587,3 +587,10 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 **Key difference**: My fix handled one leak path (per-task `codex-home/memories/`). Their fix handled both leak paths (per-task AND user-level `~/.codex/memories/`) by disabling the feature at config level. Also: config-level disable is forward-compatible — any new memory paths Codex adds in the future are automatically covered.
 **Pattern**: **CONFIG_DISABLE_VS_RUNTIME_CLEANUP** — when a third-party tool has an unwanted feature, disabling it at config level is more robust than cleaning up its artifacts at runtime. Runtime cleanup chases symptoms (new paths, new file formats); config disable kills the root cause. Also: their fix included extensive documentation (background rationale, escape hatch, layout notes) and careful TOML manipulation — production-quality vs my tactical patch.
 **Maintainer note**: Bohan-J's closing comment was positive ("root-cause analysis spot on, tests were a great touch") — they valued the analysis even though they went a different direction.
+
+## vercel/ai #15584 → #15587 (2026-05-30)
+- **My PR**: feat(google,google-vertex): add gemini-embedding-2 GA model ID
+- **Superseding PR**: #15587 by shujanislam (already MERGED)
+- **Why superseded**: (1) My commits were unsigned — maintainer explicitly requested signed commits. (2) The replacement PR had broader scope (also added deep-research model IDs, example files, docs updates).
+- **Lesson**: Always sign commits when contributing to repos that require it. Check `git log --show-signature` before pushing. Use `git config commit.gpgsign true` or `git commit -S`. Also: when adding model IDs, check if there are other related models that should be added in the same PR for completeness.
+- **Diff**: My PR only added the embedding model ID to 2 files. Their PR added the model ID + deep-research models + examples + docs updates across 9 files.
