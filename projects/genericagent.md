@@ -941,3 +941,13 @@ See also: [[salient-mining-sop]], [[self-evolving-agent-landscape]]
 - PR#493: Cloudflare 520-527 codes added to `_RETRYABLE` retry set (production resilience)
 - External contributor shenhao-stu continues to be the main TUI contributor. yumengv also active.
 - 12,167⭐ (was ~12K). Steady growth, healthy community.
+
+### Applied: Diminishing Returns Signal → study-saturation.sh (05-31)
+
+Applied the "same dimension improved 2 rounds with no J lift → saturated, switch direction" principle from Goal Hive Master SOP §5 to our [[study-saturation]] tool:
+
+- Added consecutive same-mode detection (2x = yellow warning, 3x = red "SWITCH mode")
+- Recommendation engine now deprioritizes the consecutive mode
+- Before: only raw count-based saturation (≥3 apply = locked). After: also detects diminishing returns within the count limit (2 consecutive apply ≠ 3 separate applies)
+
+This is the most practical extraction from the Goal Hive Master SOP — the PID correction loop is elegant but our workflows aren't complex enough to need full state/control/observation modeling. The diminishing returns heuristic, however, directly addresses a known study mode stuck pattern.
