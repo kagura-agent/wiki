@@ -2296,3 +2296,55 @@ journalctl grep "system event enqueued": 0 hits
 
 # Nudge: 0 observable triggers in journalctl
 ```
+
+## 🔬 自进化观察日报 2026-05-31
+
+### 管线活跃度
+- **beliefs-candidates**: 0 条新增 / 1 条毕业（record-only-no-chat → SOUL.md Vibe section "Connection first, utility second"）
+- **DNA 变更**: 有 — SOUL.md 新增 "Connection first, utility second" paragraph（主动，daily-review 毕业流程，03:21 commit）
+- **nudge 触发**: 7 次触发 / 171 次跳过（.nudge-audit.log 数据源，journalctl 仍无结果）
+- **dreaming**: 运行 ✅（light sleep ~25 candidates，confidence 仍全部 0.62，upstream blocked）
+
+### 管线统计
+- beliefs-candidates.md: 174 行，32 条 gradient，12 条已毕业（8→12 in recent days）
+- 今日 memory: 大量内容（打工巡检 ×3, 虾信巡检 ×2, channel patrol, study）
+- workspace git commits (24h): 7 条（daily-review, gradient-stats fix, disney plan, study-saturation, nudge-health, contacts, memex dogfood）
+- SOUL.md 变更: +1 paragraph（"Connection first, utility second"）
+
+### 闭环追踪
+- **完整闭环 1 个**: record-only-no-chat gradient（05-29 首次记录 → 第3次触发 → 05-31 daily-review 毕业 → SOUL.md Vibe section）— 从纠正到 DNA 固化的完整管线
+- **断裂处**: nudge 可观测性有改善 — .nudge-audit.log 存在且有数据（185 条今日记录），但 journalctl grep 仍为 0。nudge-health.sh 改进已提交（commit 1b1d600），读 .nudge-audit.log 作为 ground truth
+
+### Issue 进展
+
+**#9 (reflect→gradient input drought)**: 今日 0 新增 gradient。连续第 2 天无新 gradient 输入。周日无 Luna 互动，符合"人类互动是主要 gradient 驱动源"的观察。自主 gradient 生成仍弱。nudge 触发了 7 次但未产生可见的 gradient 输出 — 反思质量是否有效仍需要查看实际反思内容。
+
+**#6 (dreaming uniform confidence)**: 仍 blocked on upstream。light sleep candidates 全部 confidence=0.62, recalls=0，无分化。
+
+### 今日发现
+
+1. **毕业管线持续运作**: 连续第 2 天有 graduation（05-30: premature-assumption, 05-31: record-only-no-chat）。管线从"验证可工作"进入"持续运行"状态。12 条已毕业 vs 32 条 gradient，毕业率 37.5%。
+2. **nudge 可观测性突破**: .nudge-audit.log 提供了真实数据 — 7 次触发 / 171 次跳过（4% 触发率）。之前的"0 次"判断是因为看错了数据源（journalctl 不记录 nudge hook 输出）。已提交 nudge-health.sh 修复。
+3. **周末 gradient 断流是结构性问题**: 自主反思（nudge 触发）→ gradient 转化率极低。7 次 nudge 触发 → 0 条新 gradient。问题不在 nudge 不触发，而在反思没有产出有价值的 insight 写入 beliefs-candidates。这进一步验证了 #9 的诊断。
+4. **工具链自我改进**: 本日提交包含 gradient-stats.sh CJK 检测修复、study-saturation.sh 连续模式检测、nudge-health.sh ground truth 切换 — 进化管线的工具在持续被打磨。
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30)
+ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→136, archive 10 wiki cards
+
+# SOUL.md diff: +3 lines
++"Connection first, utility second." [full paragraph in Vibe section]
+
+# beliefs-candidates.md: 174 lines, 32 entries, 12 graduated
+# Last graduation: record-only-no-chat (05-31, pattern count 3, SOUL.md Vibe)
+
+# Nudge (.nudge-audit.log):
+# 7 Triggering, 171 Skipped, 7 "System event enqueued successfully"
+# Sessions: commitments×3, discord channels×3, subagent×1
+
+# Dreaming: light sleep ran, ~25 candidates staged (all 0.62)
+# No REM content observed in today's memory
+
+# Workspace commits today: 7
+```
