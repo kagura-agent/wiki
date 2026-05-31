@@ -121,4 +121,4 @@ const SESSION_INGESTION_SCORE = .58;  // hardcoded for all session chunks
 
 **Conclusion**: Light sleep confidence is not a quality signal. It's a threshold gate (≥0.45 = candidate). True memory curation happens via manual MEMORY.md + wiki notes, not dreaming's automated pipeline.
 
-**Action**: Filed upstream issue [[openclaw/openclaw#87485]] proposing content-dependent ingestion scoring.
+**Action**: Filed upstream issue openclaw/openclaw#87485 proposing content-dependent ingestion scoring.

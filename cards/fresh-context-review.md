@@ -1,0 +1,8 @@
+---
+created: 2026-05-31
+tags: [stub]
+last_verified: 2026-05-31
+---
+# Fresh-context review
+
+A technique that spawns Claude Code in read-only mode to review diffs from clean context without prior session history.

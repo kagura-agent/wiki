@@ -5,7 +5,7 @@ updated: 2026-05-12
 stars: 29
 repo: MemTensor/MemPrivacy
 status: new
-last_verified: 2026-05-30
+last_verified: 2026-05-31
 ---
 
 # MemPrivacy
@@ -61,7 +61,7 @@ Released specialized models (SFT + RL, 0.6B to 4B params) that outperform genera
 
 ## Relation to Our Direction
 
-**Directly relevant to our [[MEMORY.md]] security model.** We currently use a binary approach — MEMORY.md loaded only in direct Luna chats, never in shared contexts. MemPrivacy suggests a more nuanced approach:
+**Directly relevant to our MEMORY.md security model.** We currently use a binary approach — MEMORY.md loaded only in direct Luna chats, never in shared contexts. MemPrivacy suggests a more nuanced approach:
 
 1. **Our PL1-PL4 mapping**: We already intuitively practice this — preferences (PL1) go in SOUL.md publicly, while personal details (PL2+) stay in MEMORY.md private. But we don't have systematic detection.
 

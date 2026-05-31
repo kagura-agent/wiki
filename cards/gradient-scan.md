@@ -1,0 +1,8 @@
+---
+created: 2026-05-31
+tags: [stub]
+last_verified: 2026-05-31
+---
+# Gradient Scan
+
+Automated tool that scans logs and PRs for evidence supporting belief candidate graduation.

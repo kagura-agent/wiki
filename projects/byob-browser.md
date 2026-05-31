@@ -44,4 +44,4 @@ The key insight: instead of fighting bot detection and auth, just use the browse
 - Cookie extraction tool (`browser-get-cookies`) — security implications for agent memory?
 - Does the extension survive Chrome updates? (MV3 lifecycle)
 
-Links: [[browser-automation]], [[mcp-protocol]]
+Links: [[browser-automation]], [[mcp-vs-native-tools]]

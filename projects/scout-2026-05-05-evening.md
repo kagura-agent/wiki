@@ -20,7 +20,7 @@ Convergent wisdom from experienced agent users:
 9. **Agents amplify experience** — domain expertise → better prompts → fewer wasted cycles
 10. **Code is cheap, maintenance isn't** — "free as in puppies"
 
-**Relevance to us:** Points 3, 4, 7 directly apply. Our workloop should emphasize behavioral tests. Our [[guide]] already covers most of these, but "develop your taste" is an under-articulated principle — it's about judgment, not just rules.
+**Relevance to us:** Points 3, 4, 7 directly apply. Our workloop should emphasize behavioral tests. Our guide already covers most of these, but "develop your taste" is an under-articulated principle — it's about judgment, not just rules.
 
 ## GitHub Trending (2026-04-28 → 05-05)
 

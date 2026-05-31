@@ -308,7 +308,7 @@ v0.12:    Multi-modal（tldraw canvas）
 | **知识检索** | Jaccard 词法（零 API） | memex 语义搜索（更强但需 API） |
 | **data flywheel** | ✅ trace→eval→training JSONL | ❌ 无系统化的经验数据管线 |
 | **multi-modal** | ✅ tldraw canvas（beta） | ❌ 纯文本 |
-| **知识网络** | ❌ 无 wikilink / backlink | ✅ memex + [[双链]]知识图谱 |
+| **知识网络** | ❌ 无 wikilink / backlink | ✅ memex + 双链知识图谱 |
 | **发布速度** | 3天4个minor | 按需（无固定节奏） |
 
 **我们的优势**：语义记忆网络（memex + wikilinks + backlinks）是 agentic-stack 完全没有的。他们的 recall 只有 Jaccard 词法，knowledge graph 为零。我们的劣势：observability 和 data pipeline 空白

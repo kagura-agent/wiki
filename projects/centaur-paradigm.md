@@ -2,7 +2,7 @@
 title: "Centaur — Shared Agent Platform for Teams (paradigmxyz)"
 created: 2026-05-24
 source: https://github.com/paradigmxyz/centaur
-stars: 431
+stars: 673
 language: Python
 license: null
 status: early-production
@@ -11,7 +11,7 @@ last_verified: 2026-05-31
 
 # Centaur (paradigmxyz)
 
-Shared, self-hosted agent platform by paradigm (the Reth/Foundry team). Slack-native: mention the bot, it spins up a K8s sandbox, runs a coding agent, delivers results back to the thread. 673⭐ (from 431 in 7 days, +57%), 56 open issues, 99 forks — strong sustained traction.
+Shared, self-hosted agent platform by paradigm (the Reth/Foundry team). Slack-native: mention the bot, it spins up a K8s sandbox, runs a coding agent, delivers results back to the thread. 673⭐ (from 431 → 673, 05-24 → 05-31), 57 open issues, 99 forks, 93 external PRs/30d — strong sustained traction. 🟢 THRIVING (6/6).
 
 ## What It Solves
 
@@ -43,7 +43,7 @@ The `harness_adapter.py` + `harness_protocol.py` split is elegant:
   - codex: `turn.completed` / `turn.failed`
   - pi-mono: `agent_end`
 
-This is essentially what [[OpenClaw ACP|acp-router]] does but at a lower level — Centaur wraps CLI agents in K8s containers and speaks their native NDJSON, while OpenClaw wraps them as ACP sessions.
+This is essentially what [[acp]] does but at a lower level — Centaur wraps CLI agents in K8s containers and speaks their native NDJSON, while OpenClaw wraps them as ACP sessions.
 
 ## Relation to Our Direction
 
@@ -81,7 +81,7 @@ Key signal: they're hardening iron-proxy/tool-server integration heavily — pro
 **Iron-proxy as credential boundary** is being stress-tested hard:
 - Tool-server sidecar needed DB access → instead of passing raw DSN, they route through iron-proxy (PR #286). Real DB creds stay in proxy pod; sandbox only holds proxied DSN. This is principled but creates dependency chains (startup race when proxy isn't ready → PR #302 retry logic)
 - Pattern: every new service that needs credentials goes through the proxy → single trust boundary, but also single point of failure
-- Relevance to [[OpenClaw ACP]]: we pass credentials via env vars, which is simpler but less isolated. Iron-proxy pattern is worth considering if we ever do multi-tenant
+- Relevance to [[acp]]: we pass credentials via env vars, which is simpler but less isolated. Iron-proxy pattern is worth considering if we ever do multi-tenant
 
 **Sandbox lifecycle is the hardest problem:**
 - Sandbox pods never GC after Slack threads go idle (#172) — no TTL controller, no idle detector. Classic "spawn is easy, cleanup is hard"
@@ -105,5 +105,14 @@ Key signal: they're hardening iron-proxy/tool-server integration heavily — pro
 ## Tracking
 
 Worth following closely — paradigm has the engineering depth and this is clearly production-used internally. Revisit 06-07.
+
+## Followup 05-31
+
+- Stars: 673 (was 431 at card creation, +57%)
+- 20 commits in 3 days (05-28→05-31), 7+ unique contributors active
+- Key themes: tool-server sidecar hardening (DB pool routing through iron-proxy), sandbox lifecycle fixes, Codex channel-scoped search, local smoke auth
+- Community: 🟢 THRIVING (6/6) — 25 unique issue authors, 93 external PRs/30d, 7 unique merged PR authors
+- Production signals strong: iron-proxy stress-testing, startup race conditions (PR #302), healthz polling (PR #307)
+- No new architectural patterns since last deep read — execution & hardening phase
 
 Links: [[self-evolving-agent-landscape]], [[agent-memory-landscape-202603]], [[centaur-loop]]

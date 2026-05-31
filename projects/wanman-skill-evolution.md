@@ -3,6 +3,7 @@ title: wanman Skill Self-Evolution & db9 Brain Adapter
 created: 2026-04-27
 tags: [agent-infrastructure, skill-evolution, multi-agent, deep-read]
 related: [[openclaw-agent-skills]], [[self-evolving-agent-patterns]], [[agent-memory-architecture]], [[idle-cached-session-resume]]
+last_verified: 2026-05-31
 ---
 
 # wanman Skill Self-Evolution & db9 Brain Adapter
@@ -115,7 +116,7 @@ optimizer creates new skill version → A/B eval → auto-promote if better
 
 2. **Activation snapshots**: Freezing the exact skill versions used for a run is excellent for reproducibility. [[openclaw-agent-skills]]'s skill loading is live (always latest) — snapshot pinning would help debugging.
 
-3. **idle_cached lifecycle**: The `claude --resume` session preservation is exactly what the TODO item about `idle_cached` for [[openclaw-acp]] was asking about. wanman implements it with fallback handling (stale session → cold start). This could map to ACP session resume.
+3. **idle_cached lifecycle**: The `claude --resume` session preservation is exactly what the TODO item about `idle_cached` for [[acp]] was asking about. wanman implements it with fallback handling (stale session → cold start). This could map to ACP session resume.
 
 ### What doesn't apply
 

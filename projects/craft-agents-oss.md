@@ -75,7 +75,7 @@ Monorepo structure:
 The skill format is converging across the ecosystem:
 - Craft Agents: workspace-scoped instruction files
 - [[library-skills]]: SKILL.md standard
-- [[lukiIabs/skills]] (Matt Pocock fork): composable SKILL.md files with CLI installer
+- lukiIabs/skills (Matt Pocock fork): composable SKILL.md files with CLI installer
 - [[master-skill]]: meta-skill that generates other skills
 - [[oh-story-claudecode]]: viral single-purpose SKILL.md (784⭐!)
 

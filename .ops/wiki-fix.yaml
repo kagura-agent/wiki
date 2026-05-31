@@ -25,6 +25,8 @@ nodes:
     branches:
       - condition: "no open issues"
         next: done-quiet
+      - condition: "issue selected"
+        next: fix
 
   fix:
     task: |

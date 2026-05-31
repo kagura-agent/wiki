@@ -122,7 +122,7 @@ The context overflow problem (noted in #10) addressed through multiple mechanism
 - **Was**: 🔴 SOLO (0/6) on 05-21 initial assessment
 - **Now**: 🟢 THRIVING (5/6) — 4 unique merged PR authors, 11 issue authors/30d, 6 external PRs
 - Contributors: Zireael (CI + branch fix), trufae (--endpoint flag)
-- ACP integration requested (#20) — someone wants to connect SmallCode to [[openclaw-acp]] via Zed editor
+- ACP integration requested (#20) — someone wants to connect SmallCode to [[acp]] via Zed editor
 
 ### RTK Integration (v0.6.14)
 "Rust Token Killer" — auto-rewrites bash commands for 60-90% token savings. An optimization layer between the model's shell commands and execution, compressing verbose tool output before feeding back to context.

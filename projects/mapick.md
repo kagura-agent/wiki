@@ -5,6 +5,7 @@ updated: 2026-04-30
 status: active
 stars: 14
 url: https://github.com/mapick-ai/mapick
+last_verified: 2026-05-31
 ---
 
 # Mapick
@@ -50,7 +51,7 @@ Mapick explicitly warns against passing through raw `installCommands[].command` 
 
 2. **Context window awareness** — `clampOutput()` caps arrays to 10 items, strings to 4000 chars. Prevents dumping large backend responses into AI context. We should consider this for our own skill outputs.
 
-3. **Two-step uninstall** — `clean` only lists zombies; `uninstall <id> --confirm` requires explicit confirmation, backs up to `trash/`, auto-cleans after 7 days. Matches our own `trash > rm` philosophy in [[AGENTS.md]].
+3. **Two-step uninstall** — `clean` only lists zombies; `uninstall <id> --confirm` requires explicit confirmation, backs up to `trash/`, auto-cleans after 7 days. Matches our own `trash > rm` philosophy in AGENTS.md.
 
 4. **Device fingerprint is truly anonymous** — FNV-1a hash of `hostname|os|homedir`, 16 chars. No way to reverse. No account system.
 

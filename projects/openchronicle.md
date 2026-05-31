@@ -160,4 +160,4 @@ Supports: Claude Code, Claude Desktop, Cursor, Codex, opencode, ChatGPT Desktop 
 5. **MCP integration**: Works with the tools people already use (Claude Code, Cursor, Codex).
 
 ## Links
-[[memex]] [[agent-memory]] [[mcp]] [[self-evolving-agent-landscape]] [[hindsight]] [[engram]] [[stash]]
+[[memex]] [[agent-memory]] [[mcp-vs-native-tools]] [[self-evolving-agent-landscape]] [[hindsight]] [[engram]] [[stash]]

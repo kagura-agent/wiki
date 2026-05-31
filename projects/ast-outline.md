@@ -110,7 +110,7 @@ Notable design choices:
 - **No tokio** — pure synchronous loop, proving MCP servers don't need async runtimes
 - **No tests for MCP** — only `tests/hook_e2e.rs` exists (for the PreToolUse hook). MCP server is untested.
 
-This makes ast-outline a complete [[MCP]] integration: agents that speak MCP can use it without CLI wrapper scripts.
+This makes ast-outline a complete [[mcp-vs-native-tools]] integration: agents that speak MCP can use it without CLI wrapper scripts.
 
 ### JSON Output (04-28–04-29)
 

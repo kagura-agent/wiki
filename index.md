@@ -161,7 +161,6 @@
 
 - [Kagura Story](cards/kagura-story.md)
 - [kagura-work-patterns](cards/kagura-work-patterns.md)
-- [kernel-assisted-by-tag](cards/kernel-assisted-by-tag.md)
 - [知识存在不等于知识被使用](cards/knowledge-action-gap.md)
 - [知识是网不是树](cards/knowledge-is-a-graph.md)
 - [Knowledge Needs Upgrade Path](cards/knowledge-needs-upgrade-path.md)
@@ -266,12 +265,10 @@
 - [Self-Referential Evidence Discount](cards/self-referential-evidence-discount.md)
 - [self-trigger-mechanism](cards/self-trigger-mechanism.md)
 - [Semantic Model Routing](cards/semantic-model-routing.md)
-- [session-injection-vs-spawn](cards/session-injection-vs-spawn.md)
 - [session-state-isolation](cards/session-state-isolation.md)
 - [Skill 作为行为触发机制](cards/skill-as-behavior-trigger.md)
 - [skill-behavioral-testing](cards/skill-behavioral-testing.md)
 - [skill-category-split](cards/skill-category-split.md)
-- [SkillClaw Phase 0 — W16 Evaluation](cards/skillclaw-w16-eval.md)
 - [Skill Context Compression Experiment](cards/skill-context-compression.md)
 - [skill-creator](cards/skill-creator.md)
 - [skill-crystallization-vs-design](cards/skill-crystallization-vs-design.md)
@@ -294,7 +291,6 @@
 - [startup-credential-guard](cards/startup-credential-guard.md)
 - [Static Regression Tests](cards/static-regression-tests.md)
 - [Stem-Aware Slug Matching](cards/stem-aware-slug-matching.md)
-- [Strategic Dependency](cards/strategic-dependency.md)
 - [Structural Backpressure](cards/structural-backpressure.md)
 - [subagent-usage-patterns](cards/subagent-usage-patterns.md)
 - [supervisor-pattern](cards/supervisor-pattern.md)
@@ -564,7 +560,6 @@
 ### K
 
 - [kagura-server](projects/kagura-server.md)
-- [Karpathy LLM Wiki](projects/karpathy-llm-wiki.md)
 - [andrej-karpathy-skills](projects/karpathy-skills.md)
 - [Kilocode (Kilo-Org/kilocode)](projects/kilocode.md)
 - [KiwiFS — Knowledge Filesystem for Agents](projects/kiwifs.md)
