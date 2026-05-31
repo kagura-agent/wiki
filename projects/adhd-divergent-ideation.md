@@ -1,6 +1,6 @@
 # ADHD — Parallel Divergent Ideation Skill
 
-**Repo**: [UditAkhourii/adhd](https://github.com/UditAkhourii/adhd) | 473⭐ (2026-05-29, created 05-25) | TypeScript | MIT
+**Repo**: [UditAkhourii/adhd](https://github.com/UditAkhourii/adhd) | 601⭐ (2026-05-31, was 473 on 05-29, created 05-25) | TypeScript | MIT
 **Status**: 4-day viral growth (473⭐, 23 forks). Built on Claude Agent SDK. Ships as skill, npm lib, and CLI.
 
 ## Core Idea

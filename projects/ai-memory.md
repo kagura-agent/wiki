@@ -1,7 +1,7 @@
 # ai-memory — Cross-Agent Long-Term Memory
 
 - **repo**: akitaonrails/ai-memory
-- **stars**: 290 (2026-05-27, created 05-21 — ~48⭐/day growth)
+- **stars**: 430 (2026-05-31, was 290 on 05-27, created 05-21 — ~48⭐/day growth)
 - **lang**: Rust
 - **license**: MIT
 - **status**: active | deep-read | ✓2026-05-27
