@@ -23,7 +23,8 @@ Agent 需要使用凭证（API key、OAuth token、app secret），但不应该�
 - 短期 session token（runtime 颁发有限权限、有限时间的 token）
 - Hardware security module (HSM) / Trusted execution environment (TEE)
 
-## 业界方案（待调研）
+## 业界方案（已调研 / 待调研）
+- [x] **[[centaur-paradigm|Centaur]] iron-proxy** (2026-05-31): sidecar proxy per sandbox. Agent container only holds proxied DSN, real DB creds stay in proxy pod. `secret()` resolves via ToolContext → proxy → backend. Principled isolation but creates startup dependency chains (race conditions when proxy isn't ready → retry logic). Most production-hardened example observed so far.
 - [ ] OpenClaw 自身的 sandbox/exec 机制
 - [ ] Claude Code 的 permission model
 - [ ] Hermes agent 的凭证管理
