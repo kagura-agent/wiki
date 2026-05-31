@@ -69,3 +69,9 @@
 ## 踩过的坑 (2026-05-24)
 - Sparse checkout + shallow clone cannot push to GitHub (missing objects). Use `gh repo sync` + GitHub Contents API for file uploads, or do a full clone if disk allows
 - Large test files (3600+ lines) exceed CLI arg limit for `gh api` — use `--input` with JSON file instead
+
+## 2026-05-31 workloop notes
+- qwen-code was **missing from gogetajob watchlist** despite 2 open PRs (#4456, #4474). Fixed: `gogetajob scan QwenLM/qwen-code`
+- Both PRs APPROVED by wenshao, merge-pinged, ball on maintainer
+- 82% merge rate (high), 24775 stars
+- Lesson: always cross-verify with `gh search prs` — gogetajob sync is not exhaustive (guide #42)

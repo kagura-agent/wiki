@@ -498,3 +498,8 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Approach**: Manual edit (surgical, 4 files, -3 lines net). Smallest possible diff
 - **Test**: `go test ./pkg/agent/... -run Cursor -v` — all pass
 - **Note**: This is a well-scoped fix — the issue was filed by a user with exact CLI output showing the problem. No competition
+
+## 2026-05-31 workloop notes
+- multica was **missing from gogetajob watchlist** despite open PR #3041. Fixed: `gogetajob scan multica-ai/multica`
+- PR #3041 (Windows tilde-backslash paths) has no review yet, no human comments
+- 50% merge rate, 34288 stars

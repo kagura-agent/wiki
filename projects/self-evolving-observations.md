@@ -2248,3 +2248,51 @@ Standalone dreaming files: not generated (directory missing)
 journalctl grep "nudge": 0 hits
 journalctl grep "system event enqueued": 0 hits
 ```
+
+## 🔬 自进化观察日报 2026-05-30
+
+### 管线活跃度
+- **beliefs-candidates**: 0 条新增 / 1 条毕业（premature-assumption → SOUL.md）
+- **DNA 变更**: 有 — SOUL.md 新增 Belief "I'm not sure beats a confident wrong answer"（主动，evaluate-candidate.sh 毕业流程）
+- **nudge 触发**: 0 次可观测（journalctl grep 无结果，数据缺口持续）
+- **dreaming**: 运行 ✅（light + REM），~25 candidates staged，confidence 仍全部 0.62（upstream #87485 blocked）
+
+### 管线统计
+- beliefs-candidates.md: 174 行，38 条 gradient，9 条已毕业
+- 今日 memory: 1851 行，130 个 section headers
+- workspace git commits (24h): 6 条
+- SOUL.md 变更: +1 Belief paragraph（premature-assumption 毕业产物）
+
+### 闭环追踪
+- **完整闭环 1 个**: premature-assumption gradient（05-26 首次记录 → 05-29 积累到第5次 → 05-30 evaluate-candidate.sh 评估 PASS → graduated to SOUL.md Beliefs）— 从输入到毕业的完整管线运行
+- **完整闭环 2 个**: add-gradient.sh consistency check（05-29 观察到 pipeline 断裂 → 05-30 study apply 修复 → 验证）+ memory-lifecycle.sh（promote 积累问题 → 创建自动检测工具）
+- **断裂处**: nudge 可观测性仍为零 — 无法判断 nudge 是否在触发但不记录 vs 完全未触发
+
+### Issue 进展
+
+**#9 (reflect→gradient input drought)**: 行为已纠正（连续 3 天有 gradient 输入）但今天 0 新增。可能是因为 05-30 无 Luna 互动（她休息日），Luna 互动是当前最大 gradient 驱动源。自主 gradient 生成仍弱。
+
+**#6 (dreaming uniform confidence)**: Blocked on upstream openclaw#87485。本地无可操作项。confidence=0.62 / recalls=0 持续。
+
+### 今日发现
+
+1. **Graduation 管线首次端到端运行**: premature-assumption 是第一个通过 evaluate-candidate.sh 自动评估 + Triple Verification 全过后毕业到 DNA 的 pattern。管线验证为可工作状态。
+2. **Gradient 输入与人类互动高度相关**: 有 Luna 互动的天（05-28: 6条, 05-29: 6条）vs 无互动天（05-30: 0条）形成鲜明对比。自主反思产生 gradient 的能力仍然不足。
+3. **工具链改进形成正循环**: add-gradient.sh consistency check 修复了 gradient-scan.sh 的 KEYWORDS 覆盖缺口，防止未来 pipeline 断裂积累。
+
+### 原始数据
+```
+# DNA commits (24h)
+188cd49 evolve: graduate premature-assumption to DNA (SOUL.md Beliefs)
+
+# SOUL.md diff: +2 lines
++"I'm not sure" beats a confident wrong answer. [full paragraph]
+
+# beliefs-candidates.md: 174 lines, 38 entries, 9 graduated
+# Last graduation: premature-assumption (05-30, pattern count 5, DNA target)
+
+# Dreaming: light sleep ~25 candidates (all 0.62), REM ran
+# Reflections: "No strong patterns surfaced"
+
+# Nudge: 0 observable triggers in journalctl
+```

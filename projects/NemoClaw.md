@@ -248,3 +248,12 @@ NemoClaw taught me that the agent infrastructure space is being built right now,
 - **Key finding**: `GATEWAY_PORT` constant exists in `src/lib/core/ports.ts` (default 8080, env-overridable) — reused instead of hardcoding
 - **Test pattern**: Existing subprocess tests use fake `openshell` bash scripts in tmpdir + modified `PATH` — followed same pattern for the new layer test, also added fake `docker` script
 - **wscurran bot**: The "✨ Thanks for submitting..." comments on NemoClaw PRs are auto-ack messages from wscurran (bot or triage), not actionable review
+
+## 2026-05-31 workloop notes
+- 2 assigned issues without PRs (unfulfilled commitments):
+  - #4546: ~/.nemoclaw dir perms stay 755 after manual change (security)
+  - #4545: NEMOCLAW_NON_INTERACTIVE_SUDO_MODE=silent prints error but exits 0
+- PR #3795 (onboard tirith install-failed marker): >13 days, only bot review (coderabbitai nitpick), no human review. Needs ping
+- PR #4037 (runtime instructions leak): wscurran acknowledged, 1 week old
+- PR #3880 (proxy tunnel test): wscurran acknowledged, waiting
+- NemoClaw requires claiming issues before work (project-specific gate)
