@@ -6,12 +6,12 @@ stars: 431
 language: Python
 license: null
 status: early-production
-last_verified: 2026-05-24
+last_verified: 2026-05-31
 ---
 
 # Centaur (paradigmxyz)
 
-Shared, self-hosted agent platform by paradigm (the Reth/Foundry team). Slack-native: mention the bot, it spins up a K8s sandbox, runs a coding agent, delivers results back to the thread. 431⭐ in 6 days, 24 open issues, 46 forks — strong early traction.
+Shared, self-hosted agent platform by paradigm (the Reth/Foundry team). Slack-native: mention the bot, it spins up a K8s sandbox, runs a coding agent, delivers results back to the thread. 673⭐ (from 431 in 7 days, +57%), 56 open issues, 99 forks — strong sustained traction.
 
 ## What It Solves
 
@@ -64,15 +64,46 @@ This is essentially what [[OpenClaw ACP|acp-router]] does but at a lower level �
 3. **Organization overlays** — layering custom tools/workflows/prompts without forking the base. OpenClaw does this with skills but Centaur's tool SDK approach (pyproject.toml + client.py + .env) is more structured
 4. **Credential boundaries** — iron-proxy as a sidecar that injects credentials without the agent seeing raw keys. More principled than env var passing
 
+## Recent Activity (05-24 → 05-31)
+
+~30 commits in 7 days, mostly infrastructure hardening:
+- **Tool-server sidecar**: DB pool routing through iron-proxy, overlay tool deps install, healthz polling before readiness signal
+- **Sandbox security**: proxy env hardening against extraEnv override, sandbox permissioning fixes
+- **Harness updates**: Claude Opus 4.8 rendering support, Codex fanout disabled (experimental), Codex channel-scoped search fix
+- **Workflow engine**: clone API env into workflow-run pods, drop per-run iron-proxy
+- **New tools**: Laminar investigation tool, Sentry read-only issue perusal
+- **Infra**: bypass proxy for observability services, local smoke auth + broker token bootstrap
+
+Key signal: they're hardening iron-proxy/tool-server integration heavily — production usage driving real fixes. Multiple external contributors active.
+
+## Architecture Insights from Issues (05-31 deep read)
+
+**Iron-proxy as credential boundary** is being stress-tested hard:
+- Tool-server sidecar needed DB access → instead of passing raw DSN, they route through iron-proxy (PR #286). Real DB creds stay in proxy pod; sandbox only holds proxied DSN. This is principled but creates dependency chains (startup race when proxy isn't ready → PR #302 retry logic)
+- Pattern: every new service that needs credentials goes through the proxy → single trust boundary, but also single point of failure
+- Relevance to [[OpenClaw ACP]]: we pass credentials via env vars, which is simpler but less isolated. Iron-proxy pattern is worth considering if we ever do multi-tenant
+
+**Sandbox lifecycle is the hardest problem:**
+- Sandbox pods never GC after Slack threads go idle (#172) — no TTL controller, no idle detector. Classic "spawn is easy, cleanup is hard"
+- `pause_by_id()` deletes pod but DB says "suspended" → resume fails permanently. 2,206 zombie sessions accumulated. Fix: fall through to fresh spawn instead of raising
+- Warm pool eviction on restart leaves orphan pods
+- All of these are production-discovered — you can't design for them upfront
+- Relevance: OpenClaw ACP sessions don't have this problem (process-level, OS handles cleanup), but any K8s-based agent platform will hit exactly this
+
+**Harness dialect fragmentation:**
+- Each harness (amp, claude-code, codex, pi-mono) has different turn-completion signals
+- Codex fanout was disabled as "experimental and potentially interfering with renderers" — multi-harness rendering is genuinely hard
+- Slack renderer duplicating content when harness is claude-code (#oddharsh issue) — live commentary + final answer concatenated
+
 ## Community Signal
 
-- 24 open issues in 6 days, external contributors already (kkennis on Codex token support)
-- gakonst (paradigm founder) actively triaging and deploying
-- Real operational issues (NetworkPolicy, sandbox GC, warm pool eviction) = production use
-- paradigm team's infra quality bar is high (see Reth, Foundry)
+- 56 open issues (from 24), 99 forks (from 46) — growing fast
+- Multiple contributors: mslipper, Zygimantass, gakonst, kmx411, goksu, NormallyGaussian, decofe, 0xdiid
+- gakonst still actively triaging
+- Production-quality issues (DB pool races, sidecar routing, credential injection) = real usage
 
 ## Tracking
 
-Worth following — paradigm has the engineering depth to make this serious. Revisit 05-31.
+Worth following closely — paradigm has the engineering depth and this is clearly production-used internally. Revisit 06-07.
 
 Links: [[self-evolving-agent-landscape]], [[agent-memory-landscape-202603]], [[centaur-loop]]
