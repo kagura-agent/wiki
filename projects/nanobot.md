@@ -770,3 +770,26 @@ See also: [[self-evolving-agent-landscape]], [[dream-single-phase-consolidation]
 **Assessment**: v0.2.0 marks maturation from "lightweight alternative" to full-featured personal agent platform. `/goal` + runner exit guard is their most interesting architectural innovation — solving agent drift in long tasks at the loop level rather than the workflow level (our FlowForge approach). Growth acceleration (+4.3K stars in 7 weeks) validates the market.
 
 **Revisit**: 06-04.
+
+## 跟进 2026-05-31: Heartbeat Fail-Closed + Gateway HTTP Extraction
+
+⭐43.4K (stable). Active development: 5 commits in 2 days.
+
+### Heartbeat Fail-Closed (PRs #4112, #4114)
+
+**Problem**: Heartbeat runs push routine "All clear." to Feishu/channels when no real tasks. Empty HEARTBEAT.md or any wording edit triggers delivery.
+
+**Fix approach (dual-layer)**:
+1. **Evaluator `default_notify` parameter** (#4112): Heartbeat passes `default_notify=False` — if the notification evaluator (LLM judge deciding "should we notify?") fails, errors out, or returns malformed response, the default is now **don't notify** (fail closed). User reminders keep `default_notify=True` (fail open). Previously all evaluator failures defaulted to notify.
+2. **Message tool suppression** (#4114): During heartbeat internal checks, direct `message-tool` invocations by the model are suppressed — even if the model tries to bypass the evaluator gate by calling the messaging tool directly, delivery is blocked.
+3. **Skip detection improvement**: Template matching now looks for real task lines (ignoring headers/comments), so minor wording changes to HEARTBEAT.md don't trigger a run.
+
+**Transfer value for [[OpenClaw]]**: OpenClaw's heartbeat uses `HEARTBEAT_OK` as the quiet signal — a convention-based approach vs nanobot's evaluator-based approach. OpenClaw's is simpler (model returns magic string → no delivery) but relies entirely on the model following the convention. Nanobot's fail-closed evaluator is more robust — if the model goes off-script, delivery is still blocked. The message-tool suppression layer is particularly interesting: it handles the case where the model circumvents the intended flow.
+
+### GatewayHTTPHandler Extraction (PR #4115)
+
+868 lines extracted from `WebSocketChannel` into `GatewayHTTPHandler` — separating HTTP routing from WebSocket transport. Prerequisite for hot-reload capabilities.
+
+**Signal**: nanobot is investing in architectural refactoring for maintainability, not just features. This is a maturity indicator — projects at 43K stars need clean internals for sustainable contribution.
+
+Links: [[loop-detection-comparison]], [[persistent-goal-injection]]

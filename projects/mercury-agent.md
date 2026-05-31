@@ -531,3 +531,59 @@ Fixed critical issue where intent routing matched ~10 skills on single request. 
 **Broader pattern**: keyword/intent routing hits a precision cliff around 50-100+ skills when skill descriptions overlap in common terms. Mercury hit it at ~130. Our LLM-based approach (system prompt list) defers this problem to the LLM's judgment, but will face a different cliff: context window bloat. The [[functional-area-resolver]] dispatcher is the likely solution when we hit 40-50+ skills.
 
 **Status**: GROWING → 2,483⭐ (05-30). Major features shipping. Revisit 06-04.
+
+## 跟进 2026-05-31: Token Saver Mode (PR #69)
+
+⭐~2,490. PR #69 merged: Token Saver Mode + bottom status bar overhaul + per-step spinners.
+
+### Token Saver Mode Architecture
+
+**Battery-saver analogy for LLM budgets** — three states: `off` / `on` (manual) / `auto` (threshold-triggered).
+
+**Core mechanism** (`src/core/saver-mode.ts`, 242 lines):
+- Auto-engages at configurable threshold (default 75% of daily token budget)
+- **5-point hysteresis**: engages at 75%, disengages only below 70% — prevents oscillation near boundary
+- When active, applies 4 optimizations simultaneously:
+  1. `maxOutputTokens × 0.4` (60% reduction)
+  2. `maxSteps × 0.5` (halved tool call budget)
+  3. History window: 10 → 4 messages
+  4. System prompt suffix: "be terse, no preamble, no narration, show only changed lines"
+- User notified once on auto-activation + 2 follow-up hints ("Saver active — response optimized")
+- Persisted to config (`saveConfig()`) — survives restart
+- `/saver off|on|auto|threshold|status` CLI commands
+- Opt-in `routingEnabled` flag for cheap-provider routing (off by default — future feature)
+- Lifetime + daily saved-token counters on TokenBudget
+- Propagates to sub-agents (supervisor passes saver state)
+
+### Status Bar Overhaul
+- Single-line bottom bar: pie-fill icon + bar + %, model name, context-aware section
+- Git mode: branch/ahead-behind/staged/modified
+- Agent mode: bg tasks + active agents count
+- 2s background poller (re-entrancy guarded, diff-checked, async execFile with 1.5s timeout)
+
+### Per-Step Spinners
+- Braille spinner animation with live elapsed time (`Ns` / `1m05s`)
+- Tone escalation: cyan < 30s → yellow < 90s ("still working") → red ≥ 90s ("long op, Ctrl+C cancels")
+- Activity panel collapses to 1-line summary when idle
+
+### Skill Router Fix (PR #68 also in this merge)
+- Ambiguity floor raised to 0.75
+- Single-word tier capped at 0.45 (was causing spurious multi-skill dispatch)
+- Meta-skill-intent regex skips routing for create/build/publish + skill/plugin/tool phrases
+
+### Transfer Value
+
+**Token Saver Mode is the most directly applicable pattern.** OpenClaw doesn't have explicit token budget management — sessions run until the model's context fills or the user stops. Mercury's approach shows a clean way to degrade gracefully:
+- Hysteresis prevents flapping (classic control systems pattern, underused in LLM tooling)
+- 4-lever optimization (output length + steps + history + prompt suffix) is better than a single crude cut
+- Auto-notification keeps the user informed without asking permission
+- The system prompt suffix is the strongest lever — directly shapes model behavior without code changes
+
+**What we wouldn't copy:**
+- Daily budget model doesn't map to OpenClaw's session-based architecture (no global daily counter)
+- `maxOutputTokens × 0.4` is aggressive — 60% output reduction may break complex tool chains
+- Cheap-provider routing is unimplemented and questionable (switching models mid-conversation breaks coherence)
+
+**Relevance to OpenClaw:** [[context-compaction]] is the related OpenClaw concern — not daily budget limits, but context window management. Mercury solves "running out of money"; we need to solve "running out of context." Different problems, but the hysteresis + multi-lever approach transfers.
+
+Links: [[context-compaction]], [[nanobot]], [[functional-area-resolver]]
