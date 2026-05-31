@@ -3,6 +3,7 @@ title: wiki-as-compiled-knowledge
 slug: wiki-as-compiled-knowledge
 tags: [knowledge-management, agent-memory, wiki, patterns]
 created: 2026-04-25
+last_verified: 2026-05-31
 ---
 
 # Wiki as Compiled Knowledge (vs RAG as Runtime Retrieval)
@@ -38,12 +39,12 @@ created: 2026-04-25
 
 ## 验证信号
 
-- [[karpathy-llm-wiki]] (615★, HN 首页 2026-04-25) — wiki > RAG 理念被主流认可
+- [[llm-wiki-karpathy]] (615★, HN 首页 2026-04-25) — wiki > RAG 理念被主流认可
 - Karpathy 原 gist 引爆多个实现
 - [[mercury-agent]] Second Brain 也是结构化知识（虽然用 SQLite 不是 markdown）
 
 ## 链接
 
-- [[karpathy-llm-wiki]] — 这个洞察的直接来源
+- [[llm-wiki-karpathy]] — 这个洞察的直接来源
 - [[context-rot]] — RAG 的另一个问题：长上下文质量衰减
 - [[agentskills-io-standard]] — wiki skill 的分发标准

@@ -126,7 +126,7 @@
 ## 关联
 - [[obsidian-wiki]] - wiki-status 概念来源
 - [[generic-agent]] - 也有知识自动维护
-- [[karpathy-llm-wiki]] - lint 管线灵感来源
+- [[llm-wiki-karpathy]] - lint 管线灵感来源
 - [[wuphf]] - MCP lint 参考
 - [[stash]] - confidence decay 参考
 - [[confidence-decay-design]] - 我们的 staleness 设计方案

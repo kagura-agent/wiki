@@ -3,7 +3,7 @@ title: Overlap Detection Pattern
 type: card
 created: 2026-05-19
 status: active
-last_verified: 2026-05-19
+last_verified: 2026-05-31
 depth: applied
 ---
 
@@ -37,7 +37,7 @@ Key adaptations:
 Top duplicates discovered:
 - `kernel-assisted-by-tag` / `linux-kernel-ai-policy` (0.56) — same topic, different angles
 - `control-flow-over-prompts` / `hn-agents-control-flow` (0.53) — same concept
-- `karpathy-llm-wiki` / `llm-wiki-karpathy` (0.47) — clearly same thing
+- `llm-wiki-karpathy` / `llm-wiki-karpathy` (0.47) — clearly same thing
 - `agent-self-evolution` / `agent-self-evolution-paradigms` (0.41) — subset/superset
 
 ## Integration

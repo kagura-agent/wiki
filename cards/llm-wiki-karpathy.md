@@ -95,4 +95,4 @@ LLM Wiki：LLM 在写入时就把知识整合进持久化的 wiki，知识是编
 
 深读完成 (2026-04-12)。产出 4 个行动项，优先做 wiki/index.md 自动生成。
 
-See also: [[karpathy-llm-wiki]] (project analysis)
+See also: [[llm-wiki-karpathy]] (project analysis)
