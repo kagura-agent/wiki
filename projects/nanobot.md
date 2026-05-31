@@ -738,3 +738,35 @@ See also: [[self-evolving-agent-landscape]], [[dream-single-phase-consolidation]
 **Assessment**: Incremental maintenance. The Codex transport fix is a signal that nanobot is adding Codex as a supported backend alongside their existing model integrations. No major architectural changes.
 
 **Revisit**: 06-02.
+
+### Update 2026-05-31 — v0.2.0 deep read + post-release activity
+
+**Stars**: 43,409 (was 39,131 on 04-12 → +4,278 in 7 weeks)
+
+**v0.2.0 (05-16)**: 105 PRs, 20 new contributors. Three headline stories:
+
+1. **`/goal` persistent objective system** — `long_task` / `complete_goal` tools. Goal stored in session metadata, injected via `goal_state_runtime_lines()` every turn. See [[persistent-goal-injection]] and [[metadata-driven-context-injection]]. Wall-clock timeout auto-widens during active goals. WebUI shows goal in chat header. Runner exit guard (PR #3999, documented in our cards) adds `goal_active_predicate` to prevent premature exit.
+
+2. **WebUI shipped in pip wheel** — `pip install nanobot-ai` now bundles WebUI. BYOK redesigned, slash palette localized, reasoning streams live, image generation inline.
+
+3. **Engine refactor** — `AgentLoop.from_config()` for clean embedding. `_process_message` rewritten as functional state machine. Archived summary moved to system prompt for KV cache stability. Tools converted to self-describing plugin architecture. `ask_user` and `GlobTool` retired.
+
+**New providers**: AWS Bedrock Converse, NVIDIA NIM, LongCat, Atomic Chat, MiMo + `fallback_models` safety net.
+
+**Post-v0.2.0 fixes (05-16→05-31)**:
+- **Per-session lock in process_direct** (PR #4104): `process_direct` (API/cron/webui/SDK calls) bypassed `_session_locks`, allowing concurrent turns on same session → history corruption. Fix: reuse same `asyncio.Lock`. OpenClaw has analogous `session-write-lock` module.
+- **IPv6-mapped IPv4 SSRF bypass** (PR #4086): `::ffff:127.0.0.1` bypassed IPv4 blocklists. Fix: `_normalize_addr()` converts `ipv4_mapped` to IPv4 before matching. OpenClaw also handles this pattern.
+- **Dream enabled toggle** (PR #3885): Can now disable Dream job registration — useful for agents that don't need memory consolidation.
+- **Matrix SAS verification**: Device verification for encrypted Matrix rooms.
+- **Anthropic content block coercion**: Handle typeless content blocks from Anthropic API.
+- **Issue #4111**: Heartbeat sends 'All clear.' to Feishu when no tasks — same anti-pattern we guard against with HEARTBEAT_OK.
+
+**Architectural convergence with OpenClaw**:
+- Session write locks: both projects have per-session serialization
+- SSRF protection: both handle IPv6-mapped IPv4
+- Heartbeat quiet mode: both face the "don't spam when idle" problem
+- Context injection: nanobot metadata→runtime_context ≈ OpenClaw AGENTS.md session startup
+
+**Assessment**: v0.2.0 marks maturation from "lightweight alternative" to full-featured personal agent platform. `/goal` + runner exit guard is their most interesting architectural innovation — solving agent drift in long tasks at the loop level rather than the workflow level (our FlowForge approach). Growth acceleration (+4.3K stars in 7 weeks) validates the market.
+
+**Revisit**: 06-04.

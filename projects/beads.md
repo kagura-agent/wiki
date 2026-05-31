@@ -6,7 +6,7 @@ stars: 23555
 language: Go
 license: Apache-2.0
 status: active
-last_verified: 2026-05-12
+last_verified: 2026-05-31
 ---
 
 # Beads (bd)
@@ -89,3 +89,24 @@ Beads occupies a unique niche: **structured task memory for coding agents**. Not
 Competitors: GitHub Issues (not agent-optimized), Linear (SaaS, not embeddable), our markdown TODO (unstructured). Most "agent memory" projects ([[agent-memory-taxonomy]]) focus on conversational or knowledge memory, not task/planning memory.
 
 Links: [[self-evolving-agent-landscape]], [[agent-memory-taxonomy]], [[claude-code-memory-architecture]], [[git-backed-agent-memory]]
+
+### Update 2026-05-31 — v1.0.5 + explosive growth
+
+**Stars**: 24,229 (was 23,555 on ~05-28, +674 in ~3 days). Accelerating.
+
+**v1.0.5 (05-29) — GATED RELEASE**:
+- Migration 0043 can **silently and unrecoverably break multi-machine `bd dolt` sync**. Reverted to v1.0.4 on Homebrew, v1.0.6 in progress.
+- **Cautionary tale**: Even at 24K⭐, migration testing gaps happen. Their Issue #4259 documents the failure mode.
+
+**New features in v1.0.5**:
+- Schema-skew guard: hard fail on forward DB drift (prevents silent corruption)
+- Auto-configure contributor routing on fork detect
+- Gemini/Claude hook JSON compliance + `--hook-json` flag + legacy migration
+- Copilot CLI setup recipe
+- `--skip-labels` hydration toggle for `bd list`
+
+**Post-release fix velocity**: 4 PRs in 2 days (workspace rebind, target selection semantics, db commands). Active maintenance but the gated release suggests CI/integration testing gaps.
+
+**Assessment**: Beads continues explosive growth (24K⭐). The gated v1.0.5 release is a real-world example of why migration testing matters — schema-skew guard was ironically added in the same release that shipped a breaking migration. Healthy project with strong community but needs better multi-node sync testing.
+
+**Revisit**: 06-04.
