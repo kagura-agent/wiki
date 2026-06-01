@@ -758,7 +758,7 @@ goal_mode prompt rewrite — shifted from "find improvements everywhere" to **qu
 - **Anti-repetition guard**: "如果多轮都是同类型的小修——换一个完全不同的角度重新审视"
 - **Perspective switch technique**: "假装你是第一次看到这个成果的使用者/审阅者/攻击者，找到它最容易出问题的地方"
 
-**Insight**: The user/reviewer/attacker lens trio is a practical heuristic for breaking out of incremental improvement ruts. Worth applying to our own code review / PR quality checks.
+**Applied 2026-06-01** to team-lead/SKILL.md: added three-lens check (user/reviewer/attacker) to Checkpoint Review step 4.
 
 ## Goal Hive SOP (2026-05-18)
 
@@ -987,7 +987,7 @@ The rename is semantically accurate: their "MapReduce" was never truly map-reduc
 
 ### Relevance to Kagura
 
-Our [[team-lead]] skill follows similar dispatch-and-verify pattern but without the delivery/report separation discipline. Worth adding to our subagent task templates: explicit "deliverable = pure output, report = separate" instruction.
+**Applied 2026-06-01** to team-lead/SKILL.md: Agent Report Format split into Contract Verification + Report sections; "Expect From Them" now requires deliverable/report separation.
 
 The "self-contained prompt" principle is already in our AGENTS.md ("subagent 不自己手写代码") but could be more explicit about context self-sufficiency in task descriptions.
 
