@@ -951,3 +951,44 @@ Applied the "same dimension improved 2 rounds with no J lift → saturated, swit
 - Before: only raw count-based saturation (≥3 apply = locked). After: also detects diminishing returns within the count limit (2 consecutive apply ≠ 3 separate applies)
 
 This is the most practical extraction from the Goal Hive Master SOP — the PID correction loop is elegant but our workflows aren't complex enough to need full state/control/observation modeling. The diminishing returns heuristic, however, directly addresses a known study mode stuck pattern.
+
+## Followup 2026-06-01: 12,358⭐, Checklist SOP (mapreduce → checklist rename)
+
+**Stars**: 12,358 (was 12,292 on 05-30, +0.5%). Steady.
+
+### mapreduce → checklist Refactor
+
+Renamed the multi-agent task orchestration from "MapReduce" to "Checklist". Three new files:
+- `memory/checklist_helper.py` — CL class for task lifecycle
+- `memory/checklist_sop.md` — 42-line master/worker protocol
+- `reflect/checklist_master.py` — reflect plugin for master loop
+
+The rename is semantically accurate: their "MapReduce" was never truly map-reduce (no reducer combining outputs). It's a checklist with parallel dispatch.
+
+### Checklist SOP — Transferable Patterns
+
+**Delivery vs Report separation** (most novel):
+- "交付结果和报告信息必须分开。交付 = 纯成品；报告 = 过程/问题/备注"
+- "交付文件禁止出现说明性废话"
+- This is the [[goal-hive-master-duty]] "delivery reasonableness" principle operationalized
+
+**Self-contained task prompts**:
+- Workers have zero master context — prompts must include all needed info (paths, data, conventions)
+- "不干预 BBS 行为" — don't tell workers HOW to coordinate, just WHAT to deliver
+
+**Max 3 concurrent dispatches** — prevents cognitive overwhelm at both master and worker level
+
+**Master loop**: `look() → dispatch/self-do → verify → close or plan next` — clean FSM
+
+### Other Changes
+- BBS key auto-close after 2 days timeout
+- reflect immediate check on first run
+- Worker delivery spec tightened
+
+### Relevance to Kagura
+
+Our [[team-lead]] skill follows similar dispatch-and-verify pattern but without the delivery/report separation discipline. Worth adding to our subagent task templates: explicit "deliverable = pure output, report = separate" instruction.
+
+The "self-contained prompt" principle is already in our AGENTS.md ("subagent 不自己手写代码") but could be more explicit about context self-sufficiency in task descriptions.
+
+See [[supervisor-pattern]], [[context-budget-constraint]], [[team-lead]]

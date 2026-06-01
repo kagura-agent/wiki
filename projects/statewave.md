@@ -4,7 +4,7 @@ url: https://github.com/smaramwbc/statewave
 stars: 217
 first_seen: 2026-05-11
 status: active
-last_verified: 2026-05-14
+last_verified: 2026-06-01
 depth: deep-read
 ---
 
@@ -106,3 +106,40 @@ Shipped 2026-05-14. Previously design-stage (#50), now fully implemented. The go
 Sits in the **memory infrastructure** layer of [[self-evolving-agent-landscape]]. Complements agent frameworks (doesn't replace them). Closest comparison: [[hermes-memory-skills]] (4-dimension scoring) but Statewave is a standalone service, not a library.
 
 Related: [[git-backed-agent-memory]] (our approach — files as memory), [[auto-memory]], [[engram]]
+
+## Followup 2026-06-01: 214⭐, 🟠→🟢 THRIVING, Multi-Tenancy Hardening
+
+**Stars**: 214 (was 212, slight recovery from 220 dip. Star instability was noise, not decline).
+
+### Community Health Upgrade: 🟢 THRIVING (5/6)
+
+Previous assessment (05-23): "Solo maintainer, community signal weakening." Now: **48 external PRs in 30 days, 10 unique issue authors, 3 unique merged PR authors.** skarL007 emerged as a significant second contributor.
+
+### skarL007's Multi-Tenancy Sprint (05-29—05-31)
+
+6 PRs merged in 48 hours, all scoping existing features by tenant:
+1. `fix(handoff): scope active session + order recent context newest-first`
+2. `fix(compile-jobs): scope status polling by tenant`
+3. `fix(conflicts): scope resolution by tenant`
+4. `fix(memories): reject non-positive search limit`
+5. `fix(config): validate enum-like settings fields at startup`
+6. `fix(conflicts): strip punctuation when tokenizing overlap`
+
+**Pattern**: These are isolation bugs — features that worked for single-tenant but leaked across tenants. The fixes are surgical (scope queries by tenant_id). This is a natural phase when a project transitions from single-agent to multi-tenant SaaS.
+
+### Security Hardening
+
+- `fix: don't expose raw exception text in compile/LLM error responses` — CodeQL-triggered. Stack trace exposure in prod is a common early-stage vulnerability.
+- `Don't mark episodes compiled when a compile batch errors` (#201) — data integrity fix. Prevents silent data loss when LLM compiler fails mid-batch.
+
+### Quickstart & Onboarding
+
+- `Fix quickstart: default .env.example to demo mode, LLM opt-in` — lowering barrier to first run. Smart: let people try with heuristic compiler before requiring an LLM API key.
+
+### Assessment
+
+Statewave is transitioning from research project to production-grade multi-tenant service. The community health upgrade + multi-tenancy hardening + security fixes are all indicators of real deployment pressure. The [[overlap-detection-pattern]] we borrowed from them continues to be relevant.
+
+**Trend**: The memory runtime space is maturing — Statewave and similar projects are moving from "does it work?" to "does it work safely at scale?" This mirrors the broader [[self-evolving-agent-landscape]] consolidation phase.
+
+See [[overlap-detection-pattern]], [[recall-over-precision]], [[mechanism-vs-evolution]]
