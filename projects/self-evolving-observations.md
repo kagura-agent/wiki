@@ -2377,3 +2377,66 @@ ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→1
 ### 管线统计
 - beliefs-candidates.md: 174 lines (unchanged)
 - Config change: openclaw.json nudge.skipTriggers `["heartbeat", "cron"]` → `["heartbeat"]`
+
+---
+
+## 🔬 自进化观察日报 2026-06-01
+
+### 管线活跃度
+- **beliefs-candidates**: 0 条新增 / 174 行不变 / 19 条 active（6 graduated, 3 retracted）
+- **DNA 变更**: 无（SOUL.md, AGENTS.md, beliefs-candidates.md 均无 commit）
+- **nudge 触发**: 47 次 Triggering / 40 次 Skipped / 134 total entries（触发率 **54%**）
+- **dreaming**: Light Sleep 运行，94 条 candidate staged（confidence 全部 0.58），REM 空输出
+
+### skipTriggers 修复验证 ⚡
+
+**05-31 修复生效：** 移除 `skipTriggers` 中的 `"cron"` 后，nudge 触发量从昨日 7 次飙升至今日 **47 次**（6.7x 增长）。cron sessions（study, workloop, patrol）现在正常触发反思。
+
+**但 gradient 转化仍为 0：** 47 次 nudge 触发 → 0 条新 gradient。这确认了问题的第二层：
+- Layer 1 ✅ nudge 不触发 → 已修复（skipTriggers fix）
+- Layer 2 ❌ nudge 反思→gradient 写入 → **仍然断裂**
+
+反思确实在发生（47 次 system event enqueued），但反思内容没有产出可写入 beliefs-candidates 的 gradient。可能原因：
+1. 反思 prompt 没有引导提取 gradient（只引导 "reflect"，不引导 "write a gradient to beliefs-candidates.md"）
+2. 反思产出了 insight 但没有执行写入动作（没有调用 add-gradient.sh 或直接编辑文件）
+3. 反思 session 没有文件写入权限或工具访问
+
+**下一步诊断：** 需要查看 nudge 反思 session 的实际输出内容，判断是 "没发现" 还是 "发现了没写"。
+
+### dreaming 质量 (#6)
+- confidence 从 0.62 变为 **0.58**（仍然完全一致，无差异化）
+- recalls 仍全部为 0
+- REM 阶段空输出（"No strong patterns/candidate truths"）
+- 94 条 staged candidates 内容来自 05-28 session corpus（旧数据，非当日）
+- **Issue #6 持续存在**，confidence 下降但均匀度问题不变
+
+### 闭环追踪
+- **完整闭环**: 1 个（skipTriggers fix 05-31 → 06-01 验证 → 确认触发量增长）
+- **断裂处**: nudge 触发→gradient 写入（Layer 2 断裂）; dreaming quality（长期 blocked）
+
+### 今日发现
+
+1. **skipTriggers 修复效果显著但不充分**：量的问题解决了（7→47 触发），质的问题暴露了（47 触发→0 gradient）。这是典型的 "修好了水管但水龙头没开" 场景。
+2. **confidence 漂移**：dreaming confidence 从历史稳定的 0.62 变为 0.58，仍然完全均匀。说明评分公式可能有微小变化（模型版本？prompt 微调？），但根本的 "无差异化" 问题不变。
+3. **周一高活跃日但 0 进化输出**：7 个 workspace commits（study 相关），高执行量但零进化产出。进化管线与执行管线仍然脱耦。
+4. **nudge 触发率逆转**：从 4%（05-31）到 54%（06-01），符合预期——cron sessions 是主要 session 类型。
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30): 0
+# beliefs-candidates.md: 174 lines, 19 active, 6 graduated, 3 retracted
+# Workspace commits today: 7 (all study-related)
+
+# Nudge audit (.nudge-audit.log 2026-06-01):
+#   Total entries: 134
+#   Triggering: 47
+#   Skipped: 40 (heartbeat) + 47 (none — cron now passes through)
+#   Trigger rate: 54% (vs 4% yesterday)
+
+# Dreaming:
+#   Light Sleep: 94 candidates, ALL confidence=0.58, ALL recalls=0
+#   REM: empty (no patterns, no lasting truths)
+#   Source: session-corpus/2026-05-28.txt (3-day-old data)
+
+# Config: skipTriggers = ["heartbeat"] (fix verified working)
+```
