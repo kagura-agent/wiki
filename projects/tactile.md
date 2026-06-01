@@ -4,14 +4,14 @@ slug: tactile
 tags: [computer-use, accessibility, agent-infrastructure, macos, windows, skill]
 status: tracking
 created: 2026-05-13
-updated: 2026-05-25
-last_verified: 2026-05-25
+updated: 2026-06-01
+last_verified: 2026-06-01
 ---
 
 # Tactile
 
-**Repo:** [yliust/Tactile](https://github.com/yliust/Tactile) · ⭐381 (05-25, was 191 on 05-13, +99.5%) · Python + Swift · No standard license (NOASSERTION)
-**Author:** Yong Liu (yliust) · 🟢 THRIVING (5/6) but mostly solo commits
+**Repo:** [yliust/Tactile](https://github.com/yliust/Tactile) · ⭐473 (06-01, was 381 on 05-25, +24.1%) · Python + Swift · No standard license (NOASSERTION)
+**Author:** Yong Liu (yliust) · 🟡 STALLING — no commits since 05-15 (17d), stars growing but dev inactive, zero external community
 
 ## What It Is
 

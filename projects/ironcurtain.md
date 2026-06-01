@@ -1,17 +1,17 @@
 ---
 title: IronCurtain
 url: https://github.com/provos/ironcurtain
-stars: 461
+stars: 480
 created: 2026-02-21
-last_updated: 2026-05-25
+last_updated: 2026-06-01
 depth: 🔭 scout
 status: active
-last_verified: 2026-05-25
+last_verified: 2026-06-01
 ---
 
 # IronCurtain — Constitutional Security for AI Agents
 
-Apache-2.0, 461⭐ (+17.9% in 14d), 60 forks, by provos (likely Niels Provos, security researcher). Very active (pushing daily). 🟢 THRIVING (5/6).
+Apache-2.0, 480⭐ (+4.1% in 7d), 60+ forks, by provos (likely Niels Provos, security researcher). Very active (pushing daily). 🟢 THRIVING (5/6).
 
 ## Core Idea
 
@@ -77,6 +77,21 @@ Drop-in skill packaging at `~/.ironcurtain/skills/<name>/`. Per-state skills in 
 ## Architectural Shift
 
 The project has moved from "policy engine that wraps tool calls" to "workflow orchestration platform with constitutional security baked in." The vuln-discovery workflow demonstrates the thesis: multi-hour, multi-agent runs that are both powerful AND auditable. The security layer isn't optional — it's the foundation that makes autonomous long-running workflows trustworthy.
+
+## Post-v0.11.0 (2026-05-28~31) — SFT/RL Training Data Pipeline
+
+New direction: **MITM token-trajectory capture**. IronCurtain's proxy position between agent and LLM provider is leveraged to capture complete (input → output) training pairs as JSONL trajectories.
+
+### Key PRs:
+- **PR #273** (+4121 lines): Verbatim, byte/wire-faithful capture of agent↔provider HTTP exchanges. Per-session JSONL trajectories + ordering manifest. Opt-in via `--capture-traces` on `start`, `workflow start`, and `daemon`. This is the raw-input stage for an SFT/RL training-data pipeline.
+- **PR #276**: Wire `--capture-traces` into PTY session path (mux → child sessions). Fixes gap where capture worked in batch/workflow mode but not in interactive PTY sessions.
+- **PR #277** (+1451 lines): Break runtime import cycle + add `madge --circular` pre-push gate + CI step.
+
+### Insight
+
+IronCurtain's MITM proxy position is uniquely suited for training data capture — it already intercepts all LLM traffic for security enforcement, so adding faithful recording is architecturally cheap. This positions the project at the intersection of **agent security** and **agent training**, which is novel. No other security-focused project is doing this.
+
+The trajectory capture creates a flywheel: run agents → capture data → fine-tune models → run better agents. Combined with the vuln-discovery workflow, this could generate specialized security-researcher training data at scale.
 
 This positions IronCurtain as both a security tool AND a competitor to agent orchestration frameworks. The workflow engine is general-purpose, not limited to security tasks.
 
