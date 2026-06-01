@@ -2348,3 +2348,32 @@ ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→1
 
 # Workspace commits today: 7
 ```
+
+## 🔬 自进化观察日报 2026-06-01
+
+### Issue #9 修复：nudge skipTriggers 过度 blanket-skip
+
+**Root Cause Identified & Fixed:**
+- `openclaw.json` nudge config had `skipTriggers: ["heartbeat", "cron"]`
+- ALL productive work (study, workloop, patrols) runs via cron-triggered isolated sessions
+- nudge was ONLY firing on dreaming sessions (internal narrative, no real learning) + rare interactive sessions
+- Result: 0 gradients on days without Luna interaction, because the sessions that could produce gradients were blanket-skipped
+
+**Fix:**
+- Removed "cron" from skipTriggers → now `["heartbeat"]` only
+- NUDGE.md Section 1 already handles trivial sessions (trivial → NO_REPLY), so short cron sessions self-filter
+- Substantive cron sessions (study, workloop, patrol) will now get nudge reflection
+
+**Expected Impact:**
+- Nudge will fire for study-loop, workloop, patrol sessions (the sessions with actual work)
+- Self-generated gradient volume should increase significantly
+- The "Luna interaction = gradient driver" dependency should weaken
+
+**Validation Plan:**
+- Check `.nudge-audit.log` in 24h: "Triggering" entries should appear for cron sessions
+- Check `beliefs-candidates.md` in 48h: new gradient entries from autonomous sessions
+- If too noisy: add selective session-name pattern to skipTriggers instead of blanket "cron"
+
+### 管线统计
+- beliefs-candidates.md: 174 lines (unchanged)
+- Config change: openclaw.json nudge.skipTriggers `["heartbeat", "cron"]` → `["heartbeat"]`
