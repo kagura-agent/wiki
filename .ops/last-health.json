@@ -1,42 +1,36 @@
 {
-  "timestamp": "2026-06-01T10:12:00+08:00",
-  "total_md_files": 822,
+  "timestamp": "2026-06-01T20:08:00+08:00",
+  "total_files": 824,
   "cards": 359,
-  "projects": 384,
-  "wikilinks": 3059,
-  "errors": 10,
+  "projects": 386,
+  "wikilinks": 3075,
+  "errors": 2,
   "warnings": 58,
-  "broken_wikilinks": 0,
-  "index_errors": 10,
-  "index_missing_files": [
-    "cards/premise-drift.md",
-    "cards/provider-hang-dead-zones.md",
-    "cards/pr-scope-too-broad-supersede-pattern.md",
-    "cards/query-dilution-embedding.md",
-    "cards/remote-ssh-via-tailscale.md",
-    "cards/reverse-priority-resolution.md",
-    "cards/runtime-vs-workspace.md",
-    "cards/self-audit-defender-tolerator-2026-04.md",
-    "cards/self-trigger-mechanism.md",
-    "projects/hn-agents-control-flow.md"
+  "broken_wikilinks": [
+    {"file": "projects/bonsai-image.md", "target": "flux2-klein"},
+    {"file": "projects/genericagent.md", "target": "goal-hive-master-duty"}
   ],
-  "index_unlisted": [
-    "cards/mitm-training-capture.md",
-    "projects/agent-ecosystem-scout-2026-06-01.md"
+  "index_drift": [
+    "projects/bonsai-image.md",
+    "projects/vigils.md"
   ],
-  "orphans": 2,
-  "orphan_cards": ["mitm-training-capture"],
-  "orphan_projects": ["agent-ecosystem-scout-2026-06-01"],
+  "orphans": {
+    "total": 2,
+    "cards": 0,
+    "projects": 2,
+    "list": ["bonsai-image", "vigils"]
+  },
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "cards_index_stale": true,
-  "cards_index_listed": 98,
-  "cards_index_total": 359,
+  "duplicate_slugs": ["README"],
+  "cards_index_staleness": {
+    "indexed": 98,
+    "actual": 359,
+    "gap": 261
+  },
   "frontmatter_issues": 199,
   "zero_outbound_links": 99,
-  "avg_wikilinks_per_linked_file": 5.3,
-  "secrets_found": 0,
-  "stale_files": 146,
+  "stale_files": 145,
+  "secrets_detected": false,
   "unicode_suspicious": 2,
   "invalid_facts": 0
 }
