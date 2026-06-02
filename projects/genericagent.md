@@ -991,4 +991,13 @@ The rename is semantically accurate: their "MapReduce" was never truly map-reduc
 
 The "self-contained prompt" principle is already in our AGENTS.md ("subagent 不自己手写代码") but could be more explicit about context self-sufficiency in task descriptions.
 
-See [[supervisor-pattern]], [[context-budget-constraint]], [[team-lead]]
+### Issue #548: Context Convergence Mechanism (Architecture Critique)
+
+High-quality issue exposing a fundamental flaw: **all context management is additive, none is convergent**. When a user rejects Plan A at turn 6, the 5 earlier turns praising Plan A still outnumber the 1 rejection turn in `history_info`. Root causes:
+- `history_info.append()` only adds, never marks entries as superseded
+- `_fold_earlier` compresses format but doesn't filter semantically
+- No "negation" primitive in the context model
+
+This is a universal problem for long-context agents. OpenClaw's approach (session compaction) has the same risk — compacted summaries preserve all directions equally. Worth tracking if GenericAgent ships a convergence mechanism.
+
+See [[supervisor-pattern]], [[context-budget-constraint]], [[team-lead]], [[context-compaction]]

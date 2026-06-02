@@ -821,4 +821,23 @@ Major decoupling sprint — 6 refactoring commits in one day:
 
 No architectural novelty — standard maturation work. The event bus refactoring is well-executed but not conceptually new. DingTalk user isolation is a table-stakes feature that confirms nanobot's multi-channel ambitions but doesn't change its trajectory.
 
-Links: [[self-evolving-agent-landscape]], [[OpenClaw]]
+### Runtime Event Bus — Implementation Detail
+
+Read `nanobot/bus/runtime_events.py` in full. Clean design:
+- **Typed frozen dataclasses**: `SessionTurnStarted`, `TurnRunStatusChanged`, `TurnCompleted`, `GoalStateChanged`, `RuntimeModelChanged` — explicit event taxonomy
+- **Separate from message bus**: runtime events are in-process state notifications, not user delivery
+- **Ordered execution**: `publish()` awaits async handlers sequentially, `publish_nowait()` for sync contexts creates a task
+- **Turn-scoped metadata**: `RuntimeEventPublisher` carries per-turn latency and runtime state, with `clear_turn()` cleanup
+- **Lazy init**: `ensure_runtime_event_publisher()` creates missing state on access — defensive against initialization order
+
+This is textbook event sourcing for agent internals. OpenClaw uses a similar but more implicit approach (heartbeat events, system events via cron). The explicit event type hierarchy is cleaner.
+
+### Issue #4128: Session Retention Bug
+
+`retain_recent_legal_suffix` has an edge case: when the last N messages are all assistant/tool (no user message), the `cut` calculation uses `len(tail) - len(kept)` which can duplicate user messages across archive and kept. A subtle bug that exposes the fragility of positional session truncation — any cut-based approach risks this. Our approach ([[context-compaction]]) avoids positional cuts.
+
+### Issue #4133: Silent Tool Call Delivery Failure
+
+After tool calls, agent response silently fails to deliver — persists after a previous fix (#4080). This is the classic "tool output consumed the response" bug. Multiple channels affected.
+
+Links: [[self-evolving-agent-landscape]], [[OpenClaw]], [[context-compaction]]
