@@ -841,3 +841,13 @@ This is textbook event sourcing for agent internals. OpenClaw uses a similar but
 After tool calls, agent response silently fails to deliver — persists after a previous fix (#4080). This is the classic "tool output consumed the response" bug. Multiple channels affected.
 
 Links: [[self-evolving-agent-landscape]], [[OpenClaw]], [[context-compaction]]
+
+## Followup 2026-06-02
+
+**Stars**: 43,496 (was 41,316 last noted — steady growth)
+
+Recent activity is maintenance/polish, no new architectural signals. DingTalk group_user_isolation and event bus refactor already noted on 06-01. Today's commits are docs-only for the DingTalk feature.
+
+Open PRs of interest:
+- #3723 Local whisper transcription — still open, would add offline voice-to-text
+- #4143 Refactor session retention result — session lifecycle cleanup

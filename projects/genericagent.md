@@ -1001,3 +1001,18 @@ High-quality issue exposing a fundamental flaw: **all context management is addi
 This is a universal problem for long-context agents. OpenClaw's approach (session compaction) has the same risk — compacted summaries preserve all directions equally. Worth tracking if GenericAgent ships a convergence mechanism.
 
 See [[supervisor-pattern]], [[context-budget-constraint]], [[team-lead]], [[context-compaction]]
+
+## Followup 2026-06-02
+
+**Stars**: 12,396 (was 8,401 on 04-30 — +47% in ~33 days, strong growth)
+
+**Recent commits** (June 1-2):
+- Plugin hooks init fix (#550) — proper package recognition for plugins directory
+- TUI stdout fix (#554) — blank lines and leaked task_dir folders
+- Checklist master coordination fix — startup dedupe for checklist mode
+
+Incremental maintenance, no architectural changes. The checklist/mapreduce system and issue #548 context convergence noted on 06-01 remain the key signals.
+
+**Issue #537 — Plugin hooks can't modify context**: `_hook('agent_before', locals())` discards return value, making context modification hooks non-functional. Classic "fire-and-forget" vs "interceptor" hook design mistake. GenericAgent's hooks are observe-only, not transform-capable. Worth noting: OpenClaw's tool policy hooks are also observe-only in many places — same pattern.
+
+**Issue #536 — Goal Hive stale budget on resume**: Interrupted multi-hour runs can't safely resume because `goal_state.json` preserves the original start_time. Suggests their persistence model doesn't separate "identity state" (objective, history) from "runtime state" (budget, timing). [[write-ahead-session-persistence]] is the nanobot approach to similar problems.
