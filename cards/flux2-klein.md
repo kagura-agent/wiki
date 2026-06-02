@@ -1,6 +1,6 @@
 ---
 created: 2026-06-01
-last_verified: 2026-06-01
+last_verified: 2026-06-02
 ---
 # FLUX.2 Klein
 
@@ -16,4 +16,4 @@ last_verified: 2026-06-01
 
 ## Local inference
 
-Runs on RTX 3060 12 GB via ComfyUI at ~10-12s/image. See [[bonsai-image-4b]] for 1-bit/ternary quantization research (FLUX.2 Klein as base).
+Runs on RTX 3060 12 GB via ComfyUI at ~10-12s/image. See [[bonsai-image-4b]] for 1-bit/ternary quantization research (FLUX.2 Klein as base). Related project: [[bonsai-image]].

@@ -14,7 +14,7 @@ Sync between AGENTS.md, CLAUDE.md, .cursorrules, Copilot rules — one source of
 ### 4. HN Theme: Agent Decision Fatigue
 "Coding agents are giving everyone decision fatigue" (06-02) — agents produce too many options/PRs/suggestions, humans can't keep up with reviewing. Inverse of "agents aren't capable enough." The capability ceiling is rising but the human review bottleneck is the new problem.
 
-### 5. vigils Doubled (50→100⭐ in 2d)
+### 5. [[vigils]] Doubled (50→100⭐ in 2d)
 Agent safety control plane (hash-chain audit, default-deny firewall, credential lease broker, MCP drift detection). Rust+Tauri. Growth signal validates agent governance as hot category. On track for 06-08 revisit.
 
 ## Tracked Projects Star Updates

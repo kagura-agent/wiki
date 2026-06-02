@@ -18,4 +18,5 @@ Research/experimental. No production-ready ternary diffusion models as of mid-20
 
 ## See Also
 
+- [[bonsai-image]] — project note on ternary/1-bit quantization for image models
 - [[flux2-klein]] — base model for bonsai experiments
