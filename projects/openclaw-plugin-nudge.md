@@ -85,3 +85,40 @@ ctx: { agentId?: string; sessionKey?: string; workspaceDir?: string; trigger?: s
 - [ ] 发布到 npm（@kagura-agent/openclaw-plugin-nudge）
 - [ ] 测试 subagent.run 作为替代注入方式
 - [ ] 测试 nudge 触发后的反思质量
+
+## Layer 2 断裂修复（2026-06-02）
+
+### 问题
+05-31 修复 skipTriggers 后，nudge 触发量从 7→47/天（Layer 1 修复成功）。但 47 次触发 → 0 条 gradient 写入。
+
+### 根因分析（06-02 诊断）
+日志分析 06-01 67 次 Triggering 的 session 分布：
+- **36 cron**（study/workloop/patrol）— 有工具权限但 NUDGE.md 没指定用 add-gradient.sh
+- **14 dreaming** — 跑 memory consolidation，完全不适合反思
+- **13 discord** — 有 Luna 互动，本应产 gradient
+- **3 commitments + 1 subagent** — 边缘场景
+
+两层问题：
+1. **dreaming sessions 被 nudge**：浪费触发量。这些 session 跑的是 memory-core 的 dreaming narrative，注入 NUDGE.md 反思 prompt 毫无意义
+2. **NUDGE.md 写入路径断裂**：告诉 agent "写入 beliefs-candidates.md" 但没给具体的 tool call 路径。agent 在 system-event 反思时说"没什么新的"就跳过了，或者想写但不知道调 add-gradient.sh
+
+### 修复
+1. **skipSessionPatterns 功能**（nudge plugin v0.2.0）：
+   - 新增 `skipSessionPatterns` 配置（string 数组，session key 子串匹配）
+   - 配置 `["dreaming"]` → 跳过所有 dreaming-narrative-* sessions
+   - 审计日志显示跳过原因：`Skipped (sessionPattern=dreaming, session=...)`
+
+2. **NUDGE.md 写入路径统一**：
+   - Gradient: `bash tools/add-gradient.sh "反馈" "行为" --source nudge`
+   - Confirmation: 同上
+   - Section 2 可复用教训: 同上
+   - 新增"自主学习也算"提示：cron/study 中的发现也走 add-gradient.sh
+
+### 预期效果
+- 触发量：67 → ~53（去掉 14 dreaming）
+- 转化率：0% → 应显著提升（有明确的 tool call 路径）
+
+### 验证计划
+- 24h 后检查 `.nudge-audit.log`：应有 `Skipped (sessionPattern=dreaming)` 条目
+- 48h 后检查 `beliefs-candidates.md`：应有 `--source nudge` 的新 gradient
+- 如果仍然 0 gradient → 下一层诊断：检查 system-event 反思时 agent 是否有 exec 权限
