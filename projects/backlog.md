@@ -1260,3 +1260,6 @@ GitHub trending (agent, created past week, sorted by stars):
 - **What**: See what coding agents (Claude Code, Codex, Kimi) send to the model — local transparency tool
 - **Why interesting**: Agent observability/transparency niche. Practical utility for anyone using coding agents.
 - **Added**: 2026-05-24
+
+## 2026-06-02 Quick Scan Additions
+- **odysseus** (pewdiepie-archdaemon/odysseus): Self-hosted AI workspace, 20k stars in 48h. Worth a deeper look next scout to understand what it actually does and whether it's relevant to our tooling.

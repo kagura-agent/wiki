@@ -13,6 +13,8 @@ When a system has multiple processing tiers (quick/deep/meta), shared mutable st
 
 [[claude-soul]] Issue #6 (Abdallah01, 2026-05-23): Deep reflection tier structurally unreachable because `clearSignals()` is unconditional after any reflection. Quick fires at 12 signals and wipes. Deep needs 60 but can never accumulate.
 
+**Fixed in v0.2.5** (2026-06-02 verified): Now uses per-tier `consumedBy` markers + `gcFullyConsumed()` — exactly the fix pattern described below.
+
 ## Fix Pattern
 
 Per-tier consumed tracking. Each item tracks which tiers have consumed it (`consumedBy` array). Each tier only reads items unconsumed by its own tier.

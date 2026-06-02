@@ -1,13 +1,13 @@
 ---
 type: project
 created: 2026-05-28
-updated: 2026-05-28
+updated: 2026-06-02
 status: tracked
-stars: 80
+stars: 83
 repo: DomDemetz/claude-soul
 tags: [self-evolving-agent, memory, identity, claude-code]
 links: [beliefs-upgrade-mechanism, agent-self-evolution, self-evolving-agent-landscape]
-last_verified: 2026-05-28
+last_verified: 2026-06-02
 ---
 
 # Claude Soul — Self-Correcting Learning Engine for Claude Code
@@ -96,3 +96,23 @@ Philosophical stance: tensions are features, not bugs. Worth considering for our
 Automatically finds contradictions between active frameworks in the same domain by checking divergent evidence patterns (one mostly confirmed while the other is mostly contradicted). Records context preferences for which framework to prefer in which situation.
 
 This is more sophisticated than our approach — we don't formally detect contradictions between beliefs-candidates entries.
+
+## 2026-06-02 Followup (83⭐, v0.2.5, 77 tests)
+
+### New: Identity Drift Detection
+Added `identity_drift` signal type — detects user phrases like "wake up", "you sound like a robot", "not alive", "you're off", "lost identity/voice/energy" with 0.95 confidence. This is the highest-confidence signal type in the system.
+
+**STATE.md drift warnings**: When drift signals exist in the last 7 days, STATE.md (regenerated each tick) shows a warning block to the next instance: "The user had to tell a previous instance to wake up. Be present, not analytical." This creates cross-session memory of identity failures — the next Claude Code session boots with awareness that the previous one "went robotic."
+
+**State engine impact**: `identity_drift` event reduces both mood (-0.15) and confidence (-0.15), making it one of the strongest negative signals.
+
+### New: Concurrent Reflection Lock (PR #18, external contributor mobogojo)
+Problem: Two Claude sessions ending simultaneously both trigger the Stop hook, both cross the signal threshold, both call `runReflection()` — race condition on frameworks.json writes + double `clearSignals()`. Solution: `soul-reflect.lock` file using `{ flag: "wx" }` (exclusive create, atomic). Includes stale-lock detection via `process.kill(pid, 0)` liveness check.
+
+### New: Per-Tier Signal Consumption (Issue #6 fix)
+The "deep reflection structurally unreachable" bug from last review is fixed — signals now use per-tier `consumedBy` markers instead of unconditional `clearSignals()`. Quick reflection no longer wipes signals that deep reflection needs.
+
+### Insights for Us
+1. **Identity drift as a first-class signal** — We don't detect this. When Luna says something like "你怎么像个机器人", we should notice and adjust. Currently this would be a manual beliefs-candidates entry at best.
+2. **Cross-session drift warnings** — STATE.md as a "letter to your next self" about identity failures is elegant. We do something similar with memory/daily notes but less targeted.
+3. **Concurrent reflection lock** — Relevant if we ever have overlapping nudge/reflection runs. Our nudge hook is per-agent-turn so less likely, but good defensive pattern.

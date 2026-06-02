@@ -4,8 +4,8 @@ created: 2026-05-25
 updated: 2026-05-25
 status: active
 depth: deep-dive
-stars: 317
-last_verified: 2026-05-29
+stars: 389
+last_verified: 2026-06-02
 ---
 
 # ccglass — See What Your Coding Agent Sends
@@ -146,3 +146,7 @@ This is why external contributors are flowing in: the bar to contribute is "open
 Dashboard now has real-time observability — SSE-driven live timeline, pattern detection for user-side envelopes (system-reminder, hook, slash, memory, etc.), hover popovers for tag explanation.
 
 Velocity is high — 100% Claude Code generated PRs. jianshuo is sole maintainer but throughput is impressive.
+
+## 2026-06-02 Followup (389⭐)
+
+No new commits since 05-28. Stars continued growing (349→389, +11% in 4 days). 4 open issues. Velocity has plateaued after the v1.0 sprint — likely a natural post-launch stabilization. Mature enough to reduce check frequency.
