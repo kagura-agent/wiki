@@ -59,7 +59,7 @@ Session telemetry: confidence, energy, frustration, curiosity, hoursActive.
 | Signal detection | Automatic from conversation patterns | Manual (beliefs-candidates.md) |
 | Reflection timing | Signal-count triggered (20/100) | Nudge hook (every 5 agent turns) |
 | Evolution gate | Evidence tiers + confidence threshold | Triple Verification (cross-context ≥3, predictive, non-obvious) |
-| Anti-bootstrap | 0.5x weight for self-generated evidence | Not formalized |
+| Anti-bootstrap | 0.5x weight for self-generated evidence | **Applied 2026-06-02**: evaluate-candidate.sh + beliefs-candidates.md V1 gate |
 | Token budget | Explicit 4500-token context assembly | Full file loading (SOUL.md, AGENTS.md) |
 | Storage | SQLite + optional Ollama embeddings | Markdown files + wiki search |
 
@@ -70,7 +70,7 @@ Session telemetry: confidence, energy, frustration, curiosity, hoursActive.
 4. **Token budgeting for identity context** — Worth considering if our SOUL.md + AGENTS.md grow large.
 
 ## Verdict
-Similar philosophical direction to ours (self-evolving agent identity), more formalized/automated but also more complex. The 0.5x self-referential discount is the most actionable insight — worth considering for our beliefs pipeline. The NPM package approach makes it easy for Claude Code users to adopt.
+Similar philosophical direction to ours (self-evolving agent identity), more formalized/automated but also more complex. The 0.5x self-referential discount is the most actionable insight — **applied 2026-06-02** to evaluate-candidate.sh (weighted V1 scoring) and beliefs-candidates.md (Promotion Gate rule). The NPM package approach makes it easy for Claude Code users to adopt.
 
 Not a competitor (different layer — they augment Claude Code, we are a full agent platform), but validates the direction.
 
