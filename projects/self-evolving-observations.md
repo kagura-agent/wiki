@@ -2440,3 +2440,26 @@ ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→1
 
 # Config: skipTriggers = ["heartbeat"] (fix verified working)
 ```
+
+---
+
+## 🔬 自进化观察 2026-06-02 — Study Apply 修复
+
+### Layer 2 nudge→gradient 断裂修复
+
+**问题**: 06-01 观测到 47 次 nudge 触发 → 0 条 gradient。两层问题：
+- Layer 1 ✅ nudge 不触发（05-31 已修复，skipTriggers）
+- Layer 2 ❌ nudge 触发但不产出 gradient
+
+**诊断**: 两个并发原因：
+1. **Cron session 生命周期问题**: nudge 在 agent_end hook 触发 system event，但 cron session 是 ephemeral/isolated，session 可能已在拆除，system event 入队但未处理
+2. **study.yaml reflect 节点无显式工具调用**: reflect 节点说"学习方法 pattern → beliefs-candidates.md"但没有指定用 add-gradient.sh，agent 不知道用什么工具写入
+
+**修复**: study.yaml reflect 节点增加：
+- 显式 `add-gradient.sh --source study` 命令
+- Gradient 自检清单（3 个必答问题 + 强制行动）
+- 全 no 时写 memory 记录原因（本身是信号）
+
+**验证计划**: 下一轮 study session reflect 节点应产出至少 1 条 gradient 或 1 条 memory 解释。48h 后 check。
+
+**对比 workloop.yaml**: workloop 已有 2 处 add-gradient.sh 引用（gradient_gate 节点），不受此问题影响。
