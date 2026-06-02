@@ -279,3 +279,10 @@
   - CONTRIBUTING.md: Conventional Commits required, no DCO/CLA
   - NV QA issues tend to have detailed repro steps — good targets
   - #4105 superseded by #4149: when multiple log sources each have --tail N, must merge streams chronologically first then apply tail once to merged result, not tail each source separately (concat = 2N lines)
+
+## Issue #4546 — Read-path permission drift healing (2026-06-02)
+- **Root cause**: `readConfigFile()` never calls `ensureConfigDir()` — only `writeConfigFile()` does
+- **Impact**: Read-only CLI commands (`nemoclaw list`) don't repair drifted permissions
+- **Fix**: Call `ensureConfigDir(path.dirname(filePath))` in `readConfigFile()` before reading, plus heal file-level permissions to 0o600
+- **Pattern**: DEFENSE_IN_DEPTH — security invariants must be enforced on every access path, not just writes. Same pattern as [[PR #4054]] where `mkdirSync` lacked `mode` on alternative code paths
+- **Gotcha**: Must handle case where dir doesn't exist yet — `ensureConfigDir` creates it, but `readConfigFile` should still return fallback if file doesn't exist
