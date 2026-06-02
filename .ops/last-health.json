@@ -1,36 +1,34 @@
 {
-  "timestamp": "2026-06-01T20:08:00+08:00",
-  "total_files": 824,
-  "cards": 359,
+  "timestamp": "2026-06-02T10:17:00+08:00",
+  "total_md_files": 827,
+  "cards": 362,
   "projects": 386,
-  "wikilinks": 3075,
+  "wikilinks": 3087,
   "errors": 2,
-  "warnings": 58,
+  "warnings": 62,
   "broken_wikilinks": [
-    {"file": "projects/bonsai-image.md", "target": "flux2-klein"},
-    {"file": "projects/genericagent.md", "target": "goal-hive-master-duty"}
+    { "source": "cards/flux2-klein.md", "target": "bonsai-image-4b" },
+    { "source": "projects/nemoclaw.md", "target": "PR #4054" }
   ],
-  "index_drift": [
+  "index_drift": 5,
+  "index_drift_files": [
+    "cards/flux2-klein.md",
+    "cards/goal-hive-master-duty.md",
+    "cards/identity-drift-detection.md",
     "projects/bonsai-image.md",
     "projects/vigils.md"
   ],
-  "orphans": {
-    "total": 2,
-    "cards": 0,
-    "projects": 2,
-    "list": ["bonsai-image", "vigils"]
-  },
+  "orphans": 3,
+  "orphan_cards": ["identity-drift-detection"],
+  "orphan_projects": ["bonsai-image", "vigils"],
   "stubs": 0,
   "duplicate_slugs": ["README"],
-  "cards_index_staleness": {
-    "indexed": 98,
-    "actual": 359,
-    "gap": 261
-  },
-  "frontmatter_issues": 199,
+  "cards_index_staleness": { "indexed": 98, "actual": 362, "gap": 264 },
+  "frontmatter_issues": 202,
   "zero_outbound_links": 99,
-  "stale_files": 145,
-  "secrets_detected": false,
-  "unicode_suspicious": 2,
+  "avg_wikilinks_per_linked_file": 5.3,
+  "secrets_detected": 0,
+  "stale_files": 147,
+  "unicode_issues": 2,
   "invalid_facts": 0
 }

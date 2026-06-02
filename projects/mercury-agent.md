@@ -587,3 +587,23 @@ Fixed critical issue where intent routing matched ~10 skills on single request. 
 **Relevance to OpenClaw:** [[context-compaction]] is the related OpenClaw concern — not daily budget limits, but context window management. Mercury solves "running out of money"; we need to solve "running out of context." Different problems, but the hysteresis + multi-lever approach transfers.
 
 Links: [[context-compaction]], [[nanobot]], [[functional-area-resolver]]
+
+## Followup 2026-06-02: 2,531⭐, v1.1.12 Daemon Hotfix
+
+**Stars**: 2,531 (was ~2.4K on 06-01, steady growth).
+
+### v1.1.12 — Daemon Hotfix (06-01)
+
+Critical fix for standalone binaries introduced in v1.1.11 "Skilly Mercury":
+- Standalone binary (`bun build --compile`) couldn't start daemon — Commander treated the bun-virtual `$bunfs` path as unknown subcommand
+- `isStandaloneBinary()` detection added: checks `process.versions.bun`, `$bunfs`/`~BUN` markers, `execPath` basename
+- System-service files (macOS LaunchAgent, Linux systemd, Windows schtasks) now correctly generated for standalone installs
+- Result: Telegram bot (the main user-facing channel) was broken for all one-line installer users
+
+### Assessment
+
+The daemon hotfix reveals a distribution pain point: `bun build --compile` produces binaries that behave differently from `node script.js` in subtle ways (process.argv, process.execPath). This is the same class of issue that [[nanobot]]'s Python packaging faces — agent frameworks distributing as standalone binaries must handle the runtime abstraction gap.
+
+No new architecture. v1.1.11's skill system CLI (registry + install + search) remains the most significant recent addition — transforms [[mercury-agent-skills]] from static catalog to proper package registry.
+
+Links: [[mercury-agent-skills]], [[self-evolving-agent-landscape]]

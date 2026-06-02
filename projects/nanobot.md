@@ -793,3 +793,32 @@ See also: [[self-evolving-agent-landscape]], [[dream-single-phase-consolidation]
 **Signal**: nanobot is investing in architectural refactoring for maintainability, not just features. This is a maturity indicator — projects at 43K stars need clean internals for sustainable contribution.
 
 Links: [[loop-detection-comparison]], [[persistent-goal-injection]]
+
+## Followup 2026-06-02: 43,491⭐, Event-Driven Refactoring
+
+**Stars**: 43,491 (stable). Active development: 10 commits on 06-01.
+
+### Event-Driven Architecture Refactoring (06-01)
+
+Major decoupling sprint — 6 refactoring commits in one day:
+- `refactor: decouple webui runtime state via events` — webui no longer polls runtime state directly
+- `refactor: route file edit progress via channel capability` — progress updates go through capability abstraction
+- `refactor: subscribe to runtime event types` — typed event subscriptions replace ad-hoc listeners
+- `refactor: move runtime event publishing out of loop` — event emission extracted from hot path
+- `fix: tolerate missing runtime event state in direct loop tests` — test isolation for event refactoring
+
+**Pattern**: Moving from direct method calls to event bus for runtime→UI communication. This enables multiple UI frontends (webui, TUI, CLI) to receive the same events without coupling to runtime internals.
+
+### DingTalk Group User Isolation (06-01)
+
+`feat(dingtalk): add group_user_isolation` — separates sessions per user in group chats. Previously all users in a DingTalk group shared one session. This is the same problem OpenClaw solved from day one with session-per-user architecture.
+
+### WebSocket Error Handling
+
+`fix: close websocket turns after errors` — proper cleanup on WS failures. Standard robustness.
+
+### Assessment
+
+No architectural novelty — standard maturation work. The event bus refactoring is well-executed but not conceptually new. DingTalk user isolation is a table-stakes feature that confirms nanobot's multi-channel ambitions but doesn't change its trajectory.
+
+Links: [[self-evolving-agent-landscape]], [[OpenClaw]]
