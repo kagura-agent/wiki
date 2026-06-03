@@ -136,3 +136,24 @@ Links: [[thin-harness-fat-skills]], [[agent-skill-standard-convergence]], [[invi
 **Source insight**: Aegis v1.2-1.3 Dual-Track Governance: "deletion is the default for old logic during Retirement Track. Retention requires explicit justification."
 
 Links: [[beliefs-candidates]], [[self-evolving-observations]]
+
+## Applied: Workflow Quality Matrix (2026-06-03)
+
+**What**: Created `tools/dna-overhead-check.sh` — a "fast-path cheapness" behavioral test suite for DNA rules, inspired by Aegis's `workflow-quality-matrix.json`.
+
+**What it checks** (5 dimensions):
+1. Rule count & density (imperative rules per AGENTS.md line)
+2. Fast-path cheapness (5 representative simple tasks shouldn't trigger overhead)
+3. Rule overlap detection (verification/write-down/don't-wait rule clustering)
+4. Growth rate (net AGENTS.md line changes over 30 days)
+5. Retirement health (graduated vs retracted ratio in [[beliefs-candidates]])
+
+**Integrated into**: [[flowforge]] `review.yaml` dna_review node (step 0, runs before manual review).
+
+**First run findings**: 17 imperative rules, 7.4% density (healthy). Flagged "write it down" appearing 5 times across sections — legitimate signal for future consolidation review. Net growth negative (pruning happening).
+
+**Behavioral difference**: Before, DNA rule accumulation was invisible — no quantitative signal for bloat. Now, every dna_review starts with an automated overhead check. Over-governance becomes detectable before it hurts execution.
+
+**Source insight**: Aegis workflow-quality-matrix.json — "defining representative tasks and checking that methodology doesn't make them unnecessarily expensive."
+
+Links: [[beliefs-candidates]], [[self-evolving-observations]], [[flowforge]]

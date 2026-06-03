@@ -1,35 +1,40 @@
 {
-  "timestamp": "2026-06-02T20:08:00+08:00",
-  "total_files": 830,
-  "cards": 362,
-  "projects": 389,
-  "wikilinks": 3103,
-  "errors": 2,
-  "warnings": 59,
+  "timestamp": "2026-06-03T10:22:00+08:00",
+  "total_files": 832,
+  "cards": 363,
+  "projects": 390,
+  "wikilinks": 3120,
+  "errors": 5,
+  "warnings": 62,
   "broken_links": [
-    { "file": "cards/flux2-klein.md", "target": "bonsai-image-4b" },
-    { "file": "projects/nemoclaw.md", "target": "PR #4054" }
+    "projects/ai-memory.md -> [[admission-controller]]",
+    "projects/ai-memory.md -> [[floway]]",
+    "projects/ai-memory.md -> [[retire-candidates]]",
+    "projects/ai-memory.md -> [[sanitized-type-boundary]]",
+    "projects/nemoclaw.md -> [[PR #4054]]"
   ],
-  "index_drift": 3,
-  "index_drift_files": [
+  "index_drift": [
+    "cards/bonsai-image-4b.md",
     "projects/agent-ecosystem-scout-2026-06-02.md",
     "projects/memory-os-claudiodrews.md",
+    "projects/pilotdeck.md",
     "projects/specification-website.md"
   ],
-  "orphans": 2,
-  "orphan_files": [
-    "projects/agent-ecosystem-scout-2026-06-02.md",
-    "projects/specification-website.md"
+  "orphans": [
+    "agent-ecosystem-scout-2026-06-02",
+    "pilotdeck",
+    "specification-website"
   ],
-  "stubs": 0,
-  "duplicate_slugs": 1,
+  "orphan_count": 3,
+  "duplicate_slugs": ["README"],
   "cards_index_stale": true,
   "cards_index_listed": 98,
-  "cards_index_actual": 362,
-  "frontmatter_issues": 202,
+  "cards_index_actual": 363,
+  "frontmatter_issues": 203,
   "zero_outbound_links": 99,
-  "stale_files": 147,
+  "avg_wikilinks_per_linked_file": 5.3,
+  "stale_files": 150,
+  "secrets_found": false,
   "unicode_suspicious": 2,
-  "secrets_detected": 0,
-  "invalid_facts": 0
+  "stubs": 0
 }
