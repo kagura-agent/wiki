@@ -286,3 +286,10 @@
 - **Fix**: Call `ensureConfigDir(path.dirname(filePath))` in `readConfigFile()` before reading, plus heal file-level permissions to 0o600
 - **Pattern**: DEFENSE_IN_DEPTH — security invariants must be enforced on every access path, not just writes. Same pattern as [[PR #4054]] where `mkdirSync` lacked `mode` on alternative code paths
 - **Gotcha**: Must handle case where dir doesn't exist yet — `ensureConfigDir` creates it, but `readConfigFile` should still return fallback if file doesn't exist
+
+## Notes (2026-06-03)
+- #4545 (SUDO_MODE=silent exits 0): Analyzed thoroughly, concluded it's a **bash pipe artifact** (tee masks exit code). Left 3 detailed comments. Waiting for maintainer response. Not a code bug.
+- #4623 (fingerprint file missing): Real bug potential — `writeModelRouterInstalledFingerprint()` silently no-ops when `getModelRouterSourceFingerprint()` returns null (binary/non-git installs where git HEAD and source tree hash both fail). QA reporter was checking `.fingerprint` but code uses `.nemoclaw-source-fingerprint`. Need to verify which scenario applies.
+- Competition is fierce: `latenighthackathon` bot submits PRs for NemoClaw issues within hours of filing. Issues #4584, #4586, #4643 all had competing PRs by the time I checked.
+- NemoClaw #3880 (proxy test conflation): CLOSED by maintainer
+- Still 2 open PRs (#4628, #4037) — both pending review
