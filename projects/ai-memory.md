@@ -146,3 +146,13 @@ Rendering `[[wikilinks]]` as clickable internal links in the built-in web UI. Ba
 - `sqlite-vec` for scale beyond brute-force cosine
 - Scheduled consolidation queue
 - LongMemEval-S benchmark harness (framework exists, needs dataset)
+
+## Applied: M8 Retention Decay to retire-candidates.sh (2026-06-03)
+
+Adopted the M8 decay formula for our wiki retirement scoring:
+- **Before**: Discrete buckets (0/15/30) for age and recall → heavy clustering, 458/751 notes scored 50+ with many ties at 85
+- **After**: `retention = e^(-λ*age) × (1 + σ*ln(1+recalls)) × recency_boost` → continuous scoring, 367/751 at 50+, max 65, much better differentiation
+- **Parameters**: λ=0.03 (slower than ai-memory's 0.02 — our notes update less frequently), σ=0.6, μ=0.04
+- **Key insight**: The `recency_boost` term (how recently a note was recalled) prevents "old but actively used" notes from being flagged. This was the main gap in our v1 approach — it only counted total recalls, not when they happened.
+- **Validation**: Recalled notes (106+ recalls) correctly get retention=1.0 (score=10, never retire). Zero-recall 38-day notes get score=65 (review) vs old 85 (strong retire). More conservative = fewer false positives.
+- See [[retire-candidates]] concept for the full formula.
