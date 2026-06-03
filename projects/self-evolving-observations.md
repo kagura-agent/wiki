@@ -2507,3 +2507,98 @@ ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→1
 #   #9 (input drought): fix applied, initial results positive (4 gradients), monitoring
 #   #6 (dreaming quality): blocked upstream (openclaw#87485)
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-06-03 (Day 47)
+
+### 管线活跃度
+| 维度 | 数据 |
+|------|------|
+| beliefs-candidates | **9 条新增** / 215 行 / 51 active (12 graduated, 3 retracted) |
+| DNA 变更 | 2 commits（AGENTS.md: retirement tracking + integration verification rule） |
+| nudge 触发 | journalctl 0 matches（日志轮转 or 格式变化），但 gradient Source 显示 **4 条 nudge-sourced** |
+| dreaming | Light Sleep 运行 ✅，98 candidates all confidence=0.58，recalls=0，REM 产出 1 theme（"let", confidence 0.88），无 Lasting Truths |
+
+### Gradient 来源分布（9 条）
+| Source | Count | Patterns |
+|--------|-------|----------|
+| nudge | 4 | ui-visual-alignment, workflow-bypass, assigned-issue-neglect, subagent-boundary-leak |
+| luna | 3 | ui-alignment-practice, verify-before-claim, code-authorship-discipline |
+| workloop | 1 | preflight-false-positive |
+| study | 1 | multi-instance-disambiguation |
+
+### DNA 变更详情
+- `ac5d439` — beliefs-candidates.md Promotion Gate 增加 retirement tracking checklist（防止规则膨胀）
+- `f91b371` — beliefs-candidates.md 新增 integration verification 条目 + AGENTS.md 更新
+- 变更性质：**主动**（自己发现的改进需求，非 Luna 指出）
+
+### Dreaming 质量
+- Light Sleep: 98 条 staged，**全部 confidence=0.58**（从 0.62 漂移但仍完全均匀，无差异化）
+- 数据源: session-corpus/2026-05-30.txt + 2026-06-01.txt（2-4 天前数据）
+- REM: 提取 theme "let"（confidence 0.88），但无 Lasting Truths
+- **问题持续**: uniform confidence = 无法区分高/低价值 candidate，#6 仍 blocked
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. preflight-false-positive 发现 → gradient 写入 → 明确行为改变（update preflight-repo.sh）
+  2. retirement tracking 概念 → DNA 更新 → Promotion Gate checklist 落地
+- **断裂处**:
+  - dreaming quality（#6）— blocked upstream，无进展
+  - 9 条新 gradient 全在第1次，无候选人达到毕业门控（需 cross-context ≥3）
+
+### 今日发现
+
+1. **gradient 产出爆发: 9 条创历史新高**。相比 Day 46 的 4 条（本身已打破 drought），今天翻倍。来源多样化显著：nudge 4 + luna 3 + workloop 1 + study 1。这不是人为灌水——每条都有具体 trigger 和行为改变描述。Issue #9 修复持续见效。
+
+2. **nudge 首次成为最大 gradient 来源**（4/9）。这是自主进化管线的里程碑——之前 nudge 虽然触发但几乎不产出 gradient。Layer 2 修复（reflect 节点指引写入 gradient）正在发挥作用。
+
+3. **Luna-sourced gradients 质量高但模式重复**：3 条中 2 条与"自己写代码而不是用 Claude Code"相关（code-authorship-discipline + 间接的 verify-before-claim）。这是 AGENTS.md 已有但未执行的规则，说明 DNA 到行为的转化链有 gap。
+
+4. **DNA 自主更新 2 次，全部主动**。retirement tracking 是受 claude-soul 调研启发的 meta-evolution 改进，integration verification 是从实践中提取的规则。没有 Luna 驱动的被动修改。
+
+5. **dreaming 质量无改善**: confidence 从 0.62 漂移到 0.58 但仍完全均匀，recalls=0，REM 无 Lasting Truths。#6 持续 blocked。唯一亮点是 REM 开始提取 theme（"let"），但 confidence 评分仍无差异化。
+
+6. **Execution-to-gradient ratio 改善显著**: 今天 7 个 workspace commits + 大量 Cove PR 活动，gradient 产出 9 条。比 Day 46 的 35:1 降到约 ~5:1，趋向健康。
+
+7. **PR 活动高**: 4 个 Cove PR merged（#155, #156, #165, #166），1 个 kagura-blog PR merged（#44），2 个新 NemoClaw PR opened。高产出日与高 gradient 产出日重合，说明实际工作量确实驱动了反思。
+
+### 趋势对比（Day 44-47）
+| 维度 | Day 44 | Day 45 | Day 46 | Day 47 |
+|------|--------|--------|--------|--------|
+| 新 gradient | 0 | 0 | 4 | **9** |
+| DNA commits | 0 | 0 | 1 | **2** |
+| nudge-sourced | 0 | 0 | 1 | **4** |
+| dreaming confidence | 0.62 | 0.62 | 0.58 | 0.58 |
+| 完整闭环 | 0 | 0 | 1 | **2** |
+
+### Issue 状态更新
+- **#9** (input drought): ✅ **修复确认有效** — 连续 2 天 gradient 产出（4→9），nudge 贡献从 1→4。建议再观察 2-3 天后考虑关闭。
+- **#6** (dreaming quality): ❌ blocked upstream (openclaw#87485)，confidence 仍 uniform 0.58
+- **#3/#2/#1** (调研): dormant，低优先级
+
+### 原始数据
+```
+# DNA commits (2026-06-03): 2
+#   ac5d439 apply: add retirement tracking to DNA graduation process
+#   f91b371 update: integration verification rule + beliefs-candidates entry
+
+# beliefs-candidates.md: 215 lines, 51 gradients, 12 graduated, 3 retracted
+# New gradients today: 9 (nudge×4, luna×3, workloop×1, study×1)
+# New patterns: ui-visual-alignment, preflight-false-positive, multi-instance-disambiguation,
+#   workflow-bypass, ui-alignment-practice, assigned-issue-neglect, verify-before-claim,
+#   subagent-boundary-leak, code-authorship-discipline
+
+# Workspace commits today: 7
+# Merged PRs today: 5 (cove×4, kagura-blog×1)
+# New PRs today: 2 (NemoClaw×2) + 1 (cove)
+
+# Dreaming:
+#   Light Sleep: 98 candidates, ALL confidence=0.58, ALL recalls=0
+#   REM: 1 theme ("let", 0.88), 0 Lasting Truths
+#   Source: session-corpus/2026-05-30.txt + 2026-06-01.txt
+
+# Issue status:
+#   #9 (input drought): fix confirmed effective, 2nd day of sustained output
+#   #6 (dreaming quality): blocked upstream
+```
