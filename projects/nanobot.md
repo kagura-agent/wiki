@@ -897,3 +897,42 @@ Validates: specialized agent tasks (consolidation, review, cleanup) should reuse
 ⭐2,535. v1.1.11 "Skilly Mercury" shipped skill system (CLI + registry + install + search). v1.1.12 daemon hotfix. The skill runtime layer we noted was missing is now live.
 
 Links: [[dream-single-phase-consolidation]], [[metadata-driven-context-injection]], [[context-compaction]], [[self-evolving-agent-landscape]]
+
+## Followup 2026-06-03: v0.2.1 Release + Cost Optimization Discussion
+
+### v0.2.1 Release (84 PRs, 17 new contributors)
+
+Three stories: (1) WebUI as daily workbench — live file edits, tool traces, sidebar perf, settings. (2) Long-running work durability — session locks, AutoCompact/consolidation race fixes, heartbeat on cron. (3) Extension ecosystem — CLI Apps + MCP unified, extension registry.
+
+Notable: gateway cold start optimized from ~4.6s to ~480ms (#3918). Signal channel support added.
+
+### Issue #4142: Cache-Miss Cost Optimization (Architectural Critique)
+
+Community member @hamb1y quantified the cost problem with real data (DeepSeek V4):
+- Cache-hit tokens: 64.8M tokens → $0.18
+- Cache-miss tokens: 12.7M tokens → $1.77 (10x cost from ~6x fewer tokens)
+- Output tokens: 1.1M → $0.30
+
+**Cache-miss is 78% of total cost despite being 16% of token volume.**
+
+Proposed 6 optimizations, all well-grounded in code paths:
+1. Split stable system prompt from dynamic memory/history (context.py mixes them → cache invalidation)
+2. Shrink replayed tool results (1200-char preview per result is cache-miss heavy)
+3. Tighten _microcompact (waits for 10+ results, too late for cache-miss cost)
+4. Strip reasoning replay (persisted reasoning tokens are volatile tail, always miss)
+5. Add proactive replay budget below context limit ("fits in context" ≠ cost-efficient)
+6. Move subagent current time out of system prompt
+
+**Relevance to us**: OpenClaw's system prompt includes dynamic context (time, memory refs). Same cache-miss pattern likely applies. The "stable prefix + dynamic suffix" split is a general principle for any agent paying per-token for cache misses.
+
+### Issue #4153: Tool Result Persistence Infinite Loop
+
+Bug: `read_file` on a large file → result offloaded to `.nanobot/tool-results/` → agent calls `read_file` on *that* path → offloaded again → infinite loop. The recovery mechanism (read_file) is subject to the same offloading it's trying to recover from.
+
+**Pattern**: when a tool is both the producer and consumer of offloaded content, exempting the recovery path from offloading is necessary. This is a general agent architecture trap — any "too large" handling must not apply to the recovery mechanism.
+
+### Issue #4128: Session Retention Duplicate Bug
+
+Positional session truncation (`retain_recent_legal_suffix`) can duplicate user messages across archive and kept portions when the tail is all assistant/tool messages. Confirms fragility of cut-based session management — our [[context-compaction]] approach avoids positional cuts.
+
+Links: [[dream-single-phase-consolidation]], [[context-compaction]], [[cache-miss-cost-optimization]]
