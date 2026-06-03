@@ -5,7 +5,7 @@
 ## 概要
 - **Repo**: https://github.com/HKUDS/nanobot
 - **语言**: Python
-- **Stars**: 39,131 (2026-04-12)
+- **Stars**: 43,551 (2026-06-03, was 39,131 on 04-12)
 - **Created**: 2026-02-01
 - **最新版**: v0.1.5 (2026-04-06)
 
@@ -14,7 +14,7 @@ OpenClaw 的轻量替代品。强调 "core agent functionality with 99% fewer li
 支持多渠道（WeChat, Discord, Telegram, Matrix, Feishu, WhatsApp）。
 
 ## 关键特性
-- **Dream two-stage memory** (v0.1.5) — 两阶段记忆系统
+- **Dream single-phase memory** (v0.2.0+, PR #3990) — unified consolidation replacing two-phase pipeline
 - **Skill Discovery via Dream** (2026-04-12) — 从对话模式自动生成 SKILL.md
 - **Programming Agent SDK** — 可编程 agent
 - **Production-ready sandboxing** (v0.1.5)
@@ -851,3 +851,49 @@ Recent activity is maintenance/polish, no new architectural signals. DingTalk gr
 Open PRs of interest:
 - #3723 Local whisper transcription — still open, would add offline voice-to-text
 - #4143 Refactor session retention result — session lifecycle cleanup
+
+## Followup 2026-06-03: PR #3990 Merged — Dream Single-Phase Shipped
+
+**Stars**: 43,551 (was 43,496 on 06-02)
+
+### Dream Two-Phase → Single-Phase (PR #3990, MERGED 06-02)
+
+The long-anticipated architecture simplification is now shipped. Key implementation details from code review:
+
+**MemoryStore gains Dream responsibilities:**
+- `build_dream_prompt(max_entries=20)` — reads unprocessed history via cursor, renders unified `dream.md` template with truncated conversation snippets, returns `(prompt, last_cursor)` or `None` if nothing to process
+- `build_dream_tools()` — restricted `ToolRegistry` with only `ReadFileTool`, `EditFileTool`, `ApplyPatchTool`, `WriteFileTool`. Write restricted to `skills/` dir, edit restricted to `memory_dir` + soul/user/skills roots
+- `dream_run_completed()` — checks `_stop_reason == "completed"` from ephemeral response metadata
+
+**AgentLoop integration:**
+- `TurnContext` gets `ephemeral: bool` and `tools: ToolRegistry | None` fields
+- `_run_agent_loop` accepts `ephemeral=True, tools=...` — suppresses extra hooks (no nudge, no progress during Dream)
+- `_build_initial_messages` gains `include_memory_recent_history=False` for Dream (avoids circular injection)
+
+**Unified dream.md prompt (105 lines) — notable design:**
+- MECE routing table: SOUL.md (behavior) / USER.md (preferences) / MEMORY.md (project context) / skills/ (workflows)
+- Cross-boundary rule: no technical configs in USER.md, no user facts in SOUL.md
+- Attribute tags: `[permanent]`/`[durable]`/`[ephemeral]`/`[correction]`/`[skip]` as routing/retention hints
+- Delete-or-keep taxonomy: always/likely/never delete + migrate-to-skill
+- Skill discovery integrated: create when repeatable workflow appears 2+ times
+- "Facts easily discoverable via a quick web search" — explicit exclusion rule
+
+**Safety:** Cursor advances ONLY on successful completion. Ephemeral sessions excluded from AutoCompact. Hook suppression via `ephemeral=True`.
+
+**What was removed:** `Dream` class, `dream_phase1.md`, `dream_phase2.md`. 817 lines deleted, 949 added.
+
+### Architectural Insight: Processor → Loop Reuse
+
+Key pattern: **reuse `process_direct()` with ephemeral mode** instead of maintaining parallel execution path. Dream inherits all loop improvements automatically. Single prompt template easier to iterate than coordinated two-template pipeline.
+
+Validates: specialized agent tasks (consolidation, review, cleanup) should reuse the main agent loop with mode flags, not build parallel execution paths. Our nudge hook follows this (runs in-context). Our cron jobs create isolated sessions — middle ground.
+
+### GenericAgent Quick Check (06-03)
+
+⭐12,417. External PRs active (#559, #550). `goal_hive` rewritten to 49-line fractal loop (detect→design→execute→check). Community: 🟢 THRIVING.
+
+### mercury-agent Quick Check (06-03)
+
+⭐2,535. v1.1.11 "Skilly Mercury" shipped skill system (CLI + registry + install + search). v1.1.12 daemon hotfix. The skill runtime layer we noted was missing is now live.
+
+Links: [[dream-single-phase-consolidation]], [[metadata-driven-context-injection]], [[context-compaction]], [[self-evolving-agent-landscape]]
