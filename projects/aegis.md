@@ -121,3 +121,18 @@ Parallel to our DNA layers: SOUL.md (universal) → AGENTS.md (workspace-level) 
 - Revisit: 2026-05-20
 
 Links: [[thin-harness-fat-skills]], [[agent-skill-standard-convergence]], [[invincat]], [[open-design]], [[flowforge]], [[beliefs-candidates]], [[skill-type-taxonomy]]
+
+## Applied: Retirement Tracking (2026-06-03)
+
+**What**: Adopted the Repair+Retirement dual-track pattern for our [[beliefs-candidates]] graduation process.
+
+**Concrete changes**:
+1. `beliefs-candidates.md` promotion checklist — added retirement check item + retirement marking format
+2. `tools/graduation-pipeline.sh` — surfaces retirement question in pipeline output
+3. `AGENTS.md` DNA Self-Governance — codified as principle
+
+**Behavioral difference**: Before, rules graduated and accumulated without any mechanism to retire old ones. Now, every graduation forces the question "what does this retire?" — making unbounded growth a conscious choice rather than a default.
+
+**Source insight**: Aegis v1.2-1.3 Dual-Track Governance: "deletion is the default for old logic during Retirement Track. Retention requires explicit justification."
+
+Links: [[beliefs-candidates]], [[self-evolving-observations]]
