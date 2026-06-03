@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Compound Failure Mode
 
 Multiple small, individually-defensible changes that overlap in time and scope, creating emergent degradation that no single test catches.

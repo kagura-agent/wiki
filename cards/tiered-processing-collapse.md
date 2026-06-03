@@ -1,3 +1,7 @@
+---
+created: 2026-05-26
+last_verified: 2026-06-03
+---
 # Tiered Processing Collapse
 
 When a system has multiple processing tiers (quick/deep/meta), shared mutable state between tiers can make higher tiers structurally unreachable.

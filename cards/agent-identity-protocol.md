@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Agent Identity Protocol
 
 A proposed standard for verifiable agent identity — proving "who" an AI agent is across platforms and interactions.

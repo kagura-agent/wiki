@@ -1,3 +1,7 @@
+---
+created: 2026-05-30
+last_verified: 2026-06-03
+---
 # Skill Routing Precision Cliff
 
 As an agent's skill catalog grows, routing accuracy degrades in predictable ways depending on the matching strategy used.

@@ -1,3 +1,7 @@
+---
+created: 2026-05-03
+last_verified: 2026-06-03
+---
 # OSS Contribution Discipline
 
 **Graduated from**: beliefs-candidates.md (6 entries merged, patterns: respect-maintainer-bandwidth, contribution-pacing, pr-comment-spam, oss-retreat, ai-transparency-first, 协作边界)

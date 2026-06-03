@@ -1,3 +1,7 @@
+---
+created: 2026-05-03
+last_verified: 2026-06-03
+---
 # Cron Design Principles
 
 **Graduated from**: beliefs-candidates.md (5 entries merged, patterns: cron-quality, cron-frequency-sense, cron-config-checklist, cron-architecture, output formatting)

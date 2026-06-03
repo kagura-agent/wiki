@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Context Budget 约束
 
 > 来源: GenericAgent L1 ≤30 行硬约束 (2026-04-14)

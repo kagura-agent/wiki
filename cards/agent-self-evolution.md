@@ -1,3 +1,7 @@
+---
+created: 2026-04-18
+last_verified: 2026-06-03
+---
 # Agent Self-Evolution
 
 > 概念：AI agent 在运行过程中自主改进自身行为、知识和工作流的能力

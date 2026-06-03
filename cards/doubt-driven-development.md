@@ -1,3 +1,7 @@
+---
+created: 2026-05-13
+last_verified: 2026-06-03
+---
 # Doubt-Driven Development
 
 In-flight adversarial review for non-trivial decisions, distinct from post-hoc code review. Catches wrong directions while course-correction is still cheap.

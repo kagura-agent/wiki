@@ -1,7 +1,9 @@
 ---
+created: 2026-04-01
 name: subagent-usage-patterns
 description: OpenClaw subagent 使用模式——什么任务适合 subagent，什么不适合
 type: reference
+last_verified: 2026-06-03
 ---
 
 # Subagent 使用模式

@@ -1,3 +1,7 @@
+---
+created: 2026-04-20
+last_verified: 2026-06-03
+---
 # agent-context-files
 
 **一句话**：给 AI agent 提供结构化上下文的 .md 文件，正在成为软件项目的标配。

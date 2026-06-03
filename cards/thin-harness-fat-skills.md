@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Thin Harness, Fat Skills
 
 > 架构原则: 让 harness 薄（~200 行），让 skills 厚（domain 知识 + 判断 + 流程）。

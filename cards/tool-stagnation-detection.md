@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # Tool Stagnation Detection
 
 > Agent safety pattern: detect and break infinite tool call loops

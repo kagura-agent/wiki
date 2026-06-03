@@ -1,3 +1,7 @@
+---
+created: 2026-05-03
+last_verified: 2026-06-03
+---
 # Scheduling Over Checklist
 
 **Origin**: beliefs-candidates.md §调度 section (2026-03-30, Luna discussion)

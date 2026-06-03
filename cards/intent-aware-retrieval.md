@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Intent-Aware Retrieval
 
 > 根据查询意图选择不同的检索策略，而非对所有查询一视同仁

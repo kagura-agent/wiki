@@ -1,3 +1,7 @@
+---
+created: 2026-04-21
+last_verified: 2026-06-03
+---
 # Anthropic Thinking Signature
 
 SSE 流式解析 Anthropic extended thinking 时，必须处理 **两种** delta type：

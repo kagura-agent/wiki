@@ -1,3 +1,7 @@
+---
+created: 2026-04-30
+last_verified: 2026-06-03
+---
 # Supervisor Pattern
 
 Multi-agent quality control through a dedicated monitor agent that watches worker execution in real-time.

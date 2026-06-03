@@ -1,3 +1,7 @@
+---
+created: 2026-05-01
+last_verified: 2026-06-03
+---
 # Session State Isolation
 
 When multiple agent sessions share a single process, mutable state stored at module/global scope leaks across sessions. This creates confusing bugs where session B sees stale artifacts from session A.

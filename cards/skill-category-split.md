@@ -1,3 +1,7 @@
+---
+created: 2026-05-02
+last_verified: 2026-06-03
+---
 # Skill Category Split: Artifact vs Process
 
 Two distinct categories of SKILL.md repos are emerging, with different adoption dynamics:

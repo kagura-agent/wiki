@@ -1,3 +1,7 @@
+---
+created: 2026-05-08
+last_verified: 2026-06-03
+---
 # Mechanical Preflight Check (Applied Pattern)
 
 Source: [[apm-triage-panel-patterns]] batch allow-list pattern + [[verify-before-researching]]

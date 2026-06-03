@@ -1,3 +1,7 @@
+---
+created: 2026-04-26
+last_verified: 2026-06-03
+---
 # Cynical Deletion
 
 A maintenance philosophy: instead of fixing bugs in defensive/tolerant code, **delete the code** that generates them.

@@ -1,3 +1,7 @@
+---
+created: 2026-05-07
+last_verified: 2026-06-03
+---
 # Agent Budget Control
 
 Pre-execution cost estimation and budget enforcement for autonomous agents.

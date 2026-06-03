@@ -1,3 +1,7 @@
+---
+created: 2026-04-12
+last_verified: 2026-06-03
+---
 # Beliefs Candidates
 
 梯度收集器——记录行为反馈和教训的候选管线。

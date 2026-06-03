@@ -1,3 +1,7 @@
+---
+created: 2026-04-19
+last_verified: 2026-06-03
+---
 # SkVM Skill Optimization — Manual Application
 
 **Date:** 2026-04-19

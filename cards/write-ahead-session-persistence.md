@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # Write-Ahead Session Persistence
 
 > Pattern: Persist user input before processing, use metadata flag as transaction marker for crash recovery.

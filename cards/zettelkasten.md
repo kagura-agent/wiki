@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Zettelkasten
 
 A note-taking method based on atomic, interlinked notes — each note captures one idea and links to related notes.

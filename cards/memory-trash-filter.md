@@ -1,3 +1,7 @@
+---
+created: 2026-04-30
+last_verified: 2026-06-03
+---
 # Memory Trash Filter — What NOT to Store
 
 **Source**: [[stash]] v0.2.7 prompt engineering + convergent observation across [[hermes-memory-skills]], [[genericagent]] (2026-04-30)

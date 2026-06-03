@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Channel-as-Service Pattern
 
 > Discord channel 作为微服务端点，接收自然语言请求，处理后返回结果。

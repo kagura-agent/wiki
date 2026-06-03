@@ -1,3 +1,7 @@
+---
+created: 2026-04-30
+last_verified: 2026-06-03
+---
 # Content Before Code
 
 > 做内容型项目时，先理解内容，再做技术实现。

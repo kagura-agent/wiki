@@ -1,3 +1,7 @@
+---
+created: 2026-05-27
+last_verified: 2026-06-03
+---
 # skill-to-skill-orchestration
 
 A compositional pattern where one agent skill's output becomes another skill's input, forming a pipeline with defined handoff contracts.

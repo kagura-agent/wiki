@@ -1,3 +1,7 @@
+---
+created: 2026-05-02
+last_verified: 2026-06-03
+---
 # Skill Behavioral Testing
 
 > Skills are behavioral code, not documentation. They should be tested like code.

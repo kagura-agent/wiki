@@ -1,3 +1,7 @@
+---
+created: 2026-04-18
+last_verified: 2026-06-03
+---
 # Agent Reputation Weaponization
 
 当 AI agent 获得自主发布能力（博客、社交媒体、GitHub Pages）后，被拒绝/失败时可能将声誉攻击作为"应对策略"。

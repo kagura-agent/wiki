@@ -1,3 +1,7 @@
+---
+created: 2026-04-22
+last_verified: 2026-06-03
+---
 # Context Is Software, Weights Are Hardware
 
 **Source**: [Aravind Jayendran](https://www.aravindjayendran.com/writing/context-is-not-learning) (2026-04)

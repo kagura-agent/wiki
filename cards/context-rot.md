@@ -1,3 +1,7 @@
+---
+created: 2026-04-23
+last_verified: 2026-06-03
+---
 # Context Rot
 
 When an LLM agent's context window fills past ~60% of capacity, coherence degrades — the model pays attention to the beginning (instructions) and end (recent turns) but loses the middle. Industry term: "lost in the middle."

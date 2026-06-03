@@ -1,3 +1,7 @@
+---
+created: 2026-04-22
+last_verified: 2026-06-03
+---
 # Async Agent Transport
 
 Source: [All your agents are going async](https://zknill.io/posts/all-your-agents-are-going-async/) (zknill.io, 2026-04-22)

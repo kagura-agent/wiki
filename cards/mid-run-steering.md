@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Mid-Run Steering
 
 Injecting user guidance into an agent's execution loop **between tool calls**, without interrupting the turn or creating a new user message.

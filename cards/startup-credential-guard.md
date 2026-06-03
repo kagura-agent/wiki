@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # Startup Credential Guard
 
 > Reject known-weak placeholder secrets at gateway startup, before they cause confusing runtime auth failures.

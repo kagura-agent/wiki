@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # Authorization Layer Confusion
 
 > When a multi-layer permission system misinterprets one layer's "legitimate default" as another layer's "explicit grant," creating privilege escalation.

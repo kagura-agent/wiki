@@ -1,3 +1,7 @@
+---
+created: 2026-05-19
+last_verified: 2026-06-03
+---
 # Temporal Decay Retrieval
 
 Retrieval strategy that weights results by recency — newer items score higher, older items fade unless reinforced by access or links.

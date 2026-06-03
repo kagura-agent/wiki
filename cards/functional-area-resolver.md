@@ -1,3 +1,7 @@
+---
+created: 2026-05-13
+last_verified: 2026-06-03
+---
 # Functional-Area Resolver
 
 Skill routing pattern from [[gbrain]] (v0.32.3.0+): instead of a generic "router agent" that dispatches to skills, use a `(dispatcher for: ...)` clause that maps functional areas to specific skill handlers.

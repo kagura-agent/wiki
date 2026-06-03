@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Transport ABC (Provider Abstraction Pattern)
 
 Extracting format conversion and HTTP transport from a monolithic agent loop into pluggable transport implementations, each owning its own API shape.

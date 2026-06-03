@@ -1,3 +1,7 @@
+---
+created: 2026-05-13
+last_verified: 2026-06-03
+---
 # Source-Driven Development
 
 Verifying claims by reading actual source code rather than relying on documentation, assumptions, or hearsay. "Don't guess — read the code."

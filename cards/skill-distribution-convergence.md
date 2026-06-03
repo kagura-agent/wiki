@@ -1,3 +1,7 @@
+---
+created: 2026-05-06
+last_verified: 2026-06-03
+---
 # Skill Distribution Convergence (2026-05)
 
 The agent skill ecosystem is converging on a distribution model: **git repos + CLI installers**.

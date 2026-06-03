@@ -1,3 +1,7 @@
+---
+created: 2026-05-07
+last_verified: 2026-06-03
+---
 # Composable Prompt Assembly
 
 A pattern where agent prompts are dynamically composed from detected context rather than using monolithic static prompts.

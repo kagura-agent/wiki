@@ -1,3 +1,7 @@
+---
+created: 2026-04-18
+last_verified: 2026-06-03
+---
 # Agent Self-Evolution: Three Paradigms
 
 > 2026-04-18 | 跨项目洞察

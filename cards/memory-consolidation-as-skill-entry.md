@@ -1,3 +1,7 @@
+---
+created: 2026-04-12
+last_verified: 2026-06-03
+---
 # Memory Consolidation as Skill Entry Point
 
 > 记忆整合流程是 skill 自动生成的天然入口 — 不需要独立系统

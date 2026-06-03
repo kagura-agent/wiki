@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # AgentSkills
 
 OpenClaw's modular skill system — each skill is a directory with a SKILL.md that teaches the agent how to use a specific capability.

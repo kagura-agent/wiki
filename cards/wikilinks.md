@@ -1,3 +1,7 @@
+---
+created: 2026-04-12
+last_verified: 2026-06-03
+---
 # Wikilinks / 双链
 
 双向链接（wikilinks），`target` 格式，用于在知识库中建立概念间的关联。

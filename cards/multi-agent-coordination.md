@@ -1,3 +1,7 @@
+---
+created: 2026-04-18
+last_verified: 2026-06-03
+---
 # Multi-Agent Coordination
 
 > 概念：多个 AI agent 之间如何协作、通信、分工的问题

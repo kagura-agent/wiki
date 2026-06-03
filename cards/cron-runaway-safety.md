@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # cron-runaway-safety
 
 Preventing cron jobs from executing outside configured hours or running uncontrollably after reconnect.

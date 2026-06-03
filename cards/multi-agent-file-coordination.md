@@ -1,3 +1,7 @@
+---
+created: 2026-04-18
+last_verified: 2026-06-03
+---
 # Multi-Agent File Coordination
 
 当多个 AI agent 并行编辑同一 codebase 时，需要文件级别的协调机制。

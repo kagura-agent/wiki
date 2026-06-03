@@ -1,3 +1,7 @@
+---
+created: 2026-04-21
+last_verified: 2026-06-03
+---
 # Skill 固化 vs 设计
 
 两种 agent skill 获取路径的对比。

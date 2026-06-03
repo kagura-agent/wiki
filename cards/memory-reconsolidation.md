@@ -1,3 +1,7 @@
+---
+created: 2026-04-23
+last_verified: 2026-06-03
+---
 # Memory Reconsolidation in Agent Systems
 
 Neuroscience concept (Nader 2000) applied to AI agent memory: memories become labile on retrieval and can update.

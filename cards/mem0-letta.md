@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Mem0 / Letta
 
 Two related projects in the agent memory space.

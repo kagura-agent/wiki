@@ -1,3 +1,7 @@
+---
+created: 2026-04-17
+last_verified: 2026-06-03
+---
 # Skills as Packages
 
 > Agent skills are evolving from loose files to installable packages with metadata, versioning, and dependency management.

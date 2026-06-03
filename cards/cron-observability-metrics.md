@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # cron-observability-metrics
 
 Tracking token cost, success rate, and duration per cron job / routine.

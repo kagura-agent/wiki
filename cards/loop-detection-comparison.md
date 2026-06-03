@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # Loop Detection: OpenClaw vs nanobot
 
 > Comparing two approaches to detecting infinite tool call loops in agent runtimes

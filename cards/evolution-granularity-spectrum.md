@@ -1,3 +1,7 @@
+---
+created: 2026-04-17
+last_verified: 2026-06-03
+---
 # Evolution Granularity Spectrum
 
 > 进化粒度谱系：从 gradient 到 gene 到 skill

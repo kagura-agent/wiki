@@ -1,3 +1,7 @@
+---
+created: 2026-06-02
+last_verified: 2026-06-03
+---
 # Identity Drift Detection
 
 Automated detection of when an AI agent has "gone robotic" — lost its personality, voice, or presence — based on user signals in conversation.

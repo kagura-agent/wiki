@@ -1,3 +1,7 @@
+---
+created: 2026-05-26
+last_verified: 2026-06-03
+---
 # Salient Mining SOP
 
 Structured procedure for mining past conversation sessions to extract long-term user insights. Originated from [[genericagent]] (2026-05-26).

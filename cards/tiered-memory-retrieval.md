@@ -1,3 +1,7 @@
+---
+created: 2026-05-07
+last_verified: 2026-06-03
+---
 # Tiered Memory Retrieval
 
 > 按需分层检索，而非对所有查询执行全面召回

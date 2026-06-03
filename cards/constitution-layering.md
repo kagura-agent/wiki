@@ -1,3 +1,7 @@
+---
+created: 2026-04-22
+last_verified: 2026-06-03
+---
 # Constitution Layering
 
 Structuring agent instructions as a layered hierarchy instead of a flat document.

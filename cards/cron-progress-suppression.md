@@ -1,3 +1,7 @@
+---
+created: 2026-04-12
+last_verified: 2026-06-03
+---
 # Cron Progress Suppression
 
 > 定时任务只需最终结果，中间思考消息应被过滤

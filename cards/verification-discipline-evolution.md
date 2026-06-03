@@ -1,3 +1,7 @@
+---
+created: 2026-04-10
+last_verified: 2026-06-03
+---
 # Verification Discipline Evolution
 
 验证纪律是 Kagura DNA 中密度最高的维度（V=18），从 2026-03-22 首次出现到 04-10 完成第二轮整合。

@@ -1,3 +1,7 @@
+---
+created: 2026-03-31
+last_verified: 2026-06-03
+---
 # Claude Code Source Analysis (2026-03-31 Leak)
 
 ## 概述

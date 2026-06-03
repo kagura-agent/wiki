@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Context Budget Baseline — 2026-04-14
 
 > Kagura workspace files 注入量的首次量化 baseline，用于跟踪瘦身进展。

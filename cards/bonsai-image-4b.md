@@ -1,3 +1,7 @@
+---
+created: 2026-06-02
+last_verified: 2026-06-03
+---
 # Bonsai Image 4B
 
 Ternary/1-bit quantization research applied to image generation models. The name references "bonsai" pruning — extreme weight compression while preserving output quality.

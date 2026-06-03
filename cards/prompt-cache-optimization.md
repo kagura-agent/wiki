@@ -1,3 +1,7 @@
+---
+created: 2026-05-24
+last_verified: 2026-06-03
+---
 # Prompt Cache Optimization
 
 Techniques to maximize LLM prompt cache hit rates and reduce latency/cost.

@@ -1,3 +1,7 @@
+---
+created: 2026-04-13
+last_verified: 2026-06-03
+---
 # Progressive Disclosure for Memory Retrieval
 
 > Pattern: 分层检索，先索引后详情，按需加载

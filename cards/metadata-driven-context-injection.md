@@ -1,3 +1,7 @@
+---
+created: 2026-05-16
+last_verified: 2026-06-03
+---
 # Metadata-Driven Context Injection
 
 A pattern for making persistent state visible to the model across compaction boundaries.

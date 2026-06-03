@@ -1,3 +1,7 @@
+---
+created: 2026-05-26
+last_verified: 2026-06-03
+---
 # Context Window Management
 
 Strategies for efficiently using and managing LLM context windows in agentic systems.

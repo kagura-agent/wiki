@@ -1,3 +1,7 @@
+---
+created: 2026-04-21
+last_verified: 2026-06-03
+---
 # Decentralized Evolution Validation
 
 ## 概念

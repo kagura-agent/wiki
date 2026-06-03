@@ -1,3 +1,7 @@
+---
+created: 2026-04-07
+last_verified: 2026-06-03
+---
 # Agent 凭证安全：指纹模式
 
 > Agent credential security: fingerprint model for runtime-injected credentials. Agents use credentials (API keys, tokens) without seeing them — runtime injects on demand, like fingerprint payment.

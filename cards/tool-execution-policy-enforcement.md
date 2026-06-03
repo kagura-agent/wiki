@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Tool Execution Policy Enforcement
 
 Plugin-level interception of tool calls before execution, enabling silent programmatic blocking without user interaction.

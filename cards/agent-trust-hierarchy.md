@@ -1,9 +1,10 @@
 ---
+created: 2026-05-15
 title: "Agent Trust Hierarchy"
 type: concept
 status: noted
 updated: 2026-05-15
-last_verified: 2026-05-15
+last_verified: 2026-06-03
 ---
 
 # Agent Trust Hierarchy

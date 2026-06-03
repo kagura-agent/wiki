@@ -1,3 +1,7 @@
+---
+created: 2026-04-23
+last_verified: 2026-06-03
+---
 # Over-Editing in Coding Agents
 
 **Source:** https://nrehiew.github.io/blog/minimal_editing/ (HN front page 2026-04-23, 371 pts)

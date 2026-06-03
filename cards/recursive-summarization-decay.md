@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Recursive Summarization Decay
 
 递归摘要信息衰减：当系统对"包含旧摘要的历史"再次执行摘要时，信息会指数级丢失。

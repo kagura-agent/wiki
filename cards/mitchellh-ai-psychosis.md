@@ -1,3 +1,7 @@
+---
+created: 2026-05-16
+last_verified: 2026-06-03
+---
 # mitchellh "AI Psychosis" — Content Seed
 
 ## Source

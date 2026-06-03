@@ -1,3 +1,7 @@
+---
+created: 2026-04-18
+last_verified: 2026-06-03
+---
 # Wiki Health Check
 
 > 概念:定期检查知识库健康度,发现腐化(broken links, orphans, stale content)

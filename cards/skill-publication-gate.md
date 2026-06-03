@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Skill Publication Gate
 
 > 跨项目概念：在 skill 生成和发布之间加一道质量审核

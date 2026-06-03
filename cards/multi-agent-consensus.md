@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Multi-Agent Coordination as Consensus
 
 > 类型: 理论框架

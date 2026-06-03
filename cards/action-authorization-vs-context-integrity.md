@@ -1,3 +1,7 @@
+---
+created: 2026-04-09
+last_verified: 2026-06-03
+---
 # Action Authorization vs Context Integrity
 
 > Agent 安全的两个正交维度

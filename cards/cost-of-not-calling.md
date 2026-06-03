@@ -1,3 +1,7 @@
+---
+created: 2026-04-30
+last_verified: 2026-06-03
+---
 # COST OF NOT CALLING — Prompt Engineering Pattern
 
 **Source**: [[stash]] v0.2.7 MCP prompt template (2026-04-30 deep read)

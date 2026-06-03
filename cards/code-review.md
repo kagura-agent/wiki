@@ -1,3 +1,7 @@
+---
+created: 2026-05-13
+last_verified: 2026-06-03
+---
 # Code Review
 
 Post-hoc evaluation of finished artifacts (PRs, patches, complete implementations). Contrasts with [[doubt-driven-development]] which operates in-flight during decision-making.

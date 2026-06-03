@@ -1,3 +1,7 @@
+---
+created: 2026-04-22
+last_verified: 2026-06-03
+---
 # Agent Lifecycle FSM
 
 显式状态机管理 agent 生命周期。

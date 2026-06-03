@@ -1,3 +1,7 @@
+---
+created: 2026-04-12
+last_verified: 2026-06-03
+---
 # Pulse TODO
 
 统一任务管理 skill——AI agent 的待办事项和调度系统。

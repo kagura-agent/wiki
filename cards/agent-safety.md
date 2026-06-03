@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # Agent Safety
 
 Security and safety concerns specific to autonomous AI agents.

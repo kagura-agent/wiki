@@ -1,3 +1,7 @@
+---
+created: 2026-05-03
+last_verified: 2026-06-03
+---
 # Cured Tracking Methodology
 
 **Origin**: beliefs-candidates.md §治愈追踪 section (2026-04-17 引入, inspired by no-no-debug)

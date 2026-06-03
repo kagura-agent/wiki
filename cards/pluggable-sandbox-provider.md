@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Pluggable Sandbox Provider
 
 Agent framework pattern where code execution environments are abstracted behind a common interface, allowing users to swap providers without changing application code.

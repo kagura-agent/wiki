@@ -1,3 +1,7 @@
+---
+created: 2026-04-14
+last_verified: 2026-06-03
+---
 # The Librarian Problem
 
 When you have a growing knowledge base, the hardest part isn't storing information — it's finding the right piece at the right time.

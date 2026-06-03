@@ -1,3 +1,7 @@
+---
+created: 2026-04-12
+last_verified: 2026-06-03
+---
 # Self-Improving
 
 自我改进机制——agent 通过反馈循环持续提升执行质量。

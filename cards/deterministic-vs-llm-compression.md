@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Deterministic Compression vs LLM Summarization
 
 > 两条 agent memory 压缩路线的 tradeoff 分析

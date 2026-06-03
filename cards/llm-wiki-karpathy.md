@@ -1,3 +1,7 @@
+---
+created: 2026-04-05
+last_verified: 2026-06-03
+---
 # LLM Wiki (Karpathy, 2026-04-04)
 
 **来源**: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f

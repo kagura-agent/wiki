@@ -1,3 +1,7 @@
+---
+created: 2026-04-12
+last_verified: 2026-06-03
+---
 # Skill Creator
 
 AgentSkill 创建和维护工具。用于创建、编辑、审查、审计 skill 文件。

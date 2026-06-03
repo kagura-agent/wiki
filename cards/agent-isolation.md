@@ -1,3 +1,7 @@
+---
+created: 2026-05-09
+last_verified: 2026-06-03
+---
 # Agent Isolation
 
 The problem of preventing one agent from accessing resources, state, or credentials belonging to another agent in a shared runtime.

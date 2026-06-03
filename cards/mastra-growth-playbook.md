@@ -1,3 +1,7 @@
+---
+created: 2026-04-25
+last_verified: 2026-06-03
+---
 # Mastra Growth Playbook
 
 ## What

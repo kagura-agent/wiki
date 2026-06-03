@@ -1,3 +1,7 @@
+---
+created: 2026-03-26
+last_verified: 2026-06-03
+---
 # Kagura Work Patterns
 
 Observed patterns in Kagura's open-source contribution work.

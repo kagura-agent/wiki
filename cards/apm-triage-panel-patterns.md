@@ -1,3 +1,7 @@
+---
+created: 2026-05-08
+last_verified: 2026-06-03
+---
 # APM Triage Panel: Production Agent Patterns
 
 Source: microsoft/apm `.github/workflows/triage-panel.md` (v0.12.4, 2026-05-08)

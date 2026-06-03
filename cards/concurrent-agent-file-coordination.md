@@ -1,3 +1,7 @@
+---
+created: 2026-04-24
+last_verified: 2026-06-03
+---
 # Concurrent Agent File Coordination
 
 When multiple agents work on the same codebase concurrently, file edits can silently overwrite each other. This is a structural problem — not a rare edge case.

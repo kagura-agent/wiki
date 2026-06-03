@@ -1,3 +1,7 @@
+---
+created: 2026-04-18
+last_verified: 2026-06-03
+---
 # Existence Encoding（存在性编码）
 
 > 来源: GenericAgent memory_cleanup_sop v3 (2026-04-18)
