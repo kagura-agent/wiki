@@ -2463,3 +2463,47 @@ ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→1
 **验证计划**: 下一轮 study session reflect 节点应产出至少 1 条 gradient 或 1 条 memory 解释。48h 后 check。
 
 **对比 workloop.yaml**: workloop 已有 2 处 add-gradient.sh 引用（gradient_gate 节点），不受此问题影响。
+
+---
+
+## 🔬 自进化观察 2026-06-02 (Day 46)
+
+### 管线活跃度
+- **beliefs-candidates**: 4 条新增（3 study, 1 nudge）/ 36 total gradients / 12 graduated
+- **DNA 变更**: 1 commit — self-referential evidence discount (0.5x) added to graduation gate（主动，来自 claude-soul 研究）
+- **nudge 触发**: 0 次（journalctl 无 nudge 记录，但 1 gradient sourced from nudge — 可能来自较早 session）
+- **dreaming**: 运行，Light Sleep 100+ candidates，confidence 全部 0.58（仍均匀），recalls=0。blocked upstream (#87485)
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. Issue #9 Layer 2 诊断→study.yaml reflect 节点修复→今日 3 条 study-sourced gradient 验证修复生效
+  2. claude-soul 调研→self-referential evidence discount 规则→evaluate-candidate.sh 更新→beliefs-candidates.md Promotion Gate 更新
+- **断裂处**: dreaming quality（blocked upstream, #6）; nudge 可观测性仍有 gap（journalctl 显示 0 但有 nudge-sourced gradient）
+
+### 今日发现
+
+1. **Layer 2 修复初现成效**: 今日 4 条新 gradient，打破了连续 4 天 0 输入的drought。3 条来自 study session reflect 节点（新增 add-gradient.sh 指引），1 条来自 nudge。这是 issue #9 修复后第一天的数据，需继续观察是否持续。
+2. **自生证据折扣是元进化**: 受 claude-soul anti-bootstrap 机制启发，给自己生成的证据打 0.5x 折扣。这防止 nudge/study 自我循环膨胀 gradient count 骗过毕业门控。这是对进化管线本身的进化——meta-evolution。
+3. **dreaming confidence 漂移但无差异化**: 0.62→0.58，所有 candidate 完全一致。内容仍以操作记录为主（workloop, patrol）。上游 hardcoded constant 问题不变。
+4. **gradient 来源多样化**: 今日 4 条中 3 study + 1 nudge，首次出现非 Luna-correction 来源占主导的一天。如果持续，说明自主进化管线正在恢复功能。
+5. **memory 高活跃日**: 140 个 section headers，大量 study/patrol/workloop 活动。execution 量与 gradient 产出比为 35:1，仍然偏高但比之前的 ∞:0 有本质改善。
+
+### 原始数据
+```
+# DNA commits (2026-06-02): 1 (self-referential evidence discount)
+# beliefs-candidates.md: 186 lines, 36 gradients, 12 graduated
+# New gradients today: 4 (study×3, nudge×1)
+# Workspace commits today: 6
+
+# Nudge:
+#   journalctl grep: 0 matches
+#   Gradient sourced from nudge: 1 (workflow-bypass)
+
+# Dreaming:
+#   Light Sleep: 100+ candidates, ALL confidence=0.58, ALL recalls=0
+#   Source: session-corpus/2026-05-29.txt (4-day-old data)
+
+# Issue status:
+#   #9 (input drought): fix applied, initial results positive (4 gradients), monitoring
+#   #6 (dreaming quality): blocked upstream (openclaw#87485)
+```

@@ -1263,3 +1263,10 @@ GitHub trending (agent, created past week, sorted by stars):
 
 ## 2026-06-02 Quick Scan Additions
 - **odysseus** (pewdiepie-archdaemon/odysseus): Self-hosted AI workspace, 20k stars in 48h. Worth a deeper look next scout to understand what it actually does and whether it's relevant to our tooling.
+
+### PilotDeck (OpenBMB/PilotDeck) — 2026-06-03
+- **Stars**: 2837 (12 days old, high velocity)
+- **What**: Task-oriented AI Agent productivity platform (TypeScript)
+- **Why interesting**: OpenBMB (credible org behind ChatDev, AgentVerse), 2800+ stars in <2 weeks, 282 forks
+- **Status**: Active (pushed 06-02)
+- **Action**: Deep read when time allows — task-oriented agent UX patterns

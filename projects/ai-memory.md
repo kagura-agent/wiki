@@ -1,10 +1,10 @@
 # ai-memory — Cross-Agent Long-Term Memory
 
 - **repo**: akitaonrails/ai-memory
-- **stars**: 430 (2026-05-31, was 290 on 05-27, created 05-21 — ~48⭐/day growth)
+- **stars**: 503 (2026-06-03, was 290 on 05-27, breakout +73%)
 - **lang**: Rust
 - **license**: MIT
-- **status**: active | deep-read | ✓2026-05-27
+- **status**: active | deep-read | ✓2026-06-03
 
 ## What It Is
 
@@ -92,6 +92,54 @@ Query hits bump `access_count` + `last_accessed_at` (reinforcement). Semantic/pi
 3. **Sanitized<T> boundary** — compile-time privacy enforcement is superior to our "remember to redact" approach.
 4. **Retention decay math** — our manual "drop when stale" could use quantitative signals.
 5. **Fire-and-forget hooks** — applicable to our heartbeat/cron memory capture.
+
+## v0.8→v0.9 Evolution (2026-05-28 to 06-02)
+
+### Key New Patterns
+
+**1. Admission Webhook Chain (PR #55)**
+Pre-persistence HTTP hooks on the write path — operator-configurable, sequential, each sees mutations from the previous hook. Extension seam, not a plugin system. Design principles:
+- `failure_policy=ignore` by default — flaky webhook never blocks engine
+- Actor identity + skip-list prevent feedback loops
+- Webhooks can mutate pages (add frontmatter, validate) or observe (mirror to git remote, audit log)
+- Engine stays closed for modification — new behaviors ship as independent HTTP services
+- This is the [[admission-controller]] pattern from K8s, applied to agent memory writes
+
+**2. OpenAI-Compat Strict Mode (PR #70, Issue #69)**
+Reveals a fundamental tension: local/self-hosted models don't reliably follow JSON schemas. The `openai-compat` provider previously used descriptive prompting + tolerant JSON extraction. Under load, models drift:
+- Non-reasoning models (mistral-nemo) emit no JSON at all
+- Reasoning models produce syntactically valid JSON with wrong enum values (`tier: "state"` instead of `tier: "working"`)
+- Solution: opt-in `response_format` via structured output API. Strict fallback narrowed to parse-shape failures only.
+- **Lesson**: Any system consuming structured LLM output from diverse providers needs a strict/lenient toggle. Descriptive schema alone is insufficient for production.
+
+**3. Bounded Buffers + Security Hardening**
+- Admin routes restricted to root/owner only
+- LRU cwd cache (prevents unbounded growth from many project directories)
+- Bounded observation buffers
+- Combined with existing [[sanitized-type-boundary]], this is defense-in-depth
+
+**4. Move-Project (PR #60)**
+First-class project relocation between workspaces without changing `project_id`. Typed conflict errors, V18 handoff coverage. Shows multi-tenant architecture maturing.
+
+**5. Web Wikilinks (PR #68)**
+Rendering `[[wikilinks]]` as clickable internal links in the built-in web UI. Base-path support for reverse proxy hosting. The wiki is becoming browseable, not just queryable.
+
+### Community Evolution
+- Stars: 290 → 503 (+73% in 7 days) — breakout growth
+- External contributors: djalmajr (4 merged PRs: base-path, wikilinks, move-project, admission webhook improvements), brunoomariano (openai-compat strict), rikelmyso7 (Codex stream fix)
+- Maintainer pattern: merge external PR → immediately harden/refactor/add tests → commit hardening as separate commits. Very rigorous.
+- Brazilian dev community heavily engaged
+
+### Relevance Update
+
+**Admission webhook chain** is directly applicable:
+- Our wiki writes (wiki-lint, memex) have no extension point. If we wanted to mirror wiki changes to an external system or validate writes, we'd need to fork the tool.
+- The pattern is lightweight: just HTTP POST to a list of endpoints, sequential, with failure_policy.
+- Not needed now (our scale is tiny), but the design is worth remembering for [[flowforge]] or [[memex]] extension.
+
+**OpenAI-compat strict mode** validates a pattern we've seen:
+- Our LLM interactions via [[floway]] assume cloud providers follow schemas. If we ever route through local models, we'd hit the same drift issue.
+- The strict/lenient toggle is the right abstraction.
 
 ## Future Work (Theirs)
 - Local embeddings via `ort` (bge-small, no API key needed)
