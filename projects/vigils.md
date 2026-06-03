@@ -1,7 +1,7 @@
 # Vigils — Local-First Agent Control Plane
 
 **Repo**: [duncatzat/vigils](https://github.com/duncatzat/vigils)
-**Stars**: 50 (2026-06-01, created 05-31)
+**Stars**: 199 (2026-06-03, was 50 on 06-01 → 100 on 06-02 → 199 on 06-03; 4x in 3 days)
 **Stack**: Rust workspace + Tauri 2 + Vue 3 + Chrome MV3
 **License**: Apache-2.0
 
@@ -71,8 +71,40 @@ Fail-closed default. Wasm (Wasmtime) or native + Linux Landlock LSM filesystem i
 2. **Credential lease pattern** — scoped, TTL'd secret access instead of permanent env vars. Medium effort.
 3. **Effect extraction** — parse tool call arguments to detect paths, URLs, shell commands before execution. Would improve tool policy expressiveness.
 
+## Update — 2026-06-03
+
+### Growth
+50→100→199⭐ in 3 days. 4x growth rate. 5 releases in 3 days (v0.1.1→v0.1.7). vigil-sdk published to crates.io.
+
+### Security Audit (Self-Assessment, 9.9/10)
+Comprehensive: OWASP Top 10 + STRIDE + supply-chain + Vigils-invariant verification across ~50k Rust LOC.
+- 0 Critical, 0 High, 3 Medium, 5 Low, 1 Info
+- Hash chain v2: now binds `session_id`, `event_type`, `redacted_text` (was a gap in v1 — partial tampering was undetectable)
+- Version monotonicity enforcement (v2→v1 downgrade rejected)
+- OTA signed updater pipeline added
+- `#![forbid(unsafe_code)]` across all crates
+
+### Architecture (15 crates)
+vigil-audit, vigil-browser, vigil-firewall, vigil-http-auth, vigil-http-transport, vigil-lease, vigil-mcp, vigil-policy, vigil-redaction, vigil-runner-types, vigil-runner, vigil-sandbox-linux, vigil-sdk, vigil-types, vigil-ui-protocol
+
+### Community
+- 🔴 SOLO — 0 external PRs, 0 issues. Pure single-developer project despite 199⭐
+- All releases, commits, and security audit by maintainer only
+- Star growth driven by README quality + category momentum, not community
+
+### Assessment
+Architecturally excellent. Best-in-class agent security design (hash-chain audit, credential lease broker, MCP drift detection, Landlock sandboxing). But 0 community signal despite rapid star growth.
+
+**Contribution opportunity**: Low — Rust workspace, complex domain, solo developer hasn't invited PRs. Better as study target than contribution target.
+
+**Transfer value**: High — several patterns directly applicable:
+1. Hash chain v2 design (bind all auditable fields, version monotonicity) — general audit pattern
+2. Credential lease broker with bound triple validation — applicable anywhere secrets are injected
+3. MCP descriptor drift detection — simple hash-compare, high security value
+4. Preflight PII scanning with fail-closed merge — applicable to any pipeline
+
 ## Tracking Decision
-🟡 WATCHING — brand new (1 day old), 50⭐. Strong architecture but need to see community formation and sustained development. Check at 06-08.
+🟡 WATCHING → 🟢 CONFIRMED INTERESTING. 199⭐, strong architecture, rapid iteration. But SOLO (0 community). Worth monitoring for community formation. Revisit 06-10.
 
 Tags: #agent-safety #audit #mcp #governance #rust
 Links: [[agent-budget-control]], [[mcp-ecosystem]], [[coding-agent-ecosystem]]
