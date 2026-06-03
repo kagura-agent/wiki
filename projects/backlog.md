@@ -1270,3 +1270,26 @@ GitHub trending (agent, created past week, sorted by stars):
 - **Why interesting**: OpenBMB (credible org behind ChatDev, AgentVerse), 2800+ stars in <2 weeks, 282 forks
 - **Status**: Active (pushed 06-02)
 - **Action**: Deep read when time allows — task-oriented agent UX patterns
+
+---
+
+## 2026-06-03 Quick Scan (18:16)
+
+**GitHub Trending (agent space, past week):**
+
+| Repo | ⭐ | Verdict | Notes |
+|---|---|---|---|
+| PilotDeck (OpenBMB) | 2,885 | 已深读 | [[pilotdeck]] — Task-oriented Agent OS, workspace isolation, smart routing. Detailed note exists |
+| kimi-code (MoonshotAI) | 1,617 | 已知模式 | Moonshot's coding agent CLI, same pattern as qwen-code |
+| memory-os (ClaudioDrews) | 695 | 已深读 | [[memory-os-claudiodrews]] — 7-layer memory, Layer 7 ground truth hierarchy insight. Note exists |
+| Duel-Agents (2aronS) | 699 | 不相关 | Commercial LLM routing proxy, paid API key required. Star-farming pattern for a wrapper SDK |
+| ADHD (UditAkhourii) | 727 | 已知模式 | Tree-of-thought skill for Claw-based coding agents |
+| ai-memory (akitaonrails) | 507 | 已知模式 | Long-term memory for coding CLIs, cross-agent handoff |
+| Gamma-World (nv-tlabs) | 571 | 不深入 | Research paper implementation (multi-agent world modeling) |
+| vigils (duncatzat) | 204 | 已跟踪 | Revisit 06-10 per TODO |
+
+**HN**: MAI-Code-1-Flash (Microsoft) — efficiency-focused coding model, trained on Copilot production harnesses, 60% fewer tokens than Claude Haiku 4.5. [[smart-routing]] relevance: model-level adaptive solution length control.
+
+**Saturation**: 5/8 known patterns — ecosystem entering consolidation. No new breakout architecture. PilotDeck is the only genuinely new entrant at scale, and it's a Chinese-first competitor to [[openclaw]], not a contribution target.
+
+**Trend**: Smart routing (auto model selection by task difficulty) emerging as a theme — PilotDeck, Duel-Agents, MAI-Code-1-Flash all address cost/quality tradeoff from different angles (platform, proxy, model).
