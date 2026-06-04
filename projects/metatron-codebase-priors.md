@@ -84,3 +84,22 @@ ingest (git history + AST) → LLM extraction → candidate priors
 **Benchmark**: 10/10 queries, 17/17 items — 100% precision maintained after change.
 
 Links: [[search-engineering]], [[self-improving]], [[livecache-bench]]
+
+## 2026-06-04 Apply #2: Feedback Loop for dna-preflight.sh
+
+**Applied insight**: Metatron's "agent rates served priors (helpful/unhelpful)" feedback mechanism → adapted as **recidivism detection** for our DNA preflight system.
+
+**Problem**: `dna-preflight.sh` surfaces reminders but has no memory. Same warnings show up repeatedly with no way to detect whether they're working or whether something structural needs to change. This is the "broadcast without feedback" anti-pattern.
+
+**Solution**: 
+1. Added `.preflight-log` — every surfaced pattern is logged with timestamp + context
+2. Added recidivism detection: patterns surfaced 5+ times trigger a "structural problem" alert
+3. The alert explicitly says "preflight alone won't fix this" — shifting from reminder to escalation
+
+**Behavioral change**: Before, repeated violations just kept appearing as warnings. Now:
+- First 4 appearances → normal reminders (nudge at point of decision)  
+- 5+ appearances → explicit "this needs structural change, not more reminders" escalation
+
+**Analogy to metatron**: Their system tracks per-prior helpfulness ratings. Ours tracks per-violation recurrence. Both close the feedback loop — surfaced context isn't just broadcast, its effectiveness is measured. Their "helpfulness cannot lift cross-tier" maps to our "recidivism escalates type, not just priority."
+
+Links: [[dna-preflight]], [[self-evolving-observations]], [[beliefs-candidates]], [[gradient-pipeline]]
