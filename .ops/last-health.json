@@ -1,45 +1,24 @@
 {
-  "timestamp": "2026-06-04T10:10:00+08:00",
-  "total_files": 834,
-  "cards": 364,
-  "projects": 391,
-  "wikilinks": 3151,
-  "errors": 7,
-  "warnings": 64,
-  "broken_links": 7,
-  "orphans": 3,
+  "date": "2026-06-04T20:08:00+08:00",
+  "total_files": 839,
+  "cards": 366,
+  "projects": 394,
+  "wikilinks": 3184,
+  "errors": 11,
+  "warnings": 72,
+  "broken_links": 11,
+  "orphans": 6,
+  "orphan_cards": 1,
+  "orphan_projects": 5,
+  "index_drift": 12,
+  "collisions": 1,
   "stubs": 0,
-  "index_drift": 7,
-  "duplicate_slugs": 1,
-  "stale_files": 152,
-  "frontmatter_issues": 203,
-  "cards_with_zero_outlinks": 98,
-  "cards_index_staleness": 266,
-  "secrets_found": 0,
+  "stale_files": 151,
+  "frontmatter_issues": 205,
+  "zero_outbound_links": 98,
+  "cards_index_stale": true,
+  "cards_index_gap": 268,
+  "secrets_detected": 0,
   "unicode_suspicious": 2,
-  "details": {
-    "broken_links": [
-      "projects/ai-memory.md -> [[admission-controller]]",
-      "projects/ai-memory.md -> [[floway]]",
-      "projects/ai-memory.md -> [[retire-candidates]]",
-      "projects/ai-memory.md -> [[sanitized-type-boundary]]",
-      "projects/backlog.md -> [[smart-routing]]",
-      "projects/nemoclaw.md -> [[PR #4054]]",
-      "projects/self-evolving-observations.md -> [[gradient-pipeline]]"
-    ],
-    "orphans": [
-      "agent-ecosystem-scout-2026-06-02",
-      "gtm-platform-research",
-      "specification-website"
-    ],
-    "index_drift_files": [
-      "cards/bonsai-image-4b.md",
-      "cards/cache-miss-cost-optimization.md",
-      "projects/agent-ecosystem-scout-2026-06-02.md",
-      "projects/gtm-platform-research.md",
-      "projects/memory-os-claudiodrews.md",
-      "projects/pilotdeck.md",
-      "projects/specification-website.md"
-    ]
-  }
+  "avg_wikilinks_per_file": 5.4
 }
