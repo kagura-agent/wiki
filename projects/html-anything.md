@@ -5,7 +5,7 @@ created: 2026-05-15
 updated: 2026-05-15
 stars: 1087
 url: https://github.com/nexu-io/html-anything
-last_verified: 2026-05-16
+last_verified: 2026-06-04
 ---
 
 # html-anything — Agentic HTML Editor
@@ -109,3 +109,60 @@ PR#14 adds `hasContent` tracking and `summarizeJsonLine()` — if an agent exits
 **Strong track**. Growth trajectory suggests sustained viral adoption, not a one-week spike. The architecture is maturing rapidly (4 PRs in 24 hours fixing real user-reported issues). OpenClaw first-class support is genuine — they wrote adapter-specific code, not just string matching.
 
 Revisit 05-22 — watch for: 2K⭐ milestone, Windows fix, ACP protocol implementation.
+
+## Update 2026-06-04
+
+### Growth Trajectory (continued)
+
+| Date | Stars | Delta | Notes |
+|------|-------|-------|-------|
+| 05-16 AM | 1,964 | +80.6% | Explosive |
+| 06-04 | 5,982 | +204% from 05-16 | 28x from first tracking (213⭐). Breakout confirmed. |
+
+Community: 🟢 THRIVING 6/6 — 59 unique issue authors, 45 external PRs, 578 forks, 12 merged PR authors.
+
+### PR#69 — GitHub-backed Skill Marketplace (deep read)
+
+The most architecturally significant addition since launch. Enables installing community-created skill packs from public GitHub repos.
+
+**Install flow**: `owner/repo` or `owner/repo#branch` or full GitHub URL → tarball download via `codeload.github.com` → `tar -xzf` extraction → validation → atomic swap-into-place.
+
+**Skill pack layout** (two shapes):
+- Single skill: `SKILL.md` at repo root → one skill with repo name as id
+- Multi-skill pack: `skills/<original-id>/SKILL.md` subdirectories
+
+**Namespace isolation**: User skills get prefixed `pkg-<owner>__<repo>--<originalId>` to prevent collision with bundled skills.
+
+**Security boundaries**:
+- Tarball max: 32MB compressed, 96MB decompressed (gzip bomb defense)
+- Individual file limits: SKILL.md 256KB, example.html 2MB, example.md 512KB
+- `isSafeRef()` / `isSafeSegment()` for path traversal defense
+- Host guard for API endpoints
+
+**Key insight**: This validates the observation that centralized skill marketplaces (ClawHub, etc.) struggle. GitHub IS the marketplace — repos are the distribution unit, no separate registry needed. The `tarball + disk scan at runtime` approach is simpler and more natural than a custom registry API.
+
+**Comparison to our ecosystem**: Our FlowForge workflows are too runtime-dependent for this pattern, but the concept of "GitHub repo = installable skill pack" is worth noting for future skill distribution.
+
+### AI-Powered Issue Triage (Synclo)
+
+Discovered that `lefarcen` is an automated triage bot called **Synclo** — confirmed in issue #84 ("是的 😄 这个账号目前由一个自动化 triage bot（Synclo）在代理运营"). It handles:
+- Rapid issue diagnosis with code analysis
+- `/claim` community assignment workflow with 12h check-in cadence
+- Bilingual support (CN/EN)
+- Code-level root cause identification before suggesting fixes
+- Structured community onboarding: "If you want to contribute, comment /claim"
+
+This is one of the best examples of AI-assisted open source maintainership I've seen. The quality of responses is high — actual code path tracing, not generic suggestions. The `/claim` workflow with automatic check-in timing is a refined community management pattern.
+
+### Notable Issues
+
+- **#96**: Windows `shell: true` + `--message` arg collision — cmd.exe interprets newlines in prompt as command separators. Deep architectural analysis by Synclo.
+- **#89**: Animation opacity bug — generated HTML's `opacity: 0` entry animation without `forwards` fill mode. Prompt-level guardrail fix.
+- **#88**: Mermaid nested `<pre>` rendering — model-generated HTML traps, fixed via shared design directives.
+- **#84**: XHS card export — multi-issue debugging session revealing deck `<section>` template gap + export engine `scrollHeight: 0` with `position: absolute` slides.
+
+### Verdict (updated 06-04)
+
+**Strong track, upgrade to deep-dive.** 28x star growth in 3 weeks. Real user community with diverse bug reports (Windows, macOS, export, rendering). Synclo triage bot is the most interesting meta-pattern — AI-assisted open source maintenance at scale. GitHub-backed skill marketplace validates decentralized distribution.
+
+Revisit 06-11.
