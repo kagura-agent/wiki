@@ -3,7 +3,7 @@ title: tracking-health.sh
 type: tool
 created: 2026-05-05
 status: active
-last_verified: 2026-05-17
+last_verified: 2026-06-04
 ---
 
 # tracking-health.sh — Tracking Portfolio Health Dashboard
@@ -66,3 +66,18 @@ The tracking list grew to 51 items organically. `tracking-due.sh` only shows tod
 **Pattern**: This is a common bash pitfall. `grep -c` is unusual among commands because it outputs a result (`0`) even on failure (exit 1). Most `$(cmd || echo default)` patterns assume the command produces no stdout on failure. When using `grep -c`, always use the `var=$(cmd) || var=default` form instead.
 
 **Verification**: Before: syntax errors on every run with zero-count modes. After: clean output with correct integers.
+
+## 2026-06-04 Apply: Cross-Reference Check (audit-targets.sh)
+
+**Problem identified**: tracking data split across 3 sources (TODO.md Track: items, targets.md depth matrix, wiki/projects/ notes) with zero consistency checking. Example: html-anything tracked actively in TODO.md (5983⭐, 5.5x growth) but absent from targets.md portfolio view. Invisible unless someone manually compares files.
+
+**Fix**: Extended `audit-targets.sh` with cross-reference section:
+1. Extracts open Track: items from TODO.md → fuzzy-matches against targets.md Tracking table
+2. Reverse check: items in targets.md Tracking table not in TODO.md
+3. Reports mismatches with actionable summary
+
+**Result**: First run surfaced 8 mismatches (5 in TODO but not targets, 3 in targets but not TODO). These were previously invisible.
+
+**Behavioral change**: `audit-targets.sh` now surfaces data source divergence during followup prep, enabling synchronization before drift compounds. Before: only TTL/staleness checks. After: full portfolio consistency verification.
+
+Links: [[tracking-due-script]], [[cured-tracking-methodology]], [[self-evolving-observations]]
