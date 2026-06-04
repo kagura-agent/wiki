@@ -959,9 +959,21 @@ Feature request for horizontal agent-to-agent collaboration within group chats (
 
 **Relevance**: OpenClaw's subagent model is also vertical. The horizontal peer model with mention-based routing in group chats is a different paradigm — agents as peers rather than hierarchical workers.
 
-### MCP Reconnect Hardening
+### MCP Reconnect Hardening (PR #4186 adjacent commits)
 
-Two commits fixing MCP session reconnection: handle `Connection closed` outside McpError, and match reconnect registration prefixes with sanitized wrapper names. Tests added. Incremental reliability work.
+Two commits fixing MCP session reconnection, architecturally interesting:
+
+**Pattern**: Base class extraction (`_MCPWrapperBase`) unifying `MCPToolWrapper`, `MCPResourceWrapper`, `MCPPromptWrapper` with a shared reconnect handler via DI callback. Each wrapper gets `set_reconnect_handler(callback)` injected at connection time by `_attach_reconnect_handlers()`.
+
+**Retry layering**: Two orthogonal recovery mechanisms in `execute()`:
+1. **Transient retry** (ClosedResourceError, EndOfStream) — retry once, same session
+2. **Session termination reconnect** ("Session terminated", "Connection closed") — full server reconnect via callback, get new session
+
+Both are independent flags (`retried_transient`, `refreshed_session`) — can trigger both in one call if transient retry reveals terminated session.
+
+**Concurrent dedup**: `_refresh_terminated_server()` acquires `_reload_lock`, then checks `current_tool is not stale_tool` — if another concurrent call already reconnected, reuse the fresh session instead of reconnecting again. Clean lock-then-check pattern.
+
+**Relevance to us**: OpenClaw's MCP tool execution currently doesn't have session-level reconnection. The stale-tool identity check (`is not stale_tool`) is a elegant dedup pattern worth noting for any shared-resource reconnection logic.
 
 ### GenericAgent 06-04: Output Injection Refactoring
 
