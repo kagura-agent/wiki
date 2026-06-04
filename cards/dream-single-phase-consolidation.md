@@ -1,7 +1,7 @@
 ---
 created: 2026-05-31
 tags: [concept, memory, architecture]
-last_verified: 2026-06-03
+last_verified: 2026-06-04
 ---
 # Dream Single-Phase Consolidation
 
@@ -48,3 +48,15 @@ Compare: OpenClaw nudge hook (runs in-context, follows this pattern), OpenClaw c
 - [[metadata-driven-context-injection]] — related pattern for persistent state
 - [[context-compaction]] — Dream's MECE routing prevents compaction-related duplication
 - [[memory-trash-filter]] — SNIP filtering as pre-consolidation gate
+- [[atomic-writes]] — crash-safe persistence added alongside Dream changes
+
+## Update 2026-06-04: Dual-Phase Proposal (Issue #4186)
+
+Community member @aishangwuji proposes reverting to **dual-phase Dream**:
+- Phase 1: Pure LLM analysis of history.jsonl → structured JSON (no tools)
+- Phase 2: AgentRunner with read_file/edit_file/write_file for incremental edits
+- EditFileTool `allowed_dir` restricted to memory/ + SOUL.md + USER.md + skills/
+
+Rationale: separating analysis from execution gives better control — the analysis phase can't accidentally modify files, and the execution phase has explicit allowed-directory restrictions. Also adds sensitive info redaction before persist and atomic writes.
+
+**Status**: Open issue, not merged. No maintainer response yet. Worth tracking — if merged, our card needs updating since the "single-phase replaces two-phase" narrative would be partially reversed.

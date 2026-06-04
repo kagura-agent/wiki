@@ -1016,3 +1016,17 @@ Incremental maintenance, no architectural changes. The checklist/mapreduce syste
 **Issue #537 — Plugin hooks can't modify context**: `_hook('agent_before', locals())` discards return value, making context modification hooks non-functional. Classic "fire-and-forget" vs "interceptor" hook design mistake. GenericAgent's hooks are observe-only, not transform-capable. Worth noting: OpenClaw's tool policy hooks are also observe-only in many places — same pattern.
 
 **Issue #536 — Goal Hive stale budget on resume**: Interrupted multi-hour runs can't safely resume because `goal_state.json` preserves the original start_time. Suggests their persistence model doesn't separate "identity state" (objective, history) from "runtime state" (budget, timing). [[write-ahead-session-persistence]] is the nanobot approach to similar problems.
+
+## Followup 2026-06-04
+
+**Stars**: 12,513 (was 12,396 on 06-02 — steady)
+
+**Recent commit** (06-04): `core: per-instance print injection (no_print), EXIT sentinel for run loop, log name collision fix, checklist poll hard cap`
+
+**Output injection refactoring**: Replaced all direct `print()` calls with instance-level `self.print = safe_print` (DI pattern). `no_print` flag silences output for headless/embedded instances. `code_run()` now accepts `myprint` parameter instead of calling global print. This is the transition from "interactive-only agent" to "embeddable component" — same pattern as making a library stdout-free.
+
+**EXIT sentinel**: Run loop now checks `if isinstance(task, str): break` — a poison pill pattern for clean shutdown. Previously the loop ran forever (`while True: task = self.task_queue.get()`).
+
+**Checklist poll hard cap**: `check.times` counter with 1000-iteration ceiling. Prevents infinite polling in checklist master coordination. Defensive — the function-attribute counter pattern (`check.times = getattr(check, 'times', 0) + 1`) is a Python idiom for stateful closures without classes.
+
+No architectural changes. Project is in maintenance/polish phase.

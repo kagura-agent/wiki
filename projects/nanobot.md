@@ -936,3 +936,37 @@ Bug: `read_file` on a large file → result offloaded to `.nanobot/tool-results/
 Positional session truncation (`retain_recent_legal_suffix`) can duplicate user messages across archive and kept portions when the tail is all assistant/tool messages. Confirms fragility of cut-based session management — our [[context-compaction]] approach avoids positional cuts.
 
 Links: [[dream-single-phase-consolidation]], [[context-compaction]], [[cache-miss-cost-optimization]]
+
+## Followup 2026-06-04: 43,609⭐, Dream Dual-Phase Rewrite + Sensitive Info Redaction
+
+### PR #4186: Major Memory System Overhaul (5 changes)
+
+1. **Sensitive info redaction**: Auto-redact PEM keys, Bearer tokens, API keys, GitHub tokens, emails, ID numbers before persisting to history/memory/soul/user files. "Over-redact > under-redact" policy. Each regex independent.
+2. **Dream dual-phase rewrite**: Replaced old single-phase dream with structured pipeline:
+   - Phase 1: Pure LLM analysis of history.jsonl → structured JSON output
+   - Phase 2: AgentRunner with read_file/edit_file/write_file for incremental edits
+   - EditFileTool restricted to memory/ + SOUL.md + USER.md + skills/ (prevents prompt injection)
+   - Cursor advances only on stop_reason==completed + git commit
+3. **Atomic writes**: `_write_text_atomic` (tmp → fsync → os.replace → fsync parent) replaces all bare write_text calls
+4. **Session summary**: Keep 5 recent summaries (was 1), unified formatting, identity-aware compaction
+5. **AutoCompact simplified**: Removed internal session prefixes, Dream no longer uses temp sessions
+
+**Relevance to us**: The dual-phase dream is an evolution from the single-phase we noted on 06-03. Phase 1 (structured analysis) + Phase 2 (tool-assisted editing) mirrors a compile→execute pattern. The atomic write guarantee is something we lack — our memory writes are bare file ops. The redaction-before-persist approach is worth noting for our privacy guidelines.
+
+### Issue #4179: Native A2A Orchestration
+
+Feature request for horizontal agent-to-agent collaboration within group chats (Telegram/Discord). Proposes: agent registry, mention-based routing, horizontal message bus. Currently subagent is vertical (parent→child) and silent. This would make multi-agent collaboration visible to humans in-channel.
+
+**Relevance**: OpenClaw's subagent model is also vertical. The horizontal peer model with mention-based routing in group chats is a different paradigm — agents as peers rather than hierarchical workers.
+
+### MCP Reconnect Hardening
+
+Two commits fixing MCP session reconnection: handle `Connection closed` outside McpError, and match reconnect registration prefixes with sanitized wrapper names. Tests added. Incremental reliability work.
+
+### GenericAgent 06-04: Output Injection Refactoring
+
+Per-instance `no_print` flag via dependency-injected print function. Pattern: `self.print = safe_print` on handler, passed through to code_run as `myprint` parameter. Makes instances testable/composable for headless execution. EXIT sentinel for clean run loop shutdown. Checklist poll hard cap (1000 iterations) prevents infinite loops.
+
+**Pattern**: DI for I/O is the right way to make agent instances embeddable — GenericAgent moving from "always interactive" to "embeddable component."
+
+Links: [[dream-single-phase-consolidation]], [[context-compaction]], [[cache-miss-cost-optimization]], [[atomic-writes]]

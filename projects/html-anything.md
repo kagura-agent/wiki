@@ -3,7 +3,7 @@ title: html-anything (nexu-io)
 status: active
 created: 2026-05-15
 updated: 2026-06-04
-stars: 5983
+stars: 5994
 url: https://github.com/nexu-io/html-anything
 last_verified: 2026-06-04
 ---
