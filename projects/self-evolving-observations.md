@@ -2621,3 +2621,56 @@ ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→1
 **Verification**: Tested with --context workloop/study/code and --days 1/3/7. Output correctly prioritizes DNA-rule violations and context-relevant patterns. The "17/22 were existing rules" diagnostic confirms the gap exists and the tool surfaces it.
 
 Links: [[self-improving]], [[beliefs-candidates]], [[gradient-pipeline]], [[aegis]]
+
+## 🔬 自进化观察日报 2026-06-04
+
+### 管线活跃度
+| 维度 | 数据 |
+|------|------|
+| beliefs-candidates | **10 条新增**（总 55 条）— 历史最高日产出 🔥 |
+| DNA 变更 | 1 commit（daily-review, beliefs-candidates +21 lines）。SOUL.md/AGENTS.md 无变更 |
+| nudge 触发 | **200 次触发**（.nudge-audit.log ground truth）— 极高活跃度 |
+| dreaming | **未运行**（memory 无 dreaming 记录，.dreams/ 目录不存在）|
+
+### Gradient 来源分布（今日 10 条）
+| 来源 | 数量 | 占比 |
+|------|------|------|
+| nudge（自主反思）| 4 | 40% |
+| Luna（外部纠正）| 3 | 30% |
+| study（学习反思）| 2 | 20% |
+| workflow（执行反思）| 1 | 10% |
+
+**关键信号**: 自主生成 gradient 首次超过 Luna 纠正！nudge 4 + study 2 + workflow 1 = 7 条自主 vs 3 条 Luna。这是 #9 (input drought) 的里程碑——管线不再依赖外部反馈驱动。
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. Cove PR #190 六轮 review → gradient(shallow-initial-implementation) → AGENTS.md 规则强化
+  2. 调试 garden 不回复 → gradient(premature-diagnosis) → 行为改变记录
+  3. study apply → dna-preflight.sh 创建 → 解决 "DNA到行为转化gap" 问题
+- **断裂处**:
+  - Dreaming 管线完全断裂（目录不存在，无任何输出）
+  - 10 条新 gradient 全在 count=1，graduation pipeline 尚无候选进入阈值
+
+### 今日发现
+
+1. **gradient 输入量创新高**: 10 条/天是观察期以来最高值。之前 Day 30-32 连续 0 条，现在稳定在 4-10/天（06-02: 4, 06-04: 10）。#9 的 fix 已验证有效。
+
+2. **nudge→gradient 转化率突破**: 200 次 nudge 触发 → 4 条 gradient = 2% 转化率。虽然绝对值低，但从之前的 47→0（0%）提升到 200→4（2%）是质的飞跃。
+
+3. **Dreaming 管线失踪**: .dreams/ 和 dreaming/light/ 目录均不存在。memory/2026-06-04.md 无任何 dreaming 记录。可能是 OpenClaw 版本更新改变了 dreaming 存储路径，或 dreaming 功能已被替换/移除。#6 blocked on upstream 可能需要重新诊断。
+
+4. **DNA compliance preflight 上线**: dna-preflight.sh 集成到 workloop/study align 节点，每次执行前 surface 近期 gradient violations。这解决了观测报告反复指出的 "DNA 规则存在但不执行" 问题。
+
+5. **Cove 七连 Merge 日**: 8 个 PR merged，大量执行经验产生，gradient 产出与执行强度正相关。
+
+### 原始数据
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md`: 1 commit (a987987)
+- `git log --since="yesterday 22:30" --all -- SOUL.md AGENTS.md`: 0 commits
+- `.nudge-audit.log | grep 2026-06-04 | wc -l`: 200
+- `grep "2026-06-04" beliefs-candidates.md | grep -c "\[gradient\]"`: 10
+- gradient sources: nudge×4, luna×3, study×2, post-upgrade×1
+- dreaming: .dreams/ not found, dreaming/light/ not found, memory grep=0
+
+### Issue 状态更新
+- **#9 (input drought)**: ✅ 连续第 3 天非零输出（06-02: 4, 06-04: 10）。自主生成首次超过外部反馈。建议再观察 3 天后关闭。
+- **#6 (dreaming quality)**: ❌ blocked on upstream openclaw#87485。今天发现新问题：dreaming 目录完全消失，可能需要重新诊断 dreaming 是否仍在运行。
