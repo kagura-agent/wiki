@@ -180,13 +180,27 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
   else
     MIN_MATCH=$(( (NUM_WORDS * 3 + 4) / 5 ))  # ceil(60%)
   fi
-  # Score each file by how many query terms it contains + term frequency
-  declare -A FILE_SCORES
+  # Score each file by IDF-weighted term match + term frequency
+  # IDF: rare terms (few documents) weighted more than common terms (many documents)
+  # Inspired by Metatron codebase-priors IDF self-tuning (2026-06-04 deep read)
+  declare -A FILE_SCORES   # IDF-weighted relevance score (float)
+  declare -A FILE_HITS     # Raw term-hit count for MIN_MATCH filtering (int)
   declare -A FILE_TF
+  TOTAL_DOCS=$(find "$WIKI_DIR/projects/" "$WIKI_DIR/cards/" -name '*.md' 2>/dev/null | wc -l)
+  [[ $TOTAL_DOCS -lt 1 ]] && TOTAL_DOCS=1
   for word in "${WORD_ARRAY[@]}"; do
     found=$(grep -rli "$word" "$WIKI_DIR/projects/" "$WIKI_DIR/cards/" 2>/dev/null || true)
+    # Compute IDF weight for this term: log2(N / (1 + df))
+    # Common terms (agent: 636/756 docs) get ~0.17; rare terms (metatron: 1/756) get ~6.6
+    DF=$(echo "$found" | grep -c '.' 2>/dev/null || echo 0)
+    [[ $DF -lt 1 ]] && DF=1
+    IDF_WEIGHT=$(awk "BEGIN { printf \"%.3f\", log($TOTAL_DOCS / (1 + $DF)) / log(2) }")
+    # Floor at 0.5 so even common terms contribute something
+    IDF_WEIGHT=$(awk "BEGIN { v=$IDF_WEIGHT; if (v < 0.5) v = 0.5; printf \"%.3f\", v }")
     while IFS= read -r f; do
-      [[ -n "$f" ]] && FILE_SCORES["$f"]=$(( ${FILE_SCORES["$f"]:-0} + 1 ))
+      [[ -n "$f" ]] || continue
+      FILE_SCORES["$f"]=$(awk "BEGIN { printf \"%.3f\", ${FILE_SCORES["$f"]:-0} + $IDF_WEIGHT }")
+      FILE_HITS["$f"]=$(( ${FILE_HITS["$f"]:-0} + 1 ))
     done <<< "$found"
     # Count total occurrences (TF) per file for this word
     while IFS= read -r f; do
@@ -197,7 +211,7 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
   done
   # Filter files meeting minimum match threshold
   for f in "${!FILE_SCORES[@]}"; do
-    if [[ ${FILE_SCORES["$f"]} -ge $MIN_MATCH ]]; then
+    if [[ ${FILE_HITS["$f"]:-0} -ge $MIN_MATCH ]]; then
       WORD_FILES="${WORD_FILES}${WORD_FILES:+$'\n'}$f"
     fi
   done
@@ -299,7 +313,7 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     fi
     # Combined: term_match * 10 + tf_bonus + slug_bonus + recall_boost + decay * maturity
     SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $TF_BONUS + $SLUG_BONUS + $RECALL_BOOST + $DECAY * $MATURITY }")
-    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE decay=$DECAY maturity=$MATURITY tf=$RAW_TF recall=$RAW_RECALL status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
+    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE idf_term=$RAW_TERM_SCORE decay=$DECAY maturity=$MATURITY tf=$RAW_TF recall=$RAW_RECALL status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
     echo "$SCORE $f"
   done | sort -rn | cut -d' ' -f2- | head -"$LIMIT")
   
