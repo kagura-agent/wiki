@@ -1029,4 +1029,48 @@ Incremental maintenance, no architectural changes. The checklist/mapreduce syste
 
 **Checklist poll hard cap**: `check.times` counter with 1000-iteration ceiling. Prevents infinite polling in checklist master coordination. Defensive — the function-attribute counter pattern (`check.times = getattr(check, 'times', 0) + 1`) is a Python idiom for stateful closures without classes.
 
-No architectural changes. Project is in maintenance/polish phase.
+No architectural changes from commit 5d122e20. However, commit 9d41f42c (06-02) had a significant architectural document rewrite:
+
+### goal_hive_master_duty.md Control Theory Rewrite (commit 9d41f42c)
+
+The multi-agent orchestration SOP was rewritten from 111→49 lines using **engineering control theory** as the grounding framework:
+
+- **J\*** = user's true value (objective function, philosophically invariant)
+- **Ĵ** = Master's formalized estimate of J\* (this is what evolves)
+- **y** = current deliverable
+- **e = J\*−y** = deviation/error
+- Each round: **measure e, compress e, make y monotonically approach J\***
+
+**Fractal loop**: `探测(probe) → 设计(design) → 执行(execute) → 检查(check) → re-read SOP → next round`
+
+**Three iron rules**:
+1. Master only **decomposes** and **aggregates** — never produces artifacts directly
+2. Maintain "current best accepted version" as anchor — **merge only if J increases, revert if J decreases** — anchor is monotonically non-decreasing
+3. **Loop until budget exhausted**, deliver current anchor (not "when done")
+
+**Divergent vs Convergent phases**:
+- Probe/Check = **divergent** — multiple workers independently, de-correlated, cast wide net
+- Design/Execute = **convergent** — Master decides, picks one, faithful execution
+
+**x.4 Check (key innovation)**: Multi-angle independent critique — ① user perspective ② adversarial/counterargument ③ boundary/corner cases ④ third-party review ⑤ **question the goal itself** (is Ĵ drifting from J\*? over-designed? scope creep?). Evidence must match delivery format — code→end-to-end output, not just unit stubs.
+
+**Instability detection**: worker busy but J not rising / local artifacts many but overall unusable / process proof replacing user value / Master pulled into details losing global view.
+
+### Relevance to Us
+
+| Concept | GenericAgent goal_hive | Our system |
+|---------|----------------------|------------|
+| Monotonic anchor | Anchor only improves, revert otherwise | No explicit quality anchoring for subagent outputs |
+| Budget-bounded delivery | "deliver current best when budget exhausted" | Subagents just run to completion |
+| Goal questioning in check | x.4⑤ asks "is Ĵ drifting from J\*?" | Our reflect checks process, not goal alignment |
+| Ĵ≠J\* distinction | Names the estimate vs actual gap | We don't distinguish |
+
+**Key insight**: The Ĵ≠J\* distinction names the common failure mode where agents solve the wrong problem confidently. Most orchestration SOPs describe *what to do*; this one explains *why each step exists* in terms of error reduction. The 49-line version is more actionable than the 111-line original — compression forced clarity.
+
+**Issue #560** (catiglu): task_planning operates on stale state representation — reads memory/reports but not actual codebase. Already-implemented features get re-planned as new tasks. Same class as our verify-before-report antipattern.
+
+**Community**: shenhao-stu (TUI, /scheduler, /conductor), nianyucatfish (session fix), desmonna (plugin hooks), catiglu (architecture critique). 🟢 THRIVING.
+
+**Stars**: 12,514 (was 8,401 on 04-30 — **+49% in 5 weeks**). Growth trajectory suggests becoming reference implementation for self-evolving agent patterns.
+
+Revisit 06-11.
