@@ -68,3 +68,19 @@ ingest (git history + AST) → LLM extraction → candidate priors
 
 ---
 *Deep read: 2026-06-04 10:55 CST*
+
+## 2026-06-04 Apply: IDF Self-Tuning for Wiki Search
+
+**Applied insight**: Three-tier retrieval with IDF self-tuning → adapted IDF weighting for our wiki/search.sh keyword ranking.
+
+**Before**: Each matching query term added +1 to file score equally. "agent" (84% of 756 docs) weighted same as "metatron" (0.1% of docs).
+
+**After**: IDF weight per term = log2(N / (1 + df)), floored at 0.5. Rare terms contribute up to ~9.5× more to ranking than ubiquitous terms.
+
+**Real impact**: Query "agent metatron" → metatron-codebase-priors.md gets idf_term=9.062 (mostly from "metatron"'s rarity). Without IDF, it would score the same as any file containing both words — no discrimination.
+
+**Design choice from Metatron preserved**: "Helpfulness cannot lift cross-tier" → our recall-frequency boost (capped +1.5) cannot override IDF-weighted term relevance (which can be 10-90+ for multi-term matches). Relevance geometry is maintained.
+
+**Benchmark**: 10/10 queries, 17/17 items — 100% precision maintained after change.
+
+Links: [[search-engineering]], [[self-improving]], [[livecache-bench]]
