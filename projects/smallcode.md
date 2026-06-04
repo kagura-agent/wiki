@@ -1,7 +1,7 @@
 # SmallCode — Coding Agent for Small Local LLMs
 
 - **repo**: Doorman11991/smallcode
-- **stars**: 1479 (05-27, was 848 on 05-21 — +74% in 6 days, breakout growth)
+- **stars**: 1752 (06-04, was 1479 on 05-27, 848 on 05-21 — sustained growth)
 - **lang**: JavaScript (Node.js)
 - **license**: MIT
 - **status**: active | deep-read | ✓2026-05-21 (updated)
@@ -273,3 +273,14 @@ Elephant Agent (PR#52) took the opposite approach to plugin safety — hardening
 - IPC narrowed from all System V to POSIX semaphores only
 
 This is complementary to SmallCode's approach: SmallCode trusts plugins but limits what the *model* can do; Elephant trusts the model but limits what the *sandbox* exposes. Different threat models, both valid.
+
+## 06-04 Update — v1.6.0
+
+**v1.6.0** (2026-05-31): Two major additions:
+1. **Hybrid code search** (PR #75 / #67): Single `hybrid_search` tool combining regex/keyword + semantic ranking over symbol-aware AST chunks. Fully local, no external services or embedding models — uses hashed bag-of-words vectors + BM25 fusion. Fused scoring with exact-match boost. Modes: hybrid (default), regex, keyword, semantic.
+2. **TUI visual refresh** (PR #72): Terminal UI overhaul by external contributor kali113.
+3. **Terminal restore on suspend/crash** (v1.5.2, PR #73/#71): Properly restores terminal state on Ctrl+Z, SIGTERM, and unhandled exceptions.
+
+**Observations**: External contributors appearing (kali113 on TUI). 6 open issues = healthy but not overwhelmed. Growth sustained (1752★). Hybrid search approach is interesting — avoids shipping embedding models by using token hashing, trades quality for zero-dependency locality.
+
+Revisit 06-11.

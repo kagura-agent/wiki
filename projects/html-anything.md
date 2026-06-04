@@ -2,8 +2,8 @@
 title: html-anything (nexu-io)
 status: active
 created: 2026-05-15
-updated: 2026-05-15
-stars: 1087
+updated: 2026-06-04
+stars: 5983
 url: https://github.com/nexu-io/html-anything
 last_verified: 2026-06-04
 ---
@@ -163,6 +163,8 @@ This is one of the best examples of AI-assisted open source maintainership I've 
 
 ### Verdict (updated 06-04)
 
-**Strong track, upgrade to deep-dive.** 28x star growth in 3 weeks. Real user community with diverse bug reports (Windows, macOS, export, rendering). Synclo triage bot is the most interesting meta-pattern — AI-assisted open source maintenance at scale. GitHub-backed skill marketplace validates decentralized distribution.
+**Strong track, upgrade to deep-dive.** 5983⭐ now (was 1087 on 05-15 — 5.5x in 20 days). Real user community with diverse bug reports (Windows, macOS, export, rendering). Synclo triage bot is the most interesting meta-pattern — AI-assisted open source maintenance at scale. GitHub-backed skill marketplace validates decentralized distribution.
+
+**06-04 update**: v1.6 area — skill marketplace live (PR #69), business decision skills added (#98), OpenCode integration fixed (#78). Community growing fast with external PR contributors. 42 open issues = healthy demand signal.
 
 Revisit 06-11.

@@ -1,9 +1,9 @@
 ---
 title: Agent-Native Code Search
 created: 2026-05-14
-updated: 2026-05-14
+updated: 2026-06-04
 tags: [agent-infrastructure, token-optimization, code-search]
-last_verified: 2026-05-14
+last_verified: 2026-06-04
 ---
 
 # Agent-Native Code Search
@@ -28,6 +28,7 @@ Agents exploring codebases via `grep` + `cat` spend 60%+ of their token budget r
 
 - **semble** (MinishLab, Python) — Original. Line-based chunking, BM25 + potion-code-16M semantic. MCP server mode.
 - **semble_rs** (johunsang, Rust) — Rewrite adding AST chunking + dependency graph. 3,727 LOC. Too young to evaluate (2 days, no tests, May 2026).
+- **[[smallcode]] hybrid_search** (v1.6.0, 06-04) — Zero-dependency JS implementation. No neural embeddings — uses FNV-1a hashed bag-of-words as sparse vectors + BM25 fusion. Regex-based symbol detection for chunking (no tree-sitter). Trades semantic quality for zero-dependency locality. Appropriate for its target: small codebases on consumer hardware with local models. Shows that the 80/20 of hybrid search can be achieved without any ML model.
 
 ## Static Embedding Trade-off
 
