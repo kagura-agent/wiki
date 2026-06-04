@@ -2602,3 +2602,22 @@ ff966d3 daily-review 05-31: graduate record-only-no-chat, MEMORY.md trim 181→1
 #   #9 (input drought): fix confirmed effective, 2nd day of sustained output
 #   #6 (dreaming quality): blocked upstream
 ```
+
+## Apply: DNA Compliance Preflight (2026-06-04)
+
+**Problem**: Day 47 observation: "DNA到行为的转化链有gap" — 17/22 recent gradients violated rules that ALREADY EXIST in AGENTS.md/SOUL.md. The problem isn't knowing rules, it's following them.
+
+**Solution**: Created `tools/dna-preflight.sh` — a behavioral reminder tool that:
+1. Reads recent gradients from beliefs-candidates.md (configurable window)
+2. Matches patterns against AGENTS.md/SOUL.md to find DNA-rule violations
+3. Scores by recurrence, recency, DNA-match, context relevance, and source (Luna > self)
+4. Surfaces top 3 most relevant reminders with severity levels (🔴 DNA-RULE EXISTED / 🟡 RECURRING / 🔵 RECENT)
+5. Context-aware: `--context workloop|study|code` highlights patterns relevant to that activity
+
+**Integration**: Added to `workloop.yaml` and `study.yaml` align nodes as mandatory preflight. Every work/study session now starts with "what did you violate recently."
+
+**Behavioral change vs without**: Before, rules existed passively in AGENTS.md — 2000+ lines rarely re-read. Now, the 3 most relevant recent violations are surfaced at the exact moment of action. This is the "nudge at point of decision" pattern from behavioral economics.
+
+**Verification**: Tested with --context workloop/study/code and --days 1/3/7. Output correctly prioritizes DNA-rule violations and context-relevant patterns. The "17/22 were existing rules" diagnostic confirms the gap exists and the tool surfaces it.
+
+Links: [[self-improving]], [[beliefs-candidates]], [[gradient-pipeline]], [[aegis]]

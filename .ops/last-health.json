@@ -1,40 +1,43 @@
 {
-  "timestamp": "2026-06-03T10:22:00+08:00",
-  "total_files": 832,
-  "cards": 363,
+  "timestamp": "2026-06-03T20:07:00+08:00",
+  "total_files": 833,
+  "cards": 364,
   "projects": 390,
-  "wikilinks": 3120,
-  "errors": 5,
+  "wikilinks": 3146,
+  "errors": 6,
   "warnings": 62,
-  "broken_links": [
-    "projects/ai-memory.md -> [[admission-controller]]",
-    "projects/ai-memory.md -> [[floway]]",
-    "projects/ai-memory.md -> [[retire-candidates]]",
-    "projects/ai-memory.md -> [[sanitized-type-boundary]]",
-    "projects/nemoclaw.md -> [[PR #4054]]"
-  ],
-  "index_drift": [
-    "cards/bonsai-image-4b.md",
-    "projects/agent-ecosystem-scout-2026-06-02.md",
-    "projects/memory-os-claudiodrews.md",
-    "projects/pilotdeck.md",
-    "projects/specification-website.md"
-  ],
-  "orphans": [
-    "agent-ecosystem-scout-2026-06-02",
-    "pilotdeck",
-    "specification-website"
-  ],
-  "orphan_count": 3,
-  "duplicate_slugs": ["README"],
-  "cards_index_stale": true,
-  "cards_index_listed": 98,
-  "cards_index_actual": 363,
-  "frontmatter_issues": 203,
-  "zero_outbound_links": 99,
-  "avg_wikilinks_per_linked_file": 5.3,
+  "broken_links": 6,
+  "orphans": 2,
+  "stubs": 0,
+  "index_drift": 6,
+  "duplicate_slugs": 1,
   "stale_files": 150,
-  "secrets_found": false,
+  "frontmatter_issues": 203,
+  "zero_outbound_links": 98,
+  "cards_index_staleness": 266,
+  "secrets_detected": 0,
   "unicode_suspicious": 2,
-  "stubs": 0
+  "invalid_facts": 0,
+  "details": {
+    "broken_links": [
+      "projects/ai-memory.md -> [[admission-controller]]",
+      "projects/ai-memory.md -> [[floway]]",
+      "projects/ai-memory.md -> [[retire-candidates]]",
+      "projects/ai-memory.md -> [[sanitized-type-boundary]]",
+      "projects/backlog.md -> [[smart-routing]]",
+      "projects/nemoclaw.md -> [[PR #4054]]"
+    ],
+    "orphans": [
+      "agent-ecosystem-scout-2026-06-02",
+      "specification-website"
+    ],
+    "index_drift_files": [
+      "cards/bonsai-image-4b.md",
+      "cards/cache-miss-cost-optimization.md",
+      "projects/agent-ecosystem-scout-2026-06-02.md",
+      "projects/memory-os-claudiodrews.md",
+      "projects/pilotdeck.md",
+      "projects/specification-website.md"
+    ]
+  }
 }
