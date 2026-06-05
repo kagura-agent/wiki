@@ -80,7 +80,7 @@ The key design: **two-phase review pipeline**.
 
 ## Relevance to Us
 
-- Our code-review skill could benefit from their rules approach — inject language-specific checklists instead of relying on models' general knowledge
+- ✅ **APPLIED (2026-06-05)**: Language-specific review rules pattern adopted. Created `code-review/rules/` with 4 language rule files (TypeScript, Go, Python, Rust) + `rule-inject.sh` that auto-detects file types from PR diff and injects matching checklists. Updated `workflow.yaml` `load_prompt` node to integrate. This is the key insight: rules-as-prompt gives reviewers targeted patterns beyond generic knowledge.
 - The `code_comment` tool pattern is worth adopting — structured output via tool calls
 - Plan phase concept applicable to any large-context agent task
 - Their benchmark methodology (if published) would be interesting to compare
