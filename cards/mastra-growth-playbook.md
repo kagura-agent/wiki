@@ -1,6 +1,6 @@
 ---
 created: 2026-04-25
-last_verified: 2026-06-03
+last_verified: 2026-06-05
 ---
 # Mastra Growth Playbook
 
@@ -37,7 +37,7 @@ Open source growth ≠ code quality alone. Gatsby's code wasn't worse than Next.
 
 ## Relevance
 - [[openclaw]] — similar pattern possible: brand + content + integrations
-- [[workshop]] / [[chat-infra-survey]] — content-first GTM applies
+- [[chat-infra-survey]] — content-first GTM applies
 - Content先行 strategy Luna has been advocating
 
 ## Links

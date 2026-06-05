@@ -1,23 +1,34 @@
 {
-  "timestamp": "2026-06-05T10:15:00+08:00",
-  "total_files": 849,
-  "cards": 375,
-  "projects": 395,
-  "wikilinks": 3190,
-  "errors": 0,
-  "warnings": 83,
-  "broken_links": 0,
-  "orphans": 7,
-  "orphan_cards": 1,
-  "orphan_projects": 6,
-  "index_drift": 22,
-  "cards_index_stale": 277,
+  "timestamp": "2026-06-05T20:10:00+08:00",
+  "total_files": 852,
+  "cards": 377,
+  "projects": 396,
+  "wikilinks": 3201,
+  "errors": 5,
+  "warnings": 58,
+  "broken_wikilinks": 4,
+  "broken_wikilinks_detail": [
+    "cards/mastra-growth-playbook.md -> [[workshop]]",
+    "projects/chat-infra-survey.md -> [[workshop]]",
+    "projects/evo-nexus.md -> [[workshop]]",
+    "projects/sharkord.md -> [[workshop]]"
+  ],
+  "index_issues": {
+    "missing_files_in_index": ["projects/workshop.md"],
+    "files_not_in_index": ["projects/deepcloak.md", "projects/loom.md"]
+  },
+  "orphans": 2,
+  "orphan_detail": ["deepcloak", "loom"],
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "frontmatter_issues": 205,
+  "duplicate_slugs": ["README"],
+  "cards_index_staleness": {
+    "indexed": 98,
+    "actual": 377,
+    "not_indexed": 279
+  },
+  "frontmatter_issues": 206,
   "zero_outbound_links": 107,
   "stale_files": 157,
   "secrets_detected": 0,
-  "unicode_suspicious": 2,
-  "avg_wikilinks_per_linked_file": 5.4
+  "unicode_suspicious": 2
 }
