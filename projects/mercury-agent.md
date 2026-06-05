@@ -607,3 +607,28 @@ The daemon hotfix reveals a distribution pain point: `bun build --compile` produ
 No new architecture. v1.1.11's skill system CLI (registry + install + search) remains the most significant recent addition — transforms [[mercury-agent-skills]] from static catalog to proper package registry.
 
 Links: [[mercury-agent-skills]], [[self-evolving-agent-landscape]]
+
+## 跟进 2026-06-05: v1.1.12
+
+Stars: 2,563 (was ~2,382 on 06-01, +7.6%). 264 forks.
+
+### New Since Last Check
+
+**Token Saver Mode (PR #69)**:
+- Auto-engages at 75% budget with 5pt hysteresis (off at 70%)
+- Zero behavioral impact when off — no tokenizer dependency
+- Persists savings to file, surfaces `/saver*` commands
+- **Propagates to sub-agents** — parent budget state flows down
+- Transfer value: We don't have automatic budget-triggered behavior in OpenClaw. The hysteresis pattern (on at 75%, off at 70%) prevents oscillation — worth noting for any future budget feature.
+
+**Skill Router Refinement (also in PR #69)**:
+- Follow-up to PR #68 fan-out fix: reduced ambiguity floor to 0.75, single-word tier to 0.45
+- Added meta-skill-intent regex: "create/build/publish + skill/plugin/tool" phrases skip routing entirely (interpreted as skill-authoring intent, not skill-usage intent)
+- This is a nice distinction: "build a download skill" shouldn't match the "downloader" skill
+
+**UX: Activity Panel + Bottom Bar**:
+- Idle Activity panel collapses to 1-line summary
+- Per-step spinners with tone escalation: cyan <30s → yellow <90s → red ≥90s with cancel hint
+- Real-time git branch/ahead-behind in status bar (2s poller, diff-checked, async)
+
+**Issues**: CJK input broken (#41), Windows install issues (#13, #64), dependency trust (#49). No deep architectural criticisms — community engagement is UX/feature-level, not architecture-level.

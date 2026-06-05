@@ -578,3 +578,4 @@
 2026-06-05T09:22:04+08:00|neutral|alibaba open-code-review|cards/code-review,cards/code-review-lessons,安全/健壮性不是 afterthought,projects/genericagent
 2026-06-05T09:22:21+08:00|neutral|code review agent enterprise|cards/code-review-lessons,安全/健壮性不是 afterthought,projects/oh-my-kimichan,projects/claude-hud,概况,cards/agent-native-code-search,cards/code-review,code-review-lessons,claude-code-routines,gitagent-protocol,async-agent-transport,agent-ecosystem-scout-2026-05-09
 2026-06-05T10:46:51+08:00|neutral|bux|projects/bux,projects/spawn-agent,cards/agent-chat-interface,scout-2026-05-06,browser-use,agent-chat-interface
+2026-06-05T12:50:06+08:00|neutral|mercury-agent skill routing intent|projects/mercury-agent,cards/skill-routing-precision-cliff,projects/mercury-agent-skills,projects/agent-ecosystem-scout-2026-04-25,projects/nanobot,skill-routing-precision-cliff,mercury-agent-skills,hermes-edu-skills,ffn-free-routing,mercury-agent

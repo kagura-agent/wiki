@@ -1,6 +1,6 @@
 ---
 created: 2026-05-30
-last_verified: 2026-06-03
+last_verified: 2026-06-05
 ---
 # Skill Routing Precision Cliff
 
@@ -26,6 +26,7 @@ As an agent's skill catalog grows, routing accuracy degrades in predictable ways
 2. **Tiered confidence** — single keyword = weak signal, multiple = strong (mercury-agent)
 3. **Ambiguity prompt** — ask user to disambiguate instead of parallel fan-out (mercury-agent)
 4. **Explicit picker** — `#skill-name` bypass for power users (mercury-agent), `/skill-name` (others)
+5a. **Meta-intent regex** — distinguish "build a download skill" (skill authoring) from "download this file" (skill usage). mercury-agent PR #69 skips routing for create/build/publish + skill/plugin/tool phrases.
 5. **Hierarchical dispatch** — category → skill two-hop routing (gbrain, [[functional-area-resolver]])
 6. **Progressive disclosure** — only load name+description at startup, full content on invoke (mercury-agent)
 
