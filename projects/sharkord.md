@@ -1,6 +1,6 @@
 # Sharkord — 轻量 Discord 替代
 
-> 2026-04-20 源码深读 | 关联：[[chat-infra-survey]], [[workshop]]
+> 2026-04-20 源码深读 | 关联：[[chat-infra-survey]], [[loom]]
 
 ## 概览
 - **Repo**: Sharkord/sharkord（1.3k⭐, MIT, alpha）

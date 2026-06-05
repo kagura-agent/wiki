@@ -7,7 +7,7 @@
 
 多 agent 运营层，把 Claude Code CLI 变成一个 38 agent 团队。目标用户：独立创始人/CEO。
 
-相关：[[openclaw-architecture]], [[workshop]], [[hermes-agent]], [[flowforge]], [[skillclaw]], [[nanobot]]
+相关：[[openclaw-architecture]], [[loom]], [[hermes-agent]], [[flowforge]], [[skillclaw]], [[nanobot]]
 
 ## 架构
 
