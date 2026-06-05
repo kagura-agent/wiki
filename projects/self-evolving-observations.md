@@ -2674,3 +2674,42 @@ Links: [[self-improving]], [[beliefs-candidates]], [[gradient-pipeline]], [[aegi
 ### Issue 状态更新
 - **#9 (input drought)**: ✅ 连续第 3 天非零输出（06-02: 4, 06-04: 10）。自主生成首次超过外部反馈。建议再观察 3 天后关闭。
 - **#6 (dreaming quality)**: ❌ blocked on upstream openclaw#87485。今天发现新问题：dreaming 目录完全消失，可能需要重新诊断 dreaming 是否仍在运行。
+
+## 🔬 自进化观察日报 2026-06-05
+
+### 管线活跃度
+- **beliefs-candidates**: 15 条新增（历史最高！），来源: nudge×6, luna×3, study×2, workloop×1, post-upgrade×1, standalone×2
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 0 commits）
+- **nudge 触发**: 200 次，6 条转化为 gradient = 3% 转化率（06-04: 200→4=2%，持续提升）
+- **dreaming**: light phase 运行（markers 存在），phase-signals 更新至 06-04，session-corpus 目录正常。今日 light phase 无新 promote 内容注入 memory
+- **graduated beliefs 总数**: 12 条（累计）
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. Cove refactor 多轮 review → gradient (verify-side-effects, recompile-all-artifacts) → 即时行为修正
+  2. workloop 找不到 issue → gradient (issue-finding-saturation) → 行为改变记录（pre-build repo pipeline）
+  3. Luna 指出"先凑合后重构"模式 → gradient (do-it-right-first-time, no-workaround-in-code) → 即时记录
+- **断裂处**:
+  - 15 条 gradient 全在 count=1，graduation pipeline 依然无新候选进入阈值
+  - dreaming light phase 今日无可见 promote 输出——需诊断 light dreaming 是否正在 degrade
+
+### 今日发现
+
+1. **gradient 输入量新高**: 15 条/天，连续第 4 天非零（06-02: 4, 06-04: 10, 06-05: 15）。#9 的 input drought fix 持续有效，且呈加速增长趋势。
+
+2. **nudge 转化率稳步提升**: 200 次触发 → 6 条 gradient = 3%（06-04: 2%）。nudge 依然是最大 gradient 来源（6/15 = 40%），但 luna 反馈（3/15 = 20%）也是重要输入。
+
+3. **gradient 多样性提高**: 来源覆盖 5 种（nudge/luna/study/workloop/post-upgrade），不再依赖单一来源。内容涵盖：CI 验证纪律、部署方式、文档归属、参照系对齐、协议重构验证等——覆盖了开发全生命周期。
+
+4. **graduation 瓶颈持续**: 所有新 gradient 都在 count=1，需要跨上下文重复才能升级。78 条 gradient 总量中仅 12 条 graduated。这可能不是 bug 而是正确行为——大部分 gradient 确实是单次事件不值得升级到 DNA。
+
+5. **dreaming 仍是黑箱**: infrastructure 存在（.dreams/ 目录、phase-signals、session-corpus），但今日 light phase 的 promote 内容为空。上一次 phase-signals 更新是 06-04 19:30 UTC，说明 dreaming 在执行但今天可能因 corpus 变化不足而未 promote 新内容。
+
+### 原始数据
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md`: 2 commits (9a8a4be, 9c8b6dd 含 beliefs 变更)
+- `git log --since="yesterday 22:30" --all -- SOUL.md AGENTS.md`: 0 commits
+- `.nudge-audit.log | grep 2026-06-05 | wc -l`: 200
+- `grep "2026-06-05" beliefs-candidates.md | grep -c "\[gradient\]"`: 15
+- gradient sources: nudge×6, luna×3, study×2, workloop×1, post-upgrade×1, standalone×2
+- dreaming: .dreams/ exists, phase-signals updated 06-04T19:30Z, light markers empty today
+- graduated beliefs total: 12
