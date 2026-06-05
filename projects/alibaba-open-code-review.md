@@ -91,3 +91,17 @@ The key design: **two-phase review pipeline**.
 - But the rules system (`rule_docs/`) and skills (`skills/`) are extendable
 - Issues are mostly feature requests, not bugs — codebase seems solid
 - Worth monitoring but not a contribution target
+
+### Applied: Plan Phase (2026-06-05)
+
+**What**: Added `plan_review` node to code-review workflow between `load_prompt` and `spawn_reviewers`. Script `plan-review.sh` categorizes PR files by risk level (🔴 High / 🟡 Medium / 🟢 Low) and passes focus guidance to reviewers.
+
+**Before**: All 3 reviewers got the full diff with no guidance on where to focus. On large PRs (10+ files), attention spread uniformly — equal time on lock files and auth middleware.
+
+**After**: Reviewers get risk-categorized file list. They know to deep-dive auth/API/DB files and surface-scan docs/tests/configs. For small PRs (≤5 files), planning is skipped — not worth the overhead.
+
+**Verification**: Tested against 2 real PRs:
+- cove #192 (12 files) → 9 high risk (server routes, DB schema, WebSocket), 2 medium (client lib/store), 1 low (test)
+- cove #191 (2 files) → correctly skipped planning
+
+**Behavioral change**: Reviewers allocate attention proportionally to risk. Security-relevant files get deep inspection; generated/config files get surface scan.
