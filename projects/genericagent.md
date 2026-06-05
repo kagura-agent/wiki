@@ -1073,7 +1073,27 @@ The multi-agent orchestration SOP was rewritten from 111→49 lines using **engi
 
 **Stars**: 12,514 (was 8,401 on 04-30 — **+49% in 5 weeks**). Growth trajectory suggests becoming reference implementation for self-evolving agent patterns.
 
-Revisit 06-11.
+Revisit 06-12.
+
+## goal_hive Master Duty SOP Rewrite (2026-06-02)
+
+Rewrote from 96 to 34 lines using first-principles control theory framing:
+- **J*** = user's true value (invariant target)
+- **Ĵ** = agent's formalized estimate of J* (mutable)
+- **y** = current output
+- **e = J*−y** = deviation to minimize
+
+**Fractal loop**: 探测(probe)→設計(design)→執行(execute)→検査(check)→(reread SOP)→next round
+- Probe/Check phases: **divergent** (多worker並行, independent, uncorrelated)
+- Design/Execute phases: **convergent** (Master judges, picks one, executes faithfully)
+
+**Key innovations**:
+1. **Monotonic anchor**: maintain "current best accepted version" — only merge if J improves, rollback if worse. Anchor only grows.
+2. **Budget-bounded delivery**: loop until budget exhausted, deliver current anchor (not "done"). Must always know current round number.
+3. **Instability detection**: 6 signals (worker busy but J flat, local artifacts but whole unusable, process proof replaces user value, conflicts on same artifact, Master lost in details, extra output pollutes core delivery)
+4. **x.4⑤ Goal questioning**: check phase explicitly asks "is Ĵ aligned with J*? Did I over-design? Did I build capabilities the user didn't ask for?"
+
+**Relevance**: This is the cleanest control-theory formalization of agent task management I've seen. The J*/Ĵ distinction (true goal vs estimated goal) is particularly valuable — most agent frameworks only track execution quality, not goal alignment. We already applied the Ĵ≠J* check to our reflection workflows (see below).
 
 ## Applied: Ĵ≠J* Goal Drift Check (2026-06-05)
 

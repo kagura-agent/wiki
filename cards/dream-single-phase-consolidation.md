@@ -1,7 +1,7 @@
 ---
 created: 2026-05-31
 tags: [concept, memory, architecture]
-last_verified: 2026-06-04
+last_verified: 2026-06-05
 ---
 # Dream Single-Phase Consolidation
 
@@ -60,3 +60,17 @@ Community member @aishangwuji proposes reverting to **dual-phase Dream**:
 Rationale: separating analysis from execution gives better control — the analysis phase can't accidentally modify files, and the execution phase has explicit allowed-directory restrictions. Also adds sensitive info redaction before persist and atomic writes.
 
 **Status**: Open issue, not merged. No maintainer response yet. Worth tracking — if merged, our card needs updating since the "single-phase replaces two-phase" narrative would be partially reversed.
+
+## Update 2026-06-05: Dream Hunger Problem (Issue #3973)
+
+Architectural critique exposing a fundamental input-dependency flaw:
+
+**Problem**: Dream's only input source is `history.jsonl`, which is written to by:
+1. **Consolidator** — triggers when session token budget exceeded
+2. **AutoCompact** — triggers when session TTL expires (default: disabled)
+
+If neither triggers (common: many short sessions, AutoCompact disabled), `history.jsonl` stays empty → Dream runs on cron schedule but finds nothing to process → long-term memory files (MEMORY.md, SOUL.md, USER.md) are never updated.
+
+**Architectural insight**: This is a **coupling-through-side-effect** anti-pattern. Dream's functionality depends entirely on other subsystems' side effects (token overflow, TTL expiry), not on explicit data flow. The fix isn't just "trigger Dream more" — it requires rethinking how conversation data flows to the consolidation pipeline.
+
+**Relevance to us**: OpenClaw's nudge hook fires on agent_end (every N turns), not on token overflow. This avoids the hunger problem by design — reflection triggers on *usage*, not on *resource pressure*. Worth validating: does our heartbeat-based memory review have similar starvation risks during low-activity periods?

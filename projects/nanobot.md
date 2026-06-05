@@ -981,4 +981,21 @@ Per-instance `no_print` flag via dependency-injected print function. Pattern: `s
 
 **Pattern**: DI for I/O is the right way to make agent instances embeddable — GenericAgent moving from "always interactive" to "embeddable component."
 
+### nanobot v0.2.1 (2026-06-01, 84 PRs, 17 new contributors)
+
+Major release themes:
+1. **WebUI as daily workbench** — live file edit visibility, activity rendering, source favicons, settings/sidebar/model controls unified, Thought/response ordering fix
+2. **Long-running agent stability** — sustained goals keep runner alive, per-session locking, AutoCompact/Consolidator race fix, archive retention data-loss fixes
+3. **CLI Apps + MCP unification** — CLI-native tools → preset setup → capability mentions → extension registry. Clearer path from local tool to agent-invokable workflow
+4. **Provider expansion** — Ant Ling, Skywork, Novita, Step Plan, StepFun/Zhipu/Ollama image gen, OpenAI API type selection, `extraBody`
+5. **Gateway cold start optimization** — ~4.6s → ~480ms (10x improvement)
+6. **Security hardening** — WebSocket auth for token issuance, redirect validation, IPv6-mapped IPv4 SSRF normalization, bounded Matrix media downloads
+
+**Stars**: 43,683 (up from 28K at v0.2.0)
+
+**Notable patterns**:
+- Cold start optimization (4.6s→480ms) is impressive for a Node.js gateway — likely lazy module loading + deferred initialization
+- CLI Apps + MCP convergence mirrors OpenClaw's skill/tool unification direction
+- Per-session locking for process_direct prevents overlapping turns from corrupting state — same problem OpenClaw solves with session locks
+
 Links: [[dream-single-phase-consolidation]], [[context-compaction]], [[cache-miss-cost-optimization]], [[atomic-writes]]
