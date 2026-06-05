@@ -1074,3 +1074,19 @@ The multi-agent orchestration SOP was rewritten from 111→49 lines using **engi
 **Stars**: 12,514 (was 8,401 on 04-30 — **+49% in 5 weeks**). Growth trajectory suggests becoming reference implementation for self-evolving agent patterns.
 
 Revisit 06-11.
+
+## Applied: Ĵ≠J* Goal Drift Check (2026-06-05)
+
+**Applied the x.4⑤ "question the goal itself" check to our reflection workflows.**
+
+Changes:
+- `reflect.yaml` think node: added step 5 "目标漂移检查 (Ĵ≠J*)" — forces explicit goal alignment verification before proceeding to action
+- `workloop.yaml` reflect node: added "目标漂移检查" between success and failure analysis — catches cases where execution was clean but goal was wrong
+
+**Before**: Reflect/workloop reflection checked process quality (what went well, what failed, what to improve) but not goal alignment. Could execute perfectly against wrong objective.
+
+**After**: Every reflection explicitly asks: "Is Ĵ (my understanding of the goal) aligned with J* (the actual need)? Did I confidently solve the wrong problem?"
+
+**Why this matters**: Preflight data shows `skip-reflection` (33× surfaced) as #1 recidivism pattern, but even when reflection happens, it was only process-level. Adding goal drift detection addresses a different failure mode: correct execution of incorrect objective.
+
+Links: [[self-improving]], [[beliefs-candidates]], [[FlowForge]], [[self-evolving-observations]]
