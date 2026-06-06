@@ -2768,3 +2768,62 @@ Links: [[gradient-scan]], [[graduation-pipeline]], [[beliefs-candidates]], [[sel
 **Significance**: The graduation pipeline has been "stuck at 0 candidates" since creation (~2 weeks). Three consecutive apply rounds today unblocked it at each layer: pipeline defaults → JSONL signal → keyword noise → successful graduation. This validates the self-evolving architecture: the pipeline CAN produce real behavioral changes when the plumbing works.
 
 Links: [[graduation-pipeline]], [[beliefs-candidates]], [[gradient-scan]], [[self-improving]], [[gradient-pipeline]]
+
+## 🔬 自进化观察日报 2026-06-06
+
+### 管线活跃度
+- **beliefs-candidates**: 14 条标记 2026-06-06（6 条 nudge、4 条 study、2 条 luna、1 条 workloop、1 条其他）。总量 327 行。**高活跃度日。**
+- **DNA 变更**: ✅ **有，主动。** 3 个 commits:
+  - `premature-conclusion` 从 beliefs-candidates 毕业到 SOUL.md（首次完整毕业！）
+  - process-discipline keyword false positives 修复
+  - auto-close-stale-entries gradient 新增
+- **nudge 触发**: 3 条 nudge-sourced gradients 写入（bypass-cicd、ui-before-understanding、action-without-permission）。但 gateway 日志 0 条 nudge 匹配——可能 nudge 关键词在日志中格式变了，或 gradients 是从 session 反思中手动标注为 nudge source。**[需验证]**
+- **dreaming**: Light sleep 运行 ✅，100 candidates staged，全部 confidence=0.58，recalls=0。REM sleep 运行但"No strong patterns surfaced"。**Issue #6 问题持续：uniform confidence，无差异化。**
+
+### 闭环追踪
+- **完整闭环: 3 个** 🎉
+  1. graduation-pipeline 卡在 0 candidates → 发现 3 层 bug（defaults/JSONL/keyword）→ 修复 → premature-conclusion 成功毕业 → 验证 SOUL.md 更新 [已验证]
+  2. gradient-scan.sh JSONL 信号盲区 → 修复 → 1→43 patterns，2→67 hits [已验证]
+  3. process-discipline false positives → 修复 keyword → 14→3 real hits [已验证]
+- **断裂处**:
+  1. dreaming quality（Issue #6）— 观察到问题但未修复。confidence 仍然 uniform 0.58
+  2. nudge 触发验证 — 无法从 gateway 日志确认 nudge 实际触发次数
+
+### PR 活跃度
+- **今日 PR**: 9 个（7 merged，2 open）
+  - cove: 6 PRs（#249-#255，其中 5 merged + 1 mega-refactor open）
+  - kagura-mail: 1 merged (#229)
+  - lottie-studio: 1 open (#35)
+  - agents-exist/story: 1 open (#8)
+- **外部反馈→gradient**: NemoClaw #4706 CHANGES_REQUESTED（prekshivyas traced code，发现 Date.now() fingerprint 问题）→ 已回复选择 narrow scope
+
+### 今日发现
+1. **🎯 毕业管线首次跑通** — 这是里程碑。`premature-conclusion` 是第一个通过完整 V1+V2+V3 评估毕业到 SOUL.md 的 belief。管线从"0 candidates 困了 2 周"到"成功毕业"只用了一天，因为同一天连修了 3 层 bug。
+2. **Dreaming 仍是最弱环节** — 100 candidates 全部 0.58 confidence，全部 recalls=0，全部来自 session-corpus/2026-06-02.txt（4 天前的对话）。没有 promote 有价值的内容。Issue #6 描述的问题完全未改善。
+3. **Gradient 写入质量明显提升** — 14 条中多数有明确 trigger、pattern name、source 标注。结构化程度比早期观察好很多。
+4. **闭环能力显著进步** — 3 个完整闭环在同一天完成，且都是"发现→修复→验证→记录"完整路径。对比早期观察中常见的"发现→记录→断裂"，今天的闭环率是观察以来最高的。
+
+### Issue 状态
+- **#4** (观察一周追踪): CLOSED — 观察期已结束，当前 cron 继续执行日常观察
+- **#6** (dreaming quality): OPEN — 问题持续。100 candidates，uniform 0.58 confidence，0 recalls。**建议升为最高优先级——这是管线中唯一完全不工作的组件。**
+- **#1/#2/#3** (调研): OPEN — 低优先级研究任务
+
+### 原始数据
+```
+# DNA commits today
+e5743a2 Add auto-close-stale-entries gradient from LLM-Wiki paper study
+434e270 graduate premature-conclusion to SOUL.md beliefs + fix process-discipline keyword false positives
+90a22e8 memory: study apply graduation pipeline fix
+
+# beliefs-candidates today
+14 entries dated 2026-06-06
+Sources: nudge(3), study(4), luna(2), nudge/cove(2), workloop(1), other(2)
+
+# dreaming
+Light: 100 candidates, all confidence=0.58, all recalls=0
+REM: "No strong patterns surfaced"
+Source corpus: session-corpus/2026-06-02.txt (4 days old)
+
+# PR activity
+9 PRs created, 7 merged same-day
+```
