@@ -2729,3 +2729,22 @@ Links: [[self-improving]], [[beliefs-candidates]], [[gradient-pipeline]], [[aegi
 **Behavioral change**: Future pipeline runs won't waste agent time evaluating already-graduated or non-existent candidates. Estimated savings: ~2 min per weekly review cycle.
 
 Links: [[graduation-pipeline]], [[beliefs-candidates]], [[gradient-scan]], [[self-improving]]
+
+## 🔬 Study Apply: JSONL Signal Integration for gradient-scan.sh (2026-06-06)
+
+**Applied**: Fixed two bugs in `gradient-scan.sh` that made 92.5% of gradient signals invisible:
+
+1. **Section status leak**: `current_section_status` from a `## YYYY graduated` header leaked to ALL subsequent `pattern:` tags (no `###` reset). Every JSONL-only pattern after the last graduated `##` section was incorrectly filtered as "already graduated."
+
+2. **Missing JSONL signal**: Scan only did keyword matching against memory files, ignoring the structured `.gradient-log.jsonl` that `add-gradient.sh` has been writing since 2026-05-25. 37 of 40 JSONL patterns had NO keywords defined in the scan.
+
+**Before**: 1 pattern, 2 hits in 14 days. 0 graduation candidates.
+**After**: 43 patterns, 67 hits in 14 days. 2 graduation candidates (`process-discipline` 14 hits, `premature-conclusion` 9 hits).
+
+**Behavioral change**: The graduation pipeline now sees evidence it was blind to. Two patterns (`process-discipline`, `premature-conclusion`) crossed the graduation threshold and can now proceed to V2+V3 evaluation. This unblocks the graduation pipeline that has been stuck at "0 candidates" since its creation.
+
+**Root cause insight**: The JSONL log was the right data source all along — structured, authoritative, already there. The keyword scan in memory files is inherently noisy (false negatives from phrasing variations, false positives from casual mentions). JSONL entries are explicitly-logged behavioral signals. The scan should have used JSONL from day one.
+
+**Source**: [[metatron-codebase-priors]] (structured records > prose scanning), [[beads]] (structured data beats grep), [[self-evolving-observations]] (graduation pipeline stuck at 0)
+
+Links: [[gradient-scan]], [[graduation-pipeline]], [[beliefs-candidates]], [[self-improving]]
