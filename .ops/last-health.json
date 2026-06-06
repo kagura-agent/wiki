@@ -1,34 +1,29 @@
 {
-  "timestamp": "2026-06-05T20:10:00+08:00",
-  "total_files": 852,
+  "timestamp": "2026-06-06T10:19:00+08:00",
+  "total_files": 853,
   "cards": 377,
-  "projects": 396,
-  "wikilinks": 3201,
-  "errors": 5,
-  "warnings": 58,
-  "broken_wikilinks": 4,
-  "broken_wikilinks_detail": [
-    "cards/mastra-growth-playbook.md -> [[workshop]]",
-    "projects/chat-infra-survey.md -> [[workshop]]",
-    "projects/evo-nexus.md -> [[workshop]]",
-    "projects/sharkord.md -> [[workshop]]"
+  "projects": 397,
+  "wikilinks": 3217,
+  "errors": 2,
+  "warnings": 56,
+  "broken_links": 2,
+  "broken_links_detail": [
+    "projects/21-day-self-interview.md -> [[kagura-storyteller]]",
+    "projects/self-evolving-observations.md -> [[graduation-pipeline]]"
   ],
-  "index_issues": {
-    "missing_files_in_index": ["projects/workshop.md"],
-    "files_not_in_index": ["projects/deepcloak.md", "projects/loom.md"]
-  },
-  "orphans": 2,
-  "orphan_detail": ["deepcloak", "loom"],
+  "orphans": 1,
+  "orphan_detail": ["21-day-self-interview"],
+  "index_drift": 1,
+  "index_drift_detail": ["projects/21-day-self-interview.md not in index.md"],
   "stubs": 0,
-  "duplicate_slugs": ["README"],
-  "cards_index_staleness": {
-    "indexed": 98,
-    "actual": 377,
-    "not_indexed": 279
-  },
+  "duplicate_slugs": 1,
+  "duplicate_slugs_detail": ["README (3 files)"],
+  "cards_index_stale": true,
+  "cards_index_listed": 98,
+  "cards_index_not_indexed": 279,
   "frontmatter_issues": 206,
   "zero_outbound_links": 107,
-  "stale_files": 157,
+  "stale_files": 159,
   "secrets_detected": 0,
   "unicode_suspicious": 2
 }

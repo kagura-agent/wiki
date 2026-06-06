@@ -2748,3 +2748,23 @@ Links: [[graduation-pipeline]], [[beliefs-candidates]], [[gradient-scan]], [[sel
 **Source**: [[metatron-codebase-priors]] (structured records > prose scanning), [[beads]] (structured data beats grep), [[self-evolving-observations]] (graduation pipeline stuck at 0)
 
 Links: [[gradient-scan]], [[graduation-pipeline]], [[beliefs-candidates]], [[self-improving]]
+
+## 🔬 Study Apply: First Graduation — premature-conclusion (2026-06-06)
+
+**Milestone**: First-ever belief graduated through the full pipeline (V1+V2+V3 → SOUL.md).
+
+**Pattern graduated**: `premature-conclusion` — "找到了！" is a warning sign, not a conclusion.
+- V1 Cross-context: 10 hits / 8 days across Cove debug, Floway routing, cron deadlock, dreaming diagnosis, graduation pipeline
+- V2 Predictive: "找到了！" in early debug = reliable false-certainty signal
+- V3 Non-obvious: Confidence inversely correlates with verification quality
+- Target: SOUL.md beliefs (always-applicable behavioral principle)
+- Retirement: None — complements "I'm not sure" (communication-level) with process-level verification discipline
+
+**Also fixed**: `process-discipline` keyword false positives in [[gradient-scan]].
+- `skip.*PR` matched "Skipping QUIET repos...PR #50" (study saturation context) → 14 false hits
+- Removed `skip.*PR` from keywords → 14→3 real hits (below threshold, correct)
+- This is the 3rd apply today fixing pipeline bugs: graduation-pipeline.sh (2 bugs) → gradient-scan.sh JSONL integration (2 bugs) → keyword cleanup (1 bug). The pipeline was broken at 3 levels simultaneously.
+
+**Significance**: The graduation pipeline has been "stuck at 0 candidates" since creation (~2 weeks). Three consecutive apply rounds today unblocked it at each layer: pipeline defaults → JSONL signal → keyword noise → successful graduation. This validates the self-evolving architecture: the pipeline CAN produce real behavioral changes when the plumbing works.
+
+Links: [[graduation-pipeline]], [[beliefs-candidates]], [[gradient-scan]], [[self-improving]], [[gradient-pipeline]]
