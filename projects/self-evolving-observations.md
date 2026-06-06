@@ -2713,3 +2713,19 @@ Links: [[self-improving]], [[beliefs-candidates]], [[gradient-pipeline]], [[aegi
 - gradient sources: nudge×6, luna×3, study×2, workloop×1, post-upgrade×1, standalone×2
 - dreaming: .dreams/ exists, phase-signals updated 06-04T19:30Z, light markers empty today
 - graduated beliefs total: 12
+
+## 🔬 Study Apply: Graduation Pipeline Fix (2026-06-06)
+
+**Applied**: Fixed two bugs in `graduation-pipeline.sh` that caused false noise in pipeline output:
+
+1. **Already-graduated candidates surfacing**: `scout-before-commit` (graduated 05-27) kept appearing in pipeline runs because keyword scan doesn't know about graduation status. Fix: grep beliefs-candidates.md for "graduated" marker before surfacing.
+
+2. **Ghost patterns**: `pr-closed-self-reflect` had 8 keyword hits from casual "slop"/"deslop" mentions in memory, but no actual beliefs-candidates entry. Fix: verify candidate exists in beliefs-candidates.md before surfacing; tightened keywords from `slop.*PR` to `closed as.*slop|slop.*label.*PR` (8→3 hits).
+
+3. **Default misalignment**: Script defaults (10d/threshold 8) were stricter than review.yaml settings (14d/threshold 6). Aligned to review.yaml.
+
+**Verification**: Pipeline now correctly outputs "0 candidates" with explanatory filter messages instead of surfacing 2 false positives. Before: 2 false candidates. After: 0 candidates + clear skip reasons.
+
+**Behavioral change**: Future pipeline runs won't waste agent time evaluating already-graduated or non-existent candidates. Estimated savings: ~2 min per weekly review cycle.
+
+Links: [[graduation-pipeline]], [[beliefs-candidates]], [[gradient-scan]], [[self-improving]]
