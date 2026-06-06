@@ -168,7 +168,91 @@ Connection to [[conciseness-accuracy-paradox]]: Dirac's thesis (less context = b
 
 ---
 
-*Deep read: 2026-04-28. Followup: 2026-04-29, 2026-04-30 (x2), 2026-05-01. Source: GitHub repo + API.*
+*Deep read: 2026-04-28. Followup: 2026-04-29, 2026-04-30 (x2), 2026-05-01, 2026-06-06. Source: GitHub repo + API.*
+
+---
+
+## Update: v0.4.0 — Modular Tooling Refactor (2026-06-06)
+
+**Stars:** 1,281 (was 1,263 on 05-31, +1.4%)
+**Released:** 2026-06-05 after 14 days quiet ("before the storm" from v0.3.20 delivered)
+**Scale:** 125 new files, +16,215 lines, but LOC overall decreased (removed "LLM slop code")
+
+### Core Architecture: Plugin-Based Tool System
+
+The "most significant refactor yet" decomposes Dirac's monolithic DiracAgent into a modular tool plugin system:
+
+**Three-layer architecture:**
+1. **IDiracTool interface** — minimal contract: `spec()`, `supportedSurfaces()`, `processCall(args, env)`
+2. **ToolRegistry** (singleton) — manages builtin + user tools, handles enable/disable toggles, collision detection, scope resolution (workspace > global)
+3. **ToolDiscoveryService** — scans builtin barrel + user directories (`~/.dirac/tools/` global, `.dirac/tools/` workspace)
+
+**Each tool is a module directory:**
+```
+modules/<tool_name>/
+    tool.ts       # exports spec + create()
+    <Tool>Tool.ts  # implementation class
+    __tests__/     # per-tool tests
+```
+
+**User tool loading pipeline:**
+1. Scan directories for `dirac-tool.json` manifests
+2. Validate manifest (schemaVersion=1, createdBy="dirac", scope matches location)
+3. Compile TypeScript → ESM (content-addressed cache: `<id>-<hash>.mjs`)
+4. Import compiled module, validate exports (`spec` + `create`)
+5. Register in ToolRegistry with collision checking
+
+**Tool environment (`IToolEnvironment`) provides:**
+- `env.workspace` — readFile, writeFile, listFiles, resolvePath
+- `env.system` — executeCommand, searchFiles
+- `env.editor` — open, showReview, saveChanges
+- `env.symbols` — getDefinitions, getReferences, getSymbols
+- `env.ast` — getSkeleton, getFunctions
+- `env.interaction` — askPermission
+- `env.ui` — createCard (for visual feedback)
+
+### Key Design Decisions
+
+1. **TypeScript-only user tools** — no JS, no compiled bundles in user dirs. Dirac transpiles on load with content-addressed caching (sha256 of source)
+2. **No internal imports** — user tools cannot import from `@/` or Dirac internals. Pure structural typing against `env`
+3. **Scope precedence** — workspace tools shadow global tools of the same name
+4. **Disabled by default** — user tools start disabled, must be explicitly enabled in settings
+5. **Self-scaffolding** — built-in `new-tool` SKILL.md guides the LLM through creating user tools via interactive interview
+
+### Built-in `new-tool` and `delete-tool` Skills
+
+Dirac can **create its own tools**: the `new-tool` skill is a structured interview that generates the full tool module directory. 13-point validation checklist before declaring success. This is meta-tooling — the agent extending its own capabilities at the user's direction.
+
+### ACP Status
+
+PR #114 "Polish ACP" and PR #115 "fix tests" merged. But Issue #109 reports "ACP seems to be broken" with 14 comments — ACP integration is still problematic.
+
+### Architectural Significance
+
+This is the refactor that "before the storm" (v0.3.20) was teasing. Key signals:
+
+1. **True extensibility** — from hardcoded tools to plugin architecture. Users can add tools without modifying Dirac's source.
+2. **LOC decreased** while adding features — disciplined refactor, not feature creep
+3. **Content-addressed caching** for user tool compilation — avoids recompilation on unchanged source
+4. **Collision detection** — prevents user tools from shadowing built-in tools, workspace tools shadow global
+5. **Sandbox via env** — user tools can't access internals, only the provided environment object. Clean capability boundary.
+
+**Comparison with OpenClaw:**
+| Aspect | Dirac v0.4.0 | OpenClaw |
+|--------|-------------|----------|
+| Tool format | TypeScript modules + JSON manifest | SKILL.md + shell/Node scripts |
+| Discovery | Directory scan + manifest validation | skills/ directories |
+| Compilation | TypeScript → ESM, content-addressed cache | None (interpreted) |
+| Scope | global (~/.dirac/tools) + workspace (.dirac/tools) | Agent-level skills |
+| Self-creation | Built-in `new-tool` skill | skill-creator skill |
+| Sandbox | env object (no internal imports) | Tool policy |
+
+**Borrowable patterns:**
+1. **Content-addressed compilation cache** — hash of source + version → cached output. Eliminates redundant work. Simple but effective.
+2. **Self-scaffolding tools** — the agent can create new tools for itself. Dirac's `new-tool` skill with 13-point validation is more rigorous than ad-hoc tool creation.
+3. **Env-based sandbox** — user tools see only capabilities, not internals. Clean dependency inversion.
+
+See [[agent-skill-standard-convergence]], [[skill-ecosystem]], [[mechanism-vs-evolution]]
 
 ---
 
