@@ -2,16 +2,16 @@
 title: "Centaur — Shared Agent Platform for Teams (paradigmxyz)"
 created: 2026-05-24
 source: https://github.com/paradigmxyz/centaur
-stars: 673
+stars: 724
 language: Python
 license: null
 status: early-production
-last_verified: 2026-05-31
+last_verified: 2026-06-06
 ---
 
 # Centaur (paradigmxyz)
 
-Shared, self-hosted agent platform by paradigm (the Reth/Foundry team). Slack-native: mention the bot, it spins up a K8s sandbox, runs a coding agent, delivers results back to the thread. 673⭐ (from 431 → 673, 05-24 → 05-31), 57 open issues, 99 forks, 93 external PRs/30d — strong sustained traction. 🟢 THRIVING (6/6).
+Shared, self-hosted agent platform by paradigm (the Reth/Foundry team). Slack-native: mention the bot, it spins up a K8s sandbox, runs a coding agent, delivers results back to the thread. 724⭐ (431 → 673 → 724), 85 open issues, 119 forks — sustained traction. 🟢 THRIVING (6/6).
 
 ## What It Solves
 
@@ -55,7 +55,7 @@ This is essentially what [[acp]] does but at a lower level — Centaur wraps CLI
 | Deployment | K8s-native, Helm chart | Single binary, runs anywhere |
 | Agent harnesses | amp, claude-code, codex, pi-mono | ACP (same harnesses + more) |
 | Chat integration | Slack-first | Multi-platform (Discord, Feishu, Telegram, etc.) |
-| Credential model | iron-proxy (sidecar) | pass/sops/env integration |
+| Credential model | iron-control (centralized, was sidecar) | pass/sops/env integration |
 | Workflow engine | Built-in checkpoint/replay | FlowForge (external) |
 
 **Insights for us:**
@@ -114,5 +114,20 @@ Worth following closely — paradigm has the engineering depth and this is clear
 - Community: 🟢 THRIVING (6/6) — 25 unique issue authors, 93 external PRs/30d, 7 unique merged PR authors
 - Production signals strong: iron-proxy stress-testing, startup race conditions (PR #302), healthz polling (PR #307)
 - No new architectural patterns since last deep read — execution & hardening phase
+
+## Followup 06-06
+
+- Stars: 724 (+7.6% from 673). 85 open issues, 119 forks
+- **Major architectural shift: iron-control credential centralization** (PR #404, +766/-930, 35 files)
+  - Broker credentials now managed by iron-control with Solid Queue worker running OAuth refresh loops
+  - Delivers access tokens inline to proxies via `token_broker` source
+  - **Drops the sidecar pattern entirely** — the iron-proxy sidecar I noted on 05-31 is superseded
+  - Tradeoff: sidecar isolation (per-sandbox independence, startup race conditions) → centralized control (single trust boundary, simpler lifecycle)
+- **CloudWatch read-only tool** (PR #287, +883/-6, 12 files): boto3-backed AWS monitoring via iron-proxy aws_auth. Lazy client instantiation = zero-cost discovery
+- **De-Paradigm-ification** (PR #394): Removed internal Paradigm Pulse workflow. Committing to open-source community
+- **Slack resilience**: 8+ PRs on oversized output, stream scoping, deferred rendering. Heavy production battle-testing
+- **Default persona** (Issue #436): `CENTAUR_DEFAULT_PERSONA` — persona-driven configuration emerging
+- Contributors: gakonst, Zygimantass, mslipper, goksu all active
+- Revisit 06-13
 
 Links: [[self-evolving-agent-landscape]], [[agent-memory-landscape-202603]], [[centaur-loop]]

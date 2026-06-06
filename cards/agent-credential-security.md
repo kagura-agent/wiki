@@ -1,6 +1,6 @@
 ---
 created: 2026-04-07
-last_verified: 2026-06-03
+last_verified: 2026-06-06
 ---
 # Agent 凭证安全：指纹模式
 
@@ -28,7 +28,7 @@ Agent 需要使用凭证（API key、OAuth token、app secret），但不应该�
 - Hardware security module (HSM) / Trusted execution environment (TEE)
 
 ## 业界方案（已调研 / 待调研）
-- [x] **[[centaur-paradigm|Centaur]] iron-proxy** (2026-05-31): sidecar proxy per sandbox. Agent container only holds proxied DSN, real DB creds stay in proxy pod. `secret()` resolves via ToolContext → proxy → backend. Principled isolation but creates startup dependency chains (race conditions when proxy isn't ready → retry logic). Most production-hardened example observed so far.
+- [x] **[[centaur-paradigm|Centaur]] iron-proxy → iron-control** (2026-06-06): Originally sidecar proxy per sandbox (05-31). Now centralized: iron-control owns OAuth refresh loop via Solid Queue worker, delivers tokens inline to proxies via `token_broker` source (PR #404). Dropped sidecar pattern entirely. Tradeoff: simpler lifecycle, single trust boundary, but centralized dependency. Most production-hardened credential architecture observed.
 - [ ] OpenClaw 自身的 sandbox/exec 机制
 - [ ] Claude Code 的 permission model
 - [ ] Hermes agent 的凭证管理
