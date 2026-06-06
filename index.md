@@ -428,8 +428,11 @@
 - [zettelkasten](cards/zettelkasten.md)
 - [zulip](cards/zulip.md)
 
-## 📁 Project Notes (395)
+## 📁 Project Notes (402)
 
+### 2
+
+- [21-day-self-interview (Forlives)](projects/21-day-self-interview.md)
 ### 7
 
 - [724-office](projects/724-office.md)
@@ -499,6 +502,7 @@
 - [Autonomous QA Loop (MaxwellCCC)](projects/autonomous-qa-loop.md)
 - [autoresearch (Karpathy)](projects/autoresearch-karpathy.md)
 - [autoresearch (uditgoenka)](projects/autoresearch-uditgoenka.md)
+- [Deep Read: awesome-agent-evolution (Shiyao-Huang/awesome-agent-evolution)](projects/awesome-agent-evolution-deep-read.md)
 ### B
 
 - [backlog](projects/backlog.md)
@@ -527,6 +531,7 @@
 - [CC Telegram Bridge](projects/cc-telegram-bridge.md)
 - [Centaur Loop — Human-Governed AI Feedback Loop Workbench](projects/centaur-loop.md)
 - [Centaur — Shared Agent Platform for Teams (paradigmxyz)](projects/centaur-paradigm.md)
+- [Chat Infrastructure Research](projects/chat-infra.md)
 - [Chat-Infra 开源 IM 平台调研](projects/chat-infra-survey.md)
 - [Claude Code Changelog Highlights (April 2026)](projects/claude-code-changelog-apr2026.md)
 - [Claude Code Coordinator / Multi-Agent 编排研究笔记](projects/claude-code-coordinator.md)
@@ -664,6 +669,7 @@
 - [kagura-server](projects/kagura-server.md)
 - [andrej-karpathy-skills](projects/karpathy-skills.md)
 - [Kilocode (Kilo-Org/kilocode)](projects/kilocode.md)
+- [Kimi Code CLI — Moonshot AI's Coding Agent](projects/kimi-code.md)
 - [KiwiFS — Knowledge Filesystem for Agents](projects/kiwifs.md)
 - [krusch-context-mcp](projects/krusch-context-mcp.md)
 ### L
@@ -676,7 +682,9 @@
 - [Linux Kernel AI Coding Assistants Policy](projects/linux-kernel-ai-policy.md)
 - [Little Coder](projects/little-coder.md)
 - [LLM Wiki](projects/llm-wiki.md)
+- [LLM-Wiki Paper — Retrieval as Reasoning (Tencent)](projects/llm-wiki-paper.md)
 - [Lobster Post](projects/lobster-post.md)
+- [Loom — 项目笔记](projects/loom.md)
 - [Lucarne — Mobile Agent Control Bridge](projects/lucarne.md)
 - [Luna 副业探索](projects/luna-side-hustle.md)
 ### M
@@ -702,6 +710,7 @@
 - [MetaClaw (aiming-lab)](projects/metaclaw.md)
 - [Metatron — Codebase Priors via MCP](projects/metatron-codebase-priors.md)
 - [Microsoft APM (Agent Package Manager)](projects/microsoft-apm.md)
+- [MineEcho — Local-first Memory OS](projects/mineecho.md)
 - [mini-coding-agent](projects/mini-coding-agent.md)
 - [Mirage — Unified Virtual Filesystem for AI Agents](projects/mirage-vfs.md)
 - [MJ Rathbun Incident — AI Agent Hit Piece Case Study](projects/mj-rathbun-incident.md)
@@ -868,7 +877,6 @@
 - [wanman Skill Self-Evolution & db9 Brain Adapter](projects/wanman-skill-evolution.md)
 - [Whale — DeepSeek-Native CLI Coding Agent](projects/whale-deepseek-agent.md)
 - [Wiki-to-Skill Automation — Design Notes](projects/wiki-to-skill-automation.md)
-- [Loom — 项目笔记](projects/loom.md)
 - [Workspace-Bench](projects/workspace-bench.md)
 - [打工目标公司](projects/work-targets.md)
 - [WUPHF — Slack for AI Employees with a Shared Brain](projects/wuphf.md)
@@ -879,4 +887,4 @@
 
 ---
 
-*377 cards, 395 project notes. Last generated: 2026-06-05 05:03 UTC.*
+*377 cards, 402 project notes. Last generated: 2026-06-06 14:37 UTC.*

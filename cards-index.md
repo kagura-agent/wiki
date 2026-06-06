@@ -4,6 +4,8 @@ created: 2026-04-10
 purpose: wiki-to-skill Phase 2
 ---
 
+> ⚠️ This is a **curated subset** (~98 cards) organized by theme. For the complete alphabetical index of all cards, see [index.md](index.md).
+
 ## 主题聚类
 
 ### 🧠 Cluster 1: Self-Evolution & Agent Architecture (22 cards)
