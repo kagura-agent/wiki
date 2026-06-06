@@ -366,10 +366,118 @@ A thread is essentially: "a focused sub-conversation about one thing, spawned fr
 
 This could be Stoat-AI's killer feature: threads that ARE tasks.
 
+## OpenClaw ↔ Stoat Integration Architecture (2026-06-06)
+
+### WebSocket Protocol Analysis
+
+Stoat's real-time protocol is simple and well-suited for adapter integration:
+
+**Client → Server (ClientMessage):**
+- `Authenticate { token }` — bot token auth (same as user)
+- `BeginTyping { channel }` / `EndTyping { channel }` — typing indicators
+- `Subscribe { server_id }` — subscribe to server events
+- `Ping { data }` — keepalive
+
+**Server → Client (EventV1) — ~30 event types:**
+- `Authenticated` → connection confirmed
+- `Ready { users, servers, channels, members, emojis, ... }` → initial state dump
+- `Message(Message)` → new message (the core event for adapter)
+- `MessageUpdate / MessageAppend / MessageDelete` → message lifecycle
+- `MessageReact / MessageUnreact` → reactions
+- `ChannelCreate / ChannelUpdate / ChannelDelete` → channel lifecycle
+- `ServerUpdate / ServerMemberUpdate` → server events
+- `ChannelStartTyping / ChannelStopTyping` → typing
+- `WebhookCreate / WebhookUpdate / WebhookDelete` → webhook events
+- `Bulk { v: Vec<EventV1> }` → batched events
+
+**Event routing:** Redis pub/sub with channel naming:
+- `{user_id}` — user events
+- `{user_id}!` — private events
+- `{server_id}u` — server member events
+- `global` — global events
+
+### revolt.js SDK (MIT)
+
+The official TypeScript SDK (`revoltchat/javascript-client-sdk`, 284⭐) provides:
+- `Client` class with reactive collections (users, channels, servers, messages)
+- Event emitter: `messageCreate`, `messageUpdate`, `messageDelete`, `channelCreate`, etc.
+- REST API wrapper via `stoat-api` package
+- Connection state management (connecting, connected, disconnected, reconnecting)
+- Uses Solid.js reactivity primitives — works in Node.js too
+
+**Bot connection is trivial:**
+```typescript
+import { Client } from 'revolt.js';
+const client = new Client();
+client.on('messageCreate', (message) => {
+  // Route to OpenClaw
+});
+await client.loginBot('bot-token');
+```
+
+### Adapter Architecture Design
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  OpenClaw Gateway                                            │
+│  ┌─────────────────────┐     ┌──────────────────────────┐   │
+│  │  Stoat Channel       │     │  Discord Channel          │   │
+│  │  Adapter (new)       │     │  Adapter (existing)       │   │
+│  │                     │     │                          │   │
+│  │  revolt.js SDK       │     │  discord.js              │   │
+│  │  ┌─────────────┐   │     │                          │   │
+│  │  │ WS Client   │   │     │                          │   │
+│  │  │ REST Client │   │     │                          │   │
+│  │  └─────────────┘   │     │                          │   │
+│  └────────┬────────────┘     └──────────────────────────┘   │
+│           │                                                  │
+│  ┌────────▼──────────────────────────────────────────────┐   │
+│  │  Unified Message Bus (existing)                        │   │
+│  └───────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+          │                           │
+    ┌─────▼───────┐            ┌──────▼──────┐
+    │ Stoat Server│            │ Discord API │
+    │ (self-hosted)│            │ (cloud)     │
+    └─────────────┘            └─────────────┘
+```
+
+**Adapter responsibilities:**
+1. **Inbound:** Listen for `messageCreate` via revolt.js → normalize to OpenClaw message format → route to agent
+2. **Outbound:** Receive agent responses → format for Stoat (markdown, embeds, masquerade) → send via REST
+3. **Features:** Typing indicators, reactions, file attachments (via Autumn file server), message editing
+4. **Auth:** Bot token for basic integration; could also use webhook API for simpler one-way posting
+
+**Masquerade feature is uniquely useful:** Stoat messages support `masquerade { name, avatar }` — an agent could visually represent different "modes" (thinking, executing, reporting) with different avatars, without needing separate bot accounts.
+
+### Two Integration Paths
+
+| Path | Description | Effort | When |
+|---|---|---|---|
+| **Path A: Adapter only** | Add Stoat as OpenClaw channel (like Discord/Feishu). Use stock Stoat. Bot joins server, responds to messages. | 1-2 weeks | Immediate — validate Stoat as chat platform |
+| **Path B: Fork + Adapter** | Fork Stoat, add AI-native features (agent entity, threads, tasks), build adapter for the fork. | 2-3 months | After Path A validates the UX |
+
+**Recommendation: Path A first.** Deploy stock Stoat, build adapter, use it daily. This validates:
+- Is Stoat's UX actually good enough?
+- Does self-hosting work on our infra?
+- Is the bot API responsive enough for real-time agent interaction?
+
+Only after answering these → commit to the fork.
+
+### Deployment Fit
+
+Stoat minimum: 2 vCPU, 2GB RAM. Our options:
+- **kagura-server (local):** Plenty of resources, no cost. Good for dev/testing.
+- **VM1 (Japan):** Already at ~466MB used / 4GB total. Could fit but tight with other services.
+- **New VM:** Recommended for production. Stoat + MongoDB + KeyDB + MinIO = dedicated instance.
+
+Docker Compose makes deployment straightforward — one `docker compose up -d`.
+
 ## Next Steps
 
 1. [ ] Clone and build Stoat locally — verify compile + Docker startup on kagura-server
 2. [ ] Test revolt.js SDK — connect as bot, send/receive messages
 3. [ ] Prototype: Add `AgentInformation` to User model, see what breaks
 4. [x] Evaluate Thread/Forum channel feasibility — **feasible, ~2-3 weeks, threads-as-tasks is the killer feature**
-5. [ ] Luna decision: confirm Stoat as base, define MVP feature list
+5. [x] OpenClaw adapter architecture design — **two-path strategy: adapter first, fork later**
+6. [ ] Luna decision: confirm Stoat as base, define MVP feature list
