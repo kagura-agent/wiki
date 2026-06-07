@@ -1,7 +1,7 @@
 # Chat Infrastructure Research
 
-> Last updated: 2026-06-06
-> Status: 🔍 Deep-dive on Stoat codebase complete
+> Last updated: 2026-06-07
+> Status: 🔍 Adapter implementation spec complete, awaiting Luna greenlight
 
 ## Goal
 
@@ -597,14 +597,104 @@ This actually **simplifies our decision**: we won't waste time trying to upstrea
 - Dev community: `stt.gg/API` (Stoat server)
 - Requires DCO sign-off on commits, conventional commit style, squash merge
 
+## OpenClaw Adapter: Implementation Spec (2026-06-07)
+
+### revolt.js SDK Verified
+
+Installed `revolt.js@7.2.0` locally — 12 dependencies total, lightweight.
+
+**Key SDK types for adapter:**
+
+| SDK Class | Adapter Use |
+|---|---|
+| `Client` | Main connection — `loginBot(token)`, `connect()`, event emitter |
+| `Message` | Inbound: `content`, `authorId`, `channelId`, `attachments`, `replyIds`, `masquerade` |
+| `Channel` | Outbound: `sendMessage(data)`, `fetchMessage(id)`, typing indicators |
+| `User` | Identity resolution, bot detection via `user.bot` field |
+| `Server` | Server context for group policy |
+
+**Event mapping (revolt.js → OpenClaw):**
+
+| revolt.js Event | OpenClaw Equivalent |
+|---|---|
+| `messageCreate` | Inbound message → route to agent |
+| `messageUpdate` | Message edit (update context if needed) |
+| `messageDelete` | Cleanup |
+| `messageReactionAdd/Remove` | Reaction events |
+| `channelStartTyping` | User typing indicator |
+| `ready` | Connection established, initial state |
+| `connected/disconnected` | Connection lifecycle |
+
+**Authentication:** `X-Bot-Token` header. Bot token from Stoat Settings → Bots → Create.
+
+### OpenClaw Plugin Architecture (from Mattermost reference)
+
+An OpenClaw channel plugin consists of:
+
+```
+@openclaw/stoat/
+├── openclaw.plugin.json    # Plugin manifest + config schema
+├── index.ts                # Entry point (defineBundledChannelEntry)
+├── channel-plugin-api.ts   # ChannelPlugin implementation
+├── channel-plugin-runtime.ts # Runtime (WebSocket connection, event loop)
+├── api.ts                  # REST API helpers
+├── contract-api.ts         # Message normalization
+├── setup-entry.ts          # Interactive setup wizard
+└── secret-contract-api.ts  # Secret management (bot token)
+```
+
+**Minimal config schema for Stoat adapter:**
+
+```json5
+{
+  channels: {
+    stoat: {
+      enabled: true,
+      botToken: "xxx",           // or { source: "env", id: "STOAT_BOT_TOKEN" }
+      baseUrl: "https://stoat.example.com",  // self-hosted instance URL
+      // Standard OpenClaw channel options:
+      dmPolicy: "pairing",
+      groupPolicy: "allowlist",
+      allowFrom: ["user-id-1"],
+      streaming: "progress",
+      textChunkLimit: 2000,      // Stoat's message limit
+    }
+  }
+}
+```
+
+**Key implementation considerations:**
+- Stoat `masquerade` → can visually represent agent modes (thinking/executing/done) with different names/avatars on the same bot account
+- Stoat message limit = 2000 chars (same as Discord) → chunking logic reusable
+- Webhook API mirrors Discord's → can use webhooks for notification-only channels without full bot connection
+- No thread support in Stoat → adapter doesn't need thread binding logic (unlike Discord adapter)
+- File attachments go through Autumn (S3-backed file server) → need to handle upload flow
+
+### Implementation Effort Estimate
+
+| Component | Effort | Notes |
+|---|---|---|
+| Plugin scaffold + config | 1 day | Copy from Mattermost, adapt schema |
+| WebSocket connection (revolt.js) | 1 day | `loginBot` + event loop |
+| Inbound message normalization | 1 day | revolt.js Message → OpenClaw format |
+| Outbound message delivery | 1 day | Chunking, embeds, attachments |
+| Typing indicators + reactions | 0.5 day | Straightforward SDK calls |
+| Streaming/progress preview | 1-2 days | Message edit loop for live updates |
+| File upload (Autumn) | 1 day | Multipart upload to Stoat's file server |
+| Setup wizard + docs | 0.5 day | Interactive `openclaw setup stoat` |
+| **Total** | **~7-8 days** | Functional adapter with streaming |
+
 ## Next Steps
 
-1. [ ] Clone and build Stoat locally — verify compile + Docker startup on kagura-server
-2. [ ] Test revolt.js SDK — connect as bot, send/receive messages
-3. [ ] Prototype: Add `AgentInformation` to User model, see what breaks
-4. [x] Evaluate Thread/Forum channel feasibility — **feasible, ~2-3 weeks, threads-as-tasks is the killer feature**
-5. [x] OpenClaw adapter architecture design — **two-path strategy: adapter first, fork later**
-6. [x] Map REST API surface — **84 endpoints, OpenAPI spec available, webhook API is Discord-compatible**
-7. [x] SDK ecosystem survey — **revolt.js (MIT), stoat.py, revolt-api types — all usable**
-8. [x] Contribution policy check — **LLM PRs banned upstream → fork-only path confirmed**
-9. [ ] Luna decision: confirm Stoat as base, define MVP feature list
+1. [ ] Deploy stock Stoat instance (Docker Compose on kagura-server) — validate self-hosting
+2. [ ] Create bot account on Stoat instance, test revolt.js connection
+3. [ ] Build OpenClaw Stoat adapter plugin (scaffold from Mattermost)
+4. [ ] Prototype: Add `AgentInformation` to User model, see what breaks
+5. [x] Evaluate Thread/Forum channel feasibility — **feasible, ~2-3 weeks, threads-as-tasks is the killer feature**
+6. [x] OpenClaw adapter architecture design — **two-path strategy: adapter first, fork later**
+7. [x] Map REST API surface — **84 endpoints, OpenAPI spec available, webhook API is Discord-compatible**
+8. [x] SDK ecosystem survey — **revolt.js (MIT), stoat.py, revolt-api types — all usable**
+9. [x] Contribution policy check — **LLM PRs banned upstream → fork-only path confirmed**
+10. [x] revolt.js SDK hands-on verification — **v7.2.0, 12 deps, clean typed API confirmed**
+11. [x] OpenClaw adapter implementation spec — **~7-8 days effort, Mattermost plugin as reference**
+12. [ ] Luna decision: confirm Stoat as base, greenlight adapter development
