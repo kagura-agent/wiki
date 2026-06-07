@@ -2827,3 +2827,71 @@ Source corpus: session-corpus/2026-06-02.txt (4 days old)
 # PR activity
 9 PRs created, 7 merged same-day
 ```
+
+---
+
+## 🔬 自进化観察日報 2026-06-07
+
+### 管線活躍度
+- **beliefs-candidates**: 8 条新增 (sources: study×5, nudge×2, workloop×1)，0 条毕业
+- **待升级 (≥3次)**: 1 条 — `flowforge-workflow-targeting` (第3次, merged 06-02~06-04, daily-review 合并)
+- **DNA 变更**: 无 SOUL.md/AGENTS.md 改动
+- **nudge 触发**: gateway 日志无 nudge 记录（journalctl grep 为空），但 beliefs-candidates 有 2 条标注 Source: nudge，说明 nudge 确实触发且产出了 gradient
+- **dreaming**: Light sleep 有 markers 但**全部低质量**（confidence 0.58, recalls=0, source 仍是 06-02~06-04 旧 corpus）。无 promote。REM 无有价值产出
+
+### 闭环追踪
+- **完整闭环**: 0 个显式闭环（今天以学习和编码为主，没有"发现→修复→验证"完整链路）
+- **部分闭环**: NemoClaw #4706 review feedback → gradient 写入（test-the-behavior-not-the-artifact），但修复本身还在等 re-review
+- **断裂处**: 
+  - `flowforge-workflow-targeting` 达到第3次但未触发毕业评估
+  - memory_search 失效连续 5+ 天，仍未创建 issue 或 @ Luna
+
+### 今日発見
+1. **gradient 写入节奏健康** — 8 条/天，来源多样（study 5, nudge 2, workloop 1）。study 是最大贡献源，说明学习循环在稳定产出 insight
+2. **DNA 静默日** — 连续观察中 DNA 无变更的天数在增加。beliefs-candidates 积累了 147 条 entries，但 graduated 只有 13 条（毕业率 ~9%）。大量 gradient 停在"第1次"，说明跨上下文复现不足或毕业流程未自动触发
+3. **Dreaming 仍然完全不工作** — 这是连续第 3 天观察到同一问题：uniform confidence、zero recalls、stale corpus。Issue #6 记录了问题但没有任何进展。**这个组件需要 upstream 修复，不是观察能解决的**
+4. **Nudge 在静默中工作** — gateway 日志 grep 不到 nudge，但 gradient 产出证明它触发了。日志 grep 方法可能不对（nudge 可能不走 systemd journal），但产出可验证
+5. **PR 产出旺盛** — 10 PRs created (cove 5, lottie-studio 3, kagura-mail 1, abti 1)，3 merged same-day。编码产出高但没有产生对应的 skill 提取
+
+### Skill 提取缺口
+- Cove 连续多天高产 PR（store refactor, session TTL, O(1) lookup），但没有提取 "store extraction pattern" 或 "performance optimization checklist" 之类的可复用 skill
+- lottie-studio OG meta tags + GIF export 也是重复做过的 pattern（社交预览 + 客户端导出），没有模板化
+
+### 外部反馈利用
+- NemoClaw #4706 CHANGES_REQUESTED → gradient 已写入 ✅
+- 无其他外部 review feedback 转化
+
+### Issue 状态
+| Issue | State | 变化 |
+|-------|-------|------|
+| #6 dreaming quality | OPEN | 无进展，连续 3 天观察同一问题 |
+| #3 Orb 调研 | OPEN | 无进展 |
+| #2 GenericAgent 调研 | OPEN | 无进展 |
+| #1 Evolver GEP 调研 | OPEN | 无进展 |
+
+### 原始数据
+```
+# DNA commits 2026-06-07
+0c0cb2c Study 06-07: gradient from vibecode deep-read
+329a117 study: apply mnem token-budget transparency to search.sh + unapplied.md update
+02ece70 workloop: NemoClaw #4706 review feedback + gradient
+f3c7a83 daily-review 06-07: merge 3 flowforge targeting patterns into 1
+
+# beliefs-candidates 2026-06-07
+8 entries dated 2026-06-07
+Sources: study(5), nudge(2), workloop(1)
+Patterns: confabulation-no-context, test-the-behavior-not-the-artifact,
+  preflight-recidivism-as-apply-input, subagent-verify-command,
+  academic-industry-pairing, measure-before-after,
+  api-over-clone-for-config-repos, study-followup-freshness-gate
+
+# dreaming
+Light: markers present, all confidence=0.58, all recalls=0
+REM: empty
+Promoted: 0 (last promote was 06-05)
+Corpus: stale (06-02~06-04)
+
+# PR activity (2026-06-07)
+10 PRs created, 3 merged same-day
+Repos: cove(5), lottie-studio(3), kagura-mail(1), abti(1)
+```
