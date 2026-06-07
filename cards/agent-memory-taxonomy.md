@@ -2,7 +2,7 @@
 title: Agent Memory Taxonomy (Forms-Functions-Dynamics)
 created: 2026-03-25
 source: "Memory in the Age of AI Agents" (arxiv 2512.13564, 47 authors, HF Daily Paper #1)
-last_verified: 2026-05-27
+last_verified: 2026-06-07
 ---
 
 > Agent memory taxonomy and comparison framework. Three dimensions for analyzing agent memory systems: Forms (token/parametric/latent), Functions (factual/experiential/working), Dynamics (formation/evolution/retrieval).
@@ -71,4 +71,4 @@ No production memory library ships condition-based prospective memory. Our cron 
 
 Also introduces the **Extractor → Store → Retriever** anatomy as a simpler framework than Forms/Functions/Dynamics for comparing libraries. And identifies **procedural memory** as the cleanest litmus test: LangMem actually implements it (system prompt evolution from trajectories), most others just label semantic entries.
 
-[[self-evolving-agent-landscape]] [[beliefs-upgrade-mechanism]] [[agent-perception-gap]] [[git-backed-agent-memory]] [[agent-memory-anatomy-brgsk]]
+[[self-evolving-agent-landscape]] [[beliefs-upgrade-mechanism]] [[agent-perception-gap]] [[git-backed-agent-memory]] [[agent-memory-anatomy-brgsk]] [[agent-memory-ground-truth]]

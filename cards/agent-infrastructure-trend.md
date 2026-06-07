@@ -3,7 +3,7 @@ title: "Agent Infrastructure Trend"
 created: 2026-06-05
 updated: 2026-06-05
 tags: [trend, ecosystem, agent-infrastructure]
-last_verified: 2026-06-05
+last_verified: 2026-06-07
 ---
 
 # Agent Infrastructure Trend
@@ -14,7 +14,7 @@ As of mid-2026, the fastest-growing agent projects are NOT new agent frameworks 
 
 1. **Execution sandboxes**: [[sandboxes-tastyeffect]] (395⭐ in 2 days), [[opensandbox]] (10.5k⭐). Isolated environments where agents run code safely.
 2. **Config management**: ai-rules-sync (105⭐) — sync AGENTS.md/CLAUDE.md/.cursorrules across tools. Agent config fragmentation is a real pain point.
-3. **Codebase knowledge extraction**: metatron (13⭐) — tree-sitter-based convention discovery, serve to agents via MCP. Convention extraction > convention documentation.
+3. **Codebase knowledge extraction**: [[metatron-codebase-priors]] (13⭐) — tree-sitter-based convention discovery, serve to agents via MCP. Convention extraction > convention documentation.
 4. **Multi-agent orchestration**: relaydeck (58⭐), loushang (47⭐), agent-symphony (9⭐). Platforms for coordinating multiple coding agents.
 5. **Agent VCS**: [[re_gent]] (661⭐, +13% in 13d). Version control designed for agent workflows.
 

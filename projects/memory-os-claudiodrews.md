@@ -71,7 +71,7 @@ Key instruction: *"When injected memory contradicts your assumptions, injected m
 - 173⭐ in 2 days suggests viral README/concept more than proven solution
 - No test coverage visible
 
-**Verdict**: Architecturally interesting for the Layer 7 insight. Not a project to track (too early, solo), but the ground truth hierarchy concept has direct transfer value.
+**Verdict**: Architecturally interesting for the Layer 7 insight. Not a project to track (too early, solo), but the ground truth hierarchy concept has direct transfer value. See [[agent-memory-ground-truth]] for the distilled pattern.
 
 ---
 *Deep read: 2026-06-02 13:50 CST*

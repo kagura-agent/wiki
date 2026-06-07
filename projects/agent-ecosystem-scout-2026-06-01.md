@@ -36,8 +36,10 @@ New tracking: Lucarne (238), NanoFlow engram (123), skill-creator (417)
 ## Relevance to Us
 
 - Duel Agents' cost routing adjacent to Floway but more extreme (auto model selection)
-- Agent-readiness specs worth tracking for llms.txt adoption
+- Agent-readiness specs worth tracking for llms.txt adoption → deep read done: [[specification-website]]
 - OpenClaw ecosystem growth is positive signal
+
+Next scout: [[agent-ecosystem-scout-2026-06-02]]
 
 ---
 *Scout: 2026-06-01 09:25 CST*

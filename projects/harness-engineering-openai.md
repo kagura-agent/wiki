@@ -78,3 +78,6 @@ When something fails, the fix is never "try harder." Engineers ask: "what capabi
 - [[agents-md]] — Agent identity via markdown (related standard)
 - [[tokenomics-paper]] — Quantitative backing for the review cost OpenAI is implicitly paying
 - [[taco-terminal-compression]] — Addresses the input-token bloat in review loops
+
+## Application Log
+- **2026-06-07**: Applied "AGENTS.md as TOC" principle to TOOLS.md — restructured from 213→47 lines using progressive disclosure. Validates Lesson 1: short entry point + deeper docs on demand.

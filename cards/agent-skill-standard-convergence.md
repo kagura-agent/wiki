@@ -3,6 +3,7 @@ title: Agent Skill 标准收敛
 slug: agent-skill-standard-convergence
 tags: [agent-ecosystem, standards, skills, infrastructure]
 created: 2026-04-25
+last_verified: 2026-06-07
 ---
 
 # Agent Skill 标准收敛
@@ -165,3 +166,4 @@ Skill 生态规模进一步爆发，头部项目星数级变：
 - [[huashu-design]] — 第一个爆发级 skill 案例
 - [[microsoft-apm]] — `.agents/skills/` 标准的执行者
 - [[skills-as-packages]] — 包级元数据和分发机制
+- [[specification-website]] — Web standards spec with Agent Readiness chapter (llms.txt, MCP, Agent Skills Discovery)

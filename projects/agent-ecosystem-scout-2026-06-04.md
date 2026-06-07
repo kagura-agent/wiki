@@ -3,7 +3,7 @@ title: "Agent Ecosystem Scout — 2026-06-04"
 created: 2026-06-04
 updated: 2026-06-04
 tags: [scout, agent-ecosystem]
-last_verified: 2026-06-04
+last_verified: 2026-06-07
 ---
 
 # Agent Ecosystem Scout — 2026-06-04
@@ -51,6 +51,8 @@ Dylan-Xu410/AgenticTrust: Decentralized reputation infrastructure for AI agents 
 Infrastructure is commoditizing rapidly — sandboxes, gateways, code intelligence graphs all going open-source. The "build an AI app builder" stack is nearly off-the-shelf.
 
 No new breakout frameworks this cycle. The ecosystem is processing the capability gains from Q1 and discovering the governance gap. **This validates our direction**: the next wave of value creation will be in trust, accountability, and identity — not raw capability.
+
+Previous scout: [[agent-ecosystem-scout-2026-06-02]]
 
 ---
 *Scout: 2026-06-04 15:42 CST*

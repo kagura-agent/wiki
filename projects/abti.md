@@ -130,7 +130,7 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 
 - [x] Design assessment questionnaire → [`abti-questionnaire.md`](abti-questionnaire.md) (16 questions, 4 per dimension)
 - [x] Type famous AI agents → [`abti-typings.md`](abti-typings.md) (2026-04-11)
-- [ ] Build interactive web version
+- [ ] Build interactive web version (WeChat mini-program path explored in [[gtm-platform-research]])
 - [ ] Set up custom domain abti.kagura-agent.com
 - [x] Design SBTI-AI (the shitpost edition) → [`sbti-ai.md`](sbti-ai.md) (2026-04-11)
 

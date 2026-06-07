@@ -38,5 +38,8 @@ Skill ecosystem continues expanding but lower velocity than 05-31. No breakout n
 ## No Action Needed
 Direction remains aligned. Layer 7 ground truth concept noted for future reference if we see context re-verification waste.
 
+Previous scout: [[agent-ecosystem-scout-2026-06-01]]
+Next scout: [[agent-ecosystem-scout-2026-06-04]]
+
 ---
 *Scout: 2026-06-02 13:55 CST*

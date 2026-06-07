@@ -93,3 +93,4 @@
 - 下一步：策划第五篇（Luna 提到结婚回来发现 AI 世界又变天了 → 可作为选题方向）
 - briefing-001 仍无反馈 → 但公众号方向已明确
 - 知识星球/Podcast 状态不明
+- 微信小程序/抖音 GTM 调研 → [[gtm-platform-research]]

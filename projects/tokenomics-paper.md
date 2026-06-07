@@ -74,3 +74,6 @@ This paper provides quantitative backing for what we observed qualitatively: **l
 - [[taco-terminal-compression]] — our implementation addressing the input token bottleneck
 - [[dirac]] — AST-native reads, another approach to reducing input tokens
 - [[reasonix]] — cache-first loop, 94% cache utilization addresses similar efficiency concerns
+
+## Application Log
+- **2026-06-07**: Applied "progressive disclosure" to TOOLS.md — restructured from 213→47 lines, moved details to on-demand files. 29% reduction in auto-loaded project context (~2,200 tokens/turn saved). Directly addresses Finding 2 (input tokens = 53.9% of cost).
