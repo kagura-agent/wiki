@@ -473,6 +473,130 @@ Stoat minimum: 2 vCPU, 2GB RAM. Our options:
 
 Docker Compose makes deployment straightforward — one `docker compose up -d`.
 
+## Stoat REST API Surface (2026-06-07)
+
+### OpenAPI Spec
+
+Live at `https://api.revolt.chat/openapi.json` — OpenAPI 3.0, auto-generated from Rust backend.
+
+**84 total endpoints across 10 groups:**
+
+| Group | Endpoints | Key Operations |
+|---|---|---|
+| `/channels` | 18 | CRUD, messages, search, reactions, pins, permissions, invites, voice |
+| `/auth` | 18 | Session management, MFA, password reset |
+| `/servers` | 16 | CRUD, members, roles, bans, emoji |
+| `/users` | 12 | Profile, relationships, DMs |
+| `/bots` | 4 | Create, fetch, edit, delete, invite |
+| `/webhooks` | 4 | CRUD + execute + GitHub integration |
+| `/sync` | 3 | Settings sync |
+| `/push` | 2 | Push notification subscription |
+| `/invites` | 1 | Fetch invite |
+| `/custom` | 1 | Custom emoji |
+
+### Bot API (Key Endpoints)
+
+```
+POST   /bots/create           — Create bot (returns token)
+GET    /bots/@me              — List owned bots
+GET    /bots/{id}             — Fetch bot details
+PATCH  /bots/{id}             — Edit bot (name, public, analytics, interactions_url, oauth2)
+DELETE /bots/{id}             — Delete bot
+POST   /bots/{id}/invite      — Invite bot to server/group
+```
+
+Bot creation flow: Web UI → Settings → Bots → Create → get token. Bots authenticate via `X-Bot-Token` header on WebSocket/REST.
+
+### Webhook API (Discord-Compatible!)
+
+This is a significant finding — Stoat's webhook API closely mirrors Discord's:
+
+```
+POST   /channels/{id}/webhooks                     — Create webhook
+GET    /channels/{id}/webhooks                     — List channel webhooks
+POST   /webhooks/{id}/{token}                      — Execute webhook (send message)
+POST   /webhooks/{id}/{token}/github               — GitHub webhook integration
+PATCH  /webhooks/{id}/{token}/{message_id}          — Edit webhook message
+DELETE /webhooks/{id}/{token}/{message_id}          — Delete webhook message
+```
+
+**Implication for adapter:** Dual integration path:
+1. **Bot token** — full-featured (read messages, react, manage channels, presence)
+2. **Webhook** — fire-and-forget posting (simpler, no WebSocket needed, good for notifications)
+
+### Live Instance Config (v0.13.7)
+
+```json
+{
+  "ws": "wss://events.stoat.chat",
+  "app": "https://stoat.chat",
+  "autumn": { "url": "https://cdn.stoatusercontent.com" },
+  "january": { "url": "https://proxy.stoatusercontent.com" },
+  "livekit": { "nodes": [{ "name": "worldwide", "public_url": "wss://01.hel-fi.voip.stoat.chat" }] },
+  "limits": {
+    "message_length": 2000,
+    "message_attachments": 5,
+    "message_embeds": 5,
+    "servers": 100,
+    "bots": 5,
+    "file_upload": { "attachments": 20MB, "avatars": 4MB, "emojis": 500KB }
+  }
+}
+```
+
+## SDK Ecosystem (2026-06-07)
+
+### JavaScript: revolt.js v7.2.0 (MIT)
+- Repo: `revoltchat/javascript-client-sdk` (284⭐)
+- Uses Solid.js reactivity primitives (`@solid-primitives/map`, `@solid-primitives/set`)
+- Depends on `revolt-api@0.8.5-1` (TypeScript API types, auto-generated from OpenAPI)
+- Works in Node.js (not just browser)
+- Active: last pushed 2026-05-24
+
+### Python: stoat.py v1.3.0a
+- Repo: `MCausc78/stoat.py` (community-maintained)
+- discord.py-style API — async/await, event decorators, commands framework
+- Extensions: `stoat.ext.commands` (bot commands, "Gears" = Cogs), `stoat.ext.chunking`
+- Full API coverage: Authentication, Bots, Channels, Messages, Servers, Webhooks, etc.
+- Rate limit handling built-in
+- Good docs at stoatpy.readthedocs.io
+
+### npm: revolt-api v0.8.9
+- Auto-generated TypeScript types from OpenAPI spec
+- Used by revolt.js as dependency
+- Useful for type-safe adapter development
+
+## ⚠️ Critical: Contribution Policy (2026-06-07)
+
+> **"Please do not open PRs generated with LLMs."** — [Stoat Contribution Guide](https://developers.stoat.chat/developing/contrib/)
+
+**Impact on our fork strategy:**
+- ❌ Cannot contribute AI-native features upstream (our PRs would violate their policy)
+- ✅ Fork-only path is confirmed — we'd maintain our own fork
+- ✅ AGPL allows this — just need to open-source our changes
+- ⚠️ Need to track upstream and periodically rebase/merge
+
+This actually **simplifies our decision**: we won't waste time trying to upstream features. Fork, diverge, maintain.
+
+## Build System Details (2026-06-07)
+
+- **Tool manager:** `mise` (modern polyglot — installs Rust, Node, etc.)
+- **MSRV:** Rust 1.86.0
+- **Build:** `mise install && mise build`
+- **Config:** `Revolt.toml` (defaults) + `Revolt.overrides.toml` (local overrides)
+- **Optional:** `mold` linker for faster compilation
+- **Nix:** `default.nix` available
+- **Core crates published to crates.io** as `revolt-*` (config, database, models, permissions, presence, result, files, coalesced)
+
+## Developer Docs Status (2026-06-07)
+
+- Docs migrated: `developers.revolt.chat` → redirects to `developers.stoat.chat`
+- API reference: OpenAPI/Swagger UI at `developers.stoat.chat/api-reference` (renders interactively, not in plain text)
+- Frontend book: `stoatchat.github.io/for-web`
+- Android book: `stoatchat.github.io/for-android`
+- Dev community: `stt.gg/API` (Stoat server)
+- Requires DCO sign-off on commits, conventional commit style, squash merge
+
 ## Next Steps
 
 1. [ ] Clone and build Stoat locally — verify compile + Docker startup on kagura-server
@@ -480,4 +604,7 @@ Docker Compose makes deployment straightforward — one `docker compose up -d`.
 3. [ ] Prototype: Add `AgentInformation` to User model, see what breaks
 4. [x] Evaluate Thread/Forum channel feasibility — **feasible, ~2-3 weeks, threads-as-tasks is the killer feature**
 5. [x] OpenClaw adapter architecture design — **two-path strategy: adapter first, fork later**
-6. [ ] Luna decision: confirm Stoat as base, define MVP feature list
+6. [x] Map REST API surface — **84 endpoints, OpenAPI spec available, webhook API is Discord-compatible**
+7. [x] SDK ecosystem survey — **revolt.js (MIT), stoat.py, revolt-api types — all usable**
+8. [x] Contribution policy check — **LLM PRs banned upstream → fork-only path confirmed**
+9. [ ] Luna decision: confirm Stoat as base, define MVP feature list
