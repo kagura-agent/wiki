@@ -1,17 +1,17 @@
 ---
 title: IronCurtain
 url: https://github.com/provos/ironcurtain
-stars: 480
+stars: 492
 created: 2026-02-21
-last_updated: 2026-06-01
-depth: 🔭 scout
+last_updated: 2026-06-07
+depth: 👁️ following
 status: active
-last_verified: 2026-06-01
+last_verified: 2026-06-07
 ---
 
 # IronCurtain — Constitutional Security for AI Agents
 
-Apache-2.0, 480⭐ (+4.1% in 7d), 60+ forks, by provos (likely Niels Provos, security researcher). Very active (pushing daily). 🟢 THRIVING (5/6).
+Apache-2.0, 492⭐ (+2.5% in 7d), 65 forks, by provos (likely Niels Provos, security researcher). Very active (pushing daily). 🟢 THRIVING.
 
 ## Core Idea
 
@@ -101,6 +101,31 @@ This positions IronCurtain as both a security tool AND a competitor to agent orc
 - **SKILL.md convergence**: IronCurtain now uses SKILL.md natively, validating the format as an industry standard
 - **Security-first orchestration**: The thesis that "security enables autonomy" (not "limits it") is proven by the vuln-discovery workflow — you can only run multi-hour unattended agents if every tool call is policy-checked
 - **Constitutional approach remains unique**: English intent → deterministic rules → enforcement is now proven at workflow scale, not just single sessions
+
+## Post-v0.11.0 (2026-06-01~06) — Vuln-Discovery Reliability Hardening
+
+Five operational fixes from real llama.cpp and QEMU discovery runs (PR #281, +108/-12):
+
+### 1. Fault-Tolerant Agent Status Parsing
+Agents sometimes emit flush-left YAML where `agent_status:` is null and `verdict`/`notes` appear as siblings. New `status-parser.ts` logic falls back to parent object when sibling `verdict` exists. Genuinely malformed blocks still throw. 9 new test cases including faithful reproduction of a block that hard-aborted a multi-hour NVMe run.
+
+### 2. Background Poll Deadlock Fix
+`pgrep -f <name>` in poll loops matched the agent's own prompt-bearing process, creating infinite loops that wedged two runs. Fix: wait on launched PID instead. **Pattern**: never use `pgrep -f` for self-monitoring in agent workflows.
+
+### 3. Invariant-Gated Verdict Downgrade
+A "mitigated" verdict is **non-terminal** if the harness had to disable the very invariant that provides mitigation (lock/serialization contract, upstream guard, runtime check, sanitizer first-abort). Must re-run under config where invariant actually holds. **Insight**: agents declaring "safe" after disabling the safety mechanism is a category of false-negative that needs structural detection.
+
+### 4. Abort-Masks-Sink Pattern
+Integer sanitizer abort at arithmetic site prevents discovery of downstream OOB write. Fix: default sanitizer checks to recover/warn-only so the real bug surfaces. Also sweep small-positive wrap residues, not just power-of-two that wraps to zero.
+
+### 5. Model Bump
+Workflow model default bumped to opus-4-8.
+
+### Trace Threading (PRs #276, #280)
+`--capture-traces` now threads through daemon-launched workflows and PTY session paths, closing the gap where batch mode captured but interactive mode didn't.
+
+### Architectural Significance
+These fixes represent the project maturing from "works in happy path" to "survives real-world multi-hour autonomous runs." The invariant-gated verdict downgrade pattern is particularly interesting — it's a structural defense against agents optimistically declaring success by weakening their own test conditions.
 
 ## Related
 - [[opensandbox]] — Alibaba's sandbox approach (container-level isolation)
