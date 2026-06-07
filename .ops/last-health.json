@@ -1,34 +1,28 @@
 {
-  "timestamp": "2026-06-06T20:18:00+08:00",
-  "total_files": 857,
-  "cards": 377,
-  "projects": 401,
-  "wikilinks": 3227,
-  "errors": 2,
-  "warnings": 64,
-  "broken_wikilinks": [
-    {"source": "projects/21-day-self-interview.md", "target": "kagura-storyteller"},
-    {"source": "projects/self-evolving-observations.md", "target": "graduation-pipeline"}
-  ],
-  "orphans": {
-    "total": 5,
-    "cards": 0,
-    "projects": 5,
-    "list": ["21-day-self-interview", "awesome-agent-evolution-deep-read", "chat-infra", "kimi-code", "mineecho"]
-  },
-  "index_drift": {
-    "missing_from_index": ["projects/21-day-self-interview.md", "projects/awesome-agent-evolution-deep-read.md", "projects/chat-infra.md", "projects/kimi-code.md", "projects/mineecho.md"]
-  },
-  "duplicate_slugs": ["README"],
-  "cards_index_staleness": {
-    "indexed": 98,
-    "actual": 377,
-    "not_indexed": 279
-  },
-  "frontmatter_issues": 206,
-  "zero_outbound_links": 107,
-  "stale_files": 160,
+  "timestamp": "2026-06-07T20:08:00+08:00",
+  "total_files": 867,
+  "cards": 380,
+  "projects": 408,
+  "wikilinks": 3267,
+  "errors": 7,
+  "warnings": 67,
+  "broken_wikilinks": 7,
+  "orphans": 5,
+  "orphan_cards": 1,
+  "orphan_projects": 4,
   "stubs": 0,
-  "secrets_detected": 0,
-  "unicode_suspicious": 2
+  "index_drift": 8,
+  "duplicate_slugs": 1,
+  "cards_index_stale": true,
+  "cards_index_gap": 282,
+  "frontmatter_issues": 207,
+  "zero_outbound_links": 104,
+  "avg_wikilinks_per_file": 5.3,
+  "stale_files": 162,
+  "secrets_found": 0,
+  "unicode_suspicious": 2,
+  "invalid_facts": 0,
+  "error_book_new": 18,
+  "error_book_recurring": 55,
+  "error_book_total_open": 73
 }
