@@ -123,6 +123,15 @@ DECAY_RATE=$(get_decay_rate "$INTENT")
 declare -A SEEN
 RESULTS=()
 
+# ---- Retrieval transparency counters (mnem-inspired) ----
+# Source: mnem token-budget transparency — every retrieve reports candidates_seen, used, dropped
+# Applied: 2026-06-07
+_RT_TOTAL_DOCS=0
+_RT_SEMANTIC_CANDIDATES=0
+_RT_KEYWORD_CANDIDATES=0    # files matching ≥1 keyword
+_RT_KEYWORD_QUALIFIED=0     # files passing MIN_MATCH threshold
+_RT_KEYWORD_SCORED=0        # files after scoring pipeline
+
 # ---- Semantic search (memex) ----
 if [[ "$MODE" == "hybrid" || "$MODE" == "semantic" ]]; then
   echo "🔮 Semantic results (memex):"
@@ -144,6 +153,7 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "semantic" ]]; then
       if [[ -n "$slug" ]]; then
         SEEN["$slug"]=1
         RESULTS+=("  🔮 $slug")
+        _RT_SEMANTIC_CANDIDATES=$((_RT_SEMANTIC_CANDIDATES + 1))
       fi
     done <<< "$MEMEX_OUT"
   else
@@ -187,6 +197,7 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
   declare -A FILE_HITS     # Raw term-hit count for MIN_MATCH filtering (int)
   declare -A FILE_TF
   TOTAL_DOCS=$(find "$WIKI_DIR/projects/" "$WIKI_DIR/cards/" -name '*.md' 2>/dev/null | wc -l)
+  _RT_TOTAL_DOCS=$TOTAL_DOCS
   [[ $TOTAL_DOCS -lt 1 ]] && TOTAL_DOCS=1
   for word in "${WORD_ARRAY[@]}"; do
     found=$(grep -rli "$word" "$WIKI_DIR/projects/" "$WIKI_DIR/cards/" 2>/dev/null || true)
@@ -210,9 +221,11 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     done <<< "$found"
   done
   # Filter files meeting minimum match threshold
+  _RT_KEYWORD_CANDIDATES=${#FILE_SCORES[@]}
   for f in "${!FILE_SCORES[@]}"; do
     if [[ ${FILE_HITS["$f"]:-0} -ge $MIN_MATCH ]]; then
       WORD_FILES="${WORD_FILES}${WORD_FILES:+$'\n'}$f"
+      _RT_KEYWORD_QUALIFIED=$((_RT_KEYWORD_QUALIFIED + 1))
     fi
   done
   
@@ -352,6 +365,12 @@ fi
 # ---- Summary ----
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "📊 Total unique results: ${#RESULTS[@]}"
+# Retrieval transparency (mnem-inspired: candidates_seen → qualified → returned)
+if [[ $_RT_TOTAL_DOCS -gt 0 || $_RT_SEMANTIC_CANDIDATES -gt 0 ]]; then
+  _RT_DROPPED=$((_RT_KEYWORD_CANDIDATES - _RT_KEYWORD_QUALIFIED))
+  [[ $_RT_DROPPED -lt 0 ]] && _RT_DROPPED=0
+  echo "  Pipeline: ${_RT_TOTAL_DOCS} docs scanned → ${_RT_KEYWORD_CANDIDATES} keyword hits → ${_RT_KEYWORD_QUALIFIED} qualified (${_RT_DROPPED} dropped by MIN_MATCH) | ${_RT_SEMANTIC_CANDIDATES} semantic"
+fi
 if [[ ${#RESULTS[@]} -gt 0 ]]; then
   echo "  Legend: 🔮=semantic 🔍=keyword"
   for r in "${RESULTS[@]}"; do
