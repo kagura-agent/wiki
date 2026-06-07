@@ -1,2 +1,4 @@
 .memex/
 .memexrc
+.error-book.json
+.repair-ledger.jsonl

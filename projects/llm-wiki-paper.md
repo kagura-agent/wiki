@@ -4,7 +4,7 @@ created: 2026-06-06
 updated: 2026-06-06
 status: noted
 tags: [memory, retrieval, wiki, self-evolving, paper]
-last_verified: 2026-06-06
+last_verified: 2026-06-07
 ---
 
 # LLM-Wiki Paper — Retrieval as Reasoning
@@ -110,3 +110,21 @@ Both are persistent self-correction mechanisms:
 - **Error Book is the "immune system" for compiled knowledge** — Without persistent self-correction, LLM-compiled knowledge bases silently degrade. Our wiki needs one.
 - **Two tools are enough** — search + read, composed by the agent through its reasoning loop. No need for complex retrieval APIs. Our memex already provides this.
 - **Karpathy's pattern has been operationalized** — This paper is the first rigorous empirical validation of the "compile docs into wiki" approach he proposed.
+
+## Applied: Scout Precheck Tool (2026-06-07)
+
+**Pattern borrowed**: Error Book's "structural enforcement > instructions" principle.
+
+**What**: Created `tools/scout-precheck.sh` — checks wiki/projects/ coverage for candidate projects before deep-read. Reports EXISTING (with depth/age/status) or NEW status. Exit code 1 when ALL candidates already studied.
+
+**Integrated into**: study.yaml scout node (step 8) + deep_read node (step 6). Both now mandate running the script before committing to a target.
+
+**Why**: `scout-target-wiki-precheck` had 27x recidivism in DNA preflight despite text instructions existing in the workflow. The LLM-Wiki paper's Error Book pattern showed that structural enforcement (automated detection + constraint injection) beats instructions alone. Applied the same principle: instead of telling the agent "check wiki first," give it a tool that makes checking trivially easy and shows results it can't ignore.
+
+**Before → After**:
+- Before: Agent relies on memory to `ls wiki/projects/<name>.md` — frequently forgotten
+- After: `bash tools/scout-precheck.sh dirac mnem new-project` → instant report with ⚠️ EXISTING / ✅ NEW
+
+**Verification**: Tested with 5 projects (4 existing, 1 new). All correctly classified. Exit code 1 when all existing, 0 when any new.
+
+Links: [[self-evolving-observations]], [[gradient-scan]], [[beliefs-candidates]]

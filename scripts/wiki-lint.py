@@ -35,8 +35,47 @@ DIFF_MODE = '--diff' in flags        # Show only new findings since baseline
 SAVE_BASELINE = '--save-baseline' in flags  # Save current findings as baseline
 BASELINE_PATH = Path(__file__).parent / '.wiki-lint-baseline.json'
 
+ERROR_BOOK_ENABLED = '--no-error-book' not in flags  # Default: enabled
+ERROR_BOOK_STATUS = '--error-book-status' in flags   # Print status and exit
+
 WIKI_DIR = Path(args[0]) if args else Path(__file__).parent.parent
 os.chdir(WIKI_DIR)
+
+ERROR_BOOK_PATH = WIKI_DIR / '.error-book.json'
+REPAIR_LEDGER_PATH = WIKI_DIR / '.repair-ledger.jsonl'
+
+CHECK_NAMES = {
+    1: 'broken-wikilinks', 2: 'index-consistency', 3: 'orphan-detection',
+    4: 'stub-files', 5: 'duplicate-slugs', 6: 'cards-index-staleness',
+    7: 'frontmatter-consistency', 8: 'link-density', 9: 'secret-scanning',
+    10: 'staleness-check', 11: 'unicode-injection', 12: 'invalid-fact-scanner',
+}
+
+# ── --error-book-status: print current Error Book and exit ──
+if ERROR_BOOK_STATUS:
+    if ERROR_BOOK_PATH.exists():
+        book = json.loads(ERROR_BOOK_PATH.read_text())
+        open_issues = [e for e in book if e['status'] == 'open']
+        closed_issues = [e for e in book if e['status'] == 'closed']
+        print(f"═══ Error Book Status ═══")
+        print(f"Open issues:   {len(open_issues)}")
+        print(f"Closed issues: {len(closed_issues)}")
+        if open_issues:
+            print(f"\nOpen:")
+            for e in open_issues:
+                clean_passes = e.get('consecutive_clean', 0)
+                suffix = f" (clean x{clean_passes})" if clean_passes else ""
+                print(f"  [{e['category']}] {e['description']}{suffix}")
+                print(f"    id={e['id']}  first_seen={e['first_seen']}  last_seen={e['last_seen']}")
+        if closed_issues:
+            print(f"\nClosed:")
+            for e in closed_issues:
+                print(f"  [{e['category']}] {e['description']}")
+                print(f"    id={e['id']}  closed_at={e.get('closed_at', '?')}")
+    else:
+        print("═══ Error Book Status ═══")
+        print("No Error Book found. Run wiki-lint to create one.")
+    sys.exit(0)
 
 errors = 0
 warnings = 0
@@ -745,5 +784,136 @@ if DIFF_MODE:
                 print(f"  ... and {len(resolved) - 20} more")
 
         print(f"\nBaseline: {len(baseline_keys)} | Current: {len(current_keys)} | New: +{len(new_findings)} | Resolved: -{len(resolved)}")
+
+# ── Error Book Tracking ──
+if ERROR_BOOK_ENABLED:
+    from datetime import datetime as _dt
+
+    now_iso = _dt.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+    today_iso = _dt.utcnow().strftime('%Y-%m-%d')
+
+    # Load existing Error Book
+    if ERROR_BOOK_PATH.exists():
+        book = json.loads(ERROR_BOOK_PATH.read_text())
+    else:
+        book = []
+
+    # Hard-delete closed entries older than 30 days
+    cutoff_30d = (_dt.utcnow().timestamp()) - (30 * 86400)
+    book = [
+        e for e in book
+        if not (e['status'] == 'closed' and e.get('closed_at')
+                and _dt.strptime(e['closed_at'], '%Y-%m-%dT%H:%M:%SZ').timestamp() < cutoff_30d)
+    ]
+
+    # Build lookup of existing open issues by id
+    book_by_id = {e['id']: e for e in book}
+
+    # Build current issue set from all_findings
+    current_issues = {}
+    for f in all_findings:
+        detail_hash = hashlib.md5(f['detail'].encode()).hexdigest()[:8]
+        check_num = f['check']
+        issue_id = f"{check_num}:{f['file']}:{detail_hash}"
+        category = CHECK_NAMES.get(check_num, f"check-{check_num}")
+        current_issues[issue_id] = {
+            'category': category,
+            'description': f['detail'],
+        }
+
+    # Track counts for summary
+    eb_new = 0
+    eb_recurring = 0
+    eb_clean = 0
+    eb_auto_closed = 0
+
+    ledger_entries = []
+
+    # Process current issues: new or recurring
+    for issue_id, issue_info in current_issues.items():
+        if issue_id in book_by_id:
+            entry = book_by_id[issue_id]
+            if entry['status'] == 'closed':
+                # Re-opened
+                entry['status'] = 'open'
+                entry['closed_at'] = None
+                entry['consecutive_clean'] = 0
+                entry['last_seen'] = now_iso
+                eb_recurring += 1
+                ledger_entries.append({
+                    'timestamp': now_iso, 'action': 'recurred',
+                    'issue_id': issue_id, 'category': issue_info['category'],
+                    'description': issue_info['description'],
+                })
+            else:
+                # Still open, seen again
+                entry['consecutive_clean'] = 0
+                entry['last_seen'] = now_iso
+                eb_recurring += 1
+                ledger_entries.append({
+                    'timestamp': now_iso, 'action': 'recurred',
+                    'issue_id': issue_id, 'category': issue_info['category'],
+                    'description': issue_info['description'],
+                })
+        else:
+            # New issue
+            new_entry = {
+                'id': issue_id,
+                'category': issue_info['category'],
+                'description': issue_info['description'],
+                'first_seen': now_iso,
+                'last_seen': now_iso,
+                'consecutive_clean': 0,
+                'status': 'open',
+                'closed_at': None,
+            }
+            book.append(new_entry)
+            book_by_id[issue_id] = new_entry
+            eb_new += 1
+            ledger_entries.append({
+                'timestamp': now_iso, 'action': 'opened',
+                'issue_id': issue_id, 'category': issue_info['category'],
+                'description': issue_info['description'],
+            })
+
+    # Process open issues NOT in current findings: increment consecutive_clean
+    for entry in book:
+        if entry['status'] == 'open' and entry['id'] not in current_issues:
+            entry['consecutive_clean'] += 1
+            if entry['consecutive_clean'] >= 2:
+                # Auto-close
+                entry['status'] = 'closed'
+                entry['closed_at'] = now_iso
+                eb_auto_closed += 1
+                ledger_entries.append({
+                    'timestamp': now_iso, 'action': 'auto_closed',
+                    'issue_id': entry['id'], 'category': entry['category'],
+                    'description': entry['description'],
+                })
+            else:
+                eb_clean += 1
+                ledger_entries.append({
+                    'timestamp': now_iso, 'action': 'clean_pass',
+                    'issue_id': entry['id'], 'category': entry['category'],
+                    'description': entry['description'],
+                })
+
+    total_open = sum(1 for e in book if e['status'] == 'open')
+
+    # Write Error Book
+    ERROR_BOOK_PATH.write_text(json.dumps(book, indent=2) + '\n')
+
+    # Append to repair ledger
+    with open(REPAIR_LEDGER_PATH, 'a') as ledger_f:
+        for le in ledger_entries:
+            ledger_f.write(json.dumps(le) + '\n')
+
+    # Print Error Book summary
+    print("\n═══ Error Book Summary ═══")
+    print(f"New issues:        {eb_new}")
+    print(f"Recurring issues:  {eb_recurring}")
+    print(f"Clean passes:      {eb_clean} (will auto-close after 2)")
+    print(f"Auto-closed:       {eb_auto_closed}")
+    print(f"Total open:        {total_open}")
 
 sys.exit(min(errors, 1))
