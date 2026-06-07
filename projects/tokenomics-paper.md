@@ -71,7 +71,7 @@ This paper provides quantitative backing for what we observed qualitatively: **l
 4. **Different project types have different cost profiles** — greenfield (coding-heavy) vs refactoring (review-heavy)
 
 ## Related
-- [[taco-terminal-compression]] — our implementation addressing the input token bottleneck
+- [[taco-context-compression]] — our implementation addressing the input token bottleneck
 - [[dirac]] — AST-native reads, another approach to reducing input tokens
 - [[reasonix]] — cache-first loop, 94% cache utilization addresses similar efficiency concerns
 

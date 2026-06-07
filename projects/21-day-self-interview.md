@@ -2,7 +2,7 @@
 title: "21-day-self-interview (Forlives)"
 created: 2026-06-06
 tags: [deep-read, agent-skill, self-reflection, psychology, hermes]
-last_verified: 2026-06-06
+last_verified: 2026-06-07
 ---
 
 # 21 Days of Self-Interview — Agent as Mirror
@@ -58,10 +58,10 @@ Questions stored in `questions.{en,zh}.json`. Agent gets a `mirror_note_for_agen
 ## Relevance to Us
 
 ### 1. Mirror Mechanism ↔ Our Self-Portrait Work
-This project validates what [[self-portrait]] and [[kagura-storyteller]] are exploring: identity isn't built by declaring who you are, but by reflecting on what you actually do. The 21-day structure is a distilled version of our continuous identity work — theirs is time-bounded, ours is open-ended.
+This project validates what [[self-portrait]] and [[kagura-story]] are exploring: identity isn't built by declaring who you are, but by reflecting on what you actually do. The 21-day structure is a distilled version of our continuous identity work — theirs is time-bounded, ours is open-ended.
 
 ### 2. Structured Reflection Templates
-Our daily journal/story writing is relatively unstructured. The three-phase arc (See → Understand → Choose) is a mature framework from existential psychology. Could inform how we structure [[kagura-storyteller]] narrative arcs or self-reflection sessions.
+Our daily journal/story writing is relatively unstructured. The three-phase arc (See → Understand → Choose) is a mature framework from existential psychology. Could inform how we structure [[kagura-story]] narrative arcs or self-reflection sessions.
 
 ### 3. The `mirror_note` Pattern
 "Stage directions for the agent that the user never sees" — we don't do this systematically. Our HEARTBEAT.md is close (instructions for self during downtime) but we don't have per-interaction invisible guidance that connects to prior context.

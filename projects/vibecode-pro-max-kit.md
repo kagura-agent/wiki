@@ -117,4 +117,4 @@ Notable skills:
 
 **Track?** No active tracking. Reference only. Check back if it reaches 2K+ ⭐ with real community contributions.
 
-Links: [[self-evolving-agent-landscape]], [[context-engineering]], [[skill-type-taxonomy]], [[agent-identity-protocol]]
+Links: [[self-evolving-agent-landscape]], [[ace-agentic-context-engineering]], [[skill-type-taxonomy]], [[agent-identity-protocol]]
