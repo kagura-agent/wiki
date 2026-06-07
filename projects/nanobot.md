@@ -5,9 +5,9 @@
 ## 概要
 - **Repo**: https://github.com/HKUDS/nanobot
 - **语言**: Python
-- **Stars**: 43,551 (2026-06-03, was 39,131 on 04-12)
+- **Stars**: 43,817 (2026-06-07, was 39,131 on 04-12)
 - **Created**: 2026-02-01
-- **最新版**: v0.1.5 (2026-04-06)
+- **最新版**: v0.2.1 (2026-06-01)
 
 ## 定位
 OpenClaw 的轻量替代品。强调 "core agent functionality with 99% fewer lines of code"。
@@ -997,5 +997,33 @@ Major release themes:
 - Cold start optimization (4.6s→480ms) is impressive for a Node.js gateway — likely lazy module loading + deferred initialization
 - CLI Apps + MCP convergence mirrors OpenClaw's skill/tool unification direction
 - Per-session locking for process_direct prevents overlapping turns from corrupting state — same problem OpenClaw solves with session locks
+
+### Post-v0.2.1 Development (2026-06-04 → 06-07)
+
+**PR #4195 — Desktop Shell (merged 06-06)**: The biggest architectural move — 10,478 additions, 998 deletions, 103 files. Adds Electron desktop app while keeping WebUI as the shared UI layer.
+
+Architecture split:
+- `desktop/` → Electron host, local gateway lifecycle, Unix socket, preload bridge, packaging
+- `webui/` → chat, settings, file preview, skills, token usage, automations (shared between browser + desktop)
+- `nanobot/webui/*` → WebUI-specific gateway APIs and transcript shaping
+- `nanobot/channels/websocket.py` → pure transport (delegates UI logic to `WebUITranscriptRecorder`)
+
+**Key design principle**: "desktop app should feel native without becoming a second UI implementation." The core agent loop (`nanobot/agent/loop.py`) has zero diff — clean separation of concerns.
+
+**Bundle ID**: `wiki.nanobot.desktop` — interesting domain direction signal.
+
+**Why this matters**: nanobot is transitioning from "chat platform connector" to "native desktop agent" while OpenClaw already has this via node apps. The shared-WebUI pattern (browser + desktop from same codebase) is the right architecture — avoids the dual-implementation trap.
+
+**Other notable changes (06-04 → 06-07)**:
+- **Custom image provider support** (06-05): Pluggable image gen backends, `extraBody` null-dropping for provider compat
+- **/skill command** (06-05): New slash command to list enabled skills — user-facing skill discoverability
+- **WhatsApp LID mentions** (#2663, merged 06-07): Handles WhatsApp's new Local ID format for group mentions
+- **SDK teardown** (06-06): Proper MCP connection cleanup from Nanobot facade — important for embedding scenarios
+- **Session history hardening** (#4219, open): Drop orphan tool results before trimming — prevents history corruption when trimming cuts mid-tool-call
+- **Security PRs** (open): Symlink escape blocking (#4119), unsafe HTTP URL rejection (#4123), read-only root protection (#4053) — systematic security hardening sprint
+- **Testing harnesses** (#3982, #4193, open): Scripted agent runner + memory lifecycle test harnesses — investing in test infrastructure
+- **Cron silent mode + lock_recipient** (#4225, open): From WhatsApp contributor — scheduled jobs can now run silently and lock delivery target
+
+**Growth**: 43,817⭐ (+0.5% from 43,609 on 06-04). 7,748 forks. 863 open issues. External contributor PRs active (WhatsApp, httpx timeout, reasoning_content preservation).
 
 Links: [[dream-single-phase-consolidation]], [[context-compaction]], [[cache-miss-cost-optimization]], [[atomic-writes]]
