@@ -2912,3 +2912,13 @@ Repos: cove(5), lottie-studio(3), kagura-mail(1), abti(1)
 ### 今日発見
 1. **Structural fixes > behavioral rules** — flowforge-workflow-targeting had 7 hits across 6 days despite being a known pattern. Adding it as a DNA rule would have been hit #8. Fixing the code makes the rule unnecessary — the tool enforces it. This is the ideal graduation path: if a pattern can be enforced by tooling, do that instead of adding another rule to remember.
 2. **Graduation pipeline works but needs manual trigger** — the pipeline identified 4 candidates but none were auto-evaluated. The evaluate-candidate.sh script couldn't find the pattern by name. Gap: pattern naming in beliefs-candidates vs graduation pipeline vs evaluate-candidate.sh isn't aligned.
+
+### dna-preflight recidivism counter fix (2026-06-08)
+- **Problem**: Recidivism counter used raw log line counts (total entries), inflating to 48-62× for patterns that were surfaced 3-4 days. Every run logged top 3 patterns → multiple entries/day → counts exploded
+- **Root cause**: `cut | uniq -c` counted log lines, not meaningful signal. A pattern surfaced once/day for 4 days with 15 runs/day = 60 entries, not 60 violations
+- **Fix applied**: Two structural changes:
+  1. **Unique-day counting** — awk deduplicates by pattern+date before counting. Only counts distinct days a pattern appeared. Threshold changed 5→3 (days, not entries)
+  2. **14-day age limit** — entries older than 14d pruned on each run, preventing unbounded accumulation
+  3. **Graduated pattern pruning** — patterns marked `graduated` in beliefs-candidates get their log entries removed
+- **Result**: Recidivism list: 20+ patterns → 3 genuinely recidivist patterns (skip-reflection 4d, workflow-bypass 3d, dogfood-adoption 3d). Signal-to-noise dramatically improved
+- **Design principle**: [[auto-close-stale-entries]] + [[structural-fix-over-behavioral-rule]] — counting unique days is more meaningful than raw frequency
