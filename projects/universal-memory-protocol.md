@@ -82,7 +82,7 @@ UMP is a **new row** in the portability spectrum:
 - **The "standard without adoption" trap**: MIF, PAM, LangMem all proposed memory vocabularies before. UMP consolidates them but faces the same adoption chicken-and-egg.
 - **Overhead for simple cases**: for a single agent with file-based memory, the DID/signing/bi-temporal machinery is overkill.
 
-## Connection to [[memwatch]] (companion project)
+## Connection to [[memwatch-staleness|memwatch]] (companion project)
 
 memwatch (18⭐, same week) solves the **staleness detection** problem that UMP's bi-temporal model makes _trackable_ but doesn't automatically _detect_. UMP gives you `valid_to`; memwatch tells you when to set it. Complementary.
 
@@ -95,4 +95,4 @@ memwatch (18⭐, same week) solves the **staleness detection** problem that UMP'
 
 Re-check in 4 weeks (early July) for adoption signals.
 
-Links: [[agent-brain-portability]], [[agentic-stack]], [[memwatch]], [[piia-engram]], [[mechanism-vs-evolution]]
+Links: [[agent-brain-portability]], [[agentic-stack]], [[memwatch-staleness|memwatch]], [[piia-engram]], [[mechanism-vs-evolution]]
