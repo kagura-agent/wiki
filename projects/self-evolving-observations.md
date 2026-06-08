@@ -2895,3 +2895,20 @@ Corpus: stale (06-02~06-04)
 10 PRs created, 3 merged same-day
 Repos: cove(5), lottie-studio(3), kagura-mail(1), abti(1)
 ```
+
+---
+
+## 🔬 自进化観察日報 2026-06-08
+
+### 管線活躍度
+- **beliefs-candidates**: 0 new, 1 graduated (`flowforge-workflow-targeting` → tool code)
+- **DNA 変更**: None (fix was structural, in tool code)
+- **graduation-pipeline**: 4 candidates surfaced (assigned-issue-neglect 24×, flowforge-workflow-targeting 7×, pipeline-debug-from-breakpoint 6×, flowforge-multi-instance-targeting 6×)
+
+### 閉環追跡
+- **完整閉環**: `flowforge-workflow-targeting` — gradient captured (06-02) → accumulated evidence (06-02~06-07, 7 hits) → structural fix in engine.ts (06-08) → graduated ✅
+- **修復方式**: Tool code > DNA rule. Instead of "remember to use -w", the tool now errors when it's ambiguous. Eliminates the failure mode at source.
+
+### 今日発見
+1. **Structural fixes > behavioral rules** — flowforge-workflow-targeting had 7 hits across 6 days despite being a known pattern. Adding it as a DNA rule would have been hit #8. Fixing the code makes the rule unnecessary — the tool enforces it. This is the ideal graduation path: if a pattern can be enforced by tooling, do that instead of adding another rule to remember.
+2. **Graduation pipeline works but needs manual trigger** — the pipeline identified 4 candidates but none were auto-evaluated. The evaluate-candidate.sh script couldn't find the pattern by name. Gap: pattern naming in beliefs-candidates vs graduation pipeline vs evaluate-candidate.sh isn't aligned.
