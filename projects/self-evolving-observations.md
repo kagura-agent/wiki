@@ -2930,3 +2930,50 @@ Repos: cove(5), lottie-studio(3), kagura-mail(1), abti(1)
 - **Result**: All 3 graduation candidates (assigned-issue-neglect 24×, skip-reflection 6×, pipeline-debug-from-breakpoint 6×) now findable. Coverage: 10% → 100%
 - **Design principle**: [[structural-fix-over-behavioral-rule]] — tool format evolution must be tracked across all consumers. When data format changes (section → inline), all scripts consuming that format need updating
 - **Closes gap from**: 2026-06-08 self-evolving observation "Graduation pipeline works but needs manual trigger... pattern naming isn't aligned"
+
+---
+
+## 🔬 自进化观察日报 2026-06-08
+
+### 管线活跃度
+- **beliefs-candidates**: 8 条新增（6 条 Source: nudge, 2 条 Source: study），370 行总量，95 个 pattern 标签
+- **DNA 变更**: 无直接 SOUL.md/AGENTS.md 变更（今日改进均为工具层面 structural fix）
+- **nudge 触发**: 产出 4 条高质量 gradient（bypass-claude-code, atomic-response-delivery, incomplete-turn-output, config-single-source），质量 **高** — 均来自真实工作场景的具体教训
+- **dreaming**: Light sleep 运行，100 条 staged，0 条 promoted。全部 confidence 0.58，recalls 0。**Issue #6 问题持续** — 无差异化、无 promote
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. `flowforge-workflow-targeting` — gradient (06-02) → 7 hits over 6 days → structural fix in engine.ts → graduated ✅
+  2. `dna-preflight recidivism counter` — 发现计数膨胀 → 改为 unique-day counting + 14d 过期 → 信噪比大幅提升 ✅
+- **半闭环**: 1 个
+  - `evaluate-candidate.sh` pattern-tag alignment — 发现 90% miss rate → 修复为 3-strategy extraction → coverage 10%→100% ✅（但尚未验证 auto-graduation 端到端）
+- **断裂处**: dreaming quality（Issue #6）— 连续多日观察到 uniform confidence，但修复方案未落地
+
+### 今日发现
+
+1. **nudge 是当前最高效的 gradient 来源** — 今日 8 条新 gradient 中 6 条来自 nudge（75%），且每条都有具体场景和触发条件。nudge 机制健康运转。
+
+2. **dreaming 完全失效** — 100 条 staged, 0 条 promoted, confidence 全部 0.58。这已是连续多日的模式。dreaming 作为记忆固化机制当前无贡献。Issue #6 是最紧急的修复目标。
+
+3. **structural-fix-over-behavioral-rule 模式确立** — 今日两个 fix（flowforge engine.ts, dna-preflight counter）都是改工具代码而非加 DNA 规则。这是正确的毕业路径：能用工具 enforce 的不加规则。
+
+4. **beliefs-candidates 积累健康但升级瓶颈存在** — 370 行、95 个 pattern，但 graduated 仅 16 条。大量 pattern 停留在"第1次"状态。需要观察哪些 pattern 会自然复现到 3 次触发升级。
+
+5. **Skill 提取缺口** — 今日的 evaluate-candidate.sh 修复涉及"多策略模式匹配"的通用模式，但未提取为可复用 skill/tip。
+
+### 原始数据
+```
+# DNA 变更
+$ git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md
+f16b31f study: reflect + gradient (structural-fix-over-behavioral-rule)
+b836750 study: apply flowforge-workflow-targeting graduation + observations 06-08
+
+# beliefs-candidates 今日新增
+$ grep "2026-06-08" beliefs-candidates.md | wc -l → 8
+
+# dreaming 状态
+staged: 100, promoted: 0, skipped: 0
+
+# nudge gateway 日志
+journalctl grep nudge: 0 hits (日志可能已 rotate 或 nudge 通过其他机制触发)
+```
