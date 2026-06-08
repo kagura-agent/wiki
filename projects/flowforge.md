@@ -162,3 +162,13 @@ Also fixed stale data: two broken symlinks in `~/.flowforge/workflows/` (workloo
 
 **Pattern**: [[eat-your-own-dogfood]] — tools that analyze their own data should be run immediately after creation. This bug was caught because we ran the analytics tool and noticed the nonsensical 0% result.
 
+
+## Study Followup Freshness Gate (2026-06-08)
+
+**Applied insight**: From `study-followup-freshness-gate` gradient (06-07) — a followup round where all repos were QUIET and nothing was due produced zero new information, a predictable no-op.
+
+**Implementation**: Added a mandatory freshness gate to the `followup` node in `study.yaml`. Before doing any followup work, the agent must run `tracking-due.sh` + `tracking-activity.sh`. If both return zero (0 due items AND 0 ACTIVE repos), the agent must immediately exit to the "no new activity" branch instead of proceeding through the full followup steps.
+
+**Design principle**: [[structural-fix-over-behavioral-rule]] — instead of a DNA rule saying "don't do followup when nothing changed", the workflow topology enforces the check. The gate is at the top of the task description with ⛔ marker, before steps 0-3. Combined with the existing saturation system (followup ≥4/day cap), this creates layered prevention at both the frequency level (cap) and the content level (freshness).
+
+**Effect**: Eliminates wasted followup rounds when the entire portfolio is quiet. Saves API calls (tracking-activity checks pushed_at via GitHub API) and agent time. The pre-existing steps 0a/0a3 already ran these checks but only used them informationally — now they become a hard gate.
