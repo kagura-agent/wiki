@@ -2922,3 +2922,11 @@ Repos: cove(5), lottie-studio(3), kagura-mail(1), abti(1)
   3. **Graduated pattern pruning** — patterns marked `graduated` in beliefs-candidates get their log entries removed
 - **Result**: Recidivism list: 20+ patterns → 3 genuinely recidivist patterns (skip-reflection 4d, workflow-bypass 3d, dogfood-adoption 3d). Signal-to-noise dramatically improved
 - **Design principle**: [[auto-close-stale-entries]] + [[structural-fix-over-behavioral-rule]] — counting unique days is more meaningful than raw frequency
+
+### evaluate-candidate.sh pattern-tag alignment fix (2026-06-08)
+- **Problem**: evaluate-candidate.sh only searched `###` section headers (9 entries). Graduation pipeline passes pattern names like `assigned-issue-neglect` which are inline `(pattern: tag)` — 93 entries invisible (90% miss rate)
+- **Root cause**: Original extraction used awk matching on `###` headers only. beliefs-candidates format evolved from section-based to inline bullet entries, but the evaluator wasn't updated
+- **Fix**: 3-strategy candidate extraction: (1) section header match, (2) inline `(pattern: tag)` match, (3) fuzzy substring match. Also fixed grep crash under `set -euo pipefail`, enriched evidence display with gradient-scan hits + JSONL unique days
+- **Result**: All 3 graduation candidates (assigned-issue-neglect 24×, skip-reflection 6×, pipeline-debug-from-breakpoint 6×) now findable. Coverage: 10% → 100%
+- **Design principle**: [[structural-fix-over-behavioral-rule]] — tool format evolution must be tracked across all consumers. When data format changes (section → inline), all scripts consuming that format need updating
+- **Closes gap from**: 2026-06-08 self-evolving observation "Graduation pipeline works but needs manual trigger... pattern naming isn't aligned"
