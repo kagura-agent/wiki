@@ -4,7 +4,7 @@ url: https://github.com/smaramwbc/statewave
 stars: 217
 first_seen: 2026-05-11
 status: active
-last_verified: 2026-06-01
+last_verified: 2026-06-08
 depth: deep-read
 ---
 
@@ -143,3 +143,23 @@ Statewave is transitioning from research project to production-grade multi-tenan
 **Trend**: The memory runtime space is maturing — Statewave and similar projects are moving from "does it work?" to "does it work safely at scale?" This mirrors the broader [[self-evolving-agent-landscape]] consolidation phase.
 
 See [[overlap-detection-pattern]], [[recall-over-precision]], [[mechanism-vs-evolution]]
+
+## Followup: Multi-Tenant Admin Hardening (2026-06-08)
+
+**Stars**: 204 (down from 214 last check — continued decline, but community health score 6/6 THRIVING with 54 external PRs in 30d and 5 unique issue authors)
+
+Burst of 10+ fixes in 2 days (June 6-7), all multi-tenant admin correctness:
+- Scope session timeline metrics by tenant (PR #231-232)
+- Scope subject stats by tenant
+- Match cursor pagination key to sort key in admin receipts
+- Subject SLA error response shape consistency
+- HMAC constant-time comparison for API key validation
+- Memory-id conflict guard on `preserve_ids` import
+- Preserve `occurred_at` and reap copied resolutions on snapshot delete
+- Preserve input order and guard vector count in embeddings
+
+**Pattern**: Classic multi-tenant security hardening sprint. The HMAC fix (#228) is particularly notable — timing-based API key comparison was a real vulnerability, not just a best practice checkbox.
+
+**Star Decline Analysis**: 214→204 (-4.7%) despite healthy community. Possible explanations: GitHub bot/spam cleanup, niche positioning (memory runtime isn't as flashy as agent frameworks), or normal fluctuation. Community metrics (PRs, contributors) matter more than stars at this stage.
+
+**Assessment**: Still worth tracking. The multi-tenant hardening validates real deployment pressure. Next revisit: 06-15.

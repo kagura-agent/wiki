@@ -1110,3 +1110,46 @@ Changes:
 **Why this matters**: Preflight data shows `skip-reflection` (33× surfaced) as #1 recidivism pattern, but even when reflection happens, it was only process-level. Adding goal drift detection addresses a different failure mode: correct execution of incorrect objective.
 
 Links: [[self-improving]], [[beliefs-candidates]], [[FlowForge]], [[self-evolving-observations]]
+
+## IM Plugin System — Conductor Extension (2026-06-08)
+
+**Stars**: 12,670 (was ~7,626 on 05-23 — explosive 66% growth in 2 weeks)
+
+New `frontends/conductor_im_plugins/` directory adds a plugin-based IM integration to the [[supervisor-pattern|conductor]].
+
+### Plugin Contract (3 things)
+
+```python
+INTERVAL = 60          # polling interval in seconds
+PROMPT = "..."         # full prompt for the 採集 (collector) subagent
+def check() -> bool:   # cheap signal check — no LLM, millisecond-level
+```
+
+**Auto-discovery**: `im_poll_loop()` in `conductor.py` loads all `.py` files in the plugin dir (skips `_` prefixed). Each plugin is polled at its `INTERVAL`. On `check() == True`, fires `im_signal` event to conductor with 300s cooldown (`IM_COOLDOWN`). Conductor then spawns a collector subagent with the plugin's `PROMPT`.
+
+**Feishu/Lark plugin**: Uses `lark-cli` to poll `config.local.json` chat IDs. Checks for new messages in the last `INTERVAL + 5` seconds. Clean 30-line implementation.
+
+### Architecture Insight: Two-Phase Signal Detection
+
+The plugin separates **signal detection** (cheap `check()`) from **content analysis** (expensive LLM subagent). This is the same pattern as OpenClaw's heartbeat vs cron distinction — cheap polling triggers expensive processing only when needed.
+
+**vs OpenClaw**: We solve IM integration at the platform level (Feishu channel adapter baked into gateway). GenericAgent bolts it on via conductor plugin. Our approach is more integrated but less extensible — adding a new IM requires gateway code. Their approach lets users drop in a `.py` file.
+
+**vs fsapp.py (enterprise webhook)**: GenericAgent now has TWO Feishu integration paths:
+1. `fsapp.py` — enterprise webhook via `lark-oapi`, the "proper" way (needs app creation, OAuth, admin approval)
+2. Conductor IM plugin — polls via `lark-cli`, no webhook needed, works with personal accounts
+
+Path 2 is the "guerrilla" approach — no server, no webhook, just poll. Lower barrier but higher latency (5min intervals vs instant webhook).
+
+### Community Codex CLI Integration (Issue #583)
+
+Community member wrapped local Codex CLI as a model backend (`CodexExecSession`): GA kernel → ToolClient → CodexExecSession → `codex exec --json` → parse JSONL. Avoids 403 errors from direct API calls by routing through legitimate Codex CLI. Shows GA community actively integrating with other agent tools.
+
+### Other Recent Changes (06-05 to 06-08)
+
+- **TUI v2**: native clipboard over SSH (OSC 52 fallback), serialized terminal escapes, scrollable sidebar
+- **Scheduler fix**: ensure `sche_tasks` dir exists to avoid L4 cron import crash — a [[default-fail-gate|Default-FAIL]] pattern miss
+- **computer_use SOP**: window diagnostics + UI operation guide
+- **IME composition fix**: prevent Enter from sending during IME composition in conductor UI
+
+Links: [[supervisor-pattern]], [[conductor]], [[self-evolving-agent-landscape]], [[default-fail-gate]]

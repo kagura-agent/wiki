@@ -632,3 +632,41 @@ Stars: 2,563 (was ~2,382 on 06-01, +7.6%). 264 forks.
 - Real-time git branch/ahead-behind in status bar (2s poller, diff-checked, async)
 
 **Issues**: CJK input broken (#41), Windows install issues (#13, #64), dependency trust (#49). No deep architectural criticisms — community engagement is UX/feature-level, not architecture-level.
+
+## Followup: Silent Failure Elimination (2026-06-08)
+
+**Stars**: 2,578 (was ~2,200 — healthy growth)
+
+Standout commit `fix(core): eliminate all 12 silent task failure paths` — a systematic audit of every code path where a task could fail silently. The commit message is a masterclass in thorough failure-mode analysis:
+
+### 12 Failure Paths Fixed
+
+1. `agent.ts` top-level catch → now sends error to user + writes crash flag
+2. All 40 empty `.catch(() => {})` on user-facing sends → replaced with logging
+3. `supervisor.ts` sub-agent crash → now notifies originating channel
+4. SIGTERM/SIGINT → notifies all channels before exit
+5. SIGHUP → notifies when daemonization fails
+6. `watchdog.ts` → writes crash flag + stderr before `process.exit`
+7. `background-tasks.ts` recovery → notifies about recovered tasks after restart
+8. DEFAULT_SHELL_TIMEOUT_MS → changed from 0 (infinite) to 30 minutes
+9. uncaughtException/unhandledRejection → write crash flag
+10. telegram.ts empty `.catch()` → now log
+11. CLI `stream()` → saves partial text on interruption
+12. supervisor.ts lifecycle callbacks → log instead of swallowing
+
+**Cross-cutting**: New `crash-flag.ts` module (write/read/clear). On startup, checks for crash flag from previous run and reports to user.
+
+### Architecture Insight: Observable Failure as Default
+
+**Pattern**: Every task exit must produce a user-visible message. No empty `.catch()`. No silent process death.
+
+**Relevance to us**: Our subagent failure mode is similar — when a `sessions_spawn` child crashes, the parent gets a completion event but the error details can be opaque. Mercury's approach of making every failure path observable is the same philosophy as [[default-fail-gate|Default-FAIL]] but applied to runtime failure notification rather than pre-execution validation.
+
+**Takeaway**: The 40 empty `.catch(() => {})` replacements show how easy it is to accumulate silent failure paths. Each one was individually reasonable ("don't crash on send failure") but collectively created a system where tasks could vanish without trace. Worth auditing our own codebase for similar patterns.
+
+### Other Recent Changes
+
+- **ollamaLocal fix**: Routed through OpenAI compat endpoint (`/v1/chat/completions`) instead of ollama-ai-provider (incompatible with AI SDK v6 spec v2/v3). Includes config migration for existing `/api` URLs
+- **UI improvements**: heartbeat updates in-place instead of stacking, step logs collapse to 3 lines (Ctrl+D reveals full), 'Processing' indicator replaces agent name
+
+Links: [[default-fail-gate]], [[self-evolving-agent-landscape]], [[mercury-agent-skills]]
