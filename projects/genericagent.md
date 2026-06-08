@@ -1,7 +1,7 @@
 # GenericAgent
 
 > Self-evolving agent framework — grows skill tree from 3.3K-line seed
-> GitHub: lsdefine/GenericAgent | ⭐ 8,401 (2026-04-30) | arXiv: 2604.17091
+> GitHub: lsdefine/GenericAgent | ⭐ 12,670 (2026-06-08) | arXiv: 2604.17091
 > Created: 2026-01-16 | Language: Python | License: MIT
 
 ## 核心理念
