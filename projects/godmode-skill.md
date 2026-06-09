@@ -76,7 +76,7 @@ Exit codes: 0 (agree), 1 (disagree → revise), 2 (incomplete → escalate)
 ## Relevance to Us
 
 ### Applicable Insights
-1. **Finding verification via source grep** — we could use this in our PR review workflow. Before reporting a finding, verify the cited code actually exists. Cheap hallucination filter.
+1. **Finding verification via source grep** — ~~we could use this in our PR review workflow~~ **Applied 2026-06-09**: created `code-review/verify-findings.sh` + integrated into workflow.yaml post_summary node as step 0 gate. Extracts all backtick file references, verifies against repo via find. >30% unverified = flagged.
 2. **inotifywait for zero-cost wait** — our subagent orchestration uses polling; filesystem events could be more efficient for local scenarios.
 3. **Per-CLI prompt format knowledge** — if we ever orchestrate multi-CLI workflows, Gemini's newline-as-submit and OpenCode's chunk-boundary issues are critical to know.
 4. **Lineage diversity principle** — philosophically aligned with our own multi-model approach. Different model families genuinely catch different things.
