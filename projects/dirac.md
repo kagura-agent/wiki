@@ -520,3 +520,17 @@ See [[supervisor-pattern]], [[model-native-vs-model-agnostic]], [[agent-brain-po
 **Phase assessment**: Pre-major-release cleanup. The steady star growth (~10/day) suggests organic adoption, not hype-driven. Active daily commits maintained.
 
 *Field note: 2026-05-04 (followup)*
+
+## 2026-06-09 Followup (1282⭐)
+
+Major "modular tooling" refactor landed (v0.4.0, 06-05):
+- Monolithic `DiracAgent` broken into modular tool architecture
+- PR #115: external contributor fixing tests across codebase post-refactor
+- PR #114: ACP polish
+- v0.4.1 follow-up with CLI fixes for modular tooling compatibility (06-08)
+
+**ACP broken** (#109): When run via ACP from Zed, Dirac hangs forever — works fine from CLI. Reported on v0.3.44, likely still broken post-refactor. Suggests ACP transport layer needs work post-modular-tooling migration.
+
+Velocity remains high. Solo maintainer actively refactoring toward extensibility. The modular tooling architecture is the bet — if it works, third-party tool plugins become possible (like OpenClaw's skill system but for coding agent tools). If it doesn't stabilize, ACP breakage + refactor churn could slow adoption.
+
+Next check: 06-16.

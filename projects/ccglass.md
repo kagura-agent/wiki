@@ -5,7 +5,7 @@ updated: 2026-05-25
 status: active
 depth: deep-dive
 stars: 389
-last_verified: 2026-06-02
+last_verified: 2026-06-09
 ---
 
 # ccglass — See What Your Coding Agent Sends
@@ -150,3 +150,22 @@ Velocity is high — 100% Claude Code generated PRs. jianshuo is sole maintainer
 ## 2026-06-02 Followup (389⭐)
 
 No new commits since 05-28. Stars continued growing (349→389, +11% in 4 days). 4 open issues. Velocity has plateaued after the v1.0 sprint — likely a natural post-launch stabilization. Mature enough to reduce check frequency.
+
+## 2026-06-09 Followup (441⭐)
+
+4 commits on 06-08 after 11-day quiet period:
+
+**Forward-proxy mode** (#55): Major architectural addition. For agents that hardcode upstream URLs (CodeBuddy/Tencent), ccglass now supports CONNECT tunnel + selective TLS MITM:
+- `src/forward-proxy.js` (200 LOC): HTTP CONNECT proxy that intercepts TLS for targeted domains only
+- `src/ca.js` (84 LOC): Auto-generates CA cert + per-host certs via openssl CLI
+- `src/http-response-parser.js` (147 LOC): Handles chunked transfer encoding + gzip body decompression
+- Non-targeted domains pass through unintercepted
+
+This expands ccglass from "cooperative interception" (agents that read env vars) to "universal interception" (any agent, even hardcoded). The tradeoff: requires CA trust setup, but automated.
+
+Other changes:
+- Bedrock usage recovery + per-response-model pricing (#56)
+- Local time for session IDs, export, MCP timestamps (#59)
+- Landing page (ccglass.jianshuo.dev)
+
+**Trajectory**: Still solo-dev (jianshuo) but maintaining burst cadence. 389→441⭐ (+13% in 7 days). Evolving toward "universal coding agent observatory" — covering cooperative + uncooperative agents, all providers, with cost analytics layer. Next check: 06-16.
