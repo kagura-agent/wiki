@@ -1027,3 +1027,34 @@ Architecture split:
 **Growth**: 43,817⭐ (+0.5% from 43,609 on 06-04). 7,748 forks. 863 open issues. External contributor PRs active (WhatsApp, httpx timeout, reasoning_content preservation).
 
 Links: [[dream-single-phase-consolidation]], [[context-compaction]], [[cache-miss-cost-optimization]], [[atomic-writes]]
+
+### Multi-Provider Transcription System (2026-06-08)
+
+Nanobot added a full multi-provider STT pipeline in a single day (3 PRs merged):
+
+**Architecture** — clean two-layer design:
+- **Registry** (`transcription_registry.py`): `TranscriptionProviderSpec` dataclass with lazy adapter import via `importlib` + Protocol-based interface
+- **Application** (`transcription.py`): config resolution, MIME validation, temp-file handling, dispatch. Zero provider-specific HTTP knowledge
+
+**Providers** (5 total):
+| Provider | Default Model | Notes |
+|----------|--------------|-------|
+| groq (default) | whisper-large-v3 | Fast, free tier |
+| openai | whisper-1 | Baseline |
+| openrouter | openai/whisper-1 | Single credential, route to multiple STT models |
+| xiaomi_mimo | mimo-v2.5-asr | Chinese market; aliases: "mimo", "xiaomi" |
+| assemblyai | universal-3-pro,universal-2 | Comma-separated model fallback |
+
+**Pattern value**: Protocol-based adapter (`__init__` + `async transcribe(path) -> str`) is minimal surface — easy to add new providers. Our single-provider Whisper setup could adopt this if we need multi-provider STT.
+
+**Cross-Agent Messaging (PR #3992, closed)**: Attempted NATS/Redis message bus for multi-instance agent communication. Closed due to scope creep (698K additions). The concept — agents delegating tasks across instances — remains an unsolved problem in open-source personal agents.
+
+**Open Issues Signal** (06-09):
+- bwrap sandbox `$HOME` leak (#4237) — identical risk class for any bwrap sandbox
+- Ubuntu 24.04 user namespace restriction (#4236) — AppArmor blocks unprivileged bwrap
+- `max_messages` truncation invalidates [[cache-miss-cost-optimization|prefix caching]] — architectural tension we share
+- Per-conversation model override request — routing granularity demand
+
+**Growth**: 43,897⭐ (+0.2% from 43,817 on 06-07). Steady.
+
+Links: [[cache-miss-cost-optimization]], [[context-compaction]], [[OpenClaw]], [[agent-trust-hierarchy]]
