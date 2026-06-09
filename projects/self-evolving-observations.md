@@ -2977,3 +2977,16 @@ staged: 100, promoted: 0, skipped: 0
 # nudge gateway 日志
 journalctl grep nudge: 0 hits (日志可能已 rotate 或 nudge 通过其他机制触发)
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-06-09
+
+### Apply: verify-subagent-claims → structural enforcement
+- **Source gradient**: verify-subagent-claims (06-09, Luna/manual) — #3836 false unassign undetected for days
+- **Applied as**:
+  1. `flowforge/scripts/verify-external-ops.sh` — API verification script for 6 operation types (unassign/assign/close/merge/comment/label). Tested against #3836: correctly detects still-assigned state.
+  2. `skills/team-lead/SKILL.md` Done Contract rule #6 — "External operations must be API-verified"
+- **Design principle**: [[structural-fix-over-behavioral-rule]] — tool enforcement > memory. Subagent text output is cheap to produce and easy to hallucinate; API state is ground truth.
+- **Difference from before**: Previously relied on trusting subagent's text claim "已 unassign". Now have a callable script + structural rule requiring API check. The failure mode is eliminated at the process level, not dependent on remembering to verify.
+- **Retirement check**: No existing rule retired — this is a new guard for a previously undetected failure class.
