@@ -1056,5 +1056,6 @@ Nanobot added a full multi-provider STT pipeline in a single day (3 PRs merged):
 - Per-conversation model override request — routing granularity demand
 
 **Growth**: 43,897⭐ (+0.2% from 43,817 on 06-07). Steady.
+**Growth**: 43,906⭐ (06-09). Adding multi-provider transcription (AssemblyAI, Xiaomi MiMo ASR, OpenRouter STT) — expanding voice/audio input pipeline.
 
 Links: [[cache-miss-cost-optimization]], [[context-compaction]], [[OpenClaw]], [[agent-trust-hierarchy]]

@@ -1114,6 +1114,7 @@ Links: [[self-improving]], [[beliefs-candidates]], [[FlowForge]], [[self-evolvin
 ## IM Plugin System — Conductor Extension (2026-06-08)
 
 **Stars**: 12,670 (was ~7,626 on 05-23 — explosive 66% growth in 2 weeks)
+**Stars**: 12,711 (06-09). Doc cleanup only (browser realness table, official notice). Steady.
 
 New `frontends/conductor_im_plugins/` directory adds a plugin-based IM integration to the [[supervisor-pattern|conductor]].
 

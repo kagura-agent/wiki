@@ -4,7 +4,7 @@ url: https://github.com/smaramwbc/statewave
 stars: 204
 first_seen: 2026-05-11
 status: active
-last_verified: 2026-06-08
+last_verified: 2026-06-09
 depth: deep-read
 ---
 
@@ -161,5 +161,6 @@ Burst of 10+ fixes in 2 days (June 6-7), all multi-tenant admin correctness:
 **Pattern**: Classic multi-tenant security hardening sprint. The HMAC fix (#228) is particularly notable — timing-based API key comparison was a real vulnerability, not just a best practice checkbox.
 
 **Star Decline Analysis**: 214→204 (-4.7%) despite healthy community. Possible explanations: GitHub bot/spam cleanup, niche positioning (memory runtime isn't as flashy as agent frameworks), or normal fluctuation. Community metrics (PRs, contributors) matter more than stars at this stage.
+**Update 06-09**: 204⭐ stable. In multi-tenant hardening phase: admin scope fixes, HMAC compare_digest for API keys, cursor pagination fixes. No new features, pure security/correctness maturation.
 
 **Assessment**: Still worth tracking. The multi-tenant hardening validates real deployment pressure. Next revisit: 06-15.

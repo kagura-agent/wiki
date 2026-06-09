@@ -6,7 +6,7 @@ stars: 23555
 language: Go
 license: Apache-2.0
 status: active
-last_verified: 2026-05-31
+last_verified: 2026-06-09
 ---
 
 # Beads (bd)
@@ -108,5 +108,6 @@ Links: [[self-evolving-agent-landscape]], [[agent-memory-taxonomy]], [[claude-co
 **Post-release fix velocity**: 4 PRs in 2 days (workspace rebind, target selection semantics, db commands). Active maintenance but the gated release suggests CI/integration testing gaps.
 
 **Assessment**: Beads continues explosive growth (24K⭐). The gated v1.0.5 release is a real-world example of why migration testing matters — schema-skew guard was ironically added in the same release that shipped a breaking migration. Healthy project with strong community but needs better multi-node sync testing.
+**Update 06-09**: 24,418⭐. Dolt 2.1.4 driver bump, deterministic dep primary keys for cross-clone merge safety (#4259), hierarchical `bd create --parent`. Robustness phase.
 
 **Revisit**: 06-04.
