@@ -2990,3 +2990,13 @@ journalctl grep nudge: 0 hits (日志可能已 rotate 或 nudge 通过其他机�
 - **Design principle**: [[structural-fix-over-behavioral-rule]] — tool enforcement > memory. Subagent text output is cheap to produce and easy to hallucinate; API state is ground truth.
 - **Difference from before**: Previously relied on trusting subagent's text claim "已 unassign". Now have a callable script + structural rule requiring API check. The failure mode is eliminated at the process level, not dependent on remembering to verify.
 - **Retirement check**: No existing rule retired — this is a new guard for a previously undetected failure class.
+
+### Apply: workflow-bypass → structural enforcement via workflow-guard.sh (2026-06-09)
+- **Source gradient**: workflow-bypass (4-day recidivist in dna-preflight)
+- **Applied as**:
+  1. `tools/workflow-guard.sh` — pre-flight check that maps intents → workflows, checks `flowforge active` for matching instance. Exit 1 = STOP.
+  2. AGENTS.md "Workflow Guard" section — mandatory pre-spawn step before subagent tasks
+- **Design principle**: [[structural-fix-over-behavioral-rule]] — tool enforcement > memory. Same graduation path as flowforge-workflow-targeting (06-08).
+- **Difference from before**: Previously relied on remembering "必须走 FlowForge" text rule. Now have a callable exit-code check that blocks proceed. The bypass requires *intentionally ignoring* a tool error, not just forgetting a rule.
+- **Verification**: Tested 3 cases: active instance (exit 0), missing instance (exit 1), non-workflow intent (exit 2). All correct.
+- **Retirement check**: Retires the behavioral-only text in FlowForge SKILL.md as the sole enforcement mechanism. Text remains but is now backed by tool.
