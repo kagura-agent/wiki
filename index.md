@@ -440,7 +440,7 @@
 - [zettelkasten](cards/zettelkasten.md)
 - [zulip](cards/zulip.md)
 
-## 📁 Project Notes (414)
+## 📁 Project Notes (418)
 
 ### 2
 
@@ -476,6 +476,8 @@
 - [Agent Ecosystem Scout — 2026-06-02](projects/agent-ecosystem-scout-2026-06-02.md)
 - [Agent Ecosystem Scout — 2026-06-04](projects/agent-ecosystem-scout-2026-06-04.md)
 - [Agent Ecosystem Scout — 2026-06-08](projects/agent-ecosystem-scout-2026-06-08.md)
+- [Agent Ecosystem Scout — 2026-06-09](projects/agent-ecosystem-scout-2026-06-09.md)
+- [Agent Ecosystem Scout — 2026-06-09 PM](projects/agent-ecosystem-scout-2026-06-09-pm.md)
 - [Agent 生态周报 — 2026-03-26](projects/agent-ecosystem-weekly-2026-03-26.md)
 - [Agent 生态周报](projects/agent-ecosystem-weekly.md)
 - [Agent Experience Capitalization (expcap)](projects/agent-experience-capitalization.md)
@@ -581,6 +583,7 @@
 - [ClawX (ValueCell-ai)](projects/ClawX.zh.md)
 - [被关闭的 PR — 教训总结](projects/closed-pr-lessons.md)
 - [CodeBurn](projects/codeburn.md)
+- [codex-chatgpt-control — Cross-Surface Agent Bridge SDK](projects/codex-chatgpt-control.md)
 - [Codex Marketplace + MCP Apps 架构演进](projects/codex-marketplace-mcp-apps.md)
 - [Coding Agent](projects/coding-agent.md)
 - [Coding Guidelines for Open-Source PRs](projects/coding-guidelines-for-prs.md)
@@ -803,6 +806,7 @@
 - [qmd — 本地混合搜索引擎](projects/qmd.md)
 - [Quarq Agent — Evidence-Gated Memory Runtime](projects/quarq-agent.md)
 - [Quarq Agent OSS — Evidence-Gated Memory Agent](projects/quarq-agent-oss.md)
+- [Quarq Argus Agent — Deep Read](projects/quarq-argus-agent.md)
 - [QwenLM/qwen-code](projects/qwen-code.md)
 ### R
 
@@ -911,4 +915,4 @@
 
 ---
 
-*387 cards, 414 project notes. Last generated: 2026-06-09 04:36 UTC.*
+*387 cards, 418 project notes. Last generated: 2026-06-09 15:02 UTC.*
