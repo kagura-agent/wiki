@@ -3000,3 +3000,53 @@ journalctl grep nudge: 0 hits (日志可能已 rotate 或 nudge 通过其他机�
 - **Difference from before**: Previously relied on remembering "必须走 FlowForge" text rule. Now have a callable exit-code check that blocks proceed. The bypass requires *intentionally ignoring* a tool error, not just forgetting a rule.
 - **Verification**: Tested 3 cases: active instance (exit 0), missing instance (exit 1), non-workflow intent (exit 2). All correct.
 - **Retirement check**: Retires the behavioral-only text in FlowForge SKILL.md as the sole enforcement mechanism. Text remains but is now backed by tool.
+
+---
+
+## 🔬 自进化观察日报 2026-06-09
+
+### 管线活跃度
+- **beliefs-candidates**: 4 条新增（verify-subagent-claims, bash-regex-single-match, ui-spec-failure, supply-side-thinking, code-delegation — 实际 5 条），总计 104 条 gradient / 385 行
+- **DNA 变更**: 3 commits — 全部主动
+  - `94210dd` Add meme check rule — structural fix for skill trigger bypass
+  - `9190706` Apply workflow-bypass structural fix — workflow-guard.sh
+  - `aac5d76` DNA: verify subagent external claims + audit carry-forward
+- **nudge 触发**: gateway 日志无直接 hit（日志可能 rotate），但 beliefs-candidates 今天有 3 条 Source: nudge 的 gradient（ui-spec-failure, supply-side-thinking, code-delegation）→ nudge 在运行
+- **dreaming**: Light Sleep 运行，100 candidates staged，**0 promoted**。confidence 全部 0.58（uniform），无差异化。**Issue #6 确认复现**
+
+### Dreaming 质量 (Issue #6 追踪)
+- 今日 confidence: 全部 0.58（之前观察是 0.62，现在更低但仍无差异化）
+- recalls: 仍为 0（recall 机制疑似未生效）
+- staged 100, promoted 0 — dreaming 选了 100 个 candidate 但一个都没 promote
+- 今日 memory 文件 1721 行，Light Sleep candidates 占 ~100 条 × ~5 行 ≈ 500 行（29%）
+- **结论**: dreaming 管线在运行但无法区分高低质量内容。均匀打分 = 随机选择 = 无价值筛选
+
+### 闭环追踪
+- **完整闭环 2 个**:
+  1. verify-subagent-claims: Luna 指出 #3836 虚假 unassign → gradient 写入 → DNA 更新 (AGENTS.md) + verify-external-ops.sh 工具 + team-lead SKILL 更新。**从发现到结构性修复全闭环**
+  2. workflow-bypass: 4 天 recidivist → workflow-guard.sh 结构性修复 → DNA 更新 → 测试验证。**从行为规则毕业到工具执行**
+- **断裂处**: dreaming 质量问题（Issue #6 已 open 但无代码修复进展，29 条 comment 但问题仍在）
+
+### 今日发现
+1. **🟢 Gradient 管线健康**: 5 条新 gradient，来源多样（luna/manual, nudge, study）。质量高——每条都有明确 trigger 和行为改变
+2. **🟢 Apply 闭环质量高**: 两个 structural fix（verify-external-ops.sh, workflow-guard.sh）体现了 "structural-fix-over-behavioral-rule" 原则的实践。不是加文字规则，是写工具
+3. **🔴 Dreaming 仍是最大瓶颈**: confidence 0.58 uniform, 0 promotes。管线形式上在跑，实质上无法筛选。Issue #6 已 open 31 天，29 条 comment 但无修复
+4. **🟡 nudge 在运行但不可观测**: gateway 日志无 hit 但 gradient 来源证明 nudge 在触发。日志观测方法需要改进
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30)
+94210dd Add meme check rule to DNA layer
+9190706 study: apply workflow-bypass structural fix — workflow-guard.sh  
+aac5d76 DNA: verify subagent external claims + audit carry-forward
+
+# beliefs-candidates stats
+Total lines: 385 | Total gradients: 104
+Today's new: 5 (verify-subagent-claims, bash-regex-single-match, ui-spec-failure, supply-side-thinking, code-delegation)
+
+# dreaming stats
+Light Sleep candidates: 100 | Promoted: 0 | Confidence: all 0.58
+
+# memory/2026-06-09.md
+Total lines: 1721
+```
