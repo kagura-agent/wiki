@@ -1,10 +1,10 @@
 # ai-memory — Cross-Agent Long-Term Memory
 
 - **repo**: akitaonrails/ai-memory
-- **stars**: 503 (2026-06-03, was 290 on 05-27, breakout +73%)
+- **stars**: 557 (2026-06-10, was 503 on 06-03, steady growth)
 - **lang**: Rust
 - **license**: MIT
-- **status**: active | deep-read | ✓2026-06-03
+- **status**: active | deep-read | ✓2026-06-10
 
 ## What It Is
 
@@ -146,6 +146,43 @@ Rendering `[[wikilinks]]` as clickable internal links in the built-in web UI. Ba
 - `sqlite-vec` for scale beyond brute-force cosine
 - Scheduled consolidation queue
 - LongMemEval-S benchmark harness (framework exists, needs dataset)
+
+## v0.13.0 — Wiki Reindex: "DB is Rebuildable" Made Operational (2026-06-08)
+
+557⭐ (+18 from 503 on 06-03). Growth slowing from breakout phase but still healthy.
+
+### The Problem
+`design-decisions.md §3` stated "DB is rebuildable from files — corruption is recoverable" but nothing actually rebuilt it. Zeroing `db/` and restarting failed because the watcher's reconcile only validated scopes — it never recreated `(workspace, project)` rows, so reindex failed `NotFound`. And human-readable names lived only in DB, not in the markdown tree.
+
+### Solution: Three Cohesive Pieces (PR #86)
+
+1. **Self-describing `_meta.md` manifests** — per-scope frontmatter files: `wiki/<ws-uuid>/_meta.md` (workspace name) and `wiki/<ws-uuid>/<proj-uuid>/_meta.md` (project name + `repo_path`). Idempotent backfill on startup (unchanged content never rewritten → no git churn). `_meta.md` excluded from page indexing.
+
+2. **`ai-memory reindex` CLI command** — lifecycle op (server stopped). Walks wiki tree, recreates workspaces/projects from `_meta.md` via `ensure_{workspace,project}_with_id` (preserving UUIDs the tree is keyed by), reindexes every page. Use case: move data dir to clean migration lineage without carrying old `refinery_schema_history`.
+
+3. **Page detection by content, not filename** — reserved-name skip (`log.md`, `bootstrap.md`) now checks for YAML frontmatter instead of filename match. A frontmatter file named `log.md` is a real page and gets indexed.
+
+### Architectural Insights
+
+- **Scope = idempotent, episodic = intentionally shed**: Only markdown-derived state rebuilds (pages, links, FTS, embeddings). Episodic DB-only state (sessions, observations, handoffs, decay counters) is NOT reconstructed — consistent with their "compile-don't-hoard" philosophy.
+- **Symlink guard**: `read_scope_meta` refuses symlinked manifests — defence against path traversal attacks in the wiki tree.
+- **Atomic writes**: `write_atomic` for manifest persistence — no partial state even on crash.
+- **Validated at scale**: 659-page instance fully rebuilt from backup wiki alone.
+
+### Relevance to Us ([[git-backed-agent-memory]])
+
+Our wiki system has the same implicit promise: the markdown files ARE the source of truth, memex index is derived. But we never formalized:
+1. Can our index be fully rebuilt from files alone? (Probably yes for memex — `memex reindex` exists)
+2. Do we have self-describing metadata in the file tree? (No — our wiki relies on in-file frontmatter, not separate manifests)
+3. Do we have a content-based page detection vs filename? (We use `.md` extension, not filename-based skipping)
+
+Their pattern of "make the stated guarantee actually work" is a good discipline. Our [[retire-candidates]] already uses their M8 decay; now their reindex pattern validates the file-first design we also adopted.
+
+### Issue #73: Agent Tool Confusion (Architectural UX)
+
+Agents confuse `memory_handoff_begin` (write) with `memory_briefing` (read), creating dangling handoffs. Root cause: tool names and descriptions don't create strong enough read/write boundaries for LLM tool selection. Solution: sharpen descriptions + add handoff cancellation.
+
+**Lesson**: When designing MCP tools, read-only vs state-mutating operations need **aggressive naming differentiation** — not just different descriptions, but different naming patterns (e.g. `get_*` vs `do_*`). Agents don't read fine print; they pattern-match on names.
 
 ## Applied: M8 Retention Decay to retire-candidates.sh (2026-06-03)
 
