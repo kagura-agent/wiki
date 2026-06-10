@@ -48,7 +48,7 @@ The agent skill ecosystem continues its explosive growth. Key observations:
 - Added `headroom learn` — mines failed sessions, writes corrections to CLAUDE.md/AGENTS.md
 - Cross-agent memory store with auto-dedup
 - OpenClaw listed as compatible ("installs as ContextEngine plugin")
-- Our [[compress-output.sh]] does 71-84%, Headroom claims 47-92% on real workloads
+- Our `compress-output.sh` does 71-84%, Headroom claims 47-92% on real workloads
 - **Actionable**: evaluate `headroom wrap` for OpenClaw integration
 
 #### 4. New category: "Agent taste/quality" skills
