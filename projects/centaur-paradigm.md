@@ -6,7 +6,7 @@ stars: 724
 language: Python
 license: null
 status: early-production
-last_verified: 2026-06-06
+last_verified: 2026-06-10
 ---
 
 # Centaur (paradigmxyz)
@@ -131,3 +131,13 @@ Worth following closely — paradigm has the engineering depth and this is clear
 - Revisit 06-13
 
 Links: [[self-evolving-agent-landscape]], [[agent-memory-landscape-202603]], [[centaur-loop]]
+
+## Followup 06-10
+
+- Stars: 741 (+2.3% from 724). 494 forks (ironcurtain companion).
+- **Default model switch**: claude-fable-5 now default `--claude` harness model (#461). Fast model adoption.
+- **Codex thread auto-recovery** (#459): When OpenAI rolls deployment, existing codex threads break. Centaur now detects stale rollout and auto-recovers — pragmatic production resilience.
+- Otherwise quiet since 06-05. Hardening phase continues.
+- Revisit 06-17
+
+Links: [[self-evolving-agent-landscape]]

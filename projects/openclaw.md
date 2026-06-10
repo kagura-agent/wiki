@@ -256,3 +256,12 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Code location**: `isNonVisibleAssistantTurnEligibleForSilentReply` is only called from `shouldTreatEmptyAssistantReplyAsSilent`, both in `run/incomplete-turn.ts`. The three retry resolvers (`resolvePlanningOnlyRetryInstruction`, `resolveReasoningOnlyRetryInstruction`, `resolveEmptyResponseRetryInstruction`) are also in this file.
 - **Related**: PR #82460 (superseded by #82905) was in the same area — provider/modelApi gatekeeping for incomplete turns. PR #82075 was in silent reply policy for failure-fallback path.
 - **#86301** (2026-05-28, CLOSED): fix: sort tool definitions by name for stable prompt cache hits. **Closed by ClawSweeper — "already implemented on main"**. The session tool allowlist was already sorted before reaching the provider boundary on current main. Lesson: verify the fix is still needed on latest main before submitting, not just on the version where the issue was found. Redundant fix, not harmful but wasted effort.
+
+### 2026-06-10: PR #91885 (PENDING)
+- **Issue**: #91860 — Discord message send ignores maxLinesPerMessage and splits CLI sends at 17 lines
+- **Root cause**: `sendMessage` in `src/infra/outbound/message.ts` only forwarded `parseMode` to formatting options, never `maxLinesPerMessage`. The Discord chunker reads `ctx?.formatting?.maxLinesPerMessage` but for CLI sends it was always `undefined`.
+- **Fix**: Added `resolveMaxLinesPerMessage()` (generic channel config resolver, same pattern as `resolveChunkMode`) and `buildSendFormatting()` helper. One line change in `sendDurableMessageBatch` call.
+- **Files**: `src/infra/outbound/message.ts` (+50 lines, -1 line)
+- **CI**: 131/176 pass, 3 fail (Real behavior proof × 2 — expected, needs override; build-artifacts — pre-existing `core-support-boundary` assertion unrelated to change), 39 skipped.
+- **Pattern**: Channel config plumbing gap — `sendMessage` is generic but formatting resolution was incomplete. The agent reply path works because Discord monitor explicitly resolves formatting. CLI path was a gap. Generic config access pattern: `cfg?.channels?.[channel]?.maxLinesPerMessage` with account-level override.
+- **Local test limitation**: vitest OOM-killed on this 1.5GB repo. Can't run local tests. Verified correctness through code review + pattern matching with existing resolvers.

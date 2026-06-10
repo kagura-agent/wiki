@@ -1059,3 +1059,22 @@ Nanobot added a full multi-provider STT pipeline in a single day (3 PRs merged):
 **Growth**: 43,910⭐ (06-09). Adding multi-provider transcription (AssemblyAI, Xiaomi MiMo ASR, OpenRouter STT) — expanding voice/audio input pipeline.
 
 Links: [[cache-miss-cost-optimization]], [[context-compaction]], [[OpenClaw]], [[agent-trust-hierarchy]]
+
+### Followup 2026-06-10
+
+**Stars**: 43,966⭐ (was 43,910 on 06-09, +56). 7,788 forks. 866 open issues.
+
+**Key changes since 06-09**:
+- **PR #4208 (merged)**: WebUI fork-from-here — users can branch conversation from any assistant reply. Clean WebSocket isolation for the fork handler. UX pattern that none of the other tracked agents have.
+- **PR #4190 (merged)**: Stricter tool call validation — tightening the runtime safety net.
+- **PR #4252 (merged)**: TeX math delimiter rendering in WebUI.
+
+**Notable open PRs**:
+- **#4270**: Archive full session history during idle compact — currently truncation is lossy, this preserves full history in archive before compacting. Addresses the prefix-caching vs context-trimming tension noted before.
+- **#4269**: Improve max-iteration final responses — better UX when agent hits iteration limits.
+- **#4268**: `max_completion_tokens` for GPT-5/o-series — provider compatibility fix.
+- **#4256**: Monotonic history cursor — prevents cursor regression during concurrent access.
+
+**Assessment**: Steady incremental improvement. Fork-from-here is a nice UX feature (conversation branching). The idle compact archive PR (#4270) is architecturally interesting — it addresses context window management by archiving before truncating, rather than just dropping old messages.
+
+**Revisit**: 06-15.
