@@ -262,6 +262,9 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Root cause**: `sendMessage` in `src/infra/outbound/message.ts` only forwarded `parseMode` to formatting options, never `maxLinesPerMessage`. The Discord chunker reads `ctx?.formatting?.maxLinesPerMessage` but for CLI sends it was always `undefined`.
 - **Fix**: Added `resolveMaxLinesPerMessage()` (generic channel config resolver, same pattern as `resolveChunkMode`) and `buildSendFormatting()` helper. One line change in `sendDurableMessageBatch` call.
 - **Files**: `src/infra/outbound/message.ts` (+50 lines, -1 line)
-- **CI**: 131/176 pass, 3 fail (Real behavior proof × 2 — expected, needs override; build-artifacts — pre-existing `core-support-boundary` assertion unrelated to change), 39 skipped.
+- **CI**: 87/134 pass (still running), 1 fail (Real behavior proof gate — expected, needs maintainer override), rest pending.
 - **Pattern**: Channel config plumbing gap — `sendMessage` is generic but formatting resolution was incomplete. The agent reply path works because Discord monitor explicitly resolves formatting. CLI path was a gap. Generic config access pattern: `cfg?.channels?.[channel]?.maxLinesPerMessage` with account-level override.
+- **Review feedback (ClawSweeper)**: P1 account-default resolution bug — `normalizeAccountId(undefined)` returns `"default"` but should honor `channels.discord.defaultAccount`. Fixed in commit 84929c6 by reading `channelSection.defaultAccount` before normalizing.
+- **Fresh-context review finding**: Removed unsafe `cfg[channel]` fallback that could collide with root config keys (e.g., `cfg.agents`, `cfg.channels`). Only canonical `cfg.channels[channel]` path is used now.
+- **Added test**: `defaultAccount` resolution test — config with `defaultAccount: "bot1"` and account-level override resolves correctly when `accountId` is omitted.
 - **Local test limitation**: vitest OOM-killed on this 1.5GB repo. Can't run local tests. Verified correctness through code review + pattern matching with existing resolvers.
