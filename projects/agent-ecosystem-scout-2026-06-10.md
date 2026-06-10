@@ -85,3 +85,5 @@ The convergence between ECC and hermes-agent (ECC 2.0 adds Hermes operator story
 - hermes-agent's learning loop (skill creation from experience → self-improvement) validates our beliefs-candidates → DNA pipeline approach
 - ECC's 261-skill catalog at scale confirms the need for our functional-area-resolver pattern (from [[gbrain]]) once we hit 40+ skills
 - The "meta-skill" layer (harness, pm-skills) is a trend we could participate in — a skill that generates skills from workflow patterns
+
+Previous scout: [[agent-ecosystem-scout-2026-06-09]]

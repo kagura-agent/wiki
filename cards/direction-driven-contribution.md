@@ -2,6 +2,7 @@
 title: Direction-Driven Contribution
 created: 2026-03-24
 source: Luna feedback + workloop strategy discussion
+last_verified: 2026-06-10
 ---
 打工公司的选择 = 学习方向的选择。
 
@@ -14,4 +15,4 @@ source: Luna feedback + workloop strategy discussion
 2. 维护者的工程能力（能学到东西）
 3. 外部 PR merge rate（劳动有回报）
 
-关联：[[topic-selection-over-coding]]、[[contribution-depth-bottleneck]]、[[external-contributor-success]]
+关联：[[topic-selection-over-coding]]、[[contribution-depth-bottleneck]]、[[external-contributor-success]]、[[contributor-depth-strategy]]

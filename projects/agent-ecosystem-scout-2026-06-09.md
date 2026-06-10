@@ -3,7 +3,7 @@ title: "Agent Ecosystem Scout — 2026-06-09"
 created: 2026-06-09
 updated: 2026-06-09
 tags: [scout, agent-ecosystem]
-last_verified: 2026-06-09
+last_verified: 2026-06-10
 ---
 
 # Agent Ecosystem Scout — 2026-06-09
@@ -47,6 +47,7 @@ No major architectural shifts or new releases from established players.
 **Money and attention flow**: towards making existing agents more reliable and more connected, not towards building new agent architectures.
 
 Previous scout: [[agent-ecosystem-scout-2026-06-08]]
+Next scout: [[agent-ecosystem-scout-2026-06-10]]
 
 ---
 *Scout: 2026-06-09 13:30 CST*

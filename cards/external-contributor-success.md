@@ -2,6 +2,7 @@
 title: External Contributor Success Pattern
 created: 2026-03-24
 source: WuKongAI-CMU #722 vs kagura-agent #715 (NemoClaw)
+last_verified: 2026-06-10
 ---
 ## Pattern
 外部贡献者成功的关键不是代码质量，是**减少维护者的认知负担**。
@@ -36,3 +37,4 @@ See [[iris-clawd-contributor-study]] for full analysis.
 - [[open-pr-discipline]] — Open PR 数量管理
 - [[closed-pr-lessons]] — 被关闭 PR 的失败模式
 - [[iris-clawd-contributor-study]] — Agent contributor pattern study
+- [[contributor-depth-strategy]] — Vertical depth as contributor trust-building strategy
