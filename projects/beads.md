@@ -6,7 +6,7 @@ stars: 23555
 language: Go
 license: Apache-2.0
 status: active
-last_verified: 2026-06-09
+last_verified: 2026-06-10
 ---
 
 # Beads (bd)
@@ -111,3 +111,19 @@ Links: [[self-evolving-agent-landscape]], [[agent-memory-taxonomy]], [[claude-co
 **Update 06-09**: 24,418⭐. Dolt 2.1.4 driver bump, deterministic dep primary keys for cross-clone merge safety (#4259), hierarchical `bd create --parent`. Robustness phase.
 
 **Revisit**: 06-04.
+
+### Update 2026-06-10 — Content-hash migration + doctor hardening
+
+**Stars**: 24,444 (was 24,418 on 06-09, +26/day, steady).
+**Last push**: today (06-10). Very active.
+
+**Key changes since 06-09**:
+- **PR #4270**: Per-migration content hash — addresses the v1.0.5 gated release root cause. Each migration now has a content hash so schema-skew detection is per-migration granular, not just version-based. This is the structural fix for #4259.
+- **`bd doctor` actually runs migration content skew check now** (bd-6dnrw.27) — the skew check existed but wasn't wired in. Classic "defense that was never armed" pattern.
+- **Remote-migrate gate** wired into proxied-server open path (bd-6dnrw.28) — prevents migrations running on remote Dolt connections where they could corrupt.
+
+**Assessment**: Beads is in a robustness hardening phase. The per-migration content hash is the proper fix for their v1.0.5 fiasco — moving from "detect schema drift" to "detect drift per individual migration." Growth steady at ~25K⭐. Steve Yegge's team shipping quality infrastructure fixes.
+
+**Pattern worth noting**: The "defense that was never armed" (doctor check existed but didn't run) parallels our own [[verify-external-ops]] experience — verification code that isn't actually executed is worse than no verification (false confidence).
+
+**Revisit**: 06-17.

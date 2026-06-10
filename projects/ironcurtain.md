@@ -6,7 +6,7 @@ created: 2026-02-21
 last_updated: 2026-06-07
 depth: 👁️ following
 status: active
-last_verified: 2026-06-07
+last_verified: 2026-06-10
 ---
 
 # IronCurtain — Constitutional Security for AI Agents
@@ -131,3 +131,19 @@ These fixes represent the project maturing from "works in happy path" to "surviv
 - [[opensandbox]] — Alibaba's sandbox approach (container-level isolation)
 - [[poco-claw]] — competitor that also sandboxes agents in Docker
 - [[self-evolving-agent-landscape]] — security layer for autonomous agents
+
+### Update 2026-06-10 — Still pushing daily
+
+**Stars**: 494 (was 492 on 06-07, slow but steady).
+**Last push**: 06-08. Active.
+
+**Recent changes (06-01~06-08)**:
+- **Vuln-discovery hardening continues**: `discover background-wait guard` broadened (06-05). The fault-tolerant parsing + deadlock fix + invariant-gated verdicts from the post-v0.11.0 notes are now in production use.
+- **Web UI**: Copy-to-clipboard for workflow instructions (#283). UX polish suggests growing user base.
+- **Strict arg parsing** for leaf subcommands (#279) — hardening CLI surface.
+
+**Assessment**: IronCurtain continues steady maturation. The invariant-gated verdict downgrade pattern (from my 06-07 note) remains the most architecturally interesting contribution to the agent security space. Star growth is slow (494⭐) but the project's quality-per-star ratio is very high. Not a hype project — real security research that accumulates.
+
+**Ecosystem context**: With the [[agent-ecosystem-scout-2026-06-10|Fable 5 trust controversy]], IronCurtain's "agent is untrusted" principle gains new relevance. If models can silently degrade, constitutional enforcement at the tool-call layer (not the model layer) becomes the only reliable defense.
+
+**Revisit**: 06-17.

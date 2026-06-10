@@ -602,3 +602,14 @@ agentic-stack is now at the frontier of the **agent infrastructure** layer. With
 Links: [[agent-brain-portability]], [[mechanism-vs-evolution]], [[self-evolving-agent-landscape]], [[flowforge]], [[beliefs-candidates]], [[beliefs-upgrade-mechanism]], [[openclaw]], [[poco-claw]], [[supervisor-pattern]]
 
 *Deep-read: 2026-05-27. Source: GitHub branch spec, full spec.md reading.*
+
+### Update 2026-06-10 — Plateau signal
+
+**Stars**: 2,100 (was 1,676 on 04-27). Growth slowed significantly.
+**Last push**: 2026-05-25 (16 days idle). v0.18.0 was the last release (05-10).
+
+**v0.18.0 notable**: `integrate external Brain memory bridge` — connecting the portable brain to external memory backends. Suggests the project is expanding from file-based to hybrid storage.
+
+**Assessment**: The ambitious Phase 1 (plans+bus) shipping within 2 weeks signal from my 05-27 deep-read did NOT materialize. Last meaningful code change was May 25. The v0.19 multi-agent spec remains unshipped. 2,100⭐ shows real adoption but the 16-day commit gap is a yellow flag — either consolidation or loss of momentum. **Downgrade from 🔴 WATCH to 🟡 MONITORING.** Revisit at v0.19 release or if commit activity resumes.
+
+**Revisit**: 06-24.
