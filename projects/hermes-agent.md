@@ -6,7 +6,14 @@
 
 Hermes 是 OpenClaw/ClawX 的直接竞争者，但定位不同。OpenClaw 是基础设施（gateway + 插件），Hermes 是**完整的自我改进 agent**。它不只是跑工具，它试图让 agent 从经验中学习。
 
-78k⭐（04-14 数据），NousResearch（知名 AI 研究组织）出品。
+189K⭐（06-10 数据，from 78K on 04-14 — 2.4x in 2 months），NousResearch（知名 AI 研究组织）出品。
+
+## 06-10 Update
+- Now has `hermes claw migrate` — explicit OpenClaw migration path
+- New provider support: Xiaomi MiMo, z.ai/GLM, Kimi/Moonshot, MiniMax
+- 6 terminal backends including serverless (Modal, Daytona)
+- agentskills.io open standard compatibility
+- ECC v2.0 integrates "Hermes operator story" — convergence with ECC ecosystem (212K⭐)
 
 ## v0.9.0 (2026-04-13) — "The Everywhere Release"
 

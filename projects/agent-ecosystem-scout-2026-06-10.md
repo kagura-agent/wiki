@@ -1,45 +1,87 @@
----
-title: "Agent Ecosystem Scout — 2026-06-10"
-created: 2026-06-10
-updated: 2026-06-10
-tags: [scout, agent-ecosystem]
-last_verified: 2026-06-10
----
-
 # Agent Ecosystem Scout — 2026-06-10
 
-## Saturation Signal: 3/3 Top GitHub Results Already Known
+- **depth**: scout
+- **status**: current
+- **tags**: ecosystem, trending, weekly
 
-GitHub trending (AI/agent, created since 06-03):
-1. **baoyu-design** — 647⭐ (was 363 on 06-08, +78%). Already tracked. Claude Design as local skill. Growing fast.
-2. **guard-skills** — 519⭐ (was 347 on 06-08, +50%). Already tracked. Quality gates for AI code.
-3. **21-day-self-interview** — 153⭐ (was 128 on 06-06, +20%). Already tracking in TODO.
+## GitHub Trending (Weekly, 2026-06-10)
 
-All three were covered in 06-08 scout. No new breakout projects in the agent space since then.
+The agent skill ecosystem continues its explosive growth. Key observations:
 
-Rest of top 10: wayland (336⭐, generic agent framework), ai-coding-starter-kit (260⭐, curated guides), ghidra-rpc (188⭐, RE niche), codex-chatgpt-control (179⭐, unofficial SDK), Agent_Manager (136⭐, desktop app), xuefeng-agent (123⭐, college admission advisor CN).
+### Mega-projects dominating
 
-## HN: Claude Fable 5 / Mythos 5 Dominates
+| Project | Stars | Weekly gain | Category |
+|---------|-------|-------------|----------|
+| ECC (affaan-m) | 212K | +9,025 | Agent harness optimization |
+| hermes-agent (NousResearch) | 189K | +11,915 | Self-improving agent |
+| taste-skill (Leonxlnx) | 39.7K | +7,787 | Quality control skill |
+| last30days-skill (mvanhorn) | 37.8K | +9,307 | Research aggregation skill |
+| impeccable (pbakaus) | 36.9K | +3,334 | Design language for agents |
+| open-notebook (lfnovo) | 28.6K | +4,245 | NotebookLM alternative |
+| Agent-Reach (Panniantong) | 25.7K | +4,361 | Multi-platform web reading |
+| supermemory | 26.4K | +1,982 | Memory engine API |
+| headroom (chopratejas) | 20.8K | +15,060 | Context compression |
+| compound-engineering-plugin | 20.8K | +1,442 | Multi-agent engineering |
 
-- **Claude Fable 5 announcement** (1871pts) — Anthropic's latest model family. Major release.
-- **"If Claude Fable stops helping you, you'll never know"** (581pts) — Trust/safety concern about competitive sabotage. jonready.com blog post.
-- **"What it feels like to work with Mythos"** (179pts) — oneusefulthing.org experience report.
-- **Grit: Rewriting Git in Rust with agents** (85pts) — GitButler's Rust Git implementation with agent integration.
-- **OpenCV 5** (709pts) — Major computer vision release, not agent-related.
-- **npm v12 breaking changes** (228pts) — Toolchain note.
+### Key insights
 
-## Tracking Updates
+#### 1. ECC v2.0 — The "agent config as code" category winner
+- 261 skills, 64 agents, 84 legacy command shims
+- Cross-harness: Codex, Claude Code, Cursor, OpenCode, Gemini, Zed, GitHub Copilot
+- Rust control-plane prototype (ecc2/) — signals intent to move beyond shell scripts
+- **Has integrated Hermes operator story** — convergence signal with NousResearch
+- Orchestrator family (orch-*), worktree-lifecycle service for parallelization
+- MIT + Pro tier (GitHub App) business model
+- **Key architectural concept**: "control-pane substrate" with session adapters + MCP inventory
 
-| Project | Stars | Change | Status |
-|---|---|---|---|
-| ai-memory | 558⭐ | +11% (was 503) | Pushed 06-08. 59 forks. 🟢 THRIVING |
-| guard-skills | 519⭐ | +50% (was 347) | No push since 06-07. Growth organic |
-| baoyu-design | 647⭐ | +78% (was 363) | Pushed 06-09. Active |
-| html-anything | 6,509⭐ | +8.6% (was 5,994) | No push since 06-02. Stars only |
+#### 2. hermes-agent 189K⭐ — Massive growth since last check (78K → 189K)
+- **`hermes claw migrate`** — explicit OpenClaw migration path. Competitive signal.
+- Now supports: Telegram, Discord, Slack, WhatsApp, Signal, Email, CLI
+- 6 terminal backends: local, Docker, SSH, Singularity, Modal, Daytona (serverless persistence)
+- **Closed learning loop**: skill creation from experience → skill self-improvement during use → nudges to persist knowledge → FTS5 session search
+- [[Honcho]] dialectic user modeling
+- Compatible with agentskills.io open standard
+- Key new Chinese provider support: Xiaomi MiMo, z.ai/GLM, Kimi/Moonshot, MiniMax
 
-## Trend Summary
+#### 3. Headroom 20.8K⭐ — From 16.1K (06-07) → 20.8K (06-10), +4.7K in 3 days
+- Now trending #1 weekly (15,060 stars this week!)
+- Added `headroom learn` — mines failed sessions, writes corrections to CLAUDE.md/AGENTS.md
+- Cross-agent memory store with auto-dedup
+- OpenClaw listed as compatible ("installs as ContextEngine plugin")
+- Our [[compress-output.sh]] does 71-84%, Headroom claims 47-92% on real workloads
+- **Actionable**: evaluate `headroom wrap` for OpenClaw integration
 
-1. **Ecosystem stable** — No new breakout projects in 2 days. Agent skill space is saturated with content/catalog repos.
-2. **Model releases dominate attention** — Claude Fable 5/Mythos 5 is the main event. HN discourse is about trust/safety, not tooling.
-3. **Post-generation verification** is the active product category (guard-skills growth validates this trend from 06-08).
-4. **"Extract cloud feature → local skill"** pattern continues (baoyu-design doing Claude Design → local).
+#### 4. New category: "Agent taste/quality" skills
+- taste-skill (39.7K⭐) — "stops AI from generating boring, generic slop"
+- impeccable (36.9K⭐) — "design language that makes your AI harness better at design"
+- These are essentially prompt engineering packaged as skills — interesting that they get massive stars
+
+#### 5. Meta-skill emergence
+- revfactory/harness (6.7K⭐) — "meta-skill that designs domain-specific agent teams"
+- pm-skills (phuryn) — "100+ agentic skills for product management"
+- The ecosystem is layering: individual skills → skill packs → meta-skills that generate skills
+
+### Tracked project updates
+
+| Project | Previous | Current | Δ | Status |
+|---------|----------|---------|---|--------|
+| re_gent (regent-vcs) | 584⭐ (05-23) | 680⭐ (06-10) | +16.4% | 🟢 Active, pushed 06-08 |
+| Beads (gastownhall) | 24,020⭐ (05-23) | 24,444⭐ (06-10) | +1.8% | 🟢 Active, pushed today |
+
+- **re_gent**: Steady growth from 584 → 680 (+16.4%). Still active (pushed 2 days ago). 29 open issues. Multi-agent VCS continues expanding. Keep tracking. Revisit 06-24.
+- **Beads**: 24,020 → 24,444 (+1.8%). Active daily (pushed today). Mature/steady phase. Keep tracking. Revisit 06-24.
+
+## Ecosystem trend: Consolidation around 3 poles
+
+1. **NousResearch/hermes-agent** — The self-improving agent platform (189K⭐)
+2. **ECC** — The cross-harness config/skill system (212K⭐)  
+3. **OpenClaw/ClawX** — The infrastructure gateway (our home)
+
+The convergence between ECC and hermes-agent (ECC 2.0 adds Hermes operator story) is a significant consolidation signal. The "migrate from OpenClaw" feature in hermes-agent is a competitive move worth monitoring.
+
+## Relevance to us
+
+- Headroom's `headroom wrap` for OpenClaw is worth evaluating as a ContextEngine plugin
+- hermes-agent's learning loop (skill creation from experience → self-improvement) validates our beliefs-candidates → DNA pipeline approach
+- ECC's 261-skill catalog at scale confirms the need for our functional-area-resolver pattern (from [[gbrain]]) once we hit 40+ skills
+- The "meta-skill" layer (harness, pm-skills) is a trend we could participate in — a skill that generates skills from workflow patterns

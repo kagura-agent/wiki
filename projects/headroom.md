@@ -4,7 +4,14 @@
 - **status**: studied (2026-06-07)
 - **tags**: compression, context-engineering, tokens, proxy, rust, python
 - **repo**: https://github.com/chopratejas/headroom
-- **stars**: 16.1K (as of 2026-06-07)
+- **stars**: 20.8K (as of 2026-06-10, was 16.1K on 06-07 — +29% in 3 days!)
+
+## 06-10 Update
+- Trending #1 weekly on GitHub (15,060 stars this week)
+- New: `headroom learn` — mines failed sessions, writes corrections to CLAUDE.md/AGENTS.md
+- New: Cross-agent memory store with auto-dedup (shared across Claude, Codex, Gemini)
+- OpenClaw listed as compatible ("installs as ContextEngine plugin")
+- **Actionable**: evaluate `headroom wrap openclaw` for integration
 - **license**: Apache 2.0
 - **author**: Tejas Chopra (chopratejas)
 
