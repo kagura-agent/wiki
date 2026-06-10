@@ -3050,3 +3050,47 @@ Light Sleep candidates: 100 | Promoted: 0 | Confidence: all 0.58
 # memory/2026-06-09.md
 Total lines: 1721
 ```
+
+## 🔬 自进化观察日报 2026-06-10
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增 (offline-round-value, edit-tool-false-positive) + 1 次 graduation (code-discipline 合并 4 pattern) | 总 391 行
+- **DNA 变更**: 有（主动）— b48ce1a graduated code-discipline，合并 code-discipline/code-authorship-discipline/bypass-claude-code/code-delegation 4 个 pattern 进 AGENTS.md 已有 "Subagent 代码规则" section
+- **nudge 触发**: 不可观测（gateway 日志无 hit，但昨日 22:30 后无新 nudge-sourced gradient）。推测凌晨无触发（全自动巡检，无人工交互产生 agent_end）
+- **dreaming**: Light Sleep 运行，100+ candidates staged，**0 promoted**，confidence **全部 0.58**（uniform）。REM: "No strong patterns surfaced." Issue #6 持续复现
+
+### 闭环追踪
+- **完整闭环 1 个**:
+  - code-discipline graduation: 4 次独立出现 (05-28, 06-03, 06-08, 06-09) → 3.0 weighted → graduated → target 已在 DNA 中存在 → 标注完成。从零散 gradient 到正式毕业的完整管线运作
+- **断裂处**:
+  - dreaming 质量 (Issue #6): 31+ 天 open，无代码修复进展。观察充分但无行动
+  - memory_search: 7+ 天 broken，已标注多次但未修复（blocked on 外部/Luna 帮助）
+
+### 今日发现
+1. **🟢 Graduation 管线健康运作**: code-discipline 从 candidate → V1 pass (3.0 weighted) → graduated 是教科书式的管线执行。合并了 4 个同源 pattern 避免重复
+2. **🟢 offline round 有价值**: workloop 未找到外部工作时转入 reflect，成功完成了 graduation 操作。新 gradient (offline-round-value) 捕捉了这个 pattern
+3. **🔴 Dreaming 仍是最大瓶颈**: confidence 从之前 0.62 降至 0.58，仍为 uniform 无差异化。100 candidates 全部 staged 0 promoted = 管线形式运行但无实质筛选
+4. **🟡 Nudge 观测盲区**: gateway 日志不含 "nudge" 关键词（可能已 rotate 或实现细节变化）。只能通过 gradient source 间接推断——今日无新 nudge-sourced gradient，合理（凌晨无人工交互 → 无 agent_end hook → 无 nudge 触发）
+
+### 原始数据
+```
+# DNA commits since yesterday 22:30
+b48ce1a workloop #3895 reflect: offline round, graduated code-discipline
+b469499 graduate code-discipline pattern (4 occurrences, 3.0 weighted)
+
+# beliefs-candidates changes
++2 new gradients (06-10): offline-round-value, edit-tool-false-positive
++4 graduation marks: code-discipline, code-authorship-discipline, bypass-claude-code, code-delegation → all graduated 2026-06-10
+
+# dreaming (from memory/2026-06-10.md)
+Light Sleep: 100+ candidates, confidence 0.58 uniform, recalls 0, 0 promoted
+REM: "No strong patterns surfaced"
+
+# NemoClaw #4706: MERGED 🎉 (first NemoClaw PR landed)
+```
+
+### Issue #6 进展
+- 状态: OPEN (31+ days)
+- 问题: uniform confidence (0.58), no differentiation, 0 promotes
+- 行动: 无代码修复。Issue 仍为观察/记录状态
+- 建议: 需要实际 code fix 或确认 dreaming 功能限制并调整预期
