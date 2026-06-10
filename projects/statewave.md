@@ -4,7 +4,7 @@ url: https://github.com/smaramwbc/statewave
 stars: 204
 first_seen: 2026-05-11
 status: active
-last_verified: 2026-06-09
+last_verified: 2026-06-10
 depth: deep-read
 ---
 
@@ -164,3 +164,36 @@ Burst of 10+ fixes in 2 days (June 6-7), all multi-tenant admin correctness:
 **Update 06-09**: 204⭐ stable. In multi-tenant hardening phase: admin scope fixes, HMAC compare_digest for API keys, cursor pagination fixes. No new features, pure security/correctness maturation.
 
 **Assessment**: Still worth tracking. The multi-tenant hardening validates real deployment pressure. Next revisit: 06-15.
+
+## v1.0.0 — First Stable Public Release (2026-06-09)
+
+**Stars**: 204⭐ (stable). **Milestone**: v1.0.0 released — first stable developer API.
+
+### What v1.0 Stabilizes
+
+- `/v1` API contract — backward-compatible additions only from here
+- Governance surfaces: HMAC-signed state-assembly receipts, receipt-driven replay, per-memory sensitivity labels + declarative YAML policy, opt-in detector-suggested labels, per-region data residency
+- SDKs at v1.0.0: `statewave` (PyPI) + `@statewavedev/sdk` (npm), typed surfaces matching REST contract
+- Multi-replica API deployment (single-Postgres only)
+
+### What v1.0 Honestly Does NOT Promise
+
+Refreshingly transparent limitations carried from `why-statewave.md`:
+- Not load-tested at >10K subjects
+- Single-Postgres only (no cross-region clustering)
+- App-layer tenant isolation (no Postgres RLS yet)
+- No admin-action identity (`promoted_by`)
+- LLM-vs-heuristic compiler eval not yet published
+- Explicitly: "Not GA, not production-ready, not battle-tested, not enterprise-ready"
+
+**Anti-pattern avoided**: Calling a v1.0 "GA" or "production-ready" before actual load testing. The honest limitations list is a trust signal — contrast with projects that declare v1 without caveats.
+
+### Signal Analysis
+
+Statewave's trajectory: research → multi-tenant hardening → stable API release. The v1.0 is a developer contract milestone, not a feature milestone. The admin hardening sprint (06-05~06-09) was the cleanup before declaring stability.
+
+**Star decline (214→204) vs v1.0 release**: Unusual — hitting v1.0 usually triggers a star bump. Possible explanations: (1) release was quiet (no blog post / HN submission found), (2) memory runtime niche has low discoverability, (3) stars were inflated by bots earlier. Community health (54 external PRs/30d, 5 unique issue authors) remains the better signal.
+
+**Our relevance**: The [[overlap-detection-pattern]] we borrowed from Statewave's conflict resolution continues to be useful. Their governance surfaces (sensitivity labels, receipt-driven replay) are ahead of anything we do for [[memory-privacy]]. The honest "what we don't do" template is worth adopting for our own projects.
+
+**Revisit**: 06-24 (extended — v1.0 shipped, next interesting signal is community adoption response or v1.1 feature direction).
