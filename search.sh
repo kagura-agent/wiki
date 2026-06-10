@@ -262,9 +262,33 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     AGE_WEEKS=$(( (NOW - MTIME) / 604800 ))  # seconds per week
     [[ $AGE_WEEKS -lt 0 ]] && AGE_WEEKS=0
 
-    # Exponential decay: exp(-δ * ageWeeks), clamped to [0.1, 1.0]
+    # Content-type half-life adjustment (ClawMem pattern: decisions=∞, notes=60d, handoffs=30d)
+    # Different content types decay at different rates:
+    #   cards/ = concept notes, durable knowledge → half-life multiplier 0.3 (slower decay)
+    #   projects/*scout* = dated scouts → half-life multiplier 2.0 (faster decay)
+    #   projects/*-2026-* = dated project notes → half-life multiplier 1.5 (moderate-fast decay)
+    #   projects/ (other) = deep reads, durable → half-life multiplier 0.7 (slower decay)
+    # Applied as: effective_δ = base_δ × type_multiplier
+    _dir_name=$(basename "$(dirname "$f")")
+    _base_name=$(basename "$f" .md)
+    TYPE_MULT="1.0"
+    if [[ "$_dir_name" == "cards" ]]; then
+      TYPE_MULT="0.3"  # concept cards are durable
+    elif [[ "$_dir_name" == "projects" ]]; then
+      if [[ "$_base_name" == *scout* || "$_base_name" == *patrol* ]]; then
+        TYPE_MULT="2.0"  # dated scouts decay fast
+      elif [[ "$_base_name" == *-2026-* || "$_base_name" == *-2025-* ]]; then
+        TYPE_MULT="1.5"  # dated notes decay moderately fast
+      else
+        TYPE_MULT="0.7"  # deep reads are durable
+      fi
+    fi
+    EFF_DECAY_RATE=$(awk "BEGIN { printf \"%.4f\", $DECAY_RATE * $TYPE_MULT }")
+
+    # Exponential decay: exp(-δ_eff * ageWeeks), clamped to [0.1, 1.0]
     # δ varies by query intent (recent=0.35, current=0.50, historical=0.05, neutral=0.17)
-    DECAY=$(awk "BEGIN { d = exp(-$DECAY_RATE * $AGE_WEEKS); if (d < 0.1) d = 0.1; if (d > 1.0) d = 1.0; printf \"%.4f\", d }")
+    # and by content type (cards=0.3×, deep-reads=0.7×, scouts=2.0×)
+    DECAY=$(awk "BEGIN { d = exp(-$EFF_DECAY_RATE * $AGE_WEEKS); if (d < 0.1) d = 0.1; if (d > 1.0) d = 1.0; printf \"%.4f\", d }")
 
     # Maturity weight from frontmatter status field
     # active/deep-dive=1.3, stable=1.2, candidate/provisional=1.0, archived=0.7, dropped=0.4
@@ -336,7 +360,7 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     fi
     # Combined: term_match * 10 + tf_bonus + slug_bonus + recall_boost + decay * maturity
     SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $TF_BONUS + $SLUG_BONUS + $RECALL_BOOST + $DECAY * $MATURITY }")
-    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE idf_term=$RAW_TERM_SCORE decay=$DECAY maturity=$MATURITY tf=$RAW_TF recall=$RAW_RECALL status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
+    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE idf_term=$RAW_TERM_SCORE decay=$DECAY(eff_δ=$EFF_DECAY_RATE,type=$TYPE_MULT) maturity=$MATURITY tf=$RAW_TF recall=$RAW_RECALL status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
     echo "$SCORE $f"
   done | sort -rn | cut -d' ' -f2- | head -"$LIMIT")
   
