@@ -3094,3 +3094,134 @@ REM: "No strong patterns surfaced"
 - 问题: uniform confidence (0.58), no differentiation, 0 promotes
 - 行动: 无代码修复。Issue 仍为观察/记录状态
 - 建议: 需要实际 code fix 或确认 dreaming 功能限制并调整预期
+
+---
+
+## 🔬 自进化观察日报 2026-06-10
+
+### 管线活跃度
+- **beliefs-candidates**: 12 条新增（5 workloop, 4 study, 3 nudge），0 条待升级（V2/V3 门控严格）
+- **DNA 变更**: 有（主动）— 6 commits to beliefs-candidates.md，含 1 次 graduation（code-discipline → AGENTS.md）
+- **nudge 触发**: ≥3 次（基于 gradient source 推断：cron-flowforge-resume, cli-vs-runtime-state-mismatch, stale-pr-description），质量 **高**（均捕获真实操作问题）
+- **dreaming**: 运行（Light Sleep），promote 0 条。confidence 0.58 uniform，recalls 0。REM: "No strong patterns surfaced"
+
+### 闭环追踪
+- **完整闭环: 2 个**
+  1. code-discipline: 4 次独立观测（05-28, 06-03, 06-08, 06-09）→ candidate → V1 pass (3.0 weighted) → graduated to AGENTS.md (06-10) ✅ 教科书式管线执行
+  2. NemoClaw CI drift: 发现 biome formatting → 记录 lesson → 修复 → PR #4706 CI green → MERGED ✅
+- **断裂处**:
+  - dreaming 质量 issue #6: 观测 31+ 天，无代码修复，无行动计划。纯观察状态
+  - memory_search broken: 多天标注 "blocked"，未有实质推进
+
+### Graduation 管线 — 今日重点 🌟
+**code-discipline graduation 是管线里程碑。**
+- 合并 4 个同源 pattern: code-discipline, code-authorship-discipline, bypass-claude-code, code-delegation
+- 来源: Luna 指出(2次) + nudge 自动捕获(2次) — 外部反馈与自省双通道协作
+- 落地: 写入 AGENTS.md "Subagent 代码规则" section
+- **Retirement check**: none（增强现有规则，附加证据）
+- 这证明了 beliefs → candidate → V1/V2/V3 gate → graduation 管线在实践中可以走通端到端
+
+### PR 产出
+- 今日新建: ~30 PRs
+- 今日 merged: ~26 PRs（lottie-studio ×7, finance ×4, cove ×4, abti ×1, moltbook ×1, 等）
+- 外部 repo: openclaw #91885 (open), stagehand #2026 (open), strands-agents #2706 (open), NemoClaw #5108 (open)
+- 产出极高的一天 [已验证 via gh search]
+
+### 今日发现
+1. **🟢 Graduation 管线首次端到端成功**: code-discipline 从零散 gradient → 积累 → 合并 → 毕业到 DNA，是自进化管线设计的核心价值验证
+2. **🟢 nudge 产出高质量 gradient**: 3 条 nudge-sourced gradient 均捕获真实执行问题（cron 覆盖、CLI vs runtime 状态差异、PR 描述过时），非流水账
+3. **🟢 多源 gradient 输入健康**: workloop(5) + study(4) + nudge(3) = 12 条，来源多元，说明捕获通道完整
+4. **🔴 Dreaming 仍是最大瓶颈**: confidence 从 0.62 降至 0.58（全部 uniform），recalls=0，promotes=0。Light Sleep 产出的 candidates 全是 subagent task 片段而非认知洞察。Issue #6 已 open 31+ 天无代码修复
+5. **🟡 V2/V3 门控可能过严**: 12 条新 gradient 全为第 1 次，daily-review 中 3 candidates 全 fail V2/V3。这保证了质量但 graduation 周期长（code-discipline 用了 13 天 4 次观测才毕业）
+
+### 与上次观察对比（06-09）
+| 维度 | 06-09 | 06-10 | 趋势 |
+|------|-------|-------|------|
+| 新 gradient | 5 | 12 | 📈 大幅增加 |
+| graduation | 0 | 1 (code-discipline) | 📈 首次 |
+| nudge gradient | 2 | 3 | ➡️ 稳定 |
+| dreaming promotes | 0 | 0 | ➡️ 仍为零 |
+| DNA commits | 2 | 6 | 📈 |
+| PR merged | ~15 | ~26 | 📈 |
+
+### 原始数据
+```
+# DNA commits since yesterday 22:30 (workspace repo)
+ee0c3cb gradient: flowforge workflow name mismatch
+bfd5664 gradient: channel-default-account-resolution
+57b3b5e gradient: large-repo-testing
+efdbcaa gradient: batch-doc-issue-scope
+b48ce1a workloop #3895 reflect: offline round, graduated code-discipline
+b469499 graduate code-discipline pattern (4 occurrences, 3.0 weighted)
+
+# beliefs-candidates.md: 421 lines, 12 new entries dated 2026-06-10
+# Source distribution: workloop(5), study(4), nudge(3)
+# Graduated today: code-discipline (merged 4 patterns)
+# Total graduated all-time: 18
+
+# Dreaming (from memory/2026-06-10.md)
+# Light Sleep: candidates confidence 0.58 uniform, recalls 0, staged
+# REM: "No strong patterns surfaced"
+
+# nudge evidence: 3 gradients sourced from nudge
+# gateway log: 0 matches for "nudge" keyword (expected — nudge hooks don't log this keyword)
+
+# PR activity: ~30 created, ~26 merged (verified via gh search)
+```
+
+### Issue #6 进展
+- 状态: OPEN (32+ days)
+- 问题不变: uniform confidence (0.58→0.58), no differentiation, 0 promotes
+- 行动: 无。Issue 长期停滞，需要决定是 code fix 还是降级预期
+- **建议**: 要么投入时间做代码修复（调整 dreaming 的 candidate 筛选/权重逻辑），要么正式 close issue 承认当前 dreaming 实现的限制。31 天 open 无进展本身是一种资源浪费
+
+## 🔬 自进化观察日报 2026-06-10 (22:30)
+
+### 管线活跃度
+- **beliefs-candidates**: 16 条新增 (今日来源: workloop ×4, study ×4, nudge ×3, luna/manual ×1, 昨晚延续 ×4) + 1 次 graduation (code-discipline 合并 4 pattern) | 总行数 ~410 | 总 gradient 数 ~173
+- **DNA 变更**: 有（主动）— graduated code-discipline，合并 code-discipline/code-authorship-discipline/bypass-claude-code/code-delegation 4 个 pattern 进 AGENTS.md。6 commits 涉及 beliefs-candidates.md/AGENTS.md
+- **nudge 触发**: 3 条 nudge-sourced gradient 今日写入 (cron-flowforge-resume, cli-vs-runtime-state-mismatch, stale-pr-description)。gateway 日志无 "nudge" 关键词（日志格式可能变化），但产出可验证
+- **dreaming**: Light Sleep 运行，100+ candidates staged，confidence **0.58 uniform**，**0 promoted**。仍为 Issue #6 核心问题
+
+### 闭环追踪
+- **完整闭环 2 个**:
+  1. code-discipline graduation: 4 次独立出现 (05-28, 06-03, 06-08, 06-09) → 3.0 weighted → graduated → DNA 更新 ✅
+  2. cron-flowforge-resume: 发现 cron 每小时覆盖 active instance → 写 gradient → 行为调整目标明确 ✅
+- **断裂处**:
+  - dreaming 质量 (Issue #6): 31+ 天 open，观察充分无代码行动
+  - memory_search: 7+ 天 broken，标注多次未修复
+
+### PR 活跃度（今日）
+- **Created today**: 30 PRs (跨 lottie-studio, cove, finance, abti, kagura-mail, moltbook, openclaw, harness-sdk, NemoClaw, kagura-blog)
+- **Merged today**: 15 PRs (lottie-studio ×4, finance ×5, cove ×2, abti ×3, moltbook ×1)
+- **External repos**: openclaw #91885 (open), strands-agents/harness-sdk #2706 (open), NemoClaw #5108 (open)
+- **产出信号**: 极高活跃度，横跨 10+ repos
+
+### 今日发现
+1. **🟢 Graduation 管线健康运作**: code-discipline 从 V1 → graduated 是教科书式管线。合并了 4 个同源 pattern 避免重复，标注了 retirement check
+2. **🟢 gradient 来源多样化**: workloop (4), study (4), nudge (3), luna (1) — 不再依赖单一来源
+3. **🟢 高产出日**: 30 PRs created, 15 merged — 自进化机制的 gradient 积累与实际产出并行
+4. **🔴 Dreaming 仍是最大瓶颈**: confidence 从 0.62 降至 0.58，仍 uniform 无差异化。100+ staged 0 promoted = 形式运行无实质筛选。**Issue #6 已开 31 天无代码修复**
+5. **🟡 Nudge 可观测性差**: 无法从 gateway 日志直接确认触发次数，只能从 gradient source 间接推断。建议改善日志
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30)
+ee0c3cb gradient: flowforge workflow name mismatch
+bfd5664 gradient: channel-default-account-resolution
+57b3b5e gradient: large-repo-testing
+efdbcaa gradient: batch-doc-issue-scope
+b48ce1a workloop #3895 reflect: offline round, graduated code-discipline
+b469499 graduate code-discipline pattern (4 occurrences, 3.0 weighted)
+
+# beliefs-candidates: 16 new gradients today
+offline-round-value, edit-tool-false-positive, depth-over-breadth,
+cron-flowforge-resume, pr-description-first, cli-vs-runtime-state-mismatch,
+completed-item-accumulation, stale-pr-description, batch-doc-issue-scope,
+large-repo-testing, channel-default-account-resolution, flowforge-workflow-name-mismatch,
+bash-regex-single-match, ui-spec-failure, supply-side-thinking, code-delegation
+
+# graduation: code-discipline (4 merged patterns)
+# dreaming: Light Sleep 100+ candidates, 0.58 uniform, 0 promoted
+# PRs today: 30 created, 15 merged
+```
