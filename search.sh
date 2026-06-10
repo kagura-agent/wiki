@@ -362,8 +362,57 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
   echo ""
 fi
 
+# ---- Fallback Retrieval Pass (Quarq Argus REQUIRED_DATA pattern) ----
+# Source: quarq-argus-agent.md (two-pass retrieval with query expansion)
+# Applied: 2026-06-10
+# If first pass returned 0 results, expand query and retry with relaxed matching.
+# This addresses the RAG "silent failure" mode where a slightly different phrasing
+# would have found the answer but the user gets empty results instead.
+FALLBACK_TRIGGERED=0
+if [[ ${#RESULTS[@]} -eq 0 && "$MODE" != "semantic-only" ]]; then
+  # Generate expanded query: split into morphemes, add common suffixes/prefixes
+  EXPANDED_WORDS=()
+  for word in $WORDS; do
+    EXPANDED_WORDS+=("$word")
+    # Strip common suffixes to get stem-like forms
+    stem=$(echo "$word" | sed -E 's/(ing|tion|ment|ness|able|ible|ity|ous|ive|ful|less|ly|ed|er|est|al|ual|ary|ory)$//i')
+    [[ ${#stem} -ge 3 && "$stem" != "$word" ]] && EXPANDED_WORDS+=("$stem")
+  done
+  # Also try without MIN_MATCH restriction (any single term match counts)
+  FALLBACK_FILES=""
+  for word in "${EXPANDED_WORDS[@]}"; do
+    [[ ${#word} -lt 3 ]] && continue
+    found=$(grep -rli "$word" "$WIKI_DIR/projects/" "$WIKI_DIR/cards/" 2>/dev/null | head -20 || true)
+    while IFS= read -r f; do
+      [[ -n "$f" ]] && FALLBACK_FILES="${FALLBACK_FILES}${FALLBACK_FILES:+$'\n'}$f"
+    done <<< "$found"
+  done
+  # Deduplicate and score by hit count
+  if [[ -n "$FALLBACK_FILES" ]]; then
+    FALLBACK_RANKED=$(echo "$FALLBACK_FILES" | sort | uniq -c | sort -rn | head -"$LIMIT" | awk '{print $2}')
+    FB_COUNT=0
+    echo "🔄 Fallback retrieval (relaxed matching):"
+    while IFS= read -r filepath; do
+      [[ -z "$filepath" || ! -f "$filepath" ]] && continue
+      slug=$(basename "$filepath" .md)
+      if [[ -z "${SEEN[$slug]+x}" ]]; then
+        match_line=$(grep -m1 -i "$(echo "${EXPANDED_WORDS[0]}" 2>/dev/null)" "$filepath" 2>/dev/null || echo "(fallback match)")
+        echo "  🔄 $slug — $match_line"
+        SEEN["$slug"]=1
+        RESULTS+=("  🔄 $slug")
+        FB_COUNT=$((FB_COUNT + 1))
+        FALLBACK_TRIGGERED=1
+      fi
+      [[ $FB_COUNT -ge $LIMIT ]] && break
+    done <<< "$FALLBACK_RANKED"
+    [[ $FB_COUNT -eq 0 ]] && echo "  (fallback also returned nothing)"
+    echo ""
+  fi
+fi
+
 # ---- Summary ----
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+[[ $FALLBACK_TRIGGERED -eq 1 ]] && echo "⚠️  Results from fallback pass (relaxed matching) — verify relevance"
 echo "📊 Total unique results: ${#RESULTS[@]}"
 # Retrieval transparency (mnem-inspired: candidates_seen → qualified → returned)
 if [[ $_RT_TOTAL_DOCS -gt 0 || $_RT_SEMANTIC_CANDIDATES -gt 0 ]]; then
@@ -372,7 +421,11 @@ if [[ $_RT_TOTAL_DOCS -gt 0 || $_RT_SEMANTIC_CANDIDATES -gt 0 ]]; then
   echo "  Pipeline: ${_RT_TOTAL_DOCS} docs scanned → ${_RT_KEYWORD_CANDIDATES} keyword hits → ${_RT_KEYWORD_QUALIFIED} qualified (${_RT_DROPPED} dropped by MIN_MATCH) | ${_RT_SEMANTIC_CANDIDATES} semantic"
 fi
 if [[ ${#RESULTS[@]} -gt 0 ]]; then
-  echo "  Legend: 🔮=semantic 🔍=keyword"
+  if [[ $FALLBACK_TRIGGERED -eq 1 ]]; then
+    echo "  Legend: 🔮=semantic 🔍=keyword 🔄=fallback"
+  else
+    echo "  Legend: 🔮=semantic 🔍=keyword"
+  fi
   for r in "${RESULTS[@]}"; do
     echo "$r"
   done
