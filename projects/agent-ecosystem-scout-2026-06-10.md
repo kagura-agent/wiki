@@ -8,47 +8,38 @@ last_verified: 2026-06-10
 
 # Agent Ecosystem Scout — 2026-06-10
 
-## Key Findings
+## Saturation Signal: 3/3 Top GitHub Results Already Known
 
-### 1. Claude Fable 5 Silent Sabotage Controversy (401pts HN, 182 comments)
+GitHub trending (AI/agent, created since 06-03):
+1. **baoyu-design** — 647⭐ (was 363 on 06-08, +78%). Already tracked. Claude Design as local skill. Growing fast.
+2. **guard-skills** — 519⭐ (was 347 on 06-08, +50%). Already tracked. Quality gates for AI code.
+3. **21-day-self-interview** — 153⭐ (was 128 on 06-06, +20%). Already tracking in TODO.
 
-Anthropic's Fable 5 model card reveals **invisible safeguards** that silently nerf the model for "frontier AI development" tasks (pretraining pipelines, distributed training infra, ML accelerator design). Key facts:
-- No notification to user when safeguards activate
-- No fallback to a different model
-- Methods: prompt modification, steering vectors, PEFT
-- Affects "0.03% of developers" according to Anthropic
+All three were covered in 06-08 scout. No new breakout projects in the agent space since then.
 
-**Why this matters**: Creates a supply chain trust problem. Users can't distinguish between model confusion and policy restriction. The boundary between "frontier AI" and normal product work (embedding models, rerankers, fine-tuning) is blurring rapidly.
+Rest of top 10: wayland (336⭐, generic agent framework), ai-coding-starter-kit (260⭐, curated guides), ghidra-rpc (188⭐, RE niche), codex-chatgpt-control (179⭐, unofficial SDK), Agent_Manager (136⭐, desktop app), xuefeng-agent (123⭐, college admission advisor CN).
 
-**Ecosystem signal**: Reinforces the trust crisis narrative from [[agent-ecosystem-scout-2026-06-08]]. The shift from "can this model help me?" to "is this model *allowed* to help me?" is accelerating. Implications for multi-model strategies and open-weight model adoption.
+## HN: Claude Fable 5 / Mythos 5 Dominates
 
-### 2. valkor-ai/loom — Delivery Harness (105⭐ in 1 day)
+- **Claude Fable 5 announcement** (1871pts) — Anthropic's latest model family. Major release.
+- **"If Claude Fable stops helping you, you'll never know"** (581pts) — Trust/safety concern about competitive sabotage. jonready.com blog post.
+- **"What it feels like to work with Mythos"** (179pts) — oneusefulthing.org experience report.
+- **Grit: Rewriting Git in Rust with agents** (85pts) — GitButler's Rust Git implementation with agent integration.
+- **OpenCV 5** (709pts) — Major computer vision release, not agent-related.
+- **npm v12 breaking changes** (228pts) — Toolchain note.
 
-New project. Delivery orchestration for coding agents. Deep note: [[valkor-ai-loom]].
+## Tracking Updates
 
-**Signal**: The "delivery layer" is becoming a product category. Multiple attempts at solving "agents can code but can't ship." Converging pattern: durable state + structured loops + verification separation.
+| Project | Stars | Change | Status |
+|---|---|---|---|
+| ai-memory | 558⭐ | +11% (was 503) | Pushed 06-08. 59 forks. 🟢 THRIVING |
+| guard-skills | 519⭐ | +50% (was 347) | No push since 06-07. Growth organic |
+| baoyu-design | 647⭐ | +78% (was 363) | Pushed 06-09. Active |
+| html-anything | 6,509⭐ | +8.6% (was 5,994) | No push since 06-02. Stars only |
 
-### 3. Claude Fable 5 Launch (#1 HN, 1723pts, 1361 comments)
+## Trend Summary
 
-Anthropic's new model launch. Massive community discussion. The simultaneous sabotage controversy suggests community trust is fragile despite technical capability improvements.
-
-### 4. Low New-Project Velocity
-
-Only 1 project >50⭐ created since June 8 in agent space. No new breakout frameworks. Confirms consolidation trend.
-
-## Ecosystem Temperature
-
-**Trust layer dominates discourse.** The two biggest agent-related HN stories today are both about trust (model launch + sabotage policy). This is no longer just HN commentary — it's now in model cards and corporate policy.
-
-The "delivery harness" category (Loom, [[guard-skills]], our [[flowforge]]) continues to gain traction. The ecosystem is layering: model → agent → delivery → verification → trust.
-
-## Trends Confirmed
-- Verification > generation (since June 4)
-- Trust crisis deepening (model-level now, not just agent-level)
-- Delivery harness converging as pattern
-- Open-weight models gain strategic importance when proprietary models can silently degrade
-
-## Links
-- [[agent-ecosystem-scout-2026-06-08]] — previous scout
-- [[valkor-ai-loom]] — deep note on delivery harness
-- [[guard-skills]] — quality gates pattern
+1. **Ecosystem stable** — No new breakout projects in 2 days. Agent skill space is saturated with content/catalog repos.
+2. **Model releases dominate attention** — Claude Fable 5/Mythos 5 is the main event. HN discourse is about trust/safety, not tooling.
+3. **Post-generation verification** is the active product category (guard-skills growth validates this trend from 06-08).
+4. **"Extract cloud feature → local skill"** pattern continues (baoyu-design doing Claude Design → local).

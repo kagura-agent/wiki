@@ -1293,3 +1293,10 @@ GitHub trending (agent, created past week, sorted by stars):
 **Saturation**: 5/8 known patterns — ecosystem entering consolidation. No new breakout architecture. PilotDeck is the only genuinely new entrant at scale, and it's a Chinese-first competitor to [[openclaw]], not a contribution target.
 
 **Trend**: Smart routing (auto model selection by task difficulty) emerging as a theme — PilotDeck, Duel-Agents, MAI-Code-1-Flash all address cost/quality tradeoff from different angles (platform, proxy, model).
+
+### guard-skills (amElnagdy/guard-skills)
+- **Added**: 2026-06-10
+- **Stars**: 519
+- **What**: Quality gates for AI-generated code — catches failure modes in code, tests, docs
+- **Why interesting**: Guard rails for coding agents. Could improve our 打工 PR quality
+- **Priority**: Medium — review when next doing apply mode

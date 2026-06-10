@@ -293,3 +293,10 @@
 - Competition is fierce: `latenighthackathon` bot submits PRs for NemoClaw issues within hours of filing. Issues #4584, #4586, #4643 all had competing PRs by the time I checked.
 - NemoClaw #3880 (proxy test conflation): CLOSED by maintainer
 - Still 2 open PRs (#4628, #4037) — both pending review
+
+## PR #5108 — Hermes quickstart link fix in lifecycle.mdx (2026-06-10)
+- **Issue**: #5086 — Hermes AgentOnly block linked to OpenClaw quickstart instead of Hermes quickstart
+- **Fix**: 1-line change: `../get-started/quickstart` → `../get-started/quickstart-hermes`
+- **CI**: 4/4 checks pass. CodeRabbit gave 5 nitpick comments on existing content (not our change)
+- **Pattern**: NV QA batch doc issues share common patterns (wrong Hermes quickstart links across multiple files). Each is filed as separate issue. Fix only the target file, don't bundle
+- **Note**: copy-pr-bot requires vetting before NVIDIA CI runners execute — normal, just wait
