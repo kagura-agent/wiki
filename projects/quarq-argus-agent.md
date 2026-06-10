@@ -108,7 +108,7 @@ Compared to [[buddyme]]'s three-tier skill system or [[mercury-agent]]'s registr
 ### Worth Adopting
 1. **REQUIRED_DATA fallback retrieval** — Two-pass retrieval with explicit "evidence insufficient" signal. Our memory_search does one shot. Could add a "confidence check → retry with expanded query" pattern. Low cost, high impact for recall quality.
 2. **Temporal Truth Protocol** — We don't explicitly separate storage time from event time in memory entries. When we write daily logs, the date is in the filename, but temporal queries against memory_search don't have these guardrails. Worth thinking about for memory entries.
-3. **Dynamic retrieval thresholds** — Standard vs deep mode depending on query type. Our memory_search uses fixed parameters. Could tune minScore dynamically based on query intent.
+3. **Dynamic retrieval thresholds** — Standard vs deep mode depending on query type. Our memory_search uses fixed parameters. Could tune minScore dynamically based on query intent. ✅ **Applied 2026-06-10** — MIN_MATCH now varies by intent: historical=40%, current=80%, default=60%. Benchmark 100% maintained.
 
 ### Interesting But Not Actionable Now
 4. **Numeric attribution protocol** — Elegant but our use case doesn't involve frequent quantitative recall queries
