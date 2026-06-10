@@ -184,12 +184,22 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     fi
   done
   NUM_WORDS=${#WORD_ARRAY[@]}
-  # For short queries (1-2 words), require ALL words. For longer, require 60%
+  # Dynamic MIN_MATCH threshold based on query intent (Quarq Argus pattern)
+  # Source: quarq-argus-agent.md — deep mode (0.28) for aggregation, standard (0.38) for point facts
+  # Applied: 2026-06-10 — maps intent to match percentage:
+  #   historical/neutral → 40% (broader recall for aggregation/timeline queries)
+  #   recent → 60% (standard precision)
+  #   current → 80% (strict, only highly relevant results)
   if [[ $NUM_WORDS -le 2 ]]; then
     MIN_MATCH=$NUM_WORDS
   else
-    MIN_MATCH=$(( (NUM_WORDS * 3 + 4) / 5 ))  # ceil(60%)
+    case "$INTENT" in
+      historical) MIN_MATCH=$(( (NUM_WORDS * 2 + 4) / 5 ))  ;; # ceil(40%)
+      current)    MIN_MATCH=$(( (NUM_WORDS * 4 + 4) / 5 ))  ;; # ceil(80%)
+      *)          MIN_MATCH=$(( (NUM_WORDS * 3 + 4) / 5 ))  ;; # ceil(60%) — default
+    esac
   fi
+  [[ $DEBUG -eq 1 ]] && echo "[DBG] MIN_MATCH=$MIN_MATCH/$NUM_WORDS (intent=$INTENT)" >&2
   # Score each file by IDF-weighted term match + term frequency
   # IDF: rare terms (few documents) weighted more than common terms (many documents)
   # Inspired by Metatron codebase-priors IDF self-tuning (2026-06-04 deep read)
