@@ -3235,3 +3235,16 @@ bash-regex-single-match, ui-spec-failure, supply-side-thinking, code-delegation
 **Principles applied**: [[auto-close-stale-entries]] (LLM-Wiki Error Book pattern), [[structural-fix-over-behavioral-rule]]
 
 **Pipeline state**: 116 entries, 18 graduated, 8 retracted, ~90 active. 11 entries approaching 30d threshold (eligible ~June 18).
+
+## 🔧 Structural Fix: reflection-gate.sh (2026-06-11)
+
+**Gap addressed**: `skip-reflection` pattern — 4-day recidivist (2026-06-04 origin). When code reviews were done manually outside FlowForge, reflection steps (Layer 1-3) were skipped entirely. Existing fix was behavioral (gradient in beliefs-candidates.md saying "you must reflect"). Behavioral rules don't prevent — they remind after the fact.
+
+**Fix**: `code-review/reflection-gate.sh` — verifies a run file exists for a given PR (minimum 5 lines, not a stub). Integrated into `code-review/workflow.yaml` as a new `reflection_gate` node between `reflection` and `register_tracking`.
+
+**Before**: 2/15 tracked reviews (cove#261, cove#263) had no reflection. Both were pre-FlowForge manual reviews.
+**After**: Workflow structurally blocks completion if reflection is missing. Gate exits 1 → agent cannot proceed to register_tracking.
+
+**Principles applied**: [[structural-fix-over-behavioral-rule]], [[flowforge-workflow-targeting]] (graduated pattern)
+
+**Limitation**: Only enforces within FlowForge workflow runs. Manual reviews that don't use FlowForge at all still bypass this. But AGENTS.md already mandates FlowForge for code reviews, so this closes the gap for compliant runs.
