@@ -1,12 +1,12 @@
 ---
 title: IronCurtain
 url: https://github.com/provos/ironcurtain
-stars: 492
+stars: 497
 created: 2026-02-21
-last_updated: 2026-06-07
+last_updated: 2026-06-11
 depth: 👁️ following
 status: active
-last_verified: 2026-06-10
+last_verified: 2026-06-11
 ---
 
 # IronCurtain — Constitutional Security for AI Agents
@@ -132,18 +132,16 @@ These fixes represent the project maturing from "works in happy path" to "surviv
 - [[poco-claw]] — competitor that also sandboxes agents in Docker
 - [[self-evolving-agent-landscape]] — security layer for autonomous agents
 
-### Update 2026-06-10 — Still pushing daily
+### Update 2026-06-11 — Steady growth, vuln-discovery maturing
 
-**Stars**: 494 (was 492 on 06-07, slow but steady).
-**Last push**: 06-08. Active.
+**Stars**: 497 (was 494 on 06-10, steady +3). 5 contributors.
+**Last push**: 06-10. Active daily.
 
-**Recent changes (06-01~06-08)**:
-- **Vuln-discovery hardening continues**: `discover background-wait guard` broadened (06-05). The fault-tolerant parsing + deadlock fix + invariant-gated verdicts from the post-v0.11.0 notes are now in production use.
-- **Web UI**: Copy-to-clipboard for workflow instructions (#283). UX polish suggests growing user base.
-- **Strict arg parsing** for leaf subcommands (#279) — hardening CLI surface.
+**Recent changes (06-05~06-10)**:
+- Vuln-discovery `discover background-wait guard` broadened (06-05) — incremental hardening on the same pipeline
+- No new features since 06-05; the project is in a consolidation/production-use phase for the vuln-discovery workflow
+- Model at opus-4-8
 
-**Assessment**: IronCurtain continues steady maturation. The invariant-gated verdict downgrade pattern (from my 06-07 note) remains the most architecturally interesting contribution to the agent security space. Star growth is slow (494⭐) but the project's quality-per-star ratio is very high. Not a hype project — real security research that accumulates.
+**Assessment**: IronCurtain is in a healthy maturation phase — fixing real-world edge cases from llama.cpp/QEMU runs rather than adding new features. Quality-per-star ratio remains very high. The vuln-discovery pipeline is the most sophisticated AI-agent-driven security testing system in the open-source ecosystem.
 
-**Ecosystem context**: With the [[agent-ecosystem-scout-2026-06-10|Fable 5 trust controversy]], IronCurtain's "agent is untrusted" principle gains new relevance. If models can silently degrade, constitutional enforcement at the tool-call layer (not the model layer) becomes the only reliable defense.
-
-**Revisit**: 06-17.
+**Revisit**: 06-18.
