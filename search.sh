@@ -244,6 +244,7 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
   # Capped at +1.5 to prevent rich-get-richer. Log-scaled: log2(1+count)*0.75
   # Written to temp file because ranking loop runs in subshell pipeline
   RECALL_FREQ_FILE=$(mktemp)
+  COACT_INDEX="$WIKI_DIR/.coactivation-index"
   trap "rm -f $RECALL_FREQ_FILE" EXIT
   _recall_log="$WIKI_DIR/.recall-log"
   if [[ -f "$_recall_log" ]]; then
@@ -251,6 +252,19 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     cut -d'|' -f4 "$_recall_log" | tr ',' '\n' | sed 's/^ *//;s/ *$//' | \
       grep -v '^$' | sort | uniq -c | awk '{print $2"\t"$1}' > "$RECALL_FREQ_FILE"
   fi
+
+  # ---- Co-activation boost (ClawMem pattern) ----
+  # Source: clawmem.md — docs frequently surfaced together get boosted (up to 15%)
+  # Applied: 2026-06-11
+  # Two-pass approach: first collect all candidate slugs, then boost co-activated pairs.
+  # Pass 1: collect candidate slugs from EXACT + WORD_FILES
+  CANDIDATE_SLUGS_FILE=$(mktemp)
+  trap "rm -f $RECALL_FREQ_FILE $CANDIDATE_SLUGS_FILE" EXIT
+  echo -e "${EXACT}\n${WORD_FILES}" | sort -u | while read -r f; do
+    [[ -f "$f" ]] || continue
+    _s=$(basename "$f" .md)
+    echo "$_s"
+  done > "$CANDIDATE_SLUGS_FILE"
 
   # Merge exact + intersection results, deduplicate, rank by decay-weighted maturity score
   # Insight: AgentOps decay-ranked retrieval (δ=0.17/week) + maturity weights
@@ -358,9 +372,29 @@ if [[ "$MODE" == "hybrid" || "$MODE" == "keyword" ]]; then
     else
       RECALL_BOOST="0.00"
     fi
-    # Combined: term_match * 10 + tf_bonus + slug_bonus + recall_boost + decay * maturity
-    SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $TF_BONUS + $SLUG_BONUS + $RECALL_BOOST + $DECAY * $MATURITY }")
-    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE idf_term=$RAW_TERM_SCORE decay=$DECAY(eff_δ=$EFF_DECAY_RATE,type=$TYPE_MULT) maturity=$MATURITY tf=$RAW_TF recall=$RAW_RECALL status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
+    # Co-activation boost: if this doc frequently co-occurs with other candidate docs, boost it
+    # Max boost: +2.0 (prevents co-activation from dominating over content relevance)
+    COACT_BOOST="0.00"
+    if [[ -f "$COACT_INDEX" ]]; then
+      _coact_line=$(grep -m1 "^${SLUG_FOR_RECALL}	" "$COACT_INDEX" 2>/dev/null || true)
+      if [[ -n "$_coact_line" ]]; then
+        _partners=$(echo "$_coact_line" | cut -f2)
+        _coact_sum=0
+        while IFS=: read -r _partner _cnt; do
+          # Check if partner is also a candidate in this search
+          if grep -qx "$_partner" "$CANDIDATE_SLUGS_FILE" 2>/dev/null; then
+            _coact_sum=$((_coact_sum + _cnt))
+          fi
+        done <<< "$(echo "$_partners" | tr ',' '\n')"
+        if [[ $_coact_sum -gt 0 ]]; then
+          # log2(1 + sum) * 0.5, capped at 2.0
+          COACT_BOOST=$(awk "BEGIN { v = log(1 + $_coact_sum) / log(2) * 0.5; printf \"%.2f\", (v > 2.0 ? 2.0 : v) }")
+        fi
+      fi
+    fi
+    # Combined: term_match * 10 + tf_bonus + slug_bonus + recall_boost + coact_boost + decay * maturity
+    SCORE=$(awk "BEGIN { printf \"%.4f\", $TERM_SCORE * 10 + $TF_BONUS + $SLUG_BONUS + $RECALL_BOOST + $COACT_BOOST + $DECAY * $MATURITY }")
+    [[ $DEBUG -eq 1 ]] && echo "[DBG] score=$SCORE idf_term=$RAW_TERM_SCORE decay=$DECAY(eff_δ=$EFF_DECAY_RATE,type=$TYPE_MULT) maturity=$MATURITY tf=$RAW_TF recall=$RAW_RECALL coact=$COACT_BOOST status=$STATUS depth=$DEPTH age=${AGE_WEEKS}w $(basename "$f")" >&2
     echo "$SCORE $f"
   done | sort -rn | cut -d' ' -f2- | head -"$LIMIT")
   
