@@ -3225,3 +3225,13 @@ bash-regex-single-match, ui-spec-failure, supply-side-thinking, code-delegation
 # dreaming: Light Sleep 100+ candidates, 0.58 uniform, 0 promoted
 # PRs today: 30 created, 15 merged
 ```
+
+## 🔧 Structural Fix: beliefs-auto-retract.sh (2026-06-11)
+
+**Gap addressed**: Manual retraction of stale beliefs-candidates entries was ad-hoc and dependent on remembering during review. Previous pass (06-06) retracted 8 entries manually — effective but not sustainable.
+
+**Fix**: `tools/beliefs-auto-retract.sh` — automates the existing 30-day stale rule from beliefs-candidates.md Status Lifecycle section. Integrated into `review.yaml` memory_hygiene step 6.
+
+**Principles applied**: [[auto-close-stale-entries]] (LLM-Wiki Error Book pattern), [[structural-fix-over-behavioral-rule]]
+
+**Pipeline state**: 116 entries, 18 graduated, 8 retracted, ~90 active. 11 entries approaching 30d threshold (eligible ~June 18).
