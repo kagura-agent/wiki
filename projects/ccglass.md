@@ -5,7 +5,7 @@ updated: 2026-05-25
 status: active
 depth: deep-dive
 stars: 389
-last_verified: 2026-06-09
+last_verified: 2026-06-11
 ---
 
 # ccglass — See What Your Coding Agent Sends
@@ -168,4 +168,10 @@ Other changes:
 - Local time for session IDs, export, MCP timestamps (#59)
 - Landing page (ccglass.jianshuo.dev)
 
-**Trajectory**: Still solo-dev (jianshuo) but maintaining burst cadence. 389→441⭐ (+13% in 7 days). Evolving toward "universal coding agent observatory" — covering cooperative + uncooperative agents, all providers, with cost analytics layer. Next check: 06-16.
+**Trajectory**: Still solo-dev (jianshuo) but maintaining burst cadence. 389→441⭐ (+13% in 7 days). Evolving toward "universal coding agent observatory" — covering cooperative + uncooperative agents, all providers, with cost analytics layer.
+
+## 2026-06-11 Followup (468⭐)
+
+v1.1.0 + v1.1.1 (same day): **System prompt and tools display in live stream**, shown in request order. This makes the proxy a true observability tool — not just intercepting API calls but showing the full prompt assembly. Related tools section added (ccline, cclight — ecosystem expanding).
+
+441→468⭐ (+6% in 2 days). Growth continues steadily. Next check: 06-18.

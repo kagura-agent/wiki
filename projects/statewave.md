@@ -196,6 +196,14 @@ Statewave's trajectory: research → multi-tenant hardening → stable API relea
 
 **v1.0 stabilized API contract (06-09)**: The `/v1/*` API and v0.9 governance surfaces (HMAC-signed receipts, replay, sensitivity labels, residency pinning) are now declared stable. Both Python (`statewave` on PyPI) and TypeScript (`@statewavedev/sdk` on npm) SDKs at v1.0.0. Key v1.0 honest caveat: still not load-tested >10k subjects, single-Postgres, no RLS.
 
-**Our relevance**: The [[overlap-detection-pattern]] we borrowed from Statewave's conflict resolution continues to be useful. Their governance surfaces (sensitivity labels, receipt-driven replay) are ahead of anything we do for [[memory-privacy]]. The honest "what we don't do" template is worth adopting for our own projects.
+## 2026-06-11 Followup (205⭐, v1.0.0)
 
-**Revisit**: 06-25 (extended — v1.0 shipped, next interesting signal is post-v1 community adoption or v1.1 feature direction).
+**Issue #236 — Critical conflict detection limitation**: Jaccard-only supersession is dedup, not contradiction detection. Two memories about same entity with contradictory values but different wording (Jaccard < 0.6) both stay `active`. Even when supersession fires correctly, `assembled_context` echoes raw episodes without supersession awareness — stale facts still reach the model via `## Recent interactions`. Two independent bugs, both in core paths.
+
+**Insight for [[overlap-detection-pattern]]**: Our borrowed pattern has the same theoretical weakness. If we ever automate memory conflict resolution (vs. manual MEMORY.md curation), we'd need semantic contradiction detection, not just text similarity. The episode leak (defect B) is also relevant — our `memory/YYYY-MM-DD.md` raw logs can contain superseded facts that MEMORY.md has corrected, but if both are loaded into context, the stale version persists.
+
+**v0.7.2→v1.0.0 trajectory**: v0.8 added governance layer (receipts, sensitivity labels, policy bindings), v0.9 added tenant model (HMAC receipts, residency pinning, Jira/DB connectors, external contributors appearing), v1.0 locked API contract. 7 releases in 6 weeks — aggressive but honest about limitations. Still solo maintainer with occasional contributor PRs.
+
+**ccglass** also active: 441→468⭐, v1.1.0 adds system prompt + tools display in live stream (observability for what coding agents actually send). Steady growth, still solo-dev.
+
+**Revisit**: 06-25 (watching post-v1 community adoption and whether #236 gets fixed — fix approach will reveal architecture flexibility).
