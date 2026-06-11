@@ -1,10 +1,10 @@
 ---
 title: "Statewave"
 url: https://github.com/smaramwbc/statewave
-stars: 204
+stars: 205
 first_seen: 2026-05-11
 status: active
-last_verified: 2026-06-10
+last_verified: 2026-06-11
 depth: deep-read
 ---
 
@@ -192,8 +192,10 @@ Refreshingly transparent limitations carried from `why-statewave.md`:
 
 Statewave's trajectory: research → multi-tenant hardening → stable API release. The v1.0 is a developer contract milestone, not a feature milestone. The admin hardening sprint (06-05~06-09) was the cleanup before declaring stability.
 
-**Star decline (214→204) vs v1.0 release**: Unusual — hitting v1.0 usually triggers a star bump. Possible explanations: (1) release was quiet (no blog post / HN submission found), (2) memory runtime niche has low discoverability, (3) stars were inflated by bots earlier. Community health (54 external PRs/30d, 5 unique issue authors) remains the better signal.
+**Star decline (214→204→205) vs v1.0 release**: Stabilized around 205. The v1.0 release was more of a developer contract milestone than a viral event. Community health (external PRs, issue activity) remains the better signal than star count.
+
+**v1.0 stabilized API contract (06-09)**: The `/v1/*` API and v0.9 governance surfaces (HMAC-signed receipts, replay, sensitivity labels, residency pinning) are now declared stable. Both Python (`statewave` on PyPI) and TypeScript (`@statewavedev/sdk` on npm) SDKs at v1.0.0. Key v1.0 honest caveat: still not load-tested >10k subjects, single-Postgres, no RLS.
 
 **Our relevance**: The [[overlap-detection-pattern]] we borrowed from Statewave's conflict resolution continues to be useful. Their governance surfaces (sensitivity labels, receipt-driven replay) are ahead of anything we do for [[memory-privacy]]. The honest "what we don't do" template is worth adopting for our own projects.
 
-**Revisit**: 06-24 (extended — v1.0 shipped, next interesting signal is community adoption response or v1.1 feature direction).
+**Revisit**: 06-25 (extended — v1.0 shipped, next interesting signal is post-v1 community adoption or v1.1 feature direction).

@@ -2,11 +2,11 @@
 title: "Beads — Distributed Graph Issue Tracker for AI Agents"
 created: 2026-05-12
 source: https://github.com/gastownhall/beads
-stars: 23555
+stars: 24460
 language: Go
 license: Apache-2.0
 status: active
-last_verified: 2026-06-10
+last_verified: 2026-06-11
 ---
 
 # Beads (bd)
