@@ -1,7 +1,7 @@
 ---
 title: "TokenCode — Parallel-Native Agent Runtime in Go"
 repo: yzfly/TokenCode
-stars: 24
+stars: 26
 created: 2026-06-09
 last_push: 2026-06-11
 language: Go
@@ -88,12 +88,56 @@ Planned: IM channel system (Feishu/DingTalk → WeChat iLink → Web), per-membe
 4. **Zero-token heartbeat L0** is the same pattern we use (local checks before spending tokens)
 5. **Chinese developer ecosystem focus** — models.dev catalog with Chinese coding plans is a differentiator we don't have
 
+## CC-Parity Feature Burst (2026-06-11)
+
+Within 24h of initial release, author landed a massive batch of Claude Code-parity features:
+
+1. **Permission rule tables** (allow/ask/deny) — declarative governance layered on top of 4 permission modes. Syntax mirrors CC's `CLAUDE.md` rules
+2. **Hooks** (PreToolUse/PostToolUse/SessionStart/Stop) — command-based hooks, CC-compatible subset
+3. **`/compact` + `/context`** — conversation compression into structured summary (keeps last 2 turns), auto-triggers at 80k tokens. Context usage visualization
+4. **Checkpoint `/rewind`** — file-level checkpointing (shadow files + JSONL manifest, per-user-turn). Known blind spot: bash side-effects can't be captured
+5. **`-w` worktree mode** — isolated git worktree for each work session, separate from /race worktrees
+6. **WebUI v0** — go:embed zero-framework dashboard: usage charts, chat (SSE streaming), team management, model catalog browser. Bound to loopback only
+7. **Go SDK** (`pkg/tokencode`) — 10-line agent instantiation for embedding
+8. **IM channels** — Feishu (long-connection), DingTalk (Stream), WeChat iLink Bot (experimental). Each team member gets isolated workspace via pairing code
+9. **Headless + HTTP API** — `-p` for CI/scripting, `tokencode serve` for HTTP, SSE streaming
+10. **Usage accounting** — JSONL ledger, monthly/daily in/out/cache tracking, WebUI dashboard
+
+### Speed Signal
+
+~30 commits in <12h. This is either one person with superhuman output, or AI-assisted development at extreme velocity. Either way, the codebase grew from basic MVP to near-CC-feature-parity in 2 days.
+
+### Architectural Insight: "Five Lines" Strategy
+
+The author explicitly identified 5 feature lines to match CC, calling them "圈选" (selection):
+- Permission governance
+- Hooks
+- Context management (/compact, /context)
+- File safety (/rewind checkpoints)
+- Worktree isolation
+
+All 5 landed v1 on 2026-06-11. This is a deliberate "match the incumbent, then differentiate" strategy — build CC parity first, then /race + team engine as the wedge.
+
+## ROADMAP Analysis: Cooperative Parallelism (Phase B)
+
+The roadmap reveals the real long-term ambition — **cooperative multi-agent** (Phase B), which is architecturally harder than /race:
+
+- **Workspace Authority** pattern: single-writer actor serializes all file mutations. Agents send patches, authority does 3-way merge
+- No direct filesystem access for agents — only read snapshots + submit patches
+- Conflict = signal, not failure → escalate to "reconciliation agent"
+- Key insight from author: "a multi-agent shared workspace runtime, stripped to its core, is a version control system — except merge conflicts are resolved by intelligence, not thrown at humans"
+
+This is fundamentally different from [[paragents]]' preflight conflict detection. TokenCode's Phase B is essentially building **git-as-a-coordination-primitive** with AI merge resolution.
+
 ## Assessment
 
-- **Stars**: 24 (very early, 2 days old)
+- **Stars**: 26 (3 days old, growing)
 - **Code quality**: High — clean Go, zero-dep race package, comprehensive tests, honest devlog
 - **Author quality**: Serious builder (detailed devlog, architectural thinking, honest tradeoff documentation)
-- **Watch?**: Yes — revisit in 2 weeks (06-25). The /race concept and team positioning are both novel enough to track
+- **Velocity**: Extraordinary — near-CC-parity in 2 days
+- **Risk**: CC-BY-NC-4.0 license limits commercial use. Name collision risk ("token" in AI/crypto space)
+- **Watch?**: Yes — revisit 06-25. The /race concept, team positioning, and Phase B cooperative architecture are all novel
 
 ---
-*Deep read: 2026-06-11 08:50 CST*
+*Initial scout: 2026-06-11 08:50 CST*
+*Updated: 2026-06-11 10:05 CST — CC-parity feature burst, ROADMAP Phase B analysis, star count 24→26*
