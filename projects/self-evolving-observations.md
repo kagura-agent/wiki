@@ -3248,3 +3248,71 @@ bash-regex-single-match, ui-spec-failure, supply-side-thinking, code-delegation
 **Principles applied**: [[structural-fix-over-behavioral-rule]], [[flowforge-workflow-targeting]] (graduated pattern)
 
 **Limitation**: Only enforces within FlowForge workflow runs. Manual reviews that don't use FlowForge at all still bypass this. But AGENTS.md already mandates FlowForge for code reviews, so this closes the gap for compliant runs.
+
+## 🔬 自进化观察日报 2026-06-11 (22:30)
+
+### 管线活跃度
+- **beliefs-candidates**: 7 条新增 today (total 123 entries, 109 count=1, 7 graduated count≥2)
+  - Sources: nudge (3), workloop (2), study (2)
+  - New patterns: topic-bleed, use-hn-algolia-api, missing-automation, product-priority, reviewer-claim-verification, claude-code-bridge-integration, duplicate-issue-selection
+- **DNA 变更**: 3 commits to beliefs-candidates.md, 0 commits to SOUL.md/AGENTS.md
+  - All gradient writes, no structural DNA changes
+  - All self-initiated (workloop/study/nudge sources), 0 Luna-initiated
+- **nudge 触发**: 0 次 gateway 日志记录，但 3 gradients sourced from "nudge" → nudge 在触发但日志不可见
+  - topic-bleed, product-priority, claude-code-bridge-integration all from nudge
+  - 质量: 中-高（product-priority 和 claude-code-bridge 是实用教训，topic-bleed 较通用）
+- **dreaming**: Light Sleep 运行 ✓，REM 空转（"No strong patterns surfaced"）
+  - Light Sleep: 大量 candidates staged，全部 confidence 0.58（uniform，无差异化）
+  - REM: 0 reflections, 0 lasting truths
+  - DREAMS.md trimmed: kagura 16→14, ruantang 17→14
+  - **Issue #6 仍 open (32 天)**
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. reviewer-claim-verification: 发现 fresh-context reviewer 给错误 MEDIUM finding → 写 gradient → 行为改变（先验证 reviewer claim 再行动）
+  2. duplicate-issue-selection: workloop 重复选同一 issue → 写 gradient → 行为改变（find_work 前查已有 PR）
+- **半闭环**: 2 个
+  1. beliefs-auto-retract.sh: 结构性修复已部署（好），但 30d stale rule 的 11 个候选 entry 要到 6/18 才能验证效果
+  2. reflection-gate.sh: 结构性修复已部署，但只在 FlowForge 内生效
+- **断裂处**: 
+  - dreaming 空转连续多日，Issue #6 open 32 天无代码修复 — 观察→记录→无行动
+  - nudge 日志不可见性已被多次提及但未修复
+
+### Skill 提取缺口
+- Claude Code bridge 集成经验（4 条教训）写成了 gradient 但未提取为 skill/tip — 这是高价值可复用知识
+
+### 外部反馈利用
+- reviewer-claim-verification gradient 来自 workloop PR review 经验 ✓
+- NemoClaw #4545 maintainer 正面反馈未转化为任何 gradient（纯信息性，合理不转化）
+
+### PR 活跃度（今日）
+- **Created today**: 21 PRs (cove ×11, lottie-studio ×7, kagura-mail ×2, opencode ×1)
+- **Merged today**: 17 PRs
+- **Open**: 3 PRs (cove #326, #327, opencode #31860)
+- **External repos**: opencode #31860 (new today)
+- **产出信号**: 高活跃度，以 cove 和 lottie-studio 为主
+
+### 今日发现
+1. **🟢 Nudge 实际在工作**: 虽然 gateway 日志搜不到 "nudge"，但 3 个 gradient 明确标注 source=nudge。可观测性问题 ≠ 不运行
+2. **🟢 Gradient 来源健康分布**: nudge(3) + workloop(2) + study(2) = 三路都在贡献，无单一依赖
+3. **🟢 闭环质量提升**: reviewer-claim-verification 和 duplicate-issue-selection 都是"犯错→记录→明确行为改变"的干净闭环
+4. **🔴 Dreaming 持续空转**: Light Sleep confidence 0.58 uniform + REM "no patterns" = 第 N 天同一结论。Issue #6 已开 32 天。这是管线最大瓶颈，也是观察→不行动的典型案例
+5. **🟡 beliefs-candidates 膨胀趋势持续**: 123 entries, 88.6% count=1 (昨日 91%)。auto-retract.sh 部署但要等 6/18 才有效果
+6. **🟡 Nudge 日志可见性**: 连续多天观察报告提及此问题，仍未修复。属于"建议≠行动"模式
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30)
+3489547 gradient: duplicate-issue-selection
+f5ddceb gradient: reviewer-claim-verification
+b09e3b5 study: 2026-06-11 scout — sandboxd, xcode27-skills, memory + gradient
+
+# beliefs-candidates: 7 new gradients today (all count=1)
+topic-bleed (nudge), use-hn-algolia-api (study), missing-automation (study),
+product-priority (nudge), reviewer-claim-verification (workloop),
+claude-code-bridge-integration (nudge), duplicate-issue-selection (workloop)
+
+# dreaming: Light Sleep 0.58 uniform, REM empty
+# nudge: 0 in gateway logs, 3 gradient sources
+# PRs: 21 created, 17 merged, 3 open
+```
