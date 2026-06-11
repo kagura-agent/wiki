@@ -397,3 +397,13 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Key learning**: Model family exclusions become stale as new model versions release. When a model family adds API support for a feature (like reasoning_effort), the blanket exclusion needs carve-outs for newer models.
 - **Approach**: Manual edit (3-line change, too small for Claude Code). Deep code trace to understand the variants pipeline.
 - **Note**: PR template compliance bot auto-fires within minutes; must use template from start. Also at 5/5 PR limit now.
+
+### PR #31860 — fix(cli): check for browser opener before ENOENT in containers (2026-06-11)
+- **Issue**: #31815 — `opencode web` prints noisy ENOENT stack trace in containers without xdg-open
+- **Root cause**: Bun prints spawn error to stderr synchronously before JS `.catch()` can suppress it. The `open` npm package spawns `xdg-open` which doesn't exist in containers.
+- **Fix**: Added `canOpenBrowser()` pre-check — verifies `xdg-open`, `wslview` (WSL), or `gio` exists in PATH before calling `open()`. Falls back to printing URL message.
+- **Status**: PENDING (4/4 CI checks passed ✅, no reviews yet)
+- **Diff**: 1 file, 27 insertions, 2 deletions
+- **Fresh-context review**: First pass flagged WSL `wslview` gap (valid), fixed. Second pass flagged `gnome-open`/`kde-open` (invalid — `open` v11 doesn't use those).
+- **Approach**: Manual edit (simple helper function). Typecheck verified locally.
+- **Note**: Issue was assigned to Hona but unworked. Claimed in comment first per CONTRIBUTING.md.
