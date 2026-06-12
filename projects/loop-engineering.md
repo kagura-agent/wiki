@@ -88,3 +88,7 @@ The repo itself is "loop-engineered" — it uses its own `loop-audit` tool in CI
 - Part of the broader "harness engineering" movement ([[harness-engineering-openai]])
 
 Links: [[harness-engineering-openai]], [[self-evolving-agent-landscape]], [[addy-agent-skills]], [[agents-md-context-patterns]], [[vibecode-pro-max-kit]]
+
+## Applied (2026-06-12)
+
+- **"Reduce manual toil in repetitive loops"** → Created `study/tracking-update.sh` to automate targets.md updates during followup rounds. Previously manual markdown editing; now one-command per project with fuzzy matching, star formatting, stale detection. Integrated into study.yaml followup step 4.
