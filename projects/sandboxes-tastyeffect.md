@@ -1,15 +1,15 @@
 ---
 title: "sandboxes (tastyeffectco)"
 created: 2026-06-04
-updated: 2026-06-04
+updated: 2026-06-12
 tags: [agent-infrastructure, sandbox, self-hosted, app-builder]
-last_verified: 2026-06-05
+last_verified: 2026-06-12
 ---
 
 # sandboxes — Self-Hosted Dev Sandboxes for AI App Builders
 
-**Repo**: tastyeffectco/sandboxes | **Stars**: 395 (2 days old, ~200⭐/day) | **License**: MIT | **Lang**: Go
-**Created**: 2026-06-03 | **Deep-read**: 2026-06-05
+**Repo**: tastyeffectco/sandboxes | **Stars**: 572 (was 395 on 06-05, +45%) | **License**: MIT | **Lang**: Go
+**Created**: 2026-06-03 | **Deep-read**: 2026-06-05 | **Last followup**: 2026-06-12
 
 Open-source engine for the "prompt → app → preview URL" pattern (Lovable/Bolt/v0 clones). One Go binary + Docker + Traefik + SQLite, no Kubernetes.
 
@@ -86,6 +86,12 @@ Traefik-based auth for private sandboxes. Cookie JWT validation in the hot path,
 - No multi-host / clustering
 - No billing/metering integration
 - These are expected for a 2-day-old project
+
+### Updates (06-12)
+- **Per-sandbox idle_policy** (PR#14): sandboxes can now be set to `sleep` (default, idle reaper stops them) or `always_on` (exempt from idle reaper). Adds `always_on` pressure contract — these sandboxes still get killed under memory pressure but are restarted immediately after.
+- **CI added** (PR#15): `gofmt` + build + test in GitHub Actions. Project maturing past zero-CI phase.
+- **Growth**: 395→572⭐ in 7 days (+45%). Sustained traction post-launch, not just day-1 spike.
+- **Community**: External PRs arriving (ruslan-rm for idle_policy). Healthy contributor diversity signal.
 
 ### Relevance Assessment
 - **Direct use**: Low — we don't build app-builder products
