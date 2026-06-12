@@ -92,3 +92,5 @@ Links: [[harness-engineering-openai]], [[self-evolving-agent-landscape]], [[addy
 ## Applied (2026-06-12)
 
 - **"Reduce manual toil in repetitive loops"** → Created `study/tracking-update.sh` to automate targets.md updates during followup rounds. Previously manual markdown editing; now one-command per project with fuzzy matching, star formatting, stale detection. Integrated into study.yaml followup step 4.
+
+- **Cost budget per loop** → Created `tools/flowforge-stats.sh` — queries FlowForge SQLite DB for per-workflow and per-node time analytics. Reveals: study avg 11.5m (1677 runs, 320.6h total), workloop avg 66m (plan_review is 77.8m bottleneck), evolve avg 18h/run. First tool giving visibility into workflow time costs.
