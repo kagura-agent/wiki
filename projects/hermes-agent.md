@@ -1471,3 +1471,24 @@ This makes the review fork more disciplined — it can't wander off into web bro
 **Patterns**:
 - Verify bugs exist in HEAD before starting — saved wasting time on #30350
 - Simple quoting fix > complex validation for .env special chars
+
+## Workloop 2026-06-12 — PR #44782 (session resume compression chain) — CLOSED duplicate
+
+**Issue**: #44640 — Desktop TUI session resume fails on compressed sessions (missing resolve_resume_session_id call)
+**Result**: CLOSED — duplicate of #44652 (by LeonSGP43, submitted ~4h earlier at 04:22 UTC)
+**Fix**: Added `db.resolve_resume_session_id()` call in `tui_gateway/server.py` session.resume handler + test mock updates
+**CI**: All checks pass after adding `resolve_resume_session_id` to 6 test mock `_DB`/`FakeDB` classes
+
+### What went wrong
+- **Duplicate detection failure**: Did not check for existing PRs on #44640 before starting implementation. `gh pr list --search "44640"` or checking issue cross-references would have found #44652.
+- This is the **second time** duplicate detection was missed (first: #30246 duplicate of #26478). Pattern is recurring.
+- The scout/plan_review phase should have caught this — time invested: ~2h for a PR that got closed
+
+### What went right
+- CI mock fix was clean and surgical (18 lines, only test files)
+- Acknowledged duplicate promptly and closed without argument
+- build-amd64 flaky test (gateway autostart docker test) passed on retry — not related to our changes
+
+### Patterns
+- **Pre-existing test order dependency**: `test_session_compress_*` tests fail when run after resume tests but pass alone. This is a pre-existing issue in the repo (server module-level state leaks)
+- `build-amd64` docker integration test `test_live_gateway_autostarts_after_real_restart_without_manual_state_stamp` is flaky (timing-dependent gateway_state check)
