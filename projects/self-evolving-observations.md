@@ -3316,3 +3316,69 @@ claude-code-bridge-integration (nudge), duplicate-issue-selection (workloop)
 # nudge: 0 in gateway logs, 3 gradient sources
 # PRs: 21 created, 17 merged, 3 open
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-06-12
+
+### 管线活跃度
+- **beliefs-candidates**: 8 条新增 gradient（全部 count=1），0 条待升级
+  - stale-instance-overhead (workloop), scout-interval-awareness (study), tool-friction (study), stale-instance-context-loss (workloop), volume-persuasion-attack (study), ci-deploy-race (nudge), duplicate-pr-prevention (workloop), duplicate-pr-differentiation (workloop)
+  - 总计: 463 行，18 graduated, 8 retracted
+- **DNA 变更**: 仅 beliefs-candidates.md（4 commits），无 SOUL.md/AGENTS.md 结构性变更。全部主动（self-initiated），0 Luna-initiated
+- **nudge 触发**: gateway 日志 grep "nudge" = 0 条（可观测性问题持续），但 1 gradient 明确标注 source=nudge (ci-deploy-race)。nudge 在运行但日志不可搜
+- **dreaming**: Light Sleep 运行 ✓，99 个 candidates staged，**全部 confidence 0.58（uniform，无差异化）**。REM: "No strong patterns surfaced" — 空转。Issue #6 open 33 天
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. **stale-instance-overhead → context-loss**: 08:04 发现 stale flowforge 问题 → gradient → 11:08 进化为更具体的 context-loss 修复方案（写 current-work.md）。同日两阶段深化
+  2. **duplicate-pr-prevention → differentiation**: 17:20 发现重复 PR 问题 → gradient → 20:18 进化为差异化策略（additive value when resubmitting）。从"别提重复 PR"到"怎么让重复 PR 有价值"
+- **断裂处**:
+  - **Dreaming 空转 Issue #6 = 33 天无代码修复** — 每天观察报告都写"dreaming 空转"，但没人去改 dreaming 代码。这已不是"观察期"，这是观察→记录→不行动的循环。confidence 0.58 uniform 是上游 bug（DAILY_INGESTION_SCORE hardcoded），需要 OpenClaw 侧修复或自己在 promote 阶段加质量过滤
+  - **memory_search 今天恢复** — 06-12 19:03 标记为 recovered。但此前连续 5+ 天完全不可用期间未提过 issue（只在 memory eval 里写"需要 Luna 介入"）
+
+### Skill 提取缺口
+- **flowforge-stats.sh**: 今天新建的 workflow 成本分析工具，源自 loop-engineering 学习 + missing-automation gradient。工具本身是 skill apply 的产物，提取闭环完整 ✅
+- **tracking-update.sh**: 同上，study followup 自动化。闭环完整 ✅
+- **duplicate PR 处理经验**: 两条 gradient 记录了检测和差异化策略，但未提取为 workloop preflight check — 尚在 count=1 阶段，合理延后
+
+### 外部反馈利用
+- hermes-agent PR #44890 被 superseded（LeonSGP43 先提了 #44652）→ 转化为 2 条 gradient (duplicate-pr-prevention, duplicate-pr-differentiation) ✓
+- stagehand #2026 pirate approved 但 v4 placeholder — 信息性，无 gradient 可提取 ✓
+- NemoClaw #3836 maintainer 持续不回应 — 无法转化，纯阻塞
+
+### PR 活跃度
+- **workspace commits today**: 9（gradient ×4, study ×3, contacts ×1, memory ×1）
+- **External PRs**: 5 open，全部 ball-at-maintainer
+  - opencode #31860, openclaw #91885, harness-sdk #2706, NemoClaw #5108, stagehand #2026
+- **Own-repo PRs**: lottie-studio #90 created today (context-aware suggestion chips)
+- **Closed**: hermes-agent #44890 (superseded)
+
+### 今日发现
+1. **🟢 Gradient 双阶段深化模式**: 同一天内两次出现"first gradient → deeper gradient"模式（stale-instance 和 duplicate-pr）。说明 gradient pipeline 不只是记录，还有同日内的认知深化能力
+2. **🟢 Study → Tool 闭环高效**: flowforge-stats.sh 和 tracking-update.sh 都是从学习到工具的完整提取，当天完成。apply 模式成熟
+3. **🟢 memory_search 恢复**: 5+ 天的 semantic search 断裂终于修复。对 memory eval 和知识检索是重大改善
+4. **🔴 Dreaming 空转 Day 33**: Issue #6 的核心问题（uniform confidence 0.58, REM empty）完全未变。99 个 dream candidates 全是巡检日志片段，不是认知洞察。这是管线最大的结构性缺陷
+5. **🟡 Gradient 来源分布变化**: workloop(4) > study(3) > nudge(1)。workloop 比重上升（昨天 workloop=2），说明今天打工产出了更多教训。nudge 从昨天的 3 降到 1
+6. **🟡 beliefs-candidates 仍无毕业**: 今天 8 条新增全部 count=1。上次毕业是 05-27。管线的"输入端"活跃但"输出端"（graduation）已停滞 16 天
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30)
+39693cf gradient: duplicate-pr-differentiation
+aa7bd6b gradient: duplicate-pr-prevention
+bcf45aa gradient: stale-instance-context-loss
+23d2663 gradient: stale-instance-overhead
+
+# beliefs-candidates: 8 new gradients today (all count=1)
+stale-instance-overhead (workloop), scout-interval-awareness (study),
+tool-friction (study), stale-instance-context-loss (workloop),
+volume-persuasion-attack (study), ci-deploy-race (nudge),
+duplicate-pr-prevention (workloop), duplicate-pr-differentiation (workloop)
+
+# beliefs-candidates totals: 463 lines, 18 graduated, 8 retracted
+# dreaming: Light Sleep 99 candidates @ 0.58 uniform, REM empty
+# nudge: 0 in gateway logs, 1 gradient sourced from nudge
+# memory_search: recovered 19:03 (after 5+ days broken)
+# workspace commits: 9
+```
