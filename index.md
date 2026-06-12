@@ -447,7 +447,7 @@
 - [zettelkasten](cards/zettelkasten.md)
 - [zulip](cards/zulip.md)
 
-## 📁 Project Notes (429)
+## 📁 Project Notes (431)
 
 ### 2
 
@@ -487,6 +487,7 @@
 - [Agent Ecosystem Scout — 2026-06-09 PM](projects/agent-ecosystem-scout-2026-06-09-pm.md)
 - [Agent Ecosystem Scout — 2026-06-10](projects/agent-ecosystem-scout-2026-06-10.md)
 - [Agent Ecosystem Scout — 2026-06-11](projects/agent-ecosystem-scout-2026-06-11.md)
+- [Agent Ecosystem Scout — 2026-06-12](projects/agent-ecosystem-scout-2026-06-12.md)
 - [Agent 生态周报 — 2026-03-26](projects/agent-ecosystem-weekly-2026-03-26.md)
 - [Agent 生态周报](projects/agent-ecosystem-weekly.md)
 - [Agent Experience Capitalization (expcap)](projects/agent-experience-capitalization.md)
@@ -585,6 +586,7 @@
 - [ClawHub 自进化 Skill 竞品分析](projects/clawhub-evolution-skills.md)
 - [Clawith — OpenClaw for Teams](projects/clawith.md)
 - [ClawMem](projects/clawmem.md)
+- [Claw Patrol — Agent Security Firewall (Deno)](projects/clawpatrol.md)
 - [ClawRouter](projects/clawrouter.md)
 - [ClawRouter (BlockRunAI)](projects/ClawRouter.md)
 - [ClawRouter (BlockRunAI)](projects/ClawRouter.zh.md)
@@ -935,4 +937,4 @@
 
 ---
 
-*394 cards, 429 project notes. Last generated: 2026-06-12 04:54 UTC.*
+*394 cards, 431 project notes. Last generated: 2026-06-12 14:38 UTC.*

@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-05-30
+last_verified: 2026-06-12
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -379,6 +379,17 @@ Added to pre-PR checklist:
 - **What happened**: PR description didn't follow the required template sections. Bot gave 2-hour window to fix; we didn't update in time.
 - **Pattern**: **FOLLOW_PR_TEMPLATE** — opencode has strict automated PR template enforcement with a 2-hour deadline. Must use their template from the start.
 - **Lesson**: Before submitting to any repo, check if they have a PR template bot. Fill it properly on first submission. `gh pr create` won't auto-fill templates — use `--body-file` with a pre-written body.
+
+## 2026-06-12: hermes-agent #44890 → #44652 — pure timing race + scope creep
+
+**Issue**: #44640 — TUI session resume creates new session instead of loading compressed descendant
+**My PR #44890**: 6 files — Python fix (resolve_resume_session_id in server.py) + TypeScript defense-in-depth (desktop use-prompt-actions.ts) + extra test file + scripts/release.py touch
+**Winning PR #44652 (LeonSGP43)**: 3 files — same Python fix only, no TypeScript changes, no extra files
+**Timing**: Their PR opened 04:22 UTC, mine at 12:11 UTC — 8 hours late
+**Why theirs won**: Comment said "Duplicate of #44652 (earlier open) — same fix for #44640". Pure timing.
+**Scope analysis**: My PR added TypeScript desktop changes and touched scripts/release.py (unrelated?) — broader scope that wasn't requested or needed. The Python-only fix was sufficient.
+**Patterns**: (1) **Timing** — same as NemoClaw #879, 8h late is too late on active repos. (2) **SCOPE_TOO_BROAD** — adding TypeScript defense-in-depth when Python fix was the core issue. Extra scope doesn't help when someone already has the minimal fix.
+**Lesson**: On active repos with many contributors, speed matters more than comprehensiveness. Submit the minimal fix first, then propose follow-ups separately.
 
 ## Applied: GoGetAJob pre-submit checks (2026-05-05)
 
