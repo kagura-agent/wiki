@@ -1492,3 +1492,28 @@ This makes the review fork more disciplined — it can't wander off into web bro
 ### Patterns
 - **Pre-existing test order dependency**: `test_session_compress_*` tests fail when run after resume tests but pass alone. This is a pre-existing issue in the repo (server module-level state leaks)
 - `build-amd64` docker integration test `test_live_gateway_autostarts_after_real_restart_without_manual_state_stamp` is flaky (timing-dependent gateway_state check)
+
+## Workloop 2026-06-12 — PR #44890 (session resume + Desktop defense-in-depth)
+
+**Issue**: #44640 — Desktop TUI session resume fails on compressed sessions
+**Result**: PENDING review — CI passing (20/24 checks pass, remaining 4 in progress: Docker builds, macOS nix, test shard 6)
+**Diff**: +130/-8 across 6 files
+**Competing PR**: #44652 (LeonSGP43) — Python-only fix, no Desktop TypeScript guard
+
+### Changes
+1. **Python root fix** (`tui_gateway/server.py`): `resolve_resume_session_id()` call before `reopen_session` + `found` row refresh
+2. **Desktop defense-in-depth** (`use-prompt-actions.ts`): Guard against silent fallthrough to `createBackendSessionForSend` when resume intended
+3. **Tests**: New regression test file (AST-based, 3 tests) + mock updates in 2 existing files
+4. **AUTHOR_MAP**: Added kagura-agent entry in `scripts/release.py`
+
+### Observations
+- **Learned from #44782 (closed duplicate)**: This time checked for competing PRs before submitting. Found #44652 and noted it in PR description. Our PR adds the Desktop TypeScript fix as additive value.
+- **AST-based tests**: Fresh-context reviewer flagged these as fragile. Valid concern — refactoring the handler would break tests. But behavioral tests require heavy mocking of entire TUI gateway dispatch.
+- **`copy.resumeFailed` string**: Desktop code references an undefined i18n key, gracefully falling back via `??`. Adding the key would touch multiple locale files, expanding scope beyond surgical.
+- **CI setup**: `pytest-timeout` is required but not in venv by default. Install with `uv pip install --python venv/bin/python pytest-timeout`.
+- **Test command**: `venv/bin/python -m pytest tests/gateway/test_tui_resume_compression_chain.py tests/test_tui_gateway_server.py -v`
+
+### Maintainer patterns
+- Project uses `pyproject.toml` for pytest config with `--timeout=30 --timeout-method=thread`
+- AUTHOR_MAP in `scripts/release.py` required for new contributors
+- Desktop TypeScript changes validated by `typecheck (apps/desktop)` CI check
