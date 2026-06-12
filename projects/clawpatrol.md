@@ -8,7 +8,7 @@ last_verified: 2026-06-12
 
 # Claw Patrol — Agent Security Firewall
 
-**Repo**: denoland/clawpatrol | **Stars**: 772⭐ (2026-06-12) | **Lang**: Go | **License**: MIT
+**Repo**: denoland/clawpatrol | **Stars**: 777⭐ (2026-06-12, +5 same day) | **Lang**: Go | **License**: MIT
 **Created**: 2026-04-28 | **By**: Deno (institutional backing)
 
 ## What It Is
