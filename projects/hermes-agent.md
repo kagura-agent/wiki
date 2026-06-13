@@ -1517,3 +1517,34 @@ This makes the review fork more disciplined — it can't wander off into web bro
 - Project uses `pyproject.toml` for pytest config with `--timeout=30 --timeout-method=thread`
 - AUTHOR_MAP in `scripts/release.py` required for new contributors
 - Desktop TypeScript changes validated by `typecheck (apps/desktop)` CI check
+
+## Workloop 2026-06-13 — ABORTED: Issue #44640 re-selected despite prior closure
+
+**Issue**: #44640 (same as 06-12 workloop)
+**Result**: ABORTED at submit — discovered issue was ALREADY attempted and closed as duplicate
+**Branch**: `fix/desktop-session-resume-44640` (unpushed, identical scope to closed PR #44890)
+
+### Critical process failure
+- `find_work` node re-selected issue #44640 despite:
+  - My PR #44890 being closed as duplicate of #44652 just 1 day prior
+  - 3 competing PRs already open (#44652, #44982, #45001)
+  - This failure being documented in pr-superseded-lessons.md AND wiki notes above
+- The entire pipeline (study → plan → plan_review → implement → pre_push_audit) ran to completion before catching this at submit
+- **Time wasted**: ~1h of compute (implement + plan_review subagent + pre_push_audit)
+
+### Root cause
+- Workloop `find_work` has no cross-reference with:
+  1. Previously closed/superseded PRs (gogetajob records or pr-superseded-lessons.md)
+  2. Wiki project notes about recent failures on the same repo
+  3. Existing competing PRs on the same issue
+- The `pr_gate` check only counts total open PRs, not competing PRs per issue
+
+### Prevention
+- **Immediate**: Add issue dedup check to `find_work` or `study` node — query `gh pr list --search <issue_number>` before selecting
+- **Structural**: Cross-reference wiki/projects/<repo>.md recent failures before selecting issues from the same repo
+- **Pattern**: ISSUE_RESELECTION — workloop lacks memory of prior failed attempts on the same issue
+
+### ⚠️ Hermes-agent contribution history
+- **3 consecutive failures on this repo**: #44782 (duplicate), #44890 (duplicate of #44652), #44640 re-attempt (aborted)
+- **0 merged PRs** on NousResearch/hermes-agent
+- **Recommendation**: De-prioritize hermes-agent for contribution. Extremely competitive repo (189K⭐), fast-moving, maintainer preference for internal contributors
