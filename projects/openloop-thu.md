@@ -79,3 +79,7 @@ They're complementary, not competing. FlowForge orchestrates *which* task; OpenL
 ## Ecosystem Position
 
 Part of the emerging "loop engineering" tooling layer: [[loop-engineering]] (patterns) → OpenLoop (runtime) → [[harness-engineering-openai]] (platform-native loops). Sits in the "agent-agnostic orchestration" niche.
+
+## Applied (2026-06-13)
+
+- **Baseline regression gates** → Created `tools/regression-gate.sh` with 7 file→benchmark mappings. Auto-detects changed files from git diff, runs relevant benchmarks, gates on failure. Integrated into study.yaml apply node. Pattern: "when you change a tool, verify its benchmark still passes before committing." Our version adapts to flat-file workspace context (no openloop.json, bash-native, relies on existing benchmarks). The anti-self-certification principle maps to our existing "验证 subagent 外部操作声明" rule — same philosophy, now structurally enforced for tool modifications too.
