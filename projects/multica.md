@@ -516,3 +516,10 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Testing**: `cd packages/views && npx vitest run editor/extensions/autolink-email-repair.test.ts` — must run from packages/views (needs jsdom env from vitest.config.ts). Running from repo root fails with "document is not defined"
 - **Pattern**: When using transitive deps from TipTap, either re-export from the extension or use eslint-disable. Adding to package.json requires lockfile update which may OOM on large monorepos
 - **Note**: First frontend-only (TypeScript/ProseMirror) PR to multica. Previous PRs were all Go backend or mixed. This proves viability of frontend contributions — faster turnaround, no Go test environment needed
+
+### PR #4095 Review Handling (2026-06-13)
+- **Bohan-J**: CHANGES_REQUESTED — fix dependency boundary, don't use transitive `linkifyjs`
+- **feifeigood**: COMMENTED — suggested using `detectLinks` from `@multica/ui/markdown/linkify` (zero new deps, exact diff provided)
+- **Fix pushed**: Replaced `import { find } from "linkifyjs"` → `import { detectLinks } from "@multica/ui/markdown/linkify"`. API mapping: `match.value` → `match.text`, `match.href` → `match.url`
+- **Lesson**: Before using transitive deps, check if the monorepo has internal wrappers. `@multica/ui/markdown/linkify` wraps `linkify-it` and provides `detectLinks` with email support
+- **New reviewer**: feifeigood — provides exact code diffs, constructive, prefers zero-new-dep solutions

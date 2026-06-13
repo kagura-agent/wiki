@@ -766,3 +766,34 @@ Major jump spanning 5 releases (4.20-4.24). Key changes for our setup:
 - 30+ security fixes across channels, plugins, config, pairing, approvals
 - SSRF guards tightened across multiple channel plugins
 - Config mutation guard allowlists agent-tunable paths
+
+## PR #92665 — LiteLLM cacheRetention fix (2026-06-13)
+
+**Issue**: #37966 — cacheRetention ignored for LiteLLM-proxied Anthropic models
+**Status**: Submitted, CI all green except `Real behavior proof` (needs maintainer override — no LiteLLM test env)
+**Prior closed PR**: #38221 by Sid-Qin (only fixed retention resolution, not payload injection)
+
+### Architecture insight: Anthropic cache dual-path
+Two independent gates control Anthropic prompt caching:
+1. **Retention resolution**: `resolveAnthropicCacheRetentionFamily()` → determines if cacheRetention config is honored
+2. **Payload injection**: `detectCompat().cacheControlFormat` → determines if `cache_control` markers are injected into openai-completions payloads
+
+Both must agree for caching to work. OpenRouter already has both; LiteLLM was missing both.
+
+A third function `isAnthropicFamilyCacheTtlEligible()` gates cache-TTL *session markers* — a separate tracking feature, not required for core caching.
+
+### CI notes
+- `Real behavior proof` check blocks external PRs without real-environment evidence
+- Maintainer can apply `proof: override` label to waive
+- All other 50+ checks pass in ~3 minutes
+
+### Maintainer preferences (from review of codebase)
+- Uses `normalizeLowercaseStringOrEmpty` / `normalizeOptionalLowercaseString` for string comparison
+- Provider detection follows `provider === "xxx"` pattern, sometimes with baseUrl fallback
+- Existing test patterns: vitest, describe/it, same-directory `.test.ts` files
+- PR convention: `fix(scope): description` for bug fixes
+
+### Testing on this repo
+- vitest OOM-kills on this machine with default settings
+- Works with `NODE_OPTIONS="--max-old-space-size=3072" npx vitest run --isolate=false <file>`
+- CI runs ~50 checks, most complete in 1-3 minutes
