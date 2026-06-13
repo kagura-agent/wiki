@@ -503,3 +503,16 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - multica was **missing from gogetajob watchlist** despite open PR #3041. Fixed: `gogetajob scan multica-ai/multica`
 - PR #3041 (Windows tilde-backslash paths) has no review yet, no human comments
 - 50% merge rate, 34288 stars
+
+## 2026-06-13 PR #4095: fix(editor): repair split email links caused by autolink + inclusive:false
+- **Issue**: #4091 — Autolink splits email addresses mid-input when TLD is a valid short domain (.co, .io)
+- **PR**: #4095
+- **Status**: PENDING (backend ✅, frontend ✅, installer ✅ — all CI green)
+- **Root cause**: `inclusive: false` on Link extension means characters typed after autolink fires land outside the mark. Typing `contact@example.co` triggers autolink (`.co` is valid TLD), then typing `m` gives `[contact@example.co](mailto:…)m` instead of `.com`
+- **Fix**: New `AutolinkEmailRepairExtension` — ProseMirror `appendTransaction` plugin that detects mailto link marks followed by plain text, validates if the combined string forms a valid email via `linkifyjs.find()`, and extends the mark. Only affects mailto links, uses greedy matching for longest valid TLD (handles `.co.uk`)
+- **Files**: 3 new/modified — `autolink-email-repair.ts` (102 LOC), `autolink-email-repair.test.ts` (142 LOC, 7 tests), `index.ts` (+2 lines import/register)
+- **Approach**: Claude Code for initial implementation, manual fix for CI lint issue
+- **CI lesson**: `linkifyjs` is a transitive dependency via `@tiptap/extension-link` but not in `packages/views/package.json`. ESLint `import-x/no-extraneous-dependencies` rule catches this. Fix: `eslint-disable-next-line` comment (adding as direct dep requires lockfile update, pnpm install OOMs on this machine with 1445 packages)
+- **Testing**: `cd packages/views && npx vitest run editor/extensions/autolink-email-repair.test.ts` — must run from packages/views (needs jsdom env from vitest.config.ts). Running from repo root fails with "document is not defined"
+- **Pattern**: When using transitive deps from TipTap, either re-export from the extension or use eslint-disable. Adding to package.json requires lockfile update which may OOM on large monorepos
+- **Note**: First frontend-only (TypeScript/ProseMirror) PR to multica. Previous PRs were all Go backend or mixed. This proves viability of frontend contributions — faster turnaround, no Go test environment needed
