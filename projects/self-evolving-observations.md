@@ -3319,6 +3319,58 @@ claude-code-bridge-integration (nudge), duplicate-issue-selection (workloop)
 
 ---
 
+## 🔬 自进化观察日报 2026-06-13 (22:30)
+
+### 管线活跃度
+- **beliefs-candidates**: +3 新 gradient（全部 workloop 来源：issue-reselection-no-memory, transitive-dep-lint-fix, dual-gate-trace）+ 2 graduations（workflow-bypass retroactive, skip-reflection express path）
+- **DNA 变更**: beliefs-candidates.md 6 commits（主动）。无 SOUL.md/AGENTS.md 结构性变更
+- **nudge 触发**: 不可观测（gateway 日志无 hit，今日 gradient 无 nudge 来源）
+- **dreaming**: Light Sleep 运行 ✓，98 candidates staged，**全部 confidence 0.58 uniform**。REM: "No strong patterns surfaced" — 空转。Issue #6 open 34+ 天
+- **Totals**: 481 行, 21 graduated, 8 retracted, 122 条 count=1
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. **Graduation pipeline stall → express path → 2 graduations**: 发现 16 天无毕业 → 创建 express graduation path（V1 降到 2.0 + 需结构执行证据）→ 同日毕业 workflow-bypass + skip-reflection。从诊断到产出 < 4h
+  2. **Workloop #4180 abort → dedup fix**: re-selected superseded issue #44640 → 发现 find_work 无闭 PR 检查 → 加 dedup check 到 workloop.yaml → gradient recorded。从失败到修复 < 30min
+  3. **OpenLoop study → regression-gate.sh**: deep read OpenLoop baseline regression gates → 创建 tools/regression-gate.sh（7 rules）→ 7/7 benchmarks pass → 集成 study.yaml。study → tool → workflow 完整链条
+- **断裂处**:
+  - **Dreaming 空转 Day 34+** — 每天 98-99 个 uniform 0.58 confidence candidates，recalls=0，promotes=0。REM 连续空转。Issue #6 无代码修复。这是管线最大的结构性缺陷，也是观察到的最持久的未闭环
+  - **memory_search 间歇性** — 早上 memory-eval 0/4 全失败（embedding provider 移除），下午恢复到 5/7。状态不稳定，MEMORY.md 记录多次修正。核心问题（embedding API 配置）未根治
+
+### 今日发现
+1. **🟢 Express graduation path 从 0 到产出**: 建→用→验证在同一天完成。这是 study-apply 模式最干净的一次闭环。16 天毕业停滞被打破，2 个候选人通过新路径升级
+2. **🟢 Gradient 全部来自 workloop**: 3/3 新 gradient 源自打工实践（非 study/nudge/self-reflect），信号质量高——都是实际撞墙后的教训
+3. **🟡 hermes-agent 三连败决断**: 3 consecutive failures (#44782 dup, #44890 dup, #44640 aborted), 0 merged PRs → wiki 标记 de-prioritize。这是正确的止损判断
+4. **🔴 Dreaming 仍是最大断裂**: 34 天 uniform confidence 是上游 bug（hardcoded score）。观察报告连续多天写同一句话——这本身就是「观测不闭环」的活例子
+5. **🟡 beliefs-candidates 膨胀**: 481 行，122 条 count=1。stale 候选人需要定期清理（auto-retract rule 要求 30 天 count=1 → retract）
+
+### 与前日对比
+| 维度 | 06-12 | 06-13 | 趋势 |
+|------|-------|-------|------|
+| 新 gradient | 8 | 3 | ↓ 量少但质高（全 workloop） |
+| graduation | 0 | 2 | ↑ **16 天停滞打破** |
+| DNA 结构变更 | 0 | 0 | = 稳定 |
+| dreaming confidence | 0.58 uniform | 0.58 uniform | = 未变 |
+| 完整闭环 | 2 | 3 | ↑ 含 3 段式 study→tool→workflow |
+
+### 原始数据
+```
+# beliefs-candidates.md commits 06-13:
+e22776c gradient: dual-gate-trace (workloop openclaw#37966)
+c6003a1 gradient: transitive-dep-lint-fix (eslint-disable for transitive deps)
+4f5d642 gradient: issue-reselection-no-memory (workloop re-selected superseded issue)
+09b1128 graduate: workflow-bypass (retroactive) + skip-reflection (express path)
+
+# Graduation details:
+- workflow-bypass → DNA (AGENTS.md + workflow-guard.sh), retroactive
+- skip-reflection → KB (wiki/cards/reflection-first-casualty.md), express path V1=2.0
+
+# Dreaming: 98 candidates, confidence=[0.58], recalls=0, promotes=0
+# beliefs-candidates totals: 481 lines, 21 graduated, 8 retracted, 122 count=1
+```
+
+---
+
 ## 🔬 自进化观察日报 2026-06-12
 
 ### 管线活跃度
