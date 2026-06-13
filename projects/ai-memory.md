@@ -193,3 +193,55 @@ Adopted the M8 decay formula for our wiki retirement scoring:
 - **Key insight**: The `recency_boost` term (how recently a note was recalled) prevents "old but actively used" notes from being flagged. This was the main gap in our v1 approach — it only counted total recalls, not when they happened.
 - **Validation**: Recalled notes (106+ recalls) correctly get retention=1.0 (score=10, never retire). Zero-recall 38-day notes get score=65 (review) vs old 85 (strong retire). More conservative = fewer false positives.
 - See [[retire-candidates]] concept for the full formula.
+
+## v0.14.0 → v1.0.0: Production Stability (2026-06-11 to 06-12)
+
+588⭐ (+5.6% from 557 on 06-10). Four releases in two days, culminating in v1.0.0.
+
+### The Road to 1.0
+
+16 commits across v0.14.0 → v1.0.0, touching 32 files. Key milestones:
+
+**v0.14.0 — Windows + Checkpoint Recovery**
+- Windows x86_64 binary now in release assets (PR #87, @djalmajr)
+- Wiki checkpoint page recovery — first crash-resilience feature
+
+**v0.15.0 — OIDC Auth + Async Spool**
+- Per-developer OIDC authentication for headless hooks — multi-developer team support
+- Async spool-based capture — decouples hook ingestion from processing
+- Native macOS/Linux Claude Code hooks default to binary command (not shell wrapper)
+
+**v0.16.0 — Configurable Timings**
+- Hook drain/handoff timeouts env-configurable: `AI_MEMORY_HOOK_DRAIN_TIMEOUT_MS` etc.
+- Default budgets: drain 3s, handoff 3s, start 3s, end 10s
+- Non-numeric/zero values fall back to defaults (defensive coding)
+
+**v1.0.0 → v1.0.2 — Rapid Stabilization**
+- v1.0.0: Stable release marker after configurable timings
+- v1.0.1: VS Code GitHub Copilot agent mode as MCP client (PR #91, @zanlucathiago)
+- v1.0.2: Fix double-counting tool calls in session synthesis (PR #93, @zanlucathiago)
+
+### VS Code Copilot MCP Client (PR #91)
+
+New `McpClient::VsCodeCopilot` variant with aliases `copilot`, `github-copilot`. Key design decisions:
+- Renders `.vscode/mcp.json` using VS Code's MCP framework schema: top-level `servers` key (NOT `mcpServers`), `type: "http"`, `url`, inline `headers` map
+- **MCP-only mode**: Copilot doesn't expose lifecycle hooks (PreToolUse/PostToolUse/SessionStart), so automatic capture is NOT active. Users must call memory tools manually from chat
+- Regression test ensures `servers` (not `mcpServers`) form is emitted
+- 273 CLI tests including new alias/shape tests
+
+**Architectural lesson**: Not all agent clients are equal. Claude Code gets full automatic memory (hooks fire at session lifecycle events). Copilot gets read/write access but no automatic capture. The system gracefully degrades rather than pretending all clients are the same.
+
+### Community Evolution
+
+- **djalmajr**: 7+ merged PRs since v0.9. Infrastructure backbone contributor (admission webhooks, reindex, Windows binary, configurable timings, move-project, wikilinks)
+- **zanlucathiago**: New contributor, 2 merged PRs on v1.0.x day. VS Code Copilot client + synthesis bug fix
+- **grodingo**: Contributed subagent session filtering (PR #85, unmerged)
+- External contributor PRs now use Claude Code (visible from "🤖 Generated with Claude Code" signatures)
+- Brazilian dev community continues to dominate contributions
+
+### Relevance Update
+
+1. **Graceful client degradation** — the Copilot MCP-only mode is a pattern we should note. When integrating with different agent hosts, design for "best available" capture rather than all-or-nothing.
+2. **OIDC auth for hooks** — as teams grow, per-developer auth on memory writes prevents impersonation. Relevant if OpenClaw ever supports multi-user memory.
+3. **Async spool capture** — decoupling ingestion from processing is a pattern we use in heartbeats (fire-and-forget) but haven't formalized.
+4. **v1.0 signal** — project is now production-stable. The jump from 0.x to 1.0 with configurable timings as the gate indicates "we're confident in the API surface."
