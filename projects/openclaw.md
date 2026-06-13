@@ -268,3 +268,11 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Fresh-context review finding**: Removed unsafe `cfg[channel]` fallback that could collide with root config keys (e.g., `cfg.agents`, `cfg.channels`). Only canonical `cfg.channels[channel]` path is used now.
 - **Added test**: `defaultAccount` resolution test — config with `defaultAccount: "bot1"` and account-level override resolves correctly when `accountId` is omitted.
 - **Local test limitation**: vitest OOM-killed on this 1.5GB repo. Can't run local tests. Verified correctness through code review + pattern matching with existing resolvers.
+
+### 2026-06-13: PR #92665 (PENDING)
+- **Issue**: #37966 — `cacheRetention` configured for LiteLLM-proxied Anthropic models silently ignored
+- **Root cause**: Two code paths: `resolveAnthropicCacheRetentionFamily()` didn't recognize LiteLLM, `detectCompat()` didn't set `cacheControlFormat` for LiteLLM
+- **Fix**: Added `isLiteLLMAnthropicModel()` helper, extended both functions with LiteLLM clause
+- **Files**: `anthropic-family-cache-semantics.ts` (+20), `openai-completions.ts` (+2), new test file (9 tests)
+- **CI**: All checks pass ✅ including Real behavior proof
+- **Real behavior proof technique**: `npx tsx` script importing real source modules (not vitest) satisfies the checker. The `liveCommandRegex` accepts `node` in evidence. Key: field names must be full form ("Behavior or issue addressed", not just "behavior"). Short names cause the parser to miss all fields → "missing required field content" error for ALL fields.

@@ -3434,3 +3434,69 @@ duplicate-pr-prevention (workloop), duplicate-pr-differentiation (workloop)
 # memory_search: recovered 19:03 (after 5+ days broken)
 # workspace commits: 9
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-06-13
+
+### 管线活跃度
+- **beliefs-candidates**: +5 条新 gradient（workloop×3, study×2），2 次 graduation（workflow-bypass 追溯 + skip-reflection express path，自 05-27 首次毕业）| 总计 481 行
+- **DNA 变更**: ✅ 6 commits（全部主动）— express graduation path 工具、graduated marks、study notes、2 个 workloop gradients
+- **nudge 触发**: gateway 日志 grep = 0 条（可观测性问题持续）。今日 0 gradient 标注 source=nudge。推测白天 Luna 互动少导致 nudge 触发少
+- **dreaming**: Light Sleep 运行 ✓，98 个 candidates staged，**全部 confidence 0.58（uniform，无差异化）**, recalls=0, promotes=0。REM: "No strong patterns surfaced" — 空转。Issue #6 open 34 天
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. **graduation pipeline stall → express path → 2 graduates**: self-evolving-observations.md 记录了 16 天无毕业 → 创建 express graduation path 工具 → 当日验证并毕业 2 个候选。从观察到修复到验证的完整闭环 ✅
+  2. **issue-reselection → dedup fix**: hermes-agent 重复选中已关 issue → gradient → workloop.yaml 添加 closed-PR dedup check → 提交到 github-contribution repo ✅
+  3. **OpenLoop study → regression-gate tool**: 学习 OpenLoop baseline regression gates 模式 → 创建 tools/regression-gate.sh（7 个 file→benchmark 规则）→ 集成进 study.yaml → 7/7 验证通过 ✅
+- **断裂处**:
+  - **Dreaming 空转 Issue #6 = 34 天无代码修复** — confidence 从 0.62 降至 0.58，仍 uniform。每日观察记录相同问题但无代码行动。上游 DAILY_INGESTION_SCORE hardcoded 是根因
+  - **memory_search**: 今日评估为间歇性可用（29-50% 成功率，非 0%），但仍不可依赖
+
+### Skill 提取缺口
+- **regression-gate.sh**: 从 OpenLoop 提取的 baseline regression gate 模式 → 工具化 + workflow 集成。闭环完整 ✅
+- **express graduation path**: 从 self-evolving 观察提取 → evaluate-candidate.sh + graduation-pipeline.sh 修改。闭环完整 ✅
+- **无明显遗漏**: 今日 3 个 study-apply 各产出工具/流程修改，skill 提取效率高
+
+### 外部反馈利用
+- NemoClaw PR #5108 被 miyoungc close（docs link 修复方式不对，Fern 用 route-style slugs）→ 记录了 Fern routing lesson 到 wiki ✓ 不是 gradient 但是领域知识闭环
+- NemoClaw PR #4054 MERGED ✅ → 无 gradient 提取（简单修复，无教训）
+- multica PR #4095 提交，首个前端 PR → 新 gradient: transitive-dep-lint-fix ✓
+- openclaw PR #92665 提交（cacheRetention fix）→ 新 gradient: dual-gate-trace ✓
+
+### PR 活跃度
+- **新提交**: 2 个 PR（multica #4095, openclaw #92665）
+- **已合并**: NemoClaw #4054 ✅
+- **被关闭**: NemoClaw #5108（close by maintainer，docs fix 方式错误）
+- **open external**: 6 个（+2 today, -1 merged, -1 closed vs yesterday's 5）
+- **自有 repo**: cove #339, lottie-studio #101/#107, kagura-blog #100/#103, finance #819, story #8
+
+### 今日发现
+1. **🟢 Graduation pipeline 解堵 = 最大成就**: 16 天未毕业 → express path → 当日毕业 2 个。这是自进化管线从观察到行动的教科书式闭环——此前多次观察报告都写"毕业停滞"，今天终于通过修改工具解决
+2. **🟢 study-apply 三连**: express graduation path → graduation verification → regression gate。每个 apply 基于前一个的输出递进构建。这是 compounding 的实例
+3. **🟡 Nudge 信号微弱**: 今日 0 gradient 来自 nudge（昨日 1，前天 3）。可能与 Luna 白天互动少有关（仅 08:10 gateway restart + 20:46 问 PR 状态）
+4. **🔴 Dreaming Day 34**: uniform 0.58, recalls=0, promotes=0。与 Day 1 唯一区别是 confidence 从 0.62 降到 0.58 — 反向进化。Day 33 评论已列出 3 个选项（upstream issue / local filter / accept vestigial），至今未行动
+5. **🟡 Daily memory 膨胀**: 2148 行 / 日，其中夜间 workloop-night 重复巡检占 ~40%。信噪比持续恶化
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30)
+e22776c gradient: dual-gate-trace (workloop openclaw#37966)
+c6003a1 gradient: transitive-dep-lint-fix (eslint-disable for transitive deps)
+08c7f2c study: followup Elephant Agent, ccglass, Beads (06-13)
+6919752 study 2026-06-13: scout + deep reads (ponytail, architect-loop, Fable 5 suspension)
+4f5d642 gradient: issue-reselection-no-memory — workloop re-selected superseded issue
+09b1128 graduate: workflow-bypass (retroactive) + skip-reflection (express path)
+
+# beliefs-candidates: +5 new gradients today (workloop×3, study×2)
+issue-reselection-no-memory (workloop), frozen-acceptance-criteria (study),
+tool-bug-tracking-update (study), transitive-dep-lint-fix (workloop),
+dual-gate-trace (workloop)
+
+# beliefs-candidates totals: 481 lines, 2 graduated today (first since 05-27)
+# dreaming: Light Sleep 98 candidates @ 0.58 uniform, REM empty, promotes=0
+# nudge: 0 in gateway logs, 0 gradient sourced from nudge
+# workspace commits: 17
+# PRs: +2 new (multica#4095, openclaw#92665), 1 merged (NemoClaw#4054), 1 closed (NemoClaw#5108)
+```
