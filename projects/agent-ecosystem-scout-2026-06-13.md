@@ -62,3 +62,37 @@ Previous scout: [[agent-ecosystem-scout-2026-06-12]]
 
 ---
 *Scout: 2026-06-13 11:35 CST*
+
+## Afternoon Scan (12:32 CST)
+
+### New Finds (Created >06-08, >50⭐)
+
+| Project | Stars | Created | What | Action |
+|---|---|---|---|---|
+| effective-html | 524 | 06-09 | Visual HTML artifact skill (reports, diagrams, plans). Exemplar-distillation pattern | Wiki note ✅ |
+| BuilderIO/skills | 268 | 06-10 | Builder.io official skills repo | Noted, corporate |
+| architect-loop | 213 | 06-12 | (updated from 178 earlier today) | Already tracked |
+| renwei-writing | 160 | 06-12 | "People flavor" writing — edit without erasing personality | Noted, content |
+| luban-skill | 137 | 06-11 | Skill polishing workshop — 5-stage evidence-based refinement | Deep read ✅ |
+| orange-line-illustration | 116 | 06-10 | New Yorker-style illustration skill | Noted, style |
+| microsoft-security-skills | 81 | 06-10 | Microsoft Security skills for agents | Noted, enterprise |
+| xcode27-skills | 75 | 06-09 | Apple's official Agent Skills from Xcode 27 | Already noted |
+
+### Deep Reads Done
+
+1. **effective-html** → [[effective-html-skill]]. Viral HTML artifact skill. Key insight: exemplar-distillation (Fable 5 generates examples → smaller models learn). Content quality layer, not architecturally deep. 🔴 SOLO.
+
+2. **luban-skill** → [[luban-skill-workshop]]. Rigorous 5-stage skill polishing methodology. Real case study with real numbers (83K records, 327 false positives caught). Key transferable patterns:
+   - 验料 (material check) before any work
+   - Live-body inspection > CI green lights
+   - Verification gate on every edit (freeze-edit-measure-keep/revert)
+   - Workspace discipline from production incidents
+
+### Ecosystem Signal
+
+- **Skill quality layer maturing**: luban-skill and effective-html represent different angles — meta-quality (making skills better) and output-quality (making agent output prettier). Both growing fast.
+- **Corporate entry**: BuilderIO/skills, microsoft-security-skills, xcode27-skills — enterprise/platform players shipping official skill repos. The skill format is becoming a distribution standard.
+- **Chinese-origin skills gaining traction**: renwei-writing, luban-skill, orange-line-illustration — Chinese developer community producing quality skills with global appeal.
+
+---
+*Scout update: 2026-06-13 12:35 CST*
