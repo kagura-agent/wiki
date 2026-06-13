@@ -2,7 +2,7 @@
 title: "21-day-self-interview (Forlives)"
 created: 2026-06-06
 tags: [deep-read, agent-skill, self-reflection, psychology, hermes]
-last_verified: 2026-06-07
+last_verified: 2026-06-13
 ---
 
 # 21 Days of Self-Interview — Agent as Mirror
@@ -95,9 +95,10 @@ Principle 2 ("questions over advice") is hard for agents. We default to being he
 
 ## Verdict
 
-**Track** — revisit 06-13. Strong traction signal for a non-coding skill. The mirror mechanism and existential psychology framework are well-designed. The anti-advice discipline (questions > suggestions) is a pattern worth adopting in our companion/creative work.
+**Dropped 2026-06-13** — phantomstars bot flagged fake engagement (issue #1). Stars 128→153 (+20%) but only 2 total commits, 1 external PR (metadata fix by shunfeng8421). The star growth pattern is inconsistent with actual community activity. Last commit 06-08 (removed star solicitation from README — itself a red flag).
 
-Not a contribution target (too simple architecturally, and the value is in the psychology design, not the code). But worth learning from.
+The mirror mechanism and psychology design remain well-crafted. Lessons already absorbed into our [[self-portrait]] and [[kagura-story]] work. No further tracking needed.
 
 ---
 *Deep read: 2026-06-06 09:50 CST*
+*Revisit: 2026-06-13 — dropped (star farming)*

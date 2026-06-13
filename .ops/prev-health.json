@@ -1,25 +1,37 @@
 {
-  "timestamp": "2026-06-12T10:28:00+08:00",
-  "total_files": 900,
-  "cards": 394,
-  "projects": 426,
-  "wikilinks": 3404,
-  "errors": 0,
-  "warnings": 67,
-  "orphans": 3,
-  "orphan_cards": ["claude-code-cli-integration"],
-  "orphan_projects": ["crush-charmbracelet", "loop-engineering"],
-  "broken_links": 0,
-  "index_drift": 7,
+  "timestamp": "2026-06-13T10:24:00+08:00",
+  "total_files": 907,
+  "cards": 395,
+  "projects": 432,
+  "wikilinks": 3421,
+  "errors": 1,
+  "warnings": 60,
+  "broken_links": 1,
+  "broken_links_detail": [
+    "cards/reflection-first-casualty.md -> [[workflow-bypass]]"
+  ],
+  "index_drift": 2,
+  "index_drift_detail": [
+    "cards/reflection-first-casualty.md not in index.md",
+    "projects/openloop-thu.md not in index.md"
+  ],
+  "orphans": 1,
+  "orphan_detail": ["openloop-thu"],
   "stubs": 0,
   "duplicate_slugs": 1,
-  "stale_files": 179,
-  "frontmatter_issues": 211,
-  "zero_outbound_links": 105,
-  "secrets_found": 0,
+  "duplicate_slugs_detail": ["README (3 files)"],
+  "frontmatter_issues": 212,
+  "cards_zero_outbound_links": 105,
+  "avg_wikilinks_per_linked_file": 5.3,
+  "stale_files": 184,
   "unicode_suspicious": 5,
-  "error_book_open": 66,
-  "error_book_new": 4,
-  "error_book_recurring": 62,
-  "error_book_auto_closed": 31
+  "secrets_detected": 0,
+  "invalid_facts": 0,
+  "error_book": {
+    "new": 4,
+    "recurring": 56,
+    "clean_passes": 0,
+    "auto_closed": 33,
+    "total_open": 60
+  }
 }

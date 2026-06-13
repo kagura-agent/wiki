@@ -34,11 +34,6 @@ Portable prompt pattern for running QA with **fresh, zero-history agents**:
 3. **"Plausible concerns" category**: Our DDD classifies findings as contract-misread / actionable / trade-off / noise. Adding "plausible concern" (uncertain but worth investigating) is more permissive — might catch things we'd filter too early.
 
 ## Verdict
-Mostly validates patterns we've already adopted. Module-level parallel splitting is the main new idea, but our current PR sizes don't warrant it. **No action needed now.** Revisit if we start reviewing large (>500 line) changesets.
-
-## Community Health: 🔴 NEW (0/6)
-- 0 issues, 0 external PRs, 3 days old
-- Solo author, no license declared
-- Track for growth signal, not contribution
+**Dropped 2026-06-13** — flat growth (59→59⭐ over 2 weeks), 0 PRs, 0 issues, solo dev. Last commit 06-06. Patterns already absorbed into our QA practices via [[cwc-long-running-agents]] and [[doubt-driven-development]]. Module-level parallel splitting remains the only novel idea but our PR sizes don't warrant it.
 
 Links: [[cwc-long-running-agents]], [[doubt-driven-development]], [[multi-tier-qa-strategy]], [[fresh-context-review]]

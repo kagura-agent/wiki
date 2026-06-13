@@ -57,6 +57,15 @@
 - **Fix**: Add `mode: 0o700` + retroactive chmod (matching existing `config-io.ts` `ensureConfigDir()` pattern)
 - **Pattern**: PERMISSION_CONSISTENCY — when a codebase has a secure helper, all alternative code paths creating the same directories must use equivalent protections
 
+## Docs/Fern Routing Lessons (2026-06-13)
+- **Fern sites use route-style paths built from page slugs in `docs/index.yml`, NOT filesystem paths.**
+- Links like `../get-started/quickstart` resolve based on the navigation hierarchy slug, not the `.mdx` filename.
+- Variant blocks (`<AgentOnly variant="hermes">`) mean the same slug resolves to different pages per variant tree.
+- **Never** "fix" a Fern link by changing it to match the `.mdx` filename — that breaks routing.
+- QA/link-checker findings based on filesystem path matching are false positives for Fern sites.
+- PR #5108 CLOSED by miyoungc: my "fix" to change `quickstart` → `quickstart-hermes` would have broken the link. Issue #5086 was invalid.
+- Lesson: Before touching docs links, verify against `docs/index.yml` slug definitions and `docs/CONTRIBUTING.md` routing rules.
+
 ## Notes (2026-05-20)
 - e2e tests in `test/e2e/` are bash scripts, not vitest — `bash -n` for syntax check, can't unit test
 - M12 test in `test-messaging-providers.sh` line ~1247: Node.js HTTPS probe to api.telegram.org
