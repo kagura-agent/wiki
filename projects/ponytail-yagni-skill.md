@@ -3,7 +3,7 @@ title: "Ponytail — YAGNI Lazy Senior Dev Skill"
 created: 2026-06-13
 updated: 2026-06-13
 tags: [agent-skill, code-quality, YAGNI, prompt-engineering]
-last_verified: 2026-06-13
+last_verified: 2026-06-14
 ---
 
 # Ponytail (DietrichGebert/ponytail)
@@ -53,7 +53,7 @@ Competes with [[guard-skills]] (quality gates) but from the opposite direction �
 
 ## Relevance to Us
 
-- **Direct applicability**: We could adopt the YAGNI ladder as a principle for our own Claude Code prompts. The "stop at first rung" heuristic is mechanically enforceable.
+- **Direct applicability**: ✅ Applied 2026-06-14. YAGNI 6-rung ladder added to AGENTS.md (Claude Code prompt guidelines) and team-lead/SKILL.md (task dispatch template). "Stop at first rung" + `ponytail:` upgrade path comments.
 - **Benchmark methodology**: promptfoo-based skill evaluation is a pattern worth considering for our own skill quality gates.
 - **Agent portability design**: Their multi-host adapter pattern is relevant if we ever package skills for broader distribution via [[ClawHub]].
 - **ponytail: comment convention**: The "mark simplifications with upgrade paths" pattern is useful for our own code.
