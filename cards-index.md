@@ -6,7 +6,7 @@ updated: 2026-06-10
 
 # Cards Index
 
-> All cards in wiki/cards/, grouped alphabetically. 387 total.
+> All cards in wiki/cards/, grouped alphabetically. 399 total.
 
 ### A
 
@@ -23,6 +23,7 @@ updated: 2026-06-10
 - [agent-brain-portability](cards/agent-brain-portability.md)
 - [agent-budget-control](cards/agent-budget-control.md)
 - [agent-chat-interface](cards/agent-chat-interface.md)
+- [agent-autonomy-models](cards/agent-autonomy-models.md)
 - [agent-client-protocol](cards/agent-client-protocol.md)
 - [agent-commerce](cards/agent-commerce.md)
 - [agent-context-files](cards/agent-context-files.md)
@@ -96,12 +97,14 @@ updated: 2026-06-10
 - [chrome-devtools-mcp](cards/chrome-devtools-mcp.md)
 - [chromex](cards/chromex.md)
 - [cjk-bridge-search](cards/cjk-bridge-search.md)
+- [claude-code-cli-integration](cards/claude-code-cli-integration.md)
 - [claude-code-memory-architecture](cards/claude-code-memory-architecture.md)
 - [claude-code-source-analysis](cards/claude-code-source-analysis.md)
 - [claude-code-vs-codex-plugin-systems](cards/claude-code-vs-codex-plugin-systems.md)
 - [clawhub](cards/clawhub.md)
 - [cline](cards/cline.md)
 - [closed-loop-vs-open-pipe](cards/closed-loop-vs-open-pipe.md)
+- [co-activation-boost](cards/co-activation-boost.md)
 - [code-review-lessons](cards/code-review-lessons.md)
 - [code-review](cards/code-review.md)
 - [codex-on-use-auth-policy](cards/codex-on-use-auth-policy.md)
@@ -131,6 +134,7 @@ updated: 2026-06-10
 - [context-rot](cards/context-rot.md)
 - [context-window-management](cards/context-window-management.md)
 - [contrastive-memory](cards/contrastive-memory.md)
+- [contributor-depth-strategy](cards/contributor-depth-strategy.md)
 - [contribution-depth-bottleneck](cards/contribution-depth-bottleneck.md)
 - [convergent-evolution](cards/convergent-evolution.md)
 - [cost-of-not-calling](cards/cost-of-not-calling.md)
@@ -159,6 +163,7 @@ updated: 2026-06-10
 - [dependency-vs-association](cards/dependency-vs-association.md)
 - [deploy-without-verify](cards/deploy-without-verify.md)
 - [deterministic-vs-llm-compression](cards/deterministic-vs-llm-compression.md)
+- [diagram-maker](cards/diagram-maker.md)
 - [diff-scoped-followup](cards/diff-scoped-followup.md)
 - [diff-scoped-review](cards/diff-scoped-review.md)
 - [direction-as-internal-optimiser](cards/direction-as-internal-optimiser.md)
@@ -196,6 +201,7 @@ updated: 2026-06-10
 
 - [fact-decision-separation](cards/fact-decision-separation.md)
 - [ffn-free-routing](cards/ffn-free-routing.md)
+- [flowforge-workflow-targeting](cards/flowforge-workflow-targeting.md)
 - [floway](cards/floway.md)
 - [flux2-klein](cards/flux2-klein.md)
 - [fresh-context-review](cards/fresh-context-review.md)
@@ -218,6 +224,7 @@ updated: 2026-06-10
 - [heartbeat](cards/heartbeat.md)
 - [hermes](cards/hermes.md)
 - [hermes-memory-skills](cards/hermes-memory-skills.md)
+- [honcho](cards/honcho.md)
 
 ### I
 
@@ -271,6 +278,7 @@ updated: 2026-06-10
 - [memex-auto-extraction-design](cards/memex-auto-extraction-design.md)
 - [memory-complexity-pendulum](cards/memory-complexity-pendulum.md)
 - [memory-consolidation-as-skill-entry](cards/memory-consolidation-as-skill-entry.md)
+- [memory-privacy](cards/memory-privacy.md)
 - [memory-read-write-loop-hooks](cards/memory-read-write-loop-hooks.md)
 - [memory-reconsolidation](cards/memory-reconsolidation.md)
 - [memory-search](cards/memory-search.md)
@@ -344,6 +352,7 @@ updated: 2026-06-10
 - [recurrent-depth](cards/recurrent-depth.md)
 - [recursive-blindspot](cards/recursive-blindspot.md)
 - [recursive-summarization-decay](cards/recursive-summarization-decay.md)
+- [reflection-first-casualty](cards/reflection-first-casualty.md)
 - [re_gent](cards/re_gent.md)
 - [retire-candidates](cards/retire-candidates.md)
 - [retrieval-is-the-bottleneck](cards/retrieval-is-the-bottleneck.md)
@@ -356,6 +365,7 @@ updated: 2026-06-10
 - [sanitized-type-boundary](cards/sanitized-type-boundary.md)
 - [scheduling-over-checklist](cards/scheduling-over-checklist.md)
 - [scout-saturation-signal](cards/scout-saturation-signal.md)
+- [screenpipe](cards/screenpipe.md)
 - [search-engineering](cards/search-engineering.md)
 - [search-sh](cards/search-sh.md)
 - [self-consistency](cards/self-consistency.md)
@@ -443,6 +453,8 @@ updated: 2026-06-10
 - [verify-before-researching](cards/verify-before-researching.md)
 - [verify-claims](cards/verify-claims.md)
 
+- [verify-external-ops](cards/verify-external-ops.md)
+
 ### W
 
 - [warm-start-agents](cards/warm-start-agents.md)
@@ -453,6 +465,7 @@ updated: 2026-06-10
 - [wiki-lint](cards/wiki-lint.md)
 - [wiki](cards/wiki.md)
 - [winchester-mystery-house](cards/winchester-mystery-house.md)
+- [workflow-bypass](cards/workflow-bypass.md)
 - [worktree-convergence-2026-05](cards/worktree-convergence-2026-05.md)
 - [write-ahead-session-persistence](cards/write-ahead-session-persistence.md)
 - [write-read-gap](cards/write-read-gap.md)
