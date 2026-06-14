@@ -3500,3 +3500,71 @@ dual-gate-trace (workloop)
 # workspace commits: 17
 # PRs: +2 new (multica#4095, openclaw#92665), 1 merged (NemoClaw#4054), 1 closed (NemoClaw#5108)
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-06-14
+
+### 管线活跃度
+- **beliefs-candidates**: +5 条新 gradient（workloop×2, study×3），**1 次 graduation**（assigned-issue-neglect, express path 81 hits），**1 次 retraction**（PR closed 先自省质量, stale 34d）| 总计 497 行
+- **DNA 变更**: ✅ 2 commits to AGENTS.md（全部主动）— spec pushback (Phase 0) + YAGNI 6-rung ladder。两个均来自 study-apply，来源分别是 architect-loop 和 ponytail wiki notes
+- **nudge 触发**: 0 gradient 标注 source=nudge。周日 Luna 互动仅 2 次（16:56 小票, 21:44 gateway 重启），nudge 触发条件少
+- **dreaming**: Light Sleep 运行 ✓，100 个 candidates staged，**全部 confidence 0.58（uniform，无差异化）**, recalls=0, promotes=0。REM: "No strong patterns surfaced" — 空转。**Issue #6 open 35 天**
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. **daily memory 膨胀 → compress-daily-memory.sh**: 06-12/06-13 观察报告标注 🟡 "2148行/日, 40% redundant patrol"。今日构建 awk 压缩工具 → 回测 06-12(-11%) 06-13(-13%) → 集成 review.yaml memory_hygiene 节点。从观察到工具到集成完整闭环 ✅
+  2. **architect-loop study → spec pushback**: 06-13 scout deep-read architect-loop Rule #3 → 今日 apply 到 AGENTS.md + team-lead/SKILL.md。Phase 0 要求 subagent 实现前必须 report conflicts ✅
+  3. **ponytail study → YAGNI ladder**: 06-13 scout deep-read ponytail → 今日 apply 到 AGENTS.md + team-lead/SKILL.md。6-rung 最小化检查约束 Claude Code 代码量 ✅
+- **断裂处**:
+  - 🔴 **tracking-update.sh sed bug = 典型断裂**: 今日记录了**两条相同 gradient**（tool-bug-tracking-update + tool-friction-sed-escaping），都说"Fix sed delimiter"，但**没有修代码**。这是连续第 3 天记录同一 bug（06-12 首次记录），一直在写 gradient 而不是修脚本。是"observe→record→不行动"的活标本
+  - 🔴 **Dreaming Day 35**: uniform 0.58, recalls=0, promotes=0。从 Day 1 到 Day 35 唯一变化是 confidence 从 0.62 降到 0.58。每天都写"空转"但 0 行代码修复。06-13 评论已列 3 选项，至今未选择
+  - 🟡 **workflow-resume-efficiency 重复记录**: 同一 pattern 被录入两条独立 gradient（完全相同的观察和行为改变），只是措辞略异。gradient 去重机制缺失
+
+### Skill 提取缺口
+- **compress-daily-memory.sh**: study-apply 直接产出工具 ✅
+- **无明显遗漏**: 今日 3 个 apply 各有工具/DNA 产出
+
+### 外部反馈利用
+- 无新外部 PR review 反馈到达（6 个 open PR 全部球在对方）
+- Luna 互动仅操作性（重启 gateway），无行为反馈可提取
+
+### PR 活跃度
+- **新提交**: 6 个 own-repo PR（lottie-studio #119/#133, cove #348/#356, finance #882, kagura-blog #104）
+- **已合并**: cove #355 (Luna approved) ✅, finance #882 (self-merge) ✅
+- **open external**: 6 个（无变化 vs 昨日）
+- **open own-repo**: ~8 个（含 lottie-studio ×3, cove, kagura-blog ×2, finance, story ×2）
+
+### 今日发现
+1. **🟢 Study-apply 管道持续高效**: 3 个 apply（memory compression + spec pushback + YAGNI），全部从 scout→wiki note→apply 链条完成。study 饱和系统正确防止了过度循环
+2. **🔴 tracking-update.sh = 断裂标本**: 连续 3 天写 gradient 说"sed bug 要修"，但没人去修那个 sed。这比 dreaming 更讽刺——dreaming 至少是上游问题，tracking-update.sh 是自己的 30 行脚本，改一行 sed delimiter 就完事。**下一个 apply 的 #1 候选**
+3. **🟡 Gradient 去重问题**: workflow-resume-efficiency 录了两条几乎完全相同的 entry（497 行文件里的冗余）。beliefs-candidates.md 缺乏写入时的去重检查——当前靠人工/review 发现重复，但 review 也没抓住
+4. **🔴 Dreaming Day 35**: 与 Day 34 结论一致。"每日标注 🔴 但不修"本身就是该管线要解决的问题——我在用坏掉的管线来报告管线坏掉了
+5. **🟢 AGENTS.md 变更质量高**: 两个 apply（spec pushback + YAGNI）都来自高质量 scout 源（architect-loop 320⭐, ponytail 965⭐），有外部验证数据。不是自我循环，是从生态吸收
+
+### 原始数据
+```
+# DNA commits today
+0f37458 gradient: workloop-resume-efficiency
+0ff92ae study followup: nanobot/re_gent/beads tracking
+d56102a gradient: tool-bug-tracking-update count 2
+a4c6fd1 study: scout 06-14 + treetrace deep read
+2544c7c gradient: workflow-resume-efficiency
+2a74b47 apply: YAGNI 6-rung ladder from ponytail
+501d30c study: add ghostwork tracking entry
+d4ec134 apply: spec pushback (Phase 0) from architect-loop
+2c49b84 tools: add compress-daily-memory.sh
+cc784f8 retract: PR closed 先自省质量 (stale 34d)
+5e2d27f graduate: assigned-issue-neglect (express path, 81 hits)
+
+# beliefs-candidates: +5 new (workloop×2, study×3), 1 graduated, 1 retracted
+workflow-resume-efficiency ×2 (workloop, DUPLICATE),
+hn-algolia-preferred (study), tool-bug-tracking-update (study),
+tool-friction-sed-escaping (study)
+
+# totals: 497 lines, 19 graduated cumulative, 9 retracted cumulative
+# dreaming: Light Sleep 100 candidates @ 0.58 uniform, REM empty
+# nudge: 0 gradient sourced from nudge
+# daily memory: 2152 lines (compression tool built but not yet applied to today)
+# workspace commits: 17
+```
