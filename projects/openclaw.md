@@ -276,3 +276,5 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Files**: `anthropic-family-cache-semantics.ts` (+20), `openai-completions.ts` (+2), new test file (9 tests)
 - **CI**: All checks pass ✅ including Real behavior proof
 - **Real behavior proof technique**: `npx tsx` script importing real source modules (not vitest) satisfies the checker. The `liveCommandRegex` accepts `node` in evidence. Key: field names must be full form ("Behavior or issue addressed", not just "behavior"). Short names cause the parser to miss all fields → "missing required field content" error for ALL fields.
+- **ClawSweeper review (P1)**: LiteLLM `detectCompat` path is too broad — absent `cacheRetention` defaults to `"short"`, meaning ALL LiteLLM Claude models get `cache_control` even without explicit config. Same defaulting exists for OpenRouter. Bot suggests gating on explicit `cacheRetention`. This is architectural — the broader defaulting behavior pre-exists our change.
+- **Status**: Waiting for human maintainer review. Bot review is informational, not blocking from maintainer perspective.

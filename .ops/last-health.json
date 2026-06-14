@@ -1,37 +1,29 @@
 {
-  "timestamp": "2026-06-13T10:24:00+08:00",
-  "total_files": 907,
-  "cards": 395,
-  "projects": 432,
-  "wikilinks": 3421,
-  "errors": 1,
-  "warnings": 60,
-  "broken_links": 1,
-  "broken_links_detail": [
-    "cards/reflection-first-casualty.md -> [[workflow-bypass]]"
+  "timestamp": "2026-06-14T10:07:00+08:00",
+  "total_files": 914,
+  "cards": 396,
+  "projects": 438,
+  "wikilinks": 3446,
+  "errors": 4,
+  "warnings": 69,
+  "broken_links": [
+    {"file": "projects/effective-html-skill.md", "target": "diagram-maker"},
+    {"file": "projects/ghostwork.md", "target": "agent-autonomy-models"},
+    {"file": "projects/ghostwork.md", "target": "memory-consolidation-patterns"},
+    {"file": "projects/ghostwork.md", "target": "screenpipe"}
   ],
-  "index_drift": 2,
-  "index_drift_detail": [
-    "cards/reflection-first-casualty.md not in index.md",
-    "projects/openloop-thu.md not in index.md"
-  ],
-  "orphans": 1,
-  "orphan_detail": ["openloop-thu"],
+  "index_drift": 9,
+  "orphans": 3,
+  "orphan_list": ["agent-ecosystem-scout-2026-06-13", "ghostwork", "openloop-thu"],
   "stubs": 0,
   "duplicate_slugs": 1,
-  "duplicate_slugs_detail": ["README (3 files)"],
-  "frontmatter_issues": 212,
-  "cards_zero_outbound_links": 105,
-  "avg_wikilinks_per_linked_file": 5.3,
-  "stale_files": 184,
+  "frontmatter_issues": 213,
+  "zero_outbound_links": 105,
+  "stale_files": 185,
+  "secrets_found": 0,
   "unicode_suspicious": 5,
-  "secrets_detected": 0,
-  "invalid_facts": 0,
-  "error_book": {
-    "new": 4,
-    "recurring": 56,
-    "clean_passes": 0,
-    "auto_closed": 33,
-    "total_open": 60
-  }
+  "error_book_open": 72,
+  "error_book_new": 5,
+  "error_book_recurring": 67,
+  "error_book_auto_closed": 31
 }

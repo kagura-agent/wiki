@@ -3,7 +3,7 @@ title: "Architect Loop — Cross-Vendor Agent Orchestration Skill"
 created: 2026-06-13
 updated: 2026-06-13
 tags: [agent-orchestration, cross-vendor, multi-agent, coding-agent, skill]
-last_verified: 2026-06-13
+last_verified: 2026-06-14
 ---
 
 # Architect Loop (DanMcInerney/architect-loop)
@@ -77,8 +77,8 @@ Sits in the same space as [[superpowers]] (obra) and the "Ralph loop" pattern bu
 
 - **"Gates freeze before results exist"**: We should adopt this for our subagent code tasks — define acceptance criteria before dispatch, not after.
 - **"Builder claims are hearsay"**: Aligns with our existing rule ("验证 subagent 外部操作声明"), but architect-loop mechanizes it with gate files.
-- **"Disagreement is mandatory"**: Our subagent prompts don't require the agent to push back on the spec. This is a gap.
-- **Worktree isolation**: Our subagents share the same checkout. Worktree-per-lane prevents interference.
+- **"✅ Disagreement is mandatory"**: Applied 2026-06-14 — added Phase 0 spec pushback to team-lead/SKILL.md + AGENTS.md. Agents must review spec against code and raise conflicts before implementing.
+- **Worktree isolation**: Our subagents share the same checkout. Worktree-per-lane prevents interference. (Already addressed in team-lead Concurrent Work Guard)
 - **Research mode**: The scout → design lanes → parallel research → verify pipeline is more structured than our study workflow's scout phase.
 
 Previous scout: [[agent-ecosystem-scout-2026-06-12]]
