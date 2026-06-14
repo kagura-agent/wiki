@@ -90,4 +90,4 @@ Initial deep read complete, no revisit needed until 06-28. The 4-layer memory + 
 
 ## Links
 
-- [[screenpipe]], [[agent-autonomy-models]], [[memory-consolidation-patterns]]
+- [[screenpipe]], [[agent-autonomy-models]], [[memory-consolidation-as-skill-entry]]
