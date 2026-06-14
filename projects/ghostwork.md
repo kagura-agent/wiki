@@ -84,6 +84,10 @@ Two tiers, earned through acceptance history:
 5. **Privacy-security tension** — raw events include OCR, keystrokes, clipboard. PII stripping before LLM calls is mentioned but effectiveness depends on regex patterns.
 6. **5-day-old project** — too early to evaluate execution quality. Architecture is well-designed but no real-world usage evidence.
 
+## Follow-up (06-14)
+
+Initial deep read complete, no revisit needed until 06-28. The 4-layer memory + sleep consolidation architecture is the most interesting design pattern here — worth tracking whether the project gains contributors or stays solo. If still solo at revisit, downgrade to archive.
+
 ## Links
 
 - [[screenpipe]], [[agent-autonomy-models]], [[memory-consolidation-patterns]]
