@@ -17,10 +17,21 @@ When `web_search` is unavailable, use `web_fetch` on these URLs directly.
 - Latent Space podcast: `https://www.latent.space/`
 
 ## Usage
+
+**Preferred: use the dedicated tool** (created 2026-06-15):
 ```bash
-# HN search for agent-related stories from past week
-WEEK_AGO=$(date -d '7 days ago' +%s)
-web_fetch "https://hn.algolia.com/api/v1/search?query=ai+agent&tags=story&numericFilters=created_at_i>${WEEK_AGO}"
+bash tools/hn-scan.sh                        # default: "ai agent", 7d, min 5pts
+bash tools/hn-scan.sh --query "mcp" --days 3  # custom query + window
+bash tools/hn-scan.sh --min-points 50         # only popular stories
 ```
 
+Manual fallback (if tool unavailable):
+```bash
+WEEK_AGO=$(date -d '7 days ago' +%s)
+curl -sS "https://hn.algolia.com/api/v1/search?query=ai+agent&tags=story&numericFilters=created_at_i%3E${WEEK_AGO},points%3E5&hitsPerPage=15" | jq '.hits[] | "\(.points)pts | \(.title)"'
+```
+
+> ⚠️ Use `%3E` not `>` in URL — bare `>` causes 400 Bad Request.
+
 Created 2026-05-12 after noting web_search unavailability 3 consecutive sessions.
+Updated 2026-06-15: `tools/hn-scan.sh` created, integrated into study.yaml scout/quick_scout.
