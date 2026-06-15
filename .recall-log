@@ -891,3 +891,6 @@
 2026-06-15T09:46:54+08:00|neutral|Beads gastownhall|projects/beads,projects/agent-ecosystem-scout-2026-06-10,projects/self-evolving-observations,agent-ecosystem-scout-2026-06-10,beads
 2026-06-15T09:46:54+08:00|neutral|nanobot HKUDS|projects/nanobot,cards/self-evolving-agent-landscape,cards/write-ahead-session-persistence,write-ahead-session-persistence,DeepTutor,deeptutor
 2026-06-15T10:28:56+08:00|neutral|tracking-update shell tool|projects/self-evolving-observations,projects/tracking-health-tool,projects/elephant-agent,tracking-health-tool,loop-engineering,mcp-vs-native-tools
+2026-06-15T10:57:00+08:00|neutral|dreaming confidence hardcoded broken|projects/self-evolving-observations,projects/dreaming-observation,cards/pr-superseded-lessons,cards/wiki-health-check,projects/gbrain,dreaming-observation,ghostwork,claude-soul,pr-superseded-lessons,mineecho
+2026-06-15T11:46:46+08:00|neutral|beads|projects/beads,projects/self-evolving-observations,projects/agent-ecosystem-scout-2026-06-10,beads,agent-ecosystem-scout-2026-06-10,self-evolving-observations
+2026-06-15T11:46:47+08:00|neutral|nanobot|projects/nanobot,cards/loop-detection-comparison,cards/self-evolving-agent-landscape,memory-consolidation-as-skill-entry,persistent-goal-injection,write-ahead-session-persistence

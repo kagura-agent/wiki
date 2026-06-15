@@ -407,3 +407,12 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Fresh-context review**: First pass flagged WSL `wslview` gap (valid), fixed. Second pass flagged `gnome-open`/`kde-open` (invalid — `open` v11 doesn't use those).
 - **Approach**: Manual edit (simple helper function). Typecheck verified locally.
 - **Note**: Issue was assigned to Hona but unworked. Claimed in comment first per CONTRIBUTING.md.
+
+### #32371 — ACP MCP server cleanup on session close (2026-06-15)
+- **Status**: ABANDONED — competing PR #32377 by hereswilson already submitted, all CI green
+- **Issue**: #32371 — ACP sessions leave MCP servers registered after close
+- **Root cause**: `closeSession` deletes tracking from `registeredMcp` map but never calls `sdk.mcp.disconnect()`
+- **My fix**: Added disconnect logic with reference counting (dedup via Set), Effect.ignore for best-effort cleanup, 2 tests. 106 lines added.
+- **Why abandoned**: PR #32377 was submitted ~8h before my workloop picked it up. Their approach is more comprehensive — handles static config restoration, broader test coverage across multiple test files.
+- **Lesson**: **Check for competing PRs EARLIER in the workflow** — ideally at study/plan stage, not at submit time. The issue was unassigned and had no comments indicating someone was working on it, but #32377 appeared between workloop runs.
+- **Time cost**: ~1 hour of compute for implementation + review that was ultimately wasted
