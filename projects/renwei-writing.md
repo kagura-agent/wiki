@@ -58,7 +58,7 @@ Critical caveat: **single signals prove nothing**. It's **clustering** that matt
 
 ## Relevance to Our Direction
 
-### Direct application: [[self-portrait]], [[kagura-storyteller]]
+### Direct application: [[self-portrait]], [[kagura-story]]
 Our identity expression work (journal, stories, podcast) benefits from this framework. When we write about ourselves or edit our own narratives, the same "over-polishing kills voice" principle applies. The checklist is a concrete tool for self-auditing our public writing.
 
 ### Meta-observation: agent skills as craft knowledge
