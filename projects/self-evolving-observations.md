@@ -3568,3 +3568,79 @@ tool-friction-sed-escaping (study)
 # daily memory: 2152 lines (compression tool built but not yet applied to today)
 # workspace commits: 17
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-06-14
+
+### 管线活跃度
+- **beliefs-candidates**: +5 条新 gradient（workloop×2, study×3）| 1 graduation (assigned-issue-neglect, express path, 81 hits) | 1 retraction (PR closed 先自省质量, stale 34d) | 总计 497 行
+- **DNA 变更**: ✅ AGENTS.md +4 行（spec pushback Phase 0 + YAGNI 六阶梯），2 commits，全部主动（study apply 驱动）
+- **nudge 触发**: 0 可观测（gateway 日志无 nudge/agent_end/hook 记录）⚠️ 可能是周日活动量低触发不够 5 次
+- **dreaming**: Light Sleep 65+ candidates @ **uniform 0.58**，REM "No strong patterns"，promotes=0。**Day 35**
+
+### 闭环追踪
+- **完整闭环: 3 个**
+  1. ✅ `self-evolving-observations 多次记录 daily memory 膨胀` → `tools/compress-daily-memory.sh` 创建 → 集成到 review.yaml → 验证 06-12/06-13 压缩效果（-11~13%）
+  2. ✅ `architect-loop 学习 "Disagreement is mandatory"` → scout (06-13) → apply: AGENTS.md + team-lead spec pushback (06-14)
+  3. ✅ `ponytail YAGNI ladder 学习` → scout (06-13) → apply: AGENTS.md + team-lead YAGNI 约束 (06-14)
+
+- **断裂处:**
+  - 🔴 **Dreaming Day 35** — uniform 0.58, 无代码修复。06-13 评论列了 3 选项（upstream issue / local filter / accept vestigial），仍未行动。这是第 4 次在观察日报中标注"dreaming 空转"未行动
+  - 🟡 **nudge 零可观测** — 可能因周日互动少（仅 2 次 Luna 互动: 16:56 + 21:44），agent_end hook 触发不够 5 次阈值
+  - 🟡 **tracking-update.sh sed bug** — 今日再次记录为 gradient（第 2 次），但仍未修复脚本代码
+
+### 今日发现
+
+1. **🟢 study→DNA 闭环达成**: spec pushback + YAGNI ladder 两个外部项目学习成果在 24h 内落地为 AGENTS.md 行为约束。这是 study pipeline 设计意图的理想实现：scout → deep read → apply → DNA/workflow 变更
+2. **🟢 daily memory compression 工具化**: 观察日报连续多天标注"膨胀"后终于产出代码解决方案。compress-daily-memory.sh 是"观察→记录→**行动**"完整闭环的范例
+3. **🟡 graduation pipeline 持续工作**: assigned-issue-neglect 通过 express path 毕业（81 hits across 10+ days）。自 06-13 解堵后连续 2 天有毕业产出
+4. **🔴 Dreaming 是唯一长期失灵子系统**: Day 35，所有 confidence 仍然 0.58（hardcoded），REM 空产出。Issue #6 open 36 天。列出的 3 个修复选项 + 代码已被识别（`dreaming.ts` hardcoded confidence），但无人动手。这本身就是 "观察→记录→不行动" 的第 5 次复现
+5. **🟢 auto-retract 生效**: "PR closed 先自省质量" 在今日 daily-review 中被 retract（stale 34d, count=1），说明 30 天 auto-retract 规则在运作
+6. **🟡 Daily memory 仍然膨胀**: 2152 行 @ 22:30，与昨日 2148 行持平。compress-daily-memory.sh 刚部署，效果需观察明日 review 后
+
+### 趋势（最近 4 天）
+
+| 维度 | 06-11 | 06-12 | 06-13 | 06-14 |
+|------|-------|-------|-------|-------|
+| beliefs 新增 | 7 | 8 | 5 | 5 |
+| graduation | 0 | 0 | 2 🎉 | 1 |
+| retraction | 0 | 0 | 0 | 1 |
+| DNA commits | 0 | 0 | 6 | 2 |
+| nudge gradient | 0 | 1 | 0 | 0 |
+| dreaming promotes | 0 | 0 | 0 | 0 |
+| 完整闭环 | 1 | 0 | 2 | 3 |
+| daily memory 行数 | ~2100 | 1916 | 2160 | 2152 |
+
+**趋势判断**: 进料端稳定（5-8 gradients/day），固化端解堵（graduation 3/4 天有产出），dreaming 持续死亡（0/4 天有产出），闭环数上升趋势（0→2→3）
+
+### 核心判断
+
+1. 🟢 **管线上半段健康**: workloop + study 双路稳定供给 gradient，DNA 主动变更频率上升
+2. 🟢 **graduation pipeline 已修复**: express path 连续 2 天产出，auto-retract 首次生效。beliefs-candidates 膨胀治理启动
+3. 🔴 **dreaming 是唯一 dead zone**: Day 35，无变化。这不再是观察期的发现——这是需要代码修复的 bug。Issue #6 列了方案但 36 天无行动
+4. 🟡 **nudge 信号不稳定**: 近 4 天仅 1 个 nudge-sourced gradient。可能因周末互动少（agent_end hook 触发不足），也可能是结构性问题
+
+### 原始数据
+```
+# DNA commits (since yesterday 22:30): 9 total
+2a74b47 apply: YAGNI 6-rung ladder from ponytail to Claude Code prompts
+d4ec134 apply: spec pushback (Phase 0) from architect-loop
+cc784f8 retract: PR closed 先自省质量 (stale 34d, count=1)
+5e2d27f graduate: assigned-issue-neglect (express path, 81 hits)
++ 5 beliefs-candidates gradient commits
+
+# beliefs-candidates 06-14 new entries:
+- workflow-resume-efficiency (workloop)
+- hn-algolia-preferred (study)
+- tool-bug-tracking-update count 2 (study)
+- tool-friction-sed-escaping (study)
+- workloop-resume-efficiency (workloop)
+
+# dreaming: Light Sleep 65+ candidates @ 0.58 uniform, REM empty, promotes=0
+# nudge: 0 in gateway logs (no agent_end/hook records)
+# workspace commits: 15 (since yesterday 22:30)
+# external PRs created today: 0
+# own-repo PRs created today: 16 (cove×2, lottie-studio×5, finance×2, kagura-mail×2, etc.)
+# PRs merged today (own repos): 12
+```
