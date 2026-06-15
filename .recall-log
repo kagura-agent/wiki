@@ -880,3 +880,14 @@
 2026-06-15T03:17:36+08:00|neutral|exponential decay temporal relevance retrieval|cards/temporal-decay-retrieval,projects/elephant-agent,projects/agentops,cards/progressive-retrieval,projects/agent-memory-hooks-neo4j,temporal-decay-retrieval,cjk-bridge-search,krusch-context-mcp,progressive-retrieval,recall-frequency-boost
 2026-06-15T03:17:39+08:00|neutral|context window budget allocation strategy|cards/context-window-management,cards/context-budget,cards/context-budget-constraint,cards/context-rot,cards/context-budget-baseline-2026-04-14,context-window-management,context-budget-constraint,context-budget,context-management,multi-tier-qa-strategy
 2026-06-15T08:21:19+08:00|neutral|dreaming hardcoded confidence|projects/dreaming-observation,projects/self-evolving-observations,cards/pr-superseded-lessons,cards/dreaming,cards/dreaming-vs-beliefs-candidates,dreaming-observation,mineecho,ghostwork,claude-soul,pr-superseded-lessons
+2026-06-15T09:23:48+08:00|neutral|agent trending|projects/agent-ecosystem-scout-2026-03-25,GitHub Trending 本周 Top 10,projects/agent-ecosystem-scout-2026-04-05,GitHub Trending (2026-04-05),projects/agent-ecosystem-scout-2026-04-16,agent-ecosystem-scout-2026-06-02,agent-ecosystem-scout-2026-04-16,agent-ecosystem-scout-2026-06-12
+2026-06-15T09:24:50+08:00|neutral|omnigent|projects/omnigent,projects/renwei-writing,omnigent,agent-ecosystem-scout-2026-06-13
+2026-06-15T09:24:50+08:00|neutral|sideshow modem visual surface terminal|projects/invincat,projects/agentic-stack,agent-ecosystem-scout-2026-06-13,flowforge
+2026-06-15T09:24:51+08:00|neutral|loom valkor loop engineering|projects/valkor-ai-loom,projects/agent-ecosystem-scout-2026-06-11,valkor-ai-loom,agent-ecosystem-scout-2026-06-11
+2026-06-15T09:24:57+08:00|neutral|SpatialClaw nvidia spatial|projects/agent-ecosystem-scout-2026-03-25,GitHub Trending 本周 Top 10,projects/nemoclaw
+2026-06-15T09:24:59+08:00|neutral|agentic-sop-to-work SOP workflow|projects/skelm,projects/agentic-stack,adaptive-workflow-rigidity,agent-self-evolution
+2026-06-15T09:25:00+08:00|neutral|xcode agent skills apple|projects/xcode27-skills,projects/agent-ecosystem-scout-2026-06-11,xcode27-skills,agent-ecosystem-scout-2026-06-11
+2026-06-15T09:25:08+08:00|neutral|FableCodex codex fable|cards/claude-code-vs-codex-plugin-systems,cards/codex-on-use-auth-policy,agent-ecosystem-scout-2026-06-14,architect-loop
+2026-06-15T09:46:54+08:00|neutral|Beads gastownhall|projects/beads,projects/agent-ecosystem-scout-2026-06-10,projects/self-evolving-observations,agent-ecosystem-scout-2026-06-10,beads
+2026-06-15T09:46:54+08:00|neutral|nanobot HKUDS|projects/nanobot,cards/self-evolving-agent-landscape,cards/write-ahead-session-persistence,write-ahead-session-persistence,DeepTutor,deeptutor
+2026-06-15T10:28:56+08:00|neutral|tracking-update shell tool|projects/self-evolving-observations,projects/tracking-health-tool,projects/elephant-agent,tracking-health-tool,loop-engineering,mcp-vs-native-tools

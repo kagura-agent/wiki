@@ -3,7 +3,7 @@ title: tracking-health.sh
 type: tool
 created: 2026-05-05
 status: active
-last_verified: 2026-06-04
+last_verified: 2026-06-15
 ---
 
 # tracking-health.sh — Tracking Portfolio Health Dashboard
@@ -81,3 +81,23 @@ The tracking list grew to 51 items organically. `tracking-due.sh` only shows tod
 **Behavioral change**: `audit-targets.sh` now surfaces data source divergence during followup prep, enabling synchronization before drift compounds. Before: only TTL/staleness checks. After: full portfolio consistency verification.
 
 Links: [[tracking-due-script]], [[cured-tracking-methodology]], [[self-evolving-observations]]
+
+## 2026-06-15 Fix: tracking-update.sh sed escape bug
+
+**Problem**: 3-time DNA preflight recidivist (`tool-friction-sed-bug`). `tracking-update.sh` failed with noisy stderr when notes contained regex special chars (`/`, `(`, `|`). Pipe chars `|` in notes silently corrupted the markdown table.
+
+**Root cause**: Three issues compounding:
+1. `$PROJECT` used unescaped in `grep -P` regex — chars like `.`, `(`, `+` in project names caused match failures
+2. No sanitization of `|` in user-provided notes — pipes broke markdown table column alignment
+3. Greedy `.*` in name extraction sed `s/.*\[\(.*\)\].*/\1/` — could overcapture with multiple bracket pairs
+
+**Fix**:
+1. Added `perl -pe` regex escaping for `$PROJECT` before grep pattern interpolation
+2. Pipe chars in notes replaced with `∣` (U+2223, visually identical, table-safe)
+3. Changed to non-greedy `[^]]*` in name extraction: `s/.*\[\([^]]*\)\].*/\1/`
+
+**Pattern**: Shell scripts that interpolate user input into regex patterns need an escape layer. Bare variable expansion in `grep -P "...$VAR..."` is a regex injection bug. Either escape with `\Q$VAR\E` (PCRE) or pre-escape with `perl -pe`.
+
+**Lesson**: This was a 3-time recidivist because each occurrence was non-blocking (dates updated correctly, stderr noise ignored). Low-severity bugs that don't crash become invisible to fix-prioritization. The DNA preflight recidivist counter was what finally forced attention.
+
+Links: [[study-workflow]], [[self-evolving-observations]]
