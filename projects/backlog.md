@@ -1300,3 +1300,4 @@ GitHub trending (agent, created past week, sorted by stars):
 - **What**: Quality gates for AI-generated code — catches failure modes in code, tests, docs
 - **Why interesting**: Guard rails for coding agents. Could improve our 打工 PR quality
 - **Priority**: Medium — review when next doing apply mode
+| agentic-sop-to-work | s0912758806p/agentic-sop-to-work | 178⭐ | scout | 2026-06-15 | Deep read done. trace_gate anti-fabrication + Stop-hook regression. Claude Code plugin. Solo maintainer. |

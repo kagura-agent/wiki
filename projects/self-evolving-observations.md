@@ -3707,3 +3707,10 @@ df21103 audit fix: merge 3 sed-bug entries into tool-friction-sed-bug count=3, d
 # external PRs: 0 new, 6 open waiting review
 # nudge triggers: 0 observable
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-06-16
+
+### 管线改进
+- **study-cron-saturation-noise 修复**: 新增 `saturation_gate` 节点到 study.yaml（start 节点变更: align → saturation_gate → align）。当日 memory 已有 ≥2 次全模式饱和记录时，10ms bash check 直接退出，不走完整 workflow。配套脚本 `tools/study-saturation-gate.sh`（行首锚定 regex，避免匹配引用/候选行内的误触发）。预估影响：饱和日减少 ~40 行 memory 噪音。来源：beliefs-candidates gradient（06-15, 第1次）→ 同日 apply 修复。闭环用时: 1 天。
