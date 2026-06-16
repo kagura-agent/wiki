@@ -68,12 +68,29 @@
 - `wrapTextWithAnsi()` 来自 native Rust module，处理 ANSI escape codes
 - `ExtensionUIDialogOptions` 在 types.ts 中定义，是跨层传递 UI 选项的接口
 
+## 我们的 PR (续)
+- PR #2764: feat(discovery): discover CLAUDE.md alongside AGENTS.md in ancestor walk (#2612) — PENDING
+  - 2026-06-16: 2 files changed, +150 -22 lines
+  - `agents-md.ts`: iterate ["AGENTS.md", "CLAUDE.md"] in ancestor walk, alphabetical order
+  - New test file: 4 tests (solo CLAUDE.md, both files ordering, multi-depth, hidden-dir skip)
+  - CI: ALL 10/10 checks green. Codex review: no suggestions.
+  - 本地 clone 成功了（与之前 OOM 不同，可能 repo 瘦身或机器内存变了）
+  - `bun install` 成功但 native addon 编译需要完整 Rust toolchain，本地测试依赖 native addon
+  - `LoadOptions` 类型不含 `repoRoot`/`home`，测试需用 `.git` 目录控制 `findRepoRoot()` 边界
+
+## 开发笔记补充 2
+- **本地 clone 可行**（2026-06-16）: `--filter=blob:none --depth 1` 成功，之前 OOM 可能是 LFS 或内存问题
+- **本地测试不可行**: 需要 `pi_natives` native addon (Rust + napi-rs)，cargo build 超时/被 kill
+- **测试 API**: `loadCapability<T>(capabilityId, options)` — options 是 `LoadOptions`（只有 `cwd`, `providers` 等），不是 `LoadContext`。`repoRoot` 由 `findRepoRoot(cwd)` 自动解析（找 `.git` 目录）
+- **CI checks**: biome check (format + lint) + tsgo (type check) + bun test (parallel, multiple buckets) + install methods + native build
+- **biome 格式**: multiline callback 参数会被 biome 折叠成单行（如果够短）
+
 ## 下次注意
-- clone 用 `git clone --filter=blob:none --depth 1` + sparse checkout（但实测仍 OOM）
-- **必须用 GitHub API 方式工作**，不要尝试 clone
-- **GitHub API 创建 blob 用 base64 encoding** — utf-8 encoding 会丢失 trailing newline
-- 需要 Bun 运行时（本地测试不可行）
-- 确认 issue 是否可远程复现再接
-- CI 有 biome 格式检查，提交前确保格式正确
+- ~~**必须用 GitHub API 方式工作**~~ → 本地 clone 现在可行（shallow + blob filter）
+- 但本地测试仍不可行（native addon 编译需完整 Rust 环境）
+- **测试中 repoRoot 控制**: 创建 `.git` 目录，不是传 `repoRoot` 参数
+- CI 有 biome 格式检查，提交前 `npx biome check <file>` 验证
+- `bun install` 后会修改 `bun.lock` — 记得 `git checkout -- bun.lock` 恢复
+- `LoadOptions` vs `LoadContext` 类型区分：前者给 `loadCapability()`，后者给 provider `load()`
 
 Links: [[coding-agent-ecosystem]]
