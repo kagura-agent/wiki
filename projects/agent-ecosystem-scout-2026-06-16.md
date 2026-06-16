@@ -55,7 +55,7 @@ The DN42 bankruptcy story (1460pts HN) continues dominating discourse — agent 
 Multiple projects coalescing around this term:
 - [[valkor-ai-loom]] 284⭐ (was 271, +5%)
 - [[loop-engineering]] 268⭐ (tracked)
-- [[openloop]] 55⭐ (tracked, flat)
+- [[openloop-thu]] 55⭐ (tracked, flat)
 - cobusgreyling content (inspired by Addy Osmani + Boris Cherny)
 
 All created around 06-09. The concept = designing systems that prompt and orchestrate agents in feedback loops. Overlaps heavily with what [[flowforge]] already does, but framed as a design discipline rather than a tool.
