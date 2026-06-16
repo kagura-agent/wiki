@@ -1,23 +1,37 @@
 {
-  "timestamp": "2026-06-15T20:07:00+08:00",
-  "total_files": 926,
+  "timestamp": "2026-06-16T10:07:00+08:00",
+  "total_files": 929,
   "cards": 400,
-  "projects": 445,
-  "wikilinks": 3501,
-  "errors": 0,
-  "warnings": 84,
-  "orphans": 4,
-  "broken_links": 0,
-  "collisions": 1,
-  "index_drift": 20,
+  "projects": 448,
+  "wikilinks": 3538,
+  "errors": 2,
+  "warnings": 65,
+  "broken_links": 2,
+  "broken_links_detail": [
+    "projects/agent-ecosystem-scout-2026-06-16.md -> [[openloop]]",
+    "projects/paca.md -> [[openhands]]"
+  ],
+  "orphans": 2,
+  "orphan_detail": [
+    "agent-ecosystem-scout-2026-06-16",
+    "paca"
+  ],
+  "index_drift": 3,
+  "index_drift_detail": [
+    "projects/agent-ecosystem-scout-2026-06-16.md not in index.md",
+    "projects/paca.md not in index.md",
+    "projects/superlog.md not in index.md"
+  ],
   "stubs": 0,
-  "stale": 187,
+  "duplicate_slugs": 1,
+  "duplicate_slugs_detail": ["README (3 files)"],
   "frontmatter_issues": 214,
-  "zero_outbound_links": 105,
-  "secrets_found": 0,
+  "cards_zero_outbound_links": 105,
+  "stale_files": 188,
+  "secrets_detected": 0,
   "unicode_suspicious": 8,
-  "error_book_open": 86,
-  "error_book_new": 4,
-  "error_book_recurring": 79,
-  "error_book_auto_closed": 1
+  "error_book_new": 7,
+  "error_book_recurring": 59,
+  "error_book_auto_closed": 54,
+  "error_book_total_open": 66
 }

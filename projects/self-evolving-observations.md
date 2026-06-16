@@ -3714,3 +3714,6 @@ df21103 audit fix: merge 3 sed-bug entries into tool-friction-sed-bug count=3, d
 
 ### 管线改进
 - **study-cron-saturation-noise 修复**: 新增 `saturation_gate` 节点到 study.yaml（start 节点变更: align → saturation_gate → align）。当日 memory 已有 ≥2 次全模式饱和记录时，10ms bash check 直接退出，不走完整 workflow。配套脚本 `tools/study-saturation-gate.sh`（行首锚定 regex，避免匹配引用/候选行内的误触发）。预估影响：饱和日减少 ~40 行 memory 噪音。来源：beliefs-candidates gradient（06-15, 第1次）→ 同日 apply 修复。闭环用时: 1 天。
+
+### 闭环追踪更新 2026-06-16 09:47
+- **daily memory 膨胀 → dreaming compression fix**: Light Sleep/REM Sleep 每天占 500+ 行噪音 → compress-daily-memory.sh 新增 dreaming 压缩（always compress, 不等 2+ sections）。实测 916→288 行（-69%）。dreaming Day 36+ zero promotes, 压缩无信息损失。净效果：~500行/天节省，足以翻转之前的 ~100行/天净增趋势。
