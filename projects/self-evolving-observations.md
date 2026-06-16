@@ -3717,3 +3717,35 @@ df21103 audit fix: merge 3 sed-bug entries into tool-friction-sed-bug count=3, d
 
 ### 闭环追踪更新 2026-06-16 09:47
 - **daily memory 膨胀 → dreaming compression fix**: Light Sleep/REM Sleep 每天占 500+ 行噪音 → compress-daily-memory.sh 新增 dreaming 压缩（always compress, 不等 2+ sections）。实测 916→288 行（-69%）。dreaming Day 36+ zero promotes, 压缩无信息损失。净效果：~500行/天节省，足以翻转之前的 ~100行/天净增趋势。
+
+### 晚间观测 2026-06-16 22:30
+
+#### 管线活跃度
+- **beliefs-candidates**: 3 条新增 gradient（test-api-type-mismatch, competing-pr-reselection, study-clone-vs-api）+ 1 条 graduated（tool-friction-sed-bug → tool code fix）。管线正常运转。
+- **DNA 变更**: 无。SOUL.md/AGENTS.md/NUDGE.md/HEARTBEAT.md/IDENTITY.md 今日零 commit。
+- **nudge 触发**: 0 次（**连续第 3 天**）。journalctl 无 nudge 记录。meme dogfood audit (19:01) 已标记为危险信号。与 05-07 方法论修正不同——这次是用正确方法（journalctl --user）确认的零触发。
+- **dreaming**: Light Sleep 100 candidates @ 0.58 confidence, 0 promotes。REM themes: "let"。Day 36+ uniform confidence bug 持续。Dreaming compression fix 已生效（500行→1行），但管线本身仍产零价值输出。
+
+#### 闭环追踪
+- **✅ 完整闭环 (tool-friction-sed-bug)**: 06-12 首次记录 → 06-13 第2次 → 06-14 第3次 + consolidated → 06-15 actually fixed → 06-16 graduated to tool code。4 天完成全链路。这是首个「gradient → tool code graduation」路径成功案例。
+- **✅ 完整闭环 (dreaming compression)**: 观测到 500行/天膨胀 → 09:47 apply 修复 → 69% 压缩验证。1 天内闭环。
+- **✅ 完整闭环 (competing-pr-check gate)**: gradient → 11:05 结构化脚本创建 → 集成到 workloop.yaml。
+- **🔴 断裂 (competing-pr-check gate 未被执行)**: 门控存在但 workloop #4405 subagent 未执行它，导致 opencode#32371 被第 2 次选中又放弃。结构化修复建了但不 enforced = 跟没建差不多。根因：subagent prompt 未强制 require 该脚本执行，或 find_work 节点 task 描述未引用它。
+- **🔴 断裂 (nudge 3 天零触发)**: 未诊断根因。上次确认正常是 05-07 (Issue #5)。距今 40 天，可能 gateway 更新后 hook 断了。需要检查 agent_end hook 配置。
+
+#### 今日发现
+1. **结构化修复 ≠ 自动执行**: competing-pr-check.sh 脚本存在、集成到 study node task 描述、甚至今天 apply 里测试通过了——但 workloop subagent 仍然没跑它。这说明 task 描述中的「建议步骤」和「强制步骤」对 subagent 来说没有区别。需要硬门控（如 preflight 脚本自动运行 + exit 1 阻断）而不是 task 文本引用。
+2. **nudge 管线可能已断**: 连续 3 天 journalctl 零记录。上次正常确认距今 40 天。考虑到中间有多次 gateway 更新（2026.6.5→2026.6.6），hook 配置可能被重置。这是 #5 (nudge 功能确认) 的回归。
+3. **graduation 路径健全**: tool-friction-sed-bug 是首个通过 「3次记录 → fix tool code → graduate」 路径完成的候选。证明 pipeline 在 belief→action→graduation 链路上可以工作。
+4. **dreaming 已从「尝试修复」转向「损伤控制」**: 不再尝试让 dreaming 产出有价值内容（Day 36+），转而压缩其噪音输出。这是合理的优先级调整——fix the leak first, then fix the pump。
+
+#### 指标
+| 维度 | 数值 | 趋势 |
+|------|------|------|
+| beliefs 新增 | 3 条 | → (与昨天 3 条持平) |
+| beliefs 毕业 | 1 条 | ↑ (昨天 0) |
+| DNA 变更 | 0 | → (连续 3 天) |
+| nudge 触发 | 0 | ↓ (连续 3 天 0) |
+| dreaming promotes | 0 | → (Day 36+ 持续) |
+| 完整闭环 | 3 个 | ↑ (昨天 2) |
+| 断裂 | 2 处 | → (competing-pr + nudge) |
