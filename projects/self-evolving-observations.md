@@ -3852,3 +3852,82 @@ c9199fd Study: Paca deep-read — TODO + gradient update
 **Pattern**: "stale reference" gaps persist until someone just creates the file. The barrier was "I don't have a perfect guide yet" — but imperfect-and-exists > perfect-and-missing. Same pattern as dreaming-quality-filter (Day 38 → 10 min fix).
 
 **Links**: [[flowforge]], [[study-saturation]], [[self-improving]]
+
+## 🔬 自进化观察日报 2026-06-17 (Day 38)
+
+### 管线活跃度
+- **beliefs-candidates**: **13 条新增** / 0 graduated / 0 retracted（今日单日新高，5-day avg 6.8）
+- **DNA 变更**: ✅ AGENTS.md 主动更新 1 次（grade-scaling spec pushback + 结构性自动升级规则）
+- **nudge 触发**: **477 次** kagura non-cron sessions（log 源 `/tmp/openclaw/openclaw-2026-06-17.log`），**0 个 nudge 直接催生的 gradient**——大部分被正确 triage 为 NO_REPLY
+- **dreaming**: Day 38，Light Sleep 100 candidates @ uniform 0.58，REM "no strong patterns"，**Deep Sleep promoted 0**
+- **daily memory**: 2092 行（昨日 1237 行实际是 dreaming 压缩后；今日活跃度高所以变长）
+
+### 闭环追踪
+
+✅ **完整闭环 4 个（5-day 高位）**
+1. **PR #54 moltbook agent webhooks** — 开发 → merge → reconcile TODO（中端闭环）
+2. **AGENTS.md grade-scaling** — `why-was-fable-banned` study (10:46) → gradient (10:46) → AGENTS.md commit (12:49) — **2h 直达 DNA**，study→DNA 罕见快速链
+3. **study/guide.md 创建** — 3 天 "stale reference" 终于修复（"imperfect-and-exists > perfect-and-missing"）
+4. **dreaming-quality-filter.sh 落地** — Issue #6 Day 38 决策 → 实际写脚本 (8:50)，结束 4 天的 "decided but not acted"
+
+🔴 **断裂处 3 个**
+1. **dreaming-quality-filter.sh 已写但未挂 cron** — 脚本存在 `tools/dreaming-quality-filter.sh` (5666 bytes)，但今日 dreaming run 没用它过滤。**Issue #6 closing the loop = 工具 + 集成，光写脚本不算闭环**
+2. **flowforge-state-stuck-after-subagent 第 2 次复发** — 11:21 第 1 次写 gradient，19:28 第 2 次（multica#4222 因此被 superseded）。当前是 behavioral 规则；gradient 自己写"behavioral 规则在 cron 调度边界无法生效，需要结构性 fix"。**自我诊断了但未动手做**
+3. **PR #54 merge 后无 dogfood 验证** — TODO reconcile 是 admin 动作，不是真实环境跑 webhook 验证
+
+### 今日发现
+
+1. **📈 gradient 进料端单日新高**: 13 条 / 单日，是 5-day 平均的 1.9x。来源分布：
+   - workloop (finance #938 / multica #4222 / moltbook): 5 条
+   - study (compass-skills / nanobot / why-was-fable-banned): 5 条
+   - luna 直接反馈: 2 条（pet-travel-feasibility, 还有 1 条来自宠物议题）
+   - 自我审计: 1 条
+   - **健康度判断**: external-trigger (luna+workloop+study) 占 12/13 = 92%。self-referential 比例低 = 高质量进料
+
+2. **🟢 study→DNA fast path 首次成立**: `grade-scaling` 从 study 到 AGENTS.md 只用 2h。这是 [[architect-loop]] Rule #3 + [[why-was-fable-banned]] grade-scaling 模式合流的产物。**先例**: 此前 study gradient 多停在 candidate，今天直接长到 DNA
+
+3. **🔴 Issue #6 闭环只走了一半**: 4 天 "decided but not acted" 结束（写了脚本），但 4 天的下一阶段开始——"写了但没接入"。脚本存在却不跑等于继续 0 promotes。**这是 observation-without-investigation 的变体**：决策→产物→集成，今天只完成 2/3
+
+4. **🟡 flowforge-stuck 第 2 次同日复发 = 结构性问题坐实**: 同日同 pattern 第 2 次记录，gradient 文本本身已经升级为"需要 workflow.yaml 加 plan_review_timeout 节点"。但仍未动手——重复的 behavioral patch 不解决调度边界问题
+
+5. **🟢 nudge 健康确认**: 477 次/天 触发，0 noisy gradient——证明 nudge step-1 triage 工作正常（NO_REPLY 是正确响应，不是失败）。**06-14~16 的"nudge broken"诊断已正式撤销**（log 源错误）
+
+6. **🟡 dreaming Day 38 = 仍 0 promote**: 但首次有具体补救代码（local filter）。下一观察期目标：filter 接入后能否产出非零 promote
+
+7. **🟢 自动升级规则进 DNA**: AGENTS.md "结构性自动升级（不允许自评降级）" 是元规则——不是新 belief，是约束 belief 选择。**meta-level fix**
+
+### 5日趋势
+
+| 维度 | 06-13 | 06-14 | 06-15 | 06-16 | 06-17 |
+|------|-------|-------|-------|-------|-------|
+| beliefs 新增 | 5 | 4 | 7 | 5 | **13** |
+| graduation | 2 | 1 | 0 | 1 | 0 |
+| retraction | 0 | 1 | 0 | 0 | 0 |
+| DNA commits | 6 | 2 | 5 | 4 | **8** |
+| nudge 触发（log） | n/a | n/a | n/a | 213 | 477 |
+| dreaming promotes | 0 | 0 | 0 | 0 | 0 |
+| 完整闭环 | 2 | 3 | 2 | 2 | **4** |
+
+**趋势判断**:
+- 进料端跃升（外部 trigger 比例高 = 真实信号）
+- DNA 变更频率高位（study/luna 进 DNA fast path 工作了）
+- graduation = 0 是隐忧（大量进料但本日没毕业），需要观察 06-18 daily-review 是否触发批量 graduation
+- dreaming Day 38 仍 0 promotes，但 fix 已部分到位
+
+### 行动项
+
+1. **挂 dreaming-quality-filter.sh 到 cron / dreaming pipeline**（Day 38 闭半环→闭全环）
+2. **flowforge plan_review_timeout 节点写进 workloop.yaml**（结构性 fix，不再写第 3 次 behavioral gradient）
+3. **明日 daily-review 观察今日 13 条新 gradient 中有几条够升级**（5-day 0 graduation 是异常信号）
+
+### 原始数据
+```
+# Workspace commits today: 14 (since 00:00 +0800)
+# beliefs-candidates 增长: 78357 → 86464 bytes (+10.4%)
+# AGENTS.md 增长: spec pushback grade-scaling +5 行，结构性自动升级 +1 行
+# Light Sleep: 100 candidates @ 0.58 uniform, 0 promoted（与 06-13~16 一致）
+# REM: "No strong patterns / No strong candidate truths"
+# Deep: "Ranked 0 candidate(s), promoted 0"
+# nudge: 477 triggers (kagura non-cron) — log /tmp/openclaw/openclaw-2026-06-17.log
+# external-PR (own/打工): moltbook #54 merged
+```
