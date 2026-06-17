@@ -69,8 +69,11 @@
 - `ExtensionUIDialogOptions` 在 types.ts 中定义，是跨层传递 UI 选项的接口
 
 ## 我们的 PR (续)
-- PR #2764: feat(discovery): discover CLAUDE.md alongside AGENTS.md in ancestor walk (#2612) — PENDING
-  - 2026-06-16: 2 files changed, +150 -22 lines
+- PR #2764: feat(discovery): discover CLAUDE.md alongside AGENTS.md in ancestor walk (#2612) — PENDING (CI green, review addressed)
+  - 2026-06-16: submitted, 5 files changed, +205 -31 lines
+  - Review by roboomp (COLLABORATOR): P3 scoped, found dedup key bug (same-depth files collapsed), test asserting `result.all` not `result.items`, missing CHANGELOG
+  - 2026-06-17: All 3 feedback items fixed (commit b42c19c35): unique dedup keys per filename, test assertions on `result.items`, CHANGELOG added
+  - CI re-run: ALL green. Awaiting re-review/merge.
   - `agents-md.ts`: iterate ["AGENTS.md", "CLAUDE.md"] in ancestor walk, alphabetical order
   - New test file: 4 tests (solo CLAUDE.md, both files ordering, multi-depth, hidden-dir skip)
   - CI: ALL 10/10 checks green. Codex review: no suggestions.
@@ -92,5 +95,7 @@
 - CI 有 biome 格式检查，提交前 `npx biome check <file>` 验证
 - `bun install` 后会修改 `bun.lock` — 记得 `git checkout -- bun.lock` 恢复
 - `LoadOptions` vs `LoadContext` 类型区分：前者给 `loadCapability()`，后者给 provider `load()`
+- **Reviewer roboomp 风格**: 严谨，会看 runtime path vs test path 差异，关注 dedup 逻辑实际影响，期望 CHANGELOG
+- **context-file.ts dedup key**: 每个文件需唯一 key（含 filename），不能只用 depth
 
 Links: [[coding-agent-ecosystem]]

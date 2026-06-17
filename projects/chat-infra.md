@@ -1,9 +1,21 @@
 # Chat Infrastructure Research
 
-> Last updated: 2026-06-07
-> Status: 🔍 Adapter implementation spec complete, awaiting Luna greenlight
+> Last updated: 2026-06-17
+> Status: Product repositioning — Cove = Agent Work Control Room
 
-## Goal
+## Product Positioning (2026-06-17)
+
+**Cove = Agent Work Control Room**
+
+> 让你 3 秒内看到 agent 在做什么、做到哪了、需不需要你。
+
+Not IM, not kanban, not knowledge base. A glass panel over OpenClaw's runtime.
+
+Core scenarios: parallel work tracking, workflow progress, decision point surfacing, post-hoc review.
+
+Original island/mirror-world vision archived to `docs/vision-archive/README-island-v1.md`.
+
+## Original Goal (archived context)
 
 Find the best open-source Discord alternative to fork as an AI-native chat platform base. We want 80% of Discord's existing features for free, then add the AI-native 20%.
 

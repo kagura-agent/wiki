@@ -1,36 +1,25 @@
 {
-  "timestamp": "2026-06-16T20:12:00+08:00",
-  "total_files": 929,
-  "cards": 400,
-  "projects": 448,
-  "wikilinks": 3538,
-  "errors": 2,
-  "warnings": 65,
-  "broken_links": 2,
-  "orphans": 2,
+  "timestamp": "2026-06-17T10:07:00+08:00",
+  "total_files": 933,
+  "cards": 401,
+  "projects": 450,
+  "wikilinks": 3544,
+  "errors": 1,
+  "warnings": 70,
+  "broken_links": 1,
+  "orphans": 4,
+  "index_drift": 6,
+  "collisions": 1,
   "stubs": 0,
-  "stale_files": 188,
+  "stale_files": 191,
   "frontmatter_issues": 214,
-  "zero_outbound_links": 105,
-  "duplicate_slugs": 1,
-  "secrets_detected": 0,
+  "zero_outbound_links": 106,
   "unicode_suspicious": 8,
-  "invalid_facts": 0,
-  "index_drift": 3,
-  "error_book_open": 66,
-  "details": {
-    "broken_links": [
-      {"source": "projects/agent-ecosystem-scout-2026-06-16.md", "target": "openloop"},
-      {"source": "projects/paca.md", "target": "openhands"}
-    ],
-    "orphans": [
-      "projects/agent-ecosystem-scout-2026-06-16",
-      "projects/paca"
-    ],
-    "index_drift": [
-      "projects/agent-ecosystem-scout-2026-06-16.md",
-      "projects/paca.md",
-      "projects/superlog.md"
-    ]
+  "error_book": {
+    "new_issues": 5,
+    "recurring_issues": 65,
+    "clean_passes": 0,
+    "auto_closed": 32,
+    "total_open": 70
   }
 }
