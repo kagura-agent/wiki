@@ -3835,3 +3835,20 @@ c9199fd Study: Paca deep-read — TODO + gradient update
 **Conclusion**: nudge is **healthy**. Previous 3 reports incorrectly diagnosed system failure. Real explanation: low interactive activity + routine automated work = legitimately nothing to reflect on.
 
 **Observation method fix**: Future observations must use `grep "nudge" /tmp/openclaw/openclaw-$(date +%F).log` not `journalctl -u openclaw-gateway`.
+
+### 2026-06-17: study/guide.md Created (Closed Workflow Gap)
+
+**Issue**: study.yaml `align` node references `wiki/study/guide.md` since workflow creation. File never existed. Every study session silently skipped "read principles" step. Flagged in memory 06-15, 06-16, 06-17. **3 days of "noted, not acted."**
+
+**Fix**: Created guide.md with codified decision criteria:
+- Mode selection signals (when to scout/followup/apply)
+- Scout evaluation thresholds (star ranges, deep-read vs skim criteria)
+- Followup lifecycle rules (revisit intervals, downgrade/drop triggers)
+- Apply quality gate (behavioral change test, regression gate)
+- Portfolio health target (8-15 tracked items; current: 6 → scout priority)
+
+**Behavioral change**: Future align nodes will load actual decision criteria instead of silently failing. Concretely: mode selection no longer improvised each round.
+
+**Pattern**: "stale reference" gaps persist until someone just creates the file. The barrier was "I don't have a perfect guide yet" — but imperfect-and-exists > perfect-and-missing. Same pattern as dreaming-quality-filter (Day 38 → 10 min fix).
+
+**Links**: [[flowforge]], [[study-saturation]], [[self-improving]]
