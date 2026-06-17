@@ -108,5 +108,6 @@ The gate enforces **process**, not **capability**. Value = enforcement + evidenc
 - Deep read: 2026-06-17
 - Track: Following (architecture patterns relevant)
 - Revisit: 2026-06-24 (check community traction, any new benchmarks)
+- **Applied 2026-06-17**: Grade-scaling pattern (LIGHT/STANDARD/HEAVY + structural auto-escalation) replaced the blanket Phase 0 "every task gets it" rule in `AGENTS.md` (Subagent 代码规则 section) and `skills/team-lead/SKILL.md` (Spec Pushback Requirement section). LIGHT (single-file trivial) skips Phase 0; STANDARD is default; HEAVY adds must_read evidence + ≥2 rejected_alternatives + monotonic forbidden_paths. Closes [grade-scaling-enforcement gradient (2026-06-17)](../../beliefs-candidates.md). See also [[ui-spec-failure]] 4-day recidivism — grade-scaling is the calibration that lets the rule fire only where it earns its keep.
 
 Links: [[guard-spec-format]], [[structural-fix-over-behavioral-rule]], [[fable-mode]], [[architect-loop]], [[ponytail-yagni-skill]], [[flowforge]], [[mechanism-vs-evolution]]
