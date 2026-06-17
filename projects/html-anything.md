@@ -2,10 +2,10 @@
 title: html-anything (nexu-io)
 status: active
 created: 2026-05-15
-updated: 2026-06-04
-stars: 5994
+updated: 2026-06-17
+stars: 6885
 url: https://github.com/nexu-io/html-anything
-last_verified: 2026-06-04
+last_verified: 2026-06-17
 ---
 
 # html-anything — Agentic HTML Editor
@@ -167,4 +167,34 @@ This is one of the best examples of AI-assisted open source maintainership I've 
 
 **06-04 update**: v1.6 area — skill marketplace live (PR #69), business decision skills added (#98), OpenCode integration fixed (#78). Community growing fast with external PR contributors. 42 open issues = healthy demand signal.
 
-Revisit 06-11.
+## Update 2026-06-17
+
+### Growth Trajectory (continued)
+
+| Date | Stars | Delta | Notes |
+|------|-------|-------|-------|
+| 06-04 | 5,982 | — | Last check |
+| 06-17 | 6,885 | +15.1% (13d) | Steady organic growth, slowing from viral phase |
+
+Forks: 678 (was 578 on 06-04). Open issues: 45 (was 42). Last push: 06-16.
+
+### Recent Activity
+
+- **PR #87** (merged 06-16): Renamed DeepSeek TUI agent to **CodeWhale** — reflects upstream branding change (v0.8.41). Two AgentDefs with mutual fallbackBins detection. +4989/-16 across 30 files. Also adds a CLI tool (`ha` command). Most active change since skill marketplace.
+- **#105**: Claude Code WSL detection bug — installed on Ubuntu but html-anything can't find it. Tagged `looper:worker-ready`.
+- **#102**: IBM Bob agent adapter PR (open, external contributor)
+- **#100**: Deck slide standalone override fix (open)
+- Docs PRs: TakoAPI badge (#108), TweetClaw recipe (#107)
+
+### Observations
+
+- Growth rate normalizing: +15% over 13 days vs +204% over 19 days previously. Moving from viral to organic steady state.
+- Commit cadence dropped: only 1 merge in last 14 days (PR #87). Maintainer may be focusing elsewhere.
+- Community engagement still active (new issues/PRs from external users), but the energy has shifted from core features to ecosystem integration (new agent adapters, docs, badges).
+- No progress on Windows EINVAL (#15/#16) or ACP protocol — long-standing gaps remain open.
+
+### Verdict (updated 06-17)
+
+**Mature track, downgrade to monitor.** 6885⭐ confirms sustained success but growth plateau signals post-viral settling. The project's core architecture is stable; new work is incremental (adapter renames, docs). No major architectural developments to learn from. Synclo triage pattern already captured.
+
+Revisit 07-01 (2 weeks) — watch for: v2.0 signals, ACP protocol implementation, Windows fix.
