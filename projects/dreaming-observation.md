@@ -122,3 +122,24 @@ const SESSION_INGESTION_SCORE = .58;  // hardcoded for all session chunks
 **Conclusion**: Light sleep confidence is not a quality signal. It's a threshold gate (≥0.45 = candidate). True memory curation happens via manual MEMORY.md + wiki notes, not dreaming's automated pipeline.
 
 **Action**: Filed upstream issue openclaw/openclaw#87485 proposing content-dependent ingestion scoring.
+
+## 🔧 Local Quality Filter — Applied 2026-06-17
+
+**Context**: Issue #6 "decided but not acted" pattern broke on Day 38. Built `tools/dreaming-quality-filter.sh`.
+
+**What it does**: Re-ranks Light Sleep candidates by content quality heuristics. The upstream system assigns uniform 0.58 confidence to all 100 candidates, making differentiation impossible. The filter applies:
+- **Boost** (+10 to +25): User messages, insights/lessons, strategy decisions, technical findings, emotional content
+- **Penalize** (-10 to -30): Patrol reports, markdown tables, process logs, PR status checks, saturation skips, bot noise, narration
+
+**Validation** (2 days):
+- 2026-06-16: 100 candidates → 12 high / 54 med / 24 low / 10 noise
+- 2026-06-17: 98 candidates → 19 high / 51 med / 14 low / 14 noise
+
+**Key insight**: Even with uniform confidence, heuristic re-ranking successfully separates genuine cognitive content (Luna conversations, lessons learned, technical discoveries) from operational noise (patrols, process logs, status checks). The 0.58 uniform score is a [[dreaming]] upstream limitation (hardcoded in `dreaming.ts`), but local post-processing can compensate.
+
+**Next steps**:
+1. Integrate into daily-review or dedicated cron (run after dreaming, surface top candidates)
+2. File upstream issue for hardcoded confidence scores
+3. Measure: does manual promotion of top candidates improve MEMORY.md quality?
+
+**Pattern**: [[observation-without-investigation]] → [[structural-fix-over-behavioral-rule]]. 4 days of "decided but not acted" broke by actually writing the code.

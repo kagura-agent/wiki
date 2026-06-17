@@ -3749,3 +3749,89 @@ df21103 audit fix: merge 3 sed-bug entries into tool-friction-sed-bug count=3, d
 | dreaming promotes | 0 | → (Day 36+ 持续) |
 | 完整闭环 | 3 个 | ↑ (昨天 2) |
 | 断裂 | 2 处 | → (competing-pr + nudge) |
+
+---
+
+## 🔬 自进化观察日报 2026-06-16
+
+### 管线活跃度
+- beliefs-candidates: 2 条新增 (test-api-type-mismatch, competing-pr-reselection) / 1 条 graduated (tool-friction-sed-bug → tool code fix)
+- DNA 变更: 无 (SOUL.md / AGENTS.md 零改动，仅 beliefs-candidates.md 更新)
+- nudge 触发: **0 次**，质量 N/A — **连续第 3 天无触发**（gateway 日志无 nudge 记录、无 system event enqueued）
+- dreaming: 运行/仍 broken，Light Sleep 100 candidates @ 0.58 uniform，0 promotes。**Day 37。**
+
+### 闭环追踪
+- 完整闭环: 2 个
+  1. **dreaming memory compression**: 观察到 Light Sleep/REM 占每日 memory 55%（500+ 行） → compress-daily-memory.sh 新增 dreaming 压缩逻辑 → 实测 916→288 行（-69%）。闭环用时: <1 天
+  2. **competing-pr-check**: 昨日第 2 次 gradient → 今日 study apply 写了 `tools/competing-pr-check.sh` 结构性 gate。闭环用时: 1 天
+- 断裂处:
+  1. **dreaming quality filter (Option 2)** — 06-15 决定执行，06-16 未动手。**Day 2 of "decided but not acted"**。压缩了 dreaming 在 memory 的噪音，但没修 dreaming 本身
+  2. **nudge 连续 3 天沉默** — 06-14 开始标记异常，06-16 仍未诊断。没有跑 dream-health.sh 或查 agent_end hook 配置
+  3. **Issue #6 planned action not executed** — 06-15 评论说 "will write post-dreaming filter script"，今天只做了 memory 压缩（减轻症状而非修病因）
+
+### 今日发现
+
+1. **📊 graduation 生产力**: 1 graduation today (tool-friction-sed-bug). 这是通过 daily-review 自动触发的 — 证明 auto-graduation 管线正常工作。累计 22 graduated all-time
+2. **🔴 nudge 第 3 天沉默 = 确认异常**: 这不是 "低活动" 可以解释的。今天有 14+ workloop interactions（study, PR跟进, memes batch）。agent_end hook 理应触发。可能的根因：hook 配置失效、gateway 更新后 hook 未重载、或 nudge 频率阈值太高
+3. **🟡 Issue #6 的 "decided but not acted" 模式正在复现**: Day 34 列出 3 options → Day 35 "still not acted" → Day 36 "decide Option 2" → Day 37 still no filter script。这本身就是 observation-without-investigation (05-28 gradient) 的又一次复现
+4. **✅ memory 膨胀趋势反转**: dreaming compression (500行/天) + patrol merging + saturation gate = 净减少。今天 memory 应该显著短于昨天（尚未验证压缩后数据）
+5. **✅ study apply 生产力高**: 今天 study apply 产出 2 个结构性工具修复（competing-pr-check.sh + dreaming compression）。quality > quantity
+6. **🟡 PR 活跃但外部 merge 停滞**: 10 PRs created/merged today（全是 own repos）。6 external PRs 仍在等 review（最长 6 天）。pipeline throughput 正常但 external conversion 零
+
+### 趋势更新（最近 5 天）
+
+| 维度 | 06-12 | 06-13 | 06-14 | 06-15 | 06-16 |
+|------|-------|-------|-------|-------|-------|
+| beliefs 新增 | 8 | 5 | 5 | 7 | 2 |
+| graduation | 0 | 2 | 1 | 0 | 1 |
+| retraction | 0 | 0 | 1 | 0 | 0 |
+| DNA commits | 0 | 6 | 2 | 5 | 4 |
+| nudge gradient | 1 | 0 | 0 | 0 | 0 |
+| dreaming promotes | 0 | 0 | 0 | 0 | 0 |
+| 完整闭环 | 0 | 2 | 3 | 2 | 2 |
+| daily memory 行数 | 1916 | 2160 | 2152 | 2255 | TBD* |
+
+*06-16 memory 已压缩 dreaming sections（-628 行），预计远低于 2255
+
+**趋势判断**: 
+- 进料端下降 (2 vs 7-day avg 5.4) — 可能因为 workloop 活动集中在 own-repo (less novel gradient material)
+- graduation 稳定 (1/day avg maintained)
+- nudge = 0 连续 3 天是系统故障信号，不再是观察维度而是 action item
+- dreaming Day 37 = confirmed dead, 但 Issue #6 的 fix plan 在断裂
+
+### 原始数据
+```
+# DNA-related commits today: 4 (all beliefs-candidates.md)
+7de5f00 gradient: test-api-type-mismatch (LoadOptions vs LoadContext)
+ae7f088 gradient: competing-pr-reselection
+c9199fd Study: Paca deep-read — TODO + gradient update
+40aca6e daily-review: memory hygiene — compress daily memory, beliefs graduation (sed-bug), trim DREAMS, L1 regen, coactivation rebuild
+
+# workspace commits total: 9 (since today 00:00)
+# Light Sleep: 100 candidates @ 0.58 uniform (unchanged)
+# REM: themes "let" (empty)
+# Promotes: 0
+# beliefs-candidates total: ~160 entries, 22 graduated, 9 retracted
+# External PRs: 0 new today, 6 open waiting review (longest: 6 days)
+# Own-repo PRs: 10 PRs (7 merged, 2 open, 1 finance merged)
+# nudge: 0 in gateway logs (journalctl grep = empty)
+```
+
+### ⚠️ CORRECTION: Nudge NOT Broken — Previous Reports Used Wrong Log Source
+
+**Previous methodology error**: Reports from 06-14, 06-15, 06-16 all claimed "nudge = 0 triggers" based on `journalctl -u openclaw-gateway` which returns EMPTY because the gateway runs as a systemd **user** service (not system service). The correct log source is `/tmp/openclaw/openclaw-YYYY-MM-DD.log`.
+
+**Actual data (from correct log):**
+- **213 total nudge triggers today** (all sessions, all agents)
+- **4 triggers on kagura non-cron sessions** (discord channels + commitments)
+- Nudge plugin loaded correctly: `interval=5, mode=system-event, skipTriggers=heartbeat, skipSessionPatterns=dreaming`
+- All triggers show "System event enqueued successfully"
+
+**Why no visible gradient output in memory?**
+1. Most activity is automated (cron/workloop) — nudge fires but cron tasks are routine, nothing to learn → NO_REPLY
+2. Luna hasn't chatted since 06-13 → very few interactive sessions → few opportunities for novel gradient material
+3. Nudge reflections correctly triage most turns as trivial (per NUDGE.md Step 1)
+
+**Conclusion**: nudge is **healthy**. Previous 3 reports incorrectly diagnosed system failure. Real explanation: low interactive activity + routine automated work = legitimately nothing to reflect on.
+
+**Observation method fix**: Future observations must use `grep "nudge" /tmp/openclaw/openclaw-$(date +%F).log` not `journalctl -u openclaw-gateway`.

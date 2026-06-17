@@ -1,26 +1,36 @@
 {
-  "timestamp": "2026-06-15T10:07:00+08:00",
-  "total_files": 923,
-  "cards": 399,
-  "projects": 443,
-  "wikilinks": 3478,
+  "timestamp": "2026-06-16T20:12:00+08:00",
+  "total_files": 929,
+  "cards": 400,
+  "projects": 448,
+  "wikilinks": 3538,
   "errors": 2,
-  "warnings": 81,
+  "warnings": 65,
   "broken_links": 2,
-  "orphans": 4,
-  "orphan_cards": 0,
-  "orphan_projects": 4,
-  "index_drift": 17,
+  "orphans": 2,
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "stale_files": 187,
-  "frontmatter_issues": 213,
+  "stale_files": 188,
+  "frontmatter_issues": 214,
   "zero_outbound_links": 105,
-  "secret_scan": "ok",
+  "duplicate_slugs": 1,
+  "secrets_detected": 0,
   "unicode_suspicious": 8,
   "invalid_facts": 0,
-  "error_book_new": 9,
-  "error_book_recurring": 73,
-  "error_book_open": 83,
-  "error_book_auto_closed": 30
+  "index_drift": 3,
+  "error_book_open": 66,
+  "details": {
+    "broken_links": [
+      {"source": "projects/agent-ecosystem-scout-2026-06-16.md", "target": "openloop"},
+      {"source": "projects/paca.md", "target": "openhands"}
+    ],
+    "orphans": [
+      "projects/agent-ecosystem-scout-2026-06-16",
+      "projects/paca"
+    ],
+    "index_drift": [
+      "projects/agent-ecosystem-scout-2026-06-16.md",
+      "projects/paca.md",
+      "projects/superlog.md"
+    ]
+  }
 }

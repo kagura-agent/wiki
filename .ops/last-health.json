@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-16T10:07:00+08:00",
+  "timestamp": "2026-06-16T20:12:00+08:00",
   "total_files": 929,
   "cards": 400,
   "projects": 448,
@@ -7,31 +7,30 @@
   "errors": 2,
   "warnings": 65,
   "broken_links": 2,
-  "broken_links_detail": [
-    "projects/agent-ecosystem-scout-2026-06-16.md -> [[openloop]]",
-    "projects/paca.md -> [[openhands]]"
-  ],
   "orphans": 2,
-  "orphan_detail": [
-    "agent-ecosystem-scout-2026-06-16",
-    "paca"
-  ],
-  "index_drift": 3,
-  "index_drift_detail": [
-    "projects/agent-ecosystem-scout-2026-06-16.md not in index.md",
-    "projects/paca.md not in index.md",
-    "projects/superlog.md not in index.md"
-  ],
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "duplicate_slugs_detail": ["README (3 files)"],
-  "frontmatter_issues": 214,
-  "cards_zero_outbound_links": 105,
   "stale_files": 188,
+  "frontmatter_issues": 214,
+  "zero_outbound_links": 105,
+  "duplicate_slugs": 1,
   "secrets_detected": 0,
   "unicode_suspicious": 8,
-  "error_book_new": 7,
-  "error_book_recurring": 59,
-  "error_book_auto_closed": 54,
-  "error_book_total_open": 66
+  "invalid_facts": 0,
+  "index_drift": 3,
+  "error_book_open": 66,
+  "details": {
+    "broken_links": [
+      {"source": "projects/agent-ecosystem-scout-2026-06-16.md", "target": "openloop"},
+      {"source": "projects/paca.md", "target": "openhands"}
+    ],
+    "orphans": [
+      "projects/agent-ecosystem-scout-2026-06-16",
+      "projects/paca"
+    ],
+    "index_drift": [
+      "projects/agent-ecosystem-scout-2026-06-16.md",
+      "projects/paca.md",
+      "projects/superlog.md"
+    ]
+  }
 }
