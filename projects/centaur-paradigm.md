@@ -6,7 +6,7 @@ stars: 724
 language: Python
 license: null
 status: early-production
-last_verified: 2026-06-10
+last_verified: 2026-06-17
 ---
 
 # Centaur (paradigmxyz)
@@ -141,3 +141,64 @@ Links: [[self-evolving-agent-landscape]], [[agent-memory-landscape-202603]], [[c
 - Revisit 06-17
 
 Links: [[self-evolving-agent-landscape]]
+
+## Followup 2026-06-17
+
+**Stars**: 768⭐ (+3.6% from 741). 47 open issues. Steady production hardening, no breakout features.
+
+**Theme**: multi-tenant **credential/secret model** maturing into a real platform — the iron-control centralization noted on 06-06 is being battle-tested.
+
+### PR #617 — Secret Grant Priority Across Types
+
+The most architecturally interesting merge of this period. Multi-line summary worth quoting:
+> "Direct grants were being overridden by role grants across secret types. Grant priority (direct > role) was only honored within a single secret type, but the wire protocol applies the `secrets` array (static secrets) before the `transforms` array (gcp_auth, etc.), so a role-granted Google gcp_auth always overwrote a direct static secret on the same header regardless of priority."
+
+**Fix approach** — resolve at **config-assembly time in the console**, not at **proxy ordering time**:
+- Each secret type now reports `proxy_conflict_targets` (the host:header pairs it writes)
+- `Principal#served_credentials` withholds any credential that overlaps a stronger grant's claim
+- Only the winner is served downstream — proxy ordering becomes a tiebreaker for things config layer couldn't see, not the primary mechanism
+
+**Architectural insight**: When you have multiple subsystems writing to the same target (here: HTTP headers, but the pattern generalizes to env vars, file paths, tool registrations, anything namespaced), there are two places to resolve conflicts: at **assembly time** (the producer of the merged config knows everything and can pick a winner) or at **consumption time** (the runtime sees the final layered order and the last write wins).
+
+- Assembly-time resolution is principled, debuggable (you can ask "why did this win?"), but requires every subsystem to expose its claims explicitly.
+- Consumption-time resolution is simpler but fragile — order changes break things and "why" is opaque.
+
+Centaur is shifting from consumption-time (proxy order) → assembly-time (principal-served). This same tradeoff exists in our [[acp]] credential injection — currently we pass env vars and last-write wins; this PR is a good reference if we ever need multi-source credential layering.
+
+Acknowledged tradeoffs in the PR body itself:
+- "Scope matching is intentionally conservative (exact-string host, method/path narrowing ignored): a missed conflict still ships and is settled by proxy order, but nothing legitimate is ever dropped." — i.e., the new layer is purely a *suppressor*, not a *modifier*, so it can be added safely on top of the existing proxy ordering.
+- "Suppression is currently silent in `effective_config`, and partial overlaps drop the whole loser" — known follow-ups, not deal-breakers.
+
+### PR #613 — GitHub OAuth Provider
+
+Adds GitHub as a first-class auth provider (alongside the existing Google/etc). Follows the same pattern as the secret-type model: provider configs are layered, principal grants reference provider type, iron-proxy handles token issuance.
+
+**Signal**: Centaur is committing to being a multi-provider auth platform, not just a wrapper around Google Workspace. This is consistent with the "shared agent platform for teams" positioning — teams use diverse SaaS, the platform must federate.
+
+### PR #614 — Slack ETL Batch Backfill (Postgres Saturation Fix)
+
+`+323/-127` slack-etl service refactor. Previously, the backfill worker did per-row inserts, saturating the Postgres connection pool during large channel histories. Fixed by batching upserts.
+
+**Signal**: production-discovered scaling pain. Same class of problem as the 2,206 zombie sessions issue from 05-31 — they're learning the hard way what scale exposes. The fix is mundane (batch your DB writes), but the *discoverability* — they have enough Slack workspaces with enough channels backfilling concurrently to hit this — is a real-deployment signal.
+
+### PR #623 / #619 / #620 — Migration & CLI Polish
+
+- **#623** `readonly` role migration name patch — schema housekeeping
+- **#619** expose `company_context` tool to CLI — surfacing context-injection capability outside chat
+- **#620** test deconfliction for googleapis secrets — test isolation
+
+### Open Issues to Watch
+
+- **#621** (06-17, just-opened): "apiRs: agent → host file-upload back-channel removed in Rust rewrite; outbound file delivery no longer possible" — interesting regression from the Python → Rust port. They're actively rewriting parts in Rust and losing some agent-host bidirectional channels. Worth watching how they reintroduce.
+- **#570** "Tear down workflow-run sandboxes on run completion" — still the sandbox-GC problem from earlier card. Not solved.
+- **#444** "Codex wrapper relays background-thread events, leaking the memories agent's reply" — harness-dialect fragmentation continues.
+
+### Relevance to Our Direction
+
+1. **Credential layering**: When OpenClaw ACP needs multi-source secret injection (e.g., user-provided + skill-default + workspace-default), [PR #617]'s assembly-time resolution is the right pattern. Each producer declares its claims; the assembler picks the winner with explicit priority.
+2. **Multi-provider auth as a platform requirement**: Centaur's trajectory (Google → +GitHub → ...) suggests teams need federated auth. We've been single-account-per-platform; this is a future direction to watch.
+3. **Production scaling discovery**: They're hitting Postgres saturation, sandbox GC, harness fragmentation in the same way any production deployment will. Their fixes are reference material.
+
+**Revisit**: 06-24.
+
+Links: [[self-evolving-agent-landscape]], [[delivery-message-preservation]], [[acp]]

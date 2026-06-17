@@ -1078,3 +1078,58 @@ Links: [[cache-miss-cost-optimization]], [[context-compaction]], [[OpenClaw]], [
 **Assessment**: Steady incremental improvement. Fork-from-here is a nice UX feature (conversation branching). The idle compact archive PR (#4270) is architecturally interesting — it addresses context window management by archiving before truncating, rather than just dropping old messages.
 
 **Revisit**: 06-15.
+
+## Followup 2026-06-17
+
+**Stars**: 44,343⭐ (+377 from 06-10's 43,966). 7,838+ forks. 881 open issues. Steady growth, no breakout.
+
+**v0.2.1 still the latest tagged release** — but the trunk is shifting defaults and addressing memory-path correctness.
+
+### Key Defaults Shift (PR #4370 merged 06-16)
+
+`agents.defaults.idleCompactAfterMinutes`: `0` (disabled) → `15` (enabled). Tiny 3-file change, big semantic impact:
+
+- **Reasoning**: "Dream is enabled by default, but short WebUI chats only become Dream input after history compaction. With idle auto-compact disabled by default, new users can chat in short sessions forever without producing `memory/history.jsonl` entries, making long-term memory appear broken."
+- **Pattern**: This is *default-on memory pipeline* — same direction OpenClaw has taken (nudge auto-fires reflect every 5 turns). The implicit assumption: long-term memory is only useful if it's reachable by default.
+- **Tradeoff acknowledged**: Users wanting raw transcript trails (audit/debug) must opt out (`= 0`). Low-level `AutoCompact` constructor default remains `disabled` — the change is purely at the config schema layer for config-driven runs.
+- **Generalization**: When you ship a memory subsystem that depends on a separate trigger (compact → consolidate → archive), shipping with that trigger disabled makes the whole pipeline look broken in first-run UX. This is the same class of failure as nudge with `triggerEveryN = 0`.
+
+### Architectural Critique: Issue #4307 (open) — Post-Turn Consolidation Wipes Delivery Message
+
+Reporter's deep code analysis is one of the highest-signal bug reports nanobot has received this quarter. Five distinct production instances, all sharing the same failure mode: agent proposes options → consolidation wipes the proposal → user replies "Option 2" → agent has no idea what Option 2 was.
+
+**Code-level root causes (cited with file:line):**
+| File | Lines | Problem |
+|------|-------|---------|
+| `agent/loop.py` | 1382, 1486-1490 | Consolidation only runs pre/post turn, never mid-turn |
+| `agent/loop.py` | 789-823 | `_run_agent_loop()` — no prompt budget check mid-iteration |
+| `agent/memory.py` | 781-888 | `maybe_consolidate_by_tokens()` only callable between turns |
+| `agent/memory.py` | 746-779 | `archive()` — lossy SNIP filter, options/decisions marked `[skip]` |
+| `agent/autocompact.py` | 18 | `_RECENT_SUFFIX_MESSAGES = 8` — too small to overlap delivery message |
+| `templates/agent/consolidator_archive.md` | 1-24 | SNIP criteria filters out ephemeral decision points |
+
+**Four proposed fixes (ordered by impact):**
+1. **Preserve last assistant delivery message through consolidation** — simplest, highest impact. Agent's own delivery message must survive in the "recent suffix" window.
+2. **Mid-turn prompt budget enforcement** — currently 40k `context_window_tokens` can grow to 100k+ before any check fires. Mid-iteration check + trigger consolidation if exceeded.
+3. **Smarter consolidation summaries for decision points** — modify `consolidator_archive.md` SNIP template to recognize numbered options/proposals/findings as `[durable]` rather than `[skip]`.
+4. **Increase `_RECENT_SUFFIX_MESSAGES`** from 8 → 16-20 so suffix window overlaps delivery + tool results.
+
+**Why this matters for our direction:**
+- Our [[persistent-goal-injection]] card already captures how goals survive compaction via metadata. But goals are the *task*; this issue exposes that **the agent's own conversational outputs (proposed options, findings, decision points) are equally ephemeral** and equally need preservation.
+- OpenClaw's MEMORY.md + heartbeat compaction has the same structural risk. The reporter's framing — "decision points" vs "conversational filler" — is a useful distinction we don't currently make.
+- The "5 production instances, 1 self-reported on its own session recovery work" story (Instance 4: "the active goal was literally 'improve the session recovery tool' — and the very next turn, it lost context") is a meta-failure of exactly the kind we should be designing against.
+- New card: [[delivery-message-preservation]] for the broader pattern.
+
+### PR #4359 — Lazy Goal Continuation Refresh
+
+Already captured in earlier followup, but worth re-noting: goal continuation now refreshes from a **dynamic provider** instead of a **snapshot**. This is the right direction for [[persistent-goal-injection]] — but does not address Issue #4307 (because the issue is about the *agent's outputs* getting wiped, not the goal).
+
+### Other Notable Merged PRs (06-16)
+- **#4369** "Explain empty Dream runs" — visibility fix, helps debugging the memory pipeline
+- **#4368** macOS installer Python externally-managed fix — packaging friction relief
+- **#4363** validate stream idle timeout config — schema validation hardening
+- **#4361** thinking parameter for Kimi K2.7 — provider expansion
+
+**Assessment**: nanobot's quarterly direction is becoming clear: ship memory-path defaults that actually work, tighten the consolidation/preservation correctness, and continue provider expansion. The fact that a 5-instance critique can be filed with this level of code analysis is itself a signal — production users are running long enough to hit this and care enough to file detailed reports. That's a kind of community maturity most "agent" projects don't have yet.
+
+**Revisit**: 06-24.
