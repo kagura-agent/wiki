@@ -143,3 +143,18 @@ const SESSION_INGESTION_SCORE = .58;  // hardcoded for all session chunks
 3. Measure: does manual promotion of top candidates improve MEMORY.md quality?
 
 **Pattern**: [[observation-without-investigation]] → [[structural-fix-over-behavioral-rule]]. 4 days of "decided but not acted" broke by actually writing the code.
+
+## 🌱 Skill Extraction — 2026-06-18
+
+**Context**: dreaming-quality-filter.sh isn't just a script for our dreaming pipeline — it's a reusable pattern: **"Local heuristic post-processing for uniform-confidence upstream systems."** Self-evolving-observations 06-17 flagged this as today's skill gap.
+
+**Action**: Found existing pending proposal `heuristic-rerank-filter-20260617-888381a8f3` (created same day as the script). Inspected and discovered the `references/dreaming-quality-filter.sh` file was a 9-line stub, not the actual 181-line production script. Adopters reading the proposal would see abstract design rules without a working exemplar.
+
+**Revised** to v2 via `skill_workshop action=revise`:
+- Replaced stub reference with full 184-line production script
+- Bumped acceptance check ceiling from "<100 lines" to "<200 lines" (matches reality)
+- Refined SKILL.md prose to point at the now-complete reference
+
+**Why this matters beyond dreaming**: The pattern applies anytime upstream emits poor differentiation but you need to act today — confidence scores, embedding similarity, LLM judge votes. Filter is cheap (bash + grep), additive (never blocks upstream), and disposable (retire when upstream improves). [[heuristic-rerank-filter]] is the durable form of this lesson; this project note is the trigger story.
+
+**Lesson**: "Already created as proposal" ≠ "shipped as usable skill." Always inspect support files for stubs vs real content. Pending proposals can rot the same way decided-but-not-acted patterns do.
