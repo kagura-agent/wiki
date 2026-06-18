@@ -4,7 +4,7 @@ date: 2026-06-17
 tags: [skill-md, alignment, agent-skills, portable, clarification-gate, task-graph, user-profile]
 status: tracking
 revisit: 2026-06-24
-last_verified: 2026-06-17
+last_verified: 2026-06-18
 ---
 
 # compass-skills (dongshuyan)
@@ -106,3 +106,11 @@ This separation is **load-bearing**: it prevents both "asking trivia the agent c
 - [[addyosmani-agent-skills]] — earlier skill packaging pattern
 - [[memory-os-claudiodrews]] — different memory scope (user knowledge vs project task graph)
 - [[architect-loop]] — sibling discipline pattern (orchestration vs alignment)
+
+## Applied (2026-06-18)
+
+**Fact-vs-decision constraint split** integrated into Phase 0 spec pushback:
+- AGENTS.md: STANDARD prompt now requires classifying constraints as fact-inferrable (✅ resolve from code) or user-owned-decision (❓ flag, don't assume)
+- team-lead/SKILL.md: STANDARD template adds step 4 (CONSTRAINTS), HEAVY template adds structured constraint table before must_read
+
+This completes the first of two borrowable patterns. Second (view-based profile access) deferred.
