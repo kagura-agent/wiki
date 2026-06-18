@@ -162,3 +162,20 @@ When the next SOUL audit / DNA review surfaces ("SOUL.md weak" / "drift") — us
 Solo dev cobi, 29⭐ in 3 days = moderate velocity. Recent v1.0.0 push. Watch for: (a) fleet workflow generalization beyond Hermes, (b) any community fork that strips Hermes dependency.
 
 Revisit: 2026-07-01 (check star/community signal at 2-week mark)
+
+## Applied: SOUL.md Rubric-Driven Upgrade (2026-06-18)
+
+Used the 11-category rubric to rewrite SOUL.md. Score: **41 → 73** (+32 pts, Needs-rewrite → Scaffold band).
+
+Key structural additions:
+- **Mission section**: Named identity/user/mechanisms (mission clarity +7)
+- **Core thesis**: Fresh-context vs accumulated-identity tension (core thesis +4)
+- **Priority hierarchy**: 5-level ranked conflict resolution (optimization +6)
+- **Sharpened boundaries**: "No X without Y" approval gates (hard constraints +3, authority +4)
+- **Definition of Done**: 4 task types with concrete ≠done checks (success +5)
+
+Deliberate gaps left: Beliefs section untouched (already 7/10, strongest part). No soul-slop-detect tool created (YAGNI — the rubric itself guided edits). Not targeting 90+ Excellent band (would over-engineer authenticity).
+
+Next audit: re-grade when SOUL.md changes again. Target ≥75 (Operational band).
+
+Links: [[soul-md]], [[identity-drift-detection]], [[graduation-pipeline]]
