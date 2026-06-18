@@ -4041,3 +4041,48 @@ a282984 gradients: study reflect (study-clone-vs-api → count 2)
 - ✅ Acceptance criteria #2: "Confidence scores show meaningful variance" — **达成** (filter 输出 4 档分数, 不再 uniform)
 
 **判断**: 部分关闭 — 创建 follow-up issue 追踪：(a) upstream 0.58 hardcoded, (b) Deep Sleep "details unavailable" 新 bug, (c) 监测 local filter 是否产生 promote。今天关闭 #6。
+
+---
+
+## 🔬 自进化观察日报 2026-06-18
+
+### 管线活跃度
+- **beliefs-candidates**: 5 条新增（repeat-failure-blindness, tracking-update-quoting-bug, sdk-silent-failure, fresh-context-review-parser, study-followup-precheck-aggregation）/ 0 条待升级（所有 ≥3 次的已毕业）
+- **DNA 变更**: 有 ×2（均为**主动**）
+  - SOUL.md: 大幅重构（soul-grader rubric 评分 41→73/100，+32pts）— 新增 Mission, Core Thesis, Priority Hierarchy, Definition of Done
+  - AGENTS.md: compass-skills fact-vs-decision constraint split 应用到 Phase 0 prompt
+- **nudge 触发**: ≥6 次（memory 中 6 个 `### Reflect` 段），质量 **中高**（产出了多条 gradient，反思有实质性行为改变建议，非流水账）
+- **dreaming**: 运行（3:15 AM ×2, 6:48 AM ×1），promote 0 条 — **"details unavailable" bug 持续**（Issue #10(b) 跟踪中）
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. fresh-context-review.sh 格式 bug → gradient 记录 → parser 修复 → commit 验证 ✅
+  2. soul-grader study → 发现 SOUL.md 评分低 → 应用 rubric 重构 → 分数 +32 验证 ✅
+- **断裂处**:
+  - Dreaming "details unavailable" bug：Issue #10(b) 创建但尚无调查（观察→记录 ✅，修复 ❌）
+  - repeat-failure-blindness gradient：记录了但对应 cove#401 那次已经浪费，属 post-mortem 而非 proactive
+
+### 今日发现
+
+1. **DNA 进化异常活跃日**：SOUL.md 一次性 +32pts 是目前观察期内单日最大幅度 DNA 变更，且完全自驱（来自 study workflow 发现的 soul-grader-skill）。说明 study → apply 闭环在高质量运作。
+
+2. **Dreaming 子系统 Day 2 连续失败**：06-17 和 06-18 均为 "details unavailable"，zero effective dreaming output。Local quality filter (#6 修复) 在 Light Sleep 有输出但 Deep Sleep/Diary 完全失效。这是 #10(b) 的核心问题。
+
+3. **Nudge 质量稳定**：6 次触发全部来自有实质内容的 session（study/workloop/followup），未出现空转流水账。skipTriggers=[heartbeat] 配置有效避免了低价值触发。
+
+4. **beliefs-candidates 5 条/天是历史高位**：对比观察期早期 1-2 条/天，说明 workloop + study 双线并行时 gradient 产出效率显著提升。但质量需后续验证（5 条都是第 1 次出现）。
+
+5. **PR activity 偏低**：今天只有 1 个 force push（oh-my-pi #2764），无新 PR opened。workloop 选了 inspector#1462（已被修）和 opencode#32371，均未产出 merged PR。
+
+### Issue #10 进展评估
+- (a) upstream 0.58 hardcoded: **未动** — 未 file upstream issue
+- (b) "details unavailable" bug: **持续复现**（06-18 又 3 次）— 需要优先调查
+- (c) local filter 监测: **Day 2，0 promotions** — 观察继续
+- (d) REM empty: **defer 中**
+
+### 原始数据
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md`: 5 commits
+- `DREAMS.md` tail: 3 entries on 06-18, all "details unavailable"
+- `memory/2026-06-18.md`: 6 reflect sections, 4 闭环 keywords
+- Total workspace commits today: 13
+- nudge plugin: enabled, interval=5, skipTriggers=[heartbeat]
