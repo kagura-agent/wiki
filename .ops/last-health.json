@@ -1,25 +1,44 @@
 {
-  "timestamp": "2026-06-17T10:07:00+08:00",
-  "total_files": 933,
-  "cards": 401,
-  "projects": 450,
-  "wikilinks": 3544,
-  "errors": 1,
+  "timestamp": "2026-06-18T10:13:00+08:00",
+  "total_files": 942,
+  "cards": 406,
+  "projects": 454,
+  "wikilinks": 3622,
+  "errors": 4,
   "warnings": 70,
-  "broken_links": 1,
-  "orphans": 4,
-  "index_drift": 6,
-  "collisions": 1,
+  "broken_links": 4,
+  "orphans": 5,
+  "orphan_cards": 3,
+  "orphan_projects": 2,
+  "index_drift": 5,
   "stubs": 0,
-  "stale_files": 191,
-  "frontmatter_issues": 214,
+  "duplicate_slugs": 1,
+  "cards_index_stale": true,
+  "frontmatter_issues": 217,
   "zero_outbound_links": 106,
+  "secrets_detected": 0,
+  "stale_files": 192,
   "unicode_suspicious": 8,
-  "error_book": {
-    "new_issues": 5,
-    "recurring_issues": 65,
-    "clean_passes": 0,
-    "auto_closed": 32,
-    "total_open": 70
-  }
+  "invalid_facts": 0,
+  "error_book_new": 44,
+  "error_book_recurring": 29,
+  "error_book_clean": 41,
+  "error_book_total_open": 114,
+  "broken_link_details": [
+    "cards/single-process-to-proxied-server-migration.md -> wire-protocol-as-contract",
+    "projects/compass-skills.md -> align-tree-pattern",
+    "projects/dreaming-observation.md -> heuristic-rerank-filter",
+    "projects/why-was-fable-banned.md -> ui-spec-failure"
+  ],
+  "orphan_details": {
+    "cards": ["cron-model-switch-fragility", "ephemera-retention-primitive", "single-process-to-proxied-server-migration"],
+    "projects": ["cove-plugin", "soul-grader-skill"]
+  },
+  "index_drift_details": [
+    "cards/cron-model-switch-fragility.md",
+    "cards/ephemera-retention-primitive.md",
+    "cards/single-process-to-proxied-server-migration.md",
+    "projects/cove-plugin.md",
+    "projects/soul-grader-skill.md"
+  ]
 }
