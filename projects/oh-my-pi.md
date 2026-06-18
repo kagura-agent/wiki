@@ -73,7 +73,8 @@
   - 2026-06-16: submitted, 5 files changed, +205 -31 lines
   - Review by roboomp (COLLABORATOR): P3 scoped, found dedup key bug (same-depth files collapsed), test asserting `result.all` not `result.items`, missing CHANGELOG
   - 2026-06-17: All 3 feedback items fixed (commit b42c19c35): unique dedup keys per filename, test assertions on `result.items`, CHANGELOG added
-  - CI re-run: ALL green. Awaiting re-review/merge.
+  - 2026-06-18: CHANGELOG fix (moved entry from 16.0.4 to Unreleased), rebased. All 11 CI checks green. DFG gate ALL PASSED. Fresh-context review PASS.
+  - Status: PENDING — awaiting maintainer merge
   - `agents-md.ts`: iterate ["AGENTS.md", "CLAUDE.md"] in ancestor walk, alphabetical order
   - New test file: 4 tests (solo CLAUDE.md, both files ordering, multi-depth, hidden-dir skip)
   - CI: ALL 10/10 checks green. Codex review: no suggestions.
