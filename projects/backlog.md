@@ -1302,3 +1302,6 @@ GitHub trending (agent, created past week, sorted by stars):
 - **Priority**: Medium — review when next doing apply mode
 | agentic-sop-to-work | s0912758806p/agentic-sop-to-work | 178⭐ | scout | 2026-06-15 | Deep read done. trace_gate anti-fabrication + Stop-hook regression. Claude Code plugin. Solo maintainer. |
 | compass-skills | dongshuyan/compass-skills | 199⭐ | quick_scout | 2026-06-17 | 2d new. COMPASS = "Personal Alignment Skills OS" — 3 portable skills: task-clarifier (10-dim alignment tree, ask before research), task-forest, user-profile-keeper. Explicitly lists OpenClaw as supported agent. Novel: convergent need-alignment as a deterministic Phase-0 skill (distinct from FlowForge/DNA). Worth deep read. |
+| codexpro | rebel0789/codexpro | 291⭐ | quick_scout | 2026-06-18 | 2d new, 24 forks. ChatGPT Developer Mode as local MCP coding agent. MCP-as-universal-interface pattern continuing. JS. |
+| FableCodex | baskduf/FableCodex | 274⭐ | quick_scout | 2026-06-18 | 4d, 38 forks, active dev. Post-ban Fable derivative for Codex-style workflow. Shows Fable concepts dispersing into ecosystem. Python. Connects to architect-loop + why-was-fable-banned tracking. |
+| junction | Plaer1/junction | 501⭐ | quick_scout | 2026-06-18 | 1d old, viral. VS Code chat sidebar for local coding agents. TypeScript. UI-focused, not architecturally novel. Skim only. |

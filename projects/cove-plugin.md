@@ -23,6 +23,21 @@ Cove channel plugin for OpenClaw. Lives at `~/repos/forks/cove/packages/plugin/`
 3. 委托做 refactor 前要先有 **before/after 真实行为对照**，不只是测试通过
 4. **下次 #398 自己做，不再外包**（Luna directive）
 
+## 经验教训：PR #404 (closed 2026-06-18)
+
+Workloop 选了 issue #401（Discord-parity draft preview & delivery），走了一整个 workloop cycle（find_work → study → plan → implement → submit → verify），但 PR 在 submit 后 ~1h 被自己 close。
+
+**失败原因：**
+- 同样是 "copy Discord wholesale" approach —— 和 #399 同一个 anti-pattern
+- `sendDurableMessageBatch` silent failure、draft lifecycle race、CI failures
+- 明明 #399 已经证明这条路走不通，#400 证明 phase-by-phase works，却还是选了 wholesale 路径
+
+**复盘：**
+1. **选题失误**：选了一个已经连续失败两次的 approach（#399 → #404），没有先消化 #399 和 #400 的教训
+2. **workloop 白转了一圈**：从 find_work 到 submit 花了 ~6 小时 token，PR 1 小时后就被 close
+3. **自己 repo 的 issue 不适合 workloop**：workloop 是给外部开源贡献设计的，cove 是自己的项目，应该用更 deliberate 的方式（读 SDK 源码、写集成测试、phase-by-phase），不是走打工流水线
+4. **pattern**: 同一个坑掉两次 = 没真正学到。下次选 issue 时如果看到"之前 PR 因为 approach 问题被 close"，必须先确认 approach 变了再动手
+
 ## Plugin 现状（2026-06-18 06:45 重置后）
 
 - 分支：`main`
