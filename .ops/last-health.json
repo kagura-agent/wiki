@@ -1,44 +1,44 @@
 {
-  "timestamp": "2026-06-18T10:13:00+08:00",
-  "total_files": 942,
-  "cards": 406,
-  "projects": 454,
-  "wikilinks": 3622,
-  "errors": 4,
-  "warnings": 70,
-  "broken_links": 4,
+  "timestamp": "2026-06-18T20:19:00+08:00",
+  "total_md_files": 947,
+  "cards": 410,
+  "projects": 455,
+  "wikilinks": 3654,
+  "errors": 0,
+  "warnings": 75,
+  "broken_links": 0,
+  "index_drift": 10,
+  "index_drift_files": [
+    "cards/align-tree-pattern.md",
+    "cards/cron-model-switch-fragility.md",
+    "cards/ephemera-retention-primitive.md",
+    "cards/heuristic-rerank-filter.md",
+    "cards/single-process-to-proxied-server-migration.md",
+    "cards/ui-spec-failure.md",
+    "cards/wire-protocol-as-contract.md",
+    "projects/codex-control-plane-mcp.md",
+    "projects/cove-plugin.md",
+    "projects/soul-grader-skill.md"
+  ],
   "orphans": 5,
-  "orphan_cards": 3,
-  "orphan_projects": 2,
-  "index_drift": 5,
+  "orphan_cards": ["cron-model-switch-fragility", "ephemera-retention-primitive"],
+  "orphan_projects": ["codex-control-plane-mcp", "cove-plugin", "soul-grader-skill"],
   "stubs": 0,
   "duplicate_slugs": 1,
   "cards_index_stale": true,
-  "frontmatter_issues": 217,
+  "cards_index_missing": 410,
+  "frontmatter_issues": 221,
   "zero_outbound_links": 106,
-  "secrets_detected": 0,
+  "avg_wikilinks_per_linked_file": 5.4,
   "stale_files": 192,
+  "secret_scan": "clean",
   "unicode_suspicious": 8,
   "invalid_facts": 0,
-  "error_book_new": 44,
-  "error_book_recurring": 29,
-  "error_book_clean": 41,
-  "error_book_total_open": 114,
-  "broken_link_details": [
-    "cards/single-process-to-proxied-server-migration.md -> wire-protocol-as-contract",
-    "projects/compass-skills.md -> align-tree-pattern",
-    "projects/dreaming-observation.md -> heuristic-rerank-filter",
-    "projects/why-was-fable-banned.md -> ui-spec-failure"
-  ],
-  "orphan_details": {
-    "cards": ["cron-model-switch-fragility", "ephemera-retention-primitive", "single-process-to-proxied-server-migration"],
-    "projects": ["cove-plugin", "soul-grader-skill"]
-  },
-  "index_drift_details": [
-    "cards/cron-model-switch-fragility.md",
-    "cards/ephemera-retention-primitive.md",
-    "cards/single-process-to-proxied-server-migration.md",
-    "projects/cove-plugin.md",
-    "projects/soul-grader-skill.md"
-  ]
+  "error_book": {
+    "new_issues": 6,
+    "recurring_issues": 68,
+    "clean_passes": 5,
+    "auto_closed": 41,
+    "total_open": 79
+  }
 }
