@@ -6,7 +6,7 @@ stars: 24460
 language: Go
 license: Apache-2.0
 status: active
-last_verified: 2026-06-11
+last_verified: 2026-06-18
 ---
 
 # Beads (bd)
@@ -127,3 +127,56 @@ Links: [[self-evolving-agent-landscape]], [[agent-memory-taxonomy]], [[claude-co
 **Pattern worth noting**: The "defense that was never armed" (doctor check existed but didn't run) parallels our own [[verify-external-ops]] experience — verification code that isn't actually executed is worse than no verification (false confidence).
 
 **Revisit**: 06-17.
+
+### Update 2026-06-18 — Proxied-server completion + scale critiques
+
+**Stars**: 24,596 (was 24,444 on 06-10, +152 in 8d, ~+19/day — steady).
+**Last push**: 06-17 23:58 UTC. Very active.
+
+**Major architectural milestone — proxied-server mode fan-out**:
+
+Past 3 days landed proxied-server support for `bd close` (#4446), `bd show` (#4445), `bd delete` (#4444). Combined with earlier `bd update` (#4433), `bd list` (#4287, #4300), this completes a fundamental architecture split:
+
+- **Domain layer (`internal/storage/domain/db/`)** — pure interfaces (`IssueUseCase`, `DependencyUseCase`, `ConfigUseCase`)
+- **SQL repository layer** — implementations agnostic to embedded vs remote Dolt
+- **Single UOW (Unit Of Work) per CLI invocation** — `cmd/bd/<cmd>_proxied_server.go` opens one transaction, threads it through all per-id ops + post-loop flags (`--suggest-next`, `--continue`, `--claim-next`), commits once with descriptive message
+
+**Why this matters (the real insight)**:
+
+Previously bd was effectively a single-process tool — embedded Dolt = one CLI process owns the DB file. Proxied-server mode = bd CLI talks to a long-lived Dolt SQL server process. This unlocks:
+
+1. **Multi-tenant agent platforms** (gascity is the driver — see [[git-backed-agent-memory]]). One Dolt server, many agent CLIs.
+2. **Atomic batches**: 50 `bd close` calls in one transaction vs 50 separate dolt commits. The PR explicitly notes gascity's `CloseAllWithReason` benefits.
+3. **Remote-mode safety**: `bd doctor` migration content-hash gate (06-10 insight) prevents migrations running against shared remote servers — armed defense.
+4. **Wire-level decoupling**: matches the [[clawpatrol]] / wire-protocol-as-contract pattern. UI-mode vs proxied-mode tested identically because both go through domain interface.
+
+This is hexagonal architecture done quietly correctly. No fanfare about "DDD" or "ports and adapters" — just methodical port-and-test of each verb, untouched embedded path, full integration tests (e.g., #4445 ships 47 subtests).
+
+**Architecture critiques worth recording**:
+
+**Issue #4369 — No retention/TTL/archival primitive at scale** (filed 06-17 by vbtcl):
+> "live DB grew **11k → 98.7k issues in 36h**, ~90% closed automation churn, degrading scan-class queries to 2-minute timeouts"
+
+gascity-style agent platforms create high-churn ephemeral beads (orders, nudges, workflow steps, session records). Cleanup required hand-rolled SQL against Dolt because:
+- `bd close` keeps the row forever — no `bd archive`/`bd purge`
+- No per-type/label TTL concept
+
+**Generalizable insight**: Issue tracking systems designed for human workflows (~10s of issues/week) break when agent platforms feed them ephemera (~100k/day). The structural fix isn't more CPU — it's a tier separation: durable beads (human-meaningful work) vs ephemeral beads (automation steps). Without retention primitives at the tracker layer, every platform reinvents unsafe bulk-delete SQL.
+
+Cross-link: this is the same shape as [[memory-trash-filter]] — agent memory systems also break when not filtering low-value events. **High-volume agent telemetry needs first-class retention primitives, not afterthought cleanup.**
+
+**Issue #3963 — Pre-commit re-export loop accumulation** (filed 06-17 by fkberthold):
+
+`bd hooks install` creates `chore(beads): post-X bd export reconcile` commits per logical session. Pre-commit re-exports → diff appears → reconcile commit → triggers next hook → 3-5 layers deep. The cited agent comment is excellent:
+
+> "The bd post-commit hook re-exports issues.jsonl after every commit — chasing the loop with another commit just retriggers it. Stopping here; the drift is pure metadata reordering and the next bd-related commit will fold it in naturally."
+
+**Generalizable insight**: This is the same shape as the FlowForge "auto-close stale instance" warning (04-27) — silent side-effects that produce work the user didn't ask for. The agent did the right thing (stop chasing), but the system shouldn't have created the loop in the first place. **Hook ergonomics: any post-commit side-effect that mutates working-tree state needs an idempotence guard.**
+
+**Bigger picture — Beads as agent infrastructure**:
+
+Beads is no longer "an issue tracker that AI agents happen to use." With proxied-server mode, the architecture is explicitly multi-process / multi-tenant. The scale critiques (#4369, #3963) come from a real agent platform (gascity) building on it — that's the validation signal Beads is becoming infrastructure rather than a tool.
+
+For our own direction: this is the [[multica]] / [[nanobot]] multi-tenant gateway question answered for the persistence layer. Worth watching whether retention/TTL primitives land — if yes, Beads becomes a serious contender for our own task memory (vs current markdown TODO).
+
+**Revisit**: 06-25.
