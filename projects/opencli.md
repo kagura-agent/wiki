@@ -152,3 +152,5 @@ Links: cli-everything, [[agent-as-router]]
 - Status: pending review
 - Pattern: backward compat fix = add fallback in validation, not migration scripts
 - Note: `vitest run` without `--project unit` hangs locally (browser tests). Use `--project unit --shard=N/2`
+- Lesson: FlowForge plan_review can get stuck if spawned reviewer subagent doesn't advance — manual recovery via `flowforge advance` works
+- v1.8.3 upgrade broke backward compat for user commands — good candidate for this kind of fix (validation + fallback = minimal risk)
