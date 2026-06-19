@@ -95,7 +95,7 @@ Lessons from Reflector stored with `severity` weight, decaying at half-life 30 d
 
 ## Applied: CalibrationLog (2026-06-19)
 
-**What was applied**: Created `tools/calibration-log.sh` — a predict-then-verify tracking tool for checkable claims.
+**What was applied**: Created `tools/calibration-log.sh` — a [[predict-then-verify-calibration]] tracking tool for checkable claims.
 
 **Implementation details**:
 - Commands: `predict`, `verify`, `pending`, `due`, `stats`

@@ -1,40 +1,35 @@
 {
-  "timestamp": "2026-06-19T10:16:00+08:00",
-  "total_files": 950,
-  "cards": 412,
-  "projects": 456,
-  "wikilinks": 3664,
-  "errors": 3,
-  "warnings": 66,
-  "broken_links": 3,
-  "orphans": 3,
-  "stubs": 0,
+  "timestamp": "2026-06-19T20:06:00+08:00",
+  "total_files": 954,
+  "cards": 414,
+  "projects": 458,
+  "wikilinks": 3695,
+  "errors": 0,
+  "warnings": 71,
+  "broken_links": 0,
+  "orphans": 4,
+  "orphan_cards": ["followup-precheck-aggregation", "hn-algolia-api", "predict-then-verify-calibration"],
+  "orphan_projects": ["foreman-orchestrator"],
+  "index_drift": 7,
+  "index_drift_files": [
+    "cards/agent-harness-landscape.md",
+    "cards/followup-precheck-aggregation.md",
+    "cards/hn-algolia-api.md",
+    "cards/predict-then-verify-calibration.md",
+    "projects/foreman-orchestrator.md",
+    "projects/scholar-loop.md",
+    "projects/vercel-eve.md"
+  ],
   "duplicate_slugs": 1,
+  "stubs": 0,
   "stale_files": 193,
   "frontmatter_issues": 222,
   "zero_outbound_links": 107,
+  "avg_wikilinks_per_linked_file": 5.4,
+  "unicode_warnings": 8,
   "secret_patterns": 0,
-  "unicode_suspicious": 8,
-  "invalid_facts": 0,
-  "index_drift": 3,
-  "error_book_open": 68,
-  "error_book_new": 7,
-  "error_book_recurring": 61,
-  "details": {
-    "broken_links": [
-      "projects/vercel-eve.md -> [[acp-protocol]]",
-      "projects/vercel-eve.md -> [[agent-harness-landscape]]",
-      "projects/vercel-eve.md -> [[paca-ai]]"
-    ],
-    "orphans": [
-      "cards/followup-precheck-aggregation",
-      "cards/hn-algolia-api",
-      "projects/vercel-eve"
-    ],
-    "not_in_index": [
-      "cards/followup-precheck-aggregation.md",
-      "cards/hn-algolia-api.md",
-      "projects/vercel-eve.md"
-    ]
-  }
+  "error_book_open": 74,
+  "error_book_new": 6,
+  "error_book_recurring": 64,
+  "error_book_clean": 4
 }

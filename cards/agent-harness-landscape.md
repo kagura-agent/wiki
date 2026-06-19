@@ -40,4 +40,4 @@ This mirrors the web's own evolution: raw HTTP â†’ frameworks (Express, Rails) â
 
 ## Links
 
-[[vercel-eve]], [[openclaw]], [[valkor-ai-loom]], [[agent-harness-kit]], [[metaharness-agent-harness-generator]], [[agent-skill-standard-convergence]], [[acp]]
+[[vercel-eve]], [[openclaw]], [[valkor-ai-loom]], [[agent-harness-kit]], [[metaharness-agent-harness-generator]], [[agent-skill-standard-convergence]], [[acp]], [[foreman-orchestrator]]

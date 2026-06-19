@@ -4086,3 +4086,52 @@ a282984 gradients: study reflect (study-clone-vs-api → count 2)
 - `memory/2026-06-18.md`: 6 reflect sections, 4 闭环 keywords
 - Total workspace commits today: 13
 - nudge plugin: enabled, interval=5, skipTriggers=[heartbeat]
+
+## 🔬 自进化观察日报 2026-06-19 (Day 40)
+
+### 管线活跃度
+- **beliefs-candidates**: 7 条新增（corporate-entry-priority-signal, cron-session-continuity, population-funnel-for-exploration, data-tool-serializer-consistency, distilled-failure-feedback, flowforge-stuck-plan-review, cron-session-flowforge-desync）/ 5 条毕业 / 4 条 stale retracted
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 零改动）
+- **nudge 触发**: ≥3 次（memory 中 3 个 `### Reflect` 段），质量 **中**（1 个有实质 pattern 提取 distilled-failure-feedback + population funnel，2 个较短/无强 pattern）
+- **dreaming**: 运行（3:15 AM ×2, 8:09 AM ×2），promote 0 条 — **"details unavailable" bug 持续第 3 天**（Issue #10(b)）
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. beliefs-candidates 积压 → daily-review 发现 ≥3 次候选 → 毕业 5 条到各目标（Tool/guide.md/Workflow/DNA/KB）→ commit 验证 ✅
+  2. scholar-loop study → population-funnel pattern → 创建 tools/issue-funnel.sh → commit ✅
+  3. memex upstream 停更 → 调查发现 0.3.3 revived → 提 PR #173 → wiki health update ✅
+- **断裂处**:
+  - Dreaming "details unavailable"：Day 3 持续复现，仍无调查行动（Issue #10(b) open 但未 assign 时间）
+  - cove#402/#396/#394 CONFLICTING：连续 2 天标记需 rebase，仍未执行
+
+### 今日发现
+
+1. **beliefs-candidates 大清理日**：5 毕业 + 4 retracted stale = 9 条清出。管线从 "只进不出" 转向 "进出平衡"。毕业目标分散（Tool/guide/Workflow/DNA/KB），说明 destination 分类在实际运作。当前文件 637 行 / 236 条目 / 28 条已毕业。
+
+2. **Dreaming 连续 3 天 zero output**：06-17/18/19 所有 Deep Sleep/Diary cycle 均 "details unavailable"。Light Sleep 有候选生成（今天仍在 staging），但 promote 为 0。Issue #10(b) 是当前自进化管线最大 single-point failure。
+
+3. **新 gradient 来源分布**：7 条中 workloop 3 条（cron-session-continuity, flowforge-stuck-plan-review, cron-session-flowforge-desync）+ study 4 条（corporate-entry, population-funnel, data-tool-serializer, distilled-failure-feedback）。workloop 产出的 gradient 全部与"cron session 生命周期"相关 — 这是一个 meta 问题正在收敛。
+
+4. **工具产出**：tools/issue-funnel.sh 是 study→apply 闭环的直接产物（population funnel pattern 应用到 workloop candidate selection），符合 "观测→行动" 闭环要求。
+
+5. **PR activity 回升**：今天新开 2 个外部 PR（memex#173, OpenCLI#1974）+ 1 个内部 PR（cove#409）。对比昨天 0 个新 PR，说明 workloop 恢复了产出。
+
+6. **Nudge 触发偏低**：3 次 vs 昨天 6 次。可能与今天 session 数量/密度相关（workloop 较少，study 为主）。质量尚可但 pattern 提取率不如昨天。
+
+### Issue #10 进展评估
+- (a) upstream 0.58 hardcoded: **未动** — 仍未 file upstream issue
+- (b) "details unavailable" bug: **Day 3 持续复现，4 次今天** — ⚠️ 需要优先升级
+- (c) local filter 监测: **Day 3，0 promotions** — Light Sleep staging 有内容但 Deep Sleep 不消费
+- (d) REM empty: **defer 中**
+
+### 建议（观察→行动）
+- Issue #10(b) 已超过 72h 未调查，违反 "观测必须闭环" 原则。下一轮 workloop/study 应优先 investigate。
+- cove rebase 连续 3 天标记但未做 — 要么安排执行，要么正式 deprioritize。
+
+### 原始数据
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md`: 5 commits (all beliefs-candidates)
+- `DREAMS.md` tail: 4 entries on 06-19, all "details unavailable"
+- `memory/2026-06-19.md`: 3 reflect sections, 4 nudge mentions
+- Total workspace commits since yesterday 22:30: 11
+- New PRs today: 3 (memex#173, OpenCLI#1974, cove#409)
+- beliefs-candidates.md: 637 lines / 236 entries / 28 graduated / ~21 retracted
