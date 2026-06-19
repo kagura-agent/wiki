@@ -109,3 +109,21 @@ Lessons from Reflector stored with `severity` weight, decaying at half-life 30 d
 - Calibration by context (am I better at predicting code quality vs community growth?)
 
 **Also fixed**: `tracking-update.sh` xargs quoting bug — replaced with bash-native `trim()` function. Notes containing apostrophes no longer break the script.
+
+## Applied: Population Funnel (2026-06-19)
+
+**What was applied**: Created `tools/issue-funnel.sh` — batch smoke-screening tool for workloop issue selection.
+
+**Implementation details**:
+- 6 gates per candidate: state check, prior interaction, closed PRs, competing PRs, open PR cap, repo activity
+- Quality scoring: issue type (bug>test>feature), stars, wiki familiarity, repo freshness, PR density
+- Ranked output with top recommendation
+- Integrated into workloop.yaml find_work node (recommended for ≥3 candidates)
+
+**What's different now**: Before, find_work picked one issue at a time and ran sequential checks. If a check failed, it looped back and tried the next. With the funnel:
+- 5 candidates × 6 checks = 30 checks run in ~20 seconds total
+- Bad candidates die cheaply (first failed gate = immediate elimination)
+- Survivors ranked by quality signals (repo stars, issue type, familiarity)
+- Reduces wasted cycles from the "pick → fail → pick → fail" sequential pattern
+
+**Verified**: Tested with 3 real candidates (openclaw#92665, opencode#31860, opencli#1922) — all survived with correct ranking. Tested with known-blocked candidate (NemoClaw#3836) — correctly eliminated with "Already withdrawn" reason.
