@@ -113,18 +113,18 @@ Built-in evaluation framework with assertions, judges, reporters, targets
 
 - **#70**: `eve dev` requires Vercel login even with custom model providers → lock-in concern, community pushback
 - **#44**: Request for Codex/Claude agent runtime support → eve is model-agnostic but agent-opinionated, can't plug in external coding agents yet
-- **#100**: ACP server adapter request → interop with [[acp-protocol]] is a community demand
+- **#100**: ACP server adapter request → interop with [[acp]] is a community demand
 - **#80**: Compaction bug with Anthropic → context management for long conversations is hard
 - **#75**: Session rewind/fork request → durable sessions create new UX expectations
 
 ## 生态位置
 
 直接竞争者：[[openclaw]]（runtime vs framework 定位不同但目标用户重叠）
-平行项目：[[valkor-ai-loom]]（delivery harness），[[paca-ai]]（Scrum platform）
+平行项目：[[valkor-ai-loom]]（delivery harness），[[paca]]（Scrum platform）
 上游依赖：Vercel AI SDK, Workflow SDK
 下游：Vercel 部署生态，Next.js 开发者群体
 
-Links: [[openclaw]], [[skill-ecosystem]], [[agent-harness-landscape]], [[acp-protocol]]
+Links: [[openclaw]], [[skill-ecosystem]], [[agent-harness-landscape]], [[acp]]
 
 ---
 *Scout 2026-06-19. Deep read of README, architecture docs (execution model, security, skills, subagents, sandbox). Issues scan for architectural critique.*
