@@ -1,44 +1,40 @@
 {
-  "timestamp": "2026-06-18T20:19:00+08:00",
-  "total_md_files": 947,
-  "cards": 410,
-  "projects": 455,
-  "wikilinks": 3654,
-  "errors": 0,
-  "warnings": 75,
-  "broken_links": 0,
-  "index_drift": 10,
-  "index_drift_files": [
-    "cards/align-tree-pattern.md",
-    "cards/cron-model-switch-fragility.md",
-    "cards/ephemera-retention-primitive.md",
-    "cards/heuristic-rerank-filter.md",
-    "cards/single-process-to-proxied-server-migration.md",
-    "cards/ui-spec-failure.md",
-    "cards/wire-protocol-as-contract.md",
-    "projects/codex-control-plane-mcp.md",
-    "projects/cove-plugin.md",
-    "projects/soul-grader-skill.md"
-  ],
-  "orphans": 5,
-  "orphan_cards": ["cron-model-switch-fragility", "ephemera-retention-primitive"],
-  "orphan_projects": ["codex-control-plane-mcp", "cove-plugin", "soul-grader-skill"],
+  "timestamp": "2026-06-19T10:16:00+08:00",
+  "total_files": 950,
+  "cards": 412,
+  "projects": 456,
+  "wikilinks": 3664,
+  "errors": 3,
+  "warnings": 66,
+  "broken_links": 3,
+  "orphans": 3,
   "stubs": 0,
   "duplicate_slugs": 1,
-  "cards_index_stale": true,
-  "cards_index_missing": 410,
-  "frontmatter_issues": 221,
-  "zero_outbound_links": 106,
-  "avg_wikilinks_per_linked_file": 5.4,
-  "stale_files": 192,
-  "secret_scan": "clean",
+  "stale_files": 193,
+  "frontmatter_issues": 222,
+  "zero_outbound_links": 107,
+  "secret_patterns": 0,
   "unicode_suspicious": 8,
   "invalid_facts": 0,
-  "error_book": {
-    "new_issues": 6,
-    "recurring_issues": 68,
-    "clean_passes": 5,
-    "auto_closed": 41,
-    "total_open": 79
+  "index_drift": 3,
+  "error_book_open": 68,
+  "error_book_new": 7,
+  "error_book_recurring": 61,
+  "details": {
+    "broken_links": [
+      "projects/vercel-eve.md -> [[acp-protocol]]",
+      "projects/vercel-eve.md -> [[agent-harness-landscape]]",
+      "projects/vercel-eve.md -> [[paca-ai]]"
+    ],
+    "orphans": [
+      "cards/followup-precheck-aggregation",
+      "cards/hn-algolia-api",
+      "projects/vercel-eve"
+    ],
+    "not_in_index": [
+      "cards/followup-precheck-aggregation.md",
+      "cards/hn-algolia-api.md",
+      "projects/vercel-eve.md"
+    ]
   }
 }

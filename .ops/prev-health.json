@@ -1,44 +1,40 @@
 {
-  "timestamp": "2026-06-18T10:13:00+08:00",
-  "total_files": 942,
-  "cards": 406,
-  "projects": 454,
-  "wikilinks": 3622,
-  "errors": 4,
-  "warnings": 70,
-  "broken_links": 4,
-  "orphans": 5,
-  "orphan_cards": 3,
-  "orphan_projects": 2,
-  "index_drift": 5,
+  "timestamp": "2026-06-19T10:16:00+08:00",
+  "total_files": 950,
+  "cards": 412,
+  "projects": 456,
+  "wikilinks": 3664,
+  "errors": 3,
+  "warnings": 66,
+  "broken_links": 3,
+  "orphans": 3,
   "stubs": 0,
   "duplicate_slugs": 1,
-  "cards_index_stale": true,
-  "frontmatter_issues": 217,
-  "zero_outbound_links": 106,
-  "secrets_detected": 0,
-  "stale_files": 192,
+  "stale_files": 193,
+  "frontmatter_issues": 222,
+  "zero_outbound_links": 107,
+  "secret_patterns": 0,
   "unicode_suspicious": 8,
   "invalid_facts": 0,
-  "error_book_new": 44,
-  "error_book_recurring": 29,
-  "error_book_clean": 41,
-  "error_book_total_open": 114,
-  "broken_link_details": [
-    "cards/single-process-to-proxied-server-migration.md -> wire-protocol-as-contract",
-    "projects/compass-skills.md -> align-tree-pattern",
-    "projects/dreaming-observation.md -> heuristic-rerank-filter",
-    "projects/why-was-fable-banned.md -> ui-spec-failure"
-  ],
-  "orphan_details": {
-    "cards": ["cron-model-switch-fragility", "ephemera-retention-primitive", "single-process-to-proxied-server-migration"],
-    "projects": ["cove-plugin", "soul-grader-skill"]
-  },
-  "index_drift_details": [
-    "cards/cron-model-switch-fragility.md",
-    "cards/ephemera-retention-primitive.md",
-    "cards/single-process-to-proxied-server-migration.md",
-    "projects/cove-plugin.md",
-    "projects/soul-grader-skill.md"
-  ]
+  "index_drift": 3,
+  "error_book_open": 68,
+  "error_book_new": 7,
+  "error_book_recurring": 61,
+  "details": {
+    "broken_links": [
+      "projects/vercel-eve.md -> [[acp-protocol]]",
+      "projects/vercel-eve.md -> [[agent-harness-landscape]]",
+      "projects/vercel-eve.md -> [[paca-ai]]"
+    ],
+    "orphans": [
+      "cards/followup-precheck-aggregation",
+      "cards/hn-algolia-api",
+      "projects/vercel-eve"
+    ],
+    "not_in_index": [
+      "cards/followup-precheck-aggregation.md",
+      "cards/hn-algolia-api.md",
+      "projects/vercel-eve.md"
+    ]
+  }
 }

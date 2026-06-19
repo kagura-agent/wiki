@@ -142,3 +142,13 @@ Links: cli-everything, [[agent-as-router]]
 - 1 file, +13/-2 lines. CI all green.
 - Pattern: Chrome extension 并发控制 = promise 序列化（同 ensureOwnedContainerWindow）
 - Status: pending review
+
+### PR #1974 — fix: default access to 'read' for backward compatibility (2026-06-19)
+- Issue: #1922 — User commands fail after v1.8.3 upgrade (missing mandatory `access` field)
+- Root cause: `assertCommandAccess()` throws hard error on undefined `access`, no migration path
+- Fix: Default to `'read'` when `access` is undefined/null; invalid values still throw
+- 1 file production change + test updates (23 tests pass)
+- CI: all green (build x3, unit-test x2, bun-test, audit, docs)
+- Status: pending review
+- Pattern: backward compat fix = add fallback in validation, not migration scripts
+- Note: `vitest run` without `--project unit` hangs locally (browser tests). Use `--project unit --shard=N/2`
