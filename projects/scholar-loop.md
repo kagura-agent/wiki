@@ -92,3 +92,20 @@ Lessons from Reflector stored with `severity` weight, decaying at half-life 30 d
 ## Links
 
 [[flowforge]], [[agentic-sop-to-work]], [[invincat]], [[guard-spec-format]]
+
+## Applied: CalibrationLog (2026-06-19)
+
+**What was applied**: Created `tools/calibration-log.sh` — a predict-then-verify tracking tool for checkable claims.
+
+**Implementation details**:
+- Commands: `predict`, `verify`, `pending`, `due`, `stats`
+- Storage: append-only JSONL at `study/calibration.jsonl`
+- Stats breakdown: by confidence level (high/medium/low) and by context (study/workloop/etc.)
+- Integrated into study.yaml: followup node checks `due` predictions, note node reminds to log predictions
+
+**What's different now**: Before, predictions about repos/approaches/outcomes were ephemeral thoughts. Now they're logged with confidence levels and later verified against reality. Over time this will reveal:
+- Systematic overconfidence in specific domains
+- Blind spots (predictions I avoid making because I'm uncertain)
+- Calibration by context (am I better at predicting code quality vs community growth?)
+
+**Also fixed**: `tracking-update.sh` xargs quoting bug — replaced with bash-native `trim()` function. Notes containing apostrophes no longer break the script.
