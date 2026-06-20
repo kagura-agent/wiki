@@ -1,6 +1,7 @@
 ---
+title: Doubt Driven Development
 created: 2026-05-13
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Doubt-Driven Development
 

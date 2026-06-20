@@ -1,6 +1,7 @@
 ---
+title: Action Authorization Vs Context Integrity
 created: 2026-04-09
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Action Authorization vs Context Integrity
 

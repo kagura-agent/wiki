@@ -1,6 +1,7 @@
 ---
+title: Agent Self Evolution
 created: 2026-04-18
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Agent Self-Evolution
 

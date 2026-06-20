@@ -1,6 +1,7 @@
 ---
+title: Agent Memory Ground Truth
 created: 2026-06-04
-last_verified: 2026-06-04
+last_verified: 2026-06-20
 ---
 # Agent Memory Ground Truth
 

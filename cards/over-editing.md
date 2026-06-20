@@ -1,6 +1,7 @@
 ---
+title: Over Editing
 created: 2026-04-23
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Over-Editing in Coding Agents
 

@@ -1,6 +1,7 @@
 ---
+title: Skill Distribution Convergence
 created: 2026-05-06
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Skill Distribution Convergence (2026-05)
 

@@ -1,6 +1,7 @@
 ---
+title: Session State Isolation
 created: 2026-05-01
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Session State Isolation
 

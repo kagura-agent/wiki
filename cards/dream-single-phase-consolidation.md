@@ -1,7 +1,8 @@
 ---
+title: Dream Single Phase Consolidation
 created: 2026-05-31
 tags: [concept, memory, architecture]
-last_verified: 2026-06-05
+last_verified: 2026-06-20
 ---
 # Dream Single-Phase Consolidation
 

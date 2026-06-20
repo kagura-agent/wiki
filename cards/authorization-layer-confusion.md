@@ -1,6 +1,7 @@
 ---
+title: Authorization Layer Confusion
 created: 2026-04-13
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Authorization Layer Confusion
 

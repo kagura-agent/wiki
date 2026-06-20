@@ -1,6 +1,7 @@
 ---
+title: Apm Triage Panel Patterns
 created: 2026-05-08
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # APM Triage Panel: Production Agent Patterns
 

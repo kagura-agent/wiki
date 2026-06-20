@@ -1,6 +1,7 @@
 ---
+title: Llm Wiki Karpathy
 created: 2026-04-05
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # LLM Wiki (Karpathy, 2026-04-04)
 

@@ -1,6 +1,7 @@
 ---
+title: Cron Model Switch Fragility
 created: 2026-06-17
-last_verified: 2026-06-17
+last_verified: 2026-06-20
 tags: [cron, model-routing, failure-mode, runtime-stability]
 status: observed
 depth: reference

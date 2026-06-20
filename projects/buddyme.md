@@ -1,9 +1,10 @@
 ---
+title: Buddyme
 tags: [agent-framework, python, skill-system, heartbeat, memory, personality]
 status: active
 created: 2026-05-13
 updated: 2026-05-13
-last_verified: 2026-05-13
+last_verified: 2026-06-20
 ---
 
 # BuddyMe — Multi-Model Agent Framework with Personality Evolution

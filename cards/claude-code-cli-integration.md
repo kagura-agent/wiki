@@ -1,6 +1,7 @@
 ---
+title: Claude Code Cli Integration
 created: 2026-06-12
-last_verified: 2026-06-12
+last_verified: 2026-06-20
 status: active
 depth: deep-dive
 ---

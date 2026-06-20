@@ -1,6 +1,7 @@
 ---
+title: Wiki Health Check
 created: 2026-04-18
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Wiki Health Check
 

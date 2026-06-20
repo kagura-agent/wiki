@@ -1,7 +1,8 @@
 ---
+title: Re_gent
 created: 2026-05-31
 tags: [stub]
-last_verified: 2026-05-31
+last_verified: 2026-06-20
 ---
 # re_gent
 

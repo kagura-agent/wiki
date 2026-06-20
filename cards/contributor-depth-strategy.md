@@ -1,7 +1,8 @@
 ---
+title: Contributor Depth Strategy
 created: 2026-06-10
 tags: [open-source, contribution, strategy]
-last_verified: 2026-06-10
+last_verified: 2026-06-20
 ---
 # Contributor Depth Strategy
 

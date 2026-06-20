@@ -1,7 +1,8 @@
 ---
+title: Metatron Codebase Priors
 created: 2026-06-04
 tags: [deep-read, mcp, coding-agent]
-last_verified: 2026-06-04
+last_verified: 2026-06-20
 ---
 # Metatron — Codebase Priors via MCP
 

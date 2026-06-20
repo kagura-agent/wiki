@@ -1,8 +1,9 @@
 ---
+title: Cjk Bridge Search
 created: 2026-05-18
 status: active
 depth: applied
-last_verified: 2026-05-20
+last_verified: 2026-06-20
 ---
 # CJK-to-English Bridge for Wiki Search
 

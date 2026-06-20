@@ -1,6 +1,7 @@
 ---
+title: Goal Hive Master Duty
 created: 2026-06-01
-last_verified: 2026-06-04
+last_verified: 2026-06-20
 ---
 # Goal-Hive: Master Duty
 

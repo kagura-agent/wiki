@@ -1,6 +1,7 @@
 ---
+title: Claude Code Source Analysis
 created: 2026-03-31
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Claude Code Source Analysis (2026-03-31 Leak)
 

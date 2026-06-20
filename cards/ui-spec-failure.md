@@ -1,8 +1,9 @@
 ---
+title: Ui Spec Failure
 created: 2026-06-18
 tags: [pattern, anti-pattern, ui, specification, recidivism]
 status: insight
-last_verified: 2026-06-18
+last_verified: 2026-06-20
 ---
 
 # UI Spec Failure

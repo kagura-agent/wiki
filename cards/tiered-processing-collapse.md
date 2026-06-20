@@ -1,6 +1,7 @@
 ---
+title: Tiered Processing Collapse
 created: 2026-05-26
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Tiered Processing Collapse
 

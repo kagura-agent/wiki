@@ -1,8 +1,9 @@
 ---
+title: Heuristic Rerank Filter
 created: 2026-06-18
 tags: [pattern, heuristic, ranking, pragmatic-fix]
 status: insight
-last_verified: 2026-06-18
+last_verified: 2026-06-20
 ---
 
 # Heuristic Rerank Filter

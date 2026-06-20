@@ -1,6 +1,7 @@
 ---
+title: Memory Reconsolidation
 created: 2026-04-23
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Memory Reconsolidation in Agent Systems
 

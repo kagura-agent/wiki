@@ -1,6 +1,7 @@
 ---
+title: Workflow Bypass
 created: 2026-06-09
-last_verified: 2026-06-13
+last_verified: 2026-06-20
 tags: [failure-pattern, workflow-design, structural-fix]
 status: active
 depth: reference

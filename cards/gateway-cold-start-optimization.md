@@ -1,7 +1,8 @@
 ---
+title: Gateway Cold Start Optimization
 created: 2026-06-05
 tags: [pattern, performance, architecture]
-last_verified: 2026-06-05
+last_verified: 2026-06-20
 ---
 # Gateway Cold Start Optimization
 

@@ -1,6 +1,7 @@
 ---
+title: Agent Credential Security
 created: 2026-04-07
-last_verified: 2026-06-06
+last_verified: 2026-06-20
 ---
 # Agent 凭证安全：指纹模式
 

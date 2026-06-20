@@ -1,8 +1,9 @@
 ---
+title: Wire Protocol As Contract
 created: 2026-06-18
 tags: [architecture, hexagonal, contract, interface-design]
 status: insight
-last_verified: 2026-06-18
+last_verified: 2026-06-20
 ---
 
 # Wire Protocol as Contract

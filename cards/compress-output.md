@@ -1,7 +1,8 @@
 ---
+title: Compress Output
 tags: [tooling, token-efficiency, taco, compression]
 created: 2026-06-07
-last_verified: 2026-06-07
+last_verified: 2026-06-20
 ---
 
 # compress-output

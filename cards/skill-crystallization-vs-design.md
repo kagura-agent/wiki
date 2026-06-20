@@ -1,6 +1,7 @@
 ---
+title: Skill Crystallization Vs Design
 created: 2026-04-21
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Skill 固化 vs 设计
 

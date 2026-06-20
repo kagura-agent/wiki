@@ -1,6 +1,7 @@
 ---
+title: Context Budget Baseline 2026 04 14
 created: 2026-04-14
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Context Budget Baseline — 2026-04-14
 

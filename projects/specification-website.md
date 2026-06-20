@@ -1,10 +1,11 @@
 ---
+title: Specification Website
 status: active
 created: 2026-06-02
 updated: 2026-06-02
 tags: [web-standards, agent-readiness, specification]
 links: [[agent-skill-standard-convergence]], [[agent-context-files]]
-last_verified: 2026-06-02
+last_verified: 2026-06-20
 ---
 
 # specification.website (jdevalk)

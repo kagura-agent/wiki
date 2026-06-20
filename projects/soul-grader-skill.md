@@ -1,4 +1,5 @@
 ---
+title: Soul Grader Skill
 type: project
 created: 2026-06-18
 updated: 2026-06-18
@@ -7,7 +8,7 @@ stars: 29
 repo: cobibean/soul-grader-skill
 tags: [soul-md, agent-identity, grading, skill, rubric, hermes-agent]
 links: [soul-md, claude-soul, identity-drift-detection, graduation-pipeline]
-last_verified: 2026-06-18
+last_verified: 2026-06-20
 ---
 
 # soul-grader-skill (cobibean)

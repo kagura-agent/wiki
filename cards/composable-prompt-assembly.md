@@ -1,6 +1,7 @@
 ---
+title: Composable Prompt Assembly
 created: 2026-05-07
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Composable Prompt Assembly
 

@@ -1,9 +1,10 @@
 ---
+title: Ephemera Retention Primitive
 created: 2026-06-18
 source: study/followup (beads issue #4369, gascity scale incident)
 status: insight
 tags: [architecture, agent-platform, scale]
-last_verified: 2026-06-18
+last_verified: 2026-06-20
 ---
 
 # Ephemera Retention Primitive

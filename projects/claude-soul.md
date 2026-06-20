@@ -1,4 +1,5 @@
 ---
+title: Claude Soul
 type: project
 created: 2026-05-28
 updated: 2026-06-02
@@ -7,7 +8,7 @@ stars: 83
 repo: DomDemetz/claude-soul
 tags: [self-evolving-agent, memory, identity, claude-code]
 links: [beliefs-upgrade-mechanism, agent-self-evolution, self-evolving-agent-landscape]
-last_verified: 2026-06-02
+last_verified: 2026-06-20
 ---
 
 # Claude Soul — Self-Correcting Learning Engine for Claude Code

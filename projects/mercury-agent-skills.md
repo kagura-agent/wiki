@@ -1,9 +1,10 @@
 ---
+title: Mercury Agent Skills
 tags: [skill-registry, skill-ecosystem, mercury, curated-skills]
 status: monitor
 created: 2026-05-13
 updated: 2026-05-23
-last_verified: 2026-05-28
+last_verified: 2026-06-20
 ---
 
 # Mercury Agent Skills — Curated Skill Registry

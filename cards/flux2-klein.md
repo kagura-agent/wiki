@@ -1,6 +1,7 @@
 ---
+title: Flux2 Klein
 created: 2026-06-01
-last_verified: 2026-06-02
+last_verified: 2026-06-20
 ---
 # FLUX.2 Klein
 

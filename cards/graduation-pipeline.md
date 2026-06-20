@@ -1,7 +1,8 @@
 ---
+title: Graduation Pipeline
 tags: [self-evolving, beliefs, pipeline, tooling]
 created: 2026-06-07
-last_verified: 2026-06-13
+last_verified: 2026-06-20
 ---
 
 # Graduation Pipeline

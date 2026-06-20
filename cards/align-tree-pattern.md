@@ -1,8 +1,9 @@
 ---
+title: Align Tree Pattern
 created: 2026-06-18
 tags: [pattern, clarification, alignment, agent-workflow]
 status: insight
-last_verified: 2026-06-18
+last_verified: 2026-06-20
 ---
 
 # Align-Tree Pattern

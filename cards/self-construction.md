@@ -1,6 +1,7 @@
 ---
+title: Self Construction
 created: 2026-04-07
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Self-Construction（自我构建）
 

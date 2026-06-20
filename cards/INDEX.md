@@ -1,6 +1,7 @@
 ---
+title: Index
 created: 2026-04-10
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Wiki Cards Index
 

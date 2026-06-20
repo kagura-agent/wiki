@@ -1,4 +1,5 @@
 ---
+title: Kiwifs
 created: 2026-05-04
 updated: 2026-05-26
 type: project
@@ -7,7 +8,7 @@ stars: 747
 repo: kiwifs/kiwifs
 language: Go
 license: BSL-1.1
-last_verified: 2026-05-26
+last_verified: 2026-06-20
 ---
 
 # KiwiFS — Knowledge Filesystem for Agents

@@ -1,9 +1,10 @@
 ---
+title: Single Process To Proxied Server Migration
 created: 2026-06-18
 source: study/followup (beads proxied-server PR series #4287-4446)
 status: insight
 tags: [architecture, hexagonal, agent-platform, multi-tenant]
-last_verified: 2026-06-18
+last_verified: 2026-06-20
 ---
 
 # Single-Process → Proxied-Server Migration Pattern

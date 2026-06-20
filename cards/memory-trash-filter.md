@@ -1,6 +1,7 @@
 ---
+title: Memory Trash Filter
 created: 2026-04-30
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Memory Trash Filter — What NOT to Store
 

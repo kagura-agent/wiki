@@ -1,6 +1,7 @@
 ---
+title: Context Budget Constraint
 created: 2026-04-14
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Context Budget 约束
 

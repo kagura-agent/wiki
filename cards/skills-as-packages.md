@@ -1,6 +1,7 @@
 ---
+title: Skills As Packages
 created: 2026-04-17
-last_verified: 2026-06-03
+last_verified: 2026-06-20
 ---
 # Skills as Packages
 
