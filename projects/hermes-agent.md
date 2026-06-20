@@ -1567,3 +1567,13 @@ This makes the review fork more disciplined — it can't wander off into web bro
 - **flowforge-state-stuck pattern**: plan_review was stuck for ~9 hours because subagent completion didn't auto-advance flowforge. Known issue (4th occurrence).
 - **Hermes contribution track record**: 0 merged PRs, multiple SUPERSEDED/CLOSED. This repo is extremely competitive.
 - **189K⭐ repo**: High activity, issues get claimed fast. Detailed comment analysis = attracting competitors.
+
+### Lesson Applied: Competing-PR Recheck at Implement (2026-06-20)
+
+**Pattern**: `high-star-repo-issue-race` — high-star repos with detailed community RCA comments attract fast submitters. Time between study→implement can be hours (especially if plan_review gets stuck).
+
+**Applied**: Added `bash tools/competing-pr-check.sh` gate at the START of workloop.yaml `implement` node. Exit 1 → bail to `find_work` immediately. Previously only checked at `find_work` and `study` nodes.
+
+**Expected impact**: Catch sniped issues before investing implementation time. Would have saved the full hermes#49307 cycle (study complete → stuck 9h in plan_review → SUPERSEDED upon resuming).
+
+**Connection**: [[pr-superseded-lessons]], [[competing-pr-early-check]]
