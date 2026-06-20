@@ -93,6 +93,22 @@ Campaign on a FastAPI+SQLite app with Haiku workers:
 - [[genericagent]] — conductor/delegate pattern comparison
 - [[ccglass]] — coding agent observability (complementary to Foreman's metrics)
 
+## Applied: Regression Ratchet (2026-06-20)
+
+**What was applied**: Created `tools/test-ratchet.sh` — structural gate that prevents test count decrease and detects new failures after subagent code changes.
+
+**Implementation details**:
+- Commands: `snapshot` (before changes), `verify` (after changes), `detect` (auto-detect test cmd), `status`, `clean`
+- Parsers: Node native test runner (`ℹ tests N`), vitest (`Tests N failed | M passed (T)`), jest, pytest, go test, TAP
+- Storage: `~/.openclaw/workspace/.test-ratchet/<repo-hash>.json`
+- Ratchet checks: (1) test count decrease, (2) new failures, (3) previously-passing now failing, (4) exit code regression
+- On pass: baseline ratchets forward (new higher baseline for next verify)
+- Integrated into `tools/regression-gate.sh` rules + documented in `tools/repo-tests.md`
+
+**What's different now**: Before, we trusted subagent claims about test results (behavioral rule in AGENTS.md). Now we can independently verify by snapshot-before + verify-after. The tool specifically catches the pathological case where a subagent "fixes" a test by deleting it — test count decrease is flagged immediately.
+
+**Verification**: Tested against cove (vitest: 444 tests, correct parsing), gitclaw (Node native runner: 19 tests). Simulated regressions detected correctly: test count decrease and new failures both produce clear FAIL verdicts.
+
 ## Tracking
 
 - **Status:** following (deep-read done)
