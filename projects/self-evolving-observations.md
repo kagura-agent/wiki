@@ -4135,3 +4135,100 @@ a282984 gradients: study reflect (study-clone-vs-api → count 2)
 - Total workspace commits since yesterday 22:30: 11
 - New PRs today: 3 (memex#173, OpenCLI#1974, cove#409)
 - beliefs-candidates.md: 637 lines / 236 entries / 28 graduated / ~21 retracted
+
+## 🔬 自进化观察日报 2026-06-20 (Day 41, Saturday)
+
+### 管线活跃度
+- beliefs-candidates: 8 条新增 / 0 graduated / 0 retracted (daily-review 03:15 报告 11 条 auto-retracted，但实际 retracted 日期为 06-06/06-14，非今日) / 2 APPLIED
+- DNA 变更: 无（SOUL.md / AGENTS.md / IDENTITY.md 均未修改）
+- nudge 触发: ~3 次，质量 中（周六 session 密度低）
+- dreaming: Light Sleep 运行 ✅（101 staged candidates from 06-17 corpus），REM 运行但 empty ("No strong patterns surfaced")。**Day 4 后首次正常执行，结束 "details unavailable" 连续故障**。0 promoted。
+
+### 闭环追踪
+- 完整闭环: 2 个
+  1. hermes#49307 superseded (flowforge stuck 9h) → gradient: high-star-repo-issue-race → 同日 APPLIED: competing-pr-check.sh 加入 workloop.yaml implement node → commit ✅
+  2. saturation-gate-mode-availability 06-17 gradient → 今日 APPLIED: study-saturation-gate.sh Layer 2 → commit dna fbf44b6 ✅
+- 断裂处:
+  - followup-status.sh phantom tool: 06-20 又发现（第 N 次），仍只记了 gradient 没建工具（观测≠行动）
+  - cove#402/#396/#394 CONFLICTING: Day 4+，仍未 rebase。已知需 Claude Code，但无调度
+
+### 今日发现
+
+1. **Same-day gradient→apply cycle 第 2 次出现**: high-star-repo-issue-race 从 workloop 失败 (09:06) → gradient 记录 → tool 集成 → commit (10:59)，4 小时闭环。这验证了 "gradient 产生的当天就是最佳 apply 时机" — 上下文最完整，行动成本最低。
+
+2. **Dreaming 恢复**: Light Sleep 从 "details unavailable" (Day 3-4) 恢复到正常 staging（101 candidates）。但全部 confidence 0.58（系统默认值？），且 REM 产出为空。Dreaming 在"运行"但不在"提炼"——pipeline 的 staging→promote→integrate 路径仍然不通。
+
+3. **全自源 gradient 日**: 8 条全部 self-generated (workloop 3 + study 5)。加权得分 = 4.0（0.5x discount）。周六无 Luna 互动 = 无 external-trigger gradient。这是 pipeline 预期行为——自生成证据需要 2x 数量才能达到 graduation threshold。
+
+4. **hermes-agent 正式 drop**: 连续 0 merged across all attempts，186K⭐ 竞争太激烈。guide.md rule #64 升级高星 repo 到 P1 竞争警告。这是一个战略收敛决策——认清能力边界比坚持更有价值。
+
+5. **Graduation rate = 0 连续 Day 3+**: 06-17 (0), 06-18 (0), 06-19 (5 graduated in daily-review), 06-20 (0)。Pipeline throughput 波动大——bulk graduation in daily-review vs 常日 0。考虑: graduation 应该分散到每日 study apply 而不是全堆到 daily-review？
+
+6. **Tool 产出 healthy**: test-ratchet.sh (regression gate) + competing-pr-check.sh implement gate + study-saturation-gate.sh Layer 2。3 个工具改进/创建 in 1 day — study→apply cycle 在周末仍然运转。
+
+### 管线健康评分
+- 进料: 🟢 (8 条, steady)
+- 加工: 🟡 (2 APPLIED, 0 graduated — apply 活跃但 graduation 停滞)
+- 出料: 🟡 (工具产出 healthy, DNA 产出 = 0)
+- Dreaming: 🟡 (恢复运行但 promote = 0, quality 未验证)
+- 闭环: 🟢 (2 完整, same-day cycle 健康)
+
+### 原始数据
+- `git log --since="2026-06-20 00:00" --oneline -- beliefs-candidates.md`: 4 commits (3 new gradients + 1 apply)
+- `git log --since="2026-06-20 00:00" --oneline`: 9 total workspace commits
+- `beliefs-candidates.md`: ~188 entries / 28 graduated / 9 retracted
+- dreaming: 101 light-sleep staged, 0 promoted, REM empty
+- daily-review: ran 03:15, 4 FlowForge zombies cleaned, 06-19 memory compressed
+
+## 🔬 自进化观察日报 2026-06-20 (Day 41)
+
+### 管线活跃度
+- **beliefs-candidates**: 8 条新增（duplicate-issue-selection, stale-workloop-recovery, high-star-repo-issue-race, mode-selection-before-check, followup-status-tool-gap, dogfood-adoption, followup-notes-replace-default, saturation-gate-mode-availability-check）/ 2 条 APPLIED / 0 条毕业 / 0 条 retracted
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 零改动，变更全在 beliefs-candidates.md + tool 代码）
+- **nudge 触发**: ≥5 次（memory 中 5 个 `### Reflect` 段），质量 **中-高**（study apply/followup/scout 均产出 gradient）
+- **dreaming**: 运行 4 次（3:15 AM ×2, 10:31 AM ×2），promote 0 条 — **"details unavailable" bug Day 4 连续失败**
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. saturation-gate-mode-availability gradient → study-saturation-gate.sh Layer 2 增强 → commit fbf44b6 验证 ✅
+  2. high-star-repo-issue-race gradient → competing-pr-check.sh gate 加入 workloop.yaml → commit 验证 ✅
+  3. duplicate-issue-selection gradient → 记录第 2 次出现（oh-my-pi#2612 重复选择）→ 接近 V1 门槛
+- **断裂处**:
+  - Dreaming "details unavailable"：Day 4 未调查（#10(b) open 4 天，零调查行动）⚠️ 违反 "观测必须闭环"
+  - upstream #87485 已 filed 但无后续（ball in maintainer court，acceptable）
+
+### PR 活跃度
+- **极活跃日**: 10+ PRs opened, 9 merged（lottie-studio ×8, finance ×1）
+- **外部**: 1 新 PR（memex#174 diagnoseGitError tests）
+- **总计 open**: 14 PRs（6 external waiting review, 6 own waiting Luna, 2 stale）
+
+### 今日发现
+
+1. **gradient APPLIED 机制首次出现**：2 条 gradient 在同一天被应用（saturation-gate + competing-pr-check），标记为 `→ APPLIED YYYY-MM-DD` 而非走正式 graduation。这是 "快速闭环" 路径 — gradient 有即时价值时直接改代码，不等 Triple Verification。需要观察这种模式是否绕过了质量门控。
+
+2. **Dreaming Day 4 零输出 — 管线最大瓶颈**：连续 4 天 (06-17~06-20) 全部 "details unavailable"，Deep Sleep 0 promotions。Light Sleep staging 有内容但 Deep Sleep 无法消费。upstream issue #87485 (0.58 hardcoded) 已 filed，但 (b) "details unavailable" 根因未调查。
+
+3. **beliefs-candidates 进料持续高位**：8 条/天是观察期高位（vs 5-day avg ~6）。来源 100% self-generated（study/workloop），无外部反馈转化。当前文件 658 lines / 28 graduated / 9 retracted / ~181 active candidates。
+
+4. **工具产出持续**：study-saturation-gate.sh 和 competing-pr-check.sh 都是 gradient→tool 的直接产物。工具进化链条在运作：使用工具→发现 gap→记录 gradient→改进工具。
+
+5. **nudge 质量稳定**：5 次触发全部来自实质 session（study apply/followup/scout），无空转。但 nudge 产出的 reflect 段落深度参差不齐。
+
+### Issue #10 进展评估
+- (a) upstream 0.58 hardcoded: ✅ **FILED** — openclaw/openclaw#87485（06-20 confirmed）
+- (b) "details unavailable" bug: ❌ **Day 4 持续复现，仍无调查行动** — 这是当前最大欠债
+- (c) local filter 监测: **Day 4，0 promotions** — 被 (b) 阻塞（Light Sleep 有 staging 但 Deep Sleep 不消费）
+- (d) REM empty: **defer 中**（合理）
+
+### 建议（观察→行动）
+1. ⚠️ Issue #10(b) 超过 96h 未调查，连续 4 天写"需要优先调查"但无行动 — 这本身就是 "建议≠行动" 反模式。**下一可用 session 必须 investigate**，否则关闭该 item 并承认放弃。
+2. beliefs-candidates 的 APPLIED 模式需要规范化 — 是 graduation 的快速路径还是绕过门控？应在 promotion gate 文档中明确。
+3. 14 个 open PRs 是历史高位 — 需要追踪 merge 速率以避免 context-switching 开销。
+
+### 原始数据
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md`: 4 commits (all beliefs-candidates)
+- `DREAMS.md`: 4 entries on 06-20, all "details unavailable"; Deep Sleep 0 ranked / 0 promoted
+- `memory/2026-06-20.md`: 5 reflect sections, 11 nudge-related mentions
+- Total workspace commits since yesterday 22:30: 9
+- beliefs-candidates.md: 658 lines / 28 graduated / 9 retracted / 2 APPLIED / ~181 active
+- PRs today: 10+ opened, 9 merged, 1 external (memex#174)
