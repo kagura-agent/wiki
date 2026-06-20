@@ -1548,3 +1548,22 @@ This makes the review fork more disciplined — it can't wander off into web bro
 - **3 consecutive failures on this repo**: #44782 (duplicate), #44890 (duplicate of #44652), #44640 re-attempt (aborted)
 - **0 merged PRs** on NousResearch/hermes-agent
 - **Recommendation**: De-prioritize hermes-agent for contribution. Extremely competitive repo (189K⭐), fast-moving, maintainer preference for internal contributors
+
+## Workloop 2026-06-20 — SUPERSEDED: Issue #49307 (context compression dedup)
+
+**Issue**: #49307 — Context compression causes answer repetition + new instruction loss
+**Result**: SUPERSEDED — PR #49347 by r266-tech (opened 2026-06-20T01:05:47Z) covers identical fix
+**Our plan**: Fix `_build_static_fallback_summary` to separate resolved vs pending user asks, stop triplicating `active_task`
+**Competing PR**: #49347 — 44 additions, 2 deletions, 2 files. Same approach (neutralize In-Progress/Pending headings)
+
+### Timeline
+- 00:02 UTC: workloop start → find_work selected #49307
+- 00:16 UTC: plan complete, plan_review node entered
+- ~01:05 UTC: r266-tech submits PR #49347 (while our plan_review was stuck in flowforge)
+- 09:06 UTC: current cron run discovers SUPERSEDED, advances through reflect
+
+### Observations
+- **Issue race**: DavidMetcalfe's comment (23:38 UTC Jun 19) provided extremely detailed root cause analysis with exact file:line references + regression test shape. This attracted r266-tech who submitted within ~2 hours.
+- **flowforge-state-stuck pattern**: plan_review was stuck for ~9 hours because subagent completion didn't auto-advance flowforge. Known issue (4th occurrence).
+- **Hermes contribution track record**: 0 merged PRs, multiple SUPERSEDED/CLOSED. This repo is extremely competitive.
+- **189K⭐ repo**: High activity, issues get claimed fast. Detailed comment analysis = attracting competitors.
