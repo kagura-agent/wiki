@@ -4,7 +4,7 @@
 
 ## Quick Facts
 - **Repo**: omnigent-ai/omnigent
-- **Stars**: 1197 (3 days old, as of 2026-06-14)
+- **Stars**: 4084 (as of 2026-06-20, up from 1197 on 06-14 — 3.4x growth)
 - **Language**: Python 3.12+
 - **License**: Apache 2.0
 - **Status**: Alpha
@@ -67,7 +67,7 @@ Omnigent wraps multiple coding agent harnesses (Claude Code, Codex, Pi, custom Y
 
 ## Market Signal
 
-1197⭐ in 3 days signals strong demand for agent unification. The "too many agent CLIs" problem is real — developers want one place to manage Claude Code + Codex + Pi rather than switching between terminals. This validates OpenClaw's multi-agent approach but from a different angle (developer-focused CLI orchestration vs personality-first agent platform).
+4084⭐ in 9 days (from 1197 in first 3 days) signals strong demand for agent unification. The "too many agent CLIs" problem is real — developers want one place to manage Claude Code + Codex + Pi rather than switching between terminals. This validates OpenClaw's multi-agent approach but from a different angle (developer-focused CLI orchestration vs personality-first agent platform).
 
 ## Links
 - [[architect-loop]] — cross-vendor agent collaboration pattern
@@ -75,4 +75,4 @@ Omnigent wraps multiple coding agent harnesses (Claude Code, Codex, Pi, custom Y
 - [[self-evolving-agent-landscape]] — industry trends
 
 ---
-*Scout: 2026-06-14 | Status: following*
+*Scout: 2026-06-14 | Updated: 2026-06-20 | Status: following*
