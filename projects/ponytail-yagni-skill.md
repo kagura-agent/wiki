@@ -3,7 +3,7 @@ title: "Ponytail — YAGNI Lazy Senior Dev Skill"
 created: 2026-06-13
 updated: 2026-06-13
 tags: [agent-skill, code-quality, YAGNI, prompt-engineering]
-last_verified: 2026-06-14
+last_verified: 2026-06-20
 ---
 
 # Ponytail (DietrichGebert/ponytail)
@@ -62,3 +62,6 @@ Previous: [[guard-skills]] (different approach — additive quality vs subtracti
 
 ---
 *Deep read: 2026-06-13 11:25 CST*
+
+---
+*Followup 2026-06-20: 966→40,129⭐ (41x in 7 days). Viral mass adoption. Active dev (pushed 06-19). Copilot integration (#181), OpenClaw skill mirror (#177), Modern Web Guidance as rung-3 (added then reverted). Cross-platform bug reports indicate broader adoption stress. Value fully extracted (YAGNI ladder in DNA). Downgraded to monthly — no new architectural insights at this scale.*

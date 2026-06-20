@@ -5,7 +5,7 @@ status: active
 tags: [self-evolution, personal-model, memory, agent-infrastructure, curiosity]
 stars: 560
 repo: agentic-in/elephant-agent
-last_verified: 2026-05-29
+last_verified: 2026-06-20
 ---
 
 # Elephant Agent
@@ -466,3 +466,6 @@ See also: [[sandbox-path-mapping]], [[delegating-executor-pattern]]
 **Relevance to OpenClaw**: OpenClaw's `tools.exec.security` has a flat allow/ask/deny model per command. Elephant's tiered mode approach (`readonly→safe→dev→open`) is more user-friendly for the common case while still supporting fine-grained overrides. Worth considering if OpenClaw ever adds sandbox profiles.
 
 **Revisit**: 06-04.
+
+---
+*Followup 2026-06-20: 565⭐ (flat, 0 growth in 7 days). No commits in 19 days (last push 06-01). Open WIP PRs abandoned (#56, #41). Previously community was active (28 PRs/30d on 06-13) — now dead. **DROPPED.** Meets multiple drop criteria: solo dev abandoned, community died, growth plateau. Mode abstraction pattern (readonly→safe→dev→open) noted in this card for future reference.*
