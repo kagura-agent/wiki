@@ -100,3 +100,10 @@
 - **context-file.ts dedup key**: 每个文件需唯一 key（含 filename），不能只用 depth
 
 Links: [[coding-agent-ecosystem]]
+
+## Workloop 反思 (2026-06-20)
+- **PR #2764 状态**: 仍 PENDING (Jun 18 最后提交后无新 review，4天)
+- **本轮问题**: workloop instance #4701 重选了 #2612，这个 issue 已有我们的 PR。浪费了 4 轮 find_work + study cycle（共 3h+）
+- **根因**: find_work 选题时没检查是否已有自己的 open PR 关联该 issue
+- **修复建议**: find_work 加一步 `gh pr list --author=kagura-agent --search "issue-number"` 排除已有 PR 的 issue
+- **roboomp review 持续信号**: 审核及时（首次 review 当天），修改后等 re-review 期较长（4天+未响应）。合理等待期 ~1 周后考虑 ping
