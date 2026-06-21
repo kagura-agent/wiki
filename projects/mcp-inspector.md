@@ -5,7 +5,7 @@ language: TypeScript
 framework: React + Mantine + Vite + Vitest + Storybook
 relationship: new (first attempted PR, superseded)
 last_updated: 2026-06-15
-last_verified: 2026-06-15
+last_verified: 2026-06-21
 ---
 
 ## Repo Overview
@@ -59,3 +59,15 @@ MCP (Model Context Protocol) Inspector — web-based debugging tool for MCP serv
 - ⚠️ **Check for competing PRs** using `gh pr list --search "issue-number"` before starting
 - Fork remote: `fork` → `https://github.com/kagura-agent/inspector.git`
 - Branch naming: `fix/<descriptive-name>`
+
+### Attempt 2: #1506 — CLI broken since v0.17.0 (package.json not in files) (2026-06-21)
+- **Result**: PENDING — PR #1506 submitted, awaiting CI approval (first-time contributor CI gating)
+- **Issue**: #1503 — ERR_MODULE_NOT_FOUND when running CLI from dirs with ../package.json relative to CWD
+- **Fix**: One-line — add `"cli/package.json"` to root `package.json` `files` array
+- **Root cause**: `fs.existsSync()` resolves relative to CWD, `import()` resolves relative to module file; mismatch causes import to look for `cli/package.json` which wasn't in npm tarball
+- **Existing partial fix** (#839 by cliffhall): Added fallback to `../../package.json`, but CWD-dependence means the primary path still fails when user's CWD has a parent `package.json`
+- **Bug reproduction**: Create `/tmp/test/package.json`, run from `/tmp/test/sub/` → confirmed ERR_MODULE_NOT_FOUND
+- **Key insight**: The v2/main branch uses `dirname(fileURLToPath(import.meta.url))` for proper resolution — cleaner approach but more invasive for v1
+- **Branch**: `main` (not `v2/main`) — v0.x releases come from `main`
+- **CI**: Requires maintainer approval to run (first-time contributor). 85 CLI tests pass locally.
+- **Lesson**: Always test npm package behavior from unusual CWDs, not just from the repo root
