@@ -4232,3 +4232,15 @@ a282984 gradients: study reflect (study-clone-vs-api → count 2)
 - Total workspace commits since yesterday 22:30: 9
 - beliefs-candidates.md: 658 lines / 28 graduated / 9 retracted / 2 APPLIED / ~181 active
 - PRs today: 10+ opened, 9 merged, 1 external (memex#174)
+
+## 🔬 自进化观察日报 2026-06-21 (Day 42)
+
+### Study Apply: scout-interval-awareness structural fix
+
+**What**: 4-day recidivist `scout-interval-awareness` converted from behavioral reminder → structural gate in `study-saturation.sh`.
+
+**Mechanism**: Script now looks back 2 days for `## Study Scout` headers in memory files. If found within 2 days, displays warning and deprioritizes scout in recommendation engine. Study guide rule "≥3d between scouts" is now tool-enforced, not memory-enforced.
+
+**Insight**: Preflight alone can't fix recidivists after 3+ days (the script itself says "needs structural change"). The gradient was right — same-day scouts with overlapping queries yield 80%+ redundant results. Converting time-interval rules into tool gates is the only reliable pattern for addressing recidivist behaviors that survive behavioral reminders.
+
+**Pattern**: gradient → behavioral rule (fails after 4 days) → structural gate (tool-enforced). This is the third instance of this pattern (after saturation-gate Layer 2 and competing-pr-check). [[structural-backpressure]]
