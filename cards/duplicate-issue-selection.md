@@ -40,5 +40,4 @@ Gradient from oh-my-pi#2612 incident.
 ## Links
 
 - [[tracking-health-tool]]
-- [[gogetajob-architecture]]
-- [[issue-funnel]]
+- [[gogetajob]]
