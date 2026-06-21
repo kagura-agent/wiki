@@ -3,7 +3,7 @@ title: tracking-health.sh
 type: tool
 created: 2026-05-05
 status: active
-last_verified: 2026-06-15
+last_verified: 2026-06-21
 ---
 
 # tracking-health.sh — Tracking Portfolio Health Dashboard
@@ -101,3 +101,15 @@ Links: [[tracking-due-script]], [[cured-tracking-methodology]], [[self-evolving-
 **Lesson**: This was a 3-time recidivist because each occurrence was non-blocking (dates updated correctly, stderr noise ignored). Low-severity bugs that don't crash become invisible to fix-prioritization. The DNA preflight recidivist counter was what finally forced attention.
 
 Links: [[study-workflow]], [[self-evolving-observations]]
+
+## 2026-06-21 Apply: Duplicate Issue Selection Gate (issue-funnel.sh)
+
+Gate 3b added to `issue-funnel.sh` — blocks issues that already have an open PR from the same author. Pattern: `gh pr list --repo $repo --author=kagura-agent --state=open --search "$issue_num"`. If non-empty, FAIL.
+
+**Complementarity with existing gates:**
+- Gate 3 (closed PRs) catches re-attempts on failed/rejected work
+- Gate 3b (open PRs) catches re-selection of in-progress work
+- Gate 5 (repo cap) limits total exposure per repo
+
+**Source:** [[duplicate-issue-selection]] gradient (oh-my-pi#2612 re-selected while PR already open).
+**Verification:** memex#174 correctly blocked.
