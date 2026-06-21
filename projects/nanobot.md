@@ -1133,3 +1133,25 @@ Already captured in earlier followup, but worth re-noting: goal continuation now
 **Assessment**: nanobot's quarterly direction is becoming clear: ship memory-path defaults that actually work, tighten the consolidation/preservation correctness, and continue provider expansion. The fact that a 5-instance critique can be filed with this level of code analysis is itself a signal — production users are running long enough to hit this and care enough to file detailed reports. That's a kind of community maturity most "agent" projects don't have yet.
 
 **Revisit**: 06-24.
+### Memory Provenance Gating (PR #4424, 2026-06-21)
+
+New pattern: classify archived facts by **source quality** to prevent agent speculation from polluting durable memory.
+
+**Consolidator source discipline rules:**
+1. User-stated/confirmed facts → [permanent], [durable], [ephemeral], or [correction] (full range)
+2. Tool outputs & source-code observations → [durable] when concrete, not when speculative
+3. Agent-only guesses/inferences/interpretations that user did NOT confirm → [skip] or [ephemeral] with "(agent-inferred)" marker
+4. Facts already in long-term memory excerpt → [skip] unless conversation corrects/narrows them
+5. "Preserve the narrowest true scope" — don't broaden project-specific observations into global preferences
+
+**Dream promotion guard:**
+- Entries marked "(agent-inferred)" cannot be promoted to USER.md or SOUL.md
+- Cannot be broadened into durable preferences or project facts
+- Only promotable when a **later user turn** explicitly confirms them
+
+**Why this matters for us:**
+- Our MEMORY.md currently doesn't distinguish "Luna told me" from "I inferred from context"
+- Potential application: add source markers to memory entries (e.g. `[Luna said]` vs `[inferred]`)
+- Key insight: the provenance gate is at **write time** (consolidator), not read time — cheap enforcement
+
+See also: [[memory-trash-filter]], [[dream-single-phase-consolidation]]
