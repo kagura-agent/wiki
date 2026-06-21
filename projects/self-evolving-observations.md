@@ -4244,3 +4244,13 @@ a282984 gradients: study reflect (study-clone-vs-api → count 2)
 **Insight**: Preflight alone can't fix recidivists after 3+ days (the script itself says "needs structural change"). The gradient was right — same-day scouts with overlapping queries yield 80%+ redundant results. Converting time-interval rules into tool gates is the only reliable pattern for addressing recidivist behaviors that survive behavioral reminders.
 
 **Pattern**: gradient → behavioral rule (fails after 4 days) → structural gate (tool-enforced). This is the third instance of this pattern (after saturation-gate Layer 2 and competing-pr-check). [[structural-backpressure]]
+
+### Study Apply: stale-workloop-recovery structural fix
+
+**What**: `stale-workloop-recovery` gradient (06-20) converted from behavioral suggestion → structural gate in `workloop.yaml`.
+
+**Mechanism**: New `tools/stale-pr-check.sh` runs as first check at implement node. Uses `gh pr list --author kagura-agent` + `gh pr checks` to detect if PR already exists with passing CI. Three exit paths: 10 (fast-path), 11 (fix mode), 0 (fresh implementation). workloop.yaml Branch 3 routes exit 10 directly to pre_push_audit.
+
+**Pattern confirmed**: gradient → behavioral rule (doesn't hold across session boundaries) → structural gate (tool-enforced). Fourth instance of this maturation pattern (after saturation-gate Layer 2, competing-pr-check, scout-interval-awareness). [[structural-backpressure]] [[structural-fix-over-behavioral-rule]]
+
+**Estimated impact**: Each stuck workloop instance was costing 1-3 hours of redundant implementation. Fast-path reduces this to ~10 seconds (two API calls).

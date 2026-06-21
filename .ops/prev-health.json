@@ -1,22 +1,35 @@
 {
-  "timestamp": "2026-06-20T20:09:00+08:00",
-  "total_files": 958,
-  "cards": 414,
-  "projects": 462,
-  "wikilinks": 3716,
-  "errors": 3,
-  "warnings": 51,
-  "broken_links": 3,
-  "orphans": 4,
-  "index_drift": 4,
+  "timestamp": "2026-06-21T10:07:00+08:00",
+  "total_files": 961,
+  "cards": 416,
+  "projects": 463,
+  "wikilinks": 3724,
+  "errors": 1,
+  "warnings": 52,
+  "broken_links": 1,
+  "orphans": 2,
+  "index_drift": 7,
   "stubs": 0,
   "duplicate_slugs": 1,
-  "stale_files": 190,
+  "stale_files": 192,
   "frontmatter_issues": 3,
   "zero_outbound_links": 107,
-  "secrets_found": 0,
+  "secret_patterns": 0,
   "unicode_suspicious": 8,
-  "error_book_open": 73,
-  "error_book_new": 14,
-  "error_book_recurring": 39
+  "details": {
+    "broken_links": [
+      "projects/tracking-health-tool.md -> [[duplicate-issue-selection]]"
+    ],
+    "orphans": ["codexpro", "cometline"],
+    "index_drift_files": [
+      "cards/competing-pr-early-check.md",
+      "cards/rlhf.md",
+      "projects/agent-apprenticeship.md",
+      "projects/carry.md",
+      "projects/codexpro.md",
+      "projects/cometline.md",
+      "projects/junction.md"
+    ],
+    "frontmatter_missing": ["fable-mode", "hn-algolia-api", "yield-curve-and-term-structure"]
+  }
 }
