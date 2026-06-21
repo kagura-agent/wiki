@@ -299,3 +299,9 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Fix path**: `git rebase upstream/main` exploded with 100+ conflicts (fork branch is 2141 commits ahead with old experimental commits). Workaround: created new branch off `upstream/main`, cherry-picked the 2 cacheRetention commits cleanly (only `openai-completions.ts` + `openai-completions.test.ts` + new test file), force-pushed via `--force-with-lease=fix/...:<old-head-sha>` to the same PR head, posted comment explaining rebase.
 - **Lesson — diverged fork branches**: A personal fork that accumulates unrelated experiments can drift wildly from upstream. For each new PR, use the fork only as a `git push` target — branch off `upstream/main`, not off the local tracking branch. Cherry-pick the 1-2 commits that matter; don't try to rebase the fork-tracking branch.
 - **Lesson — "球在谁手里" gate**: CI failure ≠ always "ball in my court". Always check whether failing tests are touched by the PR diff. If a failing test is in a file my PR doesn't modify, first hypothesis is upstream regression or stale base, not my fix.
+
+### 2026-06-21: PR #92665 — workloop stale recovery fast-path
+- **Status**: Still PENDING. 8 days open, CI green (178 checks), clawsweeper feedback addressed (June 17), no human review.
+- **Fast-path validated**: `stale-pr-check.sh` correctly detected existing PR with green CI → skipped re-implementation. Saved full implement cycle.
+- **Fresh-context review finding (MEDIUM)**: `isOpenRouterAnthropicModelRef` exported but unused. Dead code from initial implementation — utility for future OpenRouter cache support. Accepted as non-harmful; will address if reviewer flags.
+- **Observation**: PR waiting 8 days without human review is typical for this repo. Already pinged (June 20). No further action possible — ball is on maintainer side.
