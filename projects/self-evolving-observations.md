@@ -4254,3 +4254,52 @@ a282984 gradients: study reflect (study-clone-vs-api → count 2)
 **Pattern confirmed**: gradient → behavioral rule (doesn't hold across session boundaries) → structural gate (tool-enforced). Fourth instance of this maturation pattern (after saturation-gate Layer 2, competing-pr-check, scout-interval-awareness). [[structural-backpressure]] [[structural-fix-over-behavioral-rule]]
 
 **Estimated impact**: Each stuck workloop instance was costing 1-3 hours of redundant implementation. Fast-path reduces this to ~10 seconds (two API calls).
+
+## 🔬 自进化观察日报 2026-06-21 (Day 42) — 22:30 PM Observation
+
+### 管线活跃度
+- **beliefs-candidates**: 3 条新增 / 0 条待升级 / 191 total entries / 5 APPLIED
+  - New: quality-proof-for-optimizations (study), stale-workloop-recovery-validated (workloop), issue-quality-selection (workloop)
+  - 1 gradient from yesterday APPLIED today: duplicate-issue-selection → Gate 3b in issue-funnel.sh
+- **DNA 变更**: 无（SOUL.md/AGENTS.md 均无 commit since yesterday 22:30）
+- **nudge 触发**: 0 events in gateway journal (journalctl grep returned empty). Memory file mentions 9 nudge-related lines but all are from dreaming corpus candidates (stale references). Actual nudge firing unclear — may need different verification method.
+- **dreaming**: 运行 but broken — 3:15 AM ×2 "details unavailable" (Day 5 of bug). Deep Sleep: 0 ranked / 0 promoted. Light Sleep: staging candidates but all from stale 06-17 corpus.
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. duplicate-issue-selection gradient (06-20) → Gate 3b code (06-21) → verified memex#174 blocked ✅
+  2. stale-workloop-recovery gradient (06-20) → stale-pr-check.sh (06-21) → production validation (exit 10 fast-path works) ✅
+- **断裂处**:
+  1. Issue #10(b) "details unavailable" — Day 5, no investigation action taken. This is the most egregious "建议≠行动" instance in this project.
+  2. Issue #10(c) local filter monitoring — Day 5, 0 promotions, permanently blocked by (b).
+
+### 今日发现
+
+**1. Structural gate maturation pattern solidified (signal: high)**
+Today saw 3 tools shipped that implement the same meta-pattern: behavioral rule that fails after N days → structural gate in tool code. Today's batch: stale-pr-check.sh, Gate 3b in issue-funnel.sh, study-saturation inter-day awareness. This is now the dominant path from gradient to lasting behavior change. The pipeline WORKS for tool-enforceable rules.
+
+**2. Dreaming remains fully non-functional — Day 5 (signal: critical)**
+Every dreaming cycle since June 17 outputs "details unavailable." Deep Sleep promotes 0. Light Sleep stages but never gets consumed. The issue has been called "highest priority" in 4 consecutive observation reports with ZERO investigation time spent. This needs to be either investigated or formally deprioritized with rationale.
+
+**3. Gradient inflow rate healthy but slowing**
+3 today vs 8 yesterday vs 7 day before. Weekend pattern (Sunday, lower interaction). All 3 are workloop/study-sourced — no interaction-driven gradients today (Luna inactive).
+
+**4. PR portfolio stable**
+13 open PRs (down from 14 yesterday — finance #947 closed). All external PRs waiting on maintainers. No new review feedback to convert into gradients.
+
+### Issue #10 进展评估
+- (a) upstream 0.58 hardcoded: ✅ Filed as openclaw/openclaw#87485
+- (b) "details unavailable" bug: ❌ **Day 5, still zero investigation**. 5 consecutive observation reports flagging this. Formally: this is "建议≠行动" manifested as an open issue.
+- (c) local filter monitoring: Day 5, 0 promotions. Blocked by (b).
+- (d) REM empty: Deferred (correct).
+
+### 行动决定
+- Issue #10(b) has been flagged for 5 days without action. Per AGENTS.md "建议≠行动" rule: **either investigate next session or formally defer with documented rationale and close the sub-item.**
+
+### 原始数据
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md`: 4 commits
+- `git log --since="yesterday 22:30" --all`: 11 commits total
+- `DREAMS.md` last entries: 06-21 3:15 AM ×2 "details unavailable"
+- Deep Sleep: "Ranked 0 candidate(s), Promoted 0 candidate(s)"
+- beliefs-candidates.md: 191 entries / 5 APPLIED / ~5 graduated
+- Today's tool commits: stale-pr-check.sh, study-saturation.sh inter-day fix, Gate 3b

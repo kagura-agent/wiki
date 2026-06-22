@@ -1190,4 +1190,4 @@ Idle auto-action: after 30min idle, injects `[AUTO]🤖 read automation SOP and 
 - DPI awareness for desktop control module (Windows)
 - Model logging in response logs
 
-Links: [[persistent-goal-injection]], [[heartbeat-design]], [[mechanism-vs-evolution]]
+Links: [[persistent-goal-injection]], [[heartbeat]], [[mechanism-vs-evolution]]
