@@ -114,3 +114,20 @@ When the model's answer signals it needed paged-out content:
 - [[caveman]] — simpler token compression (no recovery, no quality proof)
 - [[skill-context-compression]] — our skill loading compression experiment
 - [[dirac]] — studied conciseness-accuracy paradox (relevant to quality measurement)
+
+## Applied (2026-06-22)
+
+**Pattern adopted: heuristic shadow-eval for compress-output.sh**
+
+Added `signal_preservation_check()` to `tools/compress-output.sh` — after compression, extracts critical signals (errors, warnings, test failure names, aggregate summaries) from raw content and verifies they appear in compressed output. Logs `signal_preserved_pct` to JSONL metrics alongside compression ratio. Emits stderr warning when preservation drops below 80%.
+
+Key differences from tokdiet's implementation:
+- Ours is fully heuristic (regex extraction), no LLM judge call (zero cost overhead vs tokdiet's 5%)
+- Per-invocation measurement rather than sampling (our volumes are low enough to check every time)
+- No per-strategy backoff yet (only one compression pipeline, not tiered like tokdiet's dedup→elision→midSummarize)
+
+**Immediate payoff**: The quality check exposed 2 pre-existing bugs on first run:
+1. Test compression regex was case-sensitive (`ERROR|error` but not `Error`) — mixed-case error messages were being silently dropped
+2. Build compression used PCRE lookahead `(?!...)` in ERE mode — grep warnings on every build compression
+
+This validates tokdiet's core thesis: **you don't know your compression is safe until you measure it**. We were dropping error messages for months without noticing.
