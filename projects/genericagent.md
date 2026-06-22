@@ -1154,3 +1154,40 @@ Community member wrapped local Codex CLI as a model backend (`CodexExecSession`)
 - **IME composition fix**: prevent Enter from sending during IME composition in conductor UI
 
 Links: [[supervisor-pattern]], [[conductor]], [[self-evolving-agent-landscape]], [[default-fail-gate]]
+
+## 2026-06-22 Followup: Pluggable Prompt Slots + Loop Mode
+
+### extra_sys_prompts Pattern (c85b59e, 2026-06-20)
+
+**Problem**: `commit_signature` behavior was hardcoded in the main loop.
+**Solution**: Generic injection slot — `self.extra_sys_prompts = []` (list of strings).
+
+System prompt assembly:
+```python
+sys_prompt = get_system_prompt() + '\n'.join(self.extra_sys_prompts) + backend.extra_sys_prompt
+```
+
+Frontends opt-in by appending:
+```python
+from frontends.slash_cmds import COMMIT_SIGNATURE_PROMPT
+agent.extra_sys_prompts.append(COMMIT_SIGNATURE_PROMPT)
+```
+
+**Tradeoff analysis**: Flat list (order-dependent, trivially extensible) vs OpenClaw's structured Runtime Context block (richer, more observable, policy-enforced). Simple lists win for developer velocity; structured blocks win for [[observability]] and [[agent-trust-hierarchy|policy enforcement]].
+
+### Loop Mode + Idle Auto-Action (b5a30f1, 2026-06-19)
+
+User-configured loop prompt (default "继续"/"next") auto-injected after each reply → continuous autonomous operation without heartbeat infrastructure.
+
+Idle auto-action: after 30min idle, injects `[AUTO]🤖 read automation SOP and execute automatic tasks.` — functionally equivalent to OpenClaw heartbeat but at UI level, user-controllable.
+
+`max_turns` raised 80→180 to accommodate longer unattended sessions.
+
+**Pattern**: convergent design toward continuous agent operation. OpenClaw uses server-side heartbeat polling; GenericAgent uses client-side idle timer. Both solve "keep agent proactively working when human is away."
+
+### Other updates
+- SOP cleanup: trigger word criteria precision, phantom audit (detect entries that shouldn't be in memory), value storage prohibitions
+- DPI awareness for desktop control module (Windows)
+- Model logging in response logs
+
+Links: [[persistent-goal-injection]], [[heartbeat-design]], [[mechanism-vs-evolution]]
