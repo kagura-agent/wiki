@@ -101,3 +101,19 @@ Type-aware behavior:
 - `git`/others: full extraction
 
 **Before vs after**: compression summary line now reads `[...24 lines compressed (type=git) | preserved: refs:#138,#145 files:src/lib/parser.ts:45]` instead of just `[...24 lines compressed (type=git)...]`. The agent retains reference ability to compressed-away content.
+
+### Signal Preservation Measurement (2026-06-22)
+
+Applied "measure-then-trust" pattern to both compression tools:
+
+1. **compress-output.sh** (morning): Added `signal_preservation_check()` that extracts critical signals (errors, warnings, test failures, aggregate summaries) from raw content and verifies they survive compression. **Found 2 bugs on first run:**
+   - Test compression regex was case-sensitive: `ERROR|error` missed `Error:` — mixed-case error messages silently dropped
+   - Build compression used PCRE lookahead `(?!...)` in ERE mode — grep warnings on every build run
+
+2. **compress-daily-memory.sh** (this round): Added signal check targeting non-dreaming sections — verifies PR refs, action lines, and file paths survive compression. Result: 99-100% preservation across 4 test dates. No bugs found (tool was healthy). Now instrumented for future regressions.
+
+**Key insight**: Shadow-eval is most valuable as a **one-time bug-finder**. The first measurement pass invariably reveals silent degradation in "known-good" tools. Once fixed, the check becomes a guard rail. Pattern: any lossy transformation claiming quality-neutral MUST prove it with measurement.
+
+**Implication for other tools**: Same technique should be applied to wiki search reranking (are relevant results being dropped by the ranking pipeline?). Not yet done.
+
+**Metrics**: Both tools now log to JSONL files (compress-metrics.jsonl, compress-memory-metrics.jsonl) enabling longitudinal quality tracking. [[structural-backpressure]]
