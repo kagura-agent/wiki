@@ -1155,3 +1155,17 @@ New pattern: classify archived facts by **source quality** to prevent agent spec
 - Key insight: the provenance gate is at **write time** (consolidator), not read time — cheap enforcement
 
 See also: [[memory-trash-filter]], [[dream-single-phase-consolidation]]
+
+## 2026-06-22 Followup: Streaming Tool ID Poisoning
+
+**Issue #4442**: Streaming Anthropic provider can persist duplicate `tool_use` IDs in one assistant message during parallel tool calls. Once stored to session history, the malformed message is re-sent every turn → permanent session brick (Anthropic returns 400 "tool_use ids must be unique").
+
+**Root cause**: Stream assembly race — parallel tool_call chunks can duplicate IDs before dedup.
+**Fix pattern**: Dedup tool_use IDs before persisting to session history.
+**Relevance**: Any streaming agent framework that stores raw streamed messages is vulnerable. This is a cross-cutting concern — see also [[session-state-isolation]].
+
+Also: Proposal #4440 for `search_history` tool to recall memory/history.jsonl — recency-weighted search over past interactions. Pattern: making session history explicitly searchable (vs implicit context window).
+
+**Status**: v0.2.1 still current (since Jun 1). Maintenance/polish phase. No architectural shifts. Growth steady but slowing. Consider downgrade to "following" tier on next check.
+
+Links: [[delivery-message-preservation]], [[write-ahead-session-persistence]], [[session-state-isolation]]
