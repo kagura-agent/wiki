@@ -4303,3 +4303,81 @@ Every dreaming cycle since June 17 outputs "details unavailable." Deep Sleep pro
 - Deep Sleep: "Ranked 0 candidate(s), Promoted 0 candidate(s)"
 - beliefs-candidates.md: 191 entries / 5 APPLIED / ~5 graduated
 - Today's tool commits: stale-pr-check.sh, study-saturation.sh inter-day fix, Gate 3b
+
+## Day 6 Observation (2026-06-22, Mon 22:30)
+
+### Issue #10 Status
+
+| Sub-item | Status | Detail |
+|----------|--------|--------|
+| (a) upstream 0.58 | ✅ Filed | openclaw/openclaw#87485 |
+| (b) "details unavailable" | 🔍 ROOT CAUSE IDENTIFIED | See analysis below |
+| (c) local filter monitoring | Day 6, 0 promotions | Blocked by (b) — Deep always ranks 0 |
+| (d) REM empty | Deferred | "No strong patterns surfaced" today |
+
+### Root Cause Analysis: Item (b) — "details unavailable" in Dream Diary
+
+**Confirmed hypothesis**: `.memexignore` excluding `memory/.dreams/` causes Dream Diary narrative failure.
+
+**Evidence chain**:
+1. `.memexignore` contains: `memory/dreaming/` and `memory/.dreams/`
+2. `events.jsonl` shows `memory.recall.skipped` entries with `reason: "non-short-term-memory-path"` for all dreaming paths
+3. Dream Diary subagent uses memory search to find narrative material → all results rejected → fallback "details unavailable" text
+4. DREAMS.md: 19 consecutive "details unavailable" entries from Jun 17 to Jun 22 (4 today at 3:15×2, 3:48×2)
+5. Deep Sleep: "Ranked 0 candidate(s)" every single day — threshold gates (minRecallCount, minScore) never pass because:
+   - All candidates hardcoded at confidence 0.58 (upstream issue a)
+   - All candidates have recalls: 0 (no organic search hits reach them)
+
+**State file migration**:
+- `short-term-recall.json.migrated` last modified Jun 10 08:52
+- `daily-ingestion.json.migrated` last modified Jun 10 08:52
+- `phase-signals.json.migrated` last modified Jun 10 08:52
+- `.migrated` suffix = format migration happened Jun 10. Active state managed differently now (events.jsonl shows continued activity through Jun 22)
+
+**Why Jun 17 specifically?** The `.memexignore` was likely edited around that date (issue #6 local-filter fix shipped Jun 17). The filter that was supposed to improve Light Sleep quality inadvertently blocked Dream Diary's access to its own source material.
+
+**Fix options**:
+1. Remove `memory/.dreams/` from `.memexignore` (restores Dream Diary access, but re-introduces search noise)
+2. Remove only `memory/dreaming/` from `.memexignore` (keeps session-corpus noise out, allows dreaming reports to be found)
+3. File upstream: Dream Diary should use direct file read for its source material, not memory_search
+
+### Pipeline Metrics
+
+| Dimension | Value | Source |
+|-----------|-------|--------|
+| beliefs-candidates new | 3 entries (5 dated 06-22 incl. carry-over) | `git diff HEAD~3` |
+| DNA changes (SOUL/AGENTS) | 0 | `git log --since` |
+| beliefs-candidates total | 681 lines, ~195 entries, 5 APPLIED | `wc -l` + `grep` |
+| Dreaming Light Sleep | Ran, staged ~30+ candidates | memory/2026-06-22.md |
+| Dreaming Deep Sleep | Ran, 0 ranked, 0 promoted | memory/dreaming/deep/2026-06-22.md |
+| Dreaming REM | Ran, "No strong patterns" | memory/2026-06-22.md |
+| Dream Diary | 4 entries, all "details unavailable" | DREAMS.md tail |
+| Nudge | 0 gateway log hits (may be log rotation) | journalctl grep |
+| Memory sections today | 33+ sections in memory/2026-06-22.md | grep count |
+| Reflections/gradients | 9 mentions in today's memory | grep |
+| PR activity | Multiple merges (lottie #242, ABTI #545, lobster #163, finance rebase) | memory grep |
+
+### Closures (gradient→action loops)
+
+1. ✅ `precise-test-assertions` gradient → captured from fresh-context review finding weak toBeDefined assertions
+2. ✅ `dual-followup-status-contradiction` gradient → identified root cause (tools/ vs study/ scripts split)
+3. ✅ `measurement-first-audit` gradient → captured from shadow-eval quality check finding existing bugs
+4. ✅ shadow-eval quality check tool built and validated (99-100% signal preservation confirmed)
+
+### Breaks/Gaps
+
+1. 🔴 **Dreaming pipeline fully broken since Jun 17** (6 days) — Deep always 0 promotions, Diary always "unavailable". Root cause now identified.
+2. 🟡 **FlowForge auto-advance Day 7** — systemic priority inversion (internal HIGH-pri items deprioritized by find_work selecting external issues)
+3. 🟡 **Nudge verification inconclusive** — gateway log grep returned 0, may be log rotation issue
+
+### Recommendation
+
+Item (b) root cause identified. Recommended fix: **Option 3 (upstream issue)** — Dream Diary should not depend on memory_search for its own artifacts. As interim workaround: remove `memory/dreaming/` line from `.memexignore` so at least the report files (not raw session-corpus) become searchable.
+
+### Raw Data
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md`: 3 commits (all beliefs-candidates)
+- `DREAMS.md` last entries: 06-22 3:15 AM ×2, 3:48 AM ×2 — all "details unavailable"
+- Deep Sleep 06-22: "Repaired recall artifacts: rewrote recall store. Ranked 0 candidate(s). Promoted 0."
+- REM Sleep 06-22: "No strong patterns surfaced. No strong candidate truths surfaced."
+- beliefs-candidates.md: 681 lines, 5 APPLIED markers
+- `.memexignore`: `memory/dreaming/` + `memory/.dreams/` — CONFIRMED as root cause
