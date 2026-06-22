@@ -1,38 +1,25 @@
 {
-  "timestamp": "2026-06-22T10:07:00+08:00",
-  "total_files": 964,
-  "cards": 417,
-  "projects": 464,
-  "wikilinks": 3745,
-  "errors": 1,
-  "warnings": 61,
-  "broken_links": 1,
-  "orphans": 3,
-  "index_drift": 9,
-  "collisions": 1,
+  "timestamp": "2026-06-22T20:16:00+08:00",
+  "total_files": 968,
+  "cards": 418,
+  "projects": 467,
+  "wikilinks": 3763,
+  "errors": 0,
+  "warnings": 68,
+  "broken_links": 0,
+  "index_drift": 13,
+  "orphans": 6,
+  "orphan_cards": 1,
+  "orphan_projects": 5,
   "stubs": 0,
-  "stale_files": 200,
+  "duplicate_slugs": 1,
   "frontmatter_issues": 3,
-  "zero_outbound_links": 107,
+  "zero_outbound_links": 106,
+  "stale_files": 200,
   "unicode_suspicious": 14,
   "secrets_detected": 0,
-  "details": {
-    "broken_links": [
-      "projects/genericagent.md -> [[heartbeat-design]]"
-    ],
-    "orphans": ["codexpro", "cometline", "tokdiet"],
-    "index_drift_files": [
-      "cards/competing-pr-early-check.md",
-      "cards/duplicate-issue-selection.md",
-      "cards/rlhf.md",
-      "projects/agent-apprenticeship.md",
-      "projects/carry.md",
-      "projects/codexpro.md",
-      "projects/cometline.md",
-      "projects/junction.md",
-      "projects/tokdiet.md"
-    ],
-    "duplicate_slugs": ["README (3 files)"],
-    "frontmatter_missing": ["fable-mode", "hn-algolia-api", "yield-curve-and-term-structure"]
-  }
+  "avg_wikilinks_per_file": 5.4,
+  "new_issues": 7,
+  "recurring_issues": 60,
+  "status": "warnings_only"
 }
