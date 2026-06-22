@@ -89,3 +89,11 @@
   - Fork 有 595 个 file mode diff（NTFS 权限问题），需 `git config core.fileMode false`
   - legacy chat.ts 用 `hostApiFetch`，modular session-actions.ts 用 `invokeIpc`——两套都要实现
   - 需同时加 HTTP route（给 hostApiFetch 用）和 IPC handler（给 invokeIpc 用）+ preload allowlist
+
+### PR #1130 — fix(chat): handle regex SyntaxError in consumeLeadingSegment (Issue #1128)
+- **状态**: pending review, check/build ✅, E2E pending (fork PR 需 maintainer approve workflow)
+- **根因**: `consumeLeadingSegment` 用 `new RegExp(..., 'u')` 从用户内容创建正则，`'u'` flag 对 lone surrogates 等无效 Unicode 序列抛 SyntaxError
+- **修复**: try-catch 包裹 RegExp 创建 + match，catch 时 return 0（安全降级：显示完整文本而非崩溃）
+- **改动**: 1 file + 1 test file, +54/-3 lines, 最小 diff
+- **测试**: 5 个新单元测试（regex 特殊字符、lone surrogates、emoji、正常匹配、无匹配）
+- **注意**: `consumeLeadingSegment` 是内部函数不导出，通过 `stripProcessMessagePrefix` 间接测试
