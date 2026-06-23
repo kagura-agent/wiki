@@ -4406,3 +4406,13 @@ Root cause confirmed and resolved: `.memexignore` was excluding both `memory/dre
 | (b) "details unavailable" | ✅ FIXED | .memexignore unblocked memory/dreaming/ |
 | (c) local filter monitoring | 🟡 Unblocked | Now that (b) is fixed, monitor next sleep cycle |
 | (d) REM empty | Deferred | Independent of (b), may improve with better recall data |
+
+## Day 7 — dual-followup-status-contradiction FIXED (2026-06-23, Tue 11:30)
+
+**Root cause**: `tools/study-saturation.sh` pre-check called `tools/followup-status.sh` (checks TODO.md + targets.md liberally), but the study workflow's followup node gates on `study/followup-status.sh` (checks TODO.md strictly). When targets.md had items but TODO.md didn't, saturation recommended followup → node immediately skipped.
+
+**Fix**: Changed saturation.sh pre-check to use `study/followup-status.sh` (same authority as followup node). Moved pre-check before display output. Now correctly shows "🔒 LOCKED (0 items due)" when followup would be a no-op.
+
+**Verification**: Before fix: saturation shows "Followup 2/4 ✅ open" + recommends followup → node skips. After fix: saturation shows "Followup 2/4 🔒 LOCKED (0 items due)" + won't recommend followup. Regression gate PASS.
+
+**Pattern**: [[structural-fix-over-behavioral-rule]] — the recidivism (4 days) stopped with a 20-line code change, not more DNA rules. The 06-22 gradient correctly identified this as "tool improvement, not behavioral gradient."
