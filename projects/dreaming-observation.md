@@ -158,3 +158,25 @@ const SESSION_INGESTION_SCORE = .58;  // hardcoded for all session chunks
 **Why this matters beyond dreaming**: The pattern applies anytime upstream emits poor differentiation but you need to act today — confidence scores, embedding similarity, LLM judge votes. Filter is cheap (bash + grep), additive (never blocks upstream), and disposable (retire when upstream improves). [[heuristic-rerank-filter]] is the durable form of this lesson; this project note is the trigger story.
 
 **Lesson**: "Already created as proposal" ≠ "shipped as usable skill." Always inspect support files for stubs vs real content. Pending proposals can rot the same way decided-but-not-acted patterns do.
+
+## 🔧 .memexignore Silent Exclusion — 2026-06-23
+
+**Context**: Dream Diary narratives broken since Jun 17 (6 days, 19 consecutive failures). Dreaming pipeline ran fine but Dream Diary fell back to "details unavailable" for every entry.
+
+**Root cause**: `.memexignore` excluded `memory/dreaming/` (report output files) alongside `memory/.dreams/` (raw session corpus noise). Dream Diary uses `memory_search` to find dreaming reports → all results rejected by the ignore filter → narrative generation gets zero hits → fallback text.
+
+**The distinction**:
+- `memory/.dreams/` — raw session corpus chunks, high volume noise, correctly excluded
+- `memory/dreaming/` — processed dreaming reports (light/deep/rem summaries), the *useful* output that other systems (Dream Diary, daily-review) need to reference
+
+**Fix**: Removed `memory/dreaming/` from `.memexignore`, kept `memory/.dreams/` excluded.
+
+**Verification**: `memory_search` now returns dreaming report files (3 hits). Before: 0 hits.
+
+**Impact**: Unblocks Dream Diary narrative generation + may improve Deep Sleep promotion recall counts (since dreaming reports are now searchable, they can accumulate recall signals).
+
+**Commits**: `b4781cf` (workspace), `551ba03` (wiki observation Day 7)
+
+**Pattern**: [[silent-exclusion-cascade]] — a broad ignore rule intended for noise accidentally silences the meaningful output. The fix was surgical: distinguish raw input (`.dreams/`) from processed output (`dreaming/`). Same class of bug as the May 24 file-size-limit issue — the pipeline runs successfully but downstream consumers are silently starved.
+
+**Lesson**: When debugging "no results" in a search-dependent system, check ignore/exclusion filters first. The content might exist but be invisible to the query layer. This is the third time dreaming broke due to retrieval-path issues (May 23: file size limit, May 28: uniform confidence, Jun 23: memexignore exclusion) — the dreaming pipeline itself is reliable, but the integration points between it and consumers keep developing silent failure modes.
