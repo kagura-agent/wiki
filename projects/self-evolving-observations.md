@@ -4381,3 +4381,28 @@ Item (b) root cause identified. Recommended fix: **Option 3 (upstream issue)** �
 - REM Sleep 06-22: "No strong patterns surfaced. No strong candidate truths surfaced."
 - beliefs-candidates.md: 681 lines, 5 APPLIED markers
 - `.memexignore`: `memory/dreaming/` + `memory/.dreams/` — CONFIRMED as root cause
+
+## Day 7 — Issue #10(b) Fix (2026-06-23, Tue 08:21)
+
+### Applied Fix
+
+**Item (b) "details unavailable" — FIXED**
+
+Root cause confirmed and resolved: `.memexignore` was excluding both `memory/dreaming/` (report files) and `memory/.dreams/` (raw session-corpus). Dream Diary relies on `memory_search` to find narrative material, but the ignore filter rejected all dreaming paths.
+
+**Fix**: Removed `memory/dreaming/` from `.memexignore`, kept `memory/.dreams/` excluded. Reports (deep/light/rem summaries) are now searchable; raw session-corpus noise stays filtered.
+
+**Verification**: `memory_search` query "dream diary narrative lasting truths" now returns dreaming report files (3 results from light/deep/rem). Before fix: 0 results.
+
+**Impact**: Unblocks Dream Diary after 19 consecutive "details unavailable" failures (Jun 17–23). Deep Sleep promotion may also improve since recall counts should now be non-zero for dreaming candidates.
+
+**Commit**: `b4781cf fix: unblock memory/dreaming/ from .memexignore`
+
+### Updated #10 Status
+
+| Sub-item | Status | Detail |
+|----------|--------|--------|
+| (a) upstream 0.58 | ✅ Filed | openclaw/openclaw#87485 |
+| (b) "details unavailable" | ✅ FIXED | .memexignore unblocked memory/dreaming/ |
+| (c) local filter monitoring | 🟡 Unblocked | Now that (b) is fixed, monitor next sleep cycle |
+| (d) REM empty | Deferred | Independent of (b), may improve with better recall data |
