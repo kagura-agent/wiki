@@ -6,7 +6,7 @@ status: tracking
 revisit: 2026-06-26
 stars: 126
 repo: renee-jia/scholar-loop
-last_verified: 2026-06-19
+last_verified: 2026-06-23
 ---
 
 # Scholar Loop
@@ -127,3 +127,22 @@ Lessons from Reflector stored with `severity` weight, decaying at half-life 30 d
 - Reduces wasted cycles from the "pick → fail → pick → fail" sequential pattern
 
 **Verified**: Tested with 3 real candidates (openclaw#92665, opencode#31860, opencli#1922) — all survived with correct ranking. Tested with known-blocked candidate (NemoClaw#3836) — correctly eliminated with "Already withdrawn" reason.
+
+## Applied: Issue Body Quality Scoring (2026-06-23)
+
+**What was applied**: Added content-level quality scoring to `tools/issue-funnel.sh` — goes beyond metadata to score the actual issue body.
+
+**New signals** (all regex-based, zero LLM cost):
+- Error messages / stack traces present: +10 (root cause visible)
+- Code blocks present: +5 (clear examples)
+- Version info / reproduction steps: +5 (reproducible)
+- Fix suggestion language: +10 (solution path known)
+- Body length ≥ 500 chars: +5 (non-trivial detail)
+
+**Max body quality bonus**: +35 points on top of existing metadata scoring.
+
+**Source**: `issue-quality-selection` gradient (2026-06-21) — observed that well-written issues with clear root cause and fix options produce faster merged PRs. Issue quality > repo familiarity for selection.
+
+**What's different now**: Before, two issues from the same repo with same labels/stars scored identically. Now a detailed bug report with stack trace and "could be fixed by..." scores +35 higher than a vague "something is broken" one-liner. This biases find_work toward issues where the implementation path is already visible — exactly where our time investment has highest expected return.
+
+**Verified**: Tested against openclaw/openclaw#95948 — scored 100 (base 50 + metadata + body quality signals all triggered).
