@@ -1191,3 +1191,61 @@ Idle auto-action: after 30min idle, injects `[AUTO]🤖 read automation SOP and 
 - Model logging in response logs
 
 Links: [[persistent-goal-injection]], [[heartbeat]], [[mechanism-vs-evolution]]
+
+## 2026-06-23 Followup: Worldline Checkpoint-Tree Rewind
+
+### Architecture (PR #625, worldline.py — 968 lines)
+
+**Problem**: Agent sessions are linear — you can't branch, compare alternatives, or undo multi-turn sequences. Claude Code has file-history snapshots but no tree structure.
+
+**Solution**: Full checkpoint-tree with content-addressed blob storage, inspired by git internals but purpose-built for agent sessions.
+
+Core components:
+
+1. **RewindStore**: Session-scoped checkpoint tree + blob library
+   - `objects/` dir with SHA256-keyed blobs (zlib-compressed)
+   - `tree.json` persists the full tree structure
+   - Tracks only `file_write`/`file_patch` operations (hook-based)
+
+2. **Global Baseline**: Records each file's state *before first tracked edit* — solves "rewind to before tracking started" gracefully. Missing in most agent file-history implementations.
+
+3. **Checkpoint Tree Navigation**:
+   - `commit(title, hist_len)` — creates checkpoint at current HEAD, auto-forks if HEAD isn't at tip
+   - `apply_code(node_id)` — restores working directory to any node's state (only touches tracked files)
+   - `rewind_head(node_id)` — moves HEAD pointer without changing files (next commit forks from here)
+   - `rebuild_history(node_id)` — reconstructs full conversation by walking root→node path
+
+4. **Reconcile Algorithm** (most sophisticated piece):
+   - Problem: Other UIs (not worldline-aware) may append to the same session log
+   - Solution: Compare user-question sequences (`_turn_sig`) to detect divergence
+   - If diverged: fork from origin as new trunk, preserve old tree as side branch
+   - Uses user question text (not full message content) as stable identity — avoids false divergence from injected system content like `[WORKING MEMORY]`
+
+5. **Safety Mechanisms**:
+   - Soft insurance ①: Only touches files in `self.tracked` set — never modifies untracked files
+   - Soft insurance ②: Stores redo point before any restore — can recover from accidental overwrites
+   - `_ensure_origin`: Virtual root node guarantees single-rooted tree
+
+### Design Tradeoffs
+
+| Decision | Benefit | Cost |
+|----------|---------|------|
+| Content-addressed blobs | Dedup, integrity verification | Extra I/O + hash computation per edit |
+| JSON tree persistence | Human-readable, simple | Not atomic (crash during write = corrupt tree) |
+| Track only file ops | Clean scope, no side-effect tracking | Misses env changes, shell state, DB writes |
+| Thread safety by convention | Zero locking overhead | Caller must ensure single-threaded restore |
+| No test coverage | Fast iteration | 968 lines of state management unverified |
+
+### Relevance to OpenClaw
+
+- OpenClaw sessions are linear with no rewind capability — worldline pattern could add branch/rewind
+- The reconcile algorithm addresses a real multi-UI problem we share (main session + cron + subagents touching same state)
+- Content-addressed blob storage is more space-efficient than our raw session logs
+- **Key gap we have that they solved**: "rewind to before first edit" via global baseline
+- **Key gap they have that we solved**: no test coverage, no concurrent access safety, no policy enforcement on what gets checkpointed
+
+### Stars: 7,626 → 13,002 (+71% in ~5 weeks)
+
+Growth driven by TUI improvements + computer_use capabilities making it a practical desktop agent. Community healthy: 41 unique issue authors, 7 merged PR authors, 152 open issues.
+
+Links: [[persistent-goal-injection]], [[heartbeat]], [[mechanism-vs-evolution]], [[git-backed-agent-memory]], [[worktree-convergence-2026-05]]
