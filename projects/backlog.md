@@ -1307,3 +1307,4 @@ GitHub trending (agent, created past week, sorted by stars):
 | junction | Plaer1/junction | 501⭐ | quick_scout | 2026-06-18 | 1d old, viral. VS Code chat sidebar for local coding agents. TypeScript. UI-focused, not architecturally novel. Skim only. |
 | security-audit-skill | cloudflare/security-audit-skill | 172⭐ | quick_scan | 2026-06-21 | 3d new, Cloudflare official. Multi-phase security audit as a coding-agent skill with independently verified, machine-readable findings. Vendor-backed skill pattern. |
 | neuralyzer | gintasz/neuralyzer | 44⭐ | quick_scan | 2026-06-21 | 2d new. Agent harness context-wipe tool — re-runs first message after clearing session. Interesting concept for context management but too small to invest. |
+- [ ] umacloud/umadev — 92⭐ (06-23, 4d). Rust 9-stage pipeline director for coding agents. Overlaps foreman/FlowForge. Check back 06-30 if growth continues
