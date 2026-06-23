@@ -1308,3 +1308,8 @@ GitHub trending (agent, created past week, sorted by stars):
 | security-audit-skill | cloudflare/security-audit-skill | 172⭐ | quick_scan | 2026-06-21 | 3d new, Cloudflare official. Multi-phase security audit as a coding-agent skill with independently verified, machine-readable findings. Vendor-backed skill pattern. |
 | neuralyzer | gintasz/neuralyzer | 44⭐ | quick_scan | 2026-06-21 | 2d new. Agent harness context-wipe tool — re-runs first message after clearing session. Interesting concept for context management but too small to invest. |
 - [ ] umacloud/umadev — 92⭐ (06-23, 4d). Rust 9-stage pipeline director for coding agents. Overlaps foreman/FlowForge. Check back 06-30 if growth continues
+
+## 2026-06-23 Quick Scan Additions
+- cloudflare/security-audit-skill (402⭐, 5d) — Enterprise validates skill standard. Multi-phase security audit SKILL.md. Skim priority.
+- ksimback/looper (125⭐, 5d) — Visual review-gated agent loops for Claude Code. Novel UI for loop design before execution.
+- alvinunreal/lazyskills (79⭐, 4d) — TUI for agent skill discovery/install. ClawHub competitor signal.
