@@ -91,4 +91,22 @@ The ideas are worth more than the code — particularly progressive thinning, me
 
 **Status**: Deep read complete. Track for monthly check — watch for community adoption signals.
 
+## Applied (2026-06-23)
+
+**Pattern adopted: Circuit breaker for workflow/subagent failures**
+
+Created `tools/circuit-breaker.sh` — state machine (CLOSED→OPEN→HALF_OPEN) that tracks consecutive failures per workflow key. Integrated into:
+- `tools/study-saturation-gate.sh` (Layer 0, before mode availability checks)
+- `tools/workflow-guard.sh` (general guard for all FlowForge workflows)
+
+Design aligned with sofagent's per-agent circuit breaker:
+- Threshold: 3 consecutive failures → OPEN (blocks further attempts)
+- Cooldown: 30 min → HALF_OPEN (allows 1 probe attempt)
+- Success always resets to CLOSED
+- Per-key isolation (each workflow/subagent tracked independently)
+
+Key difference from sofagent: ours is a standalone bash tool (no framework dependency) integrated at pre-check gates rather than inside the agent spawn path. Same state machine semantics.
+
+**Behavioral change**: Previously, if workloop cron fired every 30 min and kept failing (e.g., 6 consecutive errors on 06-22), nothing prevented continued token waste. Now, after 3 consecutive failures the circuit opens and blocks further attempts until cooldown. Saves tokens, reduces noise, makes failure visible.
+
 Links: [[flowforge]], [[openclaw]], [[beliefs-candidates]], [[self-evolution-architecture]]
