@@ -4407,6 +4407,61 @@ Root cause confirmed and resolved: `.memexignore` was excluding both `memory/dre
 | (c) local filter monitoring | 🟡 Unblocked | Now that (b) is fixed, monitor next sleep cycle |
 | (d) REM empty | Deferred | Independent of (b), may improve with better recall data |
 
+## Day 7 Evening — Daily Observation Report (2026-06-23, Tue 22:30)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增 (followup-saturation-data-discrepancy, stale-workloop-recovery-effective) / 0 条升级 / 0 条 retracted
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 未改动）。beliefs-candidates.md 有 2 次 commit（1x gradient 写入, 1x daily-review hygiene）
+- **nudge 触发**: 0 次确认（journalctl 无 nudge 记录。方法论说明：nudge 功能已确认正常 per Issue #5，今天可能是 session 数不足 5 次门槛未触发）
+- **dreaming**: Light Sleep 运行 ✅，但 candidates 全为 routine workloop summaries（低价值）。REM Sleep 空输出（"No strong patterns surfaced"）。Deep Sleep 今天未见 promote。
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. `.memexignore` silent exclusion → root cause identified (Day 6) → fix committed `b4781cf` → memory_search 验证恢复（3 hits）→ 关闭 #10(b)
+  2. saturation.sh / followup-status.sh 数据源不一致 → identified → fix in saturation.sh → regression gate PASS
+- **断裂处**: 
+  - #10(c) local filter monitoring：now unblocked by (b) fix, 但需等下一个 sleep cycle 才能验证效果
+  - #10(d) REM empty output：deferred，无 action
+
+### PR 活跃度
+- 7 PRs merged today: lottie-studio #252/#255/#257, cove #423, 虾信 #164, openclaw #554, + others
+- 9 workspace commits today
+- No PR review feedback converted to gradient today（all merges were clean）
+
+### 今日发现
+1. **Dreaming quality remains low despite .memexignore fix**: Light Sleep candidates are all uniform 0.58 confidence, mostly routine summaries. The upstream issue (openclaw#87485) for non-uniform confidence scoring is the real bottleneck — local filter can only rescue candidates that pass, but if all input is low-quality routine text, filtered output is still empty.
+2. **nudge evidence gap**: Cannot confirm nudge fired today. This is an observation gap, not a failure declaration (per methodology fix above). The 5-session threshold might not have been reached.
+3. **Two self-tool improvements shipped today** (saturation fix + .memexignore fix) — both were identified-to-fixed within 24h. This is the strongest "observe → diagnose → fix → verify" cadence seen since observations started.
+4. **No skill extraction gap identified**: The dreaming fix and saturation fix are both structural code changes, not repeatable procedures that warrant a new skill.
+
+### Issue #10 状态更新
+| Sub-item | Status | Detail |
+|----------|--------|--------|
+| (a) upstream 0.58 | ✅ Filed | openclaw/openclaw#87485 |
+| (b) "details unavailable" | ✅ FIXED | .memexignore fix, commit b4781cf |
+| (c) local filter monitoring | 🟡 Day 1 of post-fix monitoring | Need 7 days to assess promotion rate |
+| (d) REM empty | Deferred | Independent issue, low priority |
+
+### 原始数据
+```
+$ git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md
+3197f77 gradient: stale-workloop-recovery-effective (beliefs-candidates.md)
+9cf9b38 review: memory hygiene — compress, beliefs retract check (beliefs-candidates.md)
+
+$ git log --since="2026-06-23 00:00" --all --oneline (workspace, 9 commits)
+d256e8d toolchain-review: mark memory_search fixed
+3197f77 gradient: stale-workloop-recovery-effective
+91d63a5 feat(issue-funnel): add issue body quality scoring
+7fffe9b fix: saturation.sh uses study/followup-status.sh
+ee642a6 feat: add circuit breaker for subagent/workflow failures
+d1530dc study: followup 06-23 + GenericAgent worldline deep read
+b4781cf fix: unblock memory/dreaming/ from .memexignore
+8f174cd close FlowForge auto-advance TODO: won't-fix
+9cf9b38 review: memory hygiene — compress 06-22
+```
+
+---
+
 ## Day 7 — dual-followup-status-contradiction FIXED (2026-06-23, Tue 11:30)
 
 **Root cause**: `tools/study-saturation.sh` pre-check called `tools/followup-status.sh` (checks TODO.md + targets.md liberally), but the study workflow's followup node gates on `study/followup-status.sh` (checks TODO.md strictly). When targets.md had items but TODO.md didn't, saturation recommended followup → node immediately skipped.
@@ -4416,3 +4471,49 @@ Root cause confirmed and resolved: `.memexignore` was excluding both `memory/dre
 **Verification**: Before fix: saturation shows "Followup 2/4 ✅ open" + recommends followup → node skips. After fix: saturation shows "Followup 2/4 🔒 LOCKED (0 items due)" + won't recommend followup. Regression gate PASS.
 
 **Pattern**: [[structural-fix-over-behavioral-rule]] — the recidivism (4 days) stopped with a 20-line code change, not more DNA rules. The 06-22 gradient correctly identified this as "tool improvement, not behavioral gradient."
+
+## Day 8 — Daily Observation (2026-06-23, Tue 22:30)
+
+### 管线活跃度
+- beliefs-candidates: 1 条新增 (`stale-workloop-recovery-effective`) / 0 条待升级
+- DNA 变更: 无（SOUL.md/AGENTS.md 未动）
+- nudge 触发: 0 次（机制不可验证 — 连续多天无证据 nudge 在工作）
+- dreaming: 运行（Light: 低质量 staged candidates, confidence 全部 0.58; Deep: 0 promoted）
+
+### 闭环追踪
+- 完整闭环: 5 个
+  1. ✅ Dreaming .memexignore fix (Issue #10b): 根因→修复→验证 memory_search 恢复
+  2. ✅ dual-followup-status-contradiction: 根因→saturation.sh 改用正确 gate→回归测试
+  3. ✅ hermes-agent blocklist enforcement: rule #59 无执行→rule #61 + blocklist add
+  4. ✅ issue-funnel body quality scoring: 需求→实现→commit
+  5. ✅ circuit breaker for subagent/workflow failures: 设计→实现→commit
+- 断裂处: 无新断裂
+
+### 今日发现
+
+1. **Anti-pattern: "it works" gradient series**
+   - `stale-workloop-recovery` (06-20) → `stale-workloop-recovery-validated` (06-21) → `stale-workloop-recovery-effective` (06-23)
+   - 三条 gradient 都是同一结论："工具如预期工作"。这不是 learning，是 confirmation bias 以 gradient 形式自我强化。
+   - 正确做法：第一条（06-20）是 gradient，第二条是 validation evidence，第三条是噪音。
+   - **建议**: 后两条应 retract（`rationale: confirmation, not learning — original pattern already applied`）
+
+2. **Dreaming quality 仍然低下**
+   - .memexignore fix 今天才生效，Light Sleep 仍产出 rote session summaries（"workloop-night complete" 类）
+   - 今晚是 fix 后第一个完整 sleep cycle — 明天观察是否改善
+   - Deep 持续 0 promotions（预期在 recall counts 恢复后改善）
+
+3. **Nudge 机制 Day 3+ 不可验证**
+   - 今日 0 次触发，历史证据也缺失
+   - 需要主动测试：发一条触发条件消息看 nudge 是否响应
+   - 如果 3 天内仍 0 触发，降级为"假定失效"
+
+4. **闭环效率高**
+   - 5 个完整闭环在一天内全部关闭，且多数是长期 broken 项目（dreaming 6 天、followup-status 4 天）
+   - 这证明 apply mode 从 self-evolving-observations 取目标是有效的（vs. 之前从 unapplied.md 找）
+
+### 原始数据
+- `git log --since 2026-06-23 --all -- beliefs-candidates.md`: 1 commit (3197f77)
+- dreaming deep/2026-06-23.md: "Ranked 0, Promoted 0"
+- dreaming light/2026-06-23.md: 4+ candidates, all 0.58 confidence, all rote summaries
+- memory/2026-06-23.md: "nudge 补发率 0%"
+- DNA diff: none today
