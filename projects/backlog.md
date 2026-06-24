@@ -1310,6 +1310,7 @@ GitHub trending (agent, created past week, sorted by stars):
 - [ ] umacloud/umadev — 92⭐ (06-23, 4d). Rust 9-stage pipeline director for coding agents. Overlaps foreman/FlowForge. Check back 06-30 if growth continues
 
 ## 2026-06-23 Quick Scan Additions
-- cloudflare/security-audit-skill (402⭐, 5d) — Enterprise validates skill standard. Multi-phase security audit SKILL.md. Skim priority.
-- ksimback/looper (125⭐, 5d) — Visual review-gated agent loops for Claude Code. Novel UI for loop design before execution.
+- cloudflare/security-audit-skill (499⭐, 6d, +24% in 1d) — Enterprise validates skill standard. Multi-phase security audit SKILL.md. **Ready for deep read.**
+- ksimback/looper (231⭐, 6d, +85% in 1d) — Visual review-gated agent loops for Claude Code. Novel UI for loop design before execution. **Ready for deep read.**
 - alvinunreal/lazyskills (79⭐, 4d) — TUI for agent skill discovery/install. ClawHub competitor signal.
+- Forward-Future/loop-library (1474⭐, 12d) — Reusable agent loop catalog + installable skill. "4 questions" framing (goal/check/learn/stop). JS, 120 forks. Codex/OpenClaw topics. FlowForge comparison target. Revisit 07-01
