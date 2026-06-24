@@ -110,3 +110,26 @@ Key difference from sofagent: ours is a standalone bash tool (no framework depen
 **Behavioral change**: Previously, if workloop cron fired every 30 min and kept failing (e.g., 6 consecutive errors on 06-22), nothing prevented continued token waste. Now, after 3 consecutive failures the circuit opens and blocks further attempts until cooldown. Saves tokens, reduces noise, makes failure visible.
 
 Links: [[flowforge]], [[openclaw]], [[beliefs-candidates]], [[self-evolution-architecture]]
+
+## Applied (2026-06-24)
+
+**Progressive thinning pattern applied to dna-preflight.sh**
+
+Implemented the core progressive thinning insight: reduce orchestration overhead for proven-ineffective behavioral reminders. When a pattern has been surfaced by dna-preflight on 3+ unique days without resolution, it's demoted from the top-3 display (score penalty -5) and shown only as a compact summary count.
+
+**Measured behavioral change:**
+- Before: top-3 slots consistently occupied by 6 chronic recidivists (3-5 days each). No behavioral improvement from repeated exposure.
+- After: fresh violations surface (study-no-gradient-justified, quality-proof-for-optimizations) — patterns where a reminder can still drive change.
+- Chronic patterns noted in one-line summary, not lost, but attention redirected.
+
+**Design choices:**
+- Penalty-based (-5) rather than hard filter — if a chronic pattern gets fresh reinforcement (new violation today), it can still overcome the penalty
+- Detection uses `.preflight-log` unique-day counting (already existed), so zero new tracking infrastructure needed
+- Combined with [[tokdiet]] per-strategy backoff: instead of shutting down the whole preflight (blanket), only the degraded strategy (chronic patterns) gets demoted
+
+**Difference from SofAgent's full design:**
+- SofAgent's thinning is about entire governance layers (skip loading the 3-layer chain for familiar tasks)
+- Our application is narrower: thin the output of a specific tool, not skip the tool entirely
+- Structural fixes (recommended by the recidivism alert) remain the full resolution; thinning is the interim noise reduction
+
+Links: [[structural-fix-over-behavioral-rule]], [[self-evolving-observations]], [[tokdiet]], [[progressive-thinning]]
