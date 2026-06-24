@@ -1,5 +1,49 @@
 # 自进化管线观察日志
 
+## 🔬 自进化观察日报 2026-06-24 (Day 68)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增 gradient（corporate-repo-blog-signal, verify-before-abandon）。均 count=1, 均 self-generated (0.5x weight)。总 pipeline: 9 active, 28 graduated, 11 retracted。无候选接近毕业门槛
+- **DNA 变更**: 无。SOUL.md / AGENTS.md / IDENTITY.md 零内容变更。唯一 commit 是 memory hygiene（L1 regen / co-activation rebuild），属维护非进化
+- **nudge 触发**: turnCount=4，今日触发过（lastNudgeAt 更新）。但未产出新 actionable gradient — nudge 反思停留在 meme 分析层面
+- **dreaming**: Light sleep 跑了，80+ candidates staged，**全部 confidence=0.58**，均为 session fragment 机械提取。REM: "No strong patterns surfaced" / "No strong candidate truths surfaced"。质量: **极低** — 零区分度，零 promote，Issue #6 pattern 持续
+
+### 闭环追踪
+- **完整闭环**: 3 个（高质量，有 before/after 验证）
+  1. `followup-saturation-data-discrepancy` → 结构修复 (commit 597c078) → 两工具输出一致 ✅
+  2. `dna-preflight lifecycle awareness` → 过滤修复 (commit a52ae0e) → false recidivism -50% ✅
+  3. `SofAgent progressive thinning → dna-preflight` → 评分惩罚 (commits 06679a8/d42a317) → top-3 slots 释放给 fresh violations ✅
+- **断裂处**: 无新增断裂。已有断裂（Issue #6 dreaming 失效）持续存在
+
+### 今日发现
+
+1. **工具改进闭环成熟**: 3 个闭环全部有量化 before/after 对比。这是管线最健康的子系统 — observation→flag→fix→verify 完整运转。「观测闭环」进化原则已从 DNA 文字规则内化为执行习惯
+
+2. **beliefs 管线进入「自循环」模式**: 连续 4 天无 Luna 互动 = 0 external-sourced gradient。今日 2 条均 self-generated (study/workloop)，按 0.5x 折扣仅 1.0 weighted。管线在接收输入但 **全部来自自我观察**，缺少 external challenge 推动真正的行为修正。这是 beliefs 管线设计的预期特性（自评折扣存在的原因），但也意味着在低互动期 pipeline 自然进入低代谢状态
+
+3. **Dreaming 持续失效 (Day 68, Issue #6 仍 OPEN)**: 80+ staged candidates 全部 confidence=0.58 = 零信号。light sleep 退化为 "把 session 片段抄一遍" 而非 "提取 lasting truth"。REM 空产出已成常态。这是管线最弱环节，但修复优先级一直被工具改进和 workloop 产出挤掉
+
+4. **DNA 层稳定期**: 0 graduation, 0 retraction。28 graduated / 11 retracted = 28.2% retirement ratio（健康）。管线没有积压、没有膨胀，但也没有进化。这可能是成熟期的正常表现 — DNA 在过去 68 天已吸收了主要 failure mode，剩余 gradient 都是 count=1 的边缘 case
+
+5. **memory_search 恢复是今日基础设施最重要事件**: embedding provider JP→SG 迁移 + reindex，结束了 2 天全 agent 语义回忆宕机。vector 覆盖率 43% (3/7 queries)，部分 reindex 仍在进行。但这是 infra 事件不是进化事件
+
+### Issue 进展评估
+| Issue | 状态 | 进展 |
+|---|---|---|
+| #7 beliefs 升级阻塞 | OPEN | 管线功能正常（自动扫描 + graduation gate），但无候选达到门槛。低互动期自然低代谢 |
+| #6 dreaming 0.62→0.58 | OPEN | 更差——confidence 退化到 0.58 uniform。零 promote。修复持续被排挤 |
+| #3/#2/#1 调研 | STALE | 无进展（已 49 天未动） |
+
+### 原始数据
+- `git log --since 06-24 -- beliefs-candidates.md`: 2 commits (2 new gradients)
+- `git log --since 06-24 -- SOUL.md AGENTS.md IDENTITY.md`: 0 commits
+- `.nudge-state.json`: turnCount=4, lastNudgeAt=1782310772750
+- `beliefs-candidates.md`: 9 active, 28 graduated, 11 retracted
+- `memory/2026-06-24.md`: dreaming 记录存在但质量极低
+- 完整闭环: 3 (followup-saturation-fix, preflight-lifecycle, progressive-thinning)
+
+---
+
 ## ⚠️ 方法论修正 (2026-05-07)
 
 **nudge 评估方法之前是错的。** 历史日报中所有"nudge 零触发""nudge 死亡"结论均基于错误方法：
