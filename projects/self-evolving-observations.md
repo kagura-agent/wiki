@@ -4544,3 +4544,27 @@ b4781cf fix: unblock memory/dreaming/ from .memexignore
 **Source**: [[aegis]] Repair+Retirement dual-track + self-evolving-observations Day 8 anti-pattern detection ("it works" gradient series).
 
 Links: [[beliefs-candidates]], [[self-evolving-observations]], [[aegis]], [[structural-fix-over-behavioral-rule]], [[gradient-pipeline]]
+
+## Day 9 — followup-saturation-data-discrepancy fixed (2026-06-24, Wed 10:15)
+
+### Applied: Single source of truth for followup due-items
+
+**Problem**: `tools/followup-status.sh` reported 12 items due while `study-saturation.sh` said "0/LOCKED". Discrepancy persisted 3+ days, surfaced repeatedly in dna-preflight as `followup-saturation-data-discrepancy`.
+
+**Root cause**: Two separate data sources for the same question:
+- `tools/followup-status.sh` → scanned TODO.md + targets.md tracking table (liberal)
+- `study-saturation.sh` → called `study/followup-status.sh` (TODO.md strict)
+- targets.md had 12 items with stale revisit dates never synced after followups
+
+**Fix** (commit 597c078): Removed targets.md secondary scan from `tools/followup-status.sh`. Single source of truth = TODO.md unchecked Track items. targets.md still used for activity enrichment (status badges) but no longer as a due-date authority.
+
+**Verification**:
+- Before: tools/followup-status = "12 items due" vs saturation = "LOCKED (0 due)"
+- After: both = "0 items due" (next due: 06-25, 2 items)
+- Regression gate: 8/8 PASS
+
+**Pattern**: [[structural-fix-over-behavioral-rule]] — the preflight kept saying "investigate data source alignment" but the fix was a 6-line removal (replace stale scan with a comment explaining why). The Day 7 fix (saturation→study/followup-status.sh) solved the *saturation→workflow* path but left the *tools/followup-status.sh→user confusion* path open. This closes the loop fully.
+
+**Gradient assessment**: No new gradient needed. This is the completion of the Day 7 structural fix (same root cause, second symptom surface). The `followup-saturation-data-discrepancy` should stop appearing in dna-preflight now.
+
+Links: [[self-evolving-observations]], [[structural-fix-over-behavioral-rule]], [[study-saturation]], [[gradient-pipeline]]
