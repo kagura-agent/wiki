@@ -4612,3 +4612,76 @@ Links: [[beliefs-candidates]], [[self-evolving-observations]], [[aegis]], [[stru
 **Gradient assessment**: No new gradient needed. This is the completion of the Day 7 structural fix (same root cause, second symptom surface). The `followup-saturation-data-discrepancy` should stop appearing in dna-preflight now.
 
 Links: [[self-evolving-observations]], [[structural-fix-over-behavioral-rule]], [[study-saturation]], [[gradient-pipeline]]
+
+## Day 8 — Dreaming fix incomplete, pipeline structural improvements (2026-06-24, Wed 22:30)
+
+### Observation Data
+
+**beliefs-candidates pipeline**:
+- 2 new gradients: `corporate-repo-blog-signal` (study), `verify-before-abandon` (workloop)
+- 1 retraction: `stale-workloop-recovery-validated/effective` (confirmation noise)
+- 1 tool fix: `dna-preflight` lifecycle filter (commit a52ae0e) — skip resolved gradients, 50% false recidivism reduction
+- Pipeline active and flowing ✅
+
+**DNA changes**:
+- SOUL.md: no changes
+- AGENTS.md: no changes (memory hygiene commit 87f278d touched related files but not DNA)
+- All DNA stable — no forced fixes needed
+
+**nudge triggers**: 0 in 24h period (since yesterday 22:30). No `nudge` entries in gateway journal. Anomalous — previous periods showed regular triggers. Needs investigation.
+
+**Dreaming (critical finding)**:
+- Light Sleep: 21 candidates staged, ALL confidence 0.58 (upstream hardcoded), ALL recalls: 0
+- **All candidates reference `memory/.dreams/session-corpus/2026-06-20.txt`** — corpus ingestion runs daily but Light Sleep appears stuck on June 20 data (4 days old)
+- Deep Sleep: 0 ranked, 0 promoted (expected — all candidates tied at 0.58 with 0 recalls)
+- REM: "No strong patterns surfaced" (empty, as usual)
+- Dream Diary: **4 failures on June 24** (3:15 AM ×2, 7:09 AM ×2) — "A memory trace surfaced, but details were unavailable"
+- **Day 7 .memexignore fix was INCOMPLETE**: removed `memory/dreaming/` exclusion, but candidates' evidence paths point to `memory/.dreams/session-corpus/` which is STILL excluded. Diary subagent uses memory_search → evidence paths rejected → fallback text
+
+**Closed loops (2 complete)**:
+1. dna-preflight lifecycle filter: false recidivism discovered → scanning logic fixed → measured 50% reduction ✅
+2. followup-saturation data discrepancy: dual source discovered → secondary scan removed → sources aligned ✅
+
+**Skill extraction gaps**: None identified — today's work was tool-fixing, not novel procedures
+
+**External feedback utilization**: No new PR reviews to convert to gradients
+
+### Analysis
+
+**Dreaming subsystem diagnosis update (#10)**:
+The Day 7 fix addressed the wrong layer. The real data flow:
+1. Light Sleep stages candidates with evidence paths pointing to `memory/.dreams/session-corpus/`
+2. Dream Diary subagent tries to recall candidate details via memory_search
+3. `.memexignore` excludes `memory/.dreams/` (including session-corpus)
+4. Search returns nothing → fallback "details unavailable" text
+
+Additionally, Light Sleep appears to not be cycling through session-corpus files — all 21 candidates from the same June 20 file despite 5 daily files existing (June 20-24). This suggests a separate ingestion ordering bug.
+
+**Pipeline health score**: beliefs-candidates ✅ | DNA ✅ | nudge ❓ | dreaming ❌ | loops ✅
+
+### Raw Data
+```
+# commits since yesterday 22:30
+918f74d todo: mark guide rule #62 done (blast radius)
+b74da53 gradient: verify-before-abandon (competing-pr-check false negative)
+f5187d3 study: track cloudflare/security-audit-skill, add gradient
+50a6e40 memory: study apply - followup-saturation discrepancy fix
+597c078 fix(tools): remove targets.md secondary scan from followup-status.sh
+9680bdf memory-eval 06-24: update status - search recovered (JP→SG fix)
+ae02312 memory: study apply 09:19 — progressive thinning for dna-preflight
+06679a8 apply: progressive thinning for dna-preflight chronic recidivists
+eca9c55 memory: study apply 06-24 — dna-preflight lifecycle fix
+a52ae0e fix(dna-preflight): skip resolved gradients, reduce false recidivism
+87f278d review: memory hygiene — compress 06-23 (1559→837), archive 2 stale promoted, L1 regen, co-activation rebuild
+ab099a8 retract: stale-workloop-recovery-validated/effective (confirmation noise, not learning)
+
+# dreaming output (tail)
+Light Sleep: 21 candidates, all 0.58/0 recalls, all from session-corpus/2026-06-20.txt
+Deep Sleep: 0 ranked, 0 promoted
+REM: empty
+Diary: 4/4 failures (details unavailable)
+
+# nudge: 0 triggers (journalctl grep empty)
+```
+
+Links: [[self-evolving-observations]], [[dreaming-pipeline]], [[beliefs-candidates]], [[gradient-pipeline]]
