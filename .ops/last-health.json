@@ -1,23 +1,41 @@
 {
-  "timestamp": "2026-06-23T10:14:00+08:00",
-  "total_files": 968,
+  "timestamp": "2026-06-23T20:20:00+08:00",
+  "total_files": 974,
   "cards": 418,
-  "projects": 467,
-  "wikilinks": 3768,
-  "errors": 0,
-  "warnings": 49,
-  "orphans": 0,
-  "broken_links": 0,
+  "projects": 473,
+  "wikilinks": 3783,
+  "errors": 4,
+  "warnings": 58,
+  "broken_links": [
+    {"source": "projects/browser-search.md", "target": "progressive-degradation"},
+    {"source": "projects/code-duo.md", "target": "multi-model-review"},
+    {"source": "projects/code-duo.md", "target": "trace-gate-pattern"},
+    {"source": "projects/dreaming-observation.md", "target": "silent-exclusion-cascade"}
+  ],
+  "index_drift": [
+    "projects/browser-search.md",
+    "projects/cloudflare-agent-accounts.md",
+    "projects/code-duo.md",
+    "projects/neuralyzer.md",
+    "projects/polypore.md",
+    "projects/ralph-loop-runner.md"
+  ],
+  "orphans": {
+    "count": 3,
+    "cards": 0,
+    "projects": 3,
+    "list": ["browser-search", "cloudflare-agent-accounts", "polypore"]
+  },
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "stale_files": 206,
-  "frontmatter_issues": 3,
-  "cards_zero_outbound_links": 106,
+  "duplicate_slugs": ["README"],
   "cards_index_stale": true,
-  "cards_index_missing": 418,
+  "frontmatter_issues": ["fable-mode", "hn-algolia-api", "yield-curve-and-term-structure"],
+  "link_density_avg": 5.4,
+  "zero_outbound_cards": 106,
+  "secrets_found": false,
+  "stale_files": 206,
   "unicode_warnings": 14,
-  "secrets_detected": 0,
-  "new_issues": 0,
-  "recurring_issues": 48,
-  "auto_closed": 49
+  "error_book_open": 61,
+  "error_book_new": 13,
+  "error_book_recurring": 48
 }

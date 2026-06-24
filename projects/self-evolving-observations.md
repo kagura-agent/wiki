@@ -4517,3 +4517,30 @@ b4781cf fix: unblock memory/dreaming/ from .memexignore
 - dreaming light/2026-06-23.md: 4+ candidates, all 0.58 confidence, all rote summaries
 - memory/2026-06-23.md: "nudge 补发率 0%"
 - DNA diff: none today
+
+## Day 9 — dna-preflight lifecycle-awareness applied (2026-06-24, Wed 08:45)
+
+### Applied: Gradient lifecycle filtering for preflight
+
+**Problem**: dna-preflight.sh surfaced resolved gradients as "recidivists" — patterns that were structurally fixed (tool modified, workflow updated) but never annotated as APPLIED in beliefs-candidates.md. The preflight-log accumulated stale entries, creating noise: 12 recidivism alerts, majority false positives.
+
+**Root cause**: Two gaps in the pipeline:
+1. Scanning loop read ALL gradients within window regardless of status (APPLIED/retracted markers ignored)
+2. Auto-close mechanism only recognized "graduated" patterns, not "APPLIED" or "retracted"
+3. Several confirmed-fixed gradients lacked lifecycle annotations (fix existed in code but not in beliefs-candidates.md)
+
+**Fix** (commit a52ae0e):
+1. Added lifecycle filter in scanning loop: skip entries containing `**retracted**`/`→ retracted`/`APPLIED`/`graduated`
+2. Extended auto-close regex to prune applied/retracted patterns from `.preflight-log`
+3. Annotated 5 confirmed-fixed gradients: tracking-update-quoting-bug, scout-interval-awareness, mode-selection-before-check, study-followup-precheck-aggregation, competing-pr-early-check
+
+**Measured results**:
+- False recidivism alerts: 12 → 6 (50% reduction)
+- Auto-closed entries per run: 79 → 130 (64% more cleanup)
+- Surfaced violations (3d window): 10 → 8 (only genuinely unresolved)
+
+**Pattern**: [[structural-fix-over-behavioral-rule]] again — the noise wasn't from bad behavior, it was from the tool not respecting its own data model. The beliefs-candidates lifecycle (candidate → applied/retracted/graduated) was designed 2026-05-17 but the preflight tool never integrated it.
+
+**Source**: [[aegis]] Repair+Retirement dual-track + self-evolving-observations Day 8 anti-pattern detection ("it works" gradient series).
+
+Links: [[beliefs-candidates]], [[self-evolving-observations]], [[aegis]], [[structural-fix-over-behavioral-rule]], [[gradient-pipeline]]
