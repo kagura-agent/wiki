@@ -310,3 +310,12 @@
 - **CI**: 4/4 checks pass. CodeRabbit gave 5 nitpick comments on existing content (not our change)
 - **Pattern**: NV QA batch doc issues share common patterns (wrong Hermes quickstart links across multiple files). Each is filed as separate issue. Fix only the target file, don't bundle
 - **Note**: copy-pr-bot requires vetting before NVIDIA CI runners execute — normal, just wait
+
+## PR #5740 — backup-all error handling (2026-06-24)
+- **Issue**: #5734 — `backup-all` throws on first sandbox with unknown agent manifest, aborts entire batch
+- **Root cause**: `backupSandboxState()` calls `loadAgent()` without try/catch; missing manifest → unhandled throw kills loop
+- **Fix**: try/catch in `backupAll()` loop, count thrown sandboxes as "skipped" (exit 0), not "failed" (exit 1)
+- **Test**: Added `maintenance.test.ts` with mocked dependencies verifying loop-continuation and skipped-count behavior
+- **CI**: 5/5 pass (4 GH Actions + CodeRabbit). No review comments
+- **Pattern**: Error isolation in batch loops — when iterating N items and any one can throw, wrap per-iteration not the whole loop
+- **Note**: `competing-pr-check.sh` used wrong repo name (passed `nicedoc/NemoClaw` instead of `NVIDIA/NemoClaw`) — should fix the calling layer that feeds repo to this script
