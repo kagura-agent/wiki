@@ -1,41 +1,36 @@
 {
-  "timestamp": "2026-06-23T20:20:00+08:00",
-  "total_files": 974,
-  "cards": 418,
+  "timestamp": "2026-06-24T10:07:00+08:00",
+  "total_files": 978,
+  "cards": 422,
   "projects": 473,
-  "wikilinks": 3783,
-  "errors": 4,
-  "warnings": 58,
-  "broken_links": [
-    {"source": "projects/browser-search.md", "target": "progressive-degradation"},
-    {"source": "projects/code-duo.md", "target": "multi-model-review"},
-    {"source": "projects/code-duo.md", "target": "trace-gate-pattern"},
-    {"source": "projects/dreaming-observation.md", "target": "silent-exclusion-cascade"}
-  ],
-  "index_drift": [
-    "projects/browser-search.md",
-    "projects/cloudflare-agent-accounts.md",
-    "projects/code-duo.md",
-    "projects/neuralyzer.md",
-    "projects/polypore.md",
-    "projects/ralph-loop-runner.md"
-  ],
-  "orphans": {
-    "count": 3,
-    "cards": 0,
-    "projects": 3,
-    "list": ["browser-search", "cloudflare-agent-accounts", "polypore"]
-  },
+  "wikilinks": 3806,
+  "errors": 1,
+  "warnings": 61,
+  "broken_links": 1,
+  "orphans": 2,
+  "index_drift": 10,
   "stubs": 0,
-  "duplicate_slugs": ["README"],
-  "cards_index_stale": true,
-  "frontmatter_issues": ["fable-mode", "hn-algolia-api", "yield-curve-and-term-structure"],
-  "link_density_avg": 5.4,
-  "zero_outbound_cards": 106,
-  "secrets_found": false,
-  "stale_files": 206,
-  "unicode_warnings": 14,
-  "error_book_open": 61,
-  "error_book_new": 13,
-  "error_book_recurring": 48
+  "stale": 208,
+  "duplicate_slugs": 1,
+  "frontmatter_issues": 3,
+  "zero_outbound_links": 106,
+  "unicode_suspicious": 14,
+  "secrets_detected": 0,
+  "details": {
+    "broken_links": ["projects/sofagent.md -> [[progressive-thinning]]"],
+    "orphans": ["cloudflare-agent-accounts", "polypore"],
+    "index_missing": [
+      "cards/multi-model-review.md",
+      "cards/progressive-degradation.md",
+      "cards/silent-exclusion-cascade.md",
+      "cards/trace-gate-pattern.md",
+      "projects/browser-search.md",
+      "projects/cloudflare-agent-accounts.md",
+      "projects/code-duo.md",
+      "projects/neuralyzer.md",
+      "projects/polypore.md",
+      "projects/ralph-loop-runner.md"
+    ],
+    "frontmatter_missing": ["fable-mode", "hn-algolia-api", "yield-curve-and-term-structure"]
+  }
 }
