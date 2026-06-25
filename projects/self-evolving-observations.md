@@ -4710,3 +4710,81 @@ This is the first tool to reach gen-3. Others to consider: regression-gate.sh (c
 - Validates the "nextSteps" pattern from [[codex-control-plane-mcp]] — actionable output > opaque failure
 
 Links: [[self-evolving-observations]], [[structural-fix-over-behavioral-rule]], [[codex-control-plane-mcp]], [[gradient-pipeline]]
+
+## 🔬 自进化观察日报 2026-06-25 (Day 69)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增 gradient（dogfood-adoption, hn-scan-broken-signal），均 count=1，均 self-generated (0.5x weight)。18 条 stale entries auto-retracted（daily-review 03:15 执行）。0 条接近毕业门槛。Pipeline 正在自清洁——大量积压的单次 candidate 被清理
+- **DNA 变更**: 无直接内容变更。AGENTS.md rule #62 在日间 commit 中提及已完成（blast radius），属标记完成非新增。SOUL.md 零变更
+- **nudge 触发**: **0 次**（journalctl grep 空）。连续 Day 8 起标记异常。与 Day 8 观察一致——nudge 系统可能有配置问题或触发条件未满足
+- **dreaming**: Light Sleep 运行，21 candidates staged，**全部 confidence=0.58**，**全部来自 session-corpus/2026-06-20.txt**（5天前的同一文件！）。Deep Sleep 0 ranked / 0 promoted。REM "No strong patterns surfaced"。Dream Diary 4/4 failures（details unavailable）。Issue #10 (b) 确认未修复——ingestion 卡在旧文件
+
+### 闭环追踪
+- **完整闭环 2 个**:
+  1. `repeat-failure-blindness` → 识别 5-day recidivist pattern → 增强 competing-pr-check.sh 加 failure context search + override escape → gen-3 "gate with informed override" 模式确立（commit `e0de654`）
+  2. study-apply 链: codex-control-plane-mcp nextSteps pattern → 应用到 gate scripts + dreaming .memexignore fix（commit `ca8088d`）
+- **断裂处**:
+  - nudge 0 触发连续 2 天，未做根因调查（只标记异常）
+  - dreaming ingestion 卡在 06-20 文件，未 file upstream issue
+
+### 今日发现
+
+1. **Tool evolution 达到 gen-3 里程碑**: competing-pr-check.sh 从 behavioral rule → structural gate → gate-with-informed-override。这是首个工具完成三代进化的实例。值得作为模式模板推广到其他 gate 工具
+
+2. **Study 产出异常高**: 12+ study sessions，多次命中 saturation gate。apply 产出了 3 个具体工具改进（fail-open, nextSteps, .memexignore）。但 saturation script 有 UX 问题：backlog 为空时仍推荐 apply（09:45 和 10:34 均观察到）
+
+3. **Dreaming 子系统持续退化**:
+   - Light Sleep ingestion 卡在 session-corpus/2026-06-20.txt（5天未更新），这是 Day 8 发现的 ingestion bug 的延续
+   - Dream Diary 100% failure rate（"details unavailable"），Day 7 .memexignore fix 确认不足
+   - REM 持续空输出
+   - 综合判断：dreaming 子系统目前不产出任何有效 promote。进化管线的记忆固化完全依赖手动 daily-review + study-apply 链
+
+4. **beliefs-candidates 自清洁机制有效**: auto-retract rule 在 daily-review 中清理了 18 条 stale entries。Pipeline 从累积噪音转向精简活跃。这是 06-06 引入 auto-retract 后的设计意图
+
+5. **nudge 异常需要升级处理**: 连续 2 天 0 triggers 不正常。需要从观察转为诊断——检查 nudge 配置、触发条件、agent_end hook 是否仍然注册
+
+6. **PR 自动化 race condition**: opencode#31860 被 workloop 自动脚本的 race condition 误关，已手动 reopen+comment。这是自动化工具的一个新故障模式——多个 cron/workloop 并发操作同一 PR
+
+### 原始数据
+
+```
+# git log --since="2026-06-25 00:00" (workspace, 12 commits)
+47ae10c study: peerd + gensee-crate tracking, gradient, memory
+306366b memory: study apply + reflect 10:45
+dabef14 note: Day 9 self-evolving observation — gate-with-informed-override pattern
+e0de654 apply: enhance competing-pr-check with failure context search
+bfdb58a study: quick scan 06-25 — ecosystem stable, no new targets
+694be1e memory: study apply 09:27 — tokdiet fail-open for competing-pr-check
+e5dbfea apply: fail-open pattern for competing-pr-check gate
+4916f05 memory: study reflect 08:50
+54c0ebd memory: study apply 08:45 — nextSteps pattern from codex-control-plane-mcp
+ca8088d apply: structured nextSteps for gate scripts + dreaming .memexignore fix
+1775257 memory: compress 06-10 stale promoted entry
+a98586d chore: update agent-memes TODO — expire-legacy done
+
+# DNA changes
+- SOUL.md: 0 changes
+- AGENTS.md: 0 content changes
+- beliefs-candidates.md: +12 lines (2 new gradients)
+
+# nudge: 0 triggers (journalctl --since "2026-06-25 00:00" | grep nudge → empty)
+
+# dreaming: Light 21 candidates (all 0.58, all 06-20.txt), Deep 0, REM empty, Diary 4/4 fail
+
+# memory/2026-06-25.md: 1775 lines, 90 sections, 128 h2 headers — heavy activity day
+```
+
+### Issue #10 Progress
+
+| Item | Status | Change from Day 8 |
+|------|--------|--------------------|
+| (a) Upstream 0.58 hardcoded | 🟡 Filed (openclaw#87485) | No movement |
+| (b) "details unavailable" | 🔴 Unresolved | Ingestion stuck on 06-20 file confirmed — not just diary retrieval but also candidate sourcing frozen |
+| (c) Filter monitoring | ⏸ Blocked by (b) | Cannot monitor until diary generation works |
+| (d) REM empty | ⏸ Deferred | Unchanged |
+
+**New finding for (b)**: The problem has two layers:
+1. ~~.memexignore path~~ (fixed Day 7, insufficient)
+2. **Ingestion frozen**: session-corpus 5 days stale, not cycling to newer files. This is the primary blocker — even if diary retrieval worked, candidates from 5-day-old sessions have low relevance
+
+Links: [[self-evolving-observations]], [[dreaming]], [[beliefs-candidates]], [[gradient-pipeline]], [[structural-fix-over-behavioral-rule]]
