@@ -131,3 +131,19 @@ Key differences from tokdiet's implementation:
 2. Build compression used PCRE lookahead `(?!...)` in ERE mode — grep warnings on every build compression
 
 This validates tokdiet's core thesis: **you don't know your compression is safe until you measure it**. We were dropping error messages for months without noticing.
+
+### Applied: Fail-open gate design (2026-06-25)
+
+**Pattern**: "Fail-open everywhere" — any internal infrastructure error → transparent passthrough, never block work because the gate itself broke.
+
+**Applied to**: `tools/competing-pr-check.sh` — previously, API failures (rate limit, network timeout) caused `ISSUE_STATE=UNKNOWN` which triggered "Issue is UNKNOWN (not OPEN)" → BLOCKED. This was a false negative that blocked valid work.
+
+**Implementation**:
+- Removed `set -e` (handle errors explicitly per-call with success/failure tracking)
+- `API_SUCCESSES=0 && API_FAILURES>0` → exit 0 + warning (fail-open)
+- Partial failure: assume open for unknown state, only block on verified competing PR evidence
+- `--strict` flag available when fail-closed behavior is explicitly needed
+
+**Behavioral change**: Workloop no longer abandons valid issues when GitHub API is slow/rate-limited. Addresses `verify-before-abandon` gradient directly.
+
+**Design principle validated**: Gate scripts should be fail-open by default. Their job is to *prevent known-bad* states, not to *require verified-good* states. Unknown ≠ bad.
