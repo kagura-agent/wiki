@@ -4684,4 +4684,29 @@ Diary: 4/4 failures (details unavailable)
 # nudge: 0 triggers (journalctl grep empty)
 ```
 
-Links: [[self-evolving-observations]], [[dreaming-pipeline]], [[beliefs-candidates]], [[gradient-pipeline]]
+Links: [[self-evolving-observations]], [[dreaming]], [[beliefs-candidates]], [[gradient-pipeline]]
+
+## Day 9 — Repeat-failure-blindness structural fix (2026-06-25, Thu 10:45)
+
+### Change
+
+Enhanced `competing-pr-check.sh` to address 5-day recidivist `repeat-failure-blindness`:
+- Prior closed PRs now trigger wiki/memory context search → agent sees WHY it failed
+- Added `--override-reason` escape hatch for retry with documented different approach
+- Blunt binary gate → informed decision point with context
+
+### Pattern
+
+**"Gate with informed override"** — evolutionary step beyond the [[structural-fix-over-behavioral-rule]] pattern:
+1. First gen: behavioral rule (fails repeatedly — agent forgets)
+2. Second gen: structural gate (hard block — too blunt, can't handle valid exceptions)  
+3. Third gen: gate with context + escape hatch (blocks by default, but provides evidence + structured override path)
+
+This is the first tool to reach gen-3. Others to consider: regression-gate.sh (currently hard-block, no override for known flaky tests), test-ratchet.sh (no override for intentional test removal).
+
+### Pipeline Impact
+
+- `repeat-failure-blindness` should stop appearing in dna-preflight (structural enforcement replaces behavioral reminder)
+- Validates the "nextSteps" pattern from [[codex-control-plane-mcp]] — actionable output > opaque failure
+
+Links: [[self-evolving-observations]], [[structural-fix-over-behavioral-rule]], [[codex-control-plane-mcp]], [[gradient-pipeline]]
