@@ -2,10 +2,10 @@
 title: codex-control-plane-mcp — Durable Async Control Plane for Codex Desktop
 tags: [codex, mcp, orchestration, durability, agent-harness]
 created: 2026-06-18
-stars: 116
+stars: 222
 url: https://github.com/aresyn/codex-control-plane-mcp
 status: deep-read
-last_verified: 2026-06-18
+last_verified: 2026-06-25
 ---
 
 # codex-control-plane-mcp
@@ -79,14 +79,39 @@ Core in `openclaw_codex_mcp/` (legacy naming — OpenClaw was a first-class targ
 
 **Not immediately adoptable** — we use Claude Code CLI (`claude --print`), not Codex Desktop. The specific tool targets Windows Codex Desktop. But the patterns (durability, dedup, steering) are transportable.
 
+## v0.2.0 Update (2026-06-25 followup)
+
+**222⭐ (+91% in 7 days).** Major architecture rewrite released 06-20.
+
+New in v0.2.0:
+- **Worker-first architecture** — four execution modes: `client` (submit+poll), `worker` (execute queue), `observe` (read-only status), `inline` (synchronous single-process)
+- **Durable scheduling** — queue state, worker heartbeats, resource locks, per-thread locks, concurrency limits. SQLite-backed.
+- **Self-describing MCP contract** — `codexMcpGuide` + `codex_get_agent_contract` + tool annotations + `guideHash`. Server tells agents how to use it without external docs. Pattern: inline discovery > separate skill files.
+- **Turn steering shipped** — `turn/steer` for injecting context mid-execution is now stable
+- **Thread forking** — `thread/fork` branches existing thread with/without initial message
+- **Code review workflows** — `review/start` with polling and final report capture
+- **Runtime policy floor** — MCP raises `read-only` to `workspace-write` for Plan Mode, reports adjustment in status
+
+v0.2.1 (06-21): Project ID canonicalization fix for reliable task submission.
+
+### New Pattern: Self-Describing MCP
+
+The most interesting evolution. Instead of requiring external docs/guides:
+1. `tools/list` returns `codexMcpGuide`, `toolGroups`, `recommendedStartupTool`, `recommendedPrimaryWriteTool`
+2. Contract versioning via `contractVersion` + `toolSurfaceHash` + `guideHash`
+3. Agents verify contract stability on connect
+4. Structured errors with `nextSteps` tell agents whether to poll/wait/diagnose/repair/stop
+
+This is "SKILL.md embedded in the protocol itself" — worth watching as a pattern for MCP tool design.
+
 ## Tracking
 
-- Solo dev, all issues self-filed (15 issues, 2 closed)
-- Windows-primary (Linux/macOS = "protocol-only checks")
-- Very fresh — 1 day old, growth velocity uncertain
-- No external contributors yet
-- Roadmap: code review workflows, thread forking, image inputs, thread lifecycle management
+- Solo dev, 22 issues (7 open), 4 forks, 2 watchers
+- Windows-primary (Linux/macOS = protocol-only)
+- 7 days old, growth velocity high (+91%)
+- No external contributors beyond MseeP badge bot
+- Architecture maturing fast (16k → likely 20k+ LOC now)
 
-**Verdict:** Track for patterns. Not for adoption. Revisit 06-25.
+**Verdict:** Track for patterns. Worker architecture and self-describing MCP are reference-worthy. Revisit 07-02.
 
 Links: [[taskflow]], [[OpenClaw]], [[cwc-long-running-agents]], [[thin-harness-fat-skills]], [[codex-chatgpt-control]]
