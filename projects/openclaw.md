@@ -305,3 +305,14 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Fast-path validated**: `stale-pr-check.sh` correctly detected existing PR with green CI → skipped re-implementation. Saved full implement cycle.
 - **Fresh-context review finding (MEDIUM)**: `isOpenRouterAnthropicModelRef` exported but unused. Dead code from initial implementation — utility for future OpenRouter cache support. Accepted as non-harmful; will address if reviewer flags.
 - **Observation**: PR waiting 8 days without human review is typical for this repo. Already pinged (June 20). No further action possible — ball is on maintainer side.
+
+### 2026-06-26: PR #96981 — ClawHub fallback for official external plugin install
+- **Issue**: #96878 — searxng/tavily plugins fail to install because npm packages are 0.0.0 reservation stubs without plugin metadata
+- **Root cause**: `resolveOfficialExternalInstallPlanBeforeNpm` only returns `npmSpec`, ignoring the `clawhubSpec` already declared in the catalog. When npm install fails, no fallback path exists.
+- **Fix**: Extended the plan function to include `clawhubSpec`, passed it through the install callback, added ClawHub fallback after npm failure in the official external plan path.
+- **Files**: `plugin-install-plan.ts` (+4 lines), `plugins-install-command.ts` (+28 lines), `plugin-install-plan.test.ts` (+19 lines)
+- **CI**: All 116 checks passed (including testbox shards). "Real behavior proof" initially failed due to missing structured sections — added "What Problem This Solves" and "Evidence" sections to PR body.
+- **Process note**: vitest OOMs on this 1.5GB repo locally — used `oxlint` + `oxfmt` for lint/format validation instead. CI runs full test suite.
+- **Lesson — manual efficiency**: For <20-line changes across 1000+ line files, manual edits with clear plan are more efficient than acpx exec. The well-scoped plan from study+plan_review made implementation straightforward.
+- **Lesson — Real behavior proof**: OpenClaw PRs require explicit "What Problem This Solves" and "Evidence" sections in PR body. Standard PR templates don't satisfy this check.
+- **Pattern**: When a catalog declares multiple install sources (npm + clawhub), the install code should try them as a fallback chain rather than failing on the first source. This is the same pattern as `resolveBundledInstallPlanForNpmFailure`.
