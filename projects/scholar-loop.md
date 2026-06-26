@@ -1,12 +1,12 @@
 ---
 title: "Scholar Loop — Autonomous ML Research with Deterministic Guards"
 created: 2026-06-19
-updated: 2026-06-19
-status: tracking
-revisit: 2026-06-26
-stars: 126
+updated: 2026-06-26
+status: cool
+revisit: 2026-07-26
+stars: 444
 repo: renee-jia/scholar-loop
-last_verified: 2026-06-23
+last_verified: 2026-06-26
 ---
 
 # Scholar Loop
@@ -146,3 +146,11 @@ Lessons from Reflector stored with `severity` weight, decaying at half-life 30 d
 **What's different now**: Before, two issues from the same repo with same labels/stars scored identically. Now a detailed bug report with stack trace and "could be fixed by..." scores +35 higher than a vague "something is broken" one-liner. This biases find_work toward issues where the implementation path is already visible — exactly where our time investment has highest expected return.
 
 **Verified**: Tested against openclaw/openclaw#95948 — scored 100 (base 50 + metadata + body quality signals all triggered).
+
+## Followup 2026-06-26 — Downgraded to Cool
+
+**Growth**: 126→444⭐ (+252%, viral spread from launch, not sustained development).
+**Activity**: Last feature commit 06-16. Only "publishability pass" on 06-23 (packaging metadata, stripping local doc refs). 10 days no real code.
+**Community**: 0 issues, 0 PRs, 0 external contributors.
+**Assessment**: All architectural patterns already extracted and applied (CalibrationLog → calibration-log.sh, Population Funnel → issue-funnel.sh, Issue Body Quality Scoring). Solo dev burst-publish confirmed. No further value from frequent checks.
+**Action**: Downgraded to monthly. Revisit 07-26.

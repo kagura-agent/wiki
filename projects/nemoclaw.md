@@ -48,6 +48,7 @@
 - #3722 (RequiredArgsError handling): pending review — 1-line fix in oclif-runner.ts
 - #3241 (macOS preparation page): CLOSED by miyoungc 05-22 — deemed low-value; existing prerequisites already covers macOS needs. Lesson: docs PRs adding new pages must add genuine new guidance, not just expand existing content into install commands
 - #3880 (proxy test conflation): fix M12 to treat ERR_PROXY_TUNNEL as wiring success — 05-20
+- #5740 (backup-all batch catch): SUPERSEDED by #5819 (cjagwani) 06-25 — my broad try/catch swallowed real failures. Narrower regex-matched catch for orphan-manifest only is objectively better. See [[pr-superseded-lessons]]
 
 ## PR #4054 — ~/.nemoclaw dir permissions (2026-05-22)
 - **Issue**: #4009 — directory and config.json created world-readable (1755/644) instead of 700/600
@@ -319,3 +320,8 @@
 - **CI**: 5/5 pass (4 GH Actions + CodeRabbit). No review comments
 - **Pattern**: Error isolation in batch loops — when iterating N items and any one can throw, wrap per-iteration not the whole loop
 - **Note**: `competing-pr-check.sh` used wrong repo name (passed `nicedoc/NemoClaw` instead of `NVIDIA/NemoClaw`) — should fix the calling layer that feeds repo to this script
+
+## PR #5740 superseded by #5819 (2026-06-25)
+- **Lesson**: Broad try/catch in batch loops is dangerous — swallows real errors (disk full, SSH timeout, permission denied). Use specific error matching (regex on known error shapes) + re-throw for everything else.
+- **Maintainer style**: cjagwani gave credit for the outcome while explaining the narrower approach. Respectful supersede. NemoClaw values thorough error-handling documentation (source boundary, removal condition comments).
+- **Note**: Updated competing-pr-check.sh repo name issue (logged in previous entry) still unresolved

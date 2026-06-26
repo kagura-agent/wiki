@@ -1,37 +1,40 @@
 {
-  "timestamp": "2026-06-25T10:10:00+08:00",
-  "total_files": 982,
+  "timestamp": "2026-06-25T20:13:00+08:00",
+  "total_files": 984,
   "cards": 424,
-  "projects": 475,
-  "wikilinks": 3831,
-  "errors": 1,
-  "warnings": 67,
-  "broken_links": 1,
-  "broken_links_detail": [
-    "projects/self-evolving-observations.md -> [[dreaming-pipeline]]"
-  ],
-  "index_drift": 13,
+  "projects": 477,
+  "wikilinks": 3844,
+  "errors": 2,
+  "warnings": 69,
+  "broken_links": 2,
   "orphans": 3,
-  "orphan_detail": [
-    "cloudflare-agent-accounts",
-    "cloudflare-security-audit-skill",
-    "polypore"
-  ],
+  "index_drift": 16,
   "stubs": 0,
   "duplicate_slugs": 1,
-  "duplicate_slugs_detail": ["README (3 files)"],
   "stale_files": 213,
   "frontmatter_issues": 4,
-  "frontmatter_issues_detail": [
-    "compiled-truth-plus-timeline: no title",
-    "fable-mode: no frontmatter",
-    "hn-algolia-api: no frontmatter",
-    "yield-curve-and-term-structure: no frontmatter"
-  ],
   "zero_outbound_links": 106,
-  "unicode_suspicious": 14,
   "secrets_detected": 0,
-  "error_book_new": 0,
-  "error_book_recurring": 67,
-  "error_book_auto_closed": 34
+  "unicode_suspicious": 14,
+  "invalid_facts": 0,
+  "error_book_open": 71,
+  "error_book_new": 4,
+  "error_book_recurring": 66,
+  "details": {
+    "broken_links": [
+      "projects/gensee-crate-runtime-safety.md -> [[claw-patrol-agent-firewall]]",
+      "projects/peerd-browser-agent.md -> [[claw-patrol-agent-firewall]]"
+    ],
+    "orphans": [
+      "cloudflare-agent-accounts",
+      "cloudflare-security-audit-skill",
+      "polypore"
+    ],
+    "frontmatter_issues": [
+      "compiled-truth-plus-timeline: no title",
+      "fable-mode: no frontmatter",
+      "hn-algolia-api: no frontmatter",
+      "yield-curve-and-term-structure: no frontmatter"
+    ]
+  }
 }

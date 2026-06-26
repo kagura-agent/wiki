@@ -1,45 +1,40 @@
 {
-  "timestamp": "2026-06-24T20:29:00+08:00",
-  "total_files": 981,
-  "cards": 423,
-  "projects": 475,
-  "wikilinks": 3823,
-  "errors": 1,
-  "warnings": 66,
-  "broken_links": 1,
-  "orphans": 4,
-  "index_drift": 12,
+  "timestamp": "2026-06-25T20:13:00+08:00",
+  "total_files": 984,
+  "cards": 424,
+  "projects": 477,
+  "wikilinks": 3844,
+  "errors": 2,
+  "warnings": 69,
+  "broken_links": 2,
+  "orphans": 3,
+  "index_drift": 16,
   "stubs": 0,
-  "stale_files": 208,
-  "frontmatter_issues": 3,
-  "zero_outbound_links": 106,
   "duplicate_slugs": 1,
-  "unicode_suspicious": 14,
+  "stale_files": 213,
+  "frontmatter_issues": 4,
+  "zero_outbound_links": 106,
   "secrets_detected": 0,
-  "error_book": {
-    "new_issues": 6,
-    "recurring_issues": 60,
-    "clean_passes": 1,
-    "auto_closed": 0,
-    "total_open": 67
-  },
+  "unicode_suspicious": 14,
+  "invalid_facts": 0,
+  "error_book_open": 71,
+  "error_book_new": 4,
+  "error_book_recurring": 66,
   "details": {
-    "broken_links": ["projects/brain-md.md -> [[compiled-truth-plus-timeline]]"],
-    "orphans": ["brain-md", "cloudflare-agent-accounts", "cloudflare-security-audit-skill", "polypore"],
-    "index_drift_files": [
-      "cards/multi-model-review.md",
-      "cards/progressive-degradation.md",
-      "cards/progressive-thinning.md",
-      "cards/silent-exclusion-cascade.md",
-      "cards/trace-gate-pattern.md",
-      "projects/brain-md.md",
-      "projects/browser-search.md",
-      "projects/cloudflare-agent-accounts.md",
-      "projects/cloudflare-security-audit-skill.md",
-      "projects/code-duo.md",
-      "projects/neuralyzer.md",
-      "projects/ralph-loop-runner.md"
+    "broken_links": [
+      "projects/gensee-crate-runtime-safety.md -> [[claw-patrol-agent-firewall]]",
+      "projects/peerd-browser-agent.md -> [[claw-patrol-agent-firewall]]"
     ],
-    "frontmatter_missing": ["fable-mode", "hn-algolia-api", "yield-curve-and-term-structure"]
+    "orphans": [
+      "cloudflare-agent-accounts",
+      "cloudflare-security-audit-skill",
+      "polypore"
+    ],
+    "frontmatter_issues": [
+      "compiled-truth-plus-timeline: no title",
+      "fable-mode: no frontmatter",
+      "hn-algolia-api: no frontmatter",
+      "yield-curve-and-term-structure: no frontmatter"
+    ]
   }
 }

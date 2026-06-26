@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-06-12
+last_verified: 2026-06-26
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -15,6 +15,19 @@ last_verified: 2026-06-12
 | hindsight #678 | ThreadPoolExecutor sync→async 桥接 | 直接用 async API `aretain/arecall` | client 已有 async 方法 |
 
 **规则**:修 bug 时先问"调用层能不能直接解决",再考虑底层 workaround。
+
+## Broad catch vs narrow match (2026-06-26 新增)
+
+| 我的 PR | 我的做法 | 正确做法 | 差距 |
+|---------|---------|---------|------|
+| NemoClaw #5740 | Broad `try/catch` around `backupSandboxState()` — catch any error, count as 'skipped', continue loop | #5819 (cjagwani): Narrow catch matching `/^Agent '[^']*' not found/` regex — only catches orphan-manifest error, re-throws everything else | Broad catch silently swallows real failures |
+
+**Pattern: BROAD_CATCH_VS_NARROW_MATCH**
+- 用 try/catch 包裹可能失败的代码时，精确匹配预期的错误模式，不要 catch-all
+- Broad catch 感觉"更安全"，但实际更危险：disk full / SSH timeout / permission denied 都被静默吞掉
+- Narrow regex match 只处理已知安全的错误，其他错误正常上抛
+- cjagwani 指出：broad catch "lets the installer march forward with a corrupt or absent backup" — 数据丢失场景
+- **教训**: 当 catch 的目的是"跳过这个已知情况继续"时，必须精确识别"这个已知情况"，不能用通用异常兜底
 
 
 ## Provider-specific vs Core-level fix (2026-05-13 新增)
@@ -107,6 +120,7 @@ last_verified: 2026-06-12
 | BROAD_TOGGLE_VS_TARGETED_QUERY | 精准查询 > 大范围 toggle |
 | USE_RUNTIME_CONTEXT | 用已有 runtime flag 决定行为 > hardcode 固定顺序 |
 | TEST_AT_SURFACE | 测导出的 API surface，不测内部 adapter |
+| BROAD_CATCH_VS_NARROW_MATCH | catch 精确匹配已知错误，不用 catch-all |
 
 ## 相关
 - [[kagura-work-patterns]] - 工作模式总集(暂未合并)
@@ -605,3 +619,13 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **Why superseded**: (1) My commits were unsigned — maintainer explicitly requested signed commits. (2) The replacement PR had broader scope (also added deep-research model IDs, example files, docs updates).
 - **Lesson**: Always sign commits when contributing to repos that require it. Check `git log --show-signature` before pushing. Use `git config commit.gpgsign true` or `git commit -S`. Also: when adding model IDs, check if there are other related models that should be added in the same PR for completeness.
 - **Diff**: My PR only added the embedding model ID to 2 files. Their PR added the model ID + deep-research models + examples + docs updates across 9 files.
+
+## 2026-06-25: NemoClaw #5740 → #5819 — broad catch vs specific error matching
+
+- **Issue**: #5734 — `backup-all` loop aborts entire batch when one sandbox has orphan agent manifest
+- **My PR #5740**: Wrapped `backupSandboxState()` in a broad try/catch, catching ALL errors and counting them as "skipped". Simple approach, correct outcome for the orphan case but dangerous side effects.
+- **Winning PR #5819 (cjagwani)**: Catches only the exact `loadAgent()` error shape using regex `/^Agent '[^']+' not found: .+\/manifest\.yaml$/`. Real failures (disk full, SSH timeout, EACCES) re-throw and still abort. Extensive inline comments explaining: source-of-truth, source boundary, removal condition. Added regression tests that verify non-orphan errors propagate.
+- **Key difference**: My broad catch silently swallowed real backup failures — a corrupt or absent backup would let the installer proceed. Their narrow catch only skips the known-safe orphan case while preserving the batch-abort safety net for real errors.
+- **Pattern**: **BROAD_CATCH_VS_SPECIFIC_MATCH** — when adding error resilience to a loop, match the exact error shape and re-throw everything else. Broad catch feels simpler but creates a false-safety trap: real failures become invisible. Extra regex complexity is worth it when the alternative is swallowing disk-full or permission-denied errors.
+- **Also**: Their code documented the removal condition ("drop this catch when the registry is reconciled on install/upgrade") — error handlers should explain when they should be deleted, not just why they exist.
+- **Closure**: I closed my PR voluntarily after cjagwani explained the issue. Positive interaction — they credited my "right outcome" and identified the specific risk.

@@ -3,11 +3,11 @@
 > A full agent platform from Vercel: filesystem-first authoring, durable sessions, typed tools, sandbox isolation, multi-channel support.
 
 - **Repo**: https://github.com/vercel/eve
-- **Stars**: 1,371 (06-19, 3 days old)
+- **Stars**: 2,598 (06-26, 10 days old, +89% from 1,371 on 06-19)
 - **License**: Apache-2.0
 - **Language**: TypeScript (monorepo, 714+ source files)
 - **Created**: 2026-06-16
-- **Status**: Beta, actively pushed
+- **Status**: Very active (v0.14.0, multiple PRs/day)
 
 ## 概要
 
@@ -126,5 +126,26 @@ Built-in evaluation framework with assertions, judges, reporters, targets
 
 Links: [[openclaw]], [[skill-ecosystem]], [[agent-harness-landscape]], [[acp]]
 
+## Followup 2026-06-26 — v0.14.0 Release
+
+**Growth**: 1,371→2,598⭐ (+89% in 7 days). 101 open issues, active community.
+
+**New in v0.14.0 (06-25)**:
+- `defineAgent({ reasoning })` — provider-agnostic reasoning effort forwarding
+- Standardized `approval` function with session context (replaces boolean needsApproval)
+- MCP/OpenAPI `auth` from active session context → per-tenant credentials
+- Self-hosted workflow: queue handler + world version-compat guard + reverse-proxy docs
+- Streaming tool calls and results (#291) — real-time visibility into tool execution
+- Removed experimental `codeMode` — tools always directly exposed to model
+- Built-in `agent` tool guidance for parallel recursive subagent calls
+- AI SDK 7 stable upgrade
+
+**Security signal**: Issue #312 — denied HITL tool narrated as success by agent. Trust boundary lesson: model can **claim** it ran a tool even if the runtime blocked it. Need assertion at output level, not just tool-call level.
+
+**Self-hosted story expanding**: #308 queue handler, #306 reverse-proxy docs, #316 auth without Vercel OIDC. Moving from Vercel-locked to genuinely portable.
+
+**Assessment**: HOT. Growing fast, shipping daily, architectural innovations continue. Self-hosted story addresses the #70 lock-in concern. Session-context-aware auth (MCP + approvals) is a pattern worth studying for OpenClaw plugin auth. Revisit 07-03.
+
 ---
 *Scout 2026-06-19. Deep read of README, architecture docs (execution model, security, skills, subagents, sandbox). Issues scan for architectural critique.*
+*Followup 2026-06-26. Release notes analysis (v0.13.7→v0.14.0), PR/issue scan, growth metrics.*

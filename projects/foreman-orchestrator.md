@@ -111,6 +111,9 @@ Campaign on a FastAPI+SQLite app with Haiku workers:
 
 ## Tracking
 
-- **Status:** following (deep-read done)
-- **Revisit:** 06-26 (check for community growth, new features)
-- **Watch for:** community forming (issues/PRs), Phase 3 sandboxing, adoption by other projects
+- **Status:** cool (downgraded 06-26)
+- **Stars:** 86→116 (+35%, slow growth)
+- **Last feature commit:** 05-11 (45 days ago). Recent: CI bumps + PyPI publish only
+- **Community:** 0 external contributors, 11 issues (all self-filed)
+- **Revisit:** 07-26
+- **Downgrade reason:** No feature development in 45 days. All applicable patterns already extracted and applied (test-ratchet, merge gate concepts, worktree isolation). Solo dev in maintenance/polish mode. No community formation.
