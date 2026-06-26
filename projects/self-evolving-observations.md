@@ -4788,3 +4788,22 @@ a98586d chore: update agent-memes TODO — expire-legacy done
 2. **Ingestion frozen**: session-corpus 5 days stale, not cycling to newer files. This is the primary blocker — even if diary retrieval worked, candidates from 5-day-old sessions have low relevance
 
 Links: [[self-evolving-observations]], [[dreaming]], [[beliefs-candidates]], [[gradient-pipeline]], [[structural-fix-over-behavioral-rule]]
+
+## 🔬 自进化观察日报 2026-06-26 (Day 70)
+
+### Apply: study-saturation.sh empty-backlog recommendation fix
+
+**Issue observed**: Day 69 (06-25) flagged "saturation script UX issue: recommends apply when backlog empty" (09:45 and 10:34 observations). Same issue recurred today.
+
+**Root cause**: Recommendation engine's fallback chain placed `apply (backlog empty)` as a mid-tier option, ahead of modes with yellow warnings (scout-recent, quick-consecutive). When followup was locked (0 due), scout was warned (recent), and quick was warned (consecutive), apply-without-backlog was the first available recommendation — despite having nothing to apply.
+
+**Fix**: Inserted `modes-with-warnings` tier between `apply-with-backlog` and `apply-without-backlog`. Priority chain:
+1. Fresh modes (no warnings) → top pick
+2. Modes with yellow warnings (scout-recent, quick-consecutive) → second
+3. Apply-without-backlog → true last resort with clearer guidance
+
+**Verification**: regression-gate passed. Both weekday and weekend paths fixed. Behavioral change confirmed: same scenario now recommends `quick_scan (consecutive — try different sources)`.
+
+**Pattern**: This is a [[structural-fix-over-behavioral-rule]] instance — fixing the recommendation engine code rather than adding a behavioral note "don't trust apply recommendation when backlog empty".
+
+Links: [[self-evolving-observations]], [[structural-fix-over-behavioral-rule]]
