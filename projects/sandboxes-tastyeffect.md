@@ -1,15 +1,15 @@
 ---
 title: "sandboxes (tastyeffectco)"
 created: 2026-06-04
-updated: 2026-06-12
+updated: 2026-06-26
 tags: [agent-infrastructure, sandbox, self-hosted, app-builder]
-last_verified: 2026-06-12
+last_verified: 2026-06-26
 ---
 
 # sandboxes — Self-Hosted Dev Sandboxes for AI App Builders
 
-**Repo**: tastyeffectco/sandboxes | **Stars**: 572 (was 395 on 06-05, +45%) | **License**: MIT | **Lang**: Go
-**Created**: 2026-06-03 | **Deep-read**: 2026-06-05 | **Last followup**: 2026-06-12
+**Repo**: tastyeffectco/sandboxes | **Stars**: 693 (was 672 on 06-19, +3%) | **License**: MIT | **Lang**: Go
+**Created**: 2026-06-03 | **Deep-read**: 2026-06-05 | **Last followup**: 2026-06-26
 
 Open-source engine for the "prompt → app → preview URL" pattern (Lovable/Bolt/v0 clones). One Go binary + Docker + Traefik + SQLite, no Kubernetes.
 
@@ -93,10 +93,29 @@ Traefik-based auth for private sandboxes. Cookie JWT validation in the hot path,
 - **Growth**: 395→572⭐ in 7 days (+45%). Sustained traction post-launch, not just day-1 spike.
 - **Community**: External PRs arriving (ruslan-rm for idle_policy). Healthy contributor diversity signal.
 
-### Relevance Assessment
+### Updates (06-26)
+- **v0.2.0 released** (06-22): Durable apps as first-class entities above sandboxes (`/v1/apps` API), selectable templates (`react-standard` default), `timeout_s` on task submit, e2e CI, snapshot fix.
+- **v0.4.0 draft PR#35** (active): Major feature batch — web console, app config & secrets (encrypted at rest), snapshots/fork/restore, observability/activity timeline, runtime manifest (`sandbox.yaml` process model), 5 runtime presets (react-vite, nextjs, node-express, fastapi, worker), per-process logs API, shared-host installer.
+- **Growth**: 572→693⭐ over 14 days (+21%). Steady, healthy growth. Still primarily solo dev (tastyeffectco) with occasional external contributions.
+- **Active development**: Last push 06-25. Project accelerating — jumped from v0.1→v0.2→v0.4 in 3 weeks.
+- **Contributors**: amadeusCaleb, sullamago, ruslan-rm contributed to v0.2.0. One external PR (Edgardo-Ramirez-Canales) merged docs/fix on 06-25.
+- **Open issues**: 10 (git integration, disk quota, multi-host, Firecracker, ARM64, gVisor — all from launch day; git integration is newer 06-15).
+
+### Architectural Evolution Assessment (06-26)
+Project is rapidly maturing from "single sandbox" to "app platform":
+1. **App > Sandbox hierarchy**: Apps are now first-class, sandboxes are implementation detail. This mirrors container orchestration patterns (Service > Pod).
+2. **Runtime manifest** (`sandbox.yaml`): Declarative process model (web + workers). Moving toward PaaS territory.
+3. **Snapshot/Fork**: Full state capture and branching — enables "branching deployments" pattern.
+4. **Console + Observability**: Building toward self-service admin UI.
+
+**Key insight**: The sleep/wake + admission-with-self-heal core patterns haven't changed, but the project is now layering a full app platform on top. Growth is product-driven (features users want), not just infrastructure novelty.
+
+### Relevance Assessment (updated 06-26)
 - **Direct use**: Low — we don't build app-builder products
-- **Pattern transfer**: High — sleep/wake, admission-with-self-heal, SQLite-as-truth patterns are universally applicable
+- **Pattern transfer**: High — sleep/wake, admission-with-self-heal, SQLite-as-truth, runtime manifest patterns remain universally applicable
 - **Ecosystem signal**: Very high — confirms "agent infrastructure" as the current growth category
+- **Contribution opportunity**: Low — solo dev moves fast, external PRs mostly docs. gVisor issue #3 still open from day 1 but no movement.
+- **Downgrade consideration**: Growth slowing (21% vs 45% prior period), no new *architectural* patterns since deep-read. Main novelty (sleep/wake, pressure reaper) already captured. Consider downgrading to monthly after next check.
 
 ## Ecosystem Position
 
