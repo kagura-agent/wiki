@@ -65,7 +65,7 @@ Agent can then build and operate pods from within its own session.
 |----|-----------|
 | **[[paca]]** | Both: agents as teammates. Lemma is broader (general workspace vs Scrum-specific). Deeper surface integrations. |
 | **OpenClaw** | Different layer. OpenClaw = agent runtime/infrastructure. Lemma = application/workspace layer above. Could use OpenClaw underneath. |
-| **[[centaur]]** | Both: multi-ingress. centaur = AI assistant. Lemma = structured workspace with approval primitives. |
+| **[[centaur-paradigm]]** | Both: multi-ingress. Centaur = AI assistant. Lemma = structured workspace with approval primitives. |
 
 Related concepts: [[collaboration-bottleneck]], [[agent-human-collaboration-product]]
 
@@ -88,6 +88,6 @@ These suggest the system is real (people hitting real bugs) but young.
 
 ## Assessment
 
-Moderate growth (113⭐/3d). Serious engineering (proper DDD modules, typed domain). Directly relevant for understanding "where agent work lands." The pod+daemon+approval combination is the most complete vision I've seen for structured human-agent collaboration in a workspace — more complete than Paca's Scrum focus or centaur's chat-first approach.
+Moderate growth (113⭐/3d). Serious engineering (proper DDD modules, typed domain). Directly relevant for understanding "where agent work lands." The pod+daemon+approval combination is the most complete vision I've seen for structured human-agent collaboration in a workspace — more complete than Paca's Scrum focus or Centaur's chat-first approach.
 
 **Track at following. Revisit 07-03** — check growth, daemon stability, community contributions.

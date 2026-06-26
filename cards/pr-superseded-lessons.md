@@ -30,6 +30,19 @@ last_verified: 2026-06-26
 - **教训**: 当 catch 的目的是"跳过这个已知情况继续"时，必须精确识别"这个已知情况"，不能用通用异常兜底
 
 
+## Fix data not code (2026-06-26 新增)
+
+| 我的 PR | 我的做法 | 正确做法 | 差距 |
+|---------|---------|---------|------|
+| openclaw/openclaw #96981 | CLI 里加 ClawHub fallback（npm 安装失败时自动 try ClawHub）— 通用防御逻辑 ~68 行 | #96987 (snowzlmbot): 改 catalog metadata 把 `defaultChoice` 从 "npm" → "clawhub"，clawhubSpec 加 `@beta` tag — 11 文件纯数据/文档修改 | 我修的是症状（npm 失败后兜底），他们修的是病因（一开始就别走 npm）|
+
+**Pattern: FIX_DATA_NOT_CODE**
+- 当问题是"配置/数据指向了错误的地方"时，修数据比加 runtime fallback 更干净
+- Runtime fallback 增加代码复杂度、需要测试、可能掩盖未来的真正 npm 问题
+- 改 catalog `defaultChoice` = 安装器一开始就走正确路径，零 runtime 代码
+- 我的方案是"generic defensive mechanism"，他们的是"fix the root cause at the data level"
+- **教训**: 问自己"是代码逻辑有 bug，还是数据/配置指错了？"数据错就修数据
+
 ## Provider-specific vs Core-level fix (2026-05-13 新增)
 
 | 我的 PR | 我的做法 | 正确做法 | 差距 |
