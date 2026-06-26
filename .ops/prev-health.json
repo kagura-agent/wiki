@@ -1,40 +1,20 @@
 {
-  "timestamp": "2026-06-25T20:13:00+08:00",
+  "timestamp": "2026-06-26T10:15:00+08:00",
   "total_files": 984,
   "cards": 424,
   "projects": 477,
-  "wikilinks": 3844,
+  "wikilinks": 3851,
   "errors": 2,
   "warnings": 69,
   "broken_links": 2,
   "orphans": 3,
   "index_drift": 16,
   "stubs": 0,
+  "stale_files": 221,
   "duplicate_slugs": 1,
-  "stale_files": 213,
   "frontmatter_issues": 4,
-  "zero_outbound_links": 106,
+  "cards_zero_outbound": 106,
   "secrets_detected": 0,
   "unicode_suspicious": 14,
-  "invalid_facts": 0,
-  "error_book_open": 71,
-  "error_book_new": 4,
-  "error_book_recurring": 66,
-  "details": {
-    "broken_links": [
-      "projects/gensee-crate-runtime-safety.md -> [[claw-patrol-agent-firewall]]",
-      "projects/peerd-browser-agent.md -> [[claw-patrol-agent-firewall]]"
-    ],
-    "orphans": [
-      "cloudflare-agent-accounts",
-      "cloudflare-security-audit-skill",
-      "polypore"
-    ],
-    "frontmatter_issues": [
-      "compiled-truth-plus-timeline: no title",
-      "fable-mode: no frontmatter",
-      "hn-algolia-api: no frontmatter",
-      "yield-curve-and-term-structure: no frontmatter"
-    ]
-  }
+  "invalid_facts": 0
 }

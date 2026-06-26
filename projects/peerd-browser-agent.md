@@ -4,7 +4,7 @@ created: 2026-06-25
 tags: [agent-harness, browser, extension, p2p, webrtc, security, sandbox]
 source: https://github.com/NotASithLord/peerd
 status: deep-read
-last_verified: 2026-06-25
+last_verified: 2026-06-26
 ---
 
 # peerd — Browser-Native AI Agent Harness
@@ -64,7 +64,7 @@ Leverages decades of browser hardening instead of building custom sandboxing:
 - Main agent only receives a plain-text summary from the runner
 - Even if the page fully prompt-injects the runner → it can do nothing harmful
 
-This is proper privilege separation. The attack surface is: mislead a throwaway agent that holds no secrets. Compare to [[claw-patrol-agent-firewall]] which does wire-level filtering.
+This is proper privilege separation. The attack surface is: mislead a throwaway agent that holds no secrets. Compare to [[clawpatrol]] which does wire-level filtering.
 
 ### 3. Tool Dispatch Concurrency Model
 
@@ -127,7 +127,7 @@ Adopted the AGENTS.md/CLAUDE.md memory standard:
 | Project | Approach | peerd Difference |
 |---------|----------|-----------------|
 | [[byob-chrome-reuse-mcp]] | MCP bridge TO browser | peerd = agent loop INSIDE browser |
-| [[claw-patrol-agent-firewall]] | Wire-level MITM proxy | peerd = application-level trust separation |
+| [[clawpatrol]] | Wire-level MITM proxy | peerd = application-level trust separation |
 | [[codex-control-plane-mcp]] | External orchestrator for agents | peerd = self-contained browser agent |
 | OpenClaw | Server-side runtime, multi-channel | peerd = client-only, browser-native |
 | [[gensee-crate-runtime-safety]] | Sidecar safety layer | peerd = built-in security by architecture |

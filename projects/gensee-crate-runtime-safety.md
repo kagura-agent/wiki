@@ -4,7 +4,7 @@ created: 2026-06-25
 tags: [agent-safety, runtime-security, rust, macos, coding-agents]
 source: https://github.com/GenseeAI/gensee-crate
 status: skim
-last_verified: 2026-06-25
+last_verified: 2026-06-26
 ---
 
 # Gensee Crate — Runtime Safety for AI Coding Agents
@@ -57,7 +57,7 @@ Dashboard (Vite web UI — timeline, lineage, policy, review)
 
 | vs | Difference |
 |----|-----------|
-| [[claw-patrol-agent-firewall]] | Claw Patrol = network-level MITM. Gensee = application-level hooks + OS events |
+| [[clawpatrol]] | Claw Patrol = network-level MITM. Gensee = application-level hooks + OS events |
 | [[peerd-browser-agent]] | peerd = built-in architecture. Gensee = bolt-on sidecar for existing agents |
 | OpenClaw native approvals | Similar hook model, but Gensee adds provenance/lineage graph + cross-session tracking |
 
