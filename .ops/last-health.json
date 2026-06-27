@@ -1,26 +1,50 @@
 {
-  "timestamp": "2026-06-27T02:07:00Z",
-  "total_files": 990,
+  "timestamp": "2026-06-27T20:30:00+08:00",
+  "total_files": 993,
   "cards": 424,
-  "projects": 483,
-  "wikilinks": 3887,
-  "errors": 1,
-  "warnings": 81,
-  "broken_links": 1,
-  "orphans": 9,
-  "orphan_cards": 0,
-  "orphan_projects": 9,
-  "index_drift": 22,
+  "projects": 486,
+  "wikilinks": 3896,
+  "errors": 2,
+  "warnings": 87,
+  "broken_wikilinks": 2,
+  "orphans": 12,
   "stubs": 0,
+  "index_drift": 25,
   "duplicate_slugs": 1,
   "stale_files": 225,
   "frontmatter_issues": 4,
   "zero_outbound_links": 106,
+  "secret_patterns": 0,
   "unicode_suspicious": 14,
-  "secrets_detected": 0,
-  "invalid_facts": 0,
-  "error_book_new": 4,
-  "error_book_recurring": 77,
-  "error_book_auto_closed": 31,
-  "error_book_total_open": 81
+  "error_book_open": 88,
+  "error_book_new": 7,
+  "error_book_recurring": 81,
+  "details": {
+    "broken_wikilinks": [
+      "projects/openclaw.md -> [[pr-superseded-lessons#FIX_DATA_NOT_CODE]]",
+      "projects/tradememory-protocol.md -> [[wiki search]]"
+    ],
+    "orphan_projects": [
+      "cloudflare-agent-accounts",
+      "cloudflare-security-audit-skill",
+      "error-discovery-skill",
+      "graphenium",
+      "halo-agent-trace-optimizer",
+      "lemma-platform",
+      "loop-library",
+      "pmb-memory",
+      "polypore",
+      "qwen-agentworld",
+      "repo-docs-skills",
+      "tradememory-protocol"
+    ],
+    "frontmatter_issues": [
+      "compiled-truth-plus-timeline: no title",
+      "fable-mode: no frontmatter",
+      "hn-algolia-api: no frontmatter",
+      "yield-curve-and-term-structure: no frontmatter"
+    ],
+    "index_drift_files": 25,
+    "cards_index_stale": true
+  }
 }

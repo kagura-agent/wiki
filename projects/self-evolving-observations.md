@@ -4877,3 +4877,79 @@ Total entries: 204 | Graduated: 28 | Retracted: 30
 ```
 
 Links: [[self-evolving-observations]], [[dreaming]], [[beliefs-candidates]], [[gradient-pipeline]], [[structural-fix-over-behavioral-rule]]
+
+## Day 12 Observation (2026-06-27)
+
+### Pipeline Vitals
+- **beliefs-candidates**: 0 new gradients today, 6 stale auto-retracted in daily-review. Stats: 9 active entries (post-retraction), 27 graduated, 36 retracted, 711 lines total
+- **DNA**: no changes (SOUL.md / AGENTS.md stable)
+- **nudge**: **METHODOLOGY ERROR RESOLVED** — Days 9-11 reported 0 triggers using `journalctl -u openclaw-gateway` which returns empty because gateway runs as a direct node process, not a systemd service. Actual `.nudge-audit.log` shows **5 triggers today** (01:43, 04:13, 06:02, 08:15, 10:57) + 1 late on 06-26 (21:02). **Nudge has been working correctly all along.** The 4-day "anomaly" was observing the wrong data source
+- **dreaming**: Light Sleep ran (100 candidates @ 0.58 uniform, 0 promotes — all execution log noise). REM empty ("No strong patterns surfaced"). Corpus freshness: references 06-23, 06-24, 06-25, **06-26** (Day 11: only 06-23/24/25). Progress: +1 day, now 1 day behind (06-27.txt exists but not yet referenced)
+- **Closed loops**: 3 complete:
+  1. Auto-retract dedup marker bug: identified 196 excess markers → fixed with idempotency guard + lock → verified clean ✓
+  2. **Nudge false anomaly closure**: 4-day false alarm resolved by checking `.nudge-audit.log` instead of `journalctl`. Monitoring methodology corrected ✓
+  3. Study followup: 5 items checked, openloop dropped, codexpro tracked ✓
+
+### Key Findings
+
+1. **Nudge monitoring was never broken** 🎉
+   - Root cause: `journalctl -u openclaw-gateway` returns empty because gateway is not a systemd unit (runs as `node /path/to/openclaw/dist/index.js gateway --port 18789`)
+   - Correct data source: `~/.openclaw/workspace/.nudge-audit.log` — contains both triggers and skips with timestamps
+   - **Implication**: Days 9-11 observations incorrectly flagged nudge as anomalous. The pipeline was healthy all along
+   - **Action**: Update monitoring methodology — use `.nudge-audit.log` not journalctl
+
+2. **Dreaming corpus freshness improving** 📈
+   - Day 10: stuck at 06-20
+   - Day 11: 06-23/24/25 (jumped +5 days)
+   - Day 12: 06-23/24/25/**06-26** (gained +1 day, now 1 day behind)
+   - Trajectory: steadily catching up. Item (b) approaching resolution
+
+3. **Dreaming quality still zero-signal**
+   - 100 candidates all at hardcoded 0.58 confidence (Item a: upstream issue openclaw#87485 still open)
+   - All candidates are raw session transcripts (User/Assistant dialogue), not distilled insights
+   - Local quality filter can't help when input is pure noise
+   - **This remains the core dreaming quality blocker**
+
+4. **beliefs-candidates pipeline self-cleaning healthy**
+   - Auto-retract running reliably after idempotency fix
+   - 6 stale entries cleaned today (all single-occurrence, 30+ days old)
+   - Dedup marker bug from 06-26 fully resolved
+
+### Item Status
+
+| Item | Status | Change from Day 11 |
+|------|--------|--------------------|
+| (a) Upstream 0.58 | 🟡 No change | openclaw#87485 filed, no upstream movement |
+| (b) Ingestion frozen | 🟢 **Near resolution** | Now 1 day behind (was 5 days behind Day 10) |
+| (c) Filter monitoring | 🟡 Blocked by (a) | Can't measure filter effectiveness when all input is noise |
+| (d) REM empty | ⏸ Deferred | Unchanged |
+
+### Nudge Anomaly Postmortem
+
+**False alarm duration**: 4 days (Day 9-12)
+**Root cause**: Wrong observability tool (`journalctl` vs `.nudge-audit.log`)
+**Lesson**: When monitoring a subsystem, verify the data source actually captures the subsystem's output before declaring anomaly. The gateway's audit log was the correct source all along — it was even mentioned in the issue #5 closure notes but not used in subsequent observations
+**Pattern**: "Verify your monitoring before declaring outage" — a meta-observation about observation quality
+
+### Original Data
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+ce134cc study followup 06-27: 5 items checked, openloop dropped, codexpro hot
+44752ab fix: auto-retract dedup markers + add lock + grep robustness
+4b4bd2c daily-review: memory compress + beliefs retract + coactivation rebuild
+8b6acbd fix: deduplicate 196 excess retraction markers in beliefs-candidates.md
+
+# beliefs-candidates.md stats
+Active: 9 | Graduated: 27 | Retracted: 36 | Total lines: 711
+
+# dreaming references in today's Light Sleep
+2026-06-23.txt, 2026-06-24.txt, 2026-06-25.txt, 2026-06-26.txt
+
+# nudge audit log (today)
+5 triggers (all on subagent sessions): 01:43, 04:13, 06:02, 08:15, 10:57
+~60 skips (all cron sessions, as configured)
+
+# workspace commits today: 12
+```
+
+Links: [[self-evolving-observations]], [[dreaming]], [[beliefs-candidates]], [[nudge-audit]]

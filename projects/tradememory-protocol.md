@@ -7,6 +7,7 @@ language: Python
 repo: mnemox-ai/tradememory-protocol
 tags: [ai-trading, agent-memory, mcp, audit-trail, compliance]
 revisit: 2026-07-04
+last_verified: 2026-06-27
 ---
 
 # tradememory-protocol
@@ -44,7 +45,7 @@ This is the key architectural insight: **not all memories are equal in trading**
 
 ## Why It Matters to Us
 
-The OWM framework is directly applicable to our own [[wiki search|wiki/search.sh]] scoring. We currently rank by:
+The OWM framework is directly applicable to our own `search.sh` scoring. We currently rank by:
 - Semantic similarity (memex cosine)
 - Keyword relevance
 - Temporal decay (recency)
