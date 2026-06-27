@@ -96,6 +96,19 @@ src/
 4. **MCP-first for agent consumption**: Good validation that graph-as-MCP-server is the right interface pattern. Compare [[codex-control-plane-mcp]], [[beads]].
 5. **CI trust gates**: Automated quality enforcement of structural knowledge. Related concept to [[foreman-orchestrator]] test-ratchet pattern.
 
+## Applied Patterns
+
+### Surprise Inversion → scout-precheck.sh (2026-06-27)
+
+Applied the "AMBIGUOUS scores highest" principle to study scout workflow:
+- Created `portfolio-themes.txt` (19 domain categories from 485 wiki notes)
+- Enhanced `scout-precheck.sh` with `--desc` mode and novelty scoring
+- New candidates scored NOVEL/MODERATE/EXPECTED based on portfolio theme overlap
+- NOVEL candidates get explicit deep-read priority recommendation
+- Behavioral change: instead of treating all NEW candidates equally, the tool now surfaces which ones are outside known territory (highest information value)
+
+Verification: tested with 3 scenarios — pure novel (quantum computing), moderate (memory+retrieval), expected (7-keyword hit on agent-memory theme). Correct tiering in all cases.
+
 ## Limitations
 
 - 12⭐, 3 days old — extremely early. Solo team (lambda-alpha-labs)
