@@ -3,7 +3,7 @@ title: "CodexPro — ChatGPT-to-Local-Repo MCP Bridge"
 created: 2026-06-20
 updated: 2026-06-20
 tags: [mcp, chatgpt, local-agent, cloud-to-local, tunnel, handoff]
-last_verified: 2026-06-20
+last_verified: 2026-06-27
 ---
 
 # CodexPro — ChatGPT-to-Local-Repo MCP Bridge
@@ -166,3 +166,38 @@ CodexPro is a well-executed single-purpose bridge that validates the **cloud pla
 - [[codex-chatgpt-control]] — opposite-direction bridge (Codex→ChatGPT via DOM)
 - [[acp]] — more general agent communication protocol
 - [[openclaw]] — our local-first agent platform
+
+## Followup 2026-06-27 — Week 2
+
+**Stars**: 459 → 944 (+106% in 7 days). Sustained viral growth.
+
+### New Developments
+
+**PR #37 — Tool Cards Opt-in** (merged 06-25):
+ChatGPT's widget/outputTemplate metadata made opt-in (CODEXPRO_TOOL_CARDS=1). Default mode strips all rich card descriptors from tools/list responses. Motivation: widget metadata caused stream errors, lag, and search discovery fragility. Resources still registered for stale card requests but not advertised by default.
+
+**Pattern extracted: "Minimal Default, Rich Opt-in"** — when rich metadata causes reliability issues, default to minimal and let users opt into complexity. This applies broadly: tool descriptions, API responses, agent context loading. Start with what works reliably; add bells when explicitly requested.
+
+**PR #32 — Loop Fingerprints in Nested Workspaces** (merged 06-25):
+Git porcelain status paths normalized to workspace-relative before change fingerprinting. Fix for monorepo users running CodexPro from subdirectories. Shows repo maturing toward real-world usage patterns.
+
+**Issue #33 — CodeGraph + ffgrep backends** (open):
+Users requesting structural code intelligence (symbols, call relationships, dependency graphs) and fast indexed search. Feature creep signal — shows users want more than lexical search. Validates the direction toward symbol-aware coding tools.
+
+**Issue #35 — MCP wait/poll for ChatGPT loop control** (open):
+Users want ChatGPT to stay in control of the plan→execute→review loop rather than delegating loop control to the local agent. This is architecturally significant — it pushes CodexPro toward bidirectional communication (approaching [[acp]] territory). If implemented, CodexPro becomes a lightweight agent coordination protocol, not just a bridge.
+
+### Architectural Trajectory
+
+CodexPro is evolving from "one-way bridge" toward "lightweight coordination layer":
+1. Week 1: One-way plan→execute (`.ai-bridge` files)
+2. Week 2: Bidirectional demand (wait/poll, loop control)
+3. Predicted Week 3-4: Session management, concurrent tasks, state tracking
+
+This trajectory converges toward what [[acp]] already solves, but from a different origin (ChatGPT-specific vs protocol-agnostic). The question is whether CodexPro stays narrow (ChatGPT-only) or generalizes (which would put it in ACP's space).
+
+### Relevance Update
+
+- **Demand validation**: 944⭐ confirms cloud-to-local bridging is a real category, not a novelty
+- **"Minimal Default" pattern**: Applicable to OpenClaw plugin/skill tool registration — consider opt-in rich descriptions
+- **Loop control tension**: Cloud model wanting to own the loop = exactly what ACP session management solves. CodexPro's future issues will likely rediscover ACP's design decisions.
