@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-06-26
+last_verified: 2026-06-27
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -36,7 +36,7 @@ last_verified: 2026-06-26
 |---------|---------|---------|------|
 | openclaw/openclaw #96981 | CLI 里加 ClawHub fallback（npm 安装失败时自动 try ClawHub）— 通用防御逻辑 ~68 行 | #96987 (snowzlmbot): 改 catalog metadata 把 `defaultChoice` 从 "npm" → "clawhub"，clawhubSpec 加 `@beta` tag — 11 文件纯数据/文档修改 | 我修的是症状（npm 失败后兜底），他们修的是病因（一开始就别走 npm）|
 
-**Pattern: FIX_DATA_NOT_CODE**
+### FIX_DATA_NOT_CODE
 - 当问题是"配置/数据指向了错误的地方"时，修数据比加 runtime fallback 更干净
 - Runtime fallback 增加代码复杂度、需要测试、可能掩盖未来的真正 npm 问题
 - 改 catalog `defaultChoice` = 安装器一开始就走正确路径，零 runtime 代码
