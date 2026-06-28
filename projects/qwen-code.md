@@ -75,3 +75,13 @@
 - Both PRs APPROVED by wenshao, merge-pinged, ball on maintainer
 - 82% merge rate (high), 24775 stars
 - Lesson: always cross-verify with `gh search prs` — gogetajob sync is not exhaustive (guide #42)
+
+## 2026-06-28 workloop notes
+- PR #5957 (fix: subtract reserved output tokens from compression threshold) submitted
+- Issue #5950: auto-compression fails when max_tokens escalates to 64K — computeThresholds() used raw 131K window instead of effective 67K input budget
+- Fix: 3 files, ~146 lines (mostly tests), surgical — additive only, backward compatible
+- Earlier workloop session had already implemented the fix but stalled at plan_review node without advancing. Cron resume recovered the instance correctly
+- Claude Code `--print` mode stuck with no output for 3+ minutes — fell back to manual implementation (the change was small enough: ~20 LOC production code)
+- External PRs only get `review-pr` check (skips), normal behavior — don't wait for CI to go green
+- Fresh-context review caught a HIGH issue (negative contextLimit when reservedOutputTokens >= window) — added Math.max(0, ...) clamp and edge case test
+- Stars: 25604 (up from 24775 on 05-31)
