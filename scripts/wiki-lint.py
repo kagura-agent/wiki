@@ -166,7 +166,9 @@ for fpath in all_files:
             raw = raw[:-3]
         slug = raw.lower().replace(' ', '-')
         all_wikilinks.append((fpath, raw, slug))
-        if slug not in slug_lower_set:
+        # Strip anchor (e.g. #section) before file existence check
+        file_slug = slug.split('#')[0] if '#' in slug else slug
+        if file_slug not in slug_lower_set:
             broken_links.append((fpath, raw))
 
 if not broken_links:

@@ -90,7 +90,7 @@ Compare: my DNA preflight thins "chronic patterns" but doesn't distinguish prote
 
 ## Relation to Agent Ecosystem
 
-Sits in the same space as [[pmb]], [[reflexio]], [[gbrain]], [[agent-memory-ground-truth]]. Differentiators: multi-granularity + branch-awareness + no-LLM proposition extraction + structured promotion pipeline.
+Sits in the same space as [[pmb-memory]], [[reflexio]], [[gbrain]], [[agent-memory-ground-truth]]. Differentiators: multi-granularity + branch-awareness + no-LLM proposition extraction + structured promotion pipeline.
 
 Most agent memory projects are either:
 1. Vector RAG with embedding (simple, lossy)
@@ -128,4 +128,4 @@ Architecturally rich, many novel patterns worth studying. But 26⭐/3d, solo dev
 
 ## Links
 
-[[agent-memory-taxonomy]], [[agent-memory-ground-truth]], [[beliefs-candidates]], [[self-evolving-observations]], [[pmb]], [[git-backed-agent-memory]]
+[[agent-memory-taxonomy]], [[agent-memory-ground-truth]], [[beliefs-candidates]], [[self-evolving-observations]], [[pmb-memory]], [[git-backed-agent-memory]]
