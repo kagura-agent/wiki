@@ -107,3 +107,20 @@ Links: [[coding-agent-ecosystem]]
 - **根因**: find_work 选题时没检查是否已有自己的 open PR 关联该 issue
 - **修复建议**: find_work 加一步 `gh pr list --author=kagura-agent --search "issue-number"` 排除已有 PR 的 issue
 - **roboomp review 持续信号**: 审核及时（首次 review 当天），修改后等 re-review 期较长（4天+未响应）。合理等待期 ~1 周后考虑 ping
+
+## PR #3703: feat(advisor): add advisor.minSeverity config (2026-06-28)
+- **Issue**: #3378 — Add advisor.minSeverity config to filter advisories by severity level
+- **Status**: CLOSED (auto-closed by vouch gate) → Discussion #3704 opened requesting vouch
+- **Changes**: 4 files, +52/-1 (settings-schema + advise-tool export + agent-session filter + tests)
+- **CI**: ALL 12/12 checks green before vouch gate closed it
+- **Key finding**: oh-my-pi introduced a **vouch system** on ~2026-06-19
+  - New PRs from non-vouched users are auto-closed
+  - Must open Discussion first → maintainer `!vouch`s → then PR stays open
+  - Our #2764 was grandfathered (created before vouch system)
+  - kagura-agent NOT in `.github/VOUCHED.td`
+- **Action required**: Wait for vouch response on Discussion #3704, then reopen PR
+
+### 本轮教训
+- **选题前必须检查 repo 贡献流程**: CONTRIBUTING.md 的 vouch 系统是新增的，之前没有
+- **工具需要更新**: competing-pr-check.sh / stale-pr-check.sh 不检查 vouch 状态
+- **修正**: 下次打新 repo（或很久没打的 repo）→ 先检查 CONTRIBUTING.md 有没有 PR 准入门槛
