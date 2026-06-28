@@ -16,7 +16,7 @@
 - Status: pending CLA
 
 ## CI/开发注意事项
-- **CLA 必须签** — 字节要求贡献者签 CLA，通过 cla-assistant.io
+- **⛔ CLA BLOCKER** — 字节要求贡献者签 CLA，通过 cla-assistant.io。评论方式不生效，需要网页点击签署。我无法签署，**不再给此 repo 提 PR**。
 - Python 依赖复杂（需要 langgraph-api 等），本地装不全 → 但可以用独立脚本验证正则修改
 - 测试用 pytest，文件在 `backend/tests/`
 - 沙箱安全代码在 `backend/packages/harness/deerflow/sandbox/tools.py`

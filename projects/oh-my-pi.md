@@ -23,6 +23,11 @@
 - 最近 merged PR 多来自不同贡献者（开放社区）
 - 无 CONTRIBUTING.md
 
+## Contribution Gates
+- **Vouch requirement (2026-06-28)**: github-actions bot checks if PR author is in "vouched users" list. Non-vouched PRs are auto-closed.
+- PR#3703 was auto-closed by this gate. PR#2764 (earlier) was reviewed normally — unclear if gate was added later.
+- **Action needed**: Need to get vouched before submitting new PRs. Check if roboomp reviewing #2764 constitutes vouching.
+
 ## 开发笔记
 - 测试: `bun run test` (并行 TS + Rust)
 - **⚠️ 仓库极大**: git clone 会 SIGKILL（OOM），必须用 `--filter=blob:none --depth 1` + sparse checkout
