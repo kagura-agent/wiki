@@ -1,50 +1,23 @@
 {
-  "timestamp": "2026-06-27T20:30:00+08:00",
+  "timestamp": "2026-06-28T10:07:00+08:00",
   "total_files": 993,
   "cards": 424,
   "projects": 486,
-  "wikilinks": 3896,
+  "wikilinks": 3897,
   "errors": 2,
   "warnings": 87,
-  "broken_wikilinks": 2,
+  "broken_links": 2,
   "orphans": 12,
-  "stubs": 0,
   "index_drift": 25,
+  "stubs": 0,
+  "stale_files": 232,
   "duplicate_slugs": 1,
-  "stale_files": 225,
   "frontmatter_issues": 4,
   "zero_outbound_links": 106,
-  "secret_patterns": 0,
   "unicode_suspicious": 14,
-  "error_book_open": 88,
-  "error_book_new": 7,
-  "error_book_recurring": 81,
-  "details": {
-    "broken_wikilinks": [
-      "projects/openclaw.md -> [[pr-superseded-lessons#FIX_DATA_NOT_CODE]]",
-      "projects/tradememory-protocol.md -> [[wiki search]]"
-    ],
-    "orphan_projects": [
-      "cloudflare-agent-accounts",
-      "cloudflare-security-audit-skill",
-      "error-discovery-skill",
-      "graphenium",
-      "halo-agent-trace-optimizer",
-      "lemma-platform",
-      "loop-library",
-      "pmb-memory",
-      "polypore",
-      "qwen-agentworld",
-      "repo-docs-skills",
-      "tradememory-protocol"
-    ],
-    "frontmatter_issues": [
-      "compiled-truth-plus-timeline: no title",
-      "fable-mode: no frontmatter",
-      "hn-algolia-api: no frontmatter",
-      "yield-curve-and-term-structure: no frontmatter"
-    ],
-    "index_drift_files": 25,
-    "cards_index_stale": true
-  }
+  "secrets_detected": 0,
+  "error_details": [
+    "projects/openclaw.md -> [[pr-superseded-lessons#FIX_DATA_NOT_CODE]]",
+    "projects/self-evolving-observations.md -> [[nudge-audit]]"
+  ]
 }

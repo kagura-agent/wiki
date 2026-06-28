@@ -107,12 +107,24 @@ agent-memory-engine is in a fourth category: **structured tree + deterministic e
 | Proposition extraction | Auto-extracting rules from AGENTS.md/SOUL.md for preflight | Medium |
 | Branch-scoped knowledge | Per-project working notes vs global wiki | Low (manual tagging) |
 | Confidence scoring + decay | beliefs-candidates.md graduation quality | Low |
-| Protected types | Mark DNA entries as non-archivable in preflight thinning | Low |
+| Protected types | Mark DNA entries as non-archivable in preflight thinning | Low | ✅ Applied 2026-06-28 |
 | Evidence linking | Require concrete evidence refs in beliefs-candidates entries | Already partially done |
 
 ## Verdict
 
 Architecturally rich, many novel patterns worth studying. But 26⭐/3d, solo dev, zero community. Track but don't invest until sustainability proven.
+
+## Applied Patterns
+
+### Protected Memory Types (2026-06-28)
+
+**Applied to**: `tools/dna-preflight.sh`
+
+**Change**: Added `PROTECTED_KEYWORDS` regex + `is_protected_pattern()` function. Patterns matching safety/correctness keywords (verify, test, assert, privacy, leak, silent-failure, auth, credential, destructive) are now exempt from the -5 chronic thinning penalty.
+
+**Behavioral difference**: Before, all chronic patterns (3+ days) were uniformly suppressed. After, 3 critical patterns (`sdk-silent-failure`, `verify-before-abandon`, `precise-test-assertions`) stay at full scoring weight and can surface in top-3 reminders. Prevents normalization of correctness issues through thinning.
+
+**Verification**: Ran preflight with --context study and --context workloop. Protected count = 3, displayed in output with 🛡️ icon. No regression (gate passed).
 
 ## Links
 
