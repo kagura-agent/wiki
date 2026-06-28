@@ -88,6 +88,16 @@ Two tiers, earned through acceptance history:
 
 Initial deep read complete, no revisit needed until 06-28. The 4-layer memory + sleep consolidation architecture is the most interesting design pattern here — worth tracking whether the project gains contributors or stays solo. If still solo at revisit, downgrade to archive.
 
+## Follow-up (06-28) — DROPPED
+
+**Status**: Stars 122→148 (+21%), but no commits since 06-13 (15 days). Last 5 commits were all docs/badges/UI polish. 12 open issues all self-filed same day (06-13), 0 PRs ever, 0 external contributors, 6 forks.
+
+**Assessment**: Solo dev lost momentum after initial burst. macOS + GPL-3 + Screenpipe dependency limits community growth. Architecture patterns (4-layer memory, sleep consolidation, earned autonomy) already fully documented in this wiki card — no new insights to extract.
+
+**Drop triggers met**: Solo dev inactive 15d, 0 community contributions, all transferable patterns already applied.
+
+**Ecosystem note**: The "no-prompt screen-watching" paradigm remains interesting but appears to be a hard product to build solo. [[screenpipe]] itself is the enabler; agents built on top need sustained investment. If the concept resurfaces in a better-resourced project, re-evaluate.
+
 ## Links
 
 - [[screenpipe]], [[agent-autonomy-models]], [[memory-consolidation-as-skill-entry]]

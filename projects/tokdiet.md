@@ -108,12 +108,19 @@ When the model's answer signals it needed paged-out content:
 3. Head-only previews (the naive approach) caused 0/4 on "needle buried in junk" tasks — salient-line extraction was the fix
 4. The quality guard's per-strategy rolling average means each strategy earns its own right to run — elegant decoupling
 
+## Follow-up (06-28) — DROPPED
+
+**Status**: Stars 69→63 (declined!), no commits since 06-18 (10 days). Last commits were all docs/marketing (GitHub Pages landing, dev.to article, integration guide). 0 issues, 2 forks.
+
+**Assessment**: Solo dev shifted from building to marketing, then went silent. Star decline (rare) suggests the initial burst was promotion-driven without organic retention. Core patterns (shadow-eval quality proof, fail-open proxy, content-addressed eviction, salient-line extraction) already extracted and applied to our `compress-output.sh` and `competing-pr-check.sh`.
+
+**Drop triggers met**: Star decline + no feature commits 10d + all patterns already applied + 0 community.
+
+**Validated prediction**: Deep-read noted "too early to evaluate execution quality" and "0 issues, 0 PRs from community — very early, solo project." The lack of community engagement predicted correctly. The "context virtual memory" concept is sound but this implementation won't be the one that wins.
+
 ## Links
-- [[taco-context-compression]] — related approach (terminal output compression, regex-based rules)
-- [[context-budget]] — our own context budget optimization notes
-- [[caveman]] — simpler token compression (no recovery, no quality proof)
-- [[skill-context-compression]] — our skill loading compression experiment
-- [[dirac]] — studied conciseness-accuracy paradox (relevant to quality measurement)
+- [[taco-context-compression]] — our simpler approach that benefited from tokdiet's patterns
+- [[caveman]] — the space remains fragmented with no clear winner
 
 ## Applied (2026-06-22)
 
