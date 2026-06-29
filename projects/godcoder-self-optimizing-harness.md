@@ -55,6 +55,19 @@ ranked by: (success_rate DESC, sample_count DESC)
 
 **Track, don't invest.** The route-log-recall-optimize pattern is the main takeaway. Already noted in comparison table. Revisit to see if community develops.
 
+## Applied Patterns (2026-06-29)
+
+**Quantitative outcome tracking for study workflow:**
+- Created `tools/study-outcome-log.sh` — records mode + outcome (signal/partial/empty) + tag per session
+- Created `tools/study-stats.sh` — reports success_rate per mode using Godcoder formula: `(signal + 0.5*partial) / total`
+- Integrated into `study.yaml` reflect node (mandatory outcome logging step)
+- Integrated into `study-saturation.sh` (shows 7d signal rate in output)
+- Data store: `study/outcome-log.jsonl` (append-only JSONL)
+
+**Behavioral change:** Mode recommendation can now be data-driven. Previously only count-based ("you did 3 scouts today"). Now also shows signal effectiveness ("scouts produce 80% signal, quick scans produce 25%"). Over time, enables automated deprioritization of low-signal modes.
+
+**What's different vs pre-apply:** `study-saturation.sh` now shows `Signal rate: N%` line. Study workflow now requires outcome classification before closing. Future mode selection can reference historical effectiveness data.
+
 ## Connections
 
 - [[self-evolution-architecture]] — Godcoder's approach is fully automated quantitative optimization vs our qualitative reflection

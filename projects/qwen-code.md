@@ -8,7 +8,12 @@
 - **关系**: established (wenshao approved 2 PRs, fast review cadence)
 
 ## Review 风格
-- **wenshao**: 主要 reviewer，使用 AI review bot (qwen3.7-max via Qwen Code /review)，但人工确认后 approve。响应很快（通常 <24h）
+- **wenshao**: 主要 reviewer，使用多层 AI review bot:
+  - **qwen3.7-max** via `/review` — 架构层面的问题（如 hard threshold 遗漏）
+  - **claude-opus-4-8** via `/qreview` — 深度 trace 分析（如追踪 params.config.maxOutputTokens 的实际赋值链路）
+  - 人工 CHANGES_REQUESTED 通常跟在 bot 分析之后，表示认可 bot 的判断
+- Review 特点：关注 **完整性**（"只修了一半"）和 **sourcing 正确性**（"这个字段在真实路径里有值吗？"）
+- 不接受只回 comment 说"会改" — 必须 push 代码。第二轮 review 会验证代码确实解决问题
 - external PR 只触发 `review-pr` check（skipped），主 CI 需 maintainer 手动触发
 - merge rate 高，对 AI PR 友好
 
@@ -19,6 +24,7 @@
 | #4459 | #4452 Claude plugin install broken for complex plugins | APPROVED | wenshao approved, waiting merge |
 | #4461 | #4448 invalid settings.json silently reset | APPROVED | wenshao approved, waiting merge |
 | #4474 | #4466 env var substitution from .env files | pending | Ordering fix in loadSettings() |
+| #5957 | #5950 compression threshold ignores output budget | pending | v2: source effectiveReservedOutput from model limits; 2-round review |
 
 ## 贡献要求 (CONTRIBUTING.md)
 - Link to existing issue (required, open issue first if none exists)

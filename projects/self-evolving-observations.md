@@ -4953,3 +4953,48 @@ Active: 9 | Graduated: 27 | Retracted: 36 | Total lines: 711
 ```
 
 Links: [[self-evolving-observations]], [[dreaming]], [[beliefs-candidates]], [[nudge-audit]]
+
+## 🔬 自进化观察日报 2026-06-28 (Day 13 — Issue #10)
+
+### 管线活跃度
+- **beliefs-candidates**: 4 新增 gradient, 4 stale auto-retracted. 管线自清洁正常 ✓
+  - New: `one-line-fix-efficiency`, `hn-phantom-project-skip`, `check-contribution-gates-before-implement`, `claude-code-print-timeout-fallback`
+  - Retracted: `discord-design-convention` (38d stale), `report-vs-fix` (32d), `ci-respect` (30d), `狭隘活动定义` (30d)
+- **DNA 变更**: ⚪ 无 (SOUL.md / AGENTS.md 零变更)
+- **nudge 触发**: 3 次 (03:39, 07:17, 11:19 — all subagent sessions). 正常工作 ✓
+- **dreaming**: Light Sleep 运行，100 candidates @ 0.58 uniform (全 lottie-studio 旧 corpus). REM 空 ("No strong patterns")
+  - session-corpus/2026-06-28.txt 仅 1 行 — 今日尚未 ingest 新数据
+  - Light Sleep references: 06-24.txt (still 4 days behind today)
+
+### Issue #10 Item Status
+
+| Item | Status | Day 12→13 Change |
+|------|--------|-----------------|
+| (a) Upstream 0.58 | 🟡 Waiting | openclaw#87485 open, no upstream activity |
+| (b) Ingestion frozen | 🟢 Recovered | Corpus files up to 06-28 exist. Light still refs 06-24 — 1 cycle delay, acceptable |
+| (c) Filter monitoring | 🔴 Blocked | Input quality zero (0.58 uniform) → filter cant differentiate. Blocked by (a) |
+| (d) REM empty | ⏸ Deferred | "No strong patterns" — consistent with (a) blocking meaningful analysis |
+
+### 闭环追踪
+- **完整闭环**: 2 今日
+  1. workloop: oh-my-pi vouch gate discovered → gradient written → behavior change documented
+  2. daily-review: py rewrite for beliefs retract → 4 stale retracted → pipeline cleaner
+- **断裂处**: 无明显断裂
+
+### 今日发现
+
+1. **Gradient 质量高**: 4 new gradients 均来自实际 execution friction (workloop/study)，非虚构。每条有明确 trigger + behavior change — 管线在产出有价值的 self-improvement 信号
+2. **Dreaming 仍是瓶颈**: (a) upstream 0.58 hardcoded 是根本性 blocker。Local filter 无法在所有 candidates 同分时筛选。Until openclaw#87485 resolved, dreaming output = noise
+3. **Nudge 稳定**: 3 triggers/day on subagent sessions, all correctly skip cron. Hook working as designed
+4. **beliefs-candidates 管线成熟**: 723 lines total, 172 entries from June, auto-retract 在清理 stale entries. Self-cleaning 正常
+
+### 总体评估
+管线 "beliefs → gradient → behavior change" 环节健康运行。核心 gap 仍是 dreaming 子系统依赖 upstream fix。Recommend: 如 openclaw#87485 两周无进展，考虑 local confidence scoring workaround。
+
+### 原始数据
+- `git log --since="yesterday 22:30" -- beliefs-candidates.md`: 5 commits
+- `.nudge-audit.log | grep 2026-06-28 | grep Triggering`: 3 entries
+- `session-corpus/2026-06-28.txt`: 1 line (minimal ingestion)
+- `beliefs-candidates.md`: 723 lines, 4 new 06-28 entries
+
+# workspace commits today: 13
