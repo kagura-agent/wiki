@@ -325,3 +325,14 @@
 - **Lesson**: Broad try/catch in batch loops is dangerous — swallows real errors (disk full, SSH timeout, permission denied). Use specific error matching (regex on known error shapes) + re-throw for everything else.
 - **Maintainer style**: cjagwani gave credit for the outcome while explaining the narrower approach. Respectful supersede. NemoClaw values thorough error-handling documentation (source boundary, removal condition comments).
 - **Note**: Updated competing-pr-check.sh repo name issue (logged in previous entry) still unresolved
+
+## PR #5983 — inference set provider-not-found hint (2026-06-29)
+- **Issue**: #5924 — `nemoclaw inference set` with unregistered provider gives unhelpful error
+- **Status**: PENDING, CI pass (5/5 ✅), CodeRabbit review addressed
+- **Scope**: 2 files (inference-set.ts + test), 120 insertions / 8 deletions
+- **Root cause**: `runOpenshell` used inherited stdio, stderr went to terminal but wasn't captured; error was generic
+- **Fix**: Pipe stdio to capture openshell output, detect "provider not found" pattern, enhance error with registered providers list + onboard tip
+- **Pattern**: ENHANCED_ERROR_MESSAGE — catch known error patterns from downstream calls and enrich with actionable context
+- **CodeRabbit feedback**: Don't falsely claim "No providers registered" when registry lookup fails — fixed by using null default + try-catch
+- **Key gotcha**: `runOpenshell` default stdio is "inherit" — stdout/stderr are null, not empty strings. Must pipe to capture.
+- **Process note**: Claude Code initial implementation missed the stdio capture issue (tests passed because mocks returned strings, but real execution would have null). Caught during manual review.
