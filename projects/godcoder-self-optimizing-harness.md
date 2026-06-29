@@ -78,3 +78,13 @@ ranked by: (success_rate DESC, sample_count DESC)
 
 ---
 *Deep-read: 2026-06-29 | Source: GitHub scout*
+
+## Applied: Study Outcome Tracking (2026-06-29)
+
+**Pattern applied**: Route-Log-Recall-Optimize quantitative tracking → `tools/study-outcome-log.sh`
+
+Records mode + outcome + signal_rate per study session in append-only JSONL (`study/outcome-log.jsonl`). Integrated into study-saturation.sh recommendations (deprioritize modes with low signal rate). Similar to Godcoder's `success_rate` per tag — ours is `signal_rate` per study mode.
+
+**Behavioral change**: saturation.sh now shows "Signal rate: X% (N/M last 7d)" and uses it to inform mode recommendations. Low-signal modes get deprioritized (not locked), high-signal modes get boosted.
+
+**Note (post-apply)**: Apply backlog (unapplied.md) now 100% cleared. All harvested patterns from 200+ tracked items have been applied. Future apply rounds need to mine from: (1) new deep reads, (2) preflight gradients, (3) self-evolving observations. Portfolio in "harvest complete" state — new inputs needed for apply to produce value.
