@@ -4,7 +4,7 @@ created: 2026-05-14
 source: https://github.com/DataArcTech/Awesome-Agent-Skill-Papers
 status: active
 tags: [survey, agent-skills, taxonomy, academic, governance, security]
-last_verified: 2026-05-14
+last_verified: 2026-06-29
 ---
 
 # Agent Skill Survey (DataArcTech, 2026)
@@ -87,3 +87,4 @@ What we lack (gaps identified):
 - Repo: <https://github.com/DataArcTech/Awesome-Agent-Skill-Papers>
 - [[agent-skill-standard-convergence]], [[skill-ecosystem]], [[agent-memory-taxonomy]]
 - [[self-evolution-architecture]], [[clawhub]], [[openclaw-architecture]]
+- [[cloudflare-security-audit-skill]], [[error-discovery-skill]]

@@ -480,7 +480,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (489)
+## 📁 Project Notes (490)
 
 ### 2
 
@@ -970,6 +970,7 @@
 - [Statewave](projects/statewave.md)
 - [Stripe Link CLI — Agent Commerce Layer](projects/stripe-link-cli.md)
 - [STSS — Skill Trust & Signing Service](projects/stss.md)
+- [study-portfolio-observations](projects/study-portfolio-observations.md)
 - [Superlog — Agentic Telemetry System](projects/superlog.md)
 - [superpowers (obra/superpowers)](projects/superpowers.md)
 - [SwarmForge](projects/swarm-forge.md)
@@ -1028,4 +1029,4 @@
 
 ---
 
-*425 cards, 489 project notes. Last generated: 2026-06-29 04:47 UTC.*
+*425 cards, 490 project notes. Last generated: 2026-06-29 14:55 UTC.*

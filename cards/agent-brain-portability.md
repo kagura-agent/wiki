@@ -3,6 +3,7 @@ title: Agent Brain Portability
 slug: agent-brain-portability
 created: 2026-04-17
 tags: [agent, architecture, memory, portability]
+last_verified: 2026-06-29
 ---
 
 # Agent Brain Portability
@@ -40,7 +41,7 @@ Links: [[agentic-stack]], [[beliefs-upgrade-mechanism]], [[dreaming-vs-beliefs-c
 
 Brain portability 属于 mechanism 层——它定义结构，但不自动产生进化。进化（学习、改进）需要 dream cycle / nudge / reflexio 这些 evolution 层。两层正交：好的 mechanism 让 evolution 的成果可以迁移。
 
-Links: [[agentic-stack]], [[gbrain]], [[reflexio]], [[nudge-over-workflow]], [[mechanism-vs-evolution]], [[dirac]]
+Links: [[agentic-stack]], [[gbrain]], [[reflexio]], [[nudge-over-workflow]], [[mechanism-vs-evolution]], [[dirac]], [[graphenium]]
 
 ## Update: Intra-Tool Surface Portability (2026-04-29)
 
