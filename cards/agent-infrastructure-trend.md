@@ -3,7 +3,7 @@ title: "Agent Infrastructure Trend"
 created: 2026-06-05
 updated: 2026-06-05
 tags: [trend, ecosystem, agent-infrastructure]
-last_verified: 2026-06-07
+last_verified: 2026-06-29
 ---
 
 # Agent Infrastructure Trend
@@ -17,6 +17,7 @@ As of mid-2026, the fastest-growing agent projects are NOT new agent frameworks 
 3. **Codebase knowledge extraction**: [[metatron-codebase-priors]] (13⭐) — tree-sitter-based convention discovery, serve to agents via MCP. Convention extraction > convention documentation.
 4. **Multi-agent orchestration**: relaydeck (58⭐), loushang (47⭐), agent-symphony (9⭐). Platforms for coordinating multiple coding agents.
 5. **Agent VCS**: [[re_gent]] (661⭐, +13% in 13d). Version control designed for agent workflows.
+6. **Agent identity/provisioning**: [[cloudflare-agent-accounts]] — temporary bounded credentials (60-min ephemeral deploys, no human auth). Platform-native answer to the "agents need identity" problem.
 
 ## Maturation Signal
 

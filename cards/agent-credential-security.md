@@ -1,7 +1,7 @@
 ---
 title: Agent Credential Security
 created: 2026-04-07
-last_verified: 2026-06-20
+last_verified: 2026-06-29
 ---
 # Agent 凭证安全：指纹模式
 
@@ -30,6 +30,8 @@ Agent 需要使用凭证（API key、OAuth token、app secret），但不应该�
 
 ## 业界方案（已调研 / 待调研）
 - [x] **[[centaur-paradigm|Centaur]] iron-proxy → iron-control** (2026-06-06): Originally sidecar proxy per sandbox (05-31). Now centralized: iron-control owns OAuth refresh loop via Solid Queue worker, delivers tokens inline to proxies via `token_broker` source (PR #404). Dropped sidecar pattern entirely. Tradeoff: simpler lifecycle, single trust boundary, but centralized dependency. Most production-hardened credential architecture observed.
+- [x] **[[polypore]] Secret Broker** (2026-06-17): Agent 启动时 strip 所有 secrets → 替换为 sentinel handle → agent 调 `polypore.secrets.use` 描述 HTTP 请求意图 → runtime 注入 secret 并 mask 返回值。模型永远不接触明文。与 Centaur 区别：desktop IDE 场景，per-request mediation 而非 token delivery。
+- [x] **[[cloudflare-agent-accounts]]** (2026-06-19): 平台级方案 — `--temporary` deploy 给 agent 60 分钟有限身份，无需人类 OAuth。Pattern: "identity without permanent commitment"。
 - [ ] OpenClaw 自身的 sandbox/exec 机制
 - [ ] Claude Code 的 permission model
 - [ ] Hermes agent 的凭证管理

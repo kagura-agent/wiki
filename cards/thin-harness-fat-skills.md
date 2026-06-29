@@ -1,7 +1,7 @@
 ---
 title: Thin Harness Fat Skills
 created: 2026-04-14
-last_verified: 2026-06-20
+last_verified: 2026-06-29
 ---
 # Thin Harness, Fat Skills
 
@@ -34,6 +34,7 @@ last_verified: 2026-06-20
 - [[skillclaw]]: conservative editing protocol 是 fat skills 的另一种保护（小心修改 skill）
 - [[openclaw-architecture]]: OpenClaw skill 系统 = 这个框架的一个实现
 - [[skill-ecosystem]]: skill 生态 = 方法调用的 marketplace
+- [[browser-search]]: fat skill 范例 — SKILL.md 携带三层渐进式升级逻辑（SearXNG → Camofox → CloakBrowser），harness 不需要知道策略
 
 ## 对我们的启发
 

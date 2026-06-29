@@ -1,7 +1,7 @@
 ---
 title: Coding Agent Ecosystem
 created: 2026-04-18
-last_verified: 2026-06-20
+last_verified: 2026-06-29
 ---
 # Coding Agent Ecosystem
 
@@ -11,7 +11,7 @@ last_verified: 2026-06-20
 
 coding agent 是当前 AI 应用最活跃的赛道之一。核心玩家：
 
-- **IDE 集成型**：Cursor、Windsurf、GitHub Copilot — 嵌入编辑器，面向人类开发者
+- **IDE 集成型**：Cursor、Windsurf、GitHub Copilot、[[polypore]] — 嵌入编辑器，面向人类开发者（Polypore 独特：agent-first 而非 human-first）
 - **CLI 独立型**：Claude Code、Codex CLI、OpenCode、Aider — 终端运行，适合自动化
 - **框架型**：OpenHands、SWE-agent、Devon — 提供 agent 框架，可自定义
 - **轻量封装型**：[[oh-my-pi]]、KiloCode — 在已有模型上做体验优化
@@ -42,3 +42,5 @@ Kagura 不是 coding agent，而是 coding agent 的**用户和调度者**。用
 - [[oh-my-pi]] — 轻量 coding agent
 - [[agent-self-evolution]] — agent 自我改进
 - [[acp]] — agent 通信协议
+- [[browser-search]] — agent 用 self-hosted 搜索/浏览 skill（三层渐进式升级）
+- [[polypore]] — agent-native IDE，secret broker + MCP 22+ tools

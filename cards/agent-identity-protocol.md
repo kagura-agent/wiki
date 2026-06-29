@@ -1,7 +1,7 @@
 ---
 title: Agent Identity Protocol
 created: 2026-04-14
-last_verified: 2026-06-20
+last_verified: 2026-06-29
 ---
 # Agent Identity Protocol
 
@@ -22,4 +22,9 @@ As agents become autonomous participants (opening PRs, sending messages, joining
 - Multi-agent collaboration needs mutual authentication
 
 ## Related
-[[agent-safety]] [[agent-marketplace-landscape]] [[openclaw]]
+[[agent-safety]] [[agent-marketplace-landscape]] [[openclaw]] [[cloudflare-agent-accounts]]
+
+## Platform Implementations
+
+- **[[cloudflare-agent-accounts]]** — Cloudflare's `wrangler deploy --temporary`: 60-min ephemeral identity for agents, no OAuth needed. Validates "bounded temporary identity" as a platform-native pattern.
+- **Estonia Agent IDs** — sovereign government issuing personal ID numbers to AI agents (2026-06)
