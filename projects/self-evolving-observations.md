@@ -4998,3 +4998,54 @@ Links: [[self-evolving-observations]], [[dreaming]], [[beliefs-candidates]], [[n
 - `beliefs-candidates.md`: 723 lines, 4 new 06-28 entries
 
 # workspace commits today: 13
+
+## 🔬 自进化观察日报 2026-06-29 (Day 14 — Issue #10)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 新增 gradient (`apply-mode-empty-backlog-skip`, `mock-reality-gap`), 0 retracted today (daily-review ran earlier). 729 lines total, 27 graduated, ~51 retracted/applied
+- **DNA 变更**: ⚪ 无 (SOUL.md / AGENTS.md 零变更)
+- **nudge 触发**: **20 次** — 极活跃日 (03:25-13:00 UTC). 主要在 discord channel sessions 和 subagent sessions. 远高于 Day 13 的 3 次
+- **dreaming**: Light Sleep 运行，candidates 仍 0.58 uniform. Corpus references: 06-26, 06-27, 06-28 (Day 13 was 06-24 → 进步 +2 天). REM: "let" theme @ 0.78 — artifact/noise，非有价值反思
+
+### Issue #10 Item Status
+
+| Item | Status | Day 13→14 Change |
+|------|--------|-----------------|
+| (a) Upstream 0.58 | 🟡 Waiting | openclaw#87485 open. Last activity June 21 (8 days stale). ClawSweeper reviewed + 1 community confirmation. No maintainer response |
+| (b) Ingestion lag | 🟢 Improving | Corpus refs advanced 06-24→06-26/27/28. 06-29.txt exists (46KB). Lag reduced to ~1 day |
+| (c) Filter monitoring | 🔴 Blocked by (a) | 0.58 uniform = cant differentiate. Need upstream fix or local scoring |
+| (d) REM empty | ⏸ Deferred | "let" theme is artifact. No meaningful reflection output |
+
+### 闭环追踪
+- **完整闭环**: 2 今日
+  1. workloop NemoClaw#5924: 实现 → 发现 mock-reality-gap → gradient 写入 → behavior change documented
+  2. graduation-pipeline: 标记 graduated patterns in full scan output → pipeline 可视性改进
+- **断裂处**: 无明显断裂
+
+### 今日发现
+
+1. **Nudge 极活跃**: 20 triggers vs Day 13 的 3 triggers. 因为今天 Discord session 活跃度高（大量 channel interactions），每 5 次 agent_end 触发一次。Nudge 工作正常，触发频率与活动量正相关 ✓
+2. **Dreaming corpus 持续追赶**: Light Sleep 从引用 06-24 进步到 06-26/27/28。Ingestion lag 从 4 天缩短到 ~1 天。Item (b) 基本解决
+3. **beliefs 管线稳定**: 2 new gradients 均来自实际 execution friction（study saturation + workloop mock gap），quality 高
+4. **July 5 deadline approaching**: Day 13 建议如 openclaw#87485 两周无进展则考虑 local workaround。现在距 July 5 还有 6 天，upstream 已 8 天无活动。准备启动 local confidence-scoring 方案设计
+
+### 总体评估
+管线健康度维持。beliefs 管线是主要自进化引擎且持续有效。Dreaming 仍被 upstream #87485 block，但 ingestion lag 在自修复。核心决策点: July 5 前如 upstream 无进展，需自研 local scoring。
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+78f100f gradient: mock-reality-gap (workloop NemoClaw#5924)
+
+# beliefs-candidates.md stats
+Total lines: 729 | Active entries: ~134 | Graduated: 27 | Retracted: ~51
+
+# nudge audit log (today)
+20 triggers across discord channel + subagent sessions
+~0 skips logged for cron (as configured)
+
+# dreaming corpus references in today's Light Sleep
+session-corpus/2026-06-26.txt, 2026-06-27.txt, 2026-06-28.txt
+
+# workspace commits today: 6
+```
