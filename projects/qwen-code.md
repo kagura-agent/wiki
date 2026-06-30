@@ -24,7 +24,7 @@
 | #4459 | #4452 Claude plugin install broken for complex plugins | APPROVED | wenshao approved, waiting merge |
 | #4461 | #4448 invalid settings.json silently reset | APPROVED | wenshao approved, waiting merge |
 | #4474 | #4466 env var substitution from .env files | pending | Ordering fix in loadSettings() |
-| #5957 | #5950 compression threshold ignores output budget | pending | v2: source effectiveReservedOutput from model limits; 2-round review |
+| #5957 | #5950 compression threshold ignores output budget | APPROVED | wenshao + qwen-code-ci-bot approved (2026-06-30); rebased for CI fix; 4 review rounds |
 
 ## 贡献要求 (CONTRIBUTING.md)
 - Link to existing issue (required, open issue first if none exists)
@@ -58,6 +58,11 @@
 - Sparse checkout recommended for large PRs (full clone killed by OOM)
 - `npm run preflight` is the gate check — must pass before PR
 - Screenshots/video preferred for UI/CLI behavior changes
+- CI `check:serve-fast-path-bundle` added June 2026 (#5995) — branches forked before this need rebase to pass CI
+- Full CI test suite takes 15-20+ minutes on GitHub Actions (ubuntu runner)
+- doudouOUC provides quality follow-up observations even after approval — treat as improvement suggestions for follow-up PRs
+- Multi-round reviews (4+ rounds) are normal for non-trivial core changes; wenshao is thorough but fair
+- DragonnZhang does independent verification (builds real binaries, uses tmux to test) — gold standard evidence
 - Issue must exist before PR
 
 ## 踩过的坑
