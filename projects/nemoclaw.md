@@ -49,6 +49,7 @@
 - #3241 (macOS preparation page): CLOSED by miyoungc 05-22 — deemed low-value; existing prerequisites already covers macOS needs. Lesson: docs PRs adding new pages must add genuine new guidance, not just expand existing content into install commands
 - #3880 (proxy test conflation): fix M12 to treat ERR_PROXY_TUNNEL as wiring success — 05-20
 - #5740 (backup-all batch catch): SUPERSEDED by #5819 (cjagwani) 06-25 — my broad try/catch swallowed real failures. Narrower regex-matched catch for orphan-manifest only is objectively better. See [[pr-superseded-lessons]]
+- #5983 (inference provider-not-found UX): SUPERSEDED by #6023 (cv) 06-30 — fork-origin PRs can't run mandatory PR Review Advisor CI; code was correct but recreated same-repo with modular architecture + credential redaction. See [[pr-superseded-lessons]]
 
 ## PR #4054 — ~/.nemoclaw dir permissions (2026-05-22)
 - **Issue**: #4009 — directory and config.json created world-readable (1755/644) instead of 700/600

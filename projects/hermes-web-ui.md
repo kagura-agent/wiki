@@ -33,3 +33,15 @@ Web dashboard for Hermes Agent — multi-platform AI chat, session management, s
 
 - [[hermes-hudui]] — consciousness monitor (React, 890★)
 - [[hermes-agent]] — the core agent
+
+## Contribution History
+
+### PR #1861 — fix: resolveHermesPath rejects valid absolute paths (2026-06-30)
+- **Status**: Pending review
+- **Issue**: #1848 (reported bug — file browser breaks on absolute paths)
+- **Fix scope**: 2 source files + test file. 1-line logic changes.
+- **CI**: Repo has "Aurora Smoke" and "Build" workflows, but they don't trigger automatically on fork PRs (likely need maintainer approval)
+- **Review style**: Unknown yet (first PR). Repo accepts external PRs (4/20 recent merges from non-owner observed during study)
+- **Testing**: Vitest. node_modules need `fdir` manually installed (may be missing from lockfile). Local tests pass.
+- **Gotcha**: `isPathWithin` in `hermes-path.ts` also had the same `startsWith('..')` bug — needed fix in two files
+- **Note**: Fork is named `hermes-studio` on GitHub, not `hermes-web-ui`

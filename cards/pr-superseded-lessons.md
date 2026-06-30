@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-06-27
+last_verified: 2026-06-30
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -642,3 +642,27 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **Pattern**: **BROAD_CATCH_VS_SPECIFIC_MATCH** — when adding error resilience to a loop, match the exact error shape and re-throw everything else. Broad catch feels simpler but creates a false-safety trap: real failures become invisible. Extra regex complexity is worth it when the alternative is swallowing disk-full or permission-denied errors.
 - **Also**: Their code documented the removal condition ("drop this catch when the registry is reconciled on install/upgrade") — error handlers should explain when they should be deleted, not just why they exist.
 - **Closure**: I closed my PR voluntarily after cjagwani explained the issue. Positive interaction — they credited my "right outcome" and identified the specific risk.
+
+## NemoClaw #5983 → #6023: Fork-origin CI policy + modular architecture (2026-06-30)
+
+**Issue**: #5924 — `nemoclaw inference set` gives opaque error when provider not registered
+**My PR #5983**: 2 files — inline fix in `inference-set.ts` + tests in `inference-set.test.ts`. Added provider-not-found detection + registered provider list + onboard tip.
+**Superseding PR #6023 (cv)**: 15 files — same fix PLUS:
+1. Extracted `inference-set-error.ts` (error classification + failure message builder)
+2. Extracted `inference-set-provider-diagnostics.ts` (provider list retrieval)
+3. Extracted `inference-set.test-support.ts` (shared test utilities)
+4. Split tests into focused files (context-window, error, diagnostics, etc.)
+5. Added credential redaction (env vars, Bearer tokens, URL userinfo/query params)
+6. Extracted `provider-list.ts` module for reuse in `credentials/list.ts`
+7. Updated user-facing docs
+
+**Why superseded**: Two reasons:
+1. **CI policy**: "fork-origin advisor jobs are skipped by policy" — NemoClaw's mandatory PR Review Advisor can't run on fork PRs. cv recreated as same-repo PR to preserve verified head SHA.
+2. **Architecture**: My inline approach was correct but the maintainer preferred modular extraction with comprehensive security (credential redaction in error messages).
+
+**Patterns**:
+- **FORK_CI_POLICY**: Some repos require same-repo PRs for CI compliance. Fork PRs are structurally disadvantaged regardless of code quality. Check if target repo's CI tools work on forks before contributing.
+- **INLINE_VS_MODULAR**: When fixing error handling, consider whether the logic should be extracted into a dedicated module (especially if it has independent testability, reusability across commands, or security concerns like credential redaction).
+- **SECURITY_IN_ERROR_MESSAGES**: Error messages that include stderr/stdout from subprocesses may contain credentials. Always redact env vars (`KEY=value`), Bearer tokens, URL userinfo (`user:pass@`), and sensitive query params before displaying.
+
+**Positive**: wscurran praised the fix direction before supersede. cv's supersede comment was neutral/positive ("preserves this exact verified head SHA"). My code was correct, just needed CI + architectural upgrade.
