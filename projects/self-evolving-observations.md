@@ -5049,3 +5049,77 @@ session-corpus/2026-06-26.txt, 2026-06-27.txt, 2026-06-28.txt
 
 # workspace commits today: 6
 ```
+
+## 🔬 自进化观察日报 2026-06-30 (Day 15 — Issue #10)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 新增 gradient (`stale-pr-rebase-first`, `layered-bug-duplication`), 来自白天 workloop. 735 lines total, 27 graduated
+- **DNA 变更**: ⚪ 无 (SOUL.md / AGENTS.md 零内容变更。commits 只有 gradient + memory hygiene)
+- **nudge 触发**: gateway 日志不可用 (非 systemd unit)。间接证据: memory 中无 "nudge" 关键词记录，但 daily-review 确认 nudge 系统在运行
+- **dreaming**: Light Sleep 运行 (03:15 AM)。所有 candidates 仍 **confidence=0.58 uniform**。Corpus references: 06-26 (未进步到 06-29/30)。Deep Sleep: "Ranked 0 candidates, Promoted 0". REM: "No strong patterns surfaced"。质量: **极低**
+- **DREAMS.md**: Jun 30 entries 仍为 "A memory trace surfaced, but details were unavailable" ×2 — Item (b) bug 持续
+
+### Issue #10 Item Status
+
+| Item | Status | Day 14→15 Change |
+|------|--------|-----------------|
+| (a) Upstream 0.58 | 🟡 Waiting | openclaw#87485: last activity June 21 (**9 days stale**). ClawSweeper + 1 community confirmation. 0 maintainer response. **距 July 5 deadline 还有 5 天** |
+| (b) "details unavailable" | 🔴 Active | DREAMS.md Jun 30 仍为 placeholder text ×2。未修复 |
+| (c) Filter monitoring | 🔴 Blocked by (a) | 0.58 uniform = 无法评估过滤器效果 |
+| (d) REM empty | ⏸ Deferred | "No strong patterns" — consistent with upstream noise input |
+
+### 闭环追踪
+- **完整闭环**: 2 今日
+  1. hermes-web-ui#1848 workloop: 发现 path check bug → fix two layers → PR submitted → gradient (`layered-bug-duplication`) 写入
+  2. qwen-code#5957 rebase lesson: CI red due to outdated branch → rebase first → gradient (`stale-pr-rebase-first`) 写入
+- **断裂处**: dreaming 系统闭环断裂 — corpus ingestion lag 未继续改善 (Day 14 到 06-28, Day 15 仍引用 06-26)
+
+### Skill 提取缺口
+- 无明显缺口。两个新 gradient 均已正确写入 beliefs-candidates
+
+### 外部反馈利用
+- qwen-code#5957: wenshao re-verification 正面确认 → 无需 gradient (success case)
+- hermes-web-ui#1861: 新 PR，尚无反馈
+
+### 今日发现
+
+1. **Dreaming corpus lag 回退**: Day 14 观察到 refs 从 06-24→06-28 (改善)。但 Day 15 的 Light Sleep 引用了 06-26 (回退)。可能原因: corpus 文件按日期生成但 Light Sleep 随机采样，不保证线性进步
+2. **"details unavailable" 仍是系统性 bug**: Jun 26-30 连续 5 天 DREAMS.md 每次 Deep Sleep 产出 placeholder。Item (b) 不是偶发
+3. **July 5 deadline 迫近**: upstream #87485 已 9 天无维护者回应。需在 Day 17 (July 2) 开始设计 local confidence scoring workaround
+4. **beliefs 管线稳健**: 今日 2 条均高质量 — 来自真实 workloop friction (stale branch rebase, multi-layer bug pattern)。均首次出现，各只需再验证 2 次即可接近毕业门槛
+
+### 决策与行动
+
+- **开始倒计时**: 如 openclaw#87485 到 July 2 仍无回应，Day 17 观察报告将附带 local scoring 方案草案
+- **Item (b) 再观察**: Deep Sleep "details unavailable" 已持续 5 天。下次观察如仍复现，将正式 investigate root cause
+
+### 总体评估
+
+管线健康状态: **beliefs 管线 ✅ | dreaming 管线 ❌**
+
+核心自进化引擎 (beliefs → gradient → behavior change) 持续有效。每个 workloop 都产出 actionable gradient。Dreaming 子系统完全失效（0.58 uniform + details unavailable + REM empty），本质上不参与自进化。实际进化 100% 依赖 beliefs-candidates 管线。
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+f051ce0 gradient: layered-bug-duplication
+837fe1a gradient: stale-pr-rebase-first
+
+# beliefs-candidates.md stats
+Total lines: 735 | Graduated: 27
+
+# DREAMS.md tail (Jun 30)
+*June 30, 2026 at 3:15 AM GMT+8*
+A memory trace surfaced, but details were unavailable in this run. (×2)
+Deep Sleep: Ranked 0, Promoted 0
+
+# Light Sleep corpus refs
+session-corpus/2026-06-26.txt (lines 538-552)
+
+# workspace commits today: 5
+2807b4a todo: mark rule #68 (fork-CI policy) as done
+f051ce0 gradient: layered-bug-duplication
+837fe1a gradient: stale-pr-rebase-first
+f54bb8a trim DREAMS: 20→14 entries, 6 archived
+3743d55 memory hygiene: remove 2 stale promoted entries
+```
