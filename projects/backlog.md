@@ -1314,3 +1314,24 @@ GitHub trending (agent, created past week, sorted by stars):
 - ksimback/looper (231⭐, 6d, +85% in 1d) — Visual review-gated agent loops for Claude Code. Novel UI for loop design before execution. **Ready for deep read.**
 - alvinunreal/lazyskills (79⭐, 4d) — TUI for agent skill discovery/install. ClawHub competitor signal.
 - Forward-Future/loop-library (1474⭐, 12d) — Reusable agent loop catalog + installable skill. "4 questions" framing (goal/check/learn/stop). JS, 120 forks. Codex/OpenClaw topics. FlowForge comparison target. Revisit 07-01
+
+## 2026-06-30 Quick Scan (09:25)
+
+**GitHub Search (agent+coding, created last week):**
+
+| Repo | ⭐ | Verdict | Notes |
+|---|---|---|---|
+| eli-labz/Godcoder | 251 | 已跟踪 | Already in TODO, revisit 07-03 |
+| gamedev-skills/awesome-gamedev-agent-skills | 181 | 不相关 | Game-dev specific skills collection, 66 SKILL.md files. Shows ecosystem growth but not our domain |
+| ahmadrj80/claude-fable-5-free-desktop-app | 82 | 不相关 | Clickbait/piracy repo |
+| lxcshine/nexusbox | 57 | 已知概念 | Sandbox for agents via MCP. Overlaps Claw Patrol/gensee-crate |
+| ardhaecosystem/synapse | 62 | 值得关注 | Temporal KG memory, hippocampal consolidation model, FalkorDB+Graphiti. 4 days old, only 1 day commits. Too early for deep read but connects to agent-memory-hooks research |
+| EclipseElips/recoil | 16 | 太小 | Error memory for coding agents. Go binary, no embeddings. Interesting concept but tiny |
+
+**Agent Memory space:** agent-memory-engine (tracked) up to ⭐45 (+73%). synapse is the new entrant.
+
+**HN (3d, ≥10pts):** 1 result — AI agent nukes in Civ VI. Entertainment, not relevant.
+
+**Trend signal:** Ecosystem entering consolidation phase. Fewer breakout projects. Memory/harness categories filling up with small variants of known patterns. gamedev-skills shows SKILL.md format gaining adoption beyond coding agents.
+
+**Saturation:** 4/6 known or irrelevant — mild saturation signal.
