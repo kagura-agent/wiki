@@ -1335,3 +1335,19 @@ GitHub trending (agent, created past week, sorted by stars):
 **Trend signal:** Ecosystem entering consolidation phase. Fewer breakout projects. Memory/harness categories filling up with small variants of known patterns. gamedev-skills shows SKILL.md format gaining adoption beyond coding agents.
 
 **Saturation:** 4/6 known or irrelevant — mild saturation signal.
+
+## 2026-07-01 Quick Scan (08:45)
+
+**GitHub:**
+- **Ornith-1.0** (deepreinforce-ai) ⭐800 — Self-scaffolding RL for agentic coding models. 9B/31B/35B-MoE/397B-MoE on Gemma4+Qwen3.5. MIT. 397B beats Opus 4.7 on Terminal-Bench/SWE-bench. Novel: jointly optimizes scaffold + solution via RL. **→ deep-read candidate**
+- **Lore / rac-core** (itsthelore) ⭐250 — Team decision memory for coding agents. Product knowledge != code. Active dev. Similar to compass-skills/AGENTS.md pattern but product-decision focused. Skim only.
+- **self-learning-skills** (Kulaxyz) ⭐134 — Too early (3d old, no code, 0 forks). Monitor.
+- 152⭐ cluster: confirmed SEO bot spam, skip.
+
+**HN (3d):**
+- Ornith-1.0: 259pts — top agent story of the week
+- Cursor mobile app: 17pts — ecosystem update, not new
+- DoorDash agentic-orchestrator TUI: 15pts, 43⭐ — too early
+- 143.dev open-sourced infra: 11pts — too early
+
+**Trend:** Ecosystem stable for tooling/harnesses. Model-level innovation (Ornith self-scaffolding) is the hot topic.
