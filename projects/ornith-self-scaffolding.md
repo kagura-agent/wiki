@@ -1,3 +1,12 @@
+---
+title: 'Ornith-1.0 — Self-Scaffolding LLMs for Agentic Coding'
+created: 2026-07-01
+last_verified: 2026-07-01
+tags: [rl, agentic-coding, self-scaffolding, open-source-model]
+status: tracking
+stars: 800
+---
+
 # Ornith-1.0 — Self-Scaffolding LLMs for Agentic Coding
 
 **Repo:** [deepreinforce-ai/Ornith-1](https://github.com/deepreinforce-ai/Ornith-1) | **Stars:** 800 (2026-07-01) | **License:** MIT

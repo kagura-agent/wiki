@@ -481,7 +481,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (490)
+## 📁 Project Notes (494)
 
 ### 2
 
@@ -654,6 +654,7 @@
 - [compass-skills — COMPASS Personal Alignment Skills OS](projects/compass-skills.md)
 - [Control Flow Over Prompts — HN Essay (2026-05-07)](projects/control-flow-over-prompts.md)
 - [cove-plugin](projects/cove-plugin.md)
+- [Cove 商业模式思考：Agent 样板间](projects/cove-showroom-model.md)
 - [CrabTrap](projects/crabtrap.md)
 - [Craft Agents OSS](projects/craft-agents-oss.md)
 - [Crush — Charmbracelet's Terminal Coding Agent](projects/crush-charmbracelet.md)
@@ -871,8 +872,10 @@
 - [OpenSandbox (Alibaba)](projects/opensandbox.md)
 - [OpenSpace — Self-Evolving Skill Engine + Community](projects/openspace.md)
 - [OpenSquilla — Token-Efficient AI Agent](projects/opensquilla.md)
+- [OpenTag — Channel-Native Agent Gateway for Slack](projects/opentag.md)
 - [OpenViking — Context Database for AI Agents](projects/openviking.md)
 - [Orb — Claude Code Wrapper Framework](projects/orb.md)
+- [Ornith-1.0 — Self-Scaffolding LLMs for Agentic Coding](projects/ornith-self-scaffolding.md)
 ### P
 
 - [Paca — AI-Native Project Management](projects/paca.md)
@@ -935,6 +938,7 @@
 - [Self-Evolution System — 全貌文档](projects/self-evolution-system.md)
 - [Self-Evolving Agent Landscape — Academic & OSS](projects/self-evolving-landscape.md)
 - [自进化管线观察日志](projects/self-evolving-observations.md)
+- [Self-Learning Skills — Golden Path Harvesting Meta-Skill](projects/self-learning-skills.md)
 - [semble_rs — Agent-Native Code Search in Rust](projects/semble-rs.md)
 - [Sentra RAG Failure Modes](projects/sentra-rag-failure-modes.md)
 - [Sharkord — 轻量 Discord 替代](projects/sharkord.md)
@@ -1030,4 +1034,4 @@
 
 ---
 
-*426 cards, 490 project notes. Last generated: 2026-06-29 14:55 UTC.*
+*426 cards, 494 project notes. Last generated: 2026-07-01 04:50 UTC.*
