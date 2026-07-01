@@ -337,3 +337,13 @@
 - **CodeRabbit feedback**: Don't falsely claim "No providers registered" when registry lookup fails — fixed by using null default + try-catch
 - **Key gotcha**: `runOpenshell` default stdio is "inherit" — stdout/stderr are null, not empty strings. Must pipe to capture.
 - **Process note**: Claude Code initial implementation missed the stdio capture issue (tests passed because mocks returned strings, but real execution would have null). Caught during manual review.
+
+## PR #6122 — sandbox policy get command (2026-07-01)
+- **Issue**: #6052 — `openshell policy get --full` output includes metadata header that breaks round-trip to `policy set`
+- **Status**: PENDING, CI pass (4/4 ✅), CodeRabbit review feedback addressed
+- **Scope**: 4 files (get.ts, get.test.ts, policy-get.ts, policy-get.test.ts), 203 insertions
+- **Solution**: New `nemoclaw sandbox policy get` command reuses existing `parseCurrentPolicy()` to strip metadata. `--raw` flag for unmodified output.
+- **Architecture lesson**: NemoClaw enforces single-path oclif architecture — commands = argv glue, actions = logic. CodeRabbit flagged inline orchestration (MAJOR). Fixed by extracting to `src/lib/actions/sandbox/policy-get.ts`.
+- **Test pattern**: CodeRabbit prefers observable output assertions (`logSpy`) over implementation-detail mock-call assertions. Other test files (mutate.test.ts) don't follow this, but the review preference is clear.
+- **CI notes**: `copy-pr-bot` vetting is standard for external contributors. `codebase-growth-guardrails` + `require-maintainer-edits` + `check-pr-limit` + `assign-linked-issue-author` are the 4 CI checks.
+- **Timing**: From stale `plan_review` to PR submitted in ~25 minutes. Claude Code --print worked first try (no streaming timeout this time).
