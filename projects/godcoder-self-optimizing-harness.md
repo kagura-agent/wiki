@@ -88,3 +88,11 @@ Records mode + outcome + signal_rate per study session in append-only JSONL (`st
 **Behavioral change**: saturation.sh now shows "Signal rate: X% (N/M last 7d)" and uses it to inform mode recommendations. Low-signal modes get deprioritized (not locked), high-signal modes get boosted.
 
 **Note (post-apply)**: Apply backlog (unapplied.md) now 100% cleared. All harvested patterns from 200+ tracked items have been applied. Future apply rounds need to mine from: (1) new deep reads, (2) preflight gradients, (3) self-evolving observations. Portfolio in "harvest complete" state — new inputs needed for apply to produce value.
+
+## First Outcome Stats (2026-07-01, 2 days after apply)
+
+19 sessions logged. Key finding: **apply mode has lowest signal rate (35%, 2/7 signal)** — 4 of 7 apply sessions produced empty outcomes, almost all when unapplied.md backlog was depleted. Scout leads at 83% (3 deep-reads from 3 attempts). Followup 100% but n=1. Quick scan 37% (1/8 signal, 4/8 partial, 3/8 empty).
+
+**Actionable insight:** Apply mode ROI collapses when backlog is empty. The saturation system already handles this via "backlog empty → skip or mine" hint, but could add a structural rule: if unapplied.md has 0 unchecked items AND no wiki card was created today, auto-lock apply mode. Currently relies on agent judgment which is unreliable (4 empty outcomes prove it).
+
+**Validation of pattern:** The quantitative tracking itself worked as intended — surfaced a behavioral insight (apply-forcing when backlog is empty) that was "known" but invisible without data. Classic Godcoder win: the logging reveals what reflection alone misses.
