@@ -1,23 +1,43 @@
 {
-  "timestamp": "2026-07-01T10:21:00+08:00",
+  "timestamp": "2026-07-01T20:10:00+08:00",
   "total_files": 1004,
   "cards": 426,
   "projects": 494,
   "wikilinks": 3945,
   "errors": 0,
-  "warnings": 65,
-  "orphans": 4,
+  "warnings": 57,
+  "orphans": 0,
   "broken_links": 0,
-  "index_drift": 4,
   "duplicate_slugs": 1,
-  "stale_files": 237,
   "stubs": 0,
+  "stale_files": 237,
   "frontmatter_issues": 5,
-  "zero_outbound_links": 106,
-  "unicode_suspicious": 22,
+  "cards_with_zero_outlinks": 106,
   "cards_index_stale": true,
+  "unicode_suspicious": 22,
   "secrets_detected": 0,
-  "error_book_open": 64,
-  "error_book_new": 8,
-  "error_book_recurring": 56
+  "error_book": {
+    "new_issues": 0,
+    "recurring_issues": 56,
+    "clean_passes": 8,
+    "auto_closed": 0,
+    "total_open": 64
+  },
+  "details": {
+    "duplicate_slugs": ["README (3 files)"],
+    "frontmatter_issues": [
+      "compiled-truth-plus-timeline: no title",
+      "fable-mode: no frontmatter",
+      "hn-algolia-api: no frontmatter",
+      "nudge-audit: no title",
+      "yield-curve-and-term-structure: no frontmatter"
+    ],
+    "unicode_files": [
+      "projects/self-evolving-observations.md",
+      "eval/2026-W26.md",
+      "eval/2026-W25.md",
+      "eval/2026-W24.md",
+      "eval/2026-W27.md"
+    ]
+  }
 }

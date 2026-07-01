@@ -1,3 +1,10 @@
+---
+created: 2026-06-07
+last_verified: 2026-07-01
+tags: [finance, economics, study]
+title: Yield Curve & Interest Rate Term Structure
+---
+
 # Yield Curve & Interest Rate Term Structure
 
 _收益率曲线与利率期限结构_

@@ -1,3 +1,10 @@
+---
+created: 2026-06-15
+last_verified: 2026-07-01
+tags: [agent-skill, execution-discipline]
+title: fable-mode
+---
+
 # fable-mode
 
 - **Repo**: [mrtooher/fable-mode](https://github.com/mrtooher/fable-mode)

@@ -5123,3 +5123,88 @@ f051ce0 gradient: layered-bug-duplication
 f54bb8a trim DREAMS: 20→14 entries, 6 archived
 3743d55 memory hygiene: remove 2 stale promoted entries
 ```
+
+## 🔬 自进化观察日报 2026-07-01 (Day 16 — Issue #10)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 新增 gradient (`nemoclaw-oclif-action-extraction`, `stale-workloop-uncommitted-check`). **263 total, 210 active, 15 graduated, 38 retracted** [via beliefs-count.sh]
+- **DNA 变更**: ⚪ 无 (SOUL.md / AGENTS.md 零内容变更)
+- **nudge 触发**: gateway 日志 grep 返回 0（非 systemd unit）。间接证据: memory 日志中无 nudge 关键词，但 nudge 系统已确认运行（#5 closed）
+- **dreaming**: Light Sleep 运行。100 candidates，全部 **confidence=0.58 uniform**。Corpus references: **06-28** (与 Day 14 持平，Day 15 曾回退到 06-26)。Deep Sleep: 0 promotes。REM: "No strong patterns surfaced"。质量: **极低**
+- **DREAMS.md**: 连续 6+ 天 "A memory trace surfaced, but details were unavailable" — Item (b) bug 系统性
+
+### Issue #10 Item Status
+
+| Item | Status | Day 15→16 Change |
+|------|--------|-----------------|
+| (a) Upstream 0.58 | 🟡 Waiting | openclaw#87485: last update June 21 (**10 days stale**). 0 maintainer response. **距 July 5 deadline 还有 4 天** |
+| (b) "details unavailable" | 🔴 Active | DREAMS.md 连续 6+ 天 placeholder。确认为系统性 bug，非偶发 |
+| (c) Filter monitoring | 🔴 Blocked by (a) | 0.58 uniform = 无法评估过滤器效果 |
+| (d) REM empty | ⏸ Deferred | "No strong patterns" — consistent with uniform input |
+
+### 闭环追踪
+- **完整闭环**: 3 今日
+  1. Study → prior-failure-check.sh 工具创建 → 集成到 issue-funnel.sh（Ornith anti-gaming pattern 应用）
+  2. daily-audit 发现 beliefs 计数不准 → beliefs-count.sh 工具创建（canonical counting）
+  3. qwen-code #5957 → 3x APPROVED → 等 merge（从 Day 14 观察到 wenshao re-verify 到今天正式 approve）
+- **断裂处**: dreaming 管线仍完全断裂。0 promotes，0 有效 REM output
+
+### Skill 提取缺口
+- prior-failure-check.sh 已提取为独立工具 ✅（从 study insight 到工具化）
+- beliefs-count.sh 已提取 ✅（解决计数漂移问题）
+
+### 外部反馈利用
+- qwen-code #5957: wenshao 正式 APPROVED → 无需 gradient（success case，结束跟踪）
+- NemoClaw #6052 → PR #6122 开出，bot nitpick only → 等 review
+
+### 今日发现
+
+1. **beliefs 计数工具化**: daily-audit 06:00 发现 review 报的 "169 active" 与实际 207/210 不符（计数方法不一致）。创建 beliefs-count.sh 作为 canonical 工具，消除 ad-hoc awk 导致的数据漂移。**这是观测闭环的正面案例**
+2. **Study → Apply 闭环**: Ornith-1.0 anti-gaming 3-layer pattern → 识别自身 repeat-failure-blindness → 创建 prior-failure-check.sh → 集成到 issue-funnel.sh。**从学到用不到 2 小时，完整闭环**
+3. **Memory vector index 冻结 7 天**: memory_search 语义检索退化（hit rate 63%→50%），06-24 后新文件未入索引。根因: SQLite lock conflict（gateway 运行时 CLI reindex 无法写入）。影响 dreaming 以外的记忆系统
+4. **July 2 deadline 明天到**: Day 15 决定 "如果 #87485 到 July 2 仍无回应，开始设计 local scoring 方案"。目前仍 10 天无回应，需在 Day 17 观察报告附带方案草案
+
+### 决策与行动
+
+- **明天 (Day 17, July 2)**: 启动 local confidence scoring 方案设计。因 #87485 已 10 天无回应，不再等待。方案需覆盖: (1) 基于 novelty/recency/diversity 的本地打分替代 0.58 uniform; (2) 不依赖上游修改; (3) 与现有 dreaming-quality-filter.sh 集成
+- **Item (b)**: "details unavailable" 已 6+ 天。正式标记为需要独立调查（不再等 (a) 解决）
+- **Memory index**: 需 gateway restart 或 stop→reindex→start 来解冻
+
+### 总体评估
+
+管线健康状态: **beliefs 管线 ✅ | dreaming 管线 ❌ | memory index ⚠️**
+
+Day 16 是高产日: 2 个新工具（prior-failure-check.sh, beliefs-count.sh），2 个完整 study→apply 闭环，beliefs 管线持续运转（210 active, +2 today）。Dreaming 子系统继续零贡献。明天触发 local scoring 设计，从等待转向自主解决。
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+2552283 gradient: nemoclaw-oclif-action-extraction
+903aeaa gradient: stale-workloop-uncommitted-check
+
+# beliefs-count.sh (canonical)
+Total: 263 | Active: 210 | Graduated: 15 | Retracted: 38
+
+# DREAMS.md (today)
+Light Sleep: 100 candidates, all 0.58 uniform
+Deep Sleep: 0 promotes
+REM: "No strong patterns surfaced"
+DREAMS.md: "details unavailable" ×continuous since Jun 26
+
+# openclaw#87485 status
+State: OPEN | Last updated: 2026-06-21 | Maintainer response: 0
+
+# Memory vector index
+Last indexed: 2026-06-24 | Files missing: ~46 (7 days)
+Hit rate: 50% (down from 63%)
+
+# workspace commits today (since 22:30 yesterday): 8
+2552283 gradient: nemoclaw-oclif-action-extraction
+903aeaa gradient: stale-workloop-uncommitted-check
+7155775 study: auto-lock apply mode
+c086ae8 study apply reflect: prior-failure-check
+360a4e2 apply: prior-failure-check.sh
+28d11e6 Study: Ornith-1.0 deep-read
+3d78e4b study: OpenTag + self-learning-skills tracking
+a1c6e9b daily-review: memory compress + hygiene
+```

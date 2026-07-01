@@ -1,3 +1,10 @@
+---
+created: 2026-06-19
+last_verified: 2026-07-01
+tags: [api, hacker-news, tools]
+title: HN Algolia API
+---
+
 # HN Algolia API
 
 Use `hn.algolia.com/api/v1/search` directly for Hacker News scouting instead of `web_search`.
