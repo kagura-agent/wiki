@@ -93,6 +93,6 @@ Records mode + outcome + signal_rate per study session in append-only JSONL (`st
 
 19 sessions logged. Key finding: **apply mode has lowest signal rate (35%, 2/7 signal)** — 4 of 7 apply sessions produced empty outcomes, almost all when unapplied.md backlog was depleted. Scout leads at 83% (3 deep-reads from 3 attempts). Followup 100% but n=1. Quick scan 37% (1/8 signal, 4/8 partial, 3/8 empty).
 
-**Actionable insight:** Apply mode ROI collapses when backlog is empty. The saturation system already handles this via "backlog empty → skip or mine" hint, but could add a structural rule: if unapplied.md has 0 unchecked items AND no wiki card was created today, auto-lock apply mode. Currently relies on agent judgment which is unreliable (4 empty outcomes prove it).
+**Actionable insight:** Apply mode ROI collapses when backlog is empty. ~~The saturation system already handles this via "backlog empty → skip or mine" hint, but could add a structural rule~~ **Applied 2026-07-01**: auto-lock apply when unapplied.md has 0 unchecked items AND today's outcome-log already has ≥1 empty apply entry. Implemented in both `study-saturation.sh` and `study-saturation-gate.sh`. Display shows `(auto-locked: backlog empty + prior empty outcome)`. Regression gate passes.
 
 **Validation of pattern:** The quantitative tracking itself worked as intended — surfaced a behavioral insight (apply-forcing when backlog is empty) that was "known" but invisible without data. Classic Godcoder win: the logging reveals what reflection alone misses.

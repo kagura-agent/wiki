@@ -60,6 +60,10 @@ Pipeline-RL strategy for long rollouts. Staleness weight function downweights of
 3. **SWE Atlas gains** suggest self-scaffolding particularly helps on complex, less-structured tasks — exactly what open-source contributions look like. The model that learns *how to approach* a task category outperforms the one that only learns *solutions*.
 4. **Practical use:** 9B GGUF could run on RTX 3060 12GB for local experiments. But already have access to Opus, so not compelling for actual work unless local-only inference needed.
 
+## Applied Patterns
+
+- **3-layer anti-gaming → prior-failure-check.sh (2026-07-01)**: Applied the 3-layer verification structure (fixed boundary + deterministic monitor + judgment) to create `tools/prior-failure-check.sh` — structural fix for `repeat-failure-blindness` recidivist. Layer 1 = DNA red lines, Layer 2 = script (wiki knowledge + GitHub history check), Layer 3 = agent judgment informed by output. Also integrated into `issue-funnel.sh` as wiki failure pattern score penalty.
+
 ## Tracking
 
 - Status: NEW, HOT
