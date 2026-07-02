@@ -321,3 +321,14 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Lesson — ClawSweeper supersede logic**: ClawSweeper actively compares open PRs for the same issue and will close the less-proven one. This means: (1) submit fast, (2) include real behavior proof in initial PR, (3) don't extend scope after initial review if there's competition.
 - **Lesson — workloop coordination**: Two separate cron jobs (workloop + workloop-night) worked on the same issue in parallel, creating confusion. The workloop-night cron was still implementing while the work-loop cron hit plan_review. Flowforge instance management didn't prevent this overlap.
 - **Lesson — FIX_DATA_NOT_CODE**: Their fix changed `defaultChoice: "npm"` → `"clawhub"` and added `@beta` to clawhubSpec — pure metadata/docs, zero runtime code. My fix added ~68 lines of fallback logic. When the bug is "config points to the wrong place", fix the config, don't add code to work around wrong config. See [[pr-superseded-lessons#FIX_DATA_NOT_CODE]].
+
+### 2026-07-02: PR #99047 (PENDING)
+- **Issue**: #99021 — Discord reply with >10MB attachment fails 413, text + file silently lost
+- **Root cause**: `DEFAULT_DISCORD_MEDIA_MAX_MB = 100` (Discord default bot cap is 25 MB). `sendDiscordMedia` sends text+file in one multipart request — 413 rejection loses both.
+- **Fix**: Lowered default to 25 MB. Added 413 catch in `sendDiscordMedia` with text-only fallback via `sendDiscordText`.
+- **Files**: `send.outbound.ts` (+1 -1), `send.shared.ts` (+27 -4), `send.sends-basic-channel-messages.test.ts` (+33 -1)
+- **CI**: Force-pushed after `gogetajob submit` created dirty commit with upstream files. Clean commit should pass.
+- **Competition**: 2 competing PRs — #99043 (outbound-adapter layer, size M) and #99044 (reply-delivery layer, size S). My fix is at the sendDiscordMedia layer (lowest, covers all callers).
+- **Lesson — gogetajob submit hazard**: `gogetajob submit` runs `git add -A && git commit` which picks up untracked files from diverged fork. Always verify commit contents after gogetajob submit, or use manual push+PR for forks with upstream drift.
+- **Lesson — fresh-context review value**: Caught real architectural issue — setting DEFAULT to 10 MB would make the 413 fallback unreachable (loadWebMedia preflight would reject first, with a different error that the fallback doesn't catch). 25 MB lets the 413 fallback actually fire for servers with lower limits.
+- **Pattern — 5xx retryable**: Discord retry runner treats ALL `status >= 500` as retryable (not just 408/429). Tests with mocked 500 errors need `mockRejectedValue` (persistent) not `mockRejectedValueOnce`, or use non-retryable 4xx status.
