@@ -40,7 +40,7 @@ The breakthrough design decision: interpose at the **world** level, not the **ag
 Contrast with existing approaches:
 - Agent-side permissions ([[openclaw]] tool policy) — requires agent cooperation
 - Network firewalls ([[clawpatrol]]) — network-only, no filesystem coverage
-- Sandboxing ([[code-airlock]], Docker) — nuclear option, "blow away entire system" rollback
+- Sandboxing (code-airlock, Docker) — nuclear option, "blow away entire system" rollback
 - Session-level WAL ([[write-ahead-session-persistence]]) — much narrower (crash recovery for session messages, not action-level undo)
 
 ## Relevance to Our Direction

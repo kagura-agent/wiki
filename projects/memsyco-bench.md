@@ -69,7 +69,7 @@ This nuance matters — crude "did it agree with the user" detection would produ
 - [[agent-memory-anatomy-brgsk]]: Focuses on memory structure/anatomy — complementary, doesn't test sycophancy
 - [[recoil-failure-memory]]: Focuses on failure memory (what went wrong) — orthogonal concern
 - [[agenticow]]: CoW branching for agent memory — infrastructure, not evaluation
-- [[pmb]]: Persistent memory with lesson tracking — implementation, not benchmark
+- [[pmb-memory]]: Persistent memory with lesson tracking — implementation, not benchmark
 
 MemSyco-Bench is the first to ask: "is your memory making you sycophantic?"
 
