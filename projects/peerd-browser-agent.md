@@ -4,7 +4,7 @@ created: 2026-06-25
 tags: [agent-harness, browser, extension, p2p, webrtc, security, sandbox]
 source: https://github.com/NotASithLord/peerd
 status: deep-read
-last_verified: 2026-06-26
+last_verified: 2026-07-02
 ---
 
 # peerd — Browser-Native AI Agent Harness
@@ -138,14 +138,22 @@ Adopted the AGENTS.md/CLAUDE.md memory standard:
 2. **Browser security model reuse** — instead of building sandboxing, leverage existing platform. Same philosophy as "use the OS, don't reinvent it."
 3. **Memory convention convergence** — another project adopting AGENTS.md-style memory confirms the standard is solidifying.
 4. **P2P agent communication** — early but interesting signal for agent-to-agent protocols without centralized servers.
+5. **Runtime vs fleet separation** (07-02): AgentOS feasibility PR crystallized this — runtime emits+executes (85% done), fleet provisions+collects (20% done). Similar to OpenClaw gateway/node split. Clean architectural boundary.
+6. **Invariant ceiling framing** (07-02): Documenting what the platform *can never do* (Chrome extension CPU/RAM caps, corp SSO without moat sacrifice) is disciplined scope management worth adopting.
+
+## Followup Log
+
+- **2026-06-26**: Initial deep-read. 141⭐, 2 contributors, 4 sandboxes, P2P dweb preview.
+- **2026-07-02**: 274⭐ (+94%). THRIVING 6/6. Major runtime refactor (web actor direct page driving), remote Ollama. AgentOS feasibility assessment PR #129 — runtime 85%/fleet 20%, 3-wave enterprise plan, 6 fork decisions. 4 unique PR authors, 53 ext PRs/30d.
 
 ## Predictions
 
-- Will hit 200+ stars within 2 weeks if Chrome Web Store listing goes live
+- ~~Will hit 200+ stars within 2 weeks if Chrome Web Store listing goes live~~ ✅ Hit 274 by 07-02
 - WebVM/Notebook sandboxes will attract power users but Firefox parity will be a persistent pain point
 - P2P layer will remain research-grade for 3+ months (security model is complex)
+- (07-02) AgentOS direction will attract enterprise interest but SaaS-vs-extension fork decision will delay it 2+ months
 
 ## Track
 
-- Revisit: 2026-07-02 (check stars growth, Firefox parity progress, dweb progress)
-- Watch for: Chrome Web Store approval, first external contributor beyond jonybur
+- Revisit: 2026-07-05 (check AgentOS PR resolution, runtime refactor completion, enterprise packaging)
+- Watch for: AgentOS fork decision, headless enterprise packaging, control plane repo creation
