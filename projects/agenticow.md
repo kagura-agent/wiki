@@ -87,3 +87,10 @@ The CoW lineage model is essentially "append-only log with read-through" — the
 - **Prediction**: will hit 100-200⭐ within 30 days (viral README + ruvnet's track record), then plateau unless community forms
 
 Links: [[metaharness-agent-harness-generator]], [[pmb-memory]], [[agent-memory-engine]], [[git-backed-agent-memory]], [[agent-memory-landscape-202603]]
+
+### Followup — 2026-07-02 (apply round)
+- **Apply attempt**: Principles (checkpoint-before-risk, promote-as-verification) relevant but abstract — no concrete tooling gap to fill
+- **Status**: NOTED. CoW branching is a database-level pattern; our file-based memory doesn't benefit from O(1) branching. The lineage-as-event-sourcing concept is already handled by git history for our use case
+### Followup — 2026-07-02 (apply round)
+- **Apply attempt**: Principles (checkpoint-before-risk, promote-as-verification) relevant but abstract — no concrete tooling gap to fill
+- **Status**: NOTED. CoW branching is a database-level pattern; our file-based memory doesn't benefit from O(1) branching. Lineage-as-event-sourcing already handled by git history
