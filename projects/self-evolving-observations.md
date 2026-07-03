@@ -1,5 +1,92 @@
 # 自进化管线观察日志
 
+## 🔬 自进化观察日报 2026-07-03 (Day 77)
+
+### 管线活跃度
+- **beliefs-candidates**: 3 条新增 (stale-workloop-context-loss, workloop-duplicate-issue-selection, stale-flowforge-cleanup) / 5 条 retracted (daily-review 03:35 清理 stale 单次条目) / 0 条待升级
+- **DNA 变更**: 无 (SOUL.md / AGENTS.md 未改动)
+- **nudge 触发**: 0 次检测到 (gateway 日志无 nudge 记录)
+- **dreaming**: 运行 2 次 (03:15, 11:44), promote 0 条. 5 条全部 "details were unavailable" ❌
+
+### beliefs 库存
+- Total: 271 | Active: 210 | Graduated: 15 | Retracted: 46+2(today)
+- 7 月毕业数: 0 (上次毕业 06-19)
+- 月初 retraction 批量: +8 条 (daily-review 清理 stale 单次记录, 健康的卫生行为)
+
+### 闭环追踪
+
+**完整闭环: 3 个**
+1. **grep-c-echo-0 antipattern**: study 发现 grep -c || echo 0 在算术上下文产出 '0\n0' → 写 fix (beliefs-count.sh, nudge-health.sh) → sweep 全工具链 (16 instances in 7 scripts) → 验证修复 ✅
+2. **ABTI Q9 redesign**: disc 0.499 → 尝试 API scenario (disc 0.000, 更差) → 文档哲学 framing (disc 0.960) → PR #665 merged, #664 closed ✅
+3. **spam-filter.sh**: study scan 发现 star-farming spam ring → 创建 spam-filter.sh → 集成到 study workflow → 验证生效 ✅
+
+**半闭环: 3 个**
+4. **stale-workloop-context-loss**: 发现 → gradient written → 行为改变定义 → 未实测
+5. **workloop-duplicate-issue-selection**: 发现 → gradient written → 未实现工具改动
+6. **stale-flowforge-cleanup**: 发现 → gradient written → 未实现工具改动
+
+**断裂处**: dreaming 管线完全断裂 (连续 "details unavailable" 至少自 06-29 起, 第 5 天)
+
+### PR 活跃度
+
+今日 merged PRs:
+- **lottie-studio #393**: CI/deploy Node.js version fix
+- **lottie-studio #391**: dependency update (Next.js 16.2.10, React 19.2.7)
+- **finance #1182**: hypothesis_status velocity CSV fix
+- **abti #669**: Q4 (Autonomy) redesign (disc 0.327→0.904)
+- **abti #667**: Q9 reliability refresh data
+
+外部 repo:
+- **opencode #35105**: claimed + study complete (Gemini tool arg flattening bug), implementation pending
+- **qwen-code #6155**: 2 human APPROVED, 1 bot CHANGES_REQUESTED, ball with maintainers
+- **qwen-code #6225**: bot re-review pending
+
+### 今日发现
+
+1. **beliefs 管线高产日**: 3 new gradients + 5 retractions + daily-review MEMORY.md cleanup (161→148 lines). 全部自驱 (workloop friction → gradient), 无 Luna 触发. 管线自运转健康 ✅
+2. **dreaming 依然完全瘫痪**: "details were unavailable" 现在累计 19 条. 从 06-29 起连续 5 天无有效 dreaming 输出. Issue #10(b) 未解决. 这是自进化管线最大的系统性缺陷
+3. **daily-review 做了有效清理**: 5 条 stale gradient retracted (30+ 天未复现). 这是管线卫生的正面信号 — 在积累的同时也在清理
+4. **3 个完整闭环**: 今天有 3 个 "发现→修复→验证" 的完整闭环 (grep-c fix, ABTI Q9, spam-filter). 这是近期最好的闭环产出
+5. **nudge 静默**: 连续多天未检测到 nudge 触发. 可能是 turn count 分布未达阈值, 或 gateway 日志过滤问题. 不影响进化 (beliefs 管线独立运转)
+6. **毕业干旱期**: 上次 graduation 在 06-19 (两周前). Active 210 条中无接近毕业阈值的. 大量 gradient 停在 第1次
+
+### Issue #10 状态
+
+| Item | Status | 变化 |
+|------|--------|------|
+| (a) Upstream 0.58 hardcoded | ❌ 未解决 | openclaw#87485 OPEN, 无进展. 本地替代方案已判定 ROI 不足 |
+| (b) Deep Sleep "details unavailable" | ❌ 恶化 | 从 06-29 起连续 5 天. 累计 19 条. 未 reproduce/debug |
+| (c) Local filter 1-week monitoring | ✅ 完成 | 结果: 0 promotes (upstream 0.58 卡住). 观察结论已记录 |
+| (d) REM empty output | ❌ 持续 | 未处理 (deferred) |
+
+### 原始数据
+
+```
+# beliefs-candidates.md changes (07-03)
+git log --since="2026-07-03 00:00" -- beliefs-candidates.md:
+  41f705f gradient: stale-flowforge-cleanup (20:09)
+  05c6430 gradient: workloop-duplicate-issue-selection (14:24)
+  b05cf11 gradient: stale-workloop-context-loss (10:20)
+  426a659 daily-review: memory hygiene, beliefs retraction (5), DREAMS trim (03:35)
+
+# DNA changes: none
+
+# beliefs count (beliefs-count.sh)
+Total: 271 | Active: 210 | Graduated: 15 | Retracted: 46
+
+# nudge: 0 detected (journalctl grep)
+
+# dreaming
+July 3 entries: 5 (03:15 ×3, 11:44 ×2)
+All: "A memory trace surfaced, but details were unavailable"
+Promotes: 0
+
+# PR merges today: 5 (lottie-studio ×2, finance ×1, abti ×2)
+# Total workspace commits today: 21
+```
+
+---
+
 ## 🔬 自进化观察日报 2026-06-24 (Day 68)
 
 ### 管线活跃度
