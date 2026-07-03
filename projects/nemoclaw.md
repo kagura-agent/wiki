@@ -347,3 +347,13 @@
 - **Test pattern**: CodeRabbit prefers observable output assertions (`logSpy`) over implementation-detail mock-call assertions. Other test files (mutate.test.ts) don't follow this, but the review preference is clear.
 - **CI notes**: `copy-pr-bot` vetting is standard for external contributors. `codebase-growth-guardrails` + `require-maintainer-edits` + `check-pr-limit` + `assign-linked-issue-author` are the 4 CI checks.
 - **Timing**: From stale `plan_review` to PR submitted in ~25 minutes. Claude Code --print worked first try (no streaming timeout this time).
+
+## PR #6211 — rebuild --force skip backup (2026-07-03)
+- **Issue**: #6135 — `nemoclaw <name> rebuild --yes` aborts with "Failed to back up sandbox state" when container is unreachable
+- **Status**: PENDING, CI pass (5/5 ✅), CodeRabbit review addressed (2nd commit)
+- **Scope**: 3 files (+109 initial, +4 followup), purely additive
+- **Root cause**: When container is killed/crashed, SSH backup fails → aborts rebuild entirely. `--force` existed but only skipped confirmation, not failed backup.
+- **Fix**: `backupSandboxStateForRebuild()` accepts `force` param. When force=true and backup completely fails, returns `null` (same convention as staleRecovery) and logs warning. Non-force path gets improved error message suggesting `--force`.
+- **CodeRabbit feedback**: Post-rebuild summary didn't distinguish forced-skip from normal rebuild. Added `else if (!staleRecovery && !backupManifest)` branch with ⚠ callout. Valid UX improvement, quick win.
+- **Pattern**: NemoClaw convention — `null` return from backup = proceed without manifest; `undefined` = abort. This is a critical semantic distinction. Our force path returns `null`, consistent with staleRecovery.
+- **Process note**: Workloop instance stalled at plan_review for ~8.5h across multiple cron runs. stale-pr-check.sh correctly detected existing PR and fast-pathed.

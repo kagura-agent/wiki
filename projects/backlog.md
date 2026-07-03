@@ -1353,3 +1353,9 @@ GitHub trending (agent, created past week, sorted by stars):
 **Trend:** Ecosystem stable for tooling/harnesses. Model-level innovation (Ornith self-scaffolding) is the hot topic.
 - [ ] pocketdev (0xMassi/pocketdev) - 87⭐ (07-02 HN scan). Run existing coding CLI (Claude Code/Codex/Cursor/aider) on Tailscale-only Hetzner box from phone. Go. Single-purpose remote dev. Interesting for mobile coding angle.
 - [ ] Lore (unknown repo) - 47pts/55 comments HN (07-01). "Give your coding agent the decisions your team made" — team knowledge layer for agents. Couldn't locate repo. Revisit when searchable.
+
+## 2026-07-03 Quick Scan
+
+- **ctxrs/ctx** 219⭐ Rust — search coding agent history locally (Claude Code, Cursor, Codex sessions). Show HN 24pts. Active dev. Deep read candidate.
+- **0xMassi/pocketdev** 90⭐ — one-command remote coding CLI on Tailscale+Hetzner. Practical but not architecturally novel.
+- **doordash-oss/agentic-orchestrator** 55⭐ Go — TUI for long-running coding agents. DoorDash open-source. Similar to Foreman concept.

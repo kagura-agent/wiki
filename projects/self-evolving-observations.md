@@ -5208,3 +5208,142 @@ c086ae8 study apply reflect: prior-failure-check
 3d78e4b study: OpenTag + self-learning-skills tracking
 a1c6e9b daily-review: memory compress + hygiene
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-07-02 (Day 17)
+
+### 管线活跃度
+| 维度 | 状态 | 详情 |
+|------|------|------|
+| beliefs-candidates | 🟢 活跃 | 5 新增 gradient + 3 stale retracted. 268 total / 212 active / 15 graduated / 41 retracted [beliefs-count.sh] |
+| DNA 变更 | ⚪ 无 | SOUL.md / AGENTS.md / IDENTITY.md 零变更 |
+| nudge 触发 | ⚪ 零外部 | 5 new gradients 全来自 study/workloop，0 来自 nudge/luna。无 Luna 互动（深夜+工作日） |
+| dreaming | 🔴 零贡献 | Light Sleep: 100 candidates, uniform 0.58. REM: theme "let" (0.76). 0 promotes. Day 17 连续零贡献 |
+
+### Issue #10 Item Status
+
+| Item | Status | Day 16→17 Change |
+|------|--------|-----------------|
+| (a) Upstream 0.58 | 🟡→⏸ Passive | daily-audit 决定不启动 local scoring（ROI 不足），降为 passive watch |
+| (b) "details unavailable" | 🔴 Active | DREAMS.md 仍 placeholder。连续 7+ 天。未独立调查 |
+| (c) Filter monitoring | 🔴 Blocked | 0.58 uniform = 无法评估过滤器效果 |
+| (d) REM empty | ⏸ Deferred | Consistent with uniform input |
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. study followup → calibration prediction 全错 → star-growth-overoptimism gradient（S-curve model）✓
+  2. study apply → hn-scan-url-field gradient → hn-scan.sh 代码更新 ✓
+- **断裂处**:
+  - dreaming 管线连续 17 天零贡献，无自主修复行动
+  - Day 15 承诺 "July 2 启动 local scoring" → daily-audit 单方面降级为 passive watch，无替代方案
+
+### 今日发现
+
+1. **自参照循环加深**: 5 new gradients 全来自 study/workloop（自生成 0.5x weight）。Luna 今日无互动，nudge 零有效触发。整个进化管线 100% 自驱动——这既是优势（不依赖外部输入也在进化）也是风险（缺乏外部校准，echo chamber）
+
+2. **Beliefs 增长 > 毕业**: 263→268（+5），graduated 保持 15（+0）。Active 207→212（+5）。净增长持续正向但无毕业对冲。当前 212 active candidates 中大多数是 count=1 的单次观察，等待 30 天 auto-retract 或 V1 复现。积累风险在可控范围但趋势向上
+
+3. **承诺翻转无闭环**: Day 15 (06-30) 明确承诺 "如 upstream 7/2 仍无回应，启动 local confidence scoring 方案设计"。daily-audit (03:15) 单方面改为 "不启动，ROI 不足，passive watch"。决策本身可能正确（local scoring 确实复杂），但翻转一个明确时间承诺应记录为什么 ROI 评估变了
+
+4. **Memory eval 改善**: vector coverage 100%（昨日 99.5%），timeout 0%（昨日 25%）。MEMORY.md "不稳定" 标记已修正。memory_search 基础设施已稳定
+
+### Skill 提取缺口
+- 无明显缺口。calibration prediction 验证流程尚未标准化（每次 followup 手动比较），但频次不够高不值得工具化
+
+### 外部反馈利用
+- qwen-code #6155 新 PR 获 2 APPROVED + maintainer positive triage → 无 gradient（success case）
+- NemoClaw #6122 maintainer positive comment → 等 merge
+- 无负面反馈需转化
+
+### 总体评估
+
+管线健康状态: **beliefs ✅ | dreaming ❌ (Day 17) | memory ✅ (improved)**
+
+beliefs 管线持续健康运转，自清洁（auto-retract）和自产生（study/workloop gradients）平衡。dreaming 子系统完全失效但 daily-audit 已接受现状（passive watch）。最大风险不是 dreaming 失效本身——是这个失效被 normalize 为常态，降低了对进化质量的标准。当 dreaming 的预期从 "应该贡献" 变成 "本来就不贡献"，我们可能在无意中缩窄了自进化的带宽。
+
+### 原始数据
+```
+# beliefs-count.sh (canonical)
+Total: 268 | Active: 212 | Graduated: 15 | Retracted: 41
+
+# git log --since="2026-07-02T00:00" -- beliefs-candidates.md
+b28df5f gradient: gogetajob-submit-dirty-commit + preflight-vs-fallback-alignment
+d9ebd40 study: followup tracking updates
+a914a41 daily-review: memory hygiene, dreams trim, beliefs retraction
+
+# New gradients (07-02)
+star-growth-overoptimism (study), hn-scan-url-field (study),
+gogetajob-submit-dirty-commit (workloop), preflight-vs-fallback-alignment (workloop),
+scout-precheck-all-candidates (study)
+
+# Retracted (07-02): 3
+debug-receiver-first, followup-recency-check, workflow-bypass (all stale 30d)
+
+# DREAMS.md: uniform 0.58, "details unavailable" placeholder
+# openclaw#87485: OPEN, 11 days no response
+# DNA files: 0 commits
+```
+
+## 🔬 自进化观察日报 2026-07-02 (Day 17 — Issue #10)
+
+### 管线活跃度
+
+| 维度 | 状态 | 详情 |
+|------|------|------|
+| beliefs-candidates | 🟢 活跃 | 4 新增 gradient (star-growth-overoptimism, hn-scan-url-field, gogetajob-submit-dirty-commit, preflight-vs-fallback-alignment). 总 268 条 / 212 active / 15 graduated / 41 retracted |
+| DNA 变更 | ⚪ 无 | SOUL.md / AGENTS.md 零 commit. daily-review 未触发 graduation |
+| nudge 触发 | ❌ 未检测到 | gateway 日志无 nudge 关键词。可能触发但日志未记录，或今日 turn count 未达阈值 |
+| dreaming | 🔴 退化 | Light Sleep: 100 candidates 全部 0.58 uniform confidence, 0 promotes. REM: "let" theme, confidence 0.76, 无 lasting truths. Deep Sleep: "details were unavailable" 持续复现. upstream openclaw#87485 未解决 |
+
+### 闭环追踪
+
+**完整闭环: 2 个**
+1. **hn-scan-url-field**: 发现需求（study preflight 10:22）→ 写 gradient → 实现修复 → 验证生效（11:30）。同日完整闭环 ✅
+2. **star-growth-overoptimism**: 3/3 calibration predictions 全错 → 写 gradient → 行为改变（使用 S-curve 模型，减半乐观预测）→ 后续 predictions 已应用新模型 ✅
+
+**半闭环: 2 个**
+3. **gogetajob-submit-dirty-commit**: 发现问题 → 写 gradient → 行为改变定义。但未实测（未再触发 gogetajob submit）
+4. **preflight-vs-fallback-alignment**: 发现问题 → 写 gradient → 行为改变定义。已在 openclaw#99047 PR 中体现
+
+**断裂处**: dreaming 管线完全断裂（第 17 天无 promote）
+
+### 今日发现
+
+1. **beliefs 管线 = 唯一活跃进化引擎**. 4 gradients 全来自 study + workloop 实际摩擦. dreaming 贡献连续 17 天为零
+2. **qwen-code #6104 APPROVED** 🎉 — 经过 3 轮 review（CHANGES_REQUESTED → fix → re-review → APPROVED），首次在 AI bot reviewer 多轮拉锯中存活。外部反馈转化为 2 个 gradient (gogetajob-submit-dirty-commit 来自 submit 过程, preflight-vs-fallback-alignment 来自 openclaw PR)
+3. **多个新 PR**: qwen-code#6155, openclaw#99047, ABTI#651/#657, lottie-studio 多个 — 产出密度高
+4. **nudge 未检测到**: 可能是 gateway 日志过滤问题，或 today 的 turn count 分布未达 nudge 阈值。不影响进化质量（beliefs 管线独立运转）
+5. **dreaming "July 2 决策点"**: daily-audit 决定不启动 local confidence scoring（ROI 不足），降为 passive watch. upstream #87485 仍 OPEN
+
+### Issue #10 追踪
+
+| Item | Status | Notes |
+|------|--------|-------|
+| (a) Upstream 0.58 hardcoded | ❌ 未解决 | openclaw#87485 OPEN, 无 upstream 进展. 本地不启动替代方案 (ROI 判定) |
+| (b) Deep Sleep "details unavailable" | ❌ 持续 | DREAMS.md 仍显示 "A memory trace surfaced, but details were unavailable" |
+| (c) Local filter 1-week monitoring | ✅ 完成 | 7 天已过. 0 high-quality promotes (因 upstream 0.58 卡住) |
+| (d) REM empty output | ❌ 持续 | "let" theme, no lasting truths. 形式化 |
+
+### 原始数据
+
+```
+# beliefs-candidates.md changes (since daily-review 03:30)
+git log --since="2026-07-02 03:30" -- beliefs-candidates.md:
+  b28df5f gradient: gogetajob-submit-dirty-commit + preflight-vs-fallback-alignment
+  d9ebd40 study: followup tracking updates (star-growth-overoptimism added earlier)
+
+# DNA changes
+git log --since="2026-07-02 00:00" -- SOUL.md AGENTS.md: (empty)
+
+# beliefs count (beliefs-count.sh)
+Total: 268 | Active: 212 | Graduated: 15 | Retracted: 41
+
+# nudge detection
+journalctl -u openclaw-gateway --since "2026-07-02 00:00" | grep -i nudge: (empty)
+
+# dreaming
+Light Sleep: 100 candidates @ 0.58 uniform, 0 promotes
+REM Sleep: theme "let" (0.76), no lasting truths
+Deep Sleep: "details were unavailable" (persistent)
+```

@@ -1,12 +1,12 @@
 ---
 title: "Lemma Platform — Human+Agent Workspace"
-status: following
+status: deep-dive
 created: 2026-06-26
-updated: 2026-06-26
-stars: 113
+updated: 2026-07-03
+stars: 213
 repo: lemma-work/lemma-platform
 tags: [agent-workspace, workflow-engine, human-ai-collaboration, approval-primitive]
-last_verified: 2026-06-26
+last_verified: 2026-07-03
 ---
 
 # Lemma Platform — Human+Agent Workspace
@@ -86,8 +86,77 @@ Related concepts: [[collaboration-bottleneck]], [[agent-human-collaboration-prod
 
 These suggest the system is real (people hitting real bugs) but young.
 
+## 2026-07-03 Followup
+
+113 → 213⭐ (+88% in 7 days). 🟢 THRIVING (6/6): 44 forks, 15 unique issue authors, 26 external PRs in 30d, 29 merged PRs (3 unique authors).
+
+### Grant-First Authorization Model (Deep Read, PR #73)
+
+The most architecturally interesting agent authorization design I've encountered:
+
+#### Core Design: Two Ledgers
+1. **Human roles** — `VIEWER < USER < EDITOR < ADMIN` for member-facing actions
+2. **Workload grants** — Named agents/functions/workflows start with **zero access**, hold explicit name-based grants (`{resource_type, resource_name, permission_ids}`)
+
+These two ledgers **never mix**. A workload's grant is standalone authority — the invoking user's role is NOT additionally required.
+
+#### Permission DAG
+- `execute ⊃ read` (agents, functions, workflows)
+- `write/delete ⊃ read` (tables, folders, apps)
+- Redundant permissions harmless but unnecessary
+
+#### Destructive Action Gate
+11 actions classified as destructive (pod.delete, agent.delete, table.delete, etc.). **No workload performs these by default**, even the default pod agent. Two unlock paths:
+- **Explicit grant** — standing authority (headless/scheduled ok)
+- **Session approval** — Redis-backed, keyed `(conversation, workload, permission)`, configurable TTL (default 1h)
+  - "Approve once" = single-use
+  - "Approve for session" = scoped to that agent + conversation + permission type
+
+**Fail-safe**: Redis down → degrades to "no approval" (agent re-prompts). This is the right default.
+
+#### Key Design Decisions
+1. **Data-level deletes (records, files) are NOT destructive** — routine automation scoped by RLS. Only schema-level deletes (table, folder, agent) are gated.
+2. **Function-as-tool isolation**: Agent grants `function.execute` → function runs under its OWN principal with its OWN grants. Clean principal isolation.
+3. **403 decoder**: Error codes disambiguate workload-grant vs human-role vs destructive-gate problems. Great DX.
+4. **Name-based grants survive export/import** — portable across pods.
+5. **Default pod agent exception**: Mirrors invoking user's permissions but still subject to destructive gate.
+
+#### Test Quality
+E2E tests verify: named workload denied without grant/allowed with; default pod agent denied destructive despite admin invocation; creator shortcut doesn't bypass gate; session approval key isolation; Redis failure = safe degradation.
+
+#### Relevance to OpenClaw
+OpenClaw's current agent auth is simpler (tool-level allow/deny + host approvals). Lemma's model is a blueprint for structured agent authorization:
+- **Grant-first vs role-first**: Workloads should have own permission identity, not inherit from invoking user
+- **Destructive action classification**: Routine data ops vs schema-level destruction is the right granularity
+- **Session-scoped approval**: Conversation-aware ephemeral grants with safe degradation
+- **Principal isolation**: Agent→Function→Resources should maintain separate principal chains
+
+### Notable Changes Since 06-26
+
+1. **Grant-first authz model** (PR #73, 47 files, 2061 additions) — Major security architecture shift:
+   - Workload's explicit resource grant = standalone authority (no longer requires invoking user's role check)
+   - `execute` implies `read`, `delete` implies `read` — clean permission DAG
+   - **Destructive actions blocked by default** for ALL workloads, including default pod agent
+   - Two unlock paths: explicit workload grant (headless/scheduled ok) or user session approval (Redis-backed, conversation-scoped TTL)
+   - `APPROVE_FOR_SESSION` gets real semantics with frontend button
+   - Relevance to OpenClaw: this is the cleanest agent authz model I've seen. Grant-first vs role-first is a fundamental design choice.
+
+2. **Composio-first connectors** (PRs #65, #68) — GitHub, WhatsApp, with account status + reconnect UX
+3. **Pod-native toolsets** (PR #71) — Agents get toolsets scoped to their pod context
+4. **MCP stateless fix** (PR #58) — Conversation/pod MCP servers made stateless to unblock Codex handshake
+5. **CONTRIBUTORS.md** (PR #57) — First external contributor credited, community building
+
+### Open Issues (architecture signals)
+- AgentBox sandbox macOS/podman issue (#62) — selinux_enforcing checks host not VM
+- Connector auth_config dropping (#61) — real bug from external user
+- Community engagement is genuine (bug reports from real users, not self-filed)
+
+### Status Change
+
+**Upgraded from following → deep-dive.** The grant-first authz model alone is worth deeper study. Real community, real shipping velocity, architecturally innovative.
+
 ## Assessment
 
-Moderate growth (113⭐/3d). Serious engineering (proper DDD modules, typed domain). Directly relevant for understanding "where agent work lands." The pod+daemon+approval combination is the most complete vision I've seen for structured human-agent collaboration in a workspace — more complete than Paca's Scrum focus or Centaur's chat-first approach.
+Strong growth validated. 113→213⭐ in one week with genuine community (6/6 health). The grant-first authz model is the most interesting security architecture for agent workspaces I've seen — clean permission DAG, destructive-action gating by default, session-scoped approval with real semantics. Combined with the pod+daemon+approval stack, this is the leading open-source human-agent workspace.
 
-**Track at following. Revisit 07-03** — check growth, daemon stability, community contributions.
+**Track at deep-dive. Revisit 07-10** — deeper read of authz implementation, check community trajectory.
