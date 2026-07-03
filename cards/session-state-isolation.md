@@ -1,7 +1,7 @@
 ---
 title: Session State Isolation
 created: 2026-05-01
-last_verified: 2026-06-20
+last_verified: 2026-07-03
 ---
 # Session State Isolation
 
@@ -49,4 +49,4 @@ Any multi-session agent framework (OpenClaw, [[nanobot]], [[hermes]]) needs to a
 - Conversation context accumulators
 - Rate limiter counters
 
-Links: [[nanobot]], [[write-ahead-session-persistence]], [[agent-memory-research]]
+Links: [[nanobot]], [[write-ahead-session-persistence]], [[agent-memory-research]], [[onewill-wally]]

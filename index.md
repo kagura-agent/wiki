@@ -225,7 +225,7 @@
 - [Hermes](cards/hermes.md)
 - [Hermes Memory Skills](cards/hermes-memory-skills.md)
 - [Heuristic Rerank Filter](cards/heuristic-rerank-filter.md)
-- [hn-algolia-api](cards/hn-algolia-api.md)
+- [HN Algolia API](cards/hn-algolia-api.md)
 - [Honcho](cards/honcho.md)
 ### I
 
@@ -475,13 +475,13 @@
 - [Write-Time vs Read-Time Memory Arbitration](cards/write-time-vs-read-time-arbitration.md)
 ### Y
 
-- [yield-curve-and-term-structure](cards/yield-curve-and-term-structure.md)
+- [Yield Curve & Interest Rate Term Structure](cards/yield-curve-and-term-structure.md)
 ### Z
 
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (494)
+## 📁 Project Notes (499)
 
 ### 2
 
@@ -532,6 +532,7 @@
 - [Agent Experience Capitalization (expcap)](projects/agent-experience-capitalization.md)
 - [AgentFactory — Self-Evolving via Executable Subagent Accumulation](projects/agentfactory.md)
 - [agent-harness-kit](projects/agent-harness-kit.md)
+- [agenticow — Git for Agent Memory (CoW Vector Branching)](projects/agenticow.md)
 - [agentic-sop-to-work — Deterministic SOP-to-Workflow Engine](projects/agentic-sop-to-work.md)
 - [agentic-stack — 深读笔记](projects/agentic-stack.md)
 - [Agent Identity — 凭证自管理](projects/agent-identity.md)
@@ -658,6 +659,7 @@
 - [CrabTrap](projects/crabtrap.md)
 - [Craft Agents OSS](projects/craft-agents-oss.md)
 - [Crush — Charmbracelet's Terminal Coding Agent](projects/crush-charmbracelet.md)
+- [ctx — Local Agent History Search](projects/ctx-agent-history-search.md)
 - [Cursor SDK (@cursor/sdk)](projects/cursor-sdk.md)
 - [CVE-2026-28353: First Agent→Supply Chain→Agent Attack](projects/cve-2026-28353-agent-supply-chain.md)
 - [cwc-long-running-agents](projects/cwc-long-running-agents.md)
@@ -813,6 +815,7 @@
 - [MemPalace](projects/mempalace.md)
 - [MemPrivacy — Privacy-Preserving Personalized Memory for Edge-Cloud Agents](projects/memprivacy.md)
 - [MemSkill - Learnable Memory Skills for Self-Evolving Agents](projects/memskill.md)
+- [MemSyco-Bench — Benchmarking Sycophancy in Agent Memory](projects/memsyco-bench.md)
 - [memU — 24/7 Proactive Memory Framework](projects/memu.md)
 - [memwatch — Memory Staleness Detection](projects/memwatch-staleness.md)
 - [Mercury Agent](projects/mercury-agent.md)
@@ -852,6 +855,7 @@
 - [Oh My Pi (can1357/oh-my-pi)](projects/oh-my-pi.md)
 - [OmniAgent](projects/omniagent.md)
 - [Omnigent — Meta-Harness for AI Agents](projects/omnigent.md)
+- [OneWill / Wally — WAL for Agent Actions](projects/onewill-wally.md)
 - [OpenChronicle](projects/openchronicle.md)
 - [OpenClaude (Gitlawb/openclaude)](projects/openclaude.md)
 - [OpenClaw 架构概览 — 田野笔记](projects/openclaw-architecture.md)
@@ -979,6 +983,7 @@
 - [Superlog — Agentic Telemetry System](projects/superlog.md)
 - [superpowers (obra/superpowers)](projects/superpowers.md)
 - [SwarmForge](projects/swarm-forge.md)
+- [Synapse — Synthetic Hippocampus for AI Agents](projects/synapse-hippocampus.md)
 - [System-Prompt-Skills (kangarooking)](projects/system-prompt-skills.md)
 ### T
 
@@ -1034,4 +1039,4 @@
 
 ---
 
-*426 cards, 494 project notes. Last generated: 2026-07-01 04:50 UTC.*
+*426 cards, 499 project notes. Last generated: 2026-07-03 15:25 UTC.*
