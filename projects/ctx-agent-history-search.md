@@ -53,7 +53,7 @@ Strong redaction pipeline: `redact_secret_markers()` catches API keys (sk-*, ghp
 
 ## Tradeoffs & Observations
 
-1. **Pure local-first, no cloud required** — all data stays on machine. Contrast with cloud-first memory solutions like [[Synapse]] or [[AgentSpace]]
+1. **Pure local-first, no cloud required** — all data stays on machine. Contrast with cloud-first memory solutions like [[synapse-hippocampus|Synapse]] or AgentSpace
 2. **No embedding/vector search** — relies entirely on SQLite FTS. Simpler but less semantic. Works because agent transcripts are keyword-rich (file paths, error messages, tool names)
 3. **Pivot history** — started as ADE (Agent Development Environment, desktop app), pivoted to CLI search tool. Old ADE moved to separate repo. Shows market pull toward CLI-native developer tools
 4. **Small team** (2 contributors) but high code quality — 50K lines of Rust, comprehensive test suite, well-structured crate hierarchy
