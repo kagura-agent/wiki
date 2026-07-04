@@ -103,9 +103,69 @@ Occupies a new niche: **structured agent training data generation from real work
 
 The core thesis ("useful work creates training signals, signals improve future work") is sound but currently unfalsifiable — no evidence the loop actually closes.
 
+## v0.2 Update (07-04)
+
+Major release — but still solo dev (ray-r-ren), 0 issues, 0 PRs, 0 external contributors despite 1189⭐.
+
+### New in v0.2
+1. **Experience Compiler** — iteratively extracts reusable "skill packs" from completed task bundles:
+   - `skill.md` + `canonical_skill.json` + `retrieval_card.json` → installed as "Runtime Training"
+   - Quality scoring: `transfer_confidence` (high/medium/low) based on source score, has_actual_outputs, has_artifacts
+   - Maps to: our wiki cards / beliefs-candidates.md pipeline but in a portable, machine-readable format
+
+2. **Runtime Training Install** (`apprentice learn install`):
+   - Copies experience compiler outputs to `~/.agent-apprenticeship/installed_skills/`
+   - **Runtime injection**: `select_runtime_training_for_run()` keyword-matches installed skills against new task instructions
+   - Injects relevant skill context into agent prompt as `"Installed Runtime Training"` section (max 5000 chars)
+   - Quality penalty: low-confidence or low-score sources get deprioritized
+   - This is **prompt injection as learning** — no weight updates, just context enrichment
+
+3. **Multi-harness support**: Codex, Cursor, Claude Code, OpenClaw, OpenCode, Hermes Agent, Custom
+   - `apprentice_adapters.py` handles different agent CLIs
+   - Auto-detects installed CLIs
+
+4. **Seed dataset v0.2**: 505 compilations, 39k+ structured records on HuggingFace
+
+### Architecture Insight: Experience Compiler Pipeline
+```
+Task → Baseline attempt → Grade → Revise (with mentor) → Grade again
+  → Hill-climbing comparison → Lesson extraction
+  → Process supervision (per-step labels + causal chains)
+  → Preference pairs (DPO-style)
+  → Experience Compiler → skill_pack/ + runtime_learning_package/
+  → Install as "Runtime Training" → Inject into future runs
+```
+
+The loop actually closes now (was aspirational in v0.1):
+- Complete task → extract signals → install as skill → inject into future tasks
+- But: injection is keyword-based, not semantic. Simple word overlap scoring.
+- No feedback on whether injected training actually helped (no A/B or measurement).
+
+### Updated Assessment
+
+**Strengths:**
+- Experience Compiler is a concrete mechanism for "work → reusable knowledge" loop
+- Runtime Training install/inject is a clean pattern (portable, reversible, confidence-scored)
+- Multi-harness support makes it ecosystem-agnostic
+
+**Weaknesses (unchanged):**
+- Still solo dev, still 0 community participation despite 1189⭐
+- Keyword-based skill selection will miss semantic matches
+- No measurement of whether Runtime Training actually improves outcomes
+- "Ecosystem exchange" still aspirational (contribution_count still 0)
+- No tests in repo
+
+**Relevance to us:**
+- Our DNA pipeline (beliefs-candidates.md → triple verification → DNA/workflow/wiki) is conceptually similar to their Experience Compiler → Runtime Training, but:
+  - Ours is runtime-active and self-verifying (triple verification gate)
+  - Theirs is portable and machine-readable (JSON/JSONL format)
+  - We could adopt their **portable skill pack format** for sharing learning across agents
+- Their keyword-based selection is inferior to our wiki search (hybrid semantic + keyword)
+- The "prompt injection as learning" pattern validates our approach of injecting wiki context into subagent prompts
+
 ## Tracking
 
-- **Status**: NEW — deep read done
-- **Signal**: Viral growth (290⭐/1d) but no community depth
-- **Prediction**: Will plateau quickly without real contributions. The dataset has value but the ecosystem exchange won't materialize in 30 days.
-- **Revisit**: 06-27
+- **Status**: Following — v0.2 deep read done
+- **Signal**: 1189⭐ but still zero community. Solo dev shipping fast.
+- **Previous prediction**: "Will plateau below 500⭐" — **WRONG** (hit 1189, calibration logged)
+- **Revisit**: 07-18 (monthly — community-gated, won't invest more without external contributors)
