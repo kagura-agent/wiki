@@ -1,44 +1,39 @@
 {
-  "timestamp": "2026-07-03T20:30:00+08:00",
-  "total_files": 1009,
-  "cards": 426,
-  "projects": 499,
-  "wikilinks": 3979,
-  "errors": 0,
-  "warnings": 62,
-  "broken_links": 0,
-  "index_drift": 5,
-  "index_drift_files": [
-    "projects/agenticow.md",
-    "projects/ctx-agent-history-search.md",
-    "projects/memsyco-bench.md",
-    "projects/onewill-wally.md",
-    "projects/synapse-hippocampus.md"
+  "timestamp": "2026-07-04T10:20:00+08:00",
+  "total_md_files": 1011,
+  "total_cards": 426,
+  "total_projects": 501,
+  "total_wikilinks": 3987,
+  "orphans": 2,
+  "orphan_details": ["learn-agent", "napaxi-mobile-agent-sdk"],
+  "broken_links": 3,
+  "broken_link_details": [
+    "projects/learn-agent.md -> [[prompt-cache-engineering]]",
+    "projects/napaxi-mobile-agent-sdk.md -> [[capability-architecture]]",
+    "projects/napaxi-mobile-agent-sdk.md -> [[mobile-agent]]"
   ],
-  "orphans": 3,
-  "orphan_list": [
-    "ctx-agent-history-search",
-    "memsyco-bench",
-    "onewill-wally"
-  ],
+  "collisions": 1,
+  "collision_details": ["README (3 files: ./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
+  "index_drift": 2,
+  "index_drift_details": ["projects/learn-agent.md not in index.md", "projects/napaxi-mobile-agent-sdk.md not in index.md"],
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "duplicate_slug_details": ["README (3 instances)"],
-  "cards_index_stale": true,
-  "cards_index_missing": 426,
+  "stale_files": 246,
   "frontmatter_issues": 2,
-  "frontmatter_issue_files": [
-    "compiled-truth-plus-timeline",
-    "nudge-audit"
-  ],
   "zero_outbound_links": 106,
-  "avg_links_per_file": 5.4,
-  "stale_files": 245,
-  "unicode_suspicious": 22,
+  "avg_wikilinks_per_file": 5.4,
+  "unicode_warnings": 22,
   "secrets_detected": 0,
   "invalid_facts": 0,
-  "error_book_open": 64,
-  "error_book_new": 0,
-  "error_book_recurring": 61,
-  "error_book_auto_closed": 0
+  "cards_index_stale": true,
+  "cards_index_missing": 426,
+  "error_book": {
+    "new_issues": 7,
+    "recurring_issues": 53,
+    "clean_passes": 0,
+    "auto_closed": 40,
+    "total_open": 60
+  },
+  "errors": 3,
+  "warnings": 58,
+  "exit_code": 1
 }
