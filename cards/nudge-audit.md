@@ -1,6 +1,7 @@
 ---
+title: Nudge Audit
 created: 2026-06-28
-last_verified: 2026-06-28
+last_verified: 2026-07-04
 tags: [nudge, observability, openclaw-plugin]
 ---
 

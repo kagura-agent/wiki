@@ -1,6 +1,7 @@
 ---
+title: Compiled Truth + Timeline
 created: 2026-06-24
-last_verified: 2026-06-24
+last_verified: 2026-07-04
 tags: [agent-memory, architecture-pattern, knowledge-management]
 ---
 
