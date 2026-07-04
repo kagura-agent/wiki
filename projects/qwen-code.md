@@ -85,6 +85,17 @@
 | PR | Issue | 状态 | 备注 |
 |---|---|---|---|
 | #6104 | #6097 lazy-load memory prompt | pending | Suggestion #1: condensed prompt when indexes empty, ~5k tokens saved |
+| #6300 | #6290 foreground agent concurrency cap | pending | getRunningBackgroundCount() counts all agents, register() + agent.ts preflight ungated |
+
+## 2026-07-04 workloop notes
+- Issue #6290: QWEN_CODE_MAX_BACKGROUND_AGENTS doesn't limit Explorer sub-agents. P2 bug, welcome-pr
+- Root cause: getRunningBackgroundCount() only counts isBackgrounded=true, foreground agents bypass the cap
+- Fix: 3 files (background-tasks.ts, agent.ts, background-tasks.test.ts), surgical — removed isBackgrounded guards from count, register, and preflight
+- Claude Code `--print` mode worked this time (~2 min, clean output). No timeout.
+- Fresh-context review flagged 3 MEDIUM naming concerns (method name, error message, config key all say "background" but now apply to all) — correctly identified as naming debt, not correctness. Proceeded without changes.
+- 256 tests pass locally, CI pending (external PR queue)
+- Related: #5176 (request for general agent parallel count + queueing) — our fix is a stepping stone
+- gogetajob import failed (GitHub indexing delay) — deferred
 
 ## 2026-07-01 workloop notes
 - Issue #6097: system prompt 22k token overhead, filed by another user with 4 concrete suggestions
