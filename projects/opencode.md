@@ -420,3 +420,14 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Lesson**: **Check for competing PRs EARLIER in the workflow** — ideally at study/plan stage, not at submit time. The issue was unassigned and had no comments indicating someone was working on it, but #32377 appeared between workloop runs.
 - **Time cost**: ~1 hour of compute for implementation + review that was ultimately wasted
 - **Second occurrence (2026-06-16)**: Workloop #4405 re-selected #32371 despite competing-pr-check.sh already being integrated. The find_work node selected the issue, and implementation proceeded all the way to pre_push_audit before catching the duplicate again. competing-pr-check must be failing silently or the issue passed through a code path that skips the check. Root cause: 2x wasted cycles on the same already-abandoned issue.
+
+### PR #35405 — fix(llm): unflatten Gemini tool call args with dot-bracket notation (2026-07-05)
+- **Issue**: #35105 — `question` tool fails with Gemini models due to flat dot-bracket arg notation
+- **Root cause**: Gemini models return `{"questions[0].header": "Auth"}` instead of nested `{questions: [{header: "Auth"}]}`. `gemini.ts` passes `functionCall.args` directly to `LLMEvent.toolCall` without unflattening.
+- **Fix**: New `unflattenArgs()` utility in `packages/llm/src/protocols/utils/unflatten-args.ts`. Fast-path returns args unchanged when no `[` found. Handles dot/bracket/mixed notation. Prototype pollution prevention via key denylist + `Object.create(null)`. Malformed key safety (missing `]` won't hang). Applied in `gemini.ts` at the `functionCall` handler.
+- **Status**: PENDING (4/4 CI checks passed ✅, no reviews yet)
+- **Diff**: 3 files, +158 -1 (1 utility, 1 one-line change in gemini.ts, 1 test file with 11 tests)
+- **Fresh-context review**: First pass flagged infinite loop on malformed keys (HIGH) and prototype pollution (MEDIUM). Both fixed, second pass PASS.
+- **Approach**: Claude Code for implementation, manual review and edits for security fixes.
+- **Claimed**: 2026-07-03 in issue comment with analysis. No competing PRs.
+- **Note**: This repo has `bun test` — run from `packages/llm/`, not root (root has sentinel dir). 3 merged PRs in this repo, relationship established.
