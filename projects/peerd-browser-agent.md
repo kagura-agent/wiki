@@ -1,10 +1,10 @@
 ---
 title: "peerd — Browser-Native AI Agent Harness"
 created: 2026-06-25
-tags: [agent-harness, browser, extension, p2p, webrtc, security, sandbox]
+tags: [agent-harness, browser, extension, p2p, webrtc, security, sandbox, actor-model, heap-isolation]
 source: https://github.com/NotASithLord/peerd
 status: deep-read
-last_verified: 2026-07-02
+last_verified: 2026-07-05
 ---
 
 # peerd — Browser-Native AI Agent Harness
@@ -107,6 +107,34 @@ Adopted the AGENTS.md/CLAUDE.md memory standard:
 - Apps ("dwapps") can be shared peer-to-peer
 - Inbound/unattended messaging surface deliberately OFF until security model built
 
+### 8. Actor Heap Split — Memory Boundary Isolation (v0.2.2)
+
+The leap from **prompt boundary** to **memory boundary** for actor isolation:
+- Every non-orchestrator actor runs in its own offscreen Worker heap
+- Worker holds NO vault key, NO chrome.* APIs, NO engine clients
+- Only 2 outward edges: SW-gated relay for model calls + tool calls
+- **SW re-validates every relayed call** — nothing the worker sends is trusted
+- `offscreen-actor-client.js` rebuilds caller context server-side on every dispatch
+- Bound actors: instance-pinned tool calls
+- Subagents: checked against persisted `grantedTools` set + `restrictCtxCapabilities`
+- Tool surface filtering: subagents can NEVER be granted DOM/page tools (foreground-tab escalation closed)
+- Stop cascades transitively: abort parent → abort entire subtree
+- Chrome-only (offscreen API); Firefox degrades to keyless in-SW loop
+
+**Key insight:** "Even if a page fully prompt-injects the actor → it can do nothing harmful." The attack surface is: mislead a throwaway agent that holds no secrets. This is [[clawpatrol]]-class protection achieved through architecture, not wire filtering.
+
+### 9. Dweb Actor — Agent-to-Agent Envoy (v0.2.2)
+
+First "daemon" actor — persistent, opt-in, mesh operator:
+- `actorType: 'dweb'`, global singleton per profile
+- Positive allow-set of exactly 7 dweb tools (no egress, no DOM, no engine mutation, no delegation)
+- Inbound path: peer message → rate-cap (3/min per did, 30/hr global) → fenced untrusted turn in keyless Worker → trickle-up notable findings to chat via `runWhenIdle`
+- **Unifying insight:** "After heap split, 'an agent you don't fully trust, reachable only by message, whose reply re-enters fenced' describes both a local actor and a peer's agent — the same sentence."
+- Preview-only (store build prunes the dweb module)
+- Adversarial cynical-review swarm development methodology: multi-pass security review before merge
+
+**Relevance:** The same isolation model handles both local untrusted computation AND remote untrusted peers. This is architecturally elegant — one security primitive for two threat models.
+
 ## Security Design Decisions
 
 1. **Egress allowlist is hardcoded** — only Anthropic, OpenAI, OpenRouter, Ollama loopback. No wildcards.
@@ -140,11 +168,15 @@ Adopted the AGENTS.md/CLAUDE.md memory standard:
 4. **P2P agent communication** — early but interesting signal for agent-to-agent protocols without centralized servers.
 5. **Runtime vs fleet separation** (07-02): AgentOS feasibility PR crystallized this — runtime emits+executes (85% done), fleet provisions+collects (20% done). Similar to OpenClaw gateway/node split. Clean architectural boundary.
 6. **Invariant ceiling framing** (07-02): Documenting what the platform *can never do* (Chrome extension CPU/RAM caps, corp SSO without moat sacrifice) is disciplined scope management worth adopting.
+7. **Memory boundary > prompt boundary** (07-05): For untrusted content isolation, process-level separation (Worker heaps) beats instruction-level separation (system prompts). Even full prompt injection of an isolated process does nothing if that process has no keys/tools. Applicable to OpenClaw's subagent model — similar to how isolated cron runs have restricted tool grants.
+8. **Unified local/remote security primitive** (07-05): "Fenced agent reachable only by message" is the same abstraction for local actors and remote peers. One isolation model, two threat surfaces. Elegant.
+9. **SW as centralized policy enforcement** (07-05): All tool/model calls route through one validation layer that rebuilds context server-side. Similar to OpenClaw gateway's role as trust boundary between agents and external world.
 
 ## Followup Log
 
 - **2026-06-26**: Initial deep-read. 141⭐, 2 contributors, 4 sandboxes, P2P dweb preview.
 - **2026-07-02**: 274⭐ (+94%). THRIVING 6/6. Major runtime refactor (web actor direct page driving), remote Ollama. AgentOS feasibility assessment PR #129 — runtime 85%/fleet 20%, 3-wave enterprise plan, 6 fork decisions. 4 unique PR authors, 53 ext PRs/30d.
+- **2026-07-05**: 300⭐ (+9.5%/3d). v0.2.2 released (07-04). **Major: actor model + heap split** — every actor/subagent now runs in its own keyless Worker heap (PR#138), formal Erlang-style isolation. Dweb actor (#141) as opt-in persistent P2P mesh envoy. Unified actor vocabulary across subagents+actors (#137). AgentOS PR#129 still OPEN (draft). Community still THRIVING 6/6, 48 ext PRs/30d, 5 unique issue authors.
 
 ## Predictions
 
@@ -152,8 +184,9 @@ Adopted the AGENTS.md/CLAUDE.md memory standard:
 - WebVM/Notebook sandboxes will attract power users but Firefox parity will be a persistent pain point
 - P2P layer will remain research-grade for 3+ months (security model is complex)
 - (07-02) AgentOS direction will attract enterprise interest but SaaS-vs-extension fork decision will delay it 2+ months
+- (07-05) Actor heap-split pattern will become their default isolation primitive; expect all new tool sandboxing to use this model
 
 ## Track
 
-- Revisit: 2026-07-05 (check AgentOS PR resolution, runtime refactor completion, enterprise packaging)
-- Watch for: AgentOS fork decision, headless enterprise packaging, control plane repo creation
+- Revisit: 2026-07-12 (check AgentOS PR ratification, dweb actor maturity, v0.3 direction)
+- Watch for: AgentOS fork decision, dweb actor security model (#35), control plane repo creation
