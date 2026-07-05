@@ -2,7 +2,7 @@
 title: Mobile Agent
 created: 2026-07-04
 tags: [mobile, agent, on-device, landscape]
-last_verified: 2026-07-04
+last_verified: 2026-07-05
 ---
 
 # Mobile Agent
@@ -11,7 +11,7 @@ Agents running on mobile devices. The space splits along a key architectural dis
 
 ## On-Device Runtime
 
-The agent SDK runs natively on the phone. No cloud server needed beyond model API calls. Napaxi (Ant Group) is the first serious mobile-native agent SDK, using a capability architecture to manage what the device can actually support at runtime (see [[capability-architecture]]).
+The agent SDK runs natively on the phone. No cloud server needed beyond model API calls. [[napaxi-mobile-agent-sdk|Napaxi]] (Ant Group) is the first serious mobile-native agent SDK, using a capability architecture to manage what the device can actually support at runtime (see [[capability-architecture]]).
 
 Challenges are substantial:
 - **Resource constraints** — limited memory, CPU, and battery for agent loops
@@ -21,8 +21,8 @@ Challenges are substantial:
 
 ## Cloud Box + Mobile Access
 
-The alternative pattern: run the agent in a cloud VM, access from the phone. pocketdev takes this approach — cloud box + Tailscale mesh + phone SSH client. The agent runs with full resources; the phone is a thin terminal.
+The alternative pattern: run the agent in a cloud VM, access from the phone. [[pocketdev]] takes this approach — cloud box + Tailscale mesh + phone SSH client. The agent runs with full resources; the phone is a thin terminal.
 
 ## Links
 
-[[agent-harness-landscape]], [[capability-architecture]], [[remote-development]]
+[[agent-harness-landscape]], [[capability-architecture]], [[remote-development]], [[napaxi-mobile-agent-sdk]], [[pocketdev]]

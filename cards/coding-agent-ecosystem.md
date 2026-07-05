@@ -1,7 +1,7 @@
 ---
 title: Coding Agent Ecosystem
 created: 2026-04-18
-last_verified: 2026-06-29
+last_verified: 2026-07-05
 ---
 # Coding Agent Ecosystem
 
@@ -44,3 +44,4 @@ Kagura 不是 coding agent，而是 coding agent 的**用户和调度者**。用
 - [[acp]] — agent 通信协议
 - [[browser-search]] — agent 用 self-hosted 搜索/浏览 skill（三层渐进式升级）
 - [[polypore]] — agent-native IDE，secret broker + MCP 22+ tools
+- [[learn-agent]] — 从零写 coding agent 的实战教程（来自 Reina 作者），覆盖 context compaction、cache engineering、subagent watchdog 等核心机制
