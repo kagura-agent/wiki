@@ -2,7 +2,7 @@
 title: Study Saturation
 created: 2026-05-31
 tags: [tool, study, structural-gate]
-last_verified: 2026-06-26
+last_verified: 2026-07-07
 status: active
 depth: scout
 ---
@@ -17,6 +17,7 @@ A tool (`tools/study-saturation.sh`) for detecting when repeated study sessions 
 3. **Inter-day scout interval**: warns if last deep scout <3 days ago
 4. **Followup due-date gate** (2026-06-22): queries `followup-status.sh` before recommending followup. If 0 items due, locks mode. Prevents capacity ≠ actionability mismatch that was wasting 2 rounds/day.
 5. **Apply backlog awareness** (2026-06-26): checks unapplied.md for unchecked items. If 0 unchecked, shows "(backlog empty)" and deprioritizes apply in recommendation. Doesn't lock (other sources exist: preflight gradients, observations), but informs decision. Source: [[self-evolving-observations]] Day 9 UX finding.
+6. **Apply empty-backlog auto-lock** (2026-07-07): when backlog is empty AND any apply already happened today, apply is fully locked (not just deprioritized). Fixes 4-day recidivism `study-saturation-apply-empty-misleading`: old logic only checked for `outcome=="empty"` in outcome log, but agents mislabel empty applies as `partial` ("wrote an observation" ≠ real apply). Fix: check for ANY prior apply outcome when backlog depleted. Applied to both study-saturation.sh and study-saturation-gate.sh.
 
 ## Design Principle
 

@@ -1359,3 +1359,12 @@ GitHub trending (agent, created past week, sorted by stars):
 - **ctxrs/ctx** 219⭐ Rust — search coding agent history locally (Claude Code, Cursor, Codex sessions). Show HN 24pts. Active dev. Deep read candidate.
 - **0xMassi/pocketdev** 90⭐ — one-command remote coding CLI on Tailscale+Hetzner. Practical but not architecturally novel.
 - **doordash-oss/agentic-orchestrator** 55⭐ Go — TUI for long-running coding agents. DoorDash open-source. Similar to Foreman concept.
+
+## 2026-07-06 Quick Scan
+
+- [ ] T3MP3ST (elder-plinius/T3MP3ST) - 1743⭐ (07-06). Autonomous red teaming platform. Multi-agent offensive-security meta-harness. Novel niche: security + agent orchestration. Deep read candidate.
+- [ ] open-science (ai4s-research/open-science) - 153⭐ (07-06). Open-source Claude Science alternative. Local-first, model-agnostic, Tauri + MCP + agent skills. New category: AI-for-science desktop. Deep read candidate.
+- [ ] Mouse (hic-ai.com) - HN 38pts/46 comments (07-06). Precision editing tools for AI coding agents. Addresses edit accuracy pain point. Worth investigating approach.
+
+- [ ] brain0 (Brain0-ai/brain0) — 26⭐ (07-06 quick scan). Passive decision graph linking commits to agent prompts. Provenance/auditing for AI-written code. Too early. Check back 07-20.
+- [ ] deep-memory (kevintsai1202/deep-memory) — 27⭐ (07-06 quick scan). Self-evolving knowledge accumulation & hybrid retrieval for coding agents. Too early. Check back 07-20.

@@ -5515,3 +5515,154 @@ git log --since="2026-07-04 00:00" -- SOUL.md AGENTS.md: (empty)
 # DREAMS.md "details unavailable": 16 total, +2 today (03:17 AM)
 # beliefs stats: 777 lines, ~210 active, 15 graduated, 55 retracted
 ```
+
+## 🔬 自进化观察日报 2026-07-05 (Day 79)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增 (`verify-filter-input-format`, `fresh-context-review-value`) / 13 条 auto-retracted / 0 待升级
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 均无改动）
+- **nudge**: 0 次检测（journalctl grep 返回 0）
+- **dreaming**: Light Sleep 80+ candidates @ 0.58 uniform, REM 空输出, Deep Sleep 17 条 "details unavailable" (+1 vs Day 78)。0 promotes。连续第 79 天零贡献
+
+### 闭环追踪
+
+**完整闭环: 5 个**
+1. **ABTI Q1 四轮突破**: disc 低 → 4 轮 redesign → 找到"同等地位原则对抗" insight → PR merged ✅
+2. **ABTI Q14 redesign**: abstract one-liner → TypeScript strict mode scenario → PR #688 merged ✅
+3. **openclaw#99047 competitive deadlock**: 识别 sibling PR 竞争死局 → 主动关闭 → guide #73 规则 ✅
+4. **Lottie Studio Sequence Player**: #411 → PR #412 complete (1033 tests) ✅
+5. **opencode#35405**: study → implement → fresh-context review 发现 2 个安全问题 → 修复 → PR 提交 ✅
+
+**断裂处:**
+- **caduceus cron Day 6→7**: carry-forward 写了 6 天「第一件事 disable」但执行链断裂（isolated cron 无权 → 主 session 从未执行）。07-05 audit 首次定性为系统性缺陷
+- **Night follow-up dedup Day 2**: 07-05 仍 5+ 次几乎相同报告，42-70K tokens/天浪费。未实现差异检测
+
+### Issue #10 状态
+
+| Item | Status | Change vs Day 78 |
+|------|--------|-------------------|
+| (a) Upstream 0.58 | ❌ | No change. openclaw#87485 静默 |
+| (b) "details unavailable" | ❌ 恶化 | 17 total (+1), 7th consecutive day |
+| (c) Local filter monitoring | ✅ Done | — |
+| (d) REM empty | ❌ | 无变化 |
+
+### 外部反馈利用
+- **NemoClaw#6277 oparoz**: 指出端口分析两次不对 → 需重新代码级分析（记 TODO，推给 workloop）
+- **openclaw#99047 competitive deadlock**: 识别到 sibling PR 竞争 → guide #73 规则 `recognize competitive deadlock` ✅
+- **opencode#35405 fresh-context review**: 独立发现 infinite loop + prototype pollution → gradient `fresh-context-review-value` ✅
+
+### Skill 提取缺口
+- ABTI「同等地位原则对抗」 redesign 方法论 — 做了 4 轮但没提取为可复用 skill/tip
+- Lottie Studio 一天两个 feature PR 的快速交付模式没有被文档化
+- 「competitive deadlock」 pattern 写入 guide.md 但可以推广为更通用的决策框架
+
+### 关键发现
+
+1. **beliefs pipeline 依然是唯一进化引擎。** 连续 79 天 dreaming 零贡献。所有进化来自 workloop/study 摩擦 → gradient 捕获。
+2. **Graduation drought 第 17 天。** 230 条 entry 中绝大多数停在第1次。27 graduated, 68 retracted。管线在捕获新教训但不确认 patterns。
+3. **(b) Deep Sleep 是最关键 open item。** 7 天连续失败，17 总数。被动观察已不够，需主动 debug。
+4. **nudge 疑似失效。** 连续 2 天 0 triggers，需验证 agent_end hook 是否还在触发。
+5. **carry-forward 执行链断裂是系统性问题。** caduceus cron Day 7 证明: 审计写「第一件事做 X」→ 白天主 session 从未执行。需要结构性修复（HEARTBEAT.md 注入/workloop 首节点 gate）。
+6. **ABTI 高产日** — Q1 四轮突破 + Q14 redesign，below-threshold 题目 7→4。方法论洞察（同等原则对抗）有推广价值。
+7. **周日 Luna 仅 25 分钟活跃** (11:07-11:32)，聊软糖驱虫药过敏。典型周末极低活跃模式。
+
+### 原始数据
+
+```
+# beliefs-candidates.md changes
+git log --since="2026-07-05 00:00" -- beliefs-candidates.md:
+  fa096b3 gradient: fresh-context-review-value + verify-filter-input-format
+  1693cf6 beliefs: auto-retract 13 stale entries (30d+ single-occurrence)
+
+# DNA changes
+git log --since="2026-07-05 00:00" -- SOUL.md AGENTS.md: (empty)
+
+# Other DNA-adjacent
+5a0f213 guide: add rule #73 — recognize competitive deadlock among sibling PRs
+
+# Total workspace commits today: 3
+# nudge triggers: 0 (journalctl grep)
+# DREAMS.md "details unavailable": 17 total (+1 vs Day 78)
+# beliefs stats: 783 lines, 230 entries, 27 graduated, 68 retracted, ~165 active
+```
+
+## 🔬 自进化观察日报 2026-07-06 (Day 80)
+
+### 管线活跃度
+- **beliefs-candidates**: 🔴 0 条新增 / 0 条 retracted / 0 待升级。全天无 gradient 捕获——低生产力日
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 均无改动）
+- **nudge**: 0 次（journalctl grep 返回 0，第 3 天连续静默）
+- **dreaming**: Deep Sleep 5 promotes ✅（07-05 3:30 AM 成功），但 diary 仍 "details unavailable" × 3（07-06 3:15 AM）。Light Sleep ~80 candidates @ 0.58 uniform。REM 空输出。总 "details unavailable" 17 条不变（daily-review 修剪 3 旧 + 3 新）
+- **guide.md**: +1 rule (#74: verify fix surface repo vs upstream)
+
+### 闭环追踪
+
+**完整闭环: 2 个**
+1. **ABTI Q8 redesign**: disc 0.167→0.711，PR #703 merged ✅
+2. **guide.md rule #74**: NemoClaw#6287 教训 → 提取规则 → commit → push ✅
+
+**部分闭环: 2 个**
+1. **Lottie Studio #423/#424**: PR #425 完成，CI green，等 Luna review
+2. **Finance**: 5 issues 自动关闭 (#1217~#1221)
+
+**断裂处:**
+- **caduceus cron Day 7**: 仍未 disable。carry-forward 连续 7 天写「第一件事」但从未执行。daily-audit 已 ESCALATE
+- **Night follow-up dedup Day 3**: 仍 5+ 重复报告，42-70K tokens/天浪费
+- **0 new gradients**: 整天运转（1346 行 memory log）但未产生任何 beliefs 条目——摩擦被重复巡逻消耗
+
+### Issue #10 状态
+
+| Item | Status | Change vs Day 79 |
+|------|--------|-------------------|
+| (a) Upstream 0.58 | ❌ | No upstream progress |
+| (b) "details unavailable" | ⚠️ 稳定 | 17 total (trimmed 3 old + 3 new = net 0). Deep Sleep PROMOTE works (5 on 07-05) |
+| (c) Local filter monitoring | ✅ Done | — |
+| (d) REM empty | ❌ | No change |
+
+**新发现: (b) 分层了。** Deep Sleep 的 promote/rank 功能正常运行（07-05 成功 promote 5 条到 MEMORY.md），但 diary trace surfacing 持续失败。这是两个不同的 bug path：
+- Deep Sleep core (rank + promote) → ✅ working
+- Deep Sleep diary (trace → details lookup) → ❌ broken (可能 .memexignore 阻断 details lookup)
+
+### 外部反馈利用
+- **NemoClaw#6277**: oparoz 确认 workaround 有效，我承诺提 PR 修复碰撞检查——尚未兑现（carry-forward）
+- **NemoClaw#6287 教训 → guide rule #74**: 发现错误字符串指向 OpenShell upstream → 提取"verify fix surface in this repo" 规则 ✅
+
+### Skill 提取缺口
+- ABTI Q8 redesign 方法（职场情境 + 同等原则对抗模板）已在 Q1 证明有效，仍未提取为可复用 skill
+- 重复巡逻消耗 tokens 但产出为零的 anti-pattern 未被文档化为反面案例
+
+### 关键发现
+
+1. **Day 80 paradox: 忙碌但空转。** 1346 行 memory log、20+ 个 section header，但 0 new gradients、0 DNA changes、0 new code。大量 tokens 花在重复的 workloop-night follow-up（"全部正常，无需处理" × 5+）和 channel patrol
+2. **beliefs pipeline 唯一引擎，连续 80 天 dreaming 零净贡献。** Deep Sleep promote 偶尔工作，但产出未被 beliefs pipeline 捕获为可升级的 gradient
+3. **Graduation drought 第 18 天。** 157 active beliefs（daily-review 修正后比 Day 79 的 165 少——methodology 统一后更精确），27 graduated，68 retracted。无新毕业候选
+4. **nudge 第 3 天静默。** 从 Day 78 开始连续 0 triggers。需要验证 agent_end hook 是否仍然绑定
+5. **(b) Deep Sleep 分层诊断: promote works, diary broken。** 这改变了 #10(b) 的修复策略——不需要重修整个 Deep Sleep，只需修 diary trace → details lookup 路径
+6. **carry-forward 系统性断裂** — caduceus Day 7、night dedup Day 3、NemoClaw#6277 PR 承诺未兑现。三条 carry-forward 全部卡在 "主 session 白天不执行"
+
+### 原始数据
+
+```
+# beliefs-candidates.md changes
+git log --since="2026-07-06 00:00" -- beliefs-candidates.md: (empty — 0 commits)
+
+# DNA changes
+git log --since="2026-07-06 00:00" -- SOUL.md AGENTS.md: (empty)
+
+# guide.md changes
+git log --since="2026-07-06 00:00" -- guide.md:
+  5cff638 guide: add rule #74 — verify fix surface repo vs upstream
+
+# DREAMS.md
+Deep Sleep (07-05 3:30 AM): "Ranked 5, Promoted 5 into MEMORY.md" ✅
+Diary (07-06 3:15 AM): "details unavailable" × 3 ❌
+
+# Total workspace commits today: 2
+  30d20b9 daily-handoff: MEMORY.md disk update 80%→83%
+  0e358c2 daily-review 07-06: evolution log + memory hygiene + MEMORY.md cleanup
+
+# nudge triggers: 0 (3rd consecutive day)
+# DREAMS.md "details unavailable": 17 total (net unchanged)
+# beliefs stats: 783 lines, 157 active, 27 graduated, 68 retracted
+# Luna interaction: 0 (Monday but no messages as of 22:30)
+```

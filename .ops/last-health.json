@@ -1,39 +1,36 @@
 {
-  "timestamp": "2026-07-05T10:08:00+08:00",
-  "total_files": 1018,
-  "cards": 430,
-  "projects": 504,
-  "wikilinks": 4009,
-  "errors": 1,
-  "warnings": 66,
-  "broken_wikilinks": [
+  "timestamp": "2026-07-07T10:06:00+08:00",
+  "total_md_files": 1018,
+  "total_cards": 430,
+  "total_projects": 504,
+  "total_wikilinks": 4019,
+  "orphans": 0,
+  "broken_links": 1,
+  "broken_links_detail": [
     "projects/brain0-provenance.md -> [[context-labs-halo]]"
   ],
-  "orphans": 5,
-  "orphan_list": ["astryx", "brain0-provenance", "learn-agent", "napaxi-mobile-agent-sdk", "pocketdev"],
-  "index_drift": [
-    "cards/capability-architecture.md",
-    "cards/mobile-agent.md",
-    "cards/prompt-cache-engineering.md",
-    "cards/remote-development.md",
-    "projects/astryx.md",
-    "projects/brain0-provenance.md",
-    "projects/learn-agent.md",
-    "projects/napaxi-mobile-agent-sdk.md",
-    "projects/pocketdev.md"
+  "collisions": 1,
+  "collisions_detail": [
+    "README: ./README.md, ./skill-trajectories/README.md, ./experiments/README.md"
   ],
-  "index_drift_count": 9,
-  "stubs": 0,
-  "stale_files": 262,
-  "duplicate_slugs": ["README (3 files)"],
+  "index_drift": false,
   "cards_index_stale": true,
-  "cards_index_missing": 430,
-  "zero_outbound_links": 106,
-  "avg_wikilinks_per_linked_file": 5.4,
-  "unicode_suspicious": 22,
-  "secrets_detected": 0,
-  "error_book_new": 3,
-  "error_book_recurring": 63,
-  "error_book_auto_closed": 34,
-  "error_book_total_open": 66
+  "cards_index_stale_detail": "cards-index.md lists ~0 slugs, cards/ has 430 files",
+  "stubs": 0,
+  "stale_files": 267,
+  "unicode_warnings": 22,
+  "frontmatter_ok": true,
+  "secrets_detected": false,
+  "invalid_facts": false,
+  "avg_wikilinks_per_file": 5.4,
+  "cards_zero_outbound": 106,
+  "errors": 1,
+  "warnings": 52,
+  "error_book": {
+    "new_issues": 0,
+    "recurring_issues": 52,
+    "clean_passes": 0,
+    "auto_closed": 30,
+    "total_open": 52
+  }
 }
