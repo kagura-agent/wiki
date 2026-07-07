@@ -1,5 +1,84 @@
 # 自进化管线观察日志
 
+## 🔬 自进化观察日报 2026-07-07 (Day 81)
+
+### 管线活跃度
+- **beliefs-candidates**: 🟢 Active — 3 new gradients (study-saturation-apply-empty-misleading, agent-outcome-label-unreliability, manual-vs-acpx-threshold), 16 auto-retracted in daily-review, 0 graduations
+- **Stats**: 794 lines | ~236 gradient entries | ~152 active | 34 graduated | 84 retracted
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 均无改动）
+- **nudge**: ❌ 0 triggers（第 4 天连续静默。gateway 日志中 nudge 字样 0 次出现。插件文件存在于 extensions/nudge/ 但可能未加载或 hook 未绑定）
+- **dreaming**: ❌ Diary broken — "details unavailable" × 3 (07-07 3:15 AM)。Deep Sleep promote 最后一次成功是 07-05（5 candidates promoted）。Light Sleep ~80 candidates @ 0.58 uniform。REM empty
+- **guide.md**: 无新增 rules
+
+### 闭环追踪
+
+**完整闭环: 3 个**
+1. **study-saturation apply auto-lock**: gradient (04日首次 + 07日复发) → 诊断根因 (agent mislabels outcome) → 修复 study-saturation.sh + study-saturation-gate.sh → commit da3a637 ✅
+2. **Lottie Studio plugin system**: #434 collaborative editing → #437 plugin system，两个 feature PR merged ✅
+3. **cove#453 webhook guidance**: PR merged, cove#450 ConnectionBanner fix merged ✅
+
+**部分闭环: 2 个**
+1. **openclaw#101537 cron wake skip**: Root cause identified (heartbeat guards blocking cron wakes), plan review approved 8/10, implementation pending (exec broke mid-session)
+2. **agentmemory#1028**: CodeRabbit trivial nitpick, waiting for human maintainer
+
+**断裂处:**
+- nudge 第 4 天静默 — 从观察转为需主动调查
+- dreaming diary "details unavailable" 持续，尚未实施修复
+
+### Issue #10 状态
+
+| Item | Status | Change vs Day 80 |
+|------|--------|-------------------|
+| (a) Upstream 0.58 | ❌ | No upstream progress |
+| (b) "details unavailable" | ❌ | 仍在失败。07-07 diary × 3 失败。promote 未触发（上次成功 07-05） |
+| (c) Local filter monitoring | ✅ Done | — |
+| (d) REM empty | ❌ | No change |
+
+### 今日发现
+
+1. **beliefs pipeline 回暖。** Day 80 为 0 gradients，Day 81 恢复到 3 条。原因：有实际工作产生摩擦（study-saturation bug fix, workloop implementation decision）。验证了 Day 80 的 "busy but idle" 诊断——evolution 来自 *friction*，不是 patrol
+2. **saturation gate closed loop 是高质量闭环。** 从 07-04 首次发现到 07-07 修复，经历了复发 → 根因诊断（agent outcome label 不可靠）→ 代码修复。这是一个 beliefs pipeline 正常工作的范例
+3. **nudge 第 4 天静默成为 P1 问题。** 不再是 "需要验证" — gateway 日志中 0 nudge 痕迹确认 hook 未触发。需要检查 plugin 是否被 gateway 正确加载
+4. **dreaming diary 仍然是唯一断裂的子系统。** promote 功能正常（07-05 成功 5 条），diary trace → details lookup 持续失败。.memexignore 假说未验证
+5. **PR 产出高。** 10 个 PR created/merged today（lottie-studio ×5, cove ×3, agentmemory ×1, abti ×1），但大部分是 own-repo feature work
+6. **Memory-eval 新发现：dreaming light files 污染搜索。** 78 files in memory/dreaming/light/ 未被 .memexignore 排除，影响中等特异性查询结果
+
+### 外部反馈利用
+- **openclaw#101537**: 新 bug 发现 → root cause 分析（heartbeat guards），外部用户的 issue 直接驱动了 workloop 工作选择 ✅
+- **agentmemory#1028**: CodeRabbit bot review，待处理
+
+### Skill 提取缺口
+- study-saturation gate 的 "check condition directly, not agent-reported labels" 原则是可复用的。目前只在 beliefs-candidates 中，尚未提取为通用检查原则
+- Memory-eval 作为搜索质量基线测试，方法论可提取为可复用的 eval script
+
+### 原始数据
+
+```
+# beliefs-candidates.md changes (07-07)
+git log --since="2026-07-07 00:00" -- beliefs-candidates.md:
+  dbb3844 gradient: manual-vs-acpx-threshold (16:24)
+  1f3379c daily-review 07-07: 16 entries auto-retracted (03:37)
+
+# DNA changes: none
+git log --since="yesterday 22:30" -- SOUL.md AGENTS.md: (empty)
+
+# DREAMS.md (07-07 3:15 AM)
+Diary: "details unavailable" × 3 ❌
+Promote: not triggered (last success 07-05)
+
+# Total workspace commits today: 4
+  27ff8c0 todo: mark rule #75 done
+  dbb3844 gradient: manual-vs-acpx-threshold
+  da3a637 fix: study-saturation apply auto-lock
+  1f3379c daily-review 07-07: retract 16, MEMORY.md cleanup
+
+# nudge triggers: 0 (4th consecutive day, gateway log 0 mentions)
+# beliefs stats: 794 lines, ~152 active, 34 graduated, 84 retracted
+# PR activity: 10 PRs (5 lottie-studio, 3 cove, 1 agentmemory, 1 abti)
+```
+
+---
+
 ## 🔬 自进化观察日报 2026-07-03 (Day 77)
 
 ### 管线活跃度
