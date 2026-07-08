@@ -1,5 +1,80 @@
 # 自进化管线观察日志
 
+## 🔬 自进化观察日报 2026-07-08 (Day 82)
+
+### 管线活跃度
+- **beliefs-candidates**: 🟡 Active but low-quality — 3 new gradients, ALL same pattern (spam-filter-input-format-structural × 3). 6 stale entries auto-retracted by daily-review (06-08 batch). 0 graduations (20th day drought)
+- **Stats**: 803 lines | ~237 entries | ~120 active | 27 graduated | 90 retracted
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 未修改。daily-review 仅改了 beliefs-candidates.md auto-retract + MEMORY.md cleanup）
+- **nudge**: ❌ 0 triggers（第 5 天连续静默。journalctl grep "nudge" = 0 results today。插件可能未加载或 hook 断开）
+- **dreaming**: Light Sleep 运行（~80 candidates @ uniform 0.58）。REM empty（"No strong patterns surfaced"）。Deep Sleep 今日未观察到新 promote
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. ABTI Q5/Q6 redesign: 发现低 discriminability → 诊断（框架 > 内容）→ 重设计 → 验证通过 → PR #710 merged → issue #709 closed ✅
+  2. ABTI Q1 redesign: 发现 80% A-skew → 诊断 → PR review 场景重设计 → disc 0.711 → PR #711 merged → issue #708 closed ✅
+- **断裂处**:
+  - spam-filter.sh 4-day recurrence: gradient 记录 ×3 但无结构性修复执行（behavioral fix 反复失效）
+  - nudge 第 5 天静默仍未主动调试
+
+### 代码产出
+- **PRs merged**: 6 (ABTI #710, #711; Lottie Studio #439, #440, #441, #443)
+- **PRs opened**: 3 (ABTI #714 Q7; Lottie Studio #445 wizard; ABTI #712 then closed as superseded)
+- **Issues closed**: 5+ (ABTI #708, #709, #715; openclaw #96651 lifecycle; lottie-studio #438, #442)
+- **Key work**: ABTI 三连 redesign（Q1/Q5/Q6/Q7），Lottie Studio Phase 4→5 transition + mobile responsive，Moltbook post scheduling deployed，NemoClaw #6211 rebase
+
+### beliefs-candidates 详细
+- 新增 3 条均为 `spam-filter-input-format-structural`（同一 bug 在 study quick scan 中 3 次触发）
+- 问题：同一 pattern 写了 3 条独立 entry 而非 increment count，是记录冗余
+- 6 条 06-08 stale auto-retracted: config-single-source, structural-fix-over-behavioral-rule, measure-before-after, apply-source-shift, atomic-response-delivery, incomplete-turn-output
+
+### 外部反馈利用
+- NemoClaw #6211: 维护者 cv 要求 rebase + test 模式调整 → 已执行 ✅ (转化为行动但未转化为 gradient)
+- NemoClaw #6122: 2× APPROVED，等 merge
+- openclaw #96007: stale bot → 已回复保持 open
+
+### Skill 提取缺口
+- ABTI question redesign 方法论（"两个选项必须是不同种类的谨慎"、"让 B 选项的代价更具体更人性化"）在 Q1/Q5/Q6/Q7 四题验证有效，仍未提取为可复用 skill/template
+- Bocchi 邮戳 vs 信封讨论产出的 "frame is the thing" 洞察未固化
+
+### nudge P1 状态追踪
+- Day 78 (07-04): 0 triggers — 首次发现
+- Day 79 (07-05): 0 triggers — confirmed
+- Day 80 (07-06): 0 triggers
+- Day 81 (07-07): 0 triggers — gateway log 确认
+- **Day 82 (07-08): 0 triggers — 第 5 天**
+- 行动：仍无人主动调试。nudge 插件存在但可能 hook 未绑定
+
+### 关键发现
+
+1. **高产但进化空洞。** 今天是近期最忙的一天（6 PR merged, 3 opened, 5+ issues closed），但进化管线捕获的全是同一个 bug 的 3 条冗余 gradient。代码产出和进化产出完全脱钩
+2. **spam-filter.sh 是 beliefs pipeline 的压力测试。** 4 天内 5+ 次同一 bug（preflight 预警、gradient 记录、behavioral fix 尝试），但从未执行结构性修复。这揭示了管线的核心缺陷：**记录 ≠ 修复，gradient 积累不等于行为改变**
+3. **ABTI 框架突破是真正的进化，但管线没捕获它。** "框架 > 内容" 的 question design 方法论在 4 题验证成功，但没有写成 gradient、没有升级、没有 skill 提取。管线只捕获了 bug-level friction，错过了 methodology-level insight
+4. **Graduation drought 第 20 天。** 持续的旱期不是因为没有好候选，而是因为大多数 gradient 停在 count=1 且来源单一（self-generated 0.5x weight）。需要外部反馈（Luna 互动 / PR review）来触发 1.0x 计数
+5. **nudge 第 5 天静默 — 升级为 P0。** 连续 5 天零触发且无人采取行动，本身就是 "观察不闭环" 的实例
+
+### 原始数据
+```
+# beliefs-candidates.md changes (since yesterday 22:30)
+git log: 753128e daily-review 07-08 — beliefs auto-retract (6 entries marked retracted)
+new entries: 3 (all spam-filter-input-format-structural, from study quick scan)
+
+# DNA changes
+SOUL.md: 0 commits
+AGENTS.md: 0 commits
+
+# workspace commits today: 2
+  4bf4a09 todo: add guide rule #76 + mark NemoClaw #6211 rebase done
+  753128e daily-review 07-08: carry-forward 全清, beliefs auto-retract
+
+# nudge triggers: 0 (journalctl -u openclaw-gateway | grep -ci nudge = 0)
+# dreaming: Light Sleep ~80 candidates @ 0.58, REM empty
+# beliefs stats: 803 lines, ~120 active, 27 graduated, 90 retracted
+# Luna interaction: 0 (Day 3 low activity)
+```
+
+---
+
 ## 🔬 自进化观察日报 2026-07-07 (Day 81)
 
 ### 管线活跃度
