@@ -357,3 +357,13 @@
 - **CodeRabbit feedback**: Post-rebuild summary didn't distinguish forced-skip from normal rebuild. Added `else if (!staleRecovery && !backupManifest)` branch with ⚠ callout. Valid UX improvement, quick win.
 - **Pattern**: NemoClaw convention — `null` return from backup = proceed without manifest; `undefined` = abort. This is a critical semantic distinction. Our force path returns `null`, consistent with staleRecovery.
 - **Process note**: Workloop instance stalled at plan_review for ~8.5h across multiple cron runs. stale-pr-check.sh correctly detected existing PR and fast-pathed.
+
+## PR #6573 — gate Messaging channels to openclaw/hermes variants (2026-07-09)
+- **Issue**: #6561 — Deep Agents variant Overview lists "Messaging channels" as Key Feature, but Deep Agents supports no channels
+- **Status**: PENDING, CI pass (4/4 ✅), CodeRabbit review addressed (2nd commit)
+- **Scope**: 1 file (docs/about/overview.mdx), +19/-2
+- **Fix**: (1) Moved "Messaging channels" row from shared Key Features table into `<AgentOnly variant="openclaw,hermes">` block. (2) Intro text uses block-form `<AgentOnly>` to show "always-on AI agents" (openclaw/hermes) vs "AI coding agents" (deepagents).
+- **CodeRabbit feedback**: Caught that inline `<AgentOnly>` tags don't get stripped by `scripts/sync-agent-variant-docs.ts` — the sync script regex requires `\n` after opening tag and before closing tag. Converted to block-form. Valid catch, quick fix.
+- **Key learning**: `sync-agent-variant-docs.ts` `stripAgentOnlyBlocksForVariant()` uses regex `/\n?<AgentOnly variant="([^"]+)">\n([\s\S]*?)\n<\/AgentOnly>\n?/g` — requires newlines around content. Inline `<AgentOnly>` will leak raw JSX into generated variant docs.
+- **Pattern**: DOCS_VARIANT_GATING — MDX tables can't wrap individual rows in JSX, so split into separate table blocks for variant-specific rows. Always use block-form `<AgentOnly>` (with newlines), never inline.
+- **Process note**: Workloop instance #6012 stalled at plan node for ~1hr because previous cron session completed plan-review subagent (APPROVED 8/10) but died before advancing. Recovered cleanly on next cron run.
