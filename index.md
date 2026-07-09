@@ -485,7 +485,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (504)
+## 📁 Project Notes (510)
 
 ### 2
 
@@ -545,6 +545,7 @@
 - [Agent Memory Benchmark (AMB)](projects/agent-memory-benchmark.md)
 - [Agent Memory Engine (uudam42)](projects/agent-memory-engine.md)
 - [Agent Memory Hooks — Graph-Backed Dream Memory for Coding Agents](projects/agent-memory-hooks-neo4j.md)
+- [agentmemory (rohitg00)](projects/agentmemory.md)
 - [Agent Memory Research Landscape (2025.03)](projects/agent-memory-research.md)
 - [AgentOps — Operational Layer for Coding Agents](projects/agentops.md)
 - [agent-oss (quarqlabs/agent-oss)](projects/agent-oss.md)
@@ -715,6 +716,7 @@
 - [Fedora Rogue Agent Incident (May-June 2026)](projects/fedora-rogue-agent-incident.md)
 - [Felix — Single-Binary Agent Gateway](projects/felix.md)
 - [Fides Protocol — ZKP Trust Layer for AI Agents](projects/fides-protocol.md)
+- [flint-chart — Visualization Language for the AI Era](projects/flint-chart.md)
 - [FlowForge 架构深读](projects/flowforge.md)
 - [Foreman — Boris-Style Agentic Orchestrator TUI](projects/foreman-orchestrator.md)
 - [Forge — Guardrails for Self-Hosted LLM Tool-Calling](projects/forge-guardrails.md)
@@ -732,6 +734,7 @@
 - [girl-agent](projects/girl-agent.md)
 - [GitAgentProtocol (Open GAP)](projects/gitagent-protocol.md)
 - [Gitclaw — Git-Native Agent Framework](projects/gitclaw.md)
+- [GitLost — GitHub Agentic Workflow Prompt Injection](projects/gitlost-prompt-injection.md)
 - [Godcoder — Self-Optimizing Agent Harness](projects/godcoder-self-optimizing-harness.md)
 - [GodModeSkill (99xAgency)](projects/godmode-skill.md)
 - [gogetajob — 深读笔记](projects/gogetajob.md)
@@ -742,6 +745,7 @@
 ### H
 
 - [HALO — RLM-based Agent Trace Optimizer](projects/halo-agent-trace-optimizer.md)
+- [Halo Record — Tamper-Evident Runtime Records for AI Agents](projects/halo-record.md)
 - [Harmonist](projects/harmonist.md)
 - [Harness Engineering: OpenAI's Agent-First Development](projects/harness-engineering-openai.md)
 - [Headroom — Context Compression Layer for AI Agents](projects/headroom.md)
@@ -805,6 +809,7 @@
 - [Luna 副业探索](projects/luna-side-hustle.md)
 ### M
 
+- [MakerChecker — Governance Layer for AI Agent Tool Calls](projects/makerchecker.md)
 - [manifest — Smart LLM Routing for OpenClaw](projects/manifest.md)
 - [Mapick — OpenClaw Skill Manager & Privacy Layer](projects/mapick.md)
 - [mastra-ai/mastra](projects/mastra.md)
@@ -988,6 +993,7 @@
 - [Statewave](projects/statewave.md)
 - [Stripe Link CLI — Agent Commerce Layer](projects/stripe-link-cli.md)
 - [STSS — Skill Trust & Signing Service](projects/stss.md)
+- [Study Apply: Harvest Complete State (2026-07-07)](projects/study-apply-harvest-status-2026-07-07.md)
 - [study-portfolio-observations](projects/study-portfolio-observations.md)
 - [Superlog — Agentic Telemetry System](projects/superlog.md)
 - [superpowers (obra/superpowers)](projects/superpowers.md)
@@ -1048,4 +1054,4 @@
 
 ---
 
-*430 cards, 504 project notes. Last generated: 2026-07-05 04:53 UTC.*
+*430 cards, 510 project notes. Last generated: 2026-07-09 14:55 UTC.*

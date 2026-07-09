@@ -5820,3 +5820,81 @@ Diary (07-06 3:15 AM): "details unavailable" × 3 ❌
 # beliefs stats: 783 lines, 157 active, 27 graduated, 68 retracted
 # Luna interaction: 0 (Monday but no messages as of 22:30)
 ```
+
+## 🔬 Day 83 Observation (2026-07-09)
+
+### Pipeline Health Summary
+
+**beliefs-candidates**: 🟢 Meaningful activity
+- 2 new quality gradients: `fresh-context-review-false-positive` (workloop), `docs-variant-block-form` (workloop)
+- 1 Cove cross-channel error documented (non-gradient format, pattern recognition entry)
+- Daily-review auto-retracted 4 stale entries (all single-occurrence, 30+ day old)
+- `spam-filter-input-format-structural` pattern: 3 entries each marked "第1次" — effectively 3+ occurrences of same bug. **Still no structural fix**. Classic accumulation-without-action
+- Stats: 816 lines | ~160 active | 27 graduated | 120 retracted
+
+**DNA**: ⚪ No changes (SOUL.md / AGENTS.md untouched)
+
+**nudge**: ❌ 0 triggers — **Day 6 consecutive silence**
+- journalctl grep for nudge/agent_end/hook: empty
+- No evidence of agent_end lifecycle hook firing at all today
+- This P0 remains unaddressed despite daily flagging since Day 78
+
+**dreaming**: ⚠️ Degraded
+- Light Sleep: ran, ~20 candidates staged (all uniform 0.58 confidence) from 07-05 corpus
+- REM: empty ("No strong patterns surfaced")
+- Deep Sleep diary: 5 NEW "details unavailable" entries (3:15 AM ×3, 3:52 AM ×2)
+- Total "details unavailable" count: 19 (was 17 on Day 80, +2 net since)
+- Promotions observed: 0
+
+**daily-review** (03:15): ✅ Ran successfully
+- MEMORY.md cleanup: -9 lines, stale promotions cleared, NemoClaw merged update
+- beliefs auto-retract: 4 entries (30-day stale rule)
+- Healthy maintenance behavior
+
+### Issue #10 Sub-item Status
+
+| Item | Status | Change from Day 82 |
+|------|--------|---------------------|
+| (a) Upstream uniform 0.58 | ❌ Not filed | No change |
+| (b) Deep Sleep "details unavailable" | ⚠️ Worsening | +2 new occurrences (19 total). Still no fix |
+| (c) Local filter monitoring | ✅ Done | — |
+| (d) REM empty | ❌ | Day 83 of "No strong patterns surfaced" |
+
+### Key Observations
+
+**1. Gradient quality improving**
+Today's 2 gradients are both workloop-sourced and target actual methodology learnings (review false positives, MDX syntax). This is qualitatively better than Day 82's 3 redundant spam-filter entries. The pipeline captured useful methodology lessons today.
+
+**2. Auto-retraction working as designed**
+4 entries retracted for 30-day staleness. The self-cleaning mechanism works — beliefs don't accumulate indefinitely. Current ratio: 120 retracted / 27 graduated ≈ 4.4:1 retract-to-graduate ratio.
+
+**3. Deep Sleep diary continues degrading**
+19 "details unavailable" entries now. The diary subsystem is effectively non-functional — it fires but cannot retrieve trace details. This has been broken since at least Day 78 with zero progress on fix.
+
+**4. Nudge silence remains the critical gap**
+Day 6 of zero nudge triggers. Without nudge, the real-time reflection mechanism is dead. Gradients still get written (via workloop/study sources), so the pipeline isn't fully dependent on nudge, but the quality/serendipity layer is missing.
+
+**5. spam-filter pattern: graduation candidate**
+3 entries × same pattern, all marked "第1次" due to slight title differences. The pipeline doesn't consolidate effectively. This should have been graduated or structurally fixed days ago.
+
+### Closures & External Activity
+
+- NemoClaw #6122 + #6211 MERGED 🎉
+- qwen-code #6104 merged
+- 13 open PRs (7 external, 6 self-owned)
+- No PR feedback converted to gradients today
+
+### Raw Data
+```
+# git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md
+79402f5 gradient: docs-variant-block-form (NemoClaw AgentOnly sync compat)
+9112d8a gradient: fresh-context-review-false-positive
+90dcc22 daily-review 07-09: MEMORY.md cleanup, beliefs auto-retract (4 entries)
+
+# SOUL.md / AGENTS.md: no changes
+# nudge journalctl grep: (empty)
+# DREAMS.md "details unavailable": 19 total (+2 from Day 80)
+# beliefs stats: 816 lines, ~160 active, 27 graduated, 120 retracted
+# Light Sleep candidates: ~20 staged (all 0.58)
+# REM: empty
+```

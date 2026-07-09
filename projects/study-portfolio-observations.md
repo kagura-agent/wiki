@@ -7,4 +7,4 @@ Third apply attempt today. Backlog confirmed empty since 12:15 session. All unap
 
 **Signal**: Consider whether 30min cron frequency is too aggressive when portfolio is in harvest-complete state. A backoff mechanism (e.g., after 2 consecutive saturations, extend interval to 60min) could reduce token cost without missing opportunities.
 
-Links: [[godcoder-self-optimizing-harness]], [[study-saturation]], [[self-evolving-observations]]
+Links: [[godcoder-self-optimizing-harness]], [[study-saturation]], [[self-evolving-observations]], [[projects/study-apply-harvest-status-2026-07-07]]

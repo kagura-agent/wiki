@@ -1,7 +1,7 @@
 ---
 title: Tool Execution Policy Enforcement
 created: 2026-04-14
-last_verified: 2026-06-20
+last_verified: 2026-07-09
 ---
 # Tool Execution Policy Enforcement
 
@@ -46,3 +46,4 @@ Hermes leads on this: 4 granular hooks (pre_tool_call, post_tool_call, pre_llm_c
 - [[startup-credential-guard]] — another policy enforcement pattern
 - [[authorization-layer-confusion]] — what happens when enforcement layers disagree
 - [[execution-contract-pattern]] — model-specific behavioral contracts
+- [[projects/makerchecker]] — governance layer for AI agent tool calls (approval workflows)

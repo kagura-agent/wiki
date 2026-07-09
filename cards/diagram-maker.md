@@ -2,7 +2,7 @@
 title: diagram-maker
 created: 2026-06-14
 tags: [skill, visual-output, diagrams, openclaw]
-last_verified: 2026-06-14
+last_verified: 2026-07-09
 ---
 
 # diagram-maker
@@ -26,3 +26,4 @@ Output formats: inline SVG in HTML (standalone, dark-mode aware) or Excalidraw J
 
 - [[effective-html-skill]]
 - [[skill-type-taxonomy]]
+- [[projects/flint-chart]] — Microsoft's semantic-level visualization IL for agent-driven chart generation
