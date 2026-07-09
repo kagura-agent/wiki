@@ -1368,3 +1368,23 @@ GitHub trending (agent, created past week, sorted by stars):
 
 - [ ] brain0 (Brain0-ai/brain0) — 26⭐ (07-06 quick scan). Passive decision graph linking commits to agent prompts. Provenance/auditing for AI-written code. Too early. Check back 07-20.
 - [ ] deep-memory (kevintsai1202/deep-memory) — 27⭐ (07-06 quick scan). Self-evolving knowledge accumulation & hybrid retrieval for coding agents. Too early. Check back 07-20.
+
+## Candidates — 2026-07-08
+
+- **boring-computers** (michaelshimeles/boring-computers) — ⭐176, Go, 2026-06-30. Firecracker microVMs for AI agents. Real sandboxed Linux environments with browser/terminal/coding agents. Related to sandboxd but Firecracker-native approach. Evaluate when ⭐ stabilizes.
+- **OfficeCLI** (iOfficeAI/OfficeCLI) — HN 212pts/62💬. Office suite for AI agents to read/edit Microsoft Office files. Practical gap-filler. Check repo stars/activity.
+
+## Kastor (weirdGuy/kastor)
+- **Added:** 2026-07-09 (quick scan)
+- **Stars:** 41 (07-09)
+- **What:** Declarative HCL language + toolchain for AI agents. Define agents/tools/prompts in HCL, compile to frameworks or manage on hosted platforms with plan/apply semantics (Terraform for agents).
+- **Lang:** Go | **License:** Apache-2.0
+- **Signal:** 32pts on HN Show HN, active dev (pushed 07-08), created 07-02
+- **Why interesting:** Novel abstraction — infrastructure-as-code for agent definitions. plan/apply lifecycle could enable version-controlled agent configs.
+- **Status:** Too early for deep read (41⭐ < 50 threshold). Revisit when ⭐ > 80 or HN discussion matures.
+
+## 2026-07-09 Quick Scan (10:30)
+- **Microsoft Flint** (microsoft/flint-chart, 550⭐): Visualization language for AI agents — simple chart specs → expressive charts. TypeScript, MIT. HN 210pts. 值得深入 — novel approach to agent output visualization
+- **Halo Record** (bkuan001/halo-record, 51⭐): Tamper-evident runtime records for AI agents. Hash-chained, dependency-free. Python, Apache-2.0. Different from HALO trace optimizer. 关注 — agent security/audit niche
+- **Kastor** (weirdGuy/kastor, 41⭐): Terraform-style declarative agent specs in HCL. Go, Apache-2.0. 太早 — 1 week old, 41⭐
+- GitLost, OfficeCLI, MakerChecker — 已知

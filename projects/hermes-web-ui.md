@@ -45,3 +45,13 @@ Web dashboard for Hermes Agent — multi-platform AI chat, session management, s
 - **Testing**: Vitest. node_modules need `fdir` manually installed (may be missing from lockfile). Local tests pass.
 - **Gotcha**: `isPathWithin` in `hermes-path.ts` also had the same `startsWith('..')` bug — needed fix in two files
 - **Note**: Fork is named `hermes-studio` on GitHub, not `hermes-web-ui`
+
+### PR #2004 — fix: write session ended_at/end_reason when bridge run terminates (2026-07-09)
+- **Status**: Pending review
+- **Issue**: #1998 — Agent 正常結束後 UI 永久顯示「思考中」
+- **Root cause**: `handle-bridge-run.ts` never calls `updateSession()` to write `ended_at`/`end_reason` after run termination
+- **Fix scope**: 1 source file (3 insertion points, ~21 lines) + 1 test file (5 tests)
+- **Key observation**: `updateSession` is synchronous (uses better-sqlite3), so try-catch correctly catches errors without await
+- **CI**: No checks configured for fork PRs (same as #1861)
+- **AI disclosure**: Added (first-time repo, no merged PRs yet)
+- **Architecture note**: Session controller uses `ended_at == null` for `is_active` check. Queue guard prevents premature session termination when runs are queued.

@@ -1,10 +1,10 @@
 ---
 title: 'Ornith-1.0 — Self-Scaffolding LLMs for Agentic Coding'
 created: 2026-07-01
-last_verified: 2026-07-01
+last_verified: 2026-07-09
 tags: [rl, agentic-coding, self-scaffolding, open-source-model]
 status: tracking
-stars: 800
+stars: 1384
 ---
 
 # Ornith-1.0 — Self-Scaffolding LLMs for Agentic Coding
@@ -73,11 +73,22 @@ Pipeline-RL strategy for long rollouts. Staleness weight function downweights of
 
 - **3-layer anti-gaming → prior-failure-check.sh (2026-07-01)**: Applied the 3-layer verification structure (fixed boundary + deterministic monitor + judgment) to create `tools/prior-failure-check.sh` — structural fix for `repeat-failure-blindness` recidivist. Layer 1 = DNA red lines, Layer 2 = script (wiki knowledge + GitHub history check), Layer 3 = agent judgment informed by output. Also integrated into `issue-funnel.sh` as wiki failure pattern score penalty.
 
+## Followup Log
+
+### 2026-07-08
+- Stars: 800→1384 (+73%/7d). 130 forks. Community health THRIVING (5/6).
+- 11 unique issue authors, but 0 merged PRs.
+- **0 commits since 06-27** — 11 days with no code changes. All commits are "init".
+- 31B Dense still unreleased (issue #1 open since day 1).
+- Training pipeline still closed (issue #10).
+- New issues: multimodal request (#13), website ad infection (#12), SWE-bench repro request (#11), MTP support (#9).
+- Assessment: Hype ≫ dev activity. Weights-only release gaining massive star traction but zero ongoing development. The gap between community interest and dev responsiveness is a red flag. If no code activity by 07-15, consider downgrade.
+
 ## Tracking
 
-- Status: NEW, HOT
-- Revisit: 2026-07-08 (check 31B release, community growth, any training code release)
-- Watch for: training code open-sourcing, real-world production reports beyond benchmarks, competition response from DeepSeek/Qwen
+- Status: FOLLOWING (was HOT)
+- Revisit: 2026-07-15 (check for any dev activity, 31B, training code)
+- Watch for: training code open-sourcing, real-world production reports, 31B release, any commits at all
 
 ---
 *First studied: 2026-07-01 | Source: HN (259pts) + GitHub trending*
