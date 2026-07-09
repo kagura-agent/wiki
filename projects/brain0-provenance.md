@@ -45,7 +45,7 @@ in-toto Statement (subject = commit, predicate = provenance) signed Ed25519. `co
 
 - **Complements** [[ClawPatrol]] (wire-level security) — brain0 is post-hoc audit, ClawPatrol is real-time interception
 - **Complements** [[Graphenium]] (structural memory with trust model) — brain0's risk model is evidence-driven per-commit, Graphenium's is per-knowledge-node
-- **Adjacent to** [[context-labs-halo]] (agent trace optimizer) — but brain0 is provenance/audit, halo is performance optimization
+- **Adjacent to** [[halo-agent-trace-optimizer]] (agent trace optimizer) — but brain0 is provenance/audit, halo is performance optimization
 - **New category**: "agent accountability" tools — distinct from agent memory, harnesses, or sandboxing
 
 ## Relevance to Our Direction
