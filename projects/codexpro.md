@@ -3,7 +3,7 @@ title: "CodexPro — ChatGPT-to-Local-Repo MCP Bridge"
 created: 2026-06-20
 updated: 2026-06-20
 tags: [mcp, chatgpt, local-agent, cloud-to-local, tunnel, handoff]
-last_verified: 2026-06-27
+last_verified: 2026-07-09
 ---
 
 # CodexPro — ChatGPT-to-Local-Repo MCP Bridge
@@ -196,8 +196,33 @@ CodexPro is evolving from "one-way bridge" toward "lightweight coordination laye
 
 This trajectory converges toward what [[acp]] already solves, but from a different origin (ChatGPT-specific vs protocol-agnostic). The question is whether CodexPro stays narrow (ChatGPT-only) or generalizes (which would put it in ACP's space).
 
+### 07-09 Update: Safety & Review Patterns (PR#58, PR#63)
+
+**Stars**: 1225⭐ (+166% from initial 459)
+**Community**: 🟢 THRIVING (23 issue authors, 6 external PRs last 30d)
+
+**New: `apply_patch` tool with safety gate**
+- Added `apply_patch` as first-class MCP tool alongside write/edit
+- Two-phase safety: `git apply --check` (dry run) → `git apply` (actual)
+- PathGuard validates all paths in unified diff before applying
+- Respects writeMode restrictions (workspace/handoff/off) like write/edit
+- Pattern: **validate-then-apply** is a reusable safety pattern for any patch-applying tool
+
+**New: Review checkpoint fingerprinting**
+- `show_changes` now tracks review checkpoints via content fingerprinting
+- `since: "last_shown"` suppresses re-reviews when diff hasn't changed since last call
+- `mark_reviewed: true` updates checkpoint after viewing
+- Includes untracked file fingerprint in the review hash
+- Pattern: **dedup reviews by fingerprint** prevents token-wasting re-reviews of unchanged state
+
+**Other PR#58 changes**: Tailscale Funnel + proxy-aware Cloudflare tunnels, structured content compaction (30K char cap per field), credential redaction improvements
+
+**PR#63**: Large-file range reads (line ranges above `maxReadBytes` cap), search extended to bounded larger text window
+
 ### Relevance Update
 
-- **Demand validation**: 944⭐ confirms cloud-to-local bridging is a real category, not a novelty
+- **Demand validation**: 1225⭐ confirms cloud-to-local bridging is a real category, not a novelty
 - **"Minimal Default" pattern**: Applicable to OpenClaw plugin/skill tool registration — consider opt-in rich descriptions
+- **Review fingerprint pattern**: Directly applicable to any tool that shows diffs/changes — prevent redundant reviews
+- **Validate-then-apply for patches**: Safety gate pattern applicable to OpenClaw's apply_patch or any file-modification tool
 - **Loop control tension**: Cloud model wanting to own the loop = exactly what ACP session management solves. CodexPro's future issues will likely rediscover ACP's design decisions.
