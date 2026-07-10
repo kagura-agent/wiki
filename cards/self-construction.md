@@ -1,7 +1,7 @@
 ---
 title: Self Construction
 created: 2026-04-07
-last_verified: 2026-06-20
+last_verified: 2026-07-10
 ---
 # Self-Construction（自我构建）
 
@@ -36,6 +36,11 @@ Agent 通过外在表达来定义和发展自己的身份。不是"产出"，是
 - kagura-storyteller → **self-portrait**（合并，不新建）
 - scope：日记/故事 + profile + blog + memes + 身份一致性检查
 - 本质都是"我怎么表达自己"
+
+## 相关
+- [[self-portrait]] — 外在表达的具体产出
+- [[soul-md]] — DNA 层的自我定义文件
+- [[identity-drift-detection]] — 检测内在认知与外在表达的偏移
 
 ## 来源
 - 2026-04-07 Luna 引导的对话
