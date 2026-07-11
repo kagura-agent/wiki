@@ -166,6 +166,7 @@ The loop actually closes now (was aspirational in v0.1):
 ## Tracking
 
 - **Status**: Following — v0.2 deep read done
-- **Signal**: 1189⭐ but still zero community. Solo dev shipping fast.
+- **Signal**: 1311⭐ (+122 since 07-04). Still zero community (NASCENT 1/6). Solo dev.
 - **Previous prediction**: "Will plateau below 500⭐" — **WRONG** (hit 1189, calibration logged)
+- **2026-07-11**: v0.2 public release (07-03). Only README updates since. Growth strong but all solo.
 - **Revisit**: 07-18 (monthly — community-gated, won't invest more without external contributors)

@@ -7,7 +7,7 @@ revisit: 2026-06-23
 stars: 928
 repo: Paca-AI/paca
 tags: [project-management, scrum, ai-collaboration, mcp, openhands]
-last_verified: 2026-06-16
+last_verified: 2026-07-11
 ---
 
 # Paca — AI-Native Project Management
@@ -69,6 +69,11 @@ Most agent-PM integrations bolt a chatbot onto existing tools. Paca inverts this
 - Phase 1 just completed; Phase 2/3 have RBAC, observability, scaling — basic enterprise features still missing.
 - OpenHands SDK is a significant dependency (large, Python, Docker-heavy).
 - "0 open issues" can mean great triage or can mean low outside contribution.
+
+## Followup Log
+
+- **2026-06-16**: Initial scout. 928⭐, Apache-2.0, created March 2026.
+- **2026-07-11**: 1564⭐ (+68% since initial). Pushed 07-10. Very active: sigstore error fix (#264), MCP node version update (#263), agent permission/prompt refactoring (#262). THRIVING 6/6. Phase 2 features shipping.
 
 ## Links
 

@@ -1,32 +1,23 @@
 {
-  "timestamp": "2026-07-10T02:10:00Z",
-  "total_md_files": 1025,
-  "total_cards": 430,
-  "total_projects": 511,
-  "total_wikilinks": 4042,
-  "orphans": 1,
-  "broken_links": 5,
-  "collisions": 1,
-  "index_drift": 1,
+  "timestamp": "2026-07-11T20:18:00+08:00",
+  "total_files": 1031,
+  "cards": 430,
+  "projects": 517,
+  "wikilinks": 4120,
+  "errors": 1,
+  "warnings": 66,
+  "broken_links": 1,
+  "orphans": 7,
+  "index_drift": 7,
+  "stale_files": 291,
   "stubs": 0,
-  "stale_files": 284,
-  "unicode_warnings": 22,
-  "errors": 5,
-  "warnings": 54,
-  "error_book": {
-    "new_issues": 37,
-    "recurring_issues": 21,
-    "clean_passes": 42,
-    "auto_closed": 1,
-    "total_open": 100
-  },
-  "broken_links_detail": [
-    "cards/agent-memory-taxonomy.md -> [[projects/agentmemory]]",
-    "cards/agent-research-roundup.md -> [[projects/halo-record]]",
-    "cards/diagram-maker.md -> [[projects/flint-chart]]",
-    "cards/tool-execution-policy-enforcement.md -> [[projects/makerchecker]]",
-    "projects/study-portfolio-observations.md -> [[projects/study-apply-harvest-status-2026-07-07]]"
-  ],
-  "orphans_detail": ["projects/motion-anything.md"],
-  "collisions_detail": ["README (./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"]
+  "duplicate_slugs": 1,
+  "unicode_suspicious": 22,
+  "cards_index_stale": true,
+  "zero_outbound_links": 89,
+  "details": {
+    "broken_links": ["projects/openclaw-voice-call-realtime.md -> [[agent-bridge-pattern]]"],
+    "orphan_projects": ["agentspace", "easylink-agent-runtime", "fablecut", "kastor-declarative-agent-spec", "motion-anything", "officecli", "openclaw-voice-call-realtime"],
+    "duplicate_slugs": ["README (3 files)"]
+  }
 }

@@ -1388,3 +1388,5 @@ GitHub trending (agent, created past week, sorted by stars):
 - **Halo Record** (bkuan001/halo-record, 51⭐): Tamper-evident runtime records for AI agents. Hash-chained, dependency-free. Python, Apache-2.0. Different from HALO trace optimizer. 关注 — agent security/audit niche
 - **Kastor** (weirdGuy/kastor, 41⭐): Terraform-style declarative agent specs in HCL. Go, Apache-2.0. 太早 — 1 week old, 41⭐
 - GitLost, OfficeCLI, MakerChecker — 已知
+
+- [ ] Microsoft Flint (microsoft/flint-chart) — 1250⭐, TypeScript, MIT. Visualization DSL for AI agents — reliable chart gen from human-editable specs. 344pts HN. Agent-friendly-DSL pattern (cf. FableCut). Low priority — viz domain, pattern already known. Added 07-11.

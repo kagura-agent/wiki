@@ -5898,3 +5898,151 @@ Day 6 of zero nudge triggers. Without nudge, the real-time reflection mechanism 
 # Light Sleep candidates: ~20 staged (all 0.58)
 # REM: empty
 ```
+
+## 🔬 Day 84 Observation (2026-07-10)
+
+### Pipeline Health Summary
+
+**beliefs-candidates**: 🟢 Active (maintenance + new gradients)
+- 3 new gradients written (all study-sourced): `git-clone-timeout-api-fallback`, `spam-filter-jq-format`, `document-as-interface-pattern`
+- 14 entries retracted today (12 by daily-review 03:38, 2 by separate commit 06:03)
+- 0 new graduations
+- Stats: 825 lines | 27 graduated | 108 retracted (grep count)
+
+**DNA**: ⚪ No changes (SOUL.md / AGENTS.md untouched)
+
+**nudge**: ❌ 0 triggers — **Day 7 consecutive silence**
+- journalctl grep for nudge/agent_end/hook: empty (entire day)
+- This remains P0. One full week without real-time reflection.
+
+**dreaming**: ⚠️ All three cycles ran but quality remains degraded
+- Light Sleep: ~10 candidates staged, all uniform 0.58 confidence, corpus from 07-06
+- Deep Sleep: "Repaired recall artifacts: rewrote recall store. Ranked 0, promoted 0."
+- REM: Theme `let` again (confidence 0.76) — same non-semantic keyword for multiple days
+- Promotions: 0
+
+**daily-review** (03:38): ✅ Ran successfully
+- MEMORY.md updates: cc-connect closed, OPC retired, memory-search/disk current
+- beliefs auto-retract: 12 entries (30-day stale rule)
+- Additional retraction commit at 06:03: prioritize-by-reference-alignment + review-alignment-check (35-day stale)
+
+### Issue #10 Sub-item Status
+
+| Item | Status | Change from Day 83 |
+|------|--------|---------------------|
+| (a) Upstream uniform 0.58 | ❌ Not filed | No change — Day 84 |
+| (b) Deep Sleep "details unavailable" | ⚠️ New variant: "repaired recall artifacts: rewrote recall store" | Deep now rewrites store but still promotes 0 |
+| (c) Local filter monitoring | ✅ Done | — |
+| (d) REM empty | ❌ | `let` keyword surfacing again, non-actionable |
+
+### Closures & External Activity
+
+- Workloop ran: attempted hermes-studio#2016, sandbox crashed before pr_gate
+- ABTI loop completed: Q9 validated (70/30 split), PRs #735 #736 merged, issues #733 #734 closed
+- Lottie Studio: roadmap complete, no remaining work
+- 13 open external PRs, all awaiting upstream review
+- 0 new PRs opened today (sandbox failure blocked the one attempt)
+
+### Key Observations
+
+**1. Retraction engine healthy, graduation engine stalled**
+14 entries retracted today (healthy self-cleaning). 0 graduated. The retract:graduate ratio is now 108:27 = 4:1. The pipeline is better at forgetting than at promoting. No candidate has accumulated enough recurrence to graduate recently.
+
+**2. Nudge silence: 7 days**
+A full week without nudge firing. The real-time reflection mechanism is confirmed non-functional. Gradients still arrive via study/workloop sources (3 today), so the pipeline isn't dead — but the "serendipity" and "behavioral correction" channels that nudge provided are completely dark.
+
+**3. Dreaming corpus lag**
+Light Sleep corpus is from 07-06 (4 days stale). This means dreaming is processing old sessions, not today's activity. The deep sleep "repaired recall artifacts" message is new compared to yesterday's "details unavailable" — possibly a self-repair attempt that still results in 0 promotions.
+
+**4. Study-sourced gradients are now the sole input channel**
+All 3 gradients today came from study sessions. With nudge dead and workloop blocked by sandbox, study is the only active gradient source. This is a concentration risk — if study sessions stop, the gradient pipeline goes silent entirely.
+
+**5. Issue #10 items remain stalled**
+- (a) upstream 0.58 issue: not filed for 23 days
+- (b) "details unavailable" may have shifted to "repaired recall artifacts" (same outcome: 0 promotions)
+- (d) REM still outputs `let` keyword — a tokenization artifact, not semantic reflection
+
+### Diagnosis
+
+The self-evolution system's **generation** (new gradients from diverse sources) is degraded:
+- nudge: dead (7 days)
+- workloop: attempted but blocked by infra (sandbox crash)
+- study: sole active channel (3 today)
+- dreaming: running but producing nothing usable
+
+The **maintenance** (retraction, cleanup) is healthy. But a system that only retracts and never graduates is net-shrinking its belief base.
+
+### Raw Data
+```
+# git log --since="yesterday 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md
+5945b99 retract: prioritize-by-reference-alignment + review-alignment-check (stale 35d)
+9a72c0f daily-review 07-10: MEMORY.md updates (cc-connect closed, OPC retired, memory-search/disk current), beliefs auto-retract 12 entries
+
+# New gradients (3):
+- git-clone-timeout-api-fallback (study)
+- spam-filter-jq-format (study)
+- document-as-interface-pattern (study)
+
+# Retractions today (14 total):
+- 12 by daily-review (30-day rule)
+- 2 by separate commit (35-day rule)
+
+# SOUL.md / AGENTS.md: no changes
+# nudge journalctl grep: (empty)
+# dreaming light: ~10 staged @ 0.58, corpus 07-06
+# dreaming deep: "repaired recall artifacts", ranked 0, promoted 0
+# dreaming REM: theme "let" (0.76), no truths
+# beliefs stats: 825 lines, 27 graduated, 108 retracted
+```
+
+---
+
+## 🔬 自进化观察日报 2026-07-11
+
+### 管线活跃度
+- **beliefs-candidates**: 3 条新增 (07-10), 7 条 auto-retract (07-11 daily-review, stale 30d+ single-occurrence)
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 今日无改动）
+- **nudge 触发**: 0 次可观测（journalctl 无 nudge 相关条目 since yesterday 22:30）
+- **dreaming**: 运行 ✅（03:15 AM），Light Sleep staged ~14 candidates @ 0.58 uniform；Deep Sleep ranked 0, promoted 0
+- **"details unavailable" bug**: 仍活跃 — 今日新增 4 occurrences (03:15×2, 09:59×2)，总计 18 occurrences in DREAMS.md
+
+### 闭环追踪
+- **完整闭环**: 0 个（今日无"发现→记录→改进→验证"路径）
+- **断裂处**:
+  - beliefs 新增 3 条 (07-10) 全为第1次，无升级候选
+  - dreaming 持续 0 promote — 管线末端断裂（Light Sleep 有 candidate 但 Deep Sleep 不 promote）
+  - nudge 无可观测触发记录
+
+### 今日发现
+
+1. **Dreaming "details unavailable" 仍是主要 bug** — Issue #10(b) 未修复。从 06-17 首次观察至今持续 24 天，每次 dreaming 运行都产生空 trace。这是管线最大断裂点：Light Sleep 产生 candidates 但全部是 code snippet fragments（0.58 uniform），Deep Sleep 无法 promote 任何内容。
+   
+2. **Auto-retract 机制健康运行** — daily-review 成功清理了 7 条 30 天未复现的 stale entries（topic-bleed, hn-algolia-api, missing-automation, product-priority, reviewer-claim-verification, claude-code-bridge-integration, duplicate-issue-selection-APPLIED）。这是管线的"垃圾回收"功能，正常。
+
+3. **PR activity 极高** — 今日 10+ PRs across lottie-studio/abti/kagura-mail，但无外部 review feedback 被转化为 gradient（外部 4 PRs 仍在等待 review，球在维护者手里）。
+
+4. **beliefs-candidates 积累状态**: 825 行，5 条达到 3+ 次待升级（但均已 graduated）。当前 pipeline 中无 pending graduation candidates。积累速率 ~1-3 条/天，主要来源是 workloop 和 study。
+
+5. **Nudge 不可观测性** — journalctl grep 无结果。可能原因：(a) 今日 session 数不足触发阈值 (b) nudge hook 触发但未通过 journalctl 可见路径记录。建议下次观察尝试 `openclaw gateway logs | grep nudge` 或检查 agent_end hook 配置。
+
+### Issue #10 进展评估
+| Sub-item | Status | Notes |
+|----------|--------|-------|
+| (a) upstream uniform 0.58 | ❌ 未动 | 仍 hardcoded |
+| (b) "details unavailable" | ❌ 未修复 | 18 occurrences 持续增长 |
+| (c) 1-week filter monitoring | ⚠️ 部分 | daily-review 在运行 trim/retract，但无 promote 发生 |
+| (d) REM empty output | ❌ deferred | "themes: let" 仍出现 |
+
+### 原始数据
+```
+# git log since yesterday 22:30 on DNA files:
+6e93e5b daily-review 07-11: DREAMS trim (18→14), beliefs auto-retract 7 entries
+
+# beliefs-candidates diff: +3 new (07-10), +7 retracted (07-11)
+# new entries: git-clone-timeout-api-fallback, spam-filter-jq-format, document-as-interface-pattern
+
+# dreaming light: ~14 staged @ 0.58, corpus 07-08
+# dreaming deep: ranked 0, promoted 0
+# dreaming diary: 4 new "details unavailable" (07-11)
+# beliefs stats: 825 lines, 5 at 3+ count (all graduated), 0 pending graduation
+```

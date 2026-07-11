@@ -4,7 +4,7 @@ created: 2026-06-25
 tags: [agent-harness, browser, extension, p2p, webrtc, security, sandbox, actor-model, heap-isolation]
 source: https://github.com/NotASithLord/peerd
 status: deep-read
-last_verified: 2026-07-05
+last_verified: 2026-07-11
 ---
 
 # peerd — Browser-Native AI Agent Harness
@@ -177,6 +177,7 @@ First "daemon" actor — persistent, opt-in, mesh operator:
 - **2026-06-26**: Initial deep-read. 141⭐, 2 contributors, 4 sandboxes, P2P dweb preview.
 - **2026-07-02**: 274⭐ (+94%). THRIVING 6/6. Major runtime refactor (web actor direct page driving), remote Ollama. AgentOS feasibility assessment PR #129 — runtime 85%/fleet 20%, 3-wave enterprise plan, 6 fork decisions. 4 unique PR authors, 53 ext PRs/30d.
 - **2026-07-05**: 300⭐ (+9.5%/3d). v0.2.2 released (07-04). **Major: actor model + heap split** — every actor/subagent now runs in its own keyless Worker heap (PR#138), formal Erlang-style isolation. Dweb actor (#141) as opt-in persistent P2P mesh envoy. Unified actor vocabulary across subagents+actors (#137). AgentOS PR#129 still OPEN (draft). Community still THRIVING 6/6, 48 ext PRs/30d, 5 unique issue authors.
+- **2026-07-11**: 342⭐ (+14%/6d). Pushed 07-10. Full-300 eval results (31.0% pass rate) + failure taxonomy (#193). Post-merge review-swarm findings (#194). Z.ai GLM provider added (#170). Web thread measured (OM2W + A/B) (#188). DCO sign-off dropped from PR template (#190). Still THRIVING 6/6.
 
 ## Predictions
 

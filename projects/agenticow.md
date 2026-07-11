@@ -90,7 +90,10 @@ Links: [[metaharness-agent-harness-generator]], [[pmb-memory]], [[agent-memory-e
 
 ### Followup — 2026-07-02 (apply round)
 - **Apply attempt**: Principles (checkpoint-before-risk, promote-as-verification) relevant but abstract — no concrete tooling gap to fill
-- **Status**: NOTED. CoW branching is a database-level pattern; our file-based memory doesn't benefit from O(1) branching. The lineage-as-event-sourcing concept is already handled by git history for our use case
-### Followup — 2026-07-02 (apply round)
-- **Apply attempt**: Principles (checkpoint-before-risk, promote-as-verification) relevant but abstract — no concrete tooling gap to fill
 - **Status**: NOTED. CoW branching is a database-level pattern; our file-based memory doesn't benefit from O(1) branching. Lineage-as-event-sourcing already handled by git history
+
+### Followup — 2026-07-11
+- **Stars**: 42⭐ (+6 since 07-02). Last push 07-04 (persist per-node text payloads, v0.2.4).
+- **Health**: NASCENT 1/6. Solo dev, no external contributors.
+- **Assessment**: Slow growth, niche use case. Interesting concept but no community forming.
+- **Recommendation**: Downgrade to scout. Revisit only if external adoption signals appear.

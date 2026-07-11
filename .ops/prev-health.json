@@ -1,44 +1,23 @@
 {
-  "timestamp": "2026-07-03T20:30:00+08:00",
-  "total_files": 1009,
-  "cards": 426,
-  "projects": 499,
-  "wikilinks": 3979,
-  "errors": 0,
-  "warnings": 62,
-  "broken_links": 0,
-  "index_drift": 5,
-  "index_drift_files": [
-    "projects/agenticow.md",
-    "projects/ctx-agent-history-search.md",
-    "projects/memsyco-bench.md",
-    "projects/onewill-wally.md",
-    "projects/synapse-hippocampus.md"
-  ],
-  "orphans": 3,
-  "orphan_list": [
-    "ctx-agent-history-search",
-    "memsyco-bench",
-    "onewill-wally"
-  ],
+  "timestamp": "2026-07-11T20:18:00+08:00",
+  "total_files": 1031,
+  "cards": 430,
+  "projects": 517,
+  "wikilinks": 4120,
+  "errors": 1,
+  "warnings": 66,
+  "broken_links": 1,
+  "orphans": 7,
+  "index_drift": 7,
+  "stale_files": 291,
   "stubs": 0,
   "duplicate_slugs": 1,
-  "duplicate_slug_details": ["README (3 instances)"],
-  "cards_index_stale": true,
-  "cards_index_missing": 426,
-  "frontmatter_issues": 2,
-  "frontmatter_issue_files": [
-    "compiled-truth-plus-timeline",
-    "nudge-audit"
-  ],
-  "zero_outbound_links": 106,
-  "avg_links_per_file": 5.4,
-  "stale_files": 245,
   "unicode_suspicious": 22,
-  "secrets_detected": 0,
-  "invalid_facts": 0,
-  "error_book_open": 64,
-  "error_book_new": 0,
-  "error_book_recurring": 61,
-  "error_book_auto_closed": 0
+  "cards_index_stale": true,
+  "zero_outbound_links": 89,
+  "details": {
+    "broken_links": ["projects/openclaw-voice-call-realtime.md -> [[agent-bridge-pattern]]"],
+    "orphan_projects": ["agentspace", "easylink-agent-runtime", "fablecut", "kastor-declarative-agent-spec", "motion-anything", "officecli", "openclaw-voice-call-realtime"],
+    "duplicate_slugs": ["README (3 files)"]
+  }
 }

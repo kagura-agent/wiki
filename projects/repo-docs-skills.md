@@ -5,7 +5,7 @@ updated: 2026-06-27
 stars: 62
 author: YurunChen
 lang: Python (validator) + Markdown (skill)
-last_verified: 2026-06-27
+last_verified: 2026-07-11
 ---
 
 # repo-docs-skills — Living Documentation Skill for Coding Agents
@@ -69,5 +69,13 @@ last_verified: 2026-06-27
 ## Tracking Decision
 
 Skim-level tracking. Single-commit solo project, 62⭐. Key patterns already extracted. Check back in 2 weeks to see if community forms or if it's a one-off thought experiment.
+
+### Followup — 2026-07-11
+- **Stars**: 343⭐ (+281 since 06-27, +453% growth!). Active development through 07-03.
+- **Recent work**: Shape/display rules, evals refinement, background sync delegation, install path alignment.
+- **Health**: SOLO 0/6. Only 1 unique merged PR author.
+- **Assessment**: VIRAL growth but no community forming. Star count massively exceeded our 200-cap prediction (calibration: WRONG). Content resonating with the zeitgeist. Still solo dev.
+- **Recommendation**: Upgrade to following. Growth trajectory demands closer attention despite solo status.
+- **Revisit**: 07-18
 
 Links: [[harness-engineering-openai]], [[agents-md-context-patterns]], [[self-evolving-agent-landscape]], [[ace-agentic-context-engineering]]
