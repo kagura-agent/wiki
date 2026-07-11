@@ -3,7 +3,7 @@ title: "AgentSpace — Human + Agents. One Team. One Workspace"
 created: 2026-07-04
 updated: 2026-07-11
 status: following
-stars: 648
+stars: 649
 repo: HKUDS/AgentSpace
 lang: TypeScript
 license: MIT
@@ -35,21 +35,22 @@ Issue #15: export digital employees as OpenAgent persona cards. Portable agent i
 ### 5. Memberless Channel Privacy
 Channels without explicit members default to private (deny external access). Security-by-default for agent workspaces where sensitive context flows.
 
-## Community Health (07-11)
+## Community Health (07-11, updated)
 
-- **Stars**: 648 (was 606 on 07-04, +7%)
-- **External contributors**: 4 PR authors (xing139565, lodar, DivyanshSingh9073, returnSGD)
-- **Open PRs**: 5 (stream replies, realtime refresh, persona-card export, contributing.md, per-provider concurrency)
-- **Issues**: 10 open (ESM compat, streaming, export, concurrency, sandbox)
-- **Dev pace**: Feishu merged 07-01, Slack testing branch 07-09
-- **Verdict**: 🟢 THRIVING — community forming, multi-platform expanding
+- **Stars**: 649 (was 648, +0.15% — plateau)
+- **External contributors**: 4 PR authors (hobostay: 2 merged, xing139565, lodar, DivyanshSingh9073)
+- **Merged ext PRs**: #9 auth fix (hobostay), #10 secret redaction (hobostay)
+- **Open PRs**: 3 (stream replies, persona-card export, contributing.md)
+- **Issues**: 10 open (ESM compat #18, streaming, export, concurrency, sandbox)
+- **Dev pace**: Feishu merged 07-01, Slack testing branch 07-09. Mostly docs commits since 07-01
+- **Verdict**: 🟡 WARM — community healthy but star growth plateaued. Downgraded from THRIVING
 
 ## Growth Trajectory
 
 | Date | Stars | Event |
 |------|-------|-------|
 | 2026-07-04 | 606 | First tracked. Feishu integration merged |
-| 2026-07-11 | 648 | Slack testing. 4 ext PR authors |
+| 2026-07-11 | 649 | Star plateau (+0.15%). Slack in testing. 2 ext PRs merged (hobostay). Downgraded to WARM |
 
 ## Relevance to Our Direction
 
