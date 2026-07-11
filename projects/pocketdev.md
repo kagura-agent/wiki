@@ -1,13 +1,13 @@
 ---
 title: "pocketdev — Mobile-First Remote Coding Agent Infra"
 created: 2026-07-04
-updated: 2026-07-04
-status: following
+updated: 2026-07-11
+status: monthly
 stars: 92
 repo: 0xMassi/pocketdev
 lang: Go
 license: AGPL-3.0
-last_verified: 2026-07-04
+last_verified: 2026-07-11
 ---
 
 # pocketdev — Code From Your Phone
@@ -93,6 +93,12 @@ Complementary to agent harnesses — doesn't compete with agents themselves. Fil
 - **Dependencies**: bubbletea (TUI), hcloud-go (Hetzner), yaml.v3
 - **Community**: 0 issues, 3 forks, 5 days old — too early for community signals
 - **Author**: 0xMassi, solo dev, appears to be first public project
+
+### Followup — 2026-07-11
+- **Stars**: 98⭐ (+6 since 07-04). Last push 06-30 (Cloudflare tunnel + docs).
+- **Health**: SOLO 0/6. No external contributors, no issues.
+- **Assessment**: Stagnating. No commits in 11 days. Niche tool, slow growth. Useful concept but not gaining traction.
+- **Recommendation**: Downgrade to scout. Drop if still dormant by 07-25.
 
 ---
 
