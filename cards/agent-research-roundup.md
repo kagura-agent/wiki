@@ -2,7 +2,7 @@
 title: "Agent Research Roundup (June 2026)"
 created: 2026-06-30
 tags: [agent-memory, agent-research, study-notes]
-last_verified: 2026-07-09
+last_verified: 2026-07-11
 ---
 
 Research projects studied during gogetajob/study sessions in late June 2026. These cover agent memory systems, workflow optimizers, and related infrastructure.
@@ -25,4 +25,4 @@ Research projects studied during gogetajob/study sessions in late June 2026. The
 
 - lemma-platform — Human+AI workspace with structured persistence (pods, tables, files) and proper handoff points
 - repo-docs-skills — Prompt framework teaching agents to maintain living documentation as a side effect of coding
-- [[projects/halo-record]] — Tamper-evident runtime records for AI agents (hash-chain audit trails)
+- [[halo-record]] — Tamper-evident runtime records for AI agents (hash-chain audit trails)

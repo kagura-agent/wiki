@@ -57,7 +57,7 @@ Same mental model as CSS/XPath but for binary Office formats. Makes document man
 - **L2**: DOM manipulation (add, set, remove)
 - **L3**: Raw XML access (escape hatch)
 
-"Always prefer higher layers" — same principle as [[ponytail]] YAGNI ladder but for document APIs.
+"Always prefer higher layers" — same principle as [[ponytail-yagni-skill]] YAGNI ladder but for document APIs.
 
 ### 5. Agent Skill Distribution
 
