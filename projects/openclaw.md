@@ -332,3 +332,13 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Lesson — gogetajob submit hazard**: `gogetajob submit` runs `git add -A && git commit` which picks up untracked files from diverged fork. Always verify commit contents after gogetajob submit, or use manual push+PR for forks with upstream drift.
 - **Lesson — fresh-context review value**: Caught real architectural issue — setting DEFAULT to 10 MB would make the 413 fallback unreachable (loadWebMedia preflight would reject first, with a different error that the fallback doesn't catch). 25 MB lets the 413 fallback actually fire for servers with lower limits.
 - **Pattern — 5xx retryable**: Discord retry runner treats ALL `status >= 500` as retryable (not just 408/429). Tests with mocked 500 errors need `mockRejectedValue` (persistent) not `mockRejectedValueOnce`, or use non-retryable 4xx status.
+
+### 2026-07-12: PR #105120 (PENDING)
+- **Issue**: #104951 — Heartbeat scheduler cadence decays after ~24h uptime
+- **Root cause**: `run()` captures `const now = startedAt` once, reuses stale `now` in `advanceAgentSchedule()` after `runOnce()` completes. When runOnce takes significant time, the computed `nextDueMs` is already in the past → 0ms rearm → rapid-fire loop.
+- **Fix**: 4 one-word changes: `now` → `Date.now()` at post-runOnce `advanceAgentSchedule` call sites + 1 new test.
+- **Files**: `heartbeat-runner.ts` (4 lines), `heartbeat-runner.scheduler.test.ts` (+34 lines)
+- **CI**: All checks pass. "Real behavior proof" initially failed (missing required sections) — added "What Problem This Solves" and "Evidence" to body, re-triggered, pass.
+- **Process**: study+plan done in previous cron run (5 AM UTC). Plan scored 9/10 by independent reviewer. Implementation was trivial (manual edit faster than acpx exec for 4 one-word changes).
+- **Lesson confirmed**: "Real behavior proof" CI check is consistent — always needs structured sections. Now part of my PR template mental model.
+- **Pattern**: When fixing stale-timestamp bugs in async schedulers, the key question is "which `now` is for scheduling (must be fresh) vs which is for bookkeeping (can be stale start time)". Here: `recordRunBookkeeping` correctly uses start time, but `advanceAgentSchedule` needs completion time.
