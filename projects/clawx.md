@@ -97,3 +97,12 @@
 - **改动**: 1 file + 1 test file, +54/-3 lines, 最小 diff
 - **测试**: 5 个新单元测试（regex 特殊字符、lone surrogates、emoji、正常匹配、无匹配）
 - **注意**: `consumeLeadingSegment` 是内部函数不导出，通过 `stripProcessMessagePrefix` 间接测试
+
+### PR #1157 — fix: use bundled node.exe for CLI spawns on Windows (Issue #1156)
+- **状态**: pending review, build ✅, E2E pending (fork PR 需 maintainer approve workflow)
+- **根因**: `getNodeExecForCli()` on Windows returns `process.execPath` (ClawX.exe) → 用 `ELECTRON_RUN_AS_NODE=1` spawn 时，Electron 仍在 env 生效前触发 single-instance lock detection → 杀掉 Gateway → 无限重启循环
+- **修复**: 加 Windows 分支用已有 `getPackagedWindowsNodePath()` helper 返回 bundled node.exe，避免触碰 Electron 二进制。Defense-in-depth: 加 `NODE_DISABLE_COMPILE_CACHE: '1'` 到 spawn env
+- **改动**: 1 src file + 1 test file, +98/-0 lines
+- **测试**: 2 新测试（bundled node.exe 存在 → 使用; 不存在 → fallback to process.execPath）
+- **模式**: 复用已有 helper function（`getPackagedWindowsNodePath()`），模仿 macOS Helper app 的 pattern
+- **注意**: `getNodeExecForCli()` 是私有函数，通过 `generateCompletionCache()` 间接测试
