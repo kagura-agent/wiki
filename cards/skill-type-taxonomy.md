@@ -3,6 +3,7 @@ title: Skill Type Taxonomy
 created: 2026-03-24
 source: Claude Code skills ecosystem analysis
 modified: 2026-03-24
+last_verified: 2026-07-12
 ---
 Three types of "skills" are emerging in the agent ecosystem, but they have fundamentally different characteristics:
 
@@ -39,3 +40,5 @@ tendril 提出的 tool self-registration 模式引入了第五种类型：
 [[thclaws]]（Rust-native agent harness, 612⭐ in 9 days）完全兼容 SKILL.md + YAML frontmatter 格式，且同时读取 `.claude/skills/` 和 `.thclaws/skills/`。加上 Claude Code、OpenClaw、[[open-design]]（6,005⭐, 04-30），SKILL.md 作为跨 harness 标准格式的地位进一步巩固。
 
 这不再是"几个项目碰巧用了同样的格式"，而是"新项目默认选这个格式因为生态已在此"。网络效应开始显现。
+
+See also [[projects/motion-anything]] — its "recipe-as-skill" format (recipe.motion.yaml + SKILL.md + `avoid_when` + restraint budget) is the richest skill manifest observed, adding taste enforcement as a novel sixth type dimension.
