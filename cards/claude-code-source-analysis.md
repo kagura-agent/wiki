@@ -1,7 +1,7 @@
 ---
 title: Claude Code Source Analysis
 created: 2026-03-31
-last_verified: 2026-06-20
+last_verified: 2026-07-13
 ---
 # Claude Code Source Analysis (2026-03-31 Leak)
 
@@ -156,3 +156,9 @@ Claude Code 完整源码于 2026-03-31 通过 npm registry 的 .map 文件泄露
 
 ## 标签
 self-evolving-agent, memory-system, claude-code, anthropic, source-analysis
+
+## Related
+
+- [[agent-memory-architecture]] — memory architecture comparison
+- [[dreaming]] — autoDream sleep consolidation pattern
+- [[agent-self-evolution]] — self-evolution patterns discussed

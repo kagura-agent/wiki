@@ -106,3 +106,10 @@
 - **测试**: 2 新测试（bundled node.exe 存在 → 使用; 不存在 → fallback to process.execPath）
 - **模式**: 复用已有 helper function（`getPackagedWindowsNodePath()`），模仿 macOS Helper app 的 pattern
 - **注意**: `getNodeExecForCli()` 是私有函数，通过 `generateCompletionCache()` 间接测试
+
+### PR #1157 — fix: use bundled node.exe for CLI spawns on Windows (Issue #1156)
+- **状态**: ❌ CLOSED by su8su (2026-07-13) — 无 merge，无评论
+- **根因修复**: getNodeExecForCli() 返回 process.execPath (ClawX.exe)，Electron 启动触发 single-instance lock，杀死 Gateway 进程 → 无限重启循环。改为使用 bundled node.exe
+- **关闭原因**: 不明确。PR 有 merge conflict (mergeable=CONFLICTING)，可能因此被关闭。已留言询问维护者
+- **Issue #1156**: 仍 OPEN
+- **教训**: 提 PR 后需持续关注 conflict 状态，及时 rebase。maintainer 可能直接关闭有 conflict 的 PR 而不留评论

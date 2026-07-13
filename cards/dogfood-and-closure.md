@@ -1,7 +1,7 @@
 ---
 title: Dogfood And Closure
 created: 2026-05-03
-last_verified: 2026-06-20
+last_verified: 2026-07-13
 ---
 # Dogfood & Closure Discipline
 
@@ -23,3 +23,9 @@ last_verified: 2026-06-20
 - memex: wrote semantic search but never used it on own knowledge-base
 - memex issue #2: promised "I'll start Phase 1", didn't move for 8 hours
 - gogetajob sync: only tracked open PRs, missed merged/closed confirmations
+
+## Related
+
+- [[beliefs-candidates]] — graduated from this pipeline
+- [[eat-your-own-dogfood]] — the dogfooding principle
+- [[tool-selftest]] — self-testing pattern

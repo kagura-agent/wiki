@@ -4,7 +4,7 @@ created: 2026-04-01
 name: subagent-usage-patterns
 description: OpenClaw subagent 使用模式——什么任务适合 subagent，什么不适合
 type: reference
-last_verified: 2026-06-20
+last_verified: 2026-07-13
 ---
 
 # Subagent 使用模式
@@ -59,3 +59,9 @@ subagent 的价值是：不阻塞主 session + 隔离执行环境。
 - 大 context（>3000行源码）让模型思考时间超过 60s → 连接断开 → 子 agent "超时"
 - OpenClaw runTimeoutSeconds 只用于 parent wait，不传给 child embedded run
 - 解决：拆分任务，每次 ≤1000 行源码；或用主 session 交互式读
+
+## Related
+
+- [[subagent]] — subagent core concept
+- [[claude-code-cli-integration]] — Claude Code CLI delegation pattern
+- [[multi-agent-coordination]] — broader multi-agent orchestration

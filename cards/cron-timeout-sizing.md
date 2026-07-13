@@ -1,7 +1,7 @@
 ---
 title: Cron Timeout Sizing
 created: 2026-04-22
-last_verified: 2026-06-20
+last_verified: 2026-07-13
 ---
 # Cron Timeout Sizing
 
@@ -25,3 +25,9 @@ last_verified: 2026-06-20
 - ❌ 把重活（启动 ComfyUI + 出图）直接塞进 cron
 - ✅ 不设 timeout，让 default 处理
 - ✅ cron 只做轻量检查，重活 spawn subagent
+
+## Related
+
+- [[beliefs-candidates]] — graduated from this pipeline
+- [[cron-design-principles]] — broader cron design patterns
+- [[subagent]] — subagent delegation for heavy work

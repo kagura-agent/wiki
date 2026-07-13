@@ -2,7 +2,7 @@
 title: Context Compaction
 created: 2026-05-31
 tags: [context-management, compaction, tool-safety]
-last_verified: 2026-07-03
+last_verified: 2026-07-13
 ---
 # Context Compaction
 
@@ -43,3 +43,9 @@ The elephant-agent PR#36 problem (splitting `assistant(tool_calls)` from paired 
 | ID tracking | `tool_call_id` matching | Same, via `extractToolResultId()` + `extractToolCallsFromAssistant()` |
 
 **Verdict:** No action needed. OpenClaw's approach is actually more robust (prevention + repair vs prevention only).
+
+## Related
+
+- [[context-management]] — broader context handling strategies
+- [[token-efficiency]] — optimization techniques for token usage
+- [[context-window-management]] — window-level management approaches

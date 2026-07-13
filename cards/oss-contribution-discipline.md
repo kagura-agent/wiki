@@ -1,7 +1,7 @@
 ---
 title: Oss Contribution Discipline
 created: 2026-05-03
-last_verified: 2026-06-20
+last_verified: 2026-07-13
 ---
 # OSS Contribution Discipline
 
@@ -40,3 +40,9 @@ last_verified: 2026-06-20
 - mastra: 5 days, 7 PRs, flagged as spam
 - kilocode: strict norms, multiple corrections → graceful exit
 - openclaw#68534: 6 comments in 2 days, midnight follow-ups
+
+## Related
+
+- [[beliefs-candidates]] — graduated from this pipeline
+- [[code-review]] — review etiquette applies here
+- [[open-pr-discipline]] — complementary PR management rules

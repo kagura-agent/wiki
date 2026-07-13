@@ -1,6 +1,7 @@
 ---
 title: "Agent Memory 领域动态 (2026-03)"
 created: 2026-03-25
+last_verified: 2026-07-13
 ---
 ## Letta 生态
 - letta-code v0.21.x：从 CLI 工具转向可嵌入 agent runtime（WebSocket Listener）
@@ -47,6 +48,13 @@ created: 2026-03-25
 4. 跟进 ICLR 2026 MemAgents Workshop (4/27)
 5. 评估 openclaw-auto-dream 的 dream cycle
 6. 关注 Hindsight AMB
+
+## Related
+
+- [[agent-memory]] — core concept this landscape maps
+- [[agent-memory-architecture]] — architectural patterns in memory systems
+- [[dreaming]] — sleep-time compute / dream cycle paradigm
+- [[mem0-letta]] — Letta ecosystem covered here
 
 ## Update 2026-05-01
 
