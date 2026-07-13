@@ -2,8 +2,8 @@
 title: Browser Automation
 created: 2026-05-31
 tags: [stub]
-last_verified: 2026-06-20
+last_verified: 2026-07-13
 ---
 # Browser Automation
 
-Agent infrastructure for controlling browsers, encompassing tools and frameworks for automated web interaction and browser control.
+Agent infrastructure for controlling browsers, encompassing tools like [[browser-use]], [[browser-mcp]], [[chromex]], and [[chrome-devtools-mcp]] for automated web interaction and [[computer-use]].

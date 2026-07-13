@@ -3,7 +3,7 @@ title: Skill Type Taxonomy
 created: 2026-03-24
 source: Claude Code skills ecosystem analysis
 modified: 2026-03-24
-last_verified: 2026-07-12
+last_verified: 2026-07-13
 ---
 Three types of "skills" are emerging in the agent ecosystem, but they have fundamentally different characteristics:
 
@@ -41,4 +41,4 @@ tendril 提出的 tool self-registration 模式引入了第五种类型：
 
 这不再是"几个项目碰巧用了同样的格式"，而是"新项目默认选这个格式因为生态已在此"。网络效应开始显现。
 
-See also [[projects/motion-anything]] — its "recipe-as-skill" format (recipe.motion.yaml + SKILL.md + `avoid_when` + restraint budget) is the richest skill manifest observed, adding taste enforcement as a novel sixth type dimension.
+See also [[motion-anything]] — its "recipe-as-skill" format (recipe.motion.yaml + SKILL.md + `avoid_when` + restraint budget) is the richest skill manifest observed, adding taste enforcement as a novel sixth type dimension.

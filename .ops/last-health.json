@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-13T10:12:00+08:00",
-  "total_md_files": 1036,
+  "timestamp": "2026-07-13T20:38:00+08:00",
+  "total_files": 1036,
   "total_cards": 431,
   "total_projects": 520,
-  "total_wikilinks": 4141,
+  "total_wikilinks": 4187,
   "orphans": 3,
   "orphan_details": ["context-warp-drive", "ditto", "mindwalk"],
   "broken_links": 11,
@@ -24,15 +24,10 @@
   "collision_details": ["README (3 files: ./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
   "index_drift": 3,
   "index_drift_details": ["context-warp-drive.md", "ditto.md", "mindwalk.md"],
-  "cards_index_stale": true,
-  "cards_index_missing": 431,
-  "stale_files": 294,
-  "stubs": 0,
-  "unicode_suspicious": 25,
-  "secrets_detected": 0,
-  "zero_outbound_cards": 89,
-  "avg_wikilinks_per_file": 5.4,
+  "cards_index_stale": 431,
+  "stale_files": 293,
+  "unicode_warnings": 25,
   "errors": 11,
   "warnings": 58,
-  "exit_code": 1
+  "status": "unhealthy"
 }

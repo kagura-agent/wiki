@@ -3,7 +3,7 @@ title: 机制 ≠ 进化：基础设施建设不等于行为改变
 created: '2026-03-22'
 source: Luna 的总结 + 反思
 modified: '2026-03-22'
-last_verified: 2026-07-12
+last_verified: 2026-07-13
 ---
 Luna 在盘点完 12 套自我改进机制后说：
 "cron/nudge/heartbeat/FlowForge 都只是触发机制，越用越好才是自进化的课题。"
@@ -45,4 +45,4 @@ Also:
 - [[agent-context-files]] — concrete patterns for context file design
 - [[guard-spec-format]] — mechanism for behavioral guardrails
 - [[evolution-granularity-spectrum]] — at what grain size should mechanisms operate?
-- [[projects/easylink-agent-runtime]] — pure mechanism (protocol-first agent loop kernel) with no evolutionary layer
+- [[easylink-agent-runtime]] — pure mechanism (protocol-first agent loop kernel) with no evolutionary layer

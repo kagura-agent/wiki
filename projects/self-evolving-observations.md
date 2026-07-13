@@ -6046,3 +6046,59 @@ The **maintenance** (retraction, cleanup) is healthy. But a system that only ret
 # dreaming diary: 4 new "details unavailable" (07-11)
 # beliefs stats: 825 lines, 5 at 3+ count (all graduated), 0 pending graduation
 ```
+
+## 🔬 自进化观察日报 2026-07-13 (Day 87 / Issue #10 Day 26)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增 (study×1, workloop×1), 5 条 retracted (daily-review stale cleanup), 0 条 graduated
+  - 新增: study-saturation-apply-empty-misleading, stale-pr-fast-path-efficiency
+  - Retracted: issue-reselection-no-memory, frozen-acceptance-criteria, tool-bug-tracking-update, transitive-dep-lint-fix, dual-gate-trace (均 30d stale)
+  - 活跃 candidates 总数: 109, 待升级 (3+ count): 2
+- **DNA 变更**: 无 (SOUL.md/AGENTS.md 未改动)
+- **nudge 触发**: 0 次 (journalctl 无记录, agent.yaml 配置区域返回空)
+- **dreaming**: 运行 2 次 (03:15 AM, 17:34 PM)
+  - Light Sleep: ~26 staged @ uniform 0.58, 来源 2026-07-10 session corpus
+  - Deep Sleep: ranked 0, promoted 0
+  - REM: "No strong patterns surfaced" (空)
+  - "Details unavailable" bug: +4 today (18 total, 持续 33 天)
+
+### 闭环追踪
+- **完整闭环**: 1 个 (部分)
+  - spam-filter NDJSON fix: 发现→修复→commit→daily-review 确认 (3f6aa01, 115dd48)
+- **断裂处**:
+  - dreaming promotion pipeline: Light Sleep → Deep Sleep 环节持续断裂 (0 promotes 连续 10+ 天)
+  - nudge: 完全静默，无触发记录，未产出任何反思内容
+  - beliefs graduation: 109 个活跃候选，2 个达到 3+ 次但无人评估推动
+
+### Issue #10 Sub-items
+| Item | Status | Delta vs Day 86 |
+|------|--------|-----------------|
+| (a) upstream 0.58 | ❌ Day 26, 未 file | 无变化 |
+| (b) "details unavailable" | ❌ +4 today, 18 total | 无改善，bug 持续 |
+| (c) filter monitoring | ⚠️ running, 0 promotes | 被 (b) 阻塞 |
+| (d) REM empty | ❌ "No strong patterns" | 无变化 |
+
+### 今日发现
+
+1. **管线生态失衡持续**: 维护 (retraction) 以 5:2 比例超过生产 (new gradients)。梯度来源仍然单一 (workloop + study)，nudge 贡献为零。
+2. **Dreaming "details unavailable" 已成系统性故障**: 33 天未修复，18 occurrences across 5 天 (07-09~07-13)，每次 dreaming 运行必触发。这不是间歇性 bug 而是功能性瘫痪。
+3. **stale-PR fast-path 模式收敛**: beliefs-candidates 中 07-12 和 07-13 各有一条关于 stale-PR recovery 效率的 gradient，模式几乎相同。说明 workloop 频繁遇到跨 cron 恢复场景，这个 pattern 可能接近 graduation 条件。
+4. **nudge 可观测性问题**: 连续多天 journalctl 无 nudge 相关日志。需要确认 nudge 插件是否仍在运行或已被禁用。
+
+### 原始数据
+```
+# workspace git log since yesterday 22:30:
+a3aeb3a 2026-07-13 21:09 — todo: add rule #78 contribution-evolve entry
+5969769 2026-07-13 14:12 — gradient: stale-PR fast-path efficiency (workloop)
+3f6aa01 2026-07-13 03:37 — daily-review 07-13: spam-filter NDJSON fix, 5 beliefs retracted
+115dd48 2026-07-13 03:22 — fix: spam-filter.sh handle NDJSON input (jq -s slurp)
+
+# DREAMS.md "details unavailable" by date:
+July 9:  4 occurrences
+July 10: 4 occurrences
+July 11: 4 occurrences
+July 12: 2 occurrences
+July 13: 4 occurrences (03:15×2, 17:34×2)
+
+# beliefs-candidates: 109 active, 2 at 3+ count, 0 pending graduation eval
+```
