@@ -96,4 +96,8 @@ CWD is narrower but the determinism + zero-LLM + cache exploitation is the diffe
 - Architecture will influence other agent runtimes even if this specific package doesn't become dominant
 - The CLI fold packs (Claude Code / Codex) are the highest-value entry point for adoption
 
+## Apply Assessment (2026-07-13)
+
+Coordinate Closet's core pattern (preserve identifiers during compression) was already applied to [[compress-output]] on 2026-05-12 via [[runbook-hermes]] — `extract_domain_ids()` extracts refs, paths, SHAs from compressed-away lines. CWD's version is more sophisticated: budget-scored conservation with deterministic context labels (`⟦changelog_id⟧`), residency TTLs, and page-in recall. The delta between our basic extraction and CWD's full budget-scored system is real but implementation-heavy (workloop scope, not study-apply). Cache-hot freeze design is the most distinctive CWD insight — no equivalent in our pipeline.
+
 Links: [[taco-context-compression]], [[compress-output]], [[tokenomics-paper]], [[agent-harness-landscape]], [[skill-context-compression]]
