@@ -81,7 +81,7 @@ Maps model/engine → fold knobs: `contextWindowTokens`, `pressureCeilingTokens`
 
 ## vs Memory Systems
 
-| | CWD | [[projects/agentspace\|Mem0]] | Letta | Zep/Graphiti |
+| | CWD | Mem0 ([[agentspace]]) | Letta | Zep/Graphiti |
 |---|---|---|---|---|
 | Scope | In-session compaction | Long-term extraction | Persistent agent memory | Temporal knowledge graph |
 | LLM calls | Zero (fold core) | Extraction model | Agent-managed | Entity extraction |
