@@ -4,7 +4,7 @@ created: 2026-06-25
 tags: [agent-harness, browser, extension, p2p, webrtc, security, sandbox, actor-model, heap-isolation]
 source: https://github.com/NotASithLord/peerd
 status: deep-read
-last_verified: 2026-07-11
+last_verified: 2026-07-15
 ---
 
 # peerd — Browser-Native AI Agent Harness
@@ -191,3 +191,4 @@ First "daemon" actor — persistent, opt-in, mesh operator:
 
 - Revisit: 2026-07-12 (check AgentOS PR ratification, dweb actor maturity, v0.3 direction)
 - Watch for: AgentOS fork decision, dweb actor security model (#35), control plane repo creation
+- **2026-07-15**: 352⭐ (+3%/4d). Pushed TODAY. v0.2.7 released (07-12). **Key new features**: BM25 query-relevant excerpting for oversized fetched pages (#200) — classic IR technique applied to web browsing context; actor-aware settle window for evaluation (#199) — their 31.0% pass rate was undercounted due to timing; emulated focus pattern (#209) — web actor no longer steals OS focus, emulates it instead. Community: 5 unique issue authors (last 14d), 8 open + 5 closed issues. Still THRIVING.
