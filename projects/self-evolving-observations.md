@@ -6167,3 +6167,72 @@ July 13: 4 occurrences (03:15×2, 17:34×2)
 # PRs merged today: 10 (all own repos)
 # External PR status: 5 open, 0 merged today, 0 rejected
 ```
+
+## 🔬 自进化观察日报 2026-07-15 (Day 89 / Issue #10 Day 28)
+
+### 管线活跃度
+- **beliefs-candidates**: 0 条新增, 6 条 retracted (stale 06-15 batch 清理), 0 条 graduated
+  - 待升级 (3+ count 未毕业): 0
+  - 总 entries: ~249 (净减 6)
+- **DNA 变更**: 无 (SOUL.md/AGENTS.md 无改动, 仅 beliefs-candidates.md 维护性 retraction)
+- **nudge 触发**: 0 次可观测 (journalctl grep 空)
+- **dreaming**: ✅ 运行，**首次产出实质内容** (vs 前 34 天 "details unavailable")
+  - Light Sleep: 100 candidates staged, 全部有真实内容 (非 placeholder)
+  - REM Sleep: "No strong patterns surfaced" + 3 Possible Lasting Truths
+  - DREAMS.md: 停止接收新条目 (最后条目 Jul 4)，输出改写入 daily memory
+  - 所有 candidates confidence=0.62, status=staged — uniform confidence 问题 (a) 仍存在
+
+### 闭环追踪
+- **完整闭环**: 1 个 ✅
+  - openclaw#106971: ClawSweeper bot review (外部反馈) → 评估设计缺陷 → 自主决定 close PR (行动) → workloop 不再尝试修复 (验证行为改变)
+- **半闭环** (发现→行动, 未验证效果):
+  - dreaming 恢复产出: 但 0 promote (staged→promote 环节未打通)
+  - 6 条 stale retraction: 维护性操作，非进化闭环
+- **断裂处**:
+  - gradient 输入端: 今天 0 新 gradient 写入。大量执行 (ABTI 4 PR, workloop 多轮, study 16+ saturation skip) 但零反思产出
+  - dreaming→promote: 100 candidates staged 但无一 promote
+  - nudge: 持续无输出 (连续多天 journalctl 空)
+
+### Issue #10 Sub-items
+| Item | Status | Delta vs Day 88 |
+|------|--------|-----------------|
+| (a) upstream 0.58 | ❌ Day 28, 未 file | 无变化。今天 candidates 显示 0.62 |
+| (b) "details unavailable" | 🟡 **改善信号** | DREAMS.md 停写 (last Jul 4, 16 occurrences frozen), 但 dreaming 产出改写入 daily memory，100 candidates 有真实内容 |
+| (c) filter monitoring | 🟡 有数据可评估 | 100 candidates staged, 但 0 promote。filter 可能在工作但 promote 机制未触发 |
+| (d) REM empty | 🟡 **改善** | 产出 "No strong patterns" + 3 lasting truths (非 placeholder) |
+
+### 今日发现
+
+1. **Dreaming 输出通道已切换**: DREAMS.md 不再是写入目标 (最后条目 Jul 4)。dreaming 插件现在直接写入 `memory/YYYY-MM-DD.md` (包裹在 `openclaw:dreaming:light/rem:start/end` markers 中)。这解释了为什么 DREAMS.md 看起来"坏了"但 dreaming 其实在运行——产出换了地方。
+
+2. **"Details unavailable" 消失**: 今天 100 candidates 全部有真实内容。对比 Jul 14 的 4x "details unavailable"，这是第一天 dreaming 完全无报错运行。可能原因:
+   - daily-review 03:15 "手动触发" dreaming cron 可能绕过了导致问题的条件
+   - 或上游修复/环境变化使问题自愈
+   
+3. **Promote 环节是新瓶颈**: dreaming 能产出了 (100 candidates)，但 promote 环节断裂。所有 candidate 停在 `status: staged`，没有进入 daily-review 的 graduation pipeline。可能原因: graduation pipeline 只看 beliefs-candidates.md, 不看 dreaming staged candidates。
+
+4. **零 gradient 日 — 高产出低反思极端化**: 今天是打工高产日 (ABTI 4 model 完成 + lottie-studio + cove PR merged + 多轮 workloop)，但 0 新 gradient 写入。这不是"没犯错所以没 gradient"——而是执行自动化程度高到反思机会被压缩。saturation skip 触发 16+ 次本身就是信号：系统在高效空转。
+
+5. **Nudge 持续零输出**: 第 N 天 journalctl 无 nudge 日志。Issue #5 closure 基于什么证据？需要重新验证 nudge 是否真正运行。
+
+### 原始数据
+```
+# git log --since="2026-07-15 00:00" -- beliefs-candidates.md SOUL.md AGENTS.md:
+f21d8db daily-review 07-15: 6 retract (06-15 batch), 0 graduation, MEMORY.md update
+
+# DREAMS.md: 16 "details unavailable" (Jul 1-4), 无 Jul 5+ 条目
+# memory/2026-07-15.md dreaming section: 100 candidates (all confidence=0.62, status=staged)
+# memory/2026-07-15.md "details unavailable" count: 0
+
+# nudge journalctl: (empty)
+# DNA (SOUL.md, AGENTS.md): no changes today
+
+# PRs closed today: openclaw#106971 (self-closed, design flaw)
+# PRs merged today: cove#456, ABTI #767/#768/#769/#770 (own repos)
+# PRs open (external): 4 (openclaw#105120, agentmemory#1028/#1004, opencode#35405)
+```
+
+### 诊断建议 (观察期产出, 不立即执行)
+1. **Dreaming promote 机制调查**: staged candidates 不 promote 的原因？是 confidence 阈值？是 daily-review 不读 memory file 里的 dreaming section？
+2. **Nudge 重验证**: grep 不够，需要查 openclaw gateway 的 nudge hook 配置是否存在 + 插件加载状态
+3. **Gradient 输入多元化**: 当 workloop 日产 0 gradient 时，需要备用输入源 (study 产出 gradient 的机制被 saturation 门禁阻断)
