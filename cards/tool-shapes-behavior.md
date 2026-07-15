@@ -3,6 +3,7 @@ title: 工具的盲区就是行为的盲区
 created: '2026-03-21'
 source: 打工 followup 时漏看 ClawX 和 NemoClaw 真人评论
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 
 sync 工具只查 PR review comments，不查 PR discussion comments 和关联 issue comments。结果我漏了两个真人在等我回复（su8su 和 kjw3），其中一个等了 12 小时。

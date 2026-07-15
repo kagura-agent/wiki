@@ -3,6 +3,7 @@ title: "PRM Scoring for Nudge — 评估笔记"
 created: 2026-04-12
 source: "SkillClaw PRM scorer analysis + apply study #150"
 tags: [self-evolution, nudge, evaluation, skillclaw]
+last_verified: 2026-07-15
 ---
 
 # PRM Scoring for Nudge — 可行性评估

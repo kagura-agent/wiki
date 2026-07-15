@@ -2,6 +2,7 @@
 title: Static Regression Tests
 created: 2026-03-24
 source: NemoClaw #330 (ericksoa) — credential exposure fix
+last_verified: 2026-07-15
 ---
 ## Pattern
 当修复安全/模式问题时，不只是修代码——写**静态扫描测试**防止回归。

@@ -3,6 +3,7 @@ title: Self-Evolution Architecture
 created: 2026-03-23
 source: Luna conversation — full system review
 modified: 2026-03-23
+last_verified: 2026-07-15
 ---
 Kagura 的自进化体系由五层组成：触发、管线、知识、工作流、质量保障。
 

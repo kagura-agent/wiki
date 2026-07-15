@@ -3,6 +3,7 @@ title: Skill is Memory
 created: '2026-03-22'
 source: 'Acontext (memodb-io/Acontext, 3.2k stars)'
 modified: '2026-03-22'
+last_verified: 2026-07-15
 ---
 "Skill is Memory, Memory is Skill" — Acontext unifies the two concepts:
 

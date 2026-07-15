@@ -3,6 +3,7 @@ title: Lazy Classification
 created: '2026-03-21'
 source: session reflection — bot review dismissal + tool-without-use pattern
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 把资源/信号简单二分为"有用/没用"，跳过实际检查。
 

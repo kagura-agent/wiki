@@ -3,6 +3,7 @@ title: Recursive Blindspot
 created: '2026-03-21'
 source: nudge plugin debugging observation
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 反思工具坏了导致没反思到工具坏了——这是递归盲点。
 

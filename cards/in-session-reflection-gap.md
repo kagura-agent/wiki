@@ -3,6 +3,7 @@ title: 主 Session 内反思缺口
 created: '2026-03-21'
 source: 'Luna 和我的讨论 2026-03-21 08:03'
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 
 发现一个技术缺口：

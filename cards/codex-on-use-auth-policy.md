@@ -4,6 +4,7 @@ created: 2026-04-11
 source: "codex-rs source code (marketplace.rs, discoverable.rs, tool_suggest.rs, v2.rs)"
 modified: 2026-04-11
 tags: [codex, security, authorization, agent-router, plugin-system]
+last_verified: 2026-07-15
 ---
 
 # Codex ON_USE AuthPolicy: 发现-按需授权模式

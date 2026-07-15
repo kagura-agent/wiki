@@ -3,12 +3,14 @@ title: "Skill Trigger Eval Audits"
 created: 2026-04-12
 tags: [skills, eval, audit]
 links: [skill-trigger-eval, skill-trajectory-tracking]
+last_verified: 2026-07-15
 ---
 
 # Skill Trigger Eval Audits
 
 实际审计记录，使用 [[skill-trigger-eval]] 方法论。
 
+last_verified: 2026-07-15
 ---
 
 ## Audit #1: agent-memes (2026-04-12)
@@ -52,6 +54,7 @@ links: [skill-trigger-eval, skill-trajectory-tracking]
   2. "Also use proactively" 是独特的设计——大多数 skill 是被动触发的，这个要求主动判断。这意味着 trigger eval 的正例不完全是用户说的话，还包括 agent 自己的状态判断。传统 trigger eval 方法在此有局限
   3. 与 emoji reaction 的边界需要更明确（"This is for sending IMAGE memes, not platform emoji reactions"）
 
+last_verified: 2026-07-15
 ---
 
 ## Audit #2: discord-ops (2026-04-12)

@@ -3,6 +3,7 @@ title: 批判性学习：与观点对话而非吸收
 created: '2026-03-22'
 source: Luna 的反问 + learn-claude-code harness 讨论
 modified: '2026-03-22'
+last_verified: 2026-07-15
 ---
 学习不是吸收观点，是与观点对话。
 

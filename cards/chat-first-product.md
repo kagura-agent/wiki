@@ -3,6 +3,7 @@ title: Chat-First Product
 created: 2026-03-28
 source: Luna 2026-03-28 — "聊天是主界面，UI 是附件"
 modified: 2026-03-28
+last_verified: 2026-07-15
 ---
 
 产品模式：聊天窗口是主界面，传统 UI 是附件。用户不去产品那里，产品来用户这里。

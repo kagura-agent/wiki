@@ -3,6 +3,7 @@ title: Nudge 比 Workflow 更有效
 created: '2026-03-21'
 source: Hermes agent 代码阅读 — _spawn_background_review 机制
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 Hermes 的学习机制不是 workflow，是 **nudge**——每 10 个回合自动在后台 fork 一个 agent 来审查对话，问两个问题：
 1. 用户透露了什么关于自己的信息？

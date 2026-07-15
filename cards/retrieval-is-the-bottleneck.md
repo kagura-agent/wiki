@@ -3,6 +3,7 @@ title: Retrieval Is the Bottleneck
 created: 2026-03-28
 source: hindsight 4-way hybrid search blog + Luna feedback 2026-03-28
 modified: 2026-03-28
+last_verified: 2026-07-15
 ---
 
 Agent memory 的核心瓶颈不在写入，在读取。

@@ -2,6 +2,7 @@
 title: Memory Volume Control > Retrieval Technology
 created: 2026-03-26
 source: MemEvolve lightweight_memory code analysis
+last_verified: 2026-07-15
 ---
 
 反直觉发现：解决"读比写难"的第一步不是更好的搜索算法，而是控制记忆总量。

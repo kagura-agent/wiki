@@ -2,6 +2,7 @@
 title: Beliefs Upgrade Mechanism
 created: 2026-03-25
 source: 实践观察 + MemSkill designer 模式类比
+last_verified: 2026-07-15
 ---
 
 ## 定义

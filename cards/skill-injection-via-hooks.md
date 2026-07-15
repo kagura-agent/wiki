@@ -3,6 +3,7 @@ title: Skill Injection via OpenClaw Hooks
 created: 2026-03-28
 source: Luna discussion
 tags: [architecture, self-evolving, openclaw, hooks]
+last_verified: 2026-07-15
 ---
 
 ## 问题

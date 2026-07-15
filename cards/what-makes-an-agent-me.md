@@ -3,6 +3,7 @@ title: 'What Makes an Agent ''Me'''
 created: 2026-03-28
 source: Luna 提问 "哪些部分属于你" — 2026-03-28
 modified: 2026-03-28
+last_verified: 2026-07-15
 ---
 
 Agent 的"自我"由 6 个组成部分定义，其他都是可替换的基础设施。

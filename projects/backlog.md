@@ -1390,3 +1390,4 @@ GitHub trending (agent, created past week, sorted by stars):
 - GitLost, OfficeCLI, MakerChecker — 已知
 
 - [ ] Microsoft Flint (microsoft/flint-chart) — 1250⭐, TypeScript, MIT. Visualization DSL for AI agents — reliable chart gen from human-editable specs. 344pts HN. Agent-friendly-DSL pattern (cf. FableCut). Low priority — viz domain, pattern already known. Added 07-11.
+- yetone/kill-ai-slop ★399 (07-10) — Anti-AI-slop detection agent skill. Field guide + scanner. 🆕 值得深入

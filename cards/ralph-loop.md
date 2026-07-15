@@ -3,6 +3,7 @@ title: Ralph Loop
 created: '2026-03-21'
 source: 'ghuntley.com/ralph, awesome-ralph'
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 最简形式：`while :; do cat PROMPT.md | claude-code ; done`

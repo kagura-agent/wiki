@@ -3,6 +3,7 @@ title: skill-evolution — Meta-Skill for Skill Lifecycle Management
 created: 2026-04-09
 source: GitHub hao-cyber/skill-evolution
 tags: [self-evolving, skill-lifecycle, fork-merge, claude-code, registry]
+last_verified: 2026-07-15
 ---
 
 ## 概述

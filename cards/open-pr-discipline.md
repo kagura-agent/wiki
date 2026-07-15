@@ -2,6 +2,7 @@
 title: Open PR Discipline
 created: 2026-03-24
 source: Luna feedback + NemoClaw check-pr-limit experience
+last_verified: 2026-07-15
 ---
 ## Core Rule
 一个 repo 的 open PR 不超过 3 个。超过就停下来等已有 PR 被消化。

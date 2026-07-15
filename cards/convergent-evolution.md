@@ -3,6 +3,7 @@ title: 收敛进化：独立团队到达相同的 agent 架构
 created: '2026-03-22'
 source: gitclaw/agentara/hermes 研究
 modified: '2026-03-22'
+last_verified: 2026-07-15
 ---
 不同团队独立到达 SOUL.md + memory/ + heartbeat + skills 的架构模式：
 - gitclaw: agent = git repo，行为编码在文件里

@@ -2,6 +2,7 @@
 title: ClawHub 自进化 Skill 竞品分析
 created: 2026-03-23
 type: research
+last_verified: 2026-07-15
 ---
 
 ## 概览

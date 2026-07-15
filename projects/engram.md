@@ -3,6 +3,7 @@ title: Engram — Persistent Memory Layer for AI Agents
 created: 2026-04-05
 source: GitHub Ironact/engram
 tags: [memory, agent-memory, openclaw-plugin, mem0-alternative]
+last_verified: 2026-07-15
 ---
 
 ## 概述

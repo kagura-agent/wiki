@@ -3,6 +3,7 @@ title: 有工具不用也是盲区
 created: '2026-03-21'
 source: 自我反思 — FlowForge写了不用，田野笔记有了不更新
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 [[tool-shapes-behavior]] 的推论：不仅"工具的盲区是行为的盲区"，**有工具不用也是行为的盲区**。
 

@@ -3,6 +3,7 @@ title: Anti-Generalization Principle
 created: '2026-03-22'
 source: Acontext distillation pipeline (memodb-io/Acontext)
 modified: '2026-03-22'
+last_verified: 2026-07-15
 ---
 When recording learnings, do NOT over-generalize. If the task was about flower-sunshine.com, say "flower-sunshine.com", not "any website."
 

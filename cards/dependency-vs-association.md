@@ -1,6 +1,7 @@
 ---
 title: "Dependency vs Association"
 created: 2026-03-24
+last_verified: 2026-07-15
 ---
 Code references are **dependencies** — you can't understand the current function without jumping to the called function. Not jumping means you're stuck.
 
@@ -16,6 +17,7 @@ To make links actually get followed, they need to become dependencies in some co
 **Implication for agents:**
 An agent will follow code imports automatically but skip `links` unless the task explicitly requires traversal. Design retrieval around tasks, not around link structure.
 
+last_verified: 2026-07-15
 ---
 Source: Luna's observation (2026-03-29) — "写代码时你会因为函数名跳到下一个文件，为什么看知识卡片不跳？"
 Links: [[knowledge-needs-upgrade-path]], [[retrieval-is-the-bottleneck]], [[tool-shapes-behavior]]

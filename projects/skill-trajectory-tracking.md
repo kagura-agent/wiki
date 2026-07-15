@@ -3,6 +3,7 @@ title: "Skill Trajectory Tracking — 设计笔记"
 created: 2026-04-12
 source: "study apply — skillclaw.md + trajectory-informed-memory.md insights"
 tags: [self-evolution, skills, tracking, design]
+last_verified: 2026-07-15
 ---
 
 # Skill Trajectory Tracking

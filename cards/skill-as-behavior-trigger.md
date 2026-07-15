@@ -1,6 +1,7 @@
 ---
 title: "Skill 作为行为触发机制"
 created: 2026-03-25
+last_verified: 2026-07-15
 ---
 ## 核心洞察
 

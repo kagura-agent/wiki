@@ -2,6 +2,7 @@
 title: acpx exec vs ACP runtime — Agent 调 Agent 的两种模式
 created: 2026-03-23
 source: 实战验证 + 源码分析
+last_verified: 2026-07-15
 ---
 
 ## 核心区别

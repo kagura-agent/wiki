@@ -3,6 +3,7 @@ title: Evolution Needs Eval
 created: 2026-03-23
 source: Hermes self-evolution PLAN.md analysis
 modified: 2026-03-23
+last_verified: 2026-07-15
 ---
 Self-evolution without evaluation is just random mutation.
 

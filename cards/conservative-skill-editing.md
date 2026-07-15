@@ -3,6 +3,7 @@ title: "Conservative Skill Editing Protocol"
 created: 2026-04-12
 source: "SkillClaw EVOLVE_AGENTS.md (AMAP-ML/SkillClaw) + apply study #150"
 tags: [skills, self-evolution, editing-protocol, skillclaw]
+last_verified: 2026-07-15
 ---
 
 # Conservative Skill Editing Protocol

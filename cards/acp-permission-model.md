@@ -3,6 +3,7 @@ title: ACP Permission Model
 created: 2026-03-23
 source: ACPX config.ts source code + debugging ACP session failures
 modified: 2026-03-23
+last_verified: 2026-07-15
 ---
 ACPX uses a two-layer permission model:
 

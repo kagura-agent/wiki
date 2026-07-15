@@ -2,6 +2,7 @@
 title: MemSkill - Learnable Memory Skills for Self-Evolving Agents
 created: 2026-03-25
 source: arxiv 2602.02474 + GitHub ViktorAxelsen/MemSkill
+last_verified: 2026-07-15
 ---
 
 ## 核心问题

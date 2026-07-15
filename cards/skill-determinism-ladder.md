@@ -3,6 +3,7 @@ title: Skill Determinism Ladder — 审查标准
 created: 2026-04-10
 tags: [skill-quality, determinism, skill-creator, self-evolving]
 source: skill-evolution (hao-cyber), skill-creator determinism-audit.md, EvoAgentX MAP-Elites insights
+last_verified: 2026-07-15
 ---
 
 ## 概述

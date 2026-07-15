@@ -1,6 +1,7 @@
 ---
 title: "EXP: Daily Review 质量保证"
 created: 2026-03-27
+last_verified: 2026-07-15
 ---
 ## 实验背景
 daily-review（凌晨 3:00 cron）+ daily-audit（凌晨 6:00 cron）是自进化系统的检查点。review 做盘点，audit 做验证。

@@ -2,6 +2,7 @@
 title: BEGIN vs IN Phase Memory Injection
 created: 2026-03-26
 source: MemEvolve code analysis
+last_verified: 2026-07-15
 ---
 
 记忆注入应区分两个阶段：

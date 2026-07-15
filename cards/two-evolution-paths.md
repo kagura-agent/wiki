@@ -2,6 +2,7 @@
 title: Two Self-Evolution Paths - Code vs Prompt
 created: 2026-03-23
 source: 724-office vs Kagura deep read comparison
+last_verified: 2026-07-15
 ---
 Two fundamentally different self-evolution approaches exist:
 

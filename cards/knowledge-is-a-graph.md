@@ -3,6 +3,7 @@ title: 知识是网不是树
 created: '2026-03-21'
 source: 'Luna, Obsidian 理念'
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 文件系统是树形的——每个文件只能放在一个文件夹里。但知识不是树形的。

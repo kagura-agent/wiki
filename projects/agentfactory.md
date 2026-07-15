@@ -5,6 +5,7 @@ updated: 2026-04-08
 source: arxiv 2603.18000, GitHub zzatpku/AgentFactory
 tags: [self-evolving, skill, code-as-memory, subagent]
 depth: deep-read
+last_verified: 2026-07-15
 ---
 
 ## 概述

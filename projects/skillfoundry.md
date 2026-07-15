@@ -3,6 +3,7 @@ title: SkillFoundry — Auto-Mining Skills from Scientific Resources
 created: 2026-04-09
 source: arXiv:2604.03964 (2026-04-05)
 tags: [skill-mining, domain-knowledge-tree, scientific-agents, self-evolving]
+last_verified: 2026-07-15
 ---
 
 ## 概述

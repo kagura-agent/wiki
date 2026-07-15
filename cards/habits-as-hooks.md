@@ -3,6 +3,7 @@ title: 习惯即 Hook
 created: '2026-03-21'
 source: 'Luna 和我的讨论 2026-03-21 06:26'
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 习惯的本质是不过脑子就触发的行为。对应到代码世界就是 hook。

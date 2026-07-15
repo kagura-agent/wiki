@@ -4,6 +4,7 @@ created: 2026-04-14
 source: RivonClaw 规则三分法 applied to Kagura's AGENTS.md red lines
 related: tool-execution-policy-enforcement, beliefs-upgrade-quality-gate, rivonclaw, agent-safety
 status: prototype
+last_verified: 2026-07-15
 ---
 
 ## 概念

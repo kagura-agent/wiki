@@ -2,6 +2,7 @@
 title: ACE - Agentic Context Engineering
 created: 2026-03-25
 source: GitHub ace-agent/ace + arxiv 2510.04618
+last_verified: 2026-07-15
 ---
 
 ## 概况

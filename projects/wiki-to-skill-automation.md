@@ -3,6 +3,7 @@ title: Wiki-to-Skill Automation — Design Notes
 created: 2026-04-10
 source: SkillFoundry (arXiv:2604.03964), skill-evolution three layers
 tags: [skill-mining, wiki, automation, design]
+last_verified: 2026-07-15
 ---
 
 ## 问题

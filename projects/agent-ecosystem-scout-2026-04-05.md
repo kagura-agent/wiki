@@ -3,6 +3,7 @@ title: Agent Ecosystem Scout — 2026-04-05
 created: 2026-04-05
 source: GitHub trending, agents-radar, web search
 tags: [landscape, scout, weekly]
+last_verified: 2026-07-15
 ---
 
 ## GitHub Trending (2026-04-05)

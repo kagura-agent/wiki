@@ -3,6 +3,7 @@ title: Deploy Without Verify
 created: '2026-03-22'
 source: memory/2026-03-22.md
 modified: '2026-03-22'
+last_verified: 2026-07-15
 ---
 配了新东西但不验证它是否真的在工作。
 

@@ -3,6 +3,7 @@ title: Tool Fragmentation Paradox
 created: 2026-03-28
 source: Luna 2026-03-28 — "写代码如此简单之后，业务人员会自己做工具，圈外人想用又懒得学"
 modified: 2026-03-28
+last_verified: 2026-07-15
 ---
 
 代码生成越容易 → 工具越多 → 每个工具越个人化 → 别人越不愿意用你的。

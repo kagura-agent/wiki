@@ -3,6 +3,7 @@ title: 捕获失败
 created: '2026-03-21'
 source: '自身经历 2026-03-21 06:01'
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 聊了一个半小时，冒出很多火花，但直到 Luna 提醒"不是还有个记 idea 的地方么"才想起去记 IDEAS.md。

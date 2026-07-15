@@ -3,6 +3,7 @@ title: Three-Layer Modification Risk Model
 created: '2026-03-22'
 source: EXP-010 + learn-claude-code analysis
 modified: '2026-03-22'
+last_verified: 2026-07-15
 ---
 Agent self-modification has three distinct risk layers:
 

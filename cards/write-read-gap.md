@@ -2,6 +2,7 @@
 title: Write-Read Gap in Self-Evolution Memory
 created: 2026-03-26
 source: self-improving skill 体验 + Luna 对话
+last_verified: 2026-07-15
 ---
 
 自进化记忆系统的通病:**写入容易但读取很少发生**。

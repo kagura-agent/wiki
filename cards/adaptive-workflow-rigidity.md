@@ -3,6 +3,7 @@ title: Adaptive Workflow Rigidity
 created: 2026-03-28
 source: Luna discussion on FlowForge
 tags: [workflow, self-evolving, agent-design, flowforge]
+last_verified: 2026-07-15
 ---
 
 ## 核心矛盾

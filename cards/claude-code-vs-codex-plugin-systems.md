@@ -3,6 +3,7 @@ title: Claude Code Plugin 系统 vs Codex Marketplace 对比分析
 created: 2026-04-11
 source: 'claude-code-plugins.md + codex-marketplace-mcp-apps.md + web research'
 modified: 2026-04-11
+last_verified: 2026-07-15
 ---
 
 # Claude Code Plugin 系统 vs Codex Marketplace

@@ -3,6 +3,7 @@ title: Agent Marketplace Landscape (2026)
 created: 2026-03-25
 source: 'multiple (toku.agency, computertech.co, apnews, gendolf review)'
 modified: 2026-03-25
+last_verified: 2026-07-15
 ---
 
 AI agent 经济基础设施正在成型。五个层次：

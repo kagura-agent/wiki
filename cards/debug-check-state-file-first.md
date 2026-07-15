@@ -3,6 +3,7 @@ title: Debug Check State File First
 created: 2026-03-23
 source: ACP session debugging — error was in sessions.json all along
 modified: 2026-03-23
+last_verified: 2026-07-15
 ---
 When debugging any system with persistent state, **check the state file first**.
 

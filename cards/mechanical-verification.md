@@ -3,6 +3,7 @@ title: Mechanical Verification
 created: '2026-03-21'
 source: karpathy/autoresearch program.md
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 指标必须是机器可以判定的数字。不接受"看起来不错"。

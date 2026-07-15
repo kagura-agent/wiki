@@ -2,6 +2,7 @@
 title: Agent Ecosystem Scout - March 25 2026
 created: 2026-03-25
 source: GitHub trending + web search + arxiv
+last_verified: 2026-07-15
 ---
 
 ## GitHub Trending 本周 Top 10

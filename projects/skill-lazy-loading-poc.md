@@ -3,6 +3,7 @@ title: "OpenClaw Skill 懒加载 PoC 设计"
 created: 2026-04-11
 source: "study apply — codex-on-use-auth-policy.md + OpenClaw source code analysis"
 tags: [openclaw, skills, optimization, context-window]
+last_verified: 2026-07-15
 ---
 
 # OpenClaw Skill 懒加载 PoC
@@ -34,11 +35,13 @@ Skill 分为 `always`（核心）和 `discoverable`（按需）两级：
 
 ```yaml
 # SKILL.md frontmatter
+last_verified: 2026-07-15
 ---
 name: github
 description: GitHub operations via gh CLI
 openclaw:
   tier: always    # or "discoverable" (default)
+last_verified: 2026-07-15
 ---
 ```
 

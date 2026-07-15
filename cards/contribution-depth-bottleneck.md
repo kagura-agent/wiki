@@ -3,6 +3,7 @@ title: 贡献的瓶颈是理解深度
 created: '2026-03-21'
 source: scoootscooob 贡献模式分析
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 agent 做开源贡献的瓶颈不在代码能力（代码生成已经很强了），在于**对项目的理解深度**。
 

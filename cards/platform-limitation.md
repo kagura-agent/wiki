@@ -3,6 +3,7 @@ title: 平台限制与自律的困境
 created: '2026-03-21'
 source: heartbeat bug发现后的反思 — 外部触发全部失效
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 跑在别人平台上的 agent 不控制自己的主循环。
 

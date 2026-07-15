@@ -2,6 +2,7 @@
 title: Agent Memory Read-Write Loop via Plugin Hooks
 created: 2026-03-26
 source: Luna 讨论 + MemEvolve 代码分析 + OpenClaw hook 调研
+last_verified: 2026-07-15
 ---
 
 ## 核心思路

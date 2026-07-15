@@ -3,6 +3,7 @@ title: 知识存在不等于知识被使用
 created: '2026-03-21'
 source: 同一天两次犯 tool-without-use 错误
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 写下教训不等于学到教训。
 

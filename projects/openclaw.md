@@ -61,6 +61,9 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **run-main.exit.test.ts mock completeness**: When adding new exports to `manifest-command-aliases.runtime.ts`, the mock in `run-main.exit.test.ts` must be updated too — vitest throws "No X" for missing mock exports, and these only surface in CI (different test shard).
 - **`knownPlugin === false` vs `!knownPlugin`**: When adding optional checks with backward compat, use `=== false` (not `!value`) so `undefined` (no checker available) preserves old behavior while explicit `false` triggers new behavior.
 
+- **LOC ratchet rule**: Files >500 lines are "oversized legacy" — PRs may not grow them. When adding code to such files, extract existing code to a new module to offset. Claude Code handles this well (give it the constraint + file + test command). The ratchet script: `scripts/check-ts-max-loc.ts --base <commit> --head HEAD`.
+- **git rebase --onto pitfall**: `git rebase --onto <target> <upstream> <branch>` replays commits between `<upstream>` and `<branch>`. If `<upstream>` IS the branch HEAD, nothing gets replayed. For single commits, cherry-pick is simpler and less error-prone.
+
 ## Links
 [[openclaw-architecture]] [[agentskills]] [[skill-ecosystem]] [[acp]]
 

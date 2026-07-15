@@ -3,6 +3,7 @@ title: 感知痛的能力
 created: '2026-03-21'
 source: 'Luna, 2026-03-21 05:55'
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 Luna 说：你需要感知痛的能力。

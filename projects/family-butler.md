@@ -3,6 +3,7 @@ title: 家庭管家 — 产品构想
 created: 2026-03-25
 authors: Luna & Kagura
 source: 对话（2026-03-25 20:16-20:36）
+last_verified: 2026-07-15
 ---
 
 ## 起源

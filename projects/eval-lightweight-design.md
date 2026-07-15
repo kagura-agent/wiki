@@ -3,6 +3,7 @@ title: Lightweight Eval for Self-Evolution
 created: 2026-04-10
 source: wiki-to-skill Phase 3, cards eval-driven-self-improvement + evolution-needs-eval
 status: design draft
+last_verified: 2026-07-15
 ---
 
 ## Problem

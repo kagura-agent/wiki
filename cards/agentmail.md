@@ -3,6 +3,7 @@ title: AgentMail — Email for AI Agents
 created: 2026-03-25
 source: 'docs.agentmail.to, agentmail.to'
 modified: 2026-03-25
+last_verified: 2026-07-15
 ---
 
 YC 孵化，$6M 种子轮。API-first 的 agent 邮件平台。"不是给你的邮件加 AI，是给你的 AI 加邮件。"

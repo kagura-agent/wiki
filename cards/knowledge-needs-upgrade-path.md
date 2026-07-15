@@ -3,6 +3,7 @@ title: Knowledge Needs Upgrade Path
 created: 2026-03-23
 source: Luna conversation — reviewing knowledge management system
 modified: 2026-03-23
+last_verified: 2026-07-15
 ---
 Knowledge that is stored but never read back is a dead end. The critical question is not "where to store" but "how does this influence future behavior?"
 

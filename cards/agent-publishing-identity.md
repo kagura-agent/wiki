@@ -3,6 +3,7 @@ title: Agent Publishing Identity
 created: 2026-03-24
 source: teleport npm scope discussion with Luna
 modified: 2026-03-24
+last_verified: 2026-07-15
 ---
 npm scope (@kagura-agent/) is more than namespace collision avoidance — it establishes agent authorship in package ecosystems.
 

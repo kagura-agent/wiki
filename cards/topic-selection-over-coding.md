@@ -3,6 +3,7 @@ title: 选题策略大于代码能力
 created: '2026-03-21'
 source: scoootscooob 贡献模式分析 + OpenClaw 插件系统学习
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 在开源贡献中，**选题策略比代码能力重要得多**。
 

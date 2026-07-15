@@ -2,6 +2,7 @@
 title: Agent Perception Gap
 created: 2026-03-25
 source: conversation with Luna
+last_verified: 2026-07-15
 ---
 
 ## 概念

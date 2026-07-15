@@ -4,6 +4,7 @@ created: 2026-04-12
 source: "study apply — SkillAnything trigger eval 思路"
 tags: [skills, testing, eval, quality]
 links: [skillanything, skill-creator]
+last_verified: 2026-07-15
 ---
 
 # Skill Trigger Eval

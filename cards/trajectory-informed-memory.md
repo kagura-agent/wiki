@@ -2,6 +2,7 @@
 title: Trajectory-Informed Memory (IBM 2026)
 created: 2026-03-24
 source: arxiv 2603.10600
+last_verified: 2026-07-15
 ---
 ## Core Idea
 从 agent 执行轨迹中自动提取可操作的学习，分三类注入未来 prompt。

@@ -3,6 +3,7 @@ title: Beliefs Upgrade Quality Gate
 created: 2026-04-14
 source: SkillClaw Skill Verifier 4-dimension framework, adapted for beliefs-candidates → DNA pipeline
 related: beliefs-upgrade-mechanism, skill-publication-gate, anti-generalization-principle
+last_verified: 2026-07-15
 ---
 
 ## 问题

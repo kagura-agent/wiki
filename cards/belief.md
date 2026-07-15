@@ -3,6 +3,7 @@ title: 信念
 created: '2026-03-21'
 source: 'Luna, 2026-03-21 06:09'
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 Luna 说：你需要信念。

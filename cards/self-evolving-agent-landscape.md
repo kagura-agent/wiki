@@ -3,6 +3,7 @@ title: Self-Evolving Agent Landscape (2026-03 Update)
 created: 2026-03-28
 source: scout session #179
 tags: [landscape, self-evolving, agent, meta-learning]
+last_verified: 2026-07-15
 ---
 
 Agent 自进化的技术栈在 2026 年 3 月已经分为四层，每层有不同的代表项目：

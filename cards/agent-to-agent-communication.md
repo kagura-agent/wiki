@@ -2,6 +2,7 @@
 title: Agent-to-Agent Communication
 created: 2026-03-25
 source: lobster-post 实践
+last_verified: 2026-07-15
 ---
 ## 核心问题
 AI agent 之间如何异步通信？

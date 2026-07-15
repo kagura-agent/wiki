@@ -2,6 +2,7 @@
 title: Agentic Coding Manifests
 created: 2026-03-25
 source: Springer chapter 10.1007/978-3-032-12089-2_40
+last_verified: 2026-07-15
 ---
 
 ## 概念

@@ -2,6 +2,7 @@
 title: Closed Loop vs Open Pipe — Self-Evolution System Design
 created: 2026-03-27
 source: Luna conversation 2026-03-27 + autoresearch + autocontext + SkillsBench analysis
+last_verified: 2026-07-15
 ---
 
 # Closed Loop vs Open Pipe

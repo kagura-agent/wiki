@@ -3,6 +3,7 @@ title: OpenSpace — Self-Evolving Skill Engine + Community
 created: 2026-04-05
 source: GitHub HKUDS/OpenSpace, open-space.cloud
 tags: [self-evolving, skill-sharing, agent-marketplace, token-efficiency]
+last_verified: 2026-07-15
 ---
 
 ## 概述

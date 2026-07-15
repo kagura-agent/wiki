@@ -2,6 +2,7 @@
 title: gh CLI — GitHub 命令行工具
 created: 2026-03-23
 type: tool-eval
+last_verified: 2026-07-15
 ---
 
 ## 是什么

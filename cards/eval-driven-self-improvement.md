@@ -3,6 +3,7 @@ title: Eval-Driven Self-Improvement
 created: '2026-03-21'
 source: autoresearch ecosystem research
 modified: '2026-03-20'
+last_verified: 2026-07-15
 ---
 
 AI agent 通过"修改→验证→保留/回滚"的循环自主变强。

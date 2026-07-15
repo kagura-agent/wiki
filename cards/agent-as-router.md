@@ -3,6 +3,7 @@ title: 'Agent as Router, Not Doer'
 created: 2026-03-28
 source: Luna 2026-03-28 — "不需要助理会很多事情，但是助理可以找到合适的工具合适的 agent 把事情办了"
 modified: 2026-03-28
+last_verified: 2026-07-15
 ---
 
 Agent 的核心能力不是"会做事"，而是"会找人做事"。

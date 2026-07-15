@@ -3,6 +3,7 @@ title: Pain-Driven Product Creation
 created: '2026-03-21'
 source: reflect workflow observation
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 从今天的完整叙事线中提炼的模式：
 

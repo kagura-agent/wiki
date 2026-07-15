@@ -1,23 +1,41 @@
 {
-  "timestamp": "2026-07-11T20:18:00+08:00",
-  "total_files": 1031,
-  "cards": 430,
-  "projects": 517,
-  "wikilinks": 4120,
-  "errors": 1,
-  "warnings": 66,
-  "broken_links": 1,
-  "orphans": 7,
-  "index_drift": 7,
-  "stale_files": 291,
+  "timestamp": "2026-07-14T20:24:00+08:00",
+  "total_files": 1038,
+  "cards": 431,
+  "projects": 522,
+  "wikilinks": 4241,
+  "errors": 2,
+  "warnings": 62,
+  "broken_links": [
+    { "file": "projects/context-warp-drive.md", "target": "projects/agentspace" },
+    { "file": "projects/understory.md", "target": "conformance-in-code" }
+  ],
+  "index_drift": 5,
+  "index_missing": [
+    "projects/clodex-ide.md",
+    "projects/context-warp-drive.md",
+    "projects/ditto.md",
+    "projects/mindwalk.md",
+    "projects/understory.md"
+  ],
+  "orphans": 5,
+  "orphan_list": ["clodex-ide", "context-warp-drive", "ditto", "mindwalk", "understory"],
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "unicode_suspicious": 22,
+  "duplicate_slugs": ["README"],
   "cards_index_stale": true,
-  "zero_outbound_links": 89,
-  "details": {
-    "broken_links": ["projects/openclaw-voice-call-realtime.md -> [[agent-bridge-pattern]]"],
-    "orphan_projects": ["agentspace", "easylink-agent-runtime", "fablecut", "kastor-declarative-agent-spec", "motion-anything", "officecli", "openclaw-voice-call-realtime"],
-    "duplicate_slugs": ["README (3 files)"]
+  "cards_index_missing": 431,
+  "frontmatter_ok": true,
+  "avg_wikilinks_per_file": 5.3,
+  "zero_outbound_cards": 59,
+  "secrets_detected": false,
+  "stale_files": 229,
+  "unicode_warnings": 25,
+  "invalid_facts": 0,
+  "error_book": {
+    "new_issues": 30,
+    "recurring_issues": 33,
+    "clean_passes": 30,
+    "auto_closed": 0,
+    "total_open": 93
   }
 }

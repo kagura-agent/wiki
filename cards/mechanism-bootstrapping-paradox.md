@@ -2,6 +2,7 @@
 title: Mechanism Bootstrapping Paradox
 created: 2026-03-23
 source: self-improving skill first test
+last_verified: 2026-07-15
 ---
 A new mechanism cannot self-start if the agent has never used it before.
 

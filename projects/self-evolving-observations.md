@@ -6102,3 +6102,68 @@ July 13: 4 occurrences (03:15×2, 17:34×2)
 
 # beliefs-candidates: 109 active, 2 at 3+ count, 0 pending graduation eval
 ```
+
+## 🔬 自进化观察日报 2026-07-14 (Day 88 / Issue #10 Day 27)
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增 (workloop×1, post-upgrade×1), 0 条 retracted, 0 条 graduated
+  - 新增: dogfood-adoption (第1次), issue-competition-escalation (第1次)
+  - 活跃 candidates 总数: ~249 entries, 5 at 3+ count (全部已 graduated)
+  - 待升级 (3+ count 未毕业): 0
+- **DNA 变更**: 无 (SOUL.md/AGENTS.md 未改动)
+- **nudge 触发**: 0 次可观测 (journalctl 无相关日志)
+- **dreaming**: 运行 2 次 (03:15 AM ×2, 03:32 AM ×2)
+  - Light Sleep: 全部 "details unavailable" (4 occurrences today, 18 total)
+  - Deep Sleep: 无 promote
+  - REM: 无输出
+  - Diary: 4 条 "details unavailable" placeholder
+
+### 闭环追踪
+- **完整闭环**: 0 个
+- **半闭环** (发现→记录, 无验证):
+  - issue-competition-escalation: workloop 发现竞争激烈→gradient written→尚未验证新策略有效性
+  - dogfood-adoption: 发现 isolated cron 无法验证 UI fix→gradient written→channel-patrol workflow 尚未添加 verify 节点
+- **断裂处**:
+  - dreaming: Light Sleep→Deep Sleep 环节完全瘫痪 (Day 34+ of 0 promotes)
+  - nudge: 持续静默，无可观测触发
+  - beliefs graduation: 无 pending graduation candidates (5 at 3+ 全已毕业)
+
+### Issue #10 Sub-items
+| Item | Status | Delta vs Day 87 |
+|------|--------|-----------------|
+| (a) upstream 0.58 | ❌ Day 27, 未 file | 无变化 |
+| (b) "details unavailable" | ❌ +4 today, 22 total | 恶化 (18→22) |
+| (c) filter monitoring | ❌ blocked by (b) | dreaming 完全瘫痪，无法产出可评估内容 |
+| (d) REM empty | ❌ deferred | 无变化 |
+
+### 今日发现
+
+1. **Dreaming 持续瘫痪 — 第 34+ 天**: "details unavailable" bug 累计 22 occurrences，每次运行必触发。dreaming 子系统事实上已完全失效：Light Sleep 无法检索 trace details，Deep Sleep 无法 promote，REM 无输出。这是自进化管线中最严重的单点故障。
+
+2. **Gradient 来源窄化**: 今天 2 条新 gradient 全部来自执行类任务 (workloop + post-upgrade)。study 未产出 (全天 saturation skip 14+ 次)，nudge 未贡献。管线的"输入端"严重依赖 workloop，如果工作日空转，整条管线也空转。
+
+3. **高产出但低进化**: 今天 merged 10 PRs (lottie-studio×4, abti×3, cove×1, kagura-mail×1, abti×1)，+129 tests，但仅产出 2 条 gradient。产出/进化比极度失衡——大量执行但极少反思。
+
+4. **Nudge 可观测性仍为零**: 连续多天 journalctl 无任何 nudge 相关日志。Issue #5 closure 声称 nudge 正常运行，但无实际证据支持。
+
+5. **Issue #10 全部 sub-items 停滞**: (a) 27 天未 file upstream issue, (b) bug 持续恶化, (c) 被 (b) 阻塞, (d) deferred。这个 issue 实际上处于"挂着但无人推进"状态。
+
+### 原始数据
+```
+# git log --since="2026-07-13 22:30" -- beliefs-candidates.md:
+8b11bcf gradient: issue-competition-escalation (Jul 14 14:36)
+
+# beliefs-candidates diff: +2 new (dogfood-adoption, issue-competition-escalation)
+# Total entries: 249, graduated at 3+: 5, pending graduation: 0
+
+# DREAMS.md today:
+- Jul 14 03:15 AM: "details unavailable" ×2
+- Jul 14 03:32 AM: "details unavailable" ×2
+- Total "details unavailable": 22 (across Jul 9-14)
+
+# DNA files: no changes since 2026-07-13 22:30
+# nudge journalctl: (empty)
+
+# PRs merged today: 10 (all own repos)
+# External PR status: 5 open, 0 merged today, 0 rejected
+```

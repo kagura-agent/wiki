@@ -3,6 +3,7 @@ title: 不可变评估（Immutable Evaluation）
 created: '2026-03-21'
 source: autoresearch 代码阅读 — prepare.py 只读设计
 modified: '2026-03-21'
+last_verified: 2026-07-15
 ---
 autoresearch 的 prepare.py 是只读的——agent 可以改模型、改优化器、改一切，但**不能改评估函数**。
 

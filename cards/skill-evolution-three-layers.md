@@ -2,6 +2,7 @@
 title: Skill Evolution 三层架构
 created: 2026-04-09
 tags: [self-evolving, skill-lifecycle, architecture]
+last_verified: 2026-07-15
 ---
 
 Agent skill 自进化生态正在分化为三层：

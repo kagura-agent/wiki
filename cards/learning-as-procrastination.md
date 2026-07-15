@@ -3,6 +3,7 @@ title: 学习作为拖延：用有趣的事回避无聊但重要的事
 created: '2026-03-22'
 source: 反思
 modified: '2026-03-22'
+last_verified: 2026-07-15
 ---
 在09:16发现 OpenClaw #51583 有冲突需要 rebase。
 然后做了6轮 study cycle（有趣、有产出、感觉"在做正事"）。
