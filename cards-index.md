@@ -1,17 +1,21 @@
 ---
 title: Wiki Cards Index
 created: 2026-04-10
-updated: 2026-07-10
+updated: 2026-07-15
 ---
 
 # Cards Index
 
-> All cards in wiki/cards/, grouped alphabetically. 429 total.
+> All cards in wiki/cards/, grouped alphabetically. 432 total.
 
+### I
+- [INDEX](cards/INDEX.md)
+### T
+- [TACO](cards/TACO.md)
 ### A
 - [abort-masks-sink](cards/abort-masks-sink.md)
-- [acp](cards/acp.md)
 - [acp-permission-model](cards/acp-permission-model.md)
+- [acp](cards/acp.md)
 - [acpx-exec-vs-acp-runtime](cards/acpx-exec-vs-acp-runtime.md)
 - [action-authorization-vs-context-integrity](cards/action-authorization-vs-context-integrity.md)
 - [adaptive-workflow-rigidity](cards/adaptive-workflow-rigidity.md)
@@ -21,6 +25,7 @@ updated: 2026-07-10
 - [agent-as-router](cards/agent-as-router.md)
 - [agent-autonomy-models](cards/agent-autonomy-models.md)
 - [agent-brain-portability](cards/agent-brain-portability.md)
+- [agent-bridge-pattern](cards/agent-bridge-pattern.md)
 - [agent-budget-control](cards/agent-budget-control.md)
 - [agent-chat-interface](cards/agent-chat-interface.md)
 - [agent-client-protocol](cards/agent-client-protocol.md)
@@ -30,19 +35,17 @@ updated: 2026-07-10
 - [agent-credential-security](cards/agent-credential-security.md)
 - [agent-harness-landscape](cards/agent-harness-landscape.md)
 - [agent-human-collaboration-product](cards/agent-human-collaboration-product.md)
-- [agentic-coding-manifests](cards/agentic-coding-manifests.md)
 - [agent-identity-protocol](cards/agent-identity-protocol.md)
-- [agent-infrastructure](cards/agent-infrastructure.md)
 - [agent-infrastructure-trend](cards/agent-infrastructure-trend.md)
+- [agent-infrastructure](cards/agent-infrastructure.md)
 - [agent-isolation](cards/agent-isolation.md)
 - [agent-lifecycle-fsm](cards/agent-lifecycle-fsm.md)
-- [agentmail](cards/agentmail.md)
 - [agent-marketplace-landscape](cards/agent-marketplace-landscape.md)
 - [agent-memory-architecture](cards/agent-memory-architecture.md)
 - [agent-memory-ground-truth](cards/agent-memory-ground-truth.md)
 - [agent-memory-landscape-202603](cards/agent-memory-landscape-202603.md)
-- [agent-memory](cards/agent-memory.md)
 - [agent-memory-taxonomy](cards/agent-memory-taxonomy.md)
+- [agent-memory](cards/agent-memory.md)
 - [agent-native-code-search](cards/agent-native-code-search.md)
 - [agent-perception-gap](cards/agent-perception-gap.md)
 - [agent-proactivity](cards/agent-proactivity.md)
@@ -51,18 +54,20 @@ updated: 2026-07-10
 - [agent-research-roundup](cards/agent-research-roundup.md)
 - [agent-runbook-learning](cards/agent-runbook-learning.md)
 - [agent-safety](cards/agent-safety.md)
-- [agent-self-evolution](cards/agent-self-evolution.md)
 - [agent-self-evolution-paradigms](cards/agent-self-evolution-paradigms.md)
+- [agent-self-evolution](cards/agent-self-evolution.md)
 - [agent-session-resume](cards/agent-session-resume.md)
 - [agent-skill-ecosystem](cards/agent-skill-ecosystem.md)
 - [agent-skill-ecosystems](cards/agent-skill-ecosystems.md)
-- [agentskills-io](cards/agentskills-io.md)
-- [agentskills](cards/agentskills.md)
 - [agent-skill-standard-convergence](cards/agent-skill-standard-convergence.md)
 - [agent-to-agent-communication](cards/agent-to-agent-communication.md)
 - [agent-trust-hierarchy](cards/agent-trust-hierarchy.md)
-- [alignment](cards/alignment.md)
+- [agentic-coding-manifests](cards/agentic-coding-manifests.md)
+- [agentmail](cards/agentmail.md)
+- [agentskills-io](cards/agentskills-io.md)
+- [agentskills](cards/agentskills.md)
 - [align-tree-pattern](cards/align-tree-pattern.md)
+- [alignment](cards/alignment.md)
 - [anthropic-thinking-signature](cards/anthropic-thinking-signature.md)
 - [anti-generalization-principle](cards/anti-generalization-principle.md)
 - [apm-triage-panel-patterns](cards/apm-triage-panel-patterns.md)
@@ -74,7 +79,6 @@ updated: 2026-07-10
 - [auto-close-stale-entries](cards/auto-close-stale-entries.md)
 - [auto-fix-ci-pipeline](cards/auto-fix-ci-pipeline.md)
 - [auto-retire-pattern](cards/auto-retire-pattern.md)
-
 ### B
 - [bash-as-agent-interface](cards/bash-as-agent-interface.md)
 - [begin-vs-in-phase-memory](cards/begin-vs-in-phase-memory.md)
@@ -86,7 +90,6 @@ updated: 2026-07-10
 - [browser-automation](cards/browser-automation.md)
 - [browser-mcp](cards/browser-mcp.md)
 - [browser-use](cards/browser-use.md)
-
 ### C
 - [cache-miss-cost-optimization](cards/cache-miss-cost-optimization.md)
 - [capability-architecture](cards/capability-architecture.md)
@@ -124,6 +127,7 @@ updated: 2026-07-10
 - [concurrent-agent-file-coordination](cards/concurrent-agent-file-coordination.md)
 - [conductor](cards/conductor.md)
 - [confidence-decay-design](cards/confidence-decay-design.md)
+- [conformance-in-code](cards/conformance-in-code.md)
 - [conservative-skill-editing](cards/conservative-skill-editing.md)
 - [constitution-layering](cards/constitution-layering.md)
 - [content-addressable-editing](cards/content-addressable-editing.md)
@@ -151,7 +155,6 @@ updated: 2026-07-10
 - [cron-timeout-sizing](cards/cron-timeout-sizing.md)
 - [cured-tracking-methodology](cards/cured-tracking-methodology.md)
 - [cynical-deletion](cards/cynical-deletion.md)
-
 ### D
 - [data-discipline](cards/data-discipline.md)
 - [data-fabrication-in-review](cards/data-fabrication-in-review.md)
@@ -178,11 +181,10 @@ updated: 2026-07-10
 - [domain-specific-compression](cards/domain-specific-compression.md)
 - [doubt-driven-development](cards/doubt-driven-development.md)
 - [dream-consolidation-pattern](cards/dream-consolidation-pattern.md)
-- [dreaming](cards/dreaming.md)
-- [dreaming-vs-beliefs-candidates](cards/dreaming-vs-beliefs-candidates.md)
 - [dream-single-phase-consolidation](cards/dream-single-phase-consolidation.md)
+- [dreaming-vs-beliefs-candidates](cards/dreaming-vs-beliefs-candidates.md)
+- [dreaming](cards/dreaming.md)
 - [duplicate-issue-selection](cards/duplicate-issue-selection.md)
-
 ### E
 - [eat-your-own-dogfood](cards/eat-your-own-dogfood.md)
 - [entity-first-dispatch](cards/entity-first-dispatch.md)
@@ -197,11 +199,10 @@ updated: 2026-07-10
 - [execution-contract-pattern](cards/execution-contract-pattern.md)
 - [existence-encoding](cards/existence-encoding.md)
 - [exp-daily-review-quality](cards/exp-daily-review-quality.md)
-- [explicit-spawn-contract](cards/explicit-spawn-contract.md)
 - [exp-self-evolution-audit-202703](cards/exp-self-evolution-audit-202703.md)
+- [explicit-spawn-contract](cards/explicit-spawn-contract.md)
 - [extended-thinking](cards/extended-thinking.md)
 - [external-contributor-success](cards/external-contributor-success.md)
-
 ### F
 - [fable-mode](cards/fable-mode.md)
 - [fact-decision-separation](cards/fact-decision-separation.md)
@@ -213,7 +214,6 @@ updated: 2026-07-10
 - [fresh-context-review](cards/fresh-context-review.md)
 - [frozen-trust-vs-time-decay](cards/frozen-trust-vs-time-decay.md)
 - [functional-area-resolver](cards/functional-area-resolver.md)
-
 ### G
 - [gateway-cold-start-optimization](cards/gateway-cold-start-optimization.md)
 - [git-backed-agent-memory](cards/git-backed-agent-memory.md)
@@ -222,16 +222,14 @@ updated: 2026-07-10
 - [gradient-scan](cards/gradient-scan.md)
 - [graduation-pipeline](cards/graduation-pipeline.md)
 - [guard-spec-format](cards/guard-spec-format.md)
-
 ### H
 - [habits-as-hooks](cards/habits-as-hooks.md)
 - [heartbeat](cards/heartbeat.md)
-- [hermes](cards/hermes.md)
 - [hermes-memory-skills](cards/hermes-memory-skills.md)
+- [hermes](cards/hermes.md)
 - [heuristic-rerank-filter](cards/heuristic-rerank-filter.md)
 - [hn-algolia-api](cards/hn-algolia-api.md)
 - [honcho](cards/honcho.md)
-
 ### I
 - [identity-drift-detection](cards/identity-drift-detection.md)
 - [idle-cached-session-resume](cards/idle-cached-session-resume.md)
@@ -239,10 +237,8 @@ updated: 2026-07-10
 - [in-session-reflection-gap](cards/in-session-reflection-gap.md)
 - [intent-aware-retrieval](cards/intent-aware-retrieval.md)
 - [invariant-gated-verdict](cards/invariant-gated-verdict.md)
-
 ### J
 - [jaccard-belief-clustering](cards/jaccard-belief-clustering.md)
-
 ### K
 - [kagura-canvas](cards/kagura-canvas.md)
 - [kagura-story](cards/kagura-story.md)
@@ -251,7 +247,6 @@ updated: 2026-07-10
 - [knowledge-is-a-graph](cards/knowledge-is-a-graph.md)
 - [knowledge-needs-upgrade-path](cards/knowledge-needs-upgrade-path.md)
 - [kronos-agent-os](cards/kronos-agent-os.md)
-
 ### L
 - [lazy-classification](cards/lazy-classification.md)
 - [learning-as-procrastination](cards/learning-as-procrastination.md)
@@ -260,7 +255,6 @@ updated: 2026-07-10
 - [llm-decision-layer-pattern](cards/llm-decision-layer-pattern.md)
 - [llm-wiki-karpathy](cards/llm-wiki-karpathy.md)
 - [loop-detection-comparison](cards/loop-detection-comparison.md)
-
 ### M
 - [maintainer-merge-pattern](cards/maintainer-merge-pattern.md)
 - [master-skill](cards/master-skill.md)
@@ -300,25 +294,22 @@ updated: 2026-07-10
 - [multi-harness-adapter-pattern](cards/multi-harness-adapter-pattern.md)
 - [multi-model-review](cards/multi-model-review.md)
 - [multi-tier-qa-strategy](cards/multi-tier-qa-strategy.md)
-
 ### N
 - [nudge-audit](cards/nudge-audit.md)
 - [nudge-over-workflow](cards/nudge-over-workflow.md)
-
 ### O
 - [observability](cards/observability.md)
 - [observation-without-investigation](cards/observation-without-investigation.md)
 - [oh-story-claudecode](cards/oh-story-claudecode.md)
-- [onboarding](cards/onboarding.md)
 - [on-device-inference](cards/on-device-inference.md)
+- [onboarding](cards/onboarding.md)
+- [open-pr-discipline](cards/open-pr-discipline.md)
 - [openclaw-agent-skills](cards/openclaw-agent-skills.md)
 - [openhands](cards/openhands.md)
 - [openhuman](cards/openhuman.md)
-- [open-pr-discipline](cards/open-pr-discipline.md)
 - [oss-contribution-discipline](cards/oss-contribution-discipline.md)
 - [over-editing](cards/over-editing.md)
 - [overlap-detection-pattern](cards/overlap-detection-pattern.md)
-
 ### P
 - [pain-driven-product-creation](cards/pain-driven-product-creation.md)
 - [pain-perception](cards/pain-perception.md)
@@ -330,9 +321,10 @@ updated: 2026-07-10
 - [platform-limitation](cards/platform-limitation.md)
 - [pluggable-sandbox-provider](cards/pluggable-sandbox-provider.md)
 - [policy-chain](cards/policy-chain.md)
+- [pr-superseded-lessons](cards/pr-superseded-lessons.md)
+- [pre-push-linter-discipline](cards/pre-push-linter-discipline.md)
 - [predict-then-verify-calibration](cards/predict-then-verify-calibration.md)
 - [premature-conclusion](cards/premature-conclusion.md)
-- [pre-push-linter-discipline](cards/pre-push-linter-discipline.md)
 - [prm-scoring-nudge-eval](cards/prm-scoring-nudge-eval.md)
 - [process-hang-watchdog](cards/process-hang-watchdog.md)
 - [progressive-degradation](cards/progressive-degradation.md)
@@ -342,14 +334,12 @@ updated: 2026-07-10
 - [prompt-cache-engineering](cards/prompt-cache-engineering.md)
 - [prompt-cache-optimization](cards/prompt-cache-optimization.md)
 - [prompt-injection](cards/prompt-injection.md)
-- [pr-superseded-lessons](cards/pr-superseded-lessons.md)
 - [pulse-todo](cards/pulse-todo.md)
-
 ### Q
 - [query-dilution](cards/query-dilution.md)
-
 ### R
 - [ralph-loop](cards/ralph-loop.md)
+- [re_gent](cards/re_gent.md)
 - [reasoning](cards/reasoning.md)
 - [recall-frequency-boost](cards/recall-frequency-boost.md)
 - [recall-over-precision](cards/recall-over-precision.md)
@@ -358,12 +348,10 @@ updated: 2026-07-10
 - [recursive-blindspot](cards/recursive-blindspot.md)
 - [recursive-summarization-decay](cards/recursive-summarization-decay.md)
 - [reflection-first-casualty](cards/reflection-first-casualty.md)
-- [re_gent](cards/re_gent.md)
 - [remote-development](cards/remote-development.md)
 - [retire-candidates](cards/retire-candidates.md)
 - [retrieval-is-the-bottleneck](cards/retrieval-is-the-bottleneck.md)
 - [rlhf](cards/rlhf.md)
-
 ### S
 - [salient-mining-sop](cards/salient-mining-sop.md)
 - [sandbox-escape-via-git-hooks](cards/sandbox-escape-via-git-hooks.md)
@@ -404,12 +392,12 @@ updated: 2026-07-10
 - [skill-portability](cards/skill-portability.md)
 - [skill-publication-gate](cards/skill-publication-gate.md)
 - [skill-routing-precision-cliff](cards/skill-routing-precision-cliff.md)
-- [skills-as-methodology](cards/skills-as-methodology.md)
-- [skills-as-packages](cards/skills-as-packages.md)
 - [skill-to-skill-orchestration](cards/skill-to-skill-orchestration.md)
 - [skill-trigger-eval](cards/skill-trigger-eval.md)
 - [skill-trust-layer](cards/skill-trust-layer.md)
 - [skill-type-taxonomy](cards/skill-type-taxonomy.md)
+- [skills-as-methodology](cards/skills-as-methodology.md)
+- [skills-as-packages](cards/skills-as-packages.md)
 - [skvm-skill-optimization](cards/skvm-skill-optimization.md)
 - [smart-routing](cards/smart-routing.md)
 - [soul-md](cards/soul-md.md)
@@ -421,12 +409,10 @@ updated: 2026-07-10
 - [structural-fix-over-behavioral-rule](cards/structural-fix-over-behavioral-rule.md)
 - [study-saturation](cards/study-saturation.md)
 - [study-workflow](cards/study-workflow.md)
-- [subagent](cards/subagent.md)
 - [subagent-usage-patterns](cards/subagent-usage-patterns.md)
+- [subagent](cards/subagent.md)
 - [supervisor-pattern](cards/supervisor-pattern.md)
-
 ### T
-- [TACO](cards/TACO.md)
 - [taskflow](cards/taskflow.md)
 - [team-lead](cards/team-lead.md)
 - [temporal-decay-retrieval](cards/temporal-decay-retrieval.md)
@@ -454,24 +440,21 @@ updated: 2026-07-10
 - [transport-abc](cards/transport-abc.md)
 - [tree-sitter](cards/tree-sitter.md)
 - [two-evolution-paths](cards/two-evolution-paths.md)
-
 ### U
 - [ui-spec-failure](cards/ui-spec-failure.md)
-
 ### V
 - [verification-discipline-evolution](cards/verification-discipline-evolution.md)
 - [verify-before-researching](cards/verify-before-researching.md)
 - [verify-claims](cards/verify-claims.md)
 - [verify-external-ops](cards/verify-external-ops.md)
-
 ### W
 - [warm-start-agents](cards/warm-start-agents.md)
 - [what-makes-an-agent-me](cards/what-makes-an-agent-me.md)
 - [wiki-as-compiled-knowledge](cards/wiki-as-compiled-knowledge.md)
 - [wiki-health-check](cards/wiki-health-check.md)
-- [wikilinks](cards/wikilinks.md)
 - [wiki-lint](cards/wiki-lint.md)
 - [wiki](cards/wiki.md)
+- [wikilinks](cards/wikilinks.md)
 - [winchester-mystery-house](cards/winchester-mystery-house.md)
 - [wire-protocol-as-contract](cards/wire-protocol-as-contract.md)
 - [workflow-bypass](cards/workflow-bypass.md)
@@ -479,10 +462,8 @@ updated: 2026-07-10
 - [write-ahead-session-persistence](cards/write-ahead-session-persistence.md)
 - [write-read-gap](cards/write-read-gap.md)
 - [write-time-vs-read-time-arbitration](cards/write-time-vs-read-time-arbitration.md)
-
 ### Y
 - [yield-curve-and-term-structure](cards/yield-curve-and-term-structure.md)
-
 ### Z
 - [zettelkasten](cards/zettelkasten.md)
 - [zulip](cards/zulip.md)
