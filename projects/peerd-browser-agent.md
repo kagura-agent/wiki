@@ -4,7 +4,7 @@ created: 2026-06-25
 tags: [agent-harness, browser, extension, p2p, webrtc, security, sandbox, actor-model, heap-isolation]
 source: https://github.com/NotASithLord/peerd
 status: deep-read
-last_verified: 2026-07-15
+last_verified: 2026-07-16
 ---
 
 # peerd — Browser-Native AI Agent Harness
@@ -189,6 +189,31 @@ First "daemon" actor — persistent, opt-in, mesh operator:
 
 ## Track
 
-- Revisit: 2026-07-12 (check AgentOS PR ratification, dweb actor maturity, v0.3 direction)
-- Watch for: AgentOS fork decision, dweb actor security model (#35), control plane repo creation
+- Revisit: 2026-07-23 (check Prewalk A/B results, Routines adoption, anti-bot posture decision)
+- Watch for: Prewalk Lab arms data, Background Routines user adoption, anti-bot detection (#211/#213) resolution
 - **2026-07-15**: 352⭐ (+3%/4d). Pushed TODAY. v0.2.7 released (07-12). **Key new features**: BM25 query-relevant excerpting for oversized fetched pages (#200) — classic IR technique applied to web browsing context; actor-aware settle window for evaluation (#199) — their 31.0% pass rate was undercounted due to timing; emulated focus pattern (#209) — web actor no longer steals OS focus, emulates it instead. Community: 5 unique issue authors (last 14d), 8 open + 5 closed issues. Still THRIVING.
+- **2026-07-16**: 356⭐ (+1%/1d). 8 commits on 07-15 alone. Two architecturally significant PRs merged:
+  - **Prewalk (#210)** — Frontier-plans-cheap-executes cost optimization. Core insight: agent bill is `O(reads)` — the frontier model reading its way to understanding is expensive. Traditional `/plan` handoff duplicates reading at both price levels. Prewalk hands off the **live context window**: frontier plans + lands first action, cheap executor inherits trajectory with todo list and one valid move in history. Three layers: (1) session-persisted todo checklist as plan-of-record, (2) sticky goal toggle, (3) model swap at turn boundaries with cross-model thinking-block strip. Built-in A/B Lab arms for data-driven validation. Same-provider only for now. Self-healing state on orphaned runs. [[smart-routing]] relevance — this is a concrete implementation of frontier→cheap handoff.
+  - **Background Routines (#212)** — In-browser cron: standing scheduled tasks with catch-up-on-wake (collapsed missed slots = no burst), vault-locked deferral, double-fire safety. `chrome.alarms` + 3 wake paths (alarm/startup/vault-unlock). Fresh dedicated session per firing. Interval + daily-at-local-time scheduling. Mirrors our heartbeat/cron system but browser-native.
+  - Anti-bot detection posture being designed (#211, #213) — adaptive per-origin action pacing.
+  - hung tool dispatch fix (#205), OpenAI null contextWindow cleanup (#206), emulated focus fix (#209).
+  Community: NotASithLord uses Claude Code for ALL dev + issue triage (auto-generated readiness checks on every issue). 19 open issues. Still THRIVING.
+
+## Architectural Deep-Dive: Prewalk (07-16)
+
+The most significant cost optimization pattern seen in the agent harness ecosystem.
+
+**Problem**: Agent goal runs are expensive because the frontier model spends most tokens *reading and understanding* (context window fill), not *acting*. A naive plan-then-execute split duplicates reading: frontier reads → writes plan → cheap model reads plan → re-reads context → executes.
+
+**Solution**: Prewalk eliminates the re-read. The frontier model:
+1. Plans (writes a todo via `todo_init`)
+2. Lands the first action (proves the plan is grounded)
+3. Hands off the **live context window** — the cheap executor inherits the session with todo + one completed action already in history
+
+**Key design decisions**:
+- Swaps only at turn boundaries (never mid-turn) — cost attribution, context-window sizing, thinking-block replay all resolve against the model actually running
+- Cross-model thinking blocks stripped from wire history (signed blocks are model-bound — sending them to a different model 400s the provider)
+- OFF by default until Lab arms validate it with A/B data
+- Self-healing: orphaned prewalk state (run died without restore) auto-restores planner model
+
+**Relevance to us**: This pattern is directly applicable to [[FlowForge]] multi-model workflows and OpenClaw's subagent spawning. Instead of serializing plans as text prompts for cheaper models, we could explore context-window handoff for cost reduction. The `todo_init/todo_check` abstraction as a session-persisted plan-of-record is also interesting — it's essentially what FlowForge nodes are, but at the intra-run level.

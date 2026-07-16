@@ -1,7 +1,7 @@
 ---
 title: 'Ornith-1.0 — Self-Scaffolding LLMs for Agentic Coding'
 created: 2026-07-01
-last_verified: 2026-07-09
+last_verified: 2026-07-16
 tags: [rl, agentic-coding, self-scaffolding, open-source-model]
 status: tracking
 stars: 1384
@@ -83,11 +83,12 @@ Pipeline-RL strategy for long rollouts. Staleness weight function downweights of
 - Training pipeline still closed (issue #10).
 - New issues: multimodal request (#13), website ad infection (#12), SWE-bench repro request (#11), MTP support (#9).
 - Assessment: Hype ≫ dev activity. Weights-only release gaining massive star traction but zero ongoing development. The gap between community interest and dev responsiveness is a red flag. If no code activity by 07-15, consider downgrade.
+- **2026-07-16**: 1564⭐ (+95% from 800, passive viral growth). Still **0 commits since 06-27** (19 days). No 31B release, no training code, no dev activity whatsoever. Pure hype-driven star accumulation. **Downgraded to monthly** — checking more often is pointless with zero development signal.
 
 ## Tracking
 
-- Status: FOLLOWING (was HOT)
-- Revisit: 2026-07-15 (check for any dev activity, 31B, training code)
+- Status: MONTHLY (was FOLLOWING → HOT)
+- Revisit: 2026-08-16 (monthly check — any dev activity at all?)
 - Watch for: training code open-sourcing, real-world production reports, 31B release, any commits at all
 
 ---
