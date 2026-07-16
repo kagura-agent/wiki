@@ -28,10 +28,15 @@
 ## PR History
 | PR | Issue | Status | Notes |
 |---|---|---|---|
+| #2885 | #2881 | pending | fix GNOME Wayland dock icon — set app.desktopFileName |
 | #2212 | #2155 | pending | fix SSH worktree POSIX path separators on Windows |
 
 ## Learnings
-- Repo is 138MB — git fetch can be slow/timeout; use GitHub API for branch creation as fallback
+- Repo is 158MB (as of 2026-07) — git fetch can be slow/timeout; use `--depth=1` for branch creation
+- `app-identity.ts` is the single source for app naming constants (APP_ID, PRODUCT_NAME, APP_NAME_LOWER, etc.)
+- `configure-app-identity.ts` is a side-effect import (first import in index.ts) — sets app name and paths before anything else runs
+- No CI on PRs — maintainers review manually, response time is fast (~3.4h)
+- arnestrickmann is an active contributor who triages issues quickly
 - `WorktreeService` is shared between local and SSH — path operations must be platform-aware
 - `SshWorktreeHost.validateAbsolute()` is the single boundary check for all SSH path ops
 - Repo has active contributor base (janburzinski is a frequent contributor)
