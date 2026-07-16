@@ -65,6 +65,6 @@ Complementary to (not competing with) MCP tool servers. The MCP subcommand means
 ## Also Noted This Scout Round
 
 - **talkthrough-mcp** (korovin-aa97, 12⭐): MCP server that turns narrated screen recordings into agent-ready data (Whisper + keyframes + OCR). Novel input modality.
-- **global-agent-memory** (ozankasikci, 10⭐): Local-first project-aware memory MCP with Obsidian dashboard. Similar to [[pmb]] and [[deja-vu]] territory.
+- **global-agent-memory** (ozankasikci, 10⭐): Local-first project-aware memory MCP with Obsidian dashboard. Similar to [[pmb-memory]] and [[deja-vu]] territory.
 - **HN signal**: "Compiling an AI Agent Skill" article claims 94% token reduction. GPT-5.6 migration reports (2.2× faster, 27% cheaper). FableCut (browser video editor agents can drive) got 98pts.
 - **Trend**: Tool interface design converging on "structured output from familiar commands" rather than "new API vocabulary." aict, Mirage VFS, and MCP are three competing answers to the same question.

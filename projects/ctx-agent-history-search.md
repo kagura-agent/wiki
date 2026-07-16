@@ -127,7 +127,7 @@ The richest discussion — community debating whether past-session search introd
 - Provenance metadata needed: was this user input, model output, file content, or tool output?
 
 **Relevance to our stack:**
-- Our [[memory_search]] has the same trust-laundering risk — memory files are presented as authoritative context
+- Our [[memory-search]] has the same trust-laundering risk — memory files are presented as authoritative context
 - The "recall surfaces, never decides" principle applies directly to how agents use memory_search results
 - Cross-session memory (MEMORY.md) could be a vector for the accepted-exceptions attack if compromised
 

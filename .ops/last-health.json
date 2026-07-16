@@ -1,35 +1,36 @@
 {
-  "timestamp": "2026-07-16T02:09:00Z",
-  "total_files": 1043,
-  "cards": 432,
-  "projects": 526,
-  "wikilinks": 4270,
-  "errors": 3,
-  "warnings": 55,
-  "broken_links": [
-    {"source": "projects/memraw.md", "target": "agent-memory-strategies"},
-    {"source": "projects/memraw.md", "target": "synapse-memory"},
-    {"source": "projects/waku-agent.md", "target": "agent-memory-strategies"}
+  "timestamp": "2026-07-16T20:19:00+08:00",
+  "total_files": 1047,
+  "cards": 434,
+  "projects": 528,
+  "wikilinks": 4301,
+  "errors": 2,
+  "warnings": 60,
+  "broken_links": 2,
+  "broken_link_details": [
+    "projects/aict.md -> [[pmb]]",
+    "projects/ctx-agent-history-search.md -> [[memory_search]]"
   ],
-  "index_drift": [
-    "projects/compiled-harness-pattern.md",
-    "projects/memraw.md",
-    "projects/waku-agent.md"
-  ],
-  "orphans": 0,
+  "index_drift": 7,
+  "orphans": 1,
+  "orphan_details": ["aict"],
   "stubs": 0,
-  "duplicate_slugs": [
-    {"slug": "README", "files": ["./README.md", "./skill-trajectories/README.md", "./experiments/README.md"]}
-  ],
+  "duplicate_slugs": 1,
+  "duplicate_slug_details": ["README (3 files)"],
   "stale_files": 233,
-  "cards_index_staleness": {"indexed": 0, "actual": 432},
+  "cards_index_stale": true,
+  "cards_index_missing": 434,
   "zero_outbound_links": 59,
-  "unicode_warnings": 25,
+  "avg_wikilinks_per_linked_file": 5.3,
+  "unicode_suspicious": 25,
+  "invalid_facts": 0,
+  "secret_scan": "clean",
+  "frontmatter_ok": true,
   "error_book": {
-    "new_issues": 36,
-    "recurring_issues": 21,
-    "clean_passes": 30,
-    "auto_closed": 10,
-    "total_open": 87
+    "new_issues": 7,
+    "recurring_issues": 54,
+    "clean_passes": 3,
+    "auto_closed": 30,
+    "total_open": 64
   }
 }

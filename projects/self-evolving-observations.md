@@ -6236,3 +6236,47 @@ f21d8db daily-review 07-15: 6 retract (06-15 batch), 0 graduation, MEMORY.md upd
 1. **Dreaming promote 机制调查**: staged candidates 不 promote 的原因？是 confidence 阈值？是 daily-review 不读 memory file 里的 dreaming section？
 2. **Nudge 重验证**: grep 不够，需要查 openclaw gateway 的 nudge hook 配置是否存在 + 插件加载状态
 3. **Gradient 输入多元化**: 当 workloop 日产 0 gradient 时，需要备用输入源 (study 产出 gradient 的机制被 saturation 门禁阻断)
+
+## 🔬 自进化观察日报 2026-07-16
+
+### 管线活跃度
+- beliefs-candidates: **2 条新增** / 0 条待升级（两条均为第 1 次出现，需 ≥3 才升级）
+- DNA 变更: **无**（SOUL.md / AGENTS.md 零改动）
+- nudge 触发: **0 次**（journalctl 零匹配 "nudge"/"agent_end"/"hook"，连续多日空白）
+- dreaming: **运行**，promote **0 条**（Light Sleep 产出大量 candidates 但全部 status=staged, confidence=0.62；REM 输出 "No strong patterns surfaced"）
+
+### 闭环追踪
+- 完整闭环: **2 个**
+  1. workloop 撞 openclaw repo size gate → gradient `preflight-size-gate-blocks-local-repos` 写入 ✅
+  2. openclaw#108724 retry chain 改了行为导致旧测试失败 → gradient `retry-chain-integration-test-interaction` 写入 ✅
+- 断裂处:
+  - ❌ Luna "不要bug上加bug" 反馈 → 记入 memory narrative 但**未写入 beliefs-candidates.md**（典型"记了但没进管线"）
+  - ❌ Lottie Studio progressive preview + lazy-load 两个 pattern → 未提取为 skill/tip
+  - ❌ Teams relay fire-and-forget 架构 pattern → 未提取
+
+### 今日发现
+
+1. **Gradient 输入恢复**: 相比 07-15 (0 条)，今天有 2 条新 gradient。来源均为 workloop（打工），非 study 或 nudge。说明**当打工遇到真实阻力时管线正常工作**，问题出在顺风局（无阻力 → 无反思）。
+
+2. **Nudge 持续静默**: 连续多日 journalctl 无 nudge 日志。Issue #5 已关闭（基于"确认正常运行"），但实际证据显示 nudge 可能未触发。需要重新验证 nudge 插件加载状态。
+
+3. **Dreaming promote 断裂持续**: Light Sleep 产出大量 candidates（从 07-13/07-15 carry-forward），全部停在 staged。REM 无实质输出。promote 环节仍是瓶颈——candidates 进得去但升不上来。
+
+4. **高产出日的反思稀释**: 今日极高产出（3 PR submitted, 2 merged, 5 study deep reads, Moltbook badges 上线, 3 finance fixes），但仅 2 gradient。反思率 = 2/15+ 重要事件 ≈ 13%。大量经验未被捕获。
+
+5. **Luna 反馈未进管线**: "不要bug上加bug，做正确的事情" 是典型的应升级为 gradient 的外部反馈（重复模式：急着打补丁而非理解问题）。被记叙在 memory 中但未被 beliefs 管线吸收。
+
+### 原始数据
+```
+# git log --since="2026-07-15 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md:
+4d6af3a gradient: retry-chain-integration-test-interaction
+fa38096 gradient: preflight-size-gate-blocks-local-repos
+
+# beliefs-candidates.md: 801 lines total
+# nudge journalctl 2026-07-16: 0 matches
+# dreaming markers in memory/2026-07-16.md: light+rem present, 0 promotions
+# DNA changes: 0
+# Study saturation skips today: 12+
+# PRs submitted: emdash#2885, openclaw#108724, DeepSeek-Reasonix(pending)
+# PRs merged: lottie-studio#529, #531, ABTI#775
+```
