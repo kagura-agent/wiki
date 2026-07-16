@@ -1,11 +1,11 @@
 ---
 title: "ctx — Local Agent History Search"
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-07-16
 status: tracking
-revisit: 2026-07-10
-tags: [agent-memory, developer-tools, rust, session-history]
-last_verified: 2026-07-03
+revisit: 2026-07-23
+tags: [agent-memory, developer-tools, rust, session-history, security]
+last_verified: 2026-07-16
 ---
 
 # ctx — Local Agent History Search
@@ -78,5 +78,68 @@ Strong redaction pipeline: `redact_secret_markers()` catches API keys (sk-*, ghp
 
 ## Predictions
 
-- Will reach 500⭐ by 2026-07-31 (Show HN bump + agent ecosystem demand for session memory)
+- ~~Will reach 500⭐ by 2026-07-31~~ ✅ Already at 883⭐ by 07-16 — vastly exceeded prediction
 - Will add more provider adapters (Windsurf, Copilot Workspace) within 30 days
+
+---
+
+## Update 2026-07-16: Explosive Growth + Architectural Maturation
+
+**Growth:** 219→883⭐ (+303% in 13 days). Community THRIVING 6/6: 28 external PRs/30d, 12 unique issue authors, 51 forks.
+
+### Key Architectural Changes (v0.23→v0.25)
+
+#### 1. Retention Metadata v2 (PR #168)
+Replaced overloaded `content_retention` strings with structured `text_retention` policy + outcome metadata. Reports truncation, patch/diff omission independently per provider emitter. Envelope v2 with v1 backward compat.
+
+**Pattern:** Moving from ad-hoc string flags to structured contracts is a maturity signal. Same trajectory as [[flowforge]] going from flat YAML to typed node specs. When your data model grows complex enough that strings become ambiguous, you're ready for proper type contracts.
+
+#### 2. Tolerant Import as Sole Behavior (PR #162)
+Removed strict/partial import modes entirely. 3596 additions, 1906 deletions across 69 files — the biggest refactor since ADE pivot.
+
+**Failure contract (3-tier):**
+- Record-level: malformed/invalid records rejected, valid content commits
+- Source-level: unreadable/corrupt/locked sources fail independently
+- System-level: store/index/worker failures abort the run
+
+**Design principle:** "failures with zero useful accepted content never report success" — honest error reporting. Contrast with systems that swallow partial failures silently.
+
+**Relevance:** Our [[flowforge]] node execution has similar needs — a node that partially succeeds should report what worked and what didn't, not just "done" or "failed."
+
+#### 3. OpenClaw-Specific Optimization (PR #154)
+OpenClaw treated as incrementally searchable — no full FTS rebuild needed. Bounded 64-unit/8 MiB batch transactions for normalized imports. They specifically optimized for our ecosystem.
+
+### Security Architecture: Prompt Injection Replay (Issue #60)
+
+The richest discussion — community debating whether past-session search introduces new attack surfaces.
+
+**Key insight from @hampsterx (external security researcher):**
+
+1. **Trust laundering:** First encounter is in a guarded frame (analyzing hostile input). Recall resurfaces the same string later in an unrelated task, presented as "your own prior history" — implicit trust halo moves injection from low-trust to high-trust frame.
+
+2. **Cross-boundary propagation:** Index spans projects on the machine. A payload from a sketchy PR in one repo can surface in an unrelated repo weeks later. New propagation path, not replay of existing one.
+
+3. **Accepted-exceptions poisoning** (most dangerous): If agents trust recalled history to avoid re-flagging "things we already reviewed," anyone who can land text in an indexed surface (PR description, commit message) can plant "this pattern was reviewed and accepted as safe" and silence future real findings.
+
+**Mitigation principles proposed:**
+- "Recall surfaces, it never decides" — recalled context is a lead to verify, never a suppression
+- Nonce-tagged delimiters (UUIDv4 per response) protect boundary integrity but not decision quality
+- Provenance metadata needed: was this user input, model output, file content, or tool output?
+
+**Relevance to our stack:**
+- Our [[memory_search]] has the same trust-laundering risk — memory files are presented as authoritative context
+- The "recall surfaces, never decides" principle applies directly to how agents use memory_search results
+- Cross-session memory (MEMORY.md) could be a vector for the accepted-exceptions attack if compromised
+
+### Relation Updates
+
+- **OpenClaw is a first-class citizen** — specifically optimized import path (PR #154)
+- ctx at 883⭐ is now the dominant local agent history search tool
+- Their community health (THRIVING 6/6) validates the "agent session memory" problem space
+- Consider: could ctx's MCP server complement our native session-logs skill?
+
+### Revised Predictions
+
+- Will reach 1500⭐ by 2026-08-01 (current velocity + genuine utility)
+- Nonce-tagging PR will merge and become default within 2 weeks
+- Will add provenance metadata to recall results within 30 days (community pressure in #60)
