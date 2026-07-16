@@ -1851,3 +1851,10 @@
 2026-07-16T08:19:59+08:00|neutral|agent-apprenticeship|projects/agent-apprenticeship,cards/rlhf,cards/acpx-exec-vs-acp-runtime,核心区别,rlhf,agent-apprenticeship
 2026-07-16T08:19:59+08:00|neutral|peerd|projects/peerd-browser-agent,projects/gensee-crate-runtime-safety,projects/luna-side-hustle,peerd-browser-agent,gensee-crate-runtime-safety,luna-side-hustle
 2026-07-16T08:19:59+08:00|neutral|Ornith|projects/ornith-self-scaffolding,projects/backlog,2026-05-10 Quick Scan (15:21),projects/luna-side-hustle,ornith-self-scaffolding,luna-side-hustle,backlog
+2026-07-16T08:46:55+08:00|neutral|ai agent coding harness 2026|cards/agent-harness-landscape,projects/valkor-ai-loom,projects/agent-ecosystem-scout-2026-06-11,projects/kimi-code,projects/harness-engineering-openai,agent-harness-landscape,agent-ecosystem-scout-2026-06-11,agent-ecosystem-scout-2026-04-17,agent-ecosystem-scout-2026-05-31,agent-ecosystem-scout-2026-06-14
+2026-07-16T09:22:09+08:00|neutral|MemSyco-Bench|projects/memsyco-bench,cards/agent-memory-taxonomy,cards/livecache-bench,agent-memory-taxonomy,memsyco-bench
+2026-07-16T09:22:10+08:00|neutral|Synapse ardhaecosystem|projects/synapse-hippocampus,projects/backlog,2026-05-10 Quick Scan (15:21),projects/ctx-agent-history-search,backlog
+2026-07-16T09:22:10+08:00|neutral|Ornith deepreinforce|projects/ornith-self-scaffolding,projects/backlog,2026-05-10 Quick Scan (15:21),projects/luna-side-hustle,ornith-self-scaffolding,backlog
+2026-07-16T09:49:39+08:00|neutral|agent-apprenticeship|projects/agent-apprenticeship,cards/rlhf,cards/acpx-exec-vs-acp-runtime,核心区别,rlhf,agent-apprenticeship
+2026-07-16T09:49:39+08:00|neutral|peerd|projects/peerd-browser-agent,projects/gensee-crate-runtime-safety,projects/luna-side-hustle,peerd-browser-agent,gensee-crate-runtime-safety,luna-side-hustle
+2026-07-16T09:49:39+08:00|neutral|codexpro|projects/codexpro,projects/backlog,2026-05-10 Quick Scan (15:21),projects/luna-side-hustle,codexpro,luna-side-hustle,backlog
