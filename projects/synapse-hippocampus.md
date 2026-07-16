@@ -63,5 +63,42 @@ Three layers on top of Graphiti + FalkorDB:
 - Kumaran & Maguire (2006) — Prediction error in hippocampus
 - O'Keefe & Nadel (1978) — Cognitive maps
 
+## Phase 3-4 Update (2026-07-14/15)
+
+Project has evolved dramatically since initial deep read. From "0 issues, solo dev burst" → 27 merged PRs, 7 external PRs/30d, real users filing high-quality bugs. Community health: 🟡 GROWING 4/6.
+
+### Retrieval-Induced Forgetting (RIF) — Phase 4
+
+When entity A is recalled, Jaccard-similar entities that were NOT recalled get a session-scoped ranking penalty (0.3). Key design decisions:
+- **Suppresses ranking, NOT forgetting curve strength** — penalized entities remain fully recoverable by direct query
+- **Session-scoped + time-bounded** — penalties expire with reconsolidation window (default 10 turns)
+- **Zero new detection logic** — recombines existing PatternSeparation fingerprints with recall tracking
+- **Fixed penalty, not decayed** — reconsolidation window handles expiry via tick()
+
+Biological basis: Anderson et al. (1994) — retrieving one memory inhibits competing memories. Synapse's implementation is elegant because it reuses the Jaccard fingerprints already computed for pattern separation.
+
+**Applicability:** Our wiki search could apply RIF — when a user retrieves topic A, suppress near-duplicate results that weren't directly matching. Reduces "same thing said 5 ways" noise.
+
+### Bounded Fetch + Pattern Completion — Phase 3
+
+- `get_recent_edges(limit=50)` replaces full-graph O(all edges) fetch in episode ingestion
+- `get_entity_neighborhood()` — bounded 1-hop query for pattern completion
+- **Pattern completion in synapse_query**: BM25 results → extract entities → 1-hop neighborhood → CA3 BFS expansion → merge (capped at 20 facts)
+- Result: query for "FalkorDB" returns not just direct match but connected context (Docker, Graphiti, etc.)
+
+**Applicability:** Formalized version of our backlink expansion with proper bounds. Our `memex backlinks` is unbounded — could benefit from a cap + relevance filter.
+
+### Issue #26 — Silent Failure Architectural Flaw (filed by external user)
+
+OpenAI Responses API dependency broke non-OpenAI backends. `synapse_remember` reported `success: true` even when nothing was ingested (background thread failure swallowed). Also exposed:
+- `json_schema` mode incompatibility with DeepSeek
+- Hermes plugin `src/` layout breaks discovery
+
+Fixed same-day in PR #27. **Lesson:** Any async background memory write needs explicit ingestion verification, not just "request accepted" success.
+
+### Status Assessment
+
+69⭐, active daily development, growing community. No longer "solo dev burst" — has real users and external contributors. The hippocampus algorithms are moving from theoretical to battle-tested. Worth continued tracking at `following` depth.
+
 ## Links
-[[agent-memory-hooks-neo4j]], [[temporal-decay-retrieval]], [[auto-retire-pattern]], [[agent-memory-taxonomy]], [[dreaming]], [[self-evolving-agent-landscape]]
+[[agent-memory-hooks-neo4j]], [[temporal-decay-retrieval]], [[auto-retire-pattern]], [[agent-memory-taxonomy]], [[dreaming]], [[self-evolving-agent-landscape]], [[recoil-failure-memory]]
