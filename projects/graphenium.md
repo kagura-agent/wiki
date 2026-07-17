@@ -1,9 +1,21 @@
-# Graphenium — Provenance-Aware Structural Memory for AI Coding Agents
+# Graphenium — Architecture Gate & Linter for AI Coding Agents
 
 **Repo**: [lambda-alpha-labs/Graphenium](https://github.com/lambda-alpha-labs/Graphenium)
-**Stars**: 12 (2026-06-27, 3d old)
+**Stars**: 21 (2026-07-17, +75% from 12)
 **Lang**: Rust | **License**: MIT
-**Status**: AST + Resolver + Semantic Pass + Symbol Diff + `gm check` quality gates stable. Telemetry Overlay experimental.
+**Status**: v0.19.3 stable. MCP tool support (Gemini/Vertex compat). Datalog rules engine. Active solo dev.
+
+## ⚠️ PIVOT (discovered 2026-07-17)
+
+Project **completely repositioned** between 06-27 and 07-17:
+- **Before**: "Provenance-aware structural memory for AI coding agents" (trust model, staleness detection, surprise scoring)
+- **After**: "Local pre-flight linter and architecture gate for AI agents. Uses tree-sitter, Stack Graphs, and Datalog to mechanically block structural drift, layering bypasses, and scope creep on virtual ASTs before code changes land."
+
+The trust/provenance/surprise concepts from the original deep-read may still be in the codebase but the **public framing** shifted entirely to enforcement/gating. Now competes more with linters and CI gates than with memory systems.
+
+Recent commits (07-12~13): Datalog EDB fact cap fix (v0.19.3), MCP tool schema sanitization for Gemini/Vertex, rustfmt cleanup. Active iteration.
+
+**Reclassified**: from Agent Memory → Coding Agents & Context Efficiency in targets.md.
 
 ## What It Is
 
@@ -111,14 +123,17 @@ Verification: tested with 3 scenarios — pure novel (quantum computing), modera
 
 ## Limitations
 
-- 12⭐, 3 days old — extremely early. Solo team (lambda-alpha-labs)
+- 21⭐ — still small. Solo dev (lambda-alpha-labs, 195 commits, 0 external contributors)
 - Only Rust + Go extractors currently (+ generic tree-sitter)
-- 13 open issues already — scope ambitious for codebase size
-- Semantic pass requires LLM API key (optional but limits "inference" confidence level without it)
+- 0 PRs from community — bus factor 1
+- Rapid pivots in positioning suggest still finding product-market fit
 
 ## Verdict
 
-Architecturally novel. The trust model (confidence + provenance + staleness) is the standout idea — it's the difference between "here's a code graph" and "here's a code graph AND here's how much you should trust each part of it." Worth a followup in 7-14 days to see if it gets traction.
+The enforcement/gating angle ("mechanically block structural drift") is more actionable than passive memory. If agents routinely violate architecture constraints, a pre-flight check that catches violations before code lands is valuable. Compare [[foreman-orchestrator]] test-ratchet. The Datalog rules engine is the interesting new piece — declarative architecture rules that agents can't circumvent.
+
+Still tiny and solo-dev. Track for architectural evolution, not community growth.
 
 ---
 *Deep read: 2026-06-27*
+*Followup: 2026-07-17 — pivot discovered, reclassified*
