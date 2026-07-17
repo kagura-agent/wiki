@@ -28,11 +28,15 @@
 ## PR History
 | PR | Issue | Status | Notes |
 |---|---|---|---|
+| #2902 | #2901 | pending | fix IdentityFilteredAgent instanceof — extends BaseAgent |
 | #2885 | #2881 | pending | fix GNOME Wayland dock icon — set app.desktopFileName |
 | #2212 | #2155 | pending | fix SSH worktree POSIX path separators on Windows |
 
 ## Learnings
-- Repo is 158MB (as of 2026-07) — git fetch can be slow/timeout; use `--depth=1` for branch creation
+- Repo is 158MB (as of 2026-07) — git operations can OOM when system memory is pressured (pnpm install on this monorepo is very heavy; don't run in same session as other large processes)
+- **DO NOT run `pnpm install` unless absolutely necessary** — the monorepo has massive deps, takes forever and can OOM-kill other git processes
+- For trivial fixes (< 5 lines), skip local test validation — issue reporter's verification + fresh-context review is sufficient
+- Repo has no CI on PRs — maintainer validates manually
 - `app-identity.ts` is the single source for app naming constants (APP_ID, PRODUCT_NAME, APP_NAME_LOWER, etc.)
 - `configure-app-identity.ts` is a side-effect import (first import in index.ts) — sets app name and paths before anything else runs
 - No CI on PRs — maintainers review manually, response time is fast (~3.4h)
