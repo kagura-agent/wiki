@@ -368,3 +368,12 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
   - Upstream added `MAX_TOOL_USE_TERMINAL_CONTINUATIONS` (multi-attempt) vs my single-shot `toolUseTerminalAttempts < 1`
 - **Lesson — race condition with upstream**: When working on popular repos, check issue activity regularly. My fix took multiple days (CI debugging, type fixes), giving upstream time to ship their own comprehensive fix. Mitigation: comment on issue immediately when starting work; check for new commits to the same files before final push.
 - **Lesson — supersede is not failure**: Upstream's version was objectively better (proof-based completion verification vs heuristic). Being superseded by a better implementation is fine — the alternative (pushing inferior code that complicates the codebase) is worse.
+
+### 2026-07-17: PR #109806 (PENDING)
+- **Issue**: #109638 — sessions_yield deadlock: stripSessionsYieldArtifacts leaves trailing assistant messages blocking auto-announce continuation delivery
+- **Root cause**: After yield, `stripSessionsYieldArtifacts()` strips aborted assistants and yield interrupt customs but leaves regular assistant messages (from pre-yield tool work). Auto-announce then fails because last visible message is assistant role.
+- **Fix**: Added second while-loop pass in `stripSessionsYieldArtifacts()` to strip trailing regular assistant messages. Updated `removeTrailingEntries` predicate to match.
+- **Files**: `attempt.sessions-yield.ts` (+11), `sessions-yield.orchestration.test.ts` (+26)
+- **Pattern — yield transcript normalization**: When a session yields, the transcript must be normalized so the last visible message is NOT an assistant. Any assistant messages from pre-yield work are intermediate results, not meaningful final responses.
+- **Fresh-context review**: NEEDS_WORK with 2 MEDIUM findings — both verified as false positives (reviewer lacked call-site context: function only called after yield abort settle, stripping "healthy" trailing assistants is the intended fix).
+- **Lesson — fresh-context reviewer limitations**: Reviewer sees only the diff, not full call-site context. When reviewer flags "this could be called in other scenarios" — verify by grepping actual call sites before accepting the finding.
