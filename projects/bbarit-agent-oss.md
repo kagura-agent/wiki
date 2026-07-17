@@ -35,7 +35,7 @@ Design rules: pattern objectification, cache-hot-path with explicit invalidation
 - **Memory approach**: simpler than ours (keyword overlap vs semantic search). Trade-off: faster recall, no embedding dependency, but less accurate for conceptual similarity. Our [[memex]] hybrid approach (semantic + keyword) is more sophisticated.
 - **Orchestrator pattern**: similar to [[openclaw]] subagent spawning but at OS process level. The structured result block (`== RESULT ==`) is a neat convention — we use tool responses instead.
 - **Interop philosophy**: reading other tools' configs without writing is a respectful stance. [[openclaw]] does similar with ACP (routing to Claude Code, Codex, etc.) but at protocol level rather than config file level.
-- **Personas**: we have [[SOUL.md]] as identity + per-task context. Their approach is more modular (swap entire persona). Trade-off: flexibility vs coherence.
+- **Personas**: we have [[soul-md]] as identity + per-task context. Their approach is more modular (swap entire persona). Trade-off: flexibility vs coherence.
 
 ## Observations
 
