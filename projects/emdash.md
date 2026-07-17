@@ -49,3 +49,22 @@
 - Uses oxfmt formatter (not prettier)
 - Imports from path aliases like `@main/`, `@shared/`
 - Result type pattern: `ok(value)` / `err({ type: 'error-name' })`
+
+## 2026-07-17 Workloop Notes
+
+### Issue Triage Results
+- #2865 (SSH freeze after sleep): Maintainer (arnestrickmann) actively working on it as part of SSH development cycle
+- #2853 (file-tree scan storm): Same — part of "significant work around SSH and remote execution"
+- #2867 (tmux tab width): Will be fixed as part of #2865
+- #2886 (archived tasks teardown): Competing PRs already exist
+- #2882 (FTS5 reindex lockup): Competing PRs already exist
+- #2837 (default branch setting): Maintainer couldn't reproduce on canary, asked reporter for more info
+- #2896 (SSH password not saved): Windows-specific, code analysis shows correct paths, can't identify clear defect without reproduction
+
+### Key Observation
+The emdash team (arnestrickmann) is doing a major SSH overhaul in their current development cycle. Most SSH-related issues are being handled internally. Non-SSH issues tend to have competing PRs quickly. This repo is actively maintained but heavily defended — external contributions to SSH are likely to be superseded.
+
+### Strategy for Next Round
+- Wait for current SSH work to land (watch for new releases)
+- Focus on non-SSH issues that appear fresh
+- My 2 existing PRs (#2902, #2885) are very recent — wait for review before adding more
