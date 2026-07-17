@@ -143,3 +143,48 @@ The richest discussion — community debating whether past-session search introd
 - Will reach 1500⭐ by 2026-08-01 (current velocity + genuine utility)
 - Nonce-tagging PR will merge and become default within 2 weeks
 - Will add provenance metadata to recall results within 30 days (community pressure in #60)
+
+## Update 2026-07-17: Semantic Daemon + Breaking-Change Lessons
+
+### Semantic Search Daemon (v0.25.0)
+
+Major architectural addition: opt-in background daemon + hybrid semantic search.
+
+**Daemon pattern:**
+- Background process maintains lexical freshness (skip unchanged histories, bounded WAL recovery)
+- Acquires pinned `intfloat/multilingual-e5-small` embedding model
+- Builds semantic index in bounded background work — query latency decoupled from index maintenance
+- `ctx status` reports daemon state and indexing coverage
+- Apple Silicon uses Core ML acceleration; CPU via managed ONNX Runtime sidecars
+
+**Hybrid search semantics:**
+- Lexical: OR semantics default (was AND), conversational messages rank above events
+- Semantic: sqlite-vec backed, daemon-managed FastEmbed indexing
+- Both available simultaneously — lexical remains usable while semantic backfill runs
+
+**Architecture insight:** Separating index maintenance into a daemon means:
+1. Queries never wait for indexing — read-available even during large imports
+2. Embedding model acquisition is one-time (pinned version, cached)
+3. Incremental semantic indexing bounded by batch size, not corpus size
+4. Similar to how [[flowforge]] decouples orchestration from execution
+
+### Breaking-Change Patterns (Issues #176, #177)
+
+Two issues filed *today* reveal tensions from rapid architectural iteration:
+
+1. **Content-addressed dedup + schema evolution** (#176): When payload hash is the dedup key and you change payload shape (retention metadata v2, PR #168), existing indexes can't reimport. Pre-`13e69e6d` hash ≠ post-`13e69e6d` hash for the same event. Lesson: if dedup depends on serialized format, schema changes are breaking changes that need migration paths.
+
+2. **Deprecation UX** (#177): Removing `--partial` flag (PR #162 tolerant import) breaks background warmers that use `--partial || true`. The `|| true` swallows the exit-2, so the index *silently stops updating* while reads keep working. Proposed fix: accept-and-warn for one release cycle. Lesson: silent degradation from removed flags is worse than loud failures.
+
+**Pattern:** Both issues show the same meta-problem — **changes that are correct in isolation create silent failures when composed with existing automation**. The system works fine for fresh users but breaks for upgraders. This is the "schema migration" problem generalized beyond databases.
+
+### Production Scale Evidence (PR #174)
+
+Provider session repair tested on production: 15.2 GB schema-v46 backup, 2,662,186 events. Migration: 10m45s, 87 MiB peak RSS, 428 MB peak WAL, no swap. Shows the project handles real-world scale.
+
+### Revised Assessment
+
+- **Growth:** 219→885⭐ in 14 days (was 883 yesterday, still climbing)
+- **Maturity signal:** Breaking-change issues being filed = real production users hitting edge cases = project past the toy phase
+- **Relevance:** Daemon pattern applicable to our own memory system (decoupled index maintenance)
+- **Prediction:** Will need a migration CLI within 2 releases (schema evolution + existing user base)
