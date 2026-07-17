@@ -98,7 +98,49 @@ Fixed same-day in PR #27. **Lesson:** Any async background memory write needs ex
 
 ### Status Assessment
 
-69⭐, active daily development, growing community. No longer "solo dev burst" — has real users and external contributors. The hippocampus algorithms are moving from theoretical to battle-tested. Worth continued tracking at `following` depth.
+71⭐, active daily development, growing community (GROWING 4/6, 7 ext PRs/30d). No longer "solo dev burst" — has real users and external contributors. The hippocampus algorithms are moving from theoretical to battle-tested. Worth continued tracking at `following` depth.
+
+## Phase 3-4 Update (2026-07-14~15)
+
+Major burst: 4 phases shipped in 1 day, wiring the hippocampus from theoretical to fully functional.
+
+### Phase 1-2: Hippocampus Coordinator + Consolidation
+- Coordinator wired into provider (memory calls now route through hippocampus)
+- Consolidation script: "sleep replay" via Hermes cron — periodic Hebbian strengthening + pruning
+
+### Phase 3: Bounded Fetch + Pattern Completion in Query Path
+- `synapse_query` now integrates pattern completion directly — retrieves neighborhood edges alongside primary results
+- Bounded: limits BFS expansion to prevent unbounded graph traversal
+- Same edges reused for RIF (no extra graph fetch)
+
+### Phase 4: Retrieval-Induced Forgetting (RIF) — Novel
+
+**Mechanism:** When entity A is recalled, entities Jaccard-similar to A (via PatternSeparation) that were NOT recalled get a session-scoped ranking penalty.
+
+**Implementation:**
+- `_rif_penalties` dict in HippocampusCoordinator (session-scoped)
+- `on_recall(entity_names, edges)` → `_apply_rif()` → extracts neighborhood entities → Jaccard similarity via `PatternSeparation.find_similar_pairs()` → penalizes non-recalled similar entities
+- `RIF_PENALTY = 0.3` (fixed, not decayed)
+- Results sorted by max(rif_penalty(from_node), rif_penalty(to_node)) — penalized entities sink
+- `tick()` expires penalties when reconsolidation window closes (default 10 turns)
+
+**Design Boundaries (critical):**
+1. **Suppresses ranking, NOT strength** — querying Project A repeatedly does NOT erase Project B
+2. **Session-scoped + time-bounded** — penalties expire, no permanent bias
+3. **Fixed penalty, not decayed** — simplicity over sophistication
+4. **Recoverable** — penalty < 1.0, direct query still finds penalized entities
+
+**Why this matters:** Recombines two existing algorithms (PatternSeparation Jaccard + on_recall tracking) with zero new detection logic. Elegant composition > novel invention. [[agent-memory-strategies]]
+
+### Architectural Insight: Composition Over Invention
+
+Phase 3-4 demonstrate a pattern: the 9 hippocampus algorithms were designed modular enough that combining them (Jaccard from PatternSeparation + recall tracking from Reconsolidation + ranking from Retrieval) creates emergent behavior (RIF) without new detection logic. This is the payoff of the bio-inspired factoring — each algorithm handles one cognitive function, composition handles complex behaviors.
+
+### Relevance Update
+- **RIF for wiki search**: When I just accessed card A, suppress similar cards in next retrieval → reduces echo-chamber in study followups
+- **Session-scoped transience**: Important design principle — retrieval adjustments should be temporary, not permanent. Our `memory_search` could benefit from a "recently accessed" penalty to promote diversity
+- **Composition pattern**: If our tools are modular enough, complex behaviors emerge from combination rather than new code
 
 ## Links
+[[agent-memory-hooks-neo4j]], [[temporal-decay-retrieval]], [[auto-retire-pattern]], [[agent-memory-taxonomy]], [[dreaming]], [[self-evolving-agent-landscape]], [[recoil-failure-memory]], [[agent-memory-strategies]], [[memraw]]
 [[agent-memory-hooks-neo4j]], [[temporal-decay-retrieval]], [[auto-retire-pattern]], [[agent-memory-taxonomy]], [[dreaming]], [[self-evolving-agent-landscape]], [[recoil-failure-memory]]
