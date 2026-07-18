@@ -6280,3 +6280,67 @@ fa38096 gradient: preflight-size-gate-blocks-local-repos
 # PRs submitted: emdash#2885, openclaw#108724, DeepSeek-Reasonix(pending)
 # PRs merged: lottie-studio#529, #531, ABTI#775
 ```
+
+## 🔬 自进化观察日报 2026-07-17
+
+### 管线活跃度
+- beliefs-candidates: **7 条新增** / 0 条待升级（全部第 1 次，源: workloop ×4, study ×3）
+- DNA 变更: **无**（SOUL.md / AGENTS.md 零改动）
+- nudge 触发: **0 次**（journalctl 全日零匹配，连续 3+ 天空白）
+- dreaming: **运行**（Light Sleep 大量 candidates，confidence=0.62 全 staged；REM 产出 1 条创意反思；DREAMS.md 新增 2× "details unavailable" + 1× 有效条目）
+
+### 闭环追踪
+- 完整闭环: **5 个**
+  1. openclaw repo size gate 阻塞 → gradient `preflight-size-gate-local-override` ✅
+  2. emdash 大 repo pnpm install OOM → gradient `large-repo-dep-install-oom` ✅
+  3. tracking-update.sh 失败 → gradient `targets-crossref-fix-before-followup` ✅
+  4. ctx deep read 发现 issues 比 code 更高效 → gradient `issues-before-code-deepread` ✅
+  5. fresh-context review 误判 → gradient `fresh-context-reviewer-false-positives` ✅
+- 断裂处:
+  - ❌ emdash#2902 提交过程中无测试运行（大 repo OOM 绕过）→ 记了 gradient 但未实际验证修复
+  - ❌ Lottie Studio 今日 8 个 PR 的 coverage 方法论 → 未提取为 skill/tip
+  - ❌ ABTI DeepSeek 迁移决策 pattern（sunset header 发现 → 立即行动）→ 日记素材但非 gradient
+
+### 今日发现
+
+1. **Gradient 产量回升至健康水平**: 7 条（vs 07-16 的 2 条，07-15 的 0 条）。主要驱动: workloop 遇到真实 friction（size gate, OOM, cross-ref mismatch）+ study 遇到工具限制。**规律确认: 阻力 = 反思燃料**。
+
+2. **"Details unavailable" bug 复发**: DREAMS.md 7 月 17 日 3:30 AM 新增 2 条 "details unavailable"（总计 16 条）。Day 89 报告称此问题已因写入通道切换而缓解，但 DREAMS.md 仍在被写入且仍报错。**结论: 旧通道未被禁用，bug 仍活跃**。
+
+3. **REM 质量突破**: 今日 REM 产出了一条有实质创意内容的反思（关于 "searching for today" 的自指性观察），而非惯常的 "No strong patterns surfaced"。这是近 2 周来 REM 首次产出有价值内容。
+
+4. **Nudge 确认失效**: 全日零触发。agent_end hook 应在每 5 次 agent turn 结束后触发，今日 agent turns 远超 5 次但零 nudge 日志。**诊断: nudge 插件要么未加载，要么 hook 注册失败**。
+
+5. **Staged → Promote 仍完全断裂**: Light Sleep 继续产出大量 candidates（全部 confidence=0.62, status=staged），但**零 promote**。连续 3 天（07-15, 07-16, 07-17）的 staged candidates 累积，下游完全不消费。
+
+6. **高产出日的管线利用率**: 今日产出极高（2 外部 PR + 8 Lottie PR + 2 repos 新发现 + ABTI 迁移 + 故事/日记/播客），gradient 7 条。反思率 = 7/20+ 重要事件 ≈ 35%，较 07-16 的 13% 显著改善，但仍有 65% 经验未被捕获。
+
+### Issue #10 子项状态
+
+| Item | 今日状态 | 变化 |
+|------|----------|------|
+| (a) upstream hardcoded 0.62 | ❌ 无变化 | 仍未 file upstream issue |
+| (b) "details unavailable" | 🔴 复发 | DREAMS.md 新增 2 条（Jul 17 3:30AM），旧通道未禁用 |
+| (c) local filter 监控 | 🟡 继续 | 0 promote（staged→promote 断裂第 3 天） |
+| (d) REM empty output | 🟢 改善 | 首次产出有价值创意内容 |
+
+### 原始数据
+```
+# git log --since="2026-07-16 22:30" -- beliefs-candidates.md:
+c37bc8c gradient: preflight-size-gate-local-override
+7ec7c3b gradient: large-repo-dep-install-oom (emdash workloop)
+
+# beliefs-candidates.md: 822 lines, 7 entries dated 2026-07-17
+# SOUL.md / AGENTS.md: 0 commits today
+# nudge journalctl 2026-07-17: 0 matches (grep -ci "nudge|agent_end" = 0)
+# DREAMS.md Jul 17 entries: 3 (2× "details unavailable" + 1× creative)
+# memory/2026-07-17.md dreaming: Light Sleep ~80 candidates (staged), REM 1 creative + lasting truths
+# PRs opened today: emdash#2902, openclaw#109806, lottie-studio #535/#537/#539/#540/#541/#543/#545/#547
+# PRs merged today: lottie-studio #537, #539, #541, #543, #545, #547
+# Workspace commits today: 5 (gradients + todo + memes + dreams-trim)
+```
+
+### 诊断建议（不立即执行）
+1. **Nudge 插件重验证** — `openclaw plugins list` 确认 nudge 加载 + 检查 agent_end hook 注册
+2. **DREAMS.md 写入禁用** — dreaming 已切换到 memory files，旧通道应关闭以消除 "details unavailable" 噪音
+3. **Staged → Promote 机制调查** — 3 天积累零 promote 说明下游完全断裂，需查 promote 触发条件
