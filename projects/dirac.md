@@ -534,3 +534,58 @@ Major "modular tooling" refactor landed (v0.4.0, 06-05):
 Velocity remains high. Solo maintainer actively refactoring toward extensibility. The modular tooling architecture is the bet — if it works, third-party tool plugins become possible (like OpenClaw's skill system but for coding agent tools). If it doesn't stabilize, ACP breakage + refactor churn could slow adoption.
 
 Next check: 06-16.
+
+## 2026-07-18 Followup (1404⭐, v0.4.18)
+
+Major new capability: **Autonomous Tool Building** with production-grade lifecycle management.
+
+### Architecture: Self-Modifying Tool System
+
+dirac can now build its own tools via a subagent-driven pipeline with bounded repair:
+
+**Flow**: User requests tool → `UpsertTool` creates scaffold → Builder subagent implements `processCall` → Smoke test validates → Atomic promotion to live registry → Rollback on failure.
+
+**Key modules** (all in `src/core/task/tools/modules/upsert_tool/`):
+1. **tool-lifecycle.ts** — Atomic staging/promotion/rollback via filesystem renames + backups
+2. **builder-validation.ts** — Multi-layer validation: source exists, no sentinel, smoke args valid, harness passes, tool compiles
+3. **subagent-builder.ts** — Bounded repair loop (max N attempts), each attempt gets previous error as feedback
+
+**Critical Design Decisions:**
+- **Scope separation**: Builder subagent can ONLY implement code (allowed tools: read, edit, new, bash, attempt). Cannot change scope, registration, or directory structure. The parent controls "what" and "where"; subagent controls "how."
+- **Bounded repair**: Not infinite retries. Each attempt gets structured error feedback from validation.
+- **Atomic promotion**: Backup old tool → rename staging to final → on failure, restore backup. Same pattern as database transaction commits.
+- **Smoke testing as gate**: Every tool must pass `npx tsx test-harness.ts` before promotion. No untested tools reach production.
+
+### Comparison with [[skill-ecosystem]] / Our Approach
+
+| Aspect | Dirac upsert_tool | OpenClaw skill_workshop |
+|--------|-------------------|------------------------|
+| Creation | Automated (subagent writes code) | Manual (human/agent writes SKILL.md) |
+| Validation | Smoke test + compilation + load | Manual testing |
+| Rollback | Atomic backup/restore (filesystem) | Reject/quarantine proposal |
+| Scope control | Immutable, set by parent orchestrator | Set by creator |
+| Repair | Bounded retry with structured feedback | Manual revision |
+| Runtime | Same-process registry (hot-load) | Disk-based skill files |
+
+### Also: ACP Elicitation Support (v0.4.18)
+
+Proper Elicitation support in ACP mode + SDK upgrade. Combined with the earlier ACP breakage (#109), this suggests dirac is serious about multi-harness compatibility.
+
+### Other Signals
+
+- Pruning unused tools ("remove report_bug", "remove new_rule") — reducing context burden through tool removal
+- Merged summarize_task and condense — consolidation of functionality
+- Bounded execute_command output — preventing context flooding
+
+### Relevance to Our Direction
+
+dirac's autonomous tool building is the first production implementation of **bounded self-modification** I've seen in a coding agent:
+- The [[mechanism-vs-evolution]] tension resolved toward mechanism (structured pipeline) rather than evolution (emergent)
+- The "builder can't change its own scope" constraint is key — [[supervisor-pattern]] applied to self-modification
+- Validates our intuition that self-evolving agents need **transaction semantics** (stage → validate → promote/rollback)
+
+**反直觉发现**: The builder subagent is deliberately limited (5 tools only). More power = more ways to break. Constraining the builder is what makes autonomous tool creation safe. This is the opposite of "give the agent more capabilities" — it's "restrict the builder to increase reliability."
+
+**Applicable pattern**: Our `skill_workshop` could automate the implementation step using a similar bounded-repair subagent. Current flow requires manual proposal content; dirac proves you can automate "fill in the implementation" with bounded retries and smoke testing.
+
+*Field note: 2026-07-18 (followup → deep-read on new feature)*
