@@ -107,4 +107,4 @@ Cache hit = ~0.1x price. A 50-turn task with 95% hit rate costs ~7x less than 0%
 - GitBook published (07-08) — professionalization signal
 - Revisit: 07-25 (check s21+, community growth)
 
-[[coding-agent-ecosystem]], [[agent-harness-landscape]], [[prompt-cache-engineering]], [[agent-memory-consolidation]], [[completion-verification]]
+[[coding-agent-ecosystem]], [[agent-harness-landscape]], [[prompt-cache-engineering]], [[dream-consolidation-pattern]], [[completion-verification]]

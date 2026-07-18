@@ -40,7 +40,7 @@ Not uniform truncation — ranked by usefulness:
 - Thinking blocks: stripped
 - Last resort: drop oldest turns
 
-Dynamic budget based on tier context window. Smaller tiers (nano 16K, fast 32K) get proportionally smaller send budgets. See [[context-compaction-strategies]].
+Dynamic budget based on tier context window. Smaller tiers (nano 16K, fast 32K) get proportionally smaller send budgets. See [[context-compaction]].
 
 ### Oversized Result Persistence
 Instead of truncating large tool outputs, saves full output to `~/.klaatai/tool-results/` and gives the model a preview + file path. Model can `read_file` slices on demand. Cheaper than resending or regenerating.
@@ -73,8 +73,8 @@ Claimed results: 30/30 solved, $0.026/task vs Claude Code's $0.146/task (18% cos
 
 | vs | Advantage | Disadvantage |
 |---|---|---|
-| [[coding-agent-ecosystem\|Claude Code]] | 5.5x cheaper (routing), code graph | Routing is black box, requires KlaatAI account |
-| [[projects/whale-deepseek-agent\|Whale]] | Multi-model vs DeepSeek-only | Whale's prefix-cache optimization deeper for its target |
+| Claude Code ([[coding-agent-ecosystem]]) | 5.5x cheaper (routing), code graph | Routing is black box, requires KlaatAI account |
+| Whale ([[whale-deepseek-agent]]) | Multi-model vs DeepSeek-only | Whale's prefix-cache optimization deeper for its target |
 | opencode | Cost routing, sub-agents | opencode is fully open, KlaatCode depends on hosted service |
 | Aider | Code graph, sub-agents | Aider more mature, larger community |
 
@@ -99,4 +99,4 @@ Claimed results: 30/30 solved, $0.026/task vs Claude Code's $0.146/task (18% cos
 - Community adoption beyond launch spike
 - Whether the "thin client" model attracts or repels contributors (can't improve routing, only the terminal layer)
 
-Links: [[coding-agent-ecosystem]], [[smart-routing]], [[context-compaction-strategies]], [[semantic-model-routing]]
+Links: [[coding-agent-ecosystem]], [[smart-routing]], [[context-compaction]], [[semantic-model-routing]]
