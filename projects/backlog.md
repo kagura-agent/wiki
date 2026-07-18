@@ -1391,3 +1391,11 @@ GitHub trending (agent, created past week, sorted by stars):
 
 - [ ] Microsoft Flint (microsoft/flint-chart) — 1250⭐, TypeScript, MIT. Visualization DSL for AI agents — reliable chart gen from human-editable specs. 344pts HN. Agent-friendly-DSL pattern (cf. FableCut). Low priority — viz domain, pattern already known. Added 07-11.
 - yetone/kill-ai-slop ★399 (07-10) — Anti-AI-slop detection agent skill. Field guide + scanner. 🆕 值得深入
+
+- [ ] astrio-labs/forall ⭐279 (found 07-18) — Coding agent that generates machine-checkable proofs alongside code. Rust, Apache-2.0. 1yr old, steady growth. Novel: formal verification + coding agent. HN 10pts. Worth deep read for verification architecture.
+
+## 2026-07-18 Quick Scan Candidates
+- **KlaatAI/klaatcode** (108⭐, 1d) — OSS terminal coding agent, smart model routing, Claude Code-grade accuracy claim. Rust?
+- **PromptPartner/agentsmith** (100⭐, 2d) — Universal model-agnostic operating harness for AI agents. Lean core + plugin architecture.
+- **5uck1ess/cicero** (17⭐, 5d) — Self-hosted voice for coding agents. Talk from browser or Telegram, interrupt mid-sentence.
+- **LM Studio Bionic** (323pts HN) — Agent for open models from LM Studio team. https://lmstudio.ai/blog/introducing-lm-studio-bionic
