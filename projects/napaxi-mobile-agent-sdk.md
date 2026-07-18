@@ -3,12 +3,12 @@ title: Napaxi — Mobile-Native Agent SDK (Ant Group)
 status: deep-read
 discovered: 2026-07-04
 source: https://github.com/antgroup/Napaxi
-stars: 24
+stars: 26
 language: Rust
 license: GPL-3.0
 author: Ant Group (antgroup)
 tags: [mobile-agent, on-device, sdk, rust, flutter, ant-group]
-last_verified: 2026-07-04
+last_verified: 2026-07-18
 ---
 # Napaxi — Mobile-Native Agent SDK
 
@@ -74,14 +74,26 @@ All tools, providers, policies are capability-backed. Host declares what it can 
 - A2A protocol for on-device multi-agent is novel (most A2A is cloud-to-cloud)
 - GPL-3.0 license limits commercial adoption but signals "infrastructure" intent
 
+## Followup Log
+
+### 2026-07-18
+- Stars: 24→26 (flat, 2 weeks post-launch)
+- Last real commit: 07-03 (bug fixes, SDK build improvements). No human dev since.
+- Last push: 07-15 — all dependabot (sha2, flutter deps, thiserror, etc.)
+- Community health: "GROWING 4/6" is **misleading** — 44 "external PRs" and 5 "issue authors" are ALL dependabot. Real human engagement = zero.
+- 10 open issues, all dependabot dependency bumps. No real user issues.
+- SDK v1.0.0 + app v0.1.0 released 07-02, then silence.
+- Assessment: Initial release burst then stalled. 26 stars in 2 weeks is very weak for an Ant Group project. Community metrics inflated by dependabot. Downgrade to monthly. If still stalled at next check, drop.
+- Revisit: 08-18
+
 ## Gaps / Questions
-- 0 GitHub issues (just launched)
 - GPL-3.0 might limit ecosystem adoption vs MIT/Apache competitors
-- 24⭐ — very early. But Ant Group backing = likely to grow
+- 26⭐ after 2 weeks — very weak for Ant Group backing
 - No English-first community (docs bilingual but team is Chinese)
+- Dependabot inflates community health metrics — real engagement is zero
 
 ## Tracking
-- Watch for: community adoption, Flutter adapter maturity, first external contributors
-- Revisit: 07-11
+- Watch for: community adoption, real human contributors, active development resumption
+- Revisit: 08-18 (downgraded to monthly)
 
 [[agent-harness-landscape]], [[mobile-agent]], [[capability-architecture]]

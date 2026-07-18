@@ -2,8 +2,8 @@
 title: "OpenTag — Channel-Native Agent Gateway for Slack"
 date: 2026-07-01
 status: tracking
-stars: 194
-last_verified: 2026-07-09
+stars: 451
+last_verified: 2026-07-18
 ---
 
 # OpenTag (linxidnju)
@@ -13,6 +13,14 @@ Open-source, channel-native agent gateway for **Slack**. Route team threads to C
 Created 2026-06-27, JavaScript, Apache-2.0, MVP status. Actively developed (pushed 07-02). 194⭐, 0 forks, 0 issues.
 
 ## Followup Log
+
+### 2026-07-18
+- Stars: 194→451 (+132%). Still 0 forks, 0 issues, 0 external PRs.
+- New feature (07-10): **Team Knowledge** — scoped knowledge service with partitions, versioning, auditing, memory API bridging, CLI commands. 9 commits in one burst.
+- No commits since 07-10 (8 days silent).
+- Community health: SOLO (0/6) — zero external engagement despite strong star growth.
+- Assessment: Passive growth continues strong but complete absence of community is concerning at 451 stars. The "team knowledge" feature is interesting (shared, auditable context across team members — novel for agent gateways). One more cycle — if still SOLO next check, downgrade to monthly.
+- Revisit: 07-25
 
 ### 2026-07-08
 - Stars: 65→194 (+198%/7d, tripling). Still 0 forks, 0 issues, 0 external PRs.
