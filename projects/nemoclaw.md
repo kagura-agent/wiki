@@ -367,3 +367,13 @@
 - **Key learning**: `sync-agent-variant-docs.ts` `stripAgentOnlyBlocksForVariant()` uses regex `/\n?<AgentOnly variant="([^"]+)">\n([\s\S]*?)\n<\/AgentOnly>\n?/g` — requires newlines around content. Inline `<AgentOnly>` will leak raw JSX into generated variant docs.
 - **Pattern**: DOCS_VARIANT_GATING — MDX tables can't wrap individual rows in JSX, so split into separate table blocks for variant-specific rows. Always use block-form `<AgentOnly>` (with newlines), never inline.
 - **Process note**: Workloop instance #6012 stalled at plan node for ~1hr because previous cron session completed plan-review subagent (APPROVED 8/10) but died before advancing. Recovered cleanly on next cron run.
+
+## PR #7195 — rebuild --force MCP fallback for unreachable sandbox (2026-07-19)
+- **Issue**: #7062 — `rebuild --force` cannot recover an unreachable sandbox with managed MCP state
+- **Status**: PENDING, CI 8/11 pass (E2E needs NVIDIA vetter — standard for fork PRs), CodeRabbit "No actionable comments" ✅
+- **Scope**: 4 files (rebuild-mcp-phase.ts, rebuild-destroy-phase.ts, rebuild-pipeline.ts, rebuild-destroy-phase.test.ts), +69/-1
+- **Root cause**: `prepareMcpForRebuild()` chooses live vs absent-sandbox MCP path based on `staleRecovery` flag (sandbox in live list?). When sandbox reports Ready but exec relay is broken, `staleRecovery=false` → tries live path → exec fails → bails. `--force` flag was not threaded to this function.
+- **Fix**: Thread `force: boolean` from `rebuild-pipeline.ts` → `rebuild-destroy-phase.ts` → `rebuild-mcp-phase.ts`. When `force=true` and live MCP prep fails, fallback to `prepareMcpBridgesForAbsentSandboxRebuild` (host-side only, no exec needed).
+- **Pattern**: Follows existing convention — `rebuild-backup-phase.ts` already has `force?: boolean` in its input interface with same threading pattern. NemoClaw `--force` convention: each phase independently decides what to skip/fallback when force=true.
+- **Fresh-context review**: 2 MEDIUM (1 fixed: `relockShieldsIfNeeded` arg consistency; 1 false positive: `return null` after `bail()` — same pattern in original code), 2 LOW (false positives — console.error and test scope match project convention).
+- **Relation to #6211**: This PR extends the `--force` recovery path further — #6211 let force skip backup, #7195 lets force fallback MCP prep. Same philosophical direction: `--force` should mean "recover even when I can't talk to the sandbox".
