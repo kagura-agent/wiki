@@ -1,3 +1,13 @@
+---
+title: loope
+repo: ngthluu/loope
+category: Coding Agents
+status: tracking
+stars: 7
+first_seen: 2026-07-19
+last_verified: 2026-07-19
+---
+
 # loope — Event-Driven Issue→PR Daemon
 
 > Stateless Go daemon that watches a GitHub repo for labeled issues, triages them via LLM, and drives each to a PR using headless Claude Code sessions in isolated git worktrees. All state lives in GitHub labels.

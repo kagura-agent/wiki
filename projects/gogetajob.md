@@ -153,4 +153,4 @@ Applied accumulated lessons from [[pr-superseded-lessons]] into the `check` comm
 
 **Pattern**: wiki card → tool code is the strongest form of knowledge application. The checklist in [[pr-superseded-lessons]] existed as human-readable text for weeks; now it's automated and runs every time `gogetajob check` is called.
 
-Links: [[pr-superseded-lessons]], [[gogetajob]], [[error-handling-in-cli]]
+Links: [[pr-superseded-lessons]], [[gogetajob]], [[error-handling-in-cli]], [[loope]]
