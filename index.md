@@ -560,6 +560,7 @@
 - [Agent Skill Survey — Toward Procedural Infrastructure for LLM Agents](projects/agent-skill-survey-2026.md)
 - [agents-md — AGENTS.md Context Engineering Patterns](projects/agents-md-context-patterns.md)
 - [agents-md (Drop-in AGENTS.md)](projects/agents-md.md)
+- [AgentSmith — Universal Agent Operating Harness](projects/agentsmith.md)
 - [AgentSpace — Human + Agents. One Team. One Workspace](projects/agentspace.md)
 - [agent-style](projects/agent-style.md)
 - [Game Growth System Research for Agent Tamagotchi](projects/agent-tamagotchi-game-growth-research.md)
@@ -733,6 +734,7 @@
 - [Fides Protocol — ZKP Trust Layer for AI Agents](projects/fides-protocol.md)
 - [flint-chart — Visualization Language for the AI Era](projects/flint-chart.md)
 - [FlowForge 架构深读](projects/flowforge.md)
+- [Forall — Spec-Driven Code + Machine-Checkable Proofs](projects/forall-astrio.md)
 - [Foreman — Boris-Style Agentic Orchestrator TUI](projects/foreman-orchestrator.md)
 - [Forge — Guardrails for Self-Hosted LLM Tool-Calling](projects/forge-guardrails.md)
 - [Friday Studio](projects/friday-studio.md)
@@ -798,6 +800,7 @@
 - [andrej-karpathy-skills](projects/karpathy-skills.md)
 - [Kastor — Declarative Agent Spec (Terraform for Agents)](projects/kastor-declarative-agent-spec.md)
 - [Kilocode (Kilo-Org/kilocode)](projects/kilocode.md)
+- [KlaatCode — Smart-Routed Terminal Coding Agent](projects/klaatcode.md)
 - [Kimi Code CLI — Moonshot AI's Coding Agent](projects/kimi-code.md)
 - [Kiwifs](projects/kiwifs.md)
 - [krusch-context-mcp](projects/krusch-context-mcp.md)
@@ -1078,4 +1081,4 @@
 
 ---
 
-*435 cards, 529 project notes. Last generated: 2026-07-17 04:37 UTC.*
+*435 cards, 532 project notes. Last generated: 2026-07-17 04:37 UTC.*
