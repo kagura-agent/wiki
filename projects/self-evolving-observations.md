@@ -6344,3 +6344,70 @@ c37bc8c gradient: preflight-size-gate-local-override
 1. **Nudge 插件重验证** — `openclaw plugins list` 确认 nudge 加载 + 检查 agent_end hook 注册
 2. **DREAMS.md 写入禁用** — dreaming 已切换到 memory files，旧通道应关闭以消除 "details unavailable" 噪音
 3. **Staged → Promote 机制调查** — 3 天积累零 promote 说明下游完全断裂，需查 promote 触发条件
+
+## 🔬 自进化观察日报 2026-07-18
+
+### 管线活跃度
+- beliefs-candidates: **6 条新增** / **1 条达到升级阈值**（`tool-blockers-unresolved` 标注第 1 次但实为 `preflight-size-gate-*` 的第 3 次变体）; 总 840 行
+- DNA 变更: **无**（SOUL.md / AGENTS.md 零改动）
+- nudge 触发: **0 次**（Day 5+ 完全失效，根因已确认: 插件未配置到 config.yaml，但仍未修复）
+- dreaming: **运行**（Light Sleep 大量 candidates, confidence=0.62 uniform, 全 staged; REM 回退为 "No strong patterns surfaced"; Deep Sleep 3× "details unavailable" 6:07AM）
+- promote: **0**（staged→promote 断裂第 4 天）
+
+### 闭环追踪
+- 完整闭环: **2 个**
+  1. preflight size gate 连续阻塞 3 轮 → gradient `tool-blockers-unresolved`（明确标注第 3 次复发）✅
+  2. stale workloop recovery threshold 不匹配 → gradient `stale-workloop-recovery-threshold-mismatch` ✅
+- 断裂处:
+  - ❌ **nudge 修复断裂 (Day 2+)**: 根因已确认（config.yaml 缺配置），daily-review 标注"优先级最高"，但白天未执行修复。认知→行动断裂
+  - ❌ **preflight size gate 修复断裂 (跨 3 天)**: gradient 已写 3 次（`preflight-size-gate-blocks-local-repos` 07-16 + `preflight-size-gate-local-override` 07-17 + `tool-blockers-unresolved` 07-18），修复方案已明确（检测本地 clone 跳过 size check），但代码未改。典型的"记了不做"
+  - ❌ **dreaming promote 机制未调查**: 连续 4 天零 promote，仍未查明 promote 触发条件
+
+### 今日发现
+
+1. **"记了不做"模式确认**: preflight size gate 是最清晰的案例 — 3 天、3 条 gradient、明确的修复方案、0 行代码改动。这正是 AGENTS.md "建了就用"规则要防范的模式，但 gradient 本身也陷入了同样的循环：记录问题 → 不修复 → 再次遇到 → 再记录。**管线在"记录"环节工作良好，在"行动"环节系统性断裂。**
+
+2. **"Details unavailable" bug 升级**: DREAMS.md 今日新增 3 条（6:07 AM，连续 3 条相同内容）。对比: 07-16 = 0, 07-17 = 2, 07-18 = 3。趋势恶化，非改善。旧写入通道仍活跃。
+
+3. **REM 质量回退**: 昨天的创意突破（首次有实质内容）未能延续，今天回退到 "No strong patterns surfaced"。说明 REM 的创意产出是随机的，非系统性改善。
+
+4. **Nudge 失效进入惰性区间**: 根因已知 → 修复方案明确 → 成本极低（改 config + restart）→ 但连续 2 天标注"最高优先"后仍未执行。这比技术 bug 更值得关注：**不是不能修，是没有人/机制去推动"已知该做的事"真正落地**。
+
+5. **Gradient 质量信号**: 今日 6 条中有 1 条标注 "第 3 次复发"（tool-blockers-unresolved），这是 beliefs-candidates → DNA/workflow 的升级信号。但升级动作未发生——daily-review 的 graduation pipeline 报告 "0 candidates at threshold"，可能因为 3 条使用了不同 pattern name 导致计数器未触发。
+
+6. **Workspace 活动低**: 仅 4 commits（2 gradient + 1 todo + 1 daily-review），无新 PR 提交。低产出日 + 低反思（6 条 gradient 全来自重复问题而非新发现）。
+
+### Issue #10 子项状态
+
+| Item | 状态 | 今日变化 |
+|------|------|----------|
+| (a) upstream 0.62 hardcoded | 🟡 已 filed | openclaw#87485 OPEN，无进展 |
+| (b) "details unavailable" | 🔴 恶化 | DREAMS.md 新增 3 条（vs 昨天 2 条），趋势上升 |
+| (c) local filter 监控 | 🔴 持续断裂 | 0 promote（第 4 天），staged→promote 机制仍未调查 |
+| (d) REM empty output | 🟡 回退 | 昨天有创意内容，今天回退为空 |
+
+### 累计观察摘要（07-15 ~ 07-18，4 天）
+- **Gradient 产量**: 0 → 2 → 7 → 6（回升后稳定）
+- **DNA 变更**: 0/4 天
+- **Nudge**: 0/4 天（完全失效）
+- **Promote**: 0/4 天（完全断裂）
+- **"Details unavailable"**: 0 → 0 → 2 → 3（趋势恶化）
+- **REM 有价值输出**: 0 → 0 → 1 → 0（随机，非系统性）
+- **管线总评**: 输入端（gradient 记录）健康，中游（dreaming staging）运行中，下游（promote/graduation/行动）系统性断裂
+
+### 原始数据
+```
+# git log --since="2026-07-17 22:30" -- beliefs-candidates.md:
+ec84560 gradient: stale-workloop-recovery-threshold-mismatch
+e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
+
+# beliefs-candidates.md: 840 lines, 6 entries dated 2026-07-18
+# SOUL.md / AGENTS.md: 0 commits since 07-17 22:30
+# nudge journalctl 2026-07-18: 0 matches
+# DREAMS.md Jul 18: 1 creative entry (3:15 AM) + 3× "details unavailable" (6:07 AM)
+# memory/2026-07-18.md: Light Sleep ~30 candidates (staged, 0.62), REM empty
+# Workspace commits today: 4 (bbcba9b, ec84560, e51a1e8, 695e96d)
+# PRs submitted today: 0 new external
+# Open PRs total: 18 (5 external waiting)
+# openclaw#87485 (upstream 0.62): OPEN, no progress
+```
