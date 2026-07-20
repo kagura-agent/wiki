@@ -2,7 +2,7 @@
 title: Dream Consolidation Pattern
 tags: [agent-memory, knowledge-management, architecture-pattern]
 created: 2026-05-12
-last_verified: 2026-05-12
+last_verified: 2026-07-20
 ---
 
 # Dream Consolidation Pattern
@@ -23,11 +23,33 @@ An automated background process that mines agent session transcripts to extract,
 
 6. **Conservative deletion**: Only delete when content is strictly subsumed or explicitly contradicted. Cost of redundancy < cost of knowledge loss.
 
+## Three Write Channels (learn-agent s20, 2026-07)
+
+Instead of a single consolidation pass, memory can have multiple write paths all demand-driven:
+
+1. **Inline notes** (primary): Agent writes during work. Existing in most systems.
+2. **Retrieval-as-signal** (NOVEL — no other known impl): When cross-session search hits historical session data, hint: "this was re-queried, fold into permanent notes if reusable." Zero scheduler, zero extra model calls. Demand-driven promotion.
+3. **Background dream** (backstop): Fire-and-forget fork, restricted tool whitelist (note CRUD only). Gated by cooldown + idle threshold.
+
+Key principle: "没有一次专门为记忆而生的高频模型调用" — no dedicated high-frequency memory model calls.
+
+## Idle Filter
+
+From Codex `min_rollout_idle_hours` (adopted by learn-agent s20): Only consolidate sessions idle ≥6h. Prevents recording intermediate work states as permanent facts. Gate counting and material selection MUST use same idle cutoff (otherwise: gate opens but materials are empty → infinite empty loop).
+
+## Pruning Exit
+
+Memory needs an explicit delete path or it bloats over time. Consolidation agent's tool whitelist should include `delete_note`. Instruction: "superseded/contradicted notes → delete." Only system with explicit memory exit avoids accumulation of contradictory old facts.
+
 ## Implementations
 
 - [[thclaws]] `/dream` command (v0.9.0, 2026-05-12) — first known implementation. Spawns side-channel agent with `KmsRead/Search/Write/Append/Delete` tools. Embedded AgentDef compiled into binary, overridable by user.
 - [[agent-memory-hooks-neo4j]] dream.py (tomasonjo, 2026-05-05) — Neo4j graph-backed. Watermark-based incremental processing, DERIVED_FROM provenance edges, markdown-as-graph-nodes. Multi-client (Claude Code + Codex + Cursor).
 - [[buddyme]] memory decay (virgo777, 2026-05-10) — Simpler variant: SequenceMatcher-based relevance scoring with 30-day linear decay, automatic archive/clean lifecycle. Not strictly "dream" but overlapping pattern (offline consolidation + dedup).
+- **learn-agent s20** (7-e1even, 2026-07-17) — Three-channel write + idle filter + retrieval-as-signal + stamp-as-lock. Comparison of 9 implementations (claude-code, codex, grok, hermes, etc.). Adopted grok skeleton + codex idle filter + claude-code pruning + novel retrieval-as-signal.
+- **claude-code** (Anthropic) — Most complete: per-turn extraction + 24h/5-session dream sweep + per-turn top-5 injection. Most expensive.
+- **codex** (OpenAI) — Heaviest: startup dual-pipeline, SQLite task lease, git-based memory repo with diff-based forgetting.
+- **grok** (xAI) — Session-end trigger, stamp-before-execute lock, simplest complete shape.
 
 ## Relevance to Our Stack
 
