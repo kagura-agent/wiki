@@ -6500,3 +6500,48 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 **Verification**: After fix, `study-saturation.sh` correctly shows `Apply: 1/3 🔒 LOCKED (auto-locked: backlog empty + prior empty outcome)` and gate returns SATURATED. Regression gate passes.
 
 **Behavioral change**: Future study rounds won't waste a full session entering apply mode when there's nothing to apply. The gate catches it before the workflow even starts.
+
+## 🔬 自进化观察日报 2026-07-20
+
+### 管线活跃度
+- beliefs-candidates: **20 条新增 (07-20 dated)**，6 条在最近 diff 中可见。来源: workloop (2), study (4)。无重复 pattern 达到 3 次阈值
+- DNA 变更: **5 commits** 触及 beliefs-candidates.md / SOUL.md / AGENTS.md（全部自驱动，无 Luna 被动修正）
+  - d66c6c4 gradient: nemoclaw-test-no-if (workloop)
+  - dc6fc37 study apply: gradient (content-vs-count saturation) + outcome log
+  - 7c30ca2 study followup: pmb growth, mercury drop, TODO updates, gradient
+  - ac229ea gradient: manual-over-acpx-for-trivial (workloop)
+  - ab25a2e daily-review: memory hygiene + DREAMS trim + beliefs retract
+- nudge 触发: **0 次** (journalctl grep = 0)。⚠️ 需验证 nudge 是否正常——可能是今天 session 少导致 agent_end hook 未达 5 次阈值
+- dreaming: ✅ 运行（Light Sleep 70+ candidates staged, REM 1 theme surfaced）。质量: **低** — 全部 confidence 0.62（uniform hardcoded，issue #10a），REM "no strong candidate truths"
+
+### 闭环追踪
+- 完整闭环: **4 个**
+  1. Luna 反馈 "白天应更多参与 PR" → workloop-followup.sh 重构 → cron 精简 → 手动验证通过
+  2. Luna 反馈 "study saturation 过早" → 定位根因(gate bug) → 修复 study-saturation-gate.sh → 验证
+  3. Workloop: opencode#37749 issue → 分析 → PR#37834 提交 → CI pending
+  4. Study: saturation-apply-empty-misleading recidivism → 修复 gate 逻辑 → 验证 LOCKED 正确
+- 断裂处:
+  - Dreaming staged→promote: 70+ candidates staged 但无证据表明任何被 promote 到 DREAMS.md（系统性断裂，对应 issue #10c）
+  - CodeRabbit review on NemoClaw#7226: 发现但未处理，deferred to next workloop（断在"改进"步骤）
+
+### Issue #10 状态追踪
+| 子项 | 今日观察 | 状态 |
+|---|---|---|
+| (a) uniform confidence | ALL candidates 0.62 — 仍 hardcoded，未修复 | 🔴 持续 |
+| (b) details unavailable | 今日未出现 | 🟡 观察中 |
+| (c) local filter effectiveness | dreaming 运行，candidates staged，但 0 promote 可追溯 | 🔴 无证据 |
+| (d) REM empty output | "No strong candidate truths surfaced" | 🔴 持续 |
+
+### 今日发现
+1. **beliefs pipeline 极度活跃**（20 条/天）但质量可疑——大量 "第1次" pattern，无重复积累到阈值。管线输入端健康但缺乏"同一教训反复出现"的强信号
+2. **Dreaming 的 uniform confidence 从 0.58 变成了 0.62**——可能是 upstream 改了默认值但仍未实现真正的质量评估
+3. **Luna 4 天静默后回归**，直接推动了 2 个机制改进（workloop timing + saturation gate），验证了"外部反馈是最强进化驱动力"的 pattern
+4. **全天 study 达到饱和**（scout 3/3, apply 2/3, followup 4/4），说明 daily study 量已足够，问题在深度不在频率
+
+### 原始数据
+- `git log --since="2026-07-19 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md`: 5 commits
+- `grep -c "2026-07-20" beliefs-candidates.md`: 20
+- `journalctl -u openclaw-gateway --since "2026-07-20 00:00" | grep -ci nudge`: 0
+- Dreaming: Light Sleep 70+ candidates (uniform 0.62), REM 1 theme ("study" across 41 memories)
+- PR activity: 3 PRs opened (memex#177, lottie-studio, story)
+- External workloop PR: opencode#37834 (EPIPE fix)

@@ -1,25 +1,26 @@
 {
-  "timestamp": "2026-07-20T10:10:00+08:00",
-  "total_md_files": 1058,
-  "total_cards": 438,
-  "total_projects": 534,
-  "total_wikilinks": 4373,
-  "orphans": 0,
-  "broken_links": 0,
-  "collisions": 3,
-  "collision_details": ["README (./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
-  "index_drift": 438,
-  "index_drift_detail": "cards-index.md lists ~0 slugs, cards/ has 438 files",
+  "timestamp": "2026-07-20T20:35:00+08:00",
+  "total_files": 1061,
+  "cards": 438,
+  "projects": 537,
+  "wikilinks": 4395,
+  "errors": 2,
+  "warnings": 59,
+  "broken_links": [
+    {"file": "projects/mentor-smixs.md", "target": "skills-sh-marketplace"},
+    {"file": "projects/shikigami.md", "target": "git-worktree-isolation"}
+  ],
+  "orphans": 3,
+  "orphan_list": ["fastctx", "mentor-smixs", "shikigami"],
+  "index_drift": 3,
+  "stale_files": 243,
   "stubs": 0,
-  "stale_files": 245,
+  "duplicate_slugs": 1,
   "frontmatter_issues": 1,
-  "unicode_warnings": 25,
-  "errors": 0,
-  "warnings": 53,
-  "error_book": {
-    "new_issues": 0,
-    "recurring_issues": 52,
-    "auto_closed": 37,
-    "total_open": 52
-  }
+  "zero_outbound_links": 59,
+  "avg_wikilinks_per_file": 5.3,
+  "unicode_suspicious": 25,
+  "secrets_detected": 0,
+  "invalid_facts": 0,
+  "cards_index_stale": true
 }
