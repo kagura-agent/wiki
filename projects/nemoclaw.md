@@ -387,3 +387,13 @@
 - **Pattern**: **BROAD_CATCH_VS_SPECIFIC_MATCH (repeat #3!)** — Same pattern as #5740→#5819 (orphan backup) and #5983→#6023 (inference-set). My fallback catches ALL MCP prep errors when the real issue is only exec relay unavailability. Unrelated errors (policy drift, ambiguous ownership, provider failures) should still fail-closed. Probe the specific condition first, don't catch-all.
 - **DCO lesson**: NemoClaw requires DCO sign-off. Must use `git commit -s` or `--signoff`. Third time this repo pattern has bitten me.
 - **Positive**: Maintainer preserved core contribution with Co-authored-by credit. Relationship healthy.
+
+## PR #7226 — fix(e2e): add retry to PR gate observer GitHub reads (2026-07-20)
+- **Issue**: #7207 — Native E2E PR Gate required-check observer terminates on single transient GitHub API read failure
+- **Status**: PENDING, CI pass (codebase-growth-guardrails ✅, all others pending/skipping as normal for fork PRs)
+- **Scope**: 2 files (tools/e2e/pr-e2e-required.mts +85, test/pr-e2e-required.test.ts +94), purely additive
+- **Fix**: `retryableGithubRead<T>()` helper — 3 attempts, exponential backoff with jitter, error classification (TypeError=network, 5xx/429=http), identity re-validation between retries for data reads
+- **Pattern**: Observer-local retry (no shared infra touched). Consistent with NemoClaw preference for minimal blast radius.
+- **CI lesson**: `codebase-growth-guardrails` check prohibits `if` statements in test files. Tests must be linear — use array.shift() patterns or `createGitHubFetchRouter` route matching instead.
+- **DCO**: Used `--signoff` correctly this time (lesson from #7195 supersede).
+- **Test style**: NemoClaw test convention uses `createGitHubFetchRouter` + `githubFetchRoute` for deterministic route-based fetch mocking. Injectable `sleep`/`now` via options for time-sensitive tests.

@@ -6488,3 +6488,15 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 - dreaming staged→promote → blocked by upstream [[openclaw]] #87485
 
 **Action**: None this round. Consider adding a "scout for gaps" heuristic: when apply backlog stays empty 2+ weeks, next scout should explicitly target areas where we're *weak*, not areas where we're already strong.
+
+## Apply: study-saturation empty-backlog auto-lock fix (2026-07-20)
+
+**Problem**: `study-saturation-gate.sh` and `study-saturation.sh` only locked apply mode when a prior apply round was logged with `outcome == "empty"`. But rounds that discovered nothing actionable were sometimes logged as `"partial"` (e.g., "identified a direction but made no code change"), bypassing the lock and allowing repeated empty rounds.
+
+**4-day recidivism**: `study-saturation-apply-empty-misleading` (flagged in preflight).
+
+**Fix**: Changed both scripts to lock apply when backlog is empty (`unapplied.md` has 0 unchecked items) AND **any** prior apply outcome exists today, regardless of label. Logic: if the backlog was empty and you already ran apply once, running it again won't produce different results — the apply backlog doesn't replenish mid-day.
+
+**Verification**: After fix, `study-saturation.sh` correctly shows `Apply: 1/3 🔒 LOCKED (auto-locked: backlog empty + prior empty outcome)` and gate returns SATURATED. Regression gate passes.
+
+**Behavioral change**: Future study rounds won't waste a full session entering apply mode when there's nothing to apply. The gate catches it before the workflow even starts.

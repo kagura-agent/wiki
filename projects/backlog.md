@@ -1399,3 +1399,5 @@ GitHub trending (agent, created past week, sorted by stars):
 - **PromptPartner/agentsmith** (100⭐, 2d) — Universal model-agnostic operating harness for AI agents. Lean core + plugin architecture.
 - **5uck1ess/cicero** (17⭐, 5d) — Self-hosted voice for coding agents. Talk from browser or Telegram, interrupt mid-sentence.
 - **LM Studio Bionic** (323pts HN) — Agent for open models from LM Studio team. https://lmstudio.ai/blog/introducing-lm-studio-bionic
+- **yc-duan/fastctx** (93⭐, 3d) — Fast, context-efficient repository tools for AI agents via MCP. Directly relevant to context management.
+- **Codesteward/codesteward** (61⭐, 6d) — Agentic code review with structural graph intelligence (PR gate + branch stewardship). Self-hosted.
