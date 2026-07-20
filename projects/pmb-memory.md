@@ -3,9 +3,9 @@ title: PMB — Local-First Persistent Memory for AI Coding Agents
 slug: pmb-memory
 tags: [agent-memory, mcp, sqlite, vector-search, local-first]
 created: 2026-06-26
-updated: 2026-06-26
+updated: 2026-07-20
 status: deep-read
-last_verified: 2026-06-26
+last_verified: 2026-07-20
 ---
 
 # PMB — Local-First Persistent Memory for AI Coding Agents
@@ -74,18 +74,44 @@ Build co-occurrence graph from events → Personalized PageRank with seed entiti
 **Our advantages**: human readability, zero dependencies, git-native versioning, no daemon to manage, trivially portable.
 **PMB advantages**: faster read path, structured types, graph retrieval, exploration caching, lesson follow-through.
 
-## Weaknesses
+## Update 2026-07-20: Community Transformation + Auto-Decay
 
-1. **Issue #1**: `record_keyed_fact` uses fragile `LIKE` on raw JSON instead of `json_extract` — basic data integrity flaw
-2. **The hard problem is punted**: What SHOULD become memory is left to the agent/user (Issue #2 feedback confirms this)
-3. **Solo dev, minimal community**: 87⭐ but only 2 issues, 0 PRs from community
-4. **Heavy deps**: numpy, scipy, sentence-transformers, LanceDB, rank-bm25, fastembed — non-trivial install
-5. **Dashboard is visualization, not curation**: Shows everything captured but no mechanism for memory quality control or pruning
+**Stars**: 87 → 313 (+259%). Community: THRIVING 5/6 (25 merged PRs/30d, 4 unique PR authors, 6 external PRs/30d).
 
-## Verdict
+### New Architectural Additions
 
-Well-engineered SQLite+vector memory system. Exploration memo cache and PPR graph retrieval are genuinely novel. Lesson follow-through tracking is a concrete feature we could adopt. But our file-based approach trades performance for simplicity, readability, and git-native versioning — different tradeoff, not worse.
+**1. Auto-Decay (PR#62)**: `apply_daily_decay` runs in daemon maintenance tick before archiving cold memories. Memories fade over time without explicit agent intervention. `w/(1+w)` saturation formula for graph-boost prevents runaway scores. This addresses the "no mechanism for memory quality control" weakness noted below — PMB now has autonomous memory curation.
 
-**Revisit**: 07-10 (want to see community growth + whether exploration memos get adopted elsewhere)
+**2. Read-Guard Removal (PR#62)**: Philosophical shift to "PMB informs, never blocks" — removed the mechanism that could gate reads. Permissive access philosophy.
+
+**3. OpenAI Backend (PR#68, external contributor @jbendotnet)**: Multi-provider support via auto fallback (claude → anthropic → openai → ollama). No SDK dependency (stdlib urllib). Includes benchmark verification (LoCoMo accuracy + write-path latency). Notable: PR was created using OpenCode/GPT — agent-generated PR to an agent memory system.
+
+**4. Dashboard + Live-QA Stability Fixes (PR#59, PR#64)**: Visualization layer + stability fixes from real-world QA testing.
+
+### What Changed vs Original Assessment
+
+| Original (06-26) | Now (07-20) |
+|---|---|
+| Solo dev, 87⭐, 0 PRs | THRIVING 5/6, 313⭐, 25 merged PRs/30d |
+| No memory pruning | Auto-decay + graph-boost saturation |
+| Claude/Ollama only | Multi-provider (Claude/Anthropic/OpenAI/Ollama) |
+| No dashboard | Dashboard with port fallback |
+| Fragile read-guard | Removed (informs, never blocks) |
+
+## Weaknesses (Revised)
+
+1. ~~**Solo dev, minimal community**~~: RESOLVED — now THRIVING 5/6
+2. **The hard problem is partially addressed**: Auto-decay handles staleness but "what SHOULD become memory" still left to agent/user
+3. **Heavy deps**: numpy, scipy, sentence-transformers, LanceDB, rank-bm25, fastembed — non-trivial install (unchanged)
+4. ~~**No mechanism for memory quality control**~~: RESOLVED by auto-decay + graph-boost saturation
+5. **v1.2.0 release pending**: PR#63 bump to 1.2.0 still open (23 days), suggesting release process lag
+
+## Verdict (Updated)
+
+Matured from clever solo project into a legitimate agent memory system with healthy community. Auto-decay pattern is the key new insight — autonomous memory curation via time-based decay + reinforcement is something we could adopt for our wiki/memory files (stale entries losing prominence over time). The community validation (external PRs, QA fixes, multi-provider support) confirms the architecture is sound.
+
+**Relevance to us**: Auto-decay + lesson follow-through remain the two patterns worth considering. Our file-based approach still wins on simplicity/readability but lacks autonomous freshness management.
+
+**Revisit**: 08-03 (monthly check, mature project)
 
 Links: [[git-backed-agent-memory]], [[agent-memory-landscape-202603]], [[brain-md]], [[ai-memory]], [[krusch-context-mcp]], [[beliefs-candidates]]
