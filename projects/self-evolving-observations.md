@@ -6474,3 +6474,17 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 - Dreaming candidates in memory/2026-07-19.md: 100
 - DREAMS.md last entry: Jul 16 ("details were unavailable")
 - evolution-log/2026-07-19.md: 已生成 (commit 3e81212)
+
+## Apply Pipeline Status Check (2026-07-20 13:24)
+
+**unapplied.md**: fully cleared (all items [x]). Last new entry added: 2026-07-03 (spam-filter).
+**Signal**: 17 days without a new unapplied insight accumulating. Either:
+1. Recent deep-reads are producing interesting-but-not-actionable findings (shikigami worktree = already applied via poco-claw, mentor = nudge overlap)
+2. Or scout selection is drifting toward confirmation (studying things similar to what we already do)
+
+**Remaining directions identified but not apply-scale:**
+- dirac bounded repair → skill_workshop automated implementation (workloop task)
+- mentor correction-detection → nudge enhancement (workloop task)
+- dreaming staged→promote → blocked by upstream [[openclaw]] #87485
+
+**Action**: None this round. Consider adding a "scout for gaps" heuristic: when apply backlog stays empty 2+ weeks, next scout should explicitly target areas where we're *weak*, not areas where we're already strong.
