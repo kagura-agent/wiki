@@ -431,3 +431,14 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Approach**: Claude Code for implementation, manual review and edits for security fixes.
 - **Claimed**: 2026-07-03 in issue comment with analysis. No competing PRs.
 - **Note**: This repo has `bun test` — run from `packages/llm/`, not root (root has sentinel dir). 3 merged PRs in this repo, relationship established.
+
+### PR #37834 — fix(desktop): handle async EPIPE on process.stderr (2026-07-20)
+- **Issue**: #37749 — Desktop app crashes with uncaught EPIPE on stderr when parent terminal closes
+- **Root cause**: `initConsoleTransport()` wraps `writeFn` in synchronous try-catch for EPIPE, but `process.stderr` emits async `'error'` events that bypass this guard, causing uncaught exception crash.
+- **Fix**: Added `process.stderr.on('error', ...)` listener in `initConsoleTransport()`. Checks EPIPE via existing `isBrokenPipe()` helper, disables console transport, self-removes. Non-EPIPE errors pass through to default handler.
+- **Status**: PENDING (CI checks queued, no reviews yet)
+- **Diff**: 1 file, 7 insertions (+0 deletions). Additive only.
+- **Fresh-context review**: MEDIUM (test coverage) + LOW (once semantics) — both false positives (no existing test file for desktop logging, `once` can't work because non-EPIPE must pass through).
+- **Approach**: Manual edit — 7-line additive change, too simple for Claude Code.
+- **Pattern**: Desktop/Electron node stream error handling. Extends existing sync guard to async path.
+- **Note**: CI uses 4 checks (add-contributor-label, check-compliance, check-duplicates, check-standards). GitHub Actions queue delay is normal for this repo.

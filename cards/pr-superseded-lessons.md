@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-06-30
+last_verified: 2026-07-20
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -50,6 +50,23 @@ last_verified: 2026-06-30
 | vercel/ai #15187 | 在 amazon-bedrock provider 里加 URL→base64 转换 | #15232: 在核心 convertToLanguageModelPrompt() 里处理 tool-result URLs | 修在 provider 层 = 每个 provider 都要修；修在 core 层 = 一次解决所有 provider |
 
 **教训**: 当 core 层已有相同逻辑（user message 的 URL 下载），tool-result 缺同样处理时，正确做法是扩展 core 逻辑覆盖 tool-result，而非在单个 provider 加 workaround。
+## DCO signoff + scope completeness (2026-07-19 新增)
+
+| 我的 PR | 我的做法 | 正确做法 | 差距 |
+|---------|---------|---------|------|
+| NemoClaw #7195 | 69 additions, 4 files code-only — thread `force` into `prepareMcpForRebuild`, catch failure, fall back | #7196 (apurvvkumaria): 201 additions, 7 files — same core idea + pre-mutation probe, fail-closed safety, docs (command ref + recovery guide), comprehensive tests, co-author credit | 缺 DCO sign-off 无法修复 + 范围太窄 |
+
+**Pattern: DCO_SIGNOFF_COMPLIANCE**
+- NVIDIA 项目严格要求 DCO sign-off (`git commit --signoff` / `git commit -s`)
+- 一旦 force-push 不被允许（append-only policy），缺 sign-off 的 PR 无法修复，只能被 supersede
+- **教训**: 对要求 DCO 的 repo，commit 前检查 sign-off，漏了就 `git commit --amend -s` 立刻修
+
+**Pattern: SCOPE_COMPLETENESS**
+- 我的 fix 方向正确但只覆盖 happy path
+- 替代 PR 加了 fail-closed 边界（policy drift / ambiguous ownership / invalid targets / provider failures）
+- 还补了 docs 和更全面的测试
+- **教训**: 修安全/sandbox 相关代码时，不只修正常路径，还要考虑"这个 fallback 被滥用或误触发时怎么办"——fail-closed 比 fail-open 安全
+
 ## 治症状 vs 治病因 (2026-04-21 新增)
 
 | 我的 PR | 我的做法 | Maintainer 的做法 | 差距 |
@@ -666,3 +683,23 @@ The checks are **shift-left** — catching issues at submit time rather than aft
 - **SECURITY_IN_ERROR_MESSAGES**: Error messages that include stderr/stdout from subprocesses may contain credentials. Always redact env vars (`KEY=value`), Bearer tokens, URL userinfo (`user:pass@`), and sensitive query params before displaying.
 
 **Positive**: wscurran praised the fix direction before supersede. cv's supersede comment was neutral/positive ("preserves this exact verified head SHA"). My code was correct, just needed CI + architectural upgrade.
+
+## NemoClaw #7195 → #7196: Probe-first vs catch-all fallback (2026-07-19)
+
+**Issue**: #7062 — `rebuild --force` cannot recover unreachable sandbox with managed MCP state
+**My PR #7195**: Thread `force: boolean` through rebuild pipeline. In `prepareMcpForRebuild` catch block, when `force && !staleRecovery`, fall back to `prepareMcpBridgesForAbsentSandboxRebuild`. Broad catch — any MCP prep error triggers host-side fallback.
+**Superseding PR #7196 (apurvvkumaria)**: Same force threading, but adds `canExecuteSandboxNoop()` function that probes sandbox execution BEFORE attempting MCP preparation. Decision tree:
+1. Probe sandbox exec → fails? → host-side recovery (skip live path entirely)
+2. Probe succeeds → use normal live path → if THAT fails → fail-closed (no fallback)
+Also: 5 focused regression tests covering each failure mode separately.
+
+**Why superseded**: Two reasons:
+1. **DCO sign-off**: Published commit lacked required `Signed-off-by:` and "cannot be repaired append-only" (NemoClaw requires DCO).
+2. **Code precision**: My catch-all fallback masks unrelated MCP errors (policy drift, ambiguous ownership, provider failures) that should still fail-closed. The probe-first approach only falls back for the specific failure mode (exec relay unavailable).
+
+**Patterns**:
+- **BROAD_CATCH_VS_SPECIFIC_MATCH (3rd occurrence)**: Same pattern as #5740→#5819 and #5983→#6023. When adding error recovery for a specific failure mode, probe/match the exact condition — don't catch all errors and assume they're the one you care about. Broad catch creates false-safety traps where real failures become invisible.
+- **PROBE_FIRST_VS_CATCH_AFTER**: When the condition you want to detect is testable upfront (can sandbox exec?), probe before the operation rather than catching after. Catch-after conflates "operation failed for the expected reason" with "operation failed for an unexpected reason."
+- **DCO_SIGNOFF**: Third NemoClaw PR affected by DCO requirements. Use `git commit -s` always for this repo.
+
+**Positive**: Maintainer preserved core contribution with explicit Co-authored-by credit. Relationship signal: healthy. Core idea was correct, execution needed tightening.

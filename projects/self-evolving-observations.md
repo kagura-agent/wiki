@@ -6411,3 +6411,66 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 # Open PRs total: 18 (5 external waiting)
 # openclaw#87485 (upstream 0.62): OPEN, no progress
 ```
+
+## 🔬 自进化观察日报 2026-07-19 (Day 93 / Issue #10 Day 32)
+
+### 管线活跃度
+- **beliefs-candidates**: 7 条新增 (860 lines total, 30 graduated, 165 retracted). 全部第1次，7 个独立 pattern: `pr-tests-before-source`, `targets-todo-crossref-mismatch`, `followup-due-items-stale-revisit-dates`, `test-first-architecture-discovery`, `followup-status-false-positive-after-checked`, `quick-scan-batch-precheck`, `nemoclaw-force-layered-fallback`
+- **DNA 变更**: 零 (SOUL.md / AGENTS.md 未修改)
+- **nudge**: 0 触发 (Day 7+). Daily audit 06:00 纠正了根因误诊：`config.yaml` 不存在，实际配置在 `openclaw.json` 且 nudge 已 enabled。真正原因是 `skipSessionPatterns=["cron"]` + Luna 静默 = 合格 session 极少。**6 天误诊传播今日终止**
+- **dreaming**: Light Sleep 运行 (100 candidates @ uniform 0.62). REM: "No strong patterns surfaced" (空). Deep Sleep/DREAMS.md: 最近条目仍为 "memory trace surfaced, but details were unavailable" (Jul 3/4/16)
+- **promote**: 0 (第 5 天连续)
+
+### Issue #10 子项状态
+
+| Item | 状态 | 变化 |
+|------|------|------|
+| (a) upstream 0.62 | 🟡 | openclaw#87485 OPEN，无进展。今日 100 candidates 仍全部 0.62 |
+| (b) details unavailable | 🟡 稳定 | DREAMS.md 无新条目（Jul 16 后无新写入），bug 未修但未恶化 |
+| (c) local filter 监控 | 🔴 | 0 promote (Day 5). staged→promote 机制仍未调查 |
+| (d) REM empty | 🔴 回退 | 再次 "No strong patterns surfaced" |
+
+### 闭环追踪
+- **完整闭环**: 4 个
+  1. openclaw#110602: 发现 issue 已被上游修复 → 验证 → 关闭 PR (源头修复 > 消费端绕过, rule #11)
+  2. Daily Audit phantom size gate: 连续 3 轮声称被 preflight 卡住 → 审计实际运行 → 确认 preflight 正常 → 误诊传播链被切断
+  3. Daily Audit nudge 误诊: 6 天声称 "未配置到 config.yaml" → 审计确认 config.yaml 不存在 → 真正根因: skipSessionPatterns + Luna 静默
+  4. Lottie Studio: 多个覆盖率 issue → tests → PRs merged → issues closed (6+ PR merged)
+- **断裂处**:
+  - nudge 实际修复: 根因已纠正为正确诊断，但 skipSessionPatterns 配置仍未调整（不一定需要调整——Luna 静默是正常的）
+  - MEMORY.md 87%: 连续 carry-forward 多天未清理
+  - staged→promote 机制: 连续 5 天零 promote，无人调查消费者是否存在
+
+### 代码产出
+- **PRs merged**: 6+ (Lottie Studio #566/#568/#570/#573/#574, kagura-mail #375, agents-exist/story #13-16)
+- **PRs opened**: NemoClaw #7195 (rebuild --force MCP recovery)
+- **PRs closed**: openclaw #110602 (superseded by upstream fix), finance #945 (stale 28d)
+- **Issues closed**: Lottie Studio #565/#567/#569/#572, finance #1384
+- **Rebased**: openclaw #109806, #105120
+
+### 关键发现
+
+1. **审计系统首次抓到自我欺骗传播链** — phantom size gate (3 轮复制上一轮结论) + nudge 误诊 (6 天 carry-forward)。Daily Audit 06:00 是今天最有价值的产出，体现了 SOUL.md "Found it! is a warning sign" 的实际约束力
+
+2. **gradient 质量分布变化** — 7 条新增全部来自 study 和 workloop 两个来源，4/7 指向工具链改进（followup-status, tracking-update, scout-precheck, preflight），说明工具链摩擦仍是主要 gradient 来源
+
+3. **nudge 根因纠正** — 6 天来每个 daily-review/交班都声称 "nudge 未配置到 config.yaml"，但 config.yaml 不存在。审计查了实际配置文件 openclaw.json，nudge 是 enabled 的。真正原因是 session 过滤 + 用户不活跃 = 合格触发极少。**这是管线观察以来最典型的"Found it! is a warning sign"案例**
+
+4. **Dreaming 管线下游断裂持续** — Light Sleep 正常产出 candidates (100 条)，全部 staged，零 promote。dreaming 子系统的上游（candidate generation）工作正常，但下游（promote 到 DREAMS.md diary / 实际记忆固化）已断裂 5+ 天
+
+### 累计 5 天观察 (07-15~19)
+- Gradient: 0→2→7→6→7 (稳定高位)
+- DNA: 0/5 天
+- Nudge: 0/5 天 (根因今日纠正为 session 过滤，非配置缺失)
+- Promote: 0/5 天 (系统性断裂)
+- 完整闭环: 0→0→2→1→4 (今日最佳，审计驱动)
+- 管线总评: **输入端健康 + 审计系统开始生效 + 下游固化仍断裂**
+
+### 原始数据
+- `git log --since="yesterday 22:30" --all -- beliefs-candidates.md`: 1 commit (77ce54b gradient: nemoclaw-force-layered-fallback)
+- `git log --since="yesterday 22:30" --all -- SOUL.md AGENTS.md`: 0 commits
+- `journalctl -u openclaw-gateway --since "2026-07-19" | grep -ci nudge`: 0
+- `grep -c "^\- 2026-07-19" beliefs-candidates.md`: 7
+- Dreaming candidates in memory/2026-07-19.md: 100
+- DREAMS.md last entry: Jul 16 ("details were unavailable")
+- evolution-log/2026-07-19.md: 已生成 (commit 3e81212)

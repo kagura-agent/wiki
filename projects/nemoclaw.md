@@ -51,6 +51,14 @@
 - #5740 (backup-all batch catch): SUPERSEDED by #5819 (cjagwani) 06-25 — my broad try/catch swallowed real failures. Narrower regex-matched catch for orphan-manifest only is objectively better. See [[pr-superseded-lessons]]
 - #5983 (inference provider-not-found UX): SUPERSEDED by #6023 (cv) 06-30 — fork-origin PRs can't run mandatory PR Review Advisor CI; code was correct but recreated same-repo with modular architecture + credential redaction. See [[pr-superseded-lessons]]
 
+## PR #7195 — rebuild --force MCP recovery (2026-07-19)
+- **Issue**: #7062 — `--force` cannot recover unreachable sandbox with managed MCP state
+- **Status**: CLOSED — superseded by #7196 (apurvvkumaria)
+- **Root cause of supersede**: Missing DCO sign-off (`git commit --signoff`), "cannot be repaired append-only"
+- **My approach**: 69 additions, 4 files — thread `force` flag into `prepareMcpForRebuild`, catch live-path failure, fall back to absent-sandbox path. Code-only, no docs.
+- **Their approach**: 201 additions, 7 files — same core idea plus pre-mutation no-op probe, fail-closed safety boundaries for edge cases (policy drift, ambiguous ownership, invalid targets, provider failures), docs updates (command ref + recovery guide), comprehensive tests. Co-author credit preserved.
+- **Lesson**: See [[pr-superseded-lessons]] DCO_SIGNOFF_COMPLIANCE + SCOPE_COMPLETENESS
+
 ## PR #4054 — ~/.nemoclaw dir permissions (2026-05-22)
 - **Issue**: #4009 — directory and config.json created world-readable (1755/644) instead of 700/600
 - **Status**: PENDING, CI pass (3/3 ✅), CodeRabbit feedback addressed
@@ -368,12 +376,14 @@
 - **Pattern**: DOCS_VARIANT_GATING — MDX tables can't wrap individual rows in JSX, so split into separate table blocks for variant-specific rows. Always use block-form `<AgentOnly>` (with newlines), never inline.
 - **Process note**: Workloop instance #6012 stalled at plan node for ~1hr because previous cron session completed plan-review subagent (APPROVED 8/10) but died before advancing. Recovered cleanly on next cron run.
 
-## PR #7195 — rebuild --force MCP fallback for unreachable sandbox (2026-07-19)
+## PR #7195 → #7196 — rebuild --force MCP fallback for unreachable sandbox (2026-07-19)
 - **Issue**: #7062 — `rebuild --force` cannot recover an unreachable sandbox with managed MCP state
-- **Status**: PENDING, CI 8/11 pass (E2E needs NVIDIA vetter — standard for fork PRs), CodeRabbit "No actionable comments" ✅
+- **Status**: ❌ SUPERSEDED by #7196 (apurvvkumaria). Closed 2026-07-19. Co-authored-by credit preserved.
 - **Scope**: 4 files (rebuild-mcp-phase.ts, rebuild-destroy-phase.ts, rebuild-pipeline.ts, rebuild-destroy-phase.test.ts), +69/-1
 - **Root cause**: `prepareMcpForRebuild()` chooses live vs absent-sandbox MCP path based on `staleRecovery` flag (sandbox in live list?). When sandbox reports Ready but exec relay is broken, `staleRecovery=false` → tries live path → exec fails → bails. `--force` flag was not threaded to this function.
-- **Fix**: Thread `force: boolean` from `rebuild-pipeline.ts` → `rebuild-destroy-phase.ts` → `rebuild-mcp-phase.ts`. When `force=true` and live MCP prep fails, fallback to `prepareMcpBridgesForAbsentSandboxRebuild` (host-side only, no exec needed).
-- **Pattern**: Follows existing convention — `rebuild-backup-phase.ts` already has `force?: boolean` in its input interface with same threading pattern. NemoClaw `--force` convention: each phase independently decides what to skip/fallback when force=true.
-- **Fresh-context review**: 2 MEDIUM (1 fixed: `relockShieldsIfNeeded` arg consistency; 1 false positive: `return null` after `bail()` — same pattern in original code), 2 LOW (false positives — console.error and test scope match project convention).
-- **Relation to #6211**: This PR extends the `--force` recovery path further — #6211 let force skip backup, #7195 lets force fallback MCP prep. Same philosophical direction: `--force` should mean "recover even when I can't talk to the sandbox".
+- **My fix**: Thread `force: boolean` through the pipeline. In catch block, when `force=true` and live MCP prep fails, fallback to `prepareMcpBridgesForAbsentSandboxRebuild`. **Broad catch** — any error triggers fallback.
+- **Replacement (#7196) fix**: Same `force` threading, but adds `canExecuteSandboxNoop()` probe BEFORE MCP preparation. Only falls back to host-side when exec probe specifically fails. If probe succeeds but MCP prep fails (policy drift, ownership) → fail-closed, no fallback. 5 focused regression tests.
+- **Why superseded**: (1) Published commit lacked required DCO sign-off and "cannot be repaired append-only". (2) Probe-first approach is narrower and safer than catch-all fallback.
+- **Pattern**: **BROAD_CATCH_VS_SPECIFIC_MATCH (repeat #3!)** — Same pattern as #5740→#5819 (orphan backup) and #5983→#6023 (inference-set). My fallback catches ALL MCP prep errors when the real issue is only exec relay unavailability. Unrelated errors (policy drift, ambiguous ownership, provider failures) should still fail-closed. Probe the specific condition first, don't catch-all.
+- **DCO lesson**: NemoClaw requires DCO sign-off. Must use `git commit -s` or `--signoff`. Third time this repo pattern has bitten me.
+- **Positive**: Maintainer preserved core contribution with Co-authored-by credit. Relationship healthy.
