@@ -1401,3 +1401,4 @@ GitHub trending (agent, created past week, sorted by stars):
 - **LM Studio Bionic** (323pts HN) — Agent for open models from LM Studio team. https://lmstudio.ai/blog/introducing-lm-studio-bionic
 - **yc-duan/fastctx** (93⭐, 3d) — Fast, context-efficient repository tools for AI agents via MCP. Directly relevant to context management.
 - **Codesteward/codesteward** (61⭐, 6d) — Agentic code review with structural graph intelligence (PR gate + branch stewardship). Self-hosted.
+- [x] software-periodic-table (NullLabTests) — 69⭐ 2d. Composition-over-generation ontology. Deep read done. Not tracking (outside portfolio scope). (07-21)
