@@ -382,3 +382,13 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
   - **New learning**: The messaging-tool suppression path in `buildReplyPayloads` uses a binary `suppressMessagingToolReplies ? [] : filteredPayloads` pattern. When adding new payload types that shouldn't be suppressed, use per-payload flags rather than modifying the boolean condition.
   - **Code organization**: `EmbeddedRunPayload` type flows into `ReplyPayload` — both types need the flag. Adding to `ReplyPayload` directly (since it's the dispatch-time type) is the correct place.
   - **CI**: 7 non-skipped checks, all pass quickly (<20s each). "Real behavior proof" check validates PR body format.
+
+### 2026-07-21: PR #112084 (PENDING)
+- **Issue**: #112020 — canvas default-node tie-break sorts by nodeId instead of lastSeenAtMs when all canvas nodes are disconnected
+- **Root cause**: `compareDefaultNodeOrder` only compares `connectedAtMs`. When all nodes are disconnected, `connectedAtMs` is undefined for all → all collapse to -1 → falls through to `nodeId.localeCompare()` (arbitrary hash)
+- **Fix**: Added `lastSeenAtMs` as secondary sort between `connectedAtMs` and `nodeId`. Same `Number.isFinite()` guard pattern. 5 lines in comparator.
+- **Files**: `src/agents/tools/nodes-utils.ts` (+5), `src/agents/tools/nodes-utils.test.ts` (+18)
+- **CI**: All checks pass. "Real behavior proof" requires "What Problem This Solves" + "Evidence" sections in PR body (learned mid-flight, fixed immediately).
+- **Pattern — follow existing code style**: The `?? 0` after `Number.isFinite()` is technically dead code but matches the existing `connectedAtMs` pattern 3 lines above. Consistency > pedantic optimization.
+- **Testing**: `resolveNodeIdFromList` has a `preferLocalMac` gate that fires BEFORE sort. Test nodes must NOT match `isLocalMacNode` (platform starts with "mac" AND nodeId starts with "mac-"). Use hash-like IDs instead.
+- **Efficiency**: Simple 5-line fix done manually without Claude Code — faster than spawning acpx for trivial changes.
