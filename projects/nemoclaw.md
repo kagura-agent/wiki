@@ -397,3 +397,11 @@
 - **CI lesson**: `codebase-growth-guardrails` check prohibits `if` statements in test files. Tests must be linear — use array.shift() patterns or `createGitHubFetchRouter` route matching instead.
 - **DCO**: Used `--signoff` correctly this time (lesson from #7195 supersede).
 - **Test style**: NemoClaw test convention uses `createGitHubFetchRouter` + `githubFetchRoute` for deterministic route-based fetch mocking. Injectable `sleep`/`now` via options for time-sensitive tests.
+
+## PR #7295 — channels guard host-side hint (2026-07-21)
+- **Issue**: #7292 — openclaw channels add/remove guard omits the host-side hint
+- **Status**: PENDING (CI has pre-existing unrelated failure: test/policies.test.ts size budget)
+- **Fix**: Replaced 10-line generic hint with single interpolated line using existing `_nemoclaw_policy_denial_hint_label()` helper
+- **Pattern**: The guard shell functions have shadowing-safe exit patterns (`_nemoclaw_guard_request_handled`); regular `return 1` still works for simple cases
+- **Learning**: nemoclaw-start.sh is a ~5800 line bash script; many guards exist; `_nemoclaw_policy_denial_hint_label()` is the correct helper for sandbox name interpolation
+- **CI note**: `codebase-growth-guardrails` has a pre-existing test size budget failure (policies.test.ts 1531 > budget 1530) unrelated to PR changes
