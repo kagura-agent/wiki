@@ -1402,3 +1402,31 @@ GitHub trending (agent, created past week, sorted by stars):
 - **yc-duan/fastctx** (93⭐, 3d) — Fast, context-efficient repository tools for AI agents via MCP. Directly relevant to context management.
 - **Codesteward/codesteward** (61⭐, 6d) — Agentic code review with structural graph intelligence (PR gate + branch stewardship). Self-hosted.
 - [x] software-periodic-table (NullLabTests) — 69⭐ 2d. Composition-over-generation ontology. Deep read done. Not tracking (outside portfolio scope). (07-21)
+
+## 2026-07-21 Quick Scan (11:45)
+- **KlaatAI/klaatcode** (174⭐, +61% from 07-18): Active dev, external PRs. Smart model routing claim. Derivative pattern — 已知
+- **AgentSmith** (312⭐, +212% from 07-18): Accelerating growth. Already tracking. Update star count at next followup
+- **mentor** (51⭐, +46% from 07-19): Steady. Already tracking
+- **orchetron/secondwind** (6⭐, NEW): Tool output compression for agents. Similar to my compress-output.sh. 太早
+- HN: 0 agent stories above 10pts in 3 days
+- Verdict: ecosystem stable, no new deep-read candidates
+
+## Quick Scan — 2026-07-21 12:45
+
+### GitHub (stars>50, created past 2 weeks, sorted by stars)
+- **grok-build** (20,949⭐, was 4,104 on 07-16) — 已知/tracking. Exploded 5x in 5 days
+- **unicity-aos/aos-ce** (3,370⭐, created 07-12) — Agent OS community edition. 值得深入. Agent-as-OS paradigm at scale
+- **modiqo/waggle** (909⭐, created 07-08) — Attributed artifact references for agent handoffs, ~30-byte token vs pasting context. MCP-native. 值得深入. Novel inter-agent reference layer
+- **lopopolo/harness-engineering** (879⭐, created 07-18) — Field guide/anthology for harness engineering. Educational skim
+- **mereyabdenbekuly-ctrl/clodex-ide** (849⭐, created 07-12) — Local-first zero-trust agentic IDE. 值得深入
+- **yetone/kill-ai-slop** (667⭐, created 07-10) — AI slop detection + agent skill to strip it. Utility, not core
+- **TencentCloud/Octop** (220⭐, created 07-08) — Multi-user multi-agent self-hosted assistant. Tencent entry, early
+- **barretlee/agent-pulse** (218⭐, created 07-11) — AI industry intelligence briefs. Not a tool
+
+### HN (3 days)
+- Sandbox Escape Vulnerabilities Across 4 Coding Agent Vendors (11pts) — Security relevant
+- Controlling Reasoning Effort in LLMs (64pts) — Model optimization, directly relevant
+
+### Verdict
+3 new deep-read candidates: aos-ce (agent OS), waggle (artifact references), clodex-ide (agentic IDE)
+Ecosystem NOT stable — significant new entrants at scale this week
