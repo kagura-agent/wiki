@@ -7,7 +7,7 @@ revisit: 2026-06-23
 stars: 1616
 repo: Paca-AI/paca
 tags: [project-management, scrum, ai-collaboration, mcp, openhands]
-last_verified: 2026-07-19
+last_verified: 2026-07-21
 ---
 
 # Paca — AI-Native Project Management
@@ -119,3 +119,4 @@ Our ACP uses a similar pattern (spawn ACP harness as subprocess) but through the
 - [[centaur-loop]] — related human-governed AI feedback loop concept
 - [[agentskills-io-standard]] — skill distribution via SKILL.md
 - [[flowforge]] — our lighter workflow approach vs. Paca's full PM
+- **2026-07-21**: 1627⭐ (+0.7%). PR#296 (merged 07-20): host-enforced plugin SQL security — plugins declare `SensitiveFields` per-table, request access to others' fields like OAuth scopes (`RequestedSensitiveFields`). Core platform secrets (`password_hash`, `api_keys.key_hash`, etc.) are hardcoded-protected. Read queries get per-table column redaction; writes to sensitive tables are blocked pre-Postgres unless explicitly granted. Regex-based detection fails safe (over-redacts). PR#295 (07-20): sprint events go real-time via Valkey→Socket.IO (removed 30s polling), plugin components get proper `api`/`ui`/`meta` base props, `db_query2` adds error reporting channel (old `db_query` silently swallowed errors). Community: 5 unique PR authors/30d, PR#292 (15k LOC RBAC grant-ceiling by external contributor phancao). Solo-dev risk diminishing. THRIVING 5/6.
