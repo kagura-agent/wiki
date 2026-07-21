@@ -6545,3 +6545,19 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 - Dreaming: Light Sleep 70+ candidates (uniform 0.62), REM 1 theme ("study" across 41 memories)
 - PR activity: 3 PRs opened (memex#177, lottie-studio, story)
 - External workloop PR: opencode#37834 (EPIPE fix)
+
+## Apply Pipeline Status Check (2026-07-21 13:25)
+
+**unapplied.md**: still fully cleared. 18 days since last new entry (spam-filter, 07-03).
+**Today's deep reads**: waggle (self-teaching responses, payload-free telemetry, consumption contracts), mentor (session-insights rubric). Both have interesting patterns but overlap with existing implementations:
+- Self-teaching responses → already in gate scripts via codex-control-plane-mcp (06-25)
+- Consumption contracts → already in Done Contracts via SmallCode (05-26)
+- Payload-free telemetry → no use case (we don't publish dashboards)
+- Mentor rubric → nudge already covers session quality checks
+
+**Trend**: Apply backlog has been empty since 07-03. The study pipeline is generating scout/followup value (portfolio health, new projects tracked) but not producing implementable deltas. This is expected — after 34+ successful applies over 2 months, the low-hanging fruit is exhausted. Future applies likely need:
+1. Larger architectural shifts (cross-machine scenarios, embedding-backed search)
+2. Upstream features landing (OpenClaw #87485 for dreaming promote)
+3. Genuine tool gaps emerging from workflow pain (not manufactured)
+
+**Outcome**: empty — no behavioral change possible this round.
