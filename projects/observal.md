@@ -99,4 +99,22 @@ Deduplication via xxhash. Secrets redaction before storage. Checkpoint-based inc
 2. How does session replay handle large transcripts? (ClickHouse retention policies?)
 3. What's the latency story for hook-based telemetry? (defer_session_delivery hint suggests some harnesses need async drain)
 
+## ⛔ Contribution Status: BLOCKED
+
+**Cannot contribute PRs.** Their `AI_POLICY.md` explicitly bans autonomous coding agents:
+> "Tools like Devin, SWE-agent, OpenHands, and similar autonomous agents that write and submit code without meaningful human authorship are not allowed to contribute to this project."
+> "Any PR identified as having been submitted by an autonomous agent will be closed immediately."
+
+Added to gogetajob blocklist 2026-07-22.
+
+## Contribution Requirements (for reference)
+
+- Claiming: `/take` on good first issue / help wanted
+- SPDX headers required on every file
+- Conventional Commits
+- `make test` before submitting
+- CHANGELOG.md entry for user-facing changes
+- CLA required
+- Pre-commit hooks: `make hooks`
+
 Links: [[agent-harness-landscape]], [[ccglass]], [[waggle]], [[deja-vu]], [[openclaw]], [[acp]]
