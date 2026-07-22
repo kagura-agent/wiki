@@ -23,6 +23,7 @@ See [[openclaw-architecture]] for detailed architecture notes.
 Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dogfood features, and file issues from daily use.
 
 ## PR History
+- **#112449** (2026-07-22, PENDING): fix(sessions): add non-string guard to validateSessionId. Fixes #112355. Added typeof guard before .trim() call to prevent TypeError crash when session store contains entries without sessionId. CI: first run had lint failure (restrict-template-expressions) — fixed with String() wrapper, force-pushed. Tests: 47/47 pass.
 - **#83378** (2026-05-18, PENDING): fix(cli): ensure `infer model run` exits non-zero on empty gateway output. Fixes #83280. Gateway transport path returned ok:true without checking for empty payloads — added empty-text check matching local transport's existing pattern. CI: all checks pass including Real behavior proof. Test: 74/77 pass (3 pre-existing failures unrelated).
 - **#80123** (2026-05-10, PENDING): fix(cli): return null for unknown non-plugin commands instead of suggesting plugins.allow. Fixes #80109. Added `isKnownPluginId` check so only real bundled plugin IDs get the `plugins.allow` suggestion; unknown tokens return null for Commander's did-you-mean. CI: run-main.test (37/37), run-main.exit.test (72/72) pass. Real behavior proof provided via tsx direct invocation.
 - **#79755** (2026-05-09, PENDING): fix(google): resolve gemini-3-flash-preview in forward-compat model resolver. Fixes #79750. Root cause: `normalizeGooglePreviewModelId` maps `gemini-3.1-flash` → `gemini-3-flash-preview`, but `resolveGoogleGeminiForwardCompatModel` only checks `gemini-3.1-flash` prefix. Added `gemini-3-flash` and `gemini-3-flash-lite` prefix matching. CI: Real behavior proof gate needs maintainer override (pure logic fix, no runtime env to test with Google API key). Extension-providers tests: 20/20 pass.
@@ -33,6 +34,7 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **#74877** (2026-04-30, PENDING): fix(auto-reply): fall back to automatic delivery when message tool unavailable. Fixes #74868. Addressed clawsweeper bot review (P2: extend policy check to include profile + provider policies). CI: 75/75 passed.
 
 ## Learnings
+- **restrict-template-expressions lint rule**: oxlint enforces that template literal interpolations must be string-typed. If a value might not be a string (e.g. after a `typeof !== 'string'` narrowing branch), wrap it with `String(value)` before using in template. This is the `typescript(restrict-template-expressions)` rule.
 - Auth module (`src/gateway/auth.ts`) has extensive test coverage across 3 shards (gateway-core, gateway-server, gateway-client). Tests run fast (~3s).
 - `authorizeGatewayConnect` handles multiple auth modes in a single function with mode-specific blocks. Each mode should be self-contained.
 - "Real behavior proof" CI check is the clawsweeper bot mechanism — not a real test, just requires evidence in PR body.

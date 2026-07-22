@@ -314,3 +314,9 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - Appreciates correct diagnosis even when closing — credits contributor
 - Pattern: may close first-pass fix and build on it with deeper scope
 - Lesson from #1749→#1756: platform-specific guards often protect invariants that need replacement, not just removal
+
+### #1599 — fix(workflows): guard workflow execution polling state (closed 2026-07-21)
+- **Issue**: Unguarded access in WorkflowExecution component polling
+- **状态**: Closed by maintainer Wirasm — UI surface deprecated in 0.6.0 cutover
+- **教训**: Check if the surface you're fixing is in active development vs deprecation window. The fix was technically sound but the component was being removed. Timing matters.
+- **维护者态度**: Positive — praised the repro/extraction/test approach. Not a quality rejection.

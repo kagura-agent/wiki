@@ -6561,3 +6561,47 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 3. Genuine tool gaps emerging from workflow pain (not manufactured)
 
 **Outcome**: empty — no behavioral change possible this round.
+
+## 🔬 自进化观察日报 2026-07-21
+
+### 管线活跃度
+- beliefs-candidates: **5 条新增**（study ×2, workloop ×3）。全部 "第1次" pattern，无重复积累到 3 次阈值
+- DNA 变更: **4 commits** 触及 beliefs-candidates.md（自驱动，无 Luna 修正）。SOUL.md / AGENTS.md / IDENTITY.md 无变更
+- nudge 触发: **0 次**（journalctl grep = 0）。今日 session 数可能未达 agent_end hook 5 次阈值
+- dreaming: ✅ 运行（3:15 AM）
+  - Light Sleep: 8+ candidates staged，**全部 confidence 0.62**（uniform hardcoded，#10a 持续）
+  - REM: "No strong patterns surfaced" / "No strong candidate truths surfaced"（#10d 持续）
+  - Deep Sleep: **5 candidates promoted** into MEMORY.md ✅ — 唯一正向信号
+  - ⚠️ DREAMS.md 出现 **3 条 "memory trace surfaced, but details were unavailable"**（#10b 持续复发）
+
+### 闭环追踪
+- 完整闭环: **2 个**
+  1. workloop 遇到 openclaw PR body 格式问题 → gradient 记录 (openclaw-pr-body-format) → 2nd occurrence 同日确认 → 行为已调整
+  2. study apply backlog empty → gradient 记录 (study-apply-structural-empty-no-fastpath) → 执行路径优化
+- 断裂处:
+  - Dreaming Light Sleep staged → promote 路径不透明：Deep Sleep 声称 promote 5 条，但 Light Sleep candidates 全部仍标 "staged"。promote 来源和去向无法追溯（#10c 缺乏 traceability）
+  - DREAMS.md "details unavailable" bug 已持续 34+ 天（首次记录 06-17），无修复进展
+  - 5 条新 gradient 全为第1次——管线产出丰富但缺乏"同一教训反复出现"的收敛信号
+
+### Issue #10 状态追踪
+| 子项 | 今日观察 | 状态 |
+|---|---|---|
+| (a) uniform confidence | Light Sleep 全部 0.62 — 仍 hardcoded | 🔴 持续 |
+| (b) details unavailable | 今日 3 条新发 — 34 天未修复 | 🔴 恶化 |
+| (c) local filter → promote | Deep Sleep promote 5 条，但无法追溯来源是否经 filter 筛选 | 🟡 不可验证 |
+| (d) REM empty output | "No strong patterns/truths" | 🔴 持续 |
+
+### 今日发现
+1. **Deep Sleep promote 正常工作**（5 条 → MEMORY.md），是 dreaming 子系统唯一产生实际价值的环节
+2. **beliefs pipeline 日均 5 条 gradient 是稳定节奏**（对比 07-20 的 20 条是异常高值），来源分布健康（study + workloop 各贡献）
+3. **无重复 pattern 接近 3 次阈值**——当前所有 gradient 均为首次出现。管线在"收集"阶段，尚未进入"收敛升级"阶段
+4. **PR activity 今日为零**——workloop 活跃但未产出新 PR（分析了 openclaw issue 后发现已修复，正确避免了无效工作）
+5. **#10b "details unavailable" bug 是最紧迫的修复目标**——34 天持续复发，每次 dreaming 产出 2-3 条无效 diary entry，持续污染 DREAMS.md
+
+### 原始数据
+- `git log --since="2026-07-21 00:00" --all -- beliefs-candidates.md SOUL.md AGENTS.md`: 4 commits (bd5272e, 883bc2a, 7366b3e, cb1152f)
+- `grep -c "2026-07-21" beliefs-candidates.md`: 5
+- `journalctl -u openclaw-gateway --since "2026-07-21 00:00" | grep -ci nudge`: 0
+- Dreaming: Light Sleep 8+ staged (0.62 uniform), REM empty, Deep Sleep 5 promoted
+- DREAMS.md: 3× "details unavailable" entries (07-21 3:15 AM)
+- PR activity: 0 new PRs created today

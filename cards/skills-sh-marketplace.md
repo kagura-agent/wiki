@@ -3,7 +3,7 @@ title: skills.sh Marketplace
 created: 2026-07-20
 updated: 2026-07-20
 tags: [agent-skills, marketplace, distribution]
-last_verified: 2026-07-20
+last_verified: 2026-07-22
 ---
 
 # skills.sh Marketplace
@@ -19,7 +19,7 @@ Agent skill 分发平台/协议。开发者通过 `npx skills add <skill-name>` 
 
 ## 与 ClawdHub 的区别
 
-| | skills.sh | [[agent-marketplace-landscape\|ClawdHub]] |
+| | skills.sh | [[agent-marketplace-landscape|ClawHub]] |
 |---|---|---|
 | 格式 | SKILL.md (标准化) | 自有格式 |
 | 安装 | `npx skills add` (CLI) | Web UI + API |
