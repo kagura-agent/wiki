@@ -1,40 +1,27 @@
 {
-  "timestamp": "2026-07-21T20:27:00+08:00",
-  "total_files": 1065,
+  "timestamp": "2026-07-22T02:08:00Z",
+  "total_files": 1067,
   "cards": 440,
-  "projects": 539,
-  "wikilinks": 4408,
-  "errors": 1,
-  "warnings": 63,
-  "broken_links": 1,
-  "broken_links_detail": [
-    "cards/skills-sh-marketplace.md -> [[agent-marketplace-landscape]]"
-  ],
-  "index_drift": 7,
-  "index_drift_files": [
-    "cards/git-worktree-isolation.md",
-    "cards/skills-sh-marketplace.md",
-    "projects/fastctx.md",
-    "projects/mentor-smixs.md",
-    "projects/shikigami.md",
-    "projects/software-periodic-table.md",
-    "projects/waggle.md"
-  ],
-  "orphans": 3,
-  "orphan_files": ["fastctx", "software-periodic-table", "waggle"],
+  "projects": 541,
+  "wikilinks": 4426,
+  "errors": 0,
+  "warnings": 66,
+  "broken_links": 0,
+  "index_drift": 9,
+  "orphans": 4,
+  "orphan_list": ["fastctx", "observal", "software-periodic-table", "superserve"],
   "stubs": 0,
   "duplicate_slugs": 1,
-  "duplicate_slugs_detail": ["README (3 files)"],
-  "stale_files": 400,
+  "stale_files": 402,
   "frontmatter_issues": 1,
-  "frontmatter_issues_detail": ["skill-compilation-pattern: no frontmatter"],
   "zero_outbound_links": 59,
-  "avg_links_per_file": 5.3,
   "unicode_suspicious": 25,
   "secrets_detected": 0,
-  "invalid_facts": 0,
-  "error_book_new": 4,
-  "error_book_recurring": 59,
-  "error_book_auto_closed": 34,
-  "error_book_total_open": 63
+  "error_book": {
+    "new_issues": 34,
+    "recurring_issues": 31,
+    "clean_passes": 32,
+    "auto_closed": 0,
+    "total_open": 97
+  }
 }
