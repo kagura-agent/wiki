@@ -6605,3 +6605,19 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 - Dreaming: Light Sleep 8+ staged (0.62 uniform), REM empty, Deep Sleep 5 promoted
 - DREAMS.md: 3× "details unavailable" entries (07-21 3:15 AM)
 - PR activity: 0 new PRs created today
+
+## Apply Pipeline Status Check (2026-07-22 11:33)
+
+**unapplied.md**: fully cleared. 19 days since last new entry (spam-filter, 07-03).
+**Today's deep reads**: Observal (cross-harness registry), Superserve (secret proxy, hash-chained audit), open-kritt (depth-based workflow decomposition, repeat runs).
+
+**Pattern overlap assessment**:
+- Secret proxy → no current credential-in-environment problem (we use `pass` externally)
+- Layer hash (config drift) → we read DNA every session; no detection gap
+- Repeat runs + dedup → code-review is adequate at 1 pass; N-pass would multiply cost without proven benefit
+- Self-learning pipeline → structurally similar to beliefs-candidates→DNA; would need session analytics infra (heavy lift)
+- Structured output enforcement → gate scripts produce text not JSON; schema validation doesn't apply
+
+**Trend signal**: After 34+ successful applies (05-11 → 07-03), the pipeline has reached equilibrium. New deep reads continue to validate existing patterns rather than reveal implementable gaps. Future apply triggers likely need: (1) genuine workflow pain emerging from workloop/study friction, (2) upstream OpenClaw features (dreaming promote), or (3) cross-machine architectural shifts (embedding-backed search, multi-node agents).
+
+**Outcome**: empty — correctly declined to force cosmetic apply. Ecosystem is in consolidation phase for our toolchain.
