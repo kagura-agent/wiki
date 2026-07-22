@@ -1,12 +1,12 @@
 ---
 title: Wiki Cards Index
 created: 2026-04-10
-updated: 2026-07-20
+updated: 2026-07-22
 ---
 
 # Cards Index
 
-> All cards in wiki/cards/, grouped alphabetically. 438 total.
+> All cards in wiki/cards/, grouped alphabetically. 440 total.
 
 ### A
 - [Abort-Masks-Sink Pattern](cards/abort-masks-sink.md)
@@ -215,6 +215,7 @@ updated: 2026-07-20
 ### G
 - [Gateway Cold Start Optimization](cards/gateway-cold-start-optimization.md)
 - [Git-Backed Agent Memory](cards/git-backed-agent-memory.md)
+- [Git Worktree Isolation Pattern](cards/git-worktree-isolation.md)
 - [Goal Hive Master Duty](cards/goal-hive-master-duty.md)
 - [Gradient Pipeline](cards/gradient-pipeline.md)
 - [Gradient Scan](cards/gradient-scan.md)
@@ -396,6 +397,7 @@ updated: 2026-07-20
 - [Skill Routing Precision Cliff](cards/skill-routing-precision-cliff.md)
 - [Skills-as-Methodology](cards/skills-as-methodology.md)
 - [Skills As Packages](cards/skills-as-packages.md)
+- [skills.sh Marketplace](cards/skills-sh-marketplace.md)
 - [Skill To Skill Orchestration](cards/skill-to-skill-orchestration.md)
 - [Skill Trigger Eval — 技能触发测试方法](cards/skill-trigger-eval.md)
 - [Skill Trust Layer](cards/skill-trust-layer.md)

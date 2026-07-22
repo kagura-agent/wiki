@@ -6621,3 +6621,60 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 **Trend signal**: After 34+ successful applies (05-11 → 07-03), the pipeline has reached equilibrium. New deep reads continue to validate existing patterns rather than reveal implementable gaps. Future apply triggers likely need: (1) genuine workflow pain emerging from workloop/study friction, (2) upstream OpenClaw features (dreaming promote), or (3) cross-machine architectural shifts (embedding-backed search, multi-node agents).
 
 **Outcome**: empty — correctly declined to force cosmetic apply. Ecosystem is in consolidation phase for our toolchain.
+
+## 🔬 自进化观察日报 2026-07-22 (Day 96)
+
+### 管线活跃度
+- **beliefs-candidates**: 9 条新增（5 commits），1 条升级（flowforge-terminal-node-stuck 第3次→graduated）
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 未修改）
+- **nudge 触发**: 0 次（gateway 日志无 nudge 记录）
+- **dreaming**: Light Sleep 运行（多条 candidates staged @ 0.62 uniform），REM empty ("No strong patterns surfaced")
+- **audit-consolidation**: 2 条碎片合并（preflight-size-gate-local-clone count=4, apply-empty-backlog-waste count=4）
+
+### beliefs-candidates 详情
+| 时间 | Pattern | 来源 | 计数 |
+|---|---|---|---|
+| 08:29 | oxlint-template-expression-narrowing | workloop | 第1次 |
+| 09:55 | phantom-tool-reference | study | 第1次 |
+| 11:33 | sparse-clone-api-push | workloop | 第1次 |
+| 18:33 | fail-fast-saturation-detection | workloop | 第1次 |
+| 18:33 | repo-access-barriers | workloop | 第1次 |
+| 20:20 | format-before-push | workloop | 第1次 |
+| (earlier) | flowforge-terminal-node-stuck | audit | 第3次 ✅ graduated |
+| (consolidation) | preflight-size-gate-local-clone | audit | count=4 (待评估) |
+| (consolidation) | apply-empty-backlog-waste | audit | count=4 (待评估) |
+
+### 闭环追踪
+- **完整闭环**: 1 个 — flowforge-terminal-node-stuck: 发现(07-20)→记录(07-20)→重复确认(07-21,07-22)→graduated(07-22)
+- **断裂处**:
+  - preflight-size-gate-local-clone (count=4) 达到升级门槛但仍"待评估"——管线停在 consolidation 环节
+  - nudge 0 触发——反思机制未运行，dreaming 是唯一的自动反思来源
+  - 6 条新 gradient 均为首次出现，距收敛升级还远
+
+### Issue #10 状态追踪
+| 子项 | 今日观察 | 状态 |
+|---|---|---|
+| (a) uniform confidence | Light Sleep 全部 0.62 — 仍 hardcoded | 🔴 持续 |
+| (b) details unavailable | 今日 DREAMS.md 未检查到新发（文件为空或不存在） | 🟡 待确认 |
+| (c) local filter → promote | Light Sleep staged 多条，但 promote 路径不可追溯 | 🟡 不可验证 |
+| (d) REM empty output | "No strong patterns surfaced" | 🔴 持续 |
+
+### PR activity
+- **外部贡献**: 3 个新 PR（openclaw/openclaw#112449, coleam00/Archon#2251, agentscope-ai/QwenPaw#6331）
+- **自有 repo**: 7 个 merged（finance, abti×3, lottie-studio×3）+ 1 open (lottie-studio#608)
+- **外部反馈转化**: workloop 执行中产生的 friction 直接转化为 6 条 gradient（oxlint 规则、sparse clone、format、saturation、access barriers）— 这是健康的反馈利用
+
+### 今日发现
+1. **管线产出稳定但收敛缓慢** — 日均 5-9 条 gradient 是正常节奏，但绝大多数停留在第1次。升级需要相同 pattern 跨天反复出现，而 workloop 碰到的问题多样性高（每天不同 repo、不同工具链），同一 friction 点不容易重复
+2. **audit-consolidation 是加速收敛的有效机制** — 今日通过合并碎片化 entries 发现 2 个 pattern 其实已到 count=4，否则会被埋没
+3. **nudge 沉默** — 0 触发意味着今天的反思全靠 dreaming（质量低）和 audit（有效但手动）。nudge 是否还在正常 hook？需要验证
+4. **dreaming (a)(d) 是 upstream 问题** — 本地无法修复 confidence scoring 和 REM 质量，应 file upstream issue
+5. **flowforge-terminal-node-stuck 是首个纯自主驱动的闭环** — 从发现到 graduation 全程无 Luna 介入，纯靠重复观察+自动升级
+
+### 原始数据
+- `git log --since="2026-07-21 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md`: 5 commits (全部 beliefs-candidates.md)
+- `grep -c "^- 2026-07-22" beliefs-candidates.md`: 9
+- `journalctl -u openclaw-gateway --since "2026-07-22 00:00" | grep -ci nudge`: 0
+- Dreaming: Light Sleep staged (0.62 uniform), REM empty
+- PR: 3 external new + 7 own-repo merged
+- `wc -l beliefs-candidates.md`: 926 lines (growing steadily)
