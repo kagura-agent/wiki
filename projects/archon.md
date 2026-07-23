@@ -333,3 +333,21 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - **CI lesson**: Must run `prettier` before pushing — lint-staged doesn't fire on `--no-verify` commits. Run `npx prettier --write <files>` explicitly after editing
 - **Test approach**: `spyOn(configLoader, 'loadConfig')` in beforeEach/afterEach — NOT mock.module (avoids module graph poisoning). This is now the proven pattern for both conversations.test.ts and codebases.test.ts
 - **Selection**: Found after openclaw (4 PRs, over limit) and multiple NemoClaw issues (all had competing PRs). Archon has low competition for config-area issues
+
+## 2026-07-23 Session Notes
+
+### PR #2255 — fix(workflows): warn on unknown/misplaced keys in workflow YAML (fixes #2213)
+- **Issue**: workflow validator silently accepts unknown node keys — `interactive: true` on a command node passes `archon validate` with no feedback
+- **Root cause**: Zod's default strip mode silently drops unknown keys during parsing. parseDagNode never detects or reports them.
+- **Fix**: 
+  - Export KNOWN_DAG_NODE_KEYS / KNOWN_WORKFLOW_KEYS constants from schema files
+  - In parseDagNode: compare raw YAML keys against known set, emit warnings for unknown keys with context-aware hints (workflow-level vs node-level keys)
+  - Thread warnings through ParseResult → WorkflowWithSource → CLI validate output
+- **CI**: Ubuntu ✅ (after fixing lint: unnecessary type assertion). Windows pending.
+- **CodeRabbit feedback**: 2 actionable comments (both addressed):
+  1. Reverse hint for node-only keys at workflow level (added)
+  2. Clear stale warnings when higher-scope file overrides lower-scope (added)
+- **Tests**: 6 new tests, all pass (179 total)
+- **Lesson**: ESLint strict mode catches `as string` assertions when the type is already narrowed — check with `npx eslint <file>` before pushing
+- **Pattern**: "additive warning" PRs have low review friction — no behavior change, only new feedback. Good candidate for repos where code changes get heavy scrutiny.
+- **Selection**: P1/P2 repos had all viable bugs either labeled "maintainer" or with competing PRs. Archon had unclaimed validation bugs. Weekend-filed issues still have lower competition.
