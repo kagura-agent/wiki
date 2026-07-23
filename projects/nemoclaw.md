@@ -390,7 +390,7 @@
 
 ## PR #7226 — fix(e2e): add retry to PR gate observer GitHub reads (2026-07-20)
 - **Issue**: #7207 — Native E2E PR Gate required-check observer terminates on single transient GitHub API read failure
-- **Status**: PENDING, CI pass (codebase-growth-guardrails ✅, all others pending/skipping as normal for fork PRs)
+- **Status**: PENDING (07-23: CI 7 pass, E2E Gate Coordination pending=normal for fork PRs. CodeRabbit reviewed + passed. wscurran commented positively. No CHANGES_REQUESTED)
 - **Scope**: 2 files (tools/e2e/pr-e2e-required.mts +85, test/pr-e2e-required.test.ts +94), purely additive
 - **Fix**: `retryableGithubRead<T>()` helper — 3 attempts, exponential backoff with jitter, error classification (TypeError=network, 5xx/429=http), identity re-validation between retries for data reads
 - **Pattern**: Observer-local retry (no shared infra touched). Consistent with NemoClaw preference for minimal blast radius.
