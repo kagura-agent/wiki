@@ -405,3 +405,16 @@
 - **Pattern**: The guard shell functions have shadowing-safe exit patterns (`_nemoclaw_guard_request_handled`); regular `return 1` still works for simple cases
 - **Learning**: nemoclaw-start.sh is a ~5800 line bash script; many guards exist; `_nemoclaw_policy_denial_hint_label()` is the correct helper for sandbox name interpolation
 - **CI note**: `codebase-growth-guardrails` has a pre-existing test size budget failure (policies.test.ts 1531 > budget 1530) unrelated to PR changes
+
+## PR #7422 — non-interactive error classification (2026-07-23)
+- **Issue**: #7415 — Managed DCode non-interactive API errors hide the persisted ResourceExhausted cause
+- **Status**: PENDING (CI: 4/4 main checks pass, PR review advisors pending, CodeRabbit reviewed)
+- **Scope**: 2 files (+120/-1): `patch-managed-deepagents-code.py` + new test `non-interactive-error-classification.test.ts`
+- **Root cause**: `NON_INTERACTIVE_PATCH` wrapper had no error handling — LangGraph serializes non-allowlisted exceptions to generic `RemoteException`, hiding the actual provider error (ResourceExhausted, rate limit, etc.)
+- **Fix**: Added `_NEMOCLAW_KNOWN_PROVIDER_ERRORS` regex table + `_nemoclaw_classify_non_interactive_error()` classifier. Wraps `_nemoclaw_original_run_non_interactive()` in try/except: classify → bounded WARNING log (category + retryable + hex correlation ID) → re-raise unchanged
+- **Security**: Only category string + retryable flag + correlation ID logged. Unknown errors get generic "category=unknown" with no exception details. No credentials, request bodies, model output, tool content, or checkpoint data ever logged.
+- **Test**: 3 vitest tests — infrastructure injection check, Python syntax validation, and classifier execution with sample exceptions (ResourceExhausted, RateLimitError, timeout, ConnectionError, unknown)
+- **CodeRabbit feedback**: 3 comments — (1) MAJOR: "require provider provenance" → false positive (reviewer doesn't have context that `run_non_interactive` is at the LangGraph→provider boundary, not MCP/gateway path); (2) MINOR: "import CLI source" → false positive (coding guideline for CLI tests, this tests Python patching); (3) MINOR: "test wrapper contract" → valid improvement but requires async Python runtime setup, out of scope
+- **Pattern**: Error classification inside a patch string (code-as-string) is inherently harder to review. `_nemoclaw_` prefix + aliased imports (`_nemoclaw_logging`, `_nemoclaw_re`) follow existing namespace conventions
+- **Process note**: Plan review subagent from previous cron run gave 8/10 APPROVED. Implementation + tests done in single Claude Code call. Fresh-context review caught missing classifier exercise test → added. Total workloop time ~25 min (plan node entry to PR submission)
+- **DCO**: Used `--signoff` correctly ✅
