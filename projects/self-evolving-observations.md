@@ -6678,3 +6678,10 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 - Dreaming: Light Sleep staged (0.62 uniform), REM empty
 - PR: 3 external new + 7 own-repo merged
 - `wc -l beliefs-candidates.md`: 926 lines (growing steadily)
+
+## Apply Pipeline Status Check (2026-07-23 10:45)
+
+**unapplied.md**: fully cleared (19 days since last new entry, 07-03 spam-filter).
+**Today's earlier rounds**: 1 followup (deja-vu v0.15.0 burst, peerd steady, codexpro stable, memraw dropped) + 3 quick scans (no novel patterns).
+**Apply backlog**: empty. No actionable insights from today's reads that pass the red-flag test (behavioral change, not cosmetic).
+**Outcome**: correctly declined to force apply. Consolidation phase continues — 3 weeks without new unapplied entry suggests the low-hanging cross-pollination fruit is picked. Next apply trigger likely needs genuine workflow friction or upstream feature shift.
