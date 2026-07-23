@@ -6685,3 +6685,50 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 **Today's earlier rounds**: 1 followup (deja-vu v0.15.0 burst, peerd steady, codexpro stable, memraw dropped) + 3 quick scans (no novel patterns).
 **Apply backlog**: empty. No actionable insights from today's reads that pass the red-flag test (behavioral change, not cosmetic).
 **Outcome**: correctly declined to force apply. Consolidation phase continues — 3 weeks without new unapplied entry suggests the low-hanging cross-pollination fruit is picked. Next apply trigger likely needs genuine workflow friction or upstream feature shift.
+
+## 🔬 自进化观察日报 2026-07-23
+
+### 管线活跃度
+- **beliefs-candidates**: 6 条新增（5 commits），全部第1次出现。模式：followup-status-dropped-false-positive, lint-before-push, saturation-gate-shallow-availability, stale-pr-fast-path-value, test-exercise-over-assertion, fresh-review-false-positive-check
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 未修改）
+- **nudge 触发**: 0 次（journalctl 全天无 nudge/agent_end 记录）⚠️
+- **dreaming**: Light Sleep 运行（多条 candidates staged @ 0.62 uniform），REM 运行但输出 "No strong patterns surfaced"
+- **daily-review (03:15)**: ✅ 完整跑通，retracted 8 条 stale beliefs，DREAMS.md 瘦身 (kagura 19→14, ruantang 20→14)
+
+### 闭环追踪
+- **完整闭环**: 1 个 — stale-pr-fast-path: 识别浪费(workloop #6852 跑已有 PR)→记录 gradient→实现 workloop.yaml stale_pr_check 节点→部署上线→下次 workloop 将自动跳过
+- **断裂处**:
+  - nudge 0 触发 = 反思机制完全沉默，今天的自动反思仅靠 dreaming（质量低）和 daily-audit（有效但低频）
+  - 6 条新 gradient 全部第1次 — 收敛速度取决于同一 pattern 能否跨天复现，而 workloop 每天接触不同 repo/工具链，friction 点高度多样
+  - preflight-size-gate-local-clone 和 apply-empty-backlog-waste 已到 count=4（昨日 audit 合并发现），但仍在"待评估"状态 — 管线停在 graduation 环节
+
+### Issue #10 子项状态
+| 子项 | 今日观察 | 状态 |
+|---|---|---|
+| (a) uniform confidence | Light Sleep 全部 0.62 — 仍 hardcoded（上游未修） | 🔴 持续 |
+| (b) details unavailable | 今日 DREAMS.md 未观察到新的 "details unavailable" | 🟢 未复发 |
+| (c) local filter → promote | Light Sleep staged 多条，但 promote 路径不可追溯（无标记哪些被 promote） | 🟡 不可验证 |
+| (d) REM empty output | "No strong patterns surfaced" — 无实质反思产出 | 🔴 持续 |
+
+### 今日发现
+1. **nudge 静默是最大风险** — 0 触发意味着除 dreaming/audit 外无自动反思入口。nudge 理论上 agent_end hook 每 5 次触发，但 journalctl 全天无记录。可能：a) gateway 版本变化导致 hook 失效，b) 今天 session 数不够 5 的倍数，c) 日志 rotation 导致缺失。需要主动验证
+2. **管线产出稳定但"宽而浅"** — 日均 6 条 gradient 是健康节奏，但几乎全部来自 workloop friction（不同 repo、不同工具）。缺少"深而重复"的 pattern 来触发 graduation。audit-consolidation 机制可部分弥补（合并碎片化 entries）
+3. **dreaming (a)(d) 是 upstream 瓶颈** — confidence=0.62 hardcoded + REM 空输出 = 本地无法优化的上游问题。应 file openclaw upstream issue
+4. **外部反馈利用率极高** — CodeRabbit review(Archon#2255) 直接转化为 2 条 gradient (lint-before-push, fresh-review-false-positive-check)。workloop 的"接触外部代码→收获 friction→记录 gradient"飞轮运转正常
+5. **今日产出创单日记录** — lottie-studio 10 PRs merged + NemoClaw 2 PRs + Archon 1 PR + ABTI 2 PRs。Luna 协作（看天出发 6h+）是 8 天沉默后的爆发
+
+### Skill 提取缺口
+- **stale-pr-fast-path** 逻辑已作为 workloop.yaml 节点实现 — ✅ 已提取
+- **fresh-review-false-positive-check** 可以成为 workloop pre-push 审计的标准步骤 — 尚未提取为 skill
+
+### 原始数据
+- `git log --since="2026-07-22 22:30" --all --oneline -- beliefs-candidates.md SOUL.md AGENTS.md`: 5 commits (全部 beliefs-candidates.md, 0 DNA)
+- `grep -c "^- 2026-07-23" beliefs-candidates.md`: 6
+- `journalctl -u openclaw-gateway --since "2026-07-23 00:00" | grep -ci "nudge\|agent_end"`: 0
+- Dreaming: Light Sleep staged (0.62 uniform ×多条), REM "No strong patterns surfaced"
+- PR merged today: 14+ (lottie×10, ABTI×2, Cove×2 by Luna)
+- PR submitted today: 4 (Archon#2255, NemoClaw#7422/#7434, lottie-studio#608)
+- `wc -l beliefs-candidates.md`: 944 lines
+- daily-review: carry-forward 1/1 (100%), beliefs retraction 8 条, DREAMS.md trim
+
+---

@@ -1,32 +1,23 @@
 {
-  "timestamp": "2026-07-23T10:15:00+08:00",
+  "timestamp": "2026-07-23T20:17:00+08:00",
   "total_files": 1069,
   "cards": 440,
   "projects": 543,
   "wikilinks": 4435,
   "errors": 0,
-  "warnings": 53,
+  "warnings": 52,
   "broken_links": 0,
   "orphans": 0,
   "stubs": 0,
-  "index_consistent": true,
-  "duplicate_slugs": ["README (3 locations)"],
-  "cards_index_stale": true,
-  "cards_not_indexed": 440,
-  "frontmatter_issues": 1,
-  "frontmatter_issue_files": ["skill-compilation-pattern"],
-  "zero_outbound_links": 59,
-  "avg_wikilinks_per_linked_file": 5.3,
+  "duplicate_slugs": 3,
+  "index_drift": 440,
   "stale_files": 403,
-  "stale_threshold_breach": "403 files past their staleness threshold",
   "unicode_suspicious": 25,
-  "unicode_files_affected": 6,
-  "secrets_detected": 0,
-  "invalid_facts": 0,
-  "error_book": {
-    "new_issues": 0,
-    "recurring_issues": 52,
-    "auto_closed": 30,
-    "total_open": 52
+  "zero_outbound_links": 59,
+  "avg_wikilinks_per_file": 5.3,
+  "details": {
+    "duplicate_slugs": ["README (3 instances: ./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
+    "cards_index_stale": true,
+    "unicode_issues": "variation selectors in eval/ and projects/ files (likely intentional emoji arrows)"
   }
 }
