@@ -257,3 +257,19 @@ NemoClaw taught me that the agent infrastructure space is being built right now,
 - PR #4037 (runtime instructions leak): wscurran acknowledged, 1 week old
 - PR #3880 (proxy tunnel test): wscurran acknowledged, waiting
 - NemoClaw requires claiming issues before work (project-specific gate)
+
+## 2026-07-23 PR #7434 — hermes wrapper provider/model merge
+
+- **Issue**: #7361 — separate --provider/-m flags → 401 (placeholder sent as bearer token)
+- **Status**: PENDING review (CI green, CodeRabbit reviewed)
+- **What**: `_merge_provider_into_model(argv)` in hermes-wrapper.py — merges separate provider/model flags into combined `provider/model` form for correct credential routing
+- **Pattern followed**: Mirrors existing `_translate_resumed_oneshot()` — pure argv rewrite at wrapper boundary, fail-closed on ambiguity
+- **CI**: check-pr-limit ✅, codebase-growth-guardrails ✅, CodeRabbit ✅, PR review advisor ✅, E2E skipping (fork PR, normal)
+- **CodeRabbit feedback**: 1 valid (`--` end-of-options handling) — fixed immediately. 1 false positive (test assertion position matching established pattern)
+- **Docstring coverage warning**: Pre-existing (all missing docstrings on unchanged functions), not actionable for this PR
+- **Key learnings**:
+  - NemoClaw wrapper test harness (`helpers/hermes-wrapper-harness.ts`) is robust: stubs hermes.real, captures final argv, supports planted PATH attacks
+  - The `_split_flag_value` helper is shared infrastructure in the wrapper (not exported, but reusable within)
+  - PR review advisor (GPT-5.6 Terra) runs alongside CodeRabbit — double-layer automated review
+  - Fork PRs always skip E2E (need maintainer approval) — this is expected, not a CI failure
+  - Equals-form normalization should use canonical long form (`--model=X`) not short form (`-m=X`) — matches `_VALUE_FLAGS` canonicalization pattern
