@@ -1,3 +1,11 @@
+---
+title: Skill Compilation Pattern
+created: 2026-07-17
+updated: 2026-07-17
+tags: [pattern, optimization, token-efficiency, agent-architecture]
+last_verified: 2026-07-23
+---
+
 # Skill Compilation — From Natural Language to Specialized Harness
 
 > Pattern: after a natural-language skill runs enough times, compile the stable/deterministic parts into code, keeping LLM calls only where semantic judgment is needed. Result: 94% token reduction, 87% latency reduction.
