@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-07-20
+last_verified: 2026-07-24
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -703,3 +703,18 @@ Also: 5 focused regression tests covering each failure mode separately.
 - **DCO_SIGNOFF**: Third NemoClaw PR affected by DCO requirements. Use `git commit -s` always for this repo.
 
 **Positive**: Maintainer preserved core contribution with explicit Co-authored-by credit. Relationship signal: healthy. Core idea was correct, execution needed tightening.
+
+## openclaw #112449 → #89122: Narrow guard vs architectural seam (2026-07-24)
+
+**Issue**: Non-string values reaching `validateSessionId()` causing uncaught TypeError
+**My PR #112449**: 3-line `typeof` guard at the top of `validateSessionId()` — pure defensive check, no structural change.
+**Superseding PR #89122 (jalehman, merged 2026-06-14)**: 21-file refactor routing ALL command/cron/infra session reads through a centralized `store-read` seam. The seam handles type validation as part of its contract, making my point guard redundant.
+
+**Why superseded**: The broader architectural refactor already shipped (6 weeks before closure). steipete closed mine as redundant — the entry point I was guarding is now routed through a validated seam that handles non-string inputs structurally.
+
+**Patterns**:
+- **CHECK_ONGOING_REFACTORS**: Before submitting a narrow defensive fix, check recently merged PRs in the same module/file. If a systemic refactor just landed that restructures the call path, your point fix may already be covered.
+- **POINT_FIX_VS_SEAM**: A `typeof` guard at one function is a band-aid; routing all callers through a validated seam is structural. Prefer understanding the architectural direction before adding guards.
+- **TIMING_GAP**: #89122 merged Jun 14, my PR opened later and closed Jul 23. 6-week gap = I didn't check recent merges in the same area before opening.
+
+**Lesson**: Run `gh pr list --repo X --state merged --search "path:src/config/sessions" --limit 10` before PRing fixes in a module. If a recent refactor touched the same paths, read it first.

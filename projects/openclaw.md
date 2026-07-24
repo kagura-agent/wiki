@@ -394,3 +394,11 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Pattern — follow existing code style**: The `?? 0` after `Number.isFinite()` is technically dead code but matches the existing `connectedAtMs` pattern 3 lines above. Consistency > pedantic optimization.
 - **Testing**: `resolveNodeIdFromList` has a `preferLocalMac` gate that fires BEFORE sort. Test nodes must NOT match `isLocalMacNode` (platform starts with "mac" AND nodeId starts with "mac-"). Use hash-like IDs instead.
 - **Efficiency**: Simple 5-line fix done manually without Claude Code — faster than spawning acpx for trivial changes.
+
+### 2026-07-24: PR #112449 (CLOSED/SUPERSEDED)
+- **Issue**: Non-string values reaching `validateSessionId()` — TypeError
+- **My fix**: 3-line typeof guard + test
+- **Superseded by**: #89122 (jalehman, merged Jun 14) — 21-file refactor routing session reads through store-read seam
+- **Reason**: Architectural refactor already covered the same path structurally
+- **Maintainer**: steipete — clean closure, referenced superseding PR+commit
+- **Lesson**: Check `gh pr list --state merged --search "path:<module>"` before opening narrow fixes. openclaw moves fast with architectural refactors — point guards get swallowed.

@@ -351,3 +351,10 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - **Lesson**: ESLint strict mode catches `as string` assertions when the type is already narrowed — check with `npx eslint <file>` before pushing
 - **Pattern**: "additive warning" PRs have low review friction — no behavior change, only new feedback. Good candidate for repos where code changes get heavy scrutiny.
 - **Selection**: P1/P2 repos had all viable bugs either labeled "maintainer" or with competing PRs. Archon had unclaimed validation bugs. Weekend-filed issues still have lower competition.
+
+### 2026-07-24: PR #2262 (PENDING) — chore(workflows): remove double-quoted $node.output refs
+- **Issue**: #2242 — 19 validator warnings for double-quoted bash $node.output
+- **Fix**: Mechanical sweep — remove double quotes, extract to variables where needed
+- **CI**: Ubuntu PASS, Windows/Docker in progress
+- **Note**: archon-release.yaml has complex bash with multiple $node.output inside echo strings — required variable extraction pattern
+- **Pattern**: YAML-only fixes are fast to implement manually, no need for Claude Code
