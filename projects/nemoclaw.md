@@ -418,3 +418,13 @@
 - **Pattern**: Error classification inside a patch string (code-as-string) is inherently harder to review. `_nemoclaw_` prefix + aliased imports (`_nemoclaw_logging`, `_nemoclaw_re`) follow existing namespace conventions
 - **Process note**: Plan review subagent from previous cron run gave 8/10 APPROVED. Implementation + tests done in single Claude Code call. Fresh-context review caught missing classifier exercise test → added. Total workloop time ~25 min (plan node entry to PR submission)
 - **DCO**: Used `--signoff` correctly ✅
+
+## PR #7434 — merge separate --provider/-m flags (2026-07-24, updated)
+- **Issue**: #7361 — Credential placeholder sent as bearer token when using separate `--provider`/`-m` flags
+- **Status**: PENDING (CI: all reviewable checks pass — GPT-5.6 Terra ✅, Nemotron 3 Ultra ✅, CodeRabbit ✅, codebase-growth-guardrails ✅. E2E Gate pending=normal for fork. Maintainer wscurran commented positively)
+- **Scope**: 2 files (+224): `agents/hermes/hermes-wrapper.py` (new `_merge_provider_into_model()` function), `test/hermes-wrapper-provider-merge.test.ts` (10 tests)
+- **Root cause**: Separate `--provider opencode-zen -m nemotron-3-ultra-free` reads API key directly from `.env` which stores `openshell:resolve:env:VAR_NAME` placeholder. Combined form `-m "opencode-zen/nemotron-3-ultra-free"` routes through OpenShell proxy that resolves credentials. Fix merges flags into combined form in the wrapper.
+- **Pattern**: Follows existing `_translate_resumed_oneshot()` pattern — pure argv rewrite at wrapper boundary. Fail-closed on ambiguity (duplicates, missing values, empty strings)
+- **Fresh-context review caught bug**: Original `--` handling did `return argv` (aborting merge even when flags appeared before `--`). Fixed to `break` so already-collected flags still merge. Added test for flags-only-after-`--` case.
+- **CI note**: Nemotron 3 Ultra reviewer is flaky — failed on first push (transient), passed on second
+- **DCO**: Used `--signoff` ✅
