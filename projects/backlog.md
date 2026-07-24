@@ -1430,3 +1430,23 @@ GitHub trending (agent, created past week, sorted by stars):
 ### Verdict
 3 new deep-read candidates: aos-ce (agent OS), waggle (artifact references), clodex-ide (agentic IDE)
 Ecosystem NOT stable — significant new entrants at scale this week
+
+## Quick Scan — 2026-07-24 09:55
+
+### GitHub (coding agent + ai-agent topics, past week)
+- **risa-labs-inc/BossConsole** (167⭐, created 07-21, Kotlin) — JVM-native multi-threaded harness for AI agents. Non-Electron, real browser/terminal/editor. Enterprise/research focus. 100+ MCP tools. 值得深入 — novel architecture (only JVM harness I've seen)
+- **open-kritt** (359⭐, was 259 on 07-22) — 已知/tracking. +38% in 2 days
+- **smixs/mentor** (60⭐, was 35 on 07-20) — 已知/tracking. +71% growth
+- **agents-council** (94⭐, created 07-20) — Multi-agent collab plugin for Claude Code. 已知模式, not novel
+- **NullLabTests/software-periodic-table** (75⭐) — Ontology for coding agents. Academic/conceptual, no executable
+
+### HN (3 days, ≥10pts)
+- **Jack Dorsey's Buzz** (374pts) — Team chat + AI agents + Git in one product. Closed-source, can't study
+- **OneCLI** (2645⭐, 80pts HN) — OSS credential gateway/vault keeping secrets out of AI agents. Mature (created 2026-03). 值得关注 — security angle, directly relevant to agent sandboxing
+- **AgentNest** (11pts) — Self-hosted sandboxes. 已知模式 (similar to Superserve/tracking)
+- **Headroom** (10pts) — Token compression for agents. 已知模式 (we have TACO)
+
+### Verdict
+1 deep-read candidate: BossConsole (JVM harness, novel architecture)
+1 worth-tracking: OneCLI (credential gateway, mature project, security-relevant)
+Ecosystem stable this scan — most results are known patterns or tracked items
