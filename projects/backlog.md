@@ -1450,3 +1450,8 @@ Ecosystem NOT stable — significant new entrants at scale this week
 1 deep-read candidate: BossConsole (JVM harness, novel architecture)
 1 worth-tracking: OneCLI (credential gateway, mature project, security-relevant)
 Ecosystem stable this scan — most results are known patterns or tracked items
+
+## Quick Scan — 2026-07-24
+- **sigbound** (surya-koritala/sigbound, 27⭐) — Parallel agents on one git repo + safe auto-merge (only changes that build/pass land). Go, Apache-2.0. Novel concept for multi-agent code collaboration. Too early to track (27⭐, 3d old, 0 forks). Revisit if >80⭐ in 2 weeks
+- agents-council (94⭐) — Multi-agent council skill for Claude Code. Thin wrapper around CLI calls. Known pattern (Karpathy LLM Council). Not tracking
+- pm-manager (48⭐) — Local governance skill. Our FlowForge+DNA covers this niche. Not tracking
