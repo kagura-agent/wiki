@@ -1,7 +1,7 @@
 ---
 title: Content Before Code
 created: 2026-04-30
-last_verified: 2026-06-20
+last_verified: 2026-07-24
 ---
 # Content Before Code
 
@@ -35,3 +35,5 @@ last_verified: 2026-06-20
 
 - 3 次 gradient（2026-04-29），均来自 Luna 对婚纱照网站项目的反馈
 - 从 beliefs-candidates.md 升级
+
+Related: [[direction-driven-contribution]] (understand intent before acting), [[topic-selection-over-coding]], [[anti-generalization-principle]].
