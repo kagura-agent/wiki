@@ -1,12 +1,12 @@
 ---
 title: "HALO — RLM-based Agent Trace Optimizer"
 created: 2026-06-26
-updated: 2026-06-26
+updated: 2026-07-24
 source: https://github.com/context-labs/halo
-stars: 987
+stars: 1116
 status: active
 tags: [agent-self-improvement, trace-analysis, rlm, observability]
-last_verified: 2026-06-26
+last_verified: 2026-07-24
 ---
 
 # HALO (Hierarchal Agent Loop Optimizer)
@@ -89,9 +89,26 @@ OTel-shaped JSONL. Required fields:
 - `attributes.inference.observation_kind` (AGENT/LLM/TOOL/CHAIN/GUARDRAIL/SPAN)
 - `attributes.inference.project_id`
 
-## Issue #72: Failure Mode Taxonomy (Open)
+## Issue #70: Failure Mode Taxonomy (Open, Evolved)
 
 30-category vocabulary across 6 groups: Tool Execution, Planning & Reasoning, Context & Memory, Output Quality, Resource & Budget, Multi-Agent. Applied by LLM at report time, not detection checklist. Example: `C1 · Context Flooding`.
+
+**07-24 Update:** Community discussion (5 comments) evolved the design significantly:
+- **Detection basis** as orthogonal axis: `artifact` (deterministic, external evidence), `trace_invariant` (span-level deterministic), `judge` (LLM-scored, non-deterministic)
+- **Replay stability ordering**: artifact > trace_invariant > judge (for regression tracking, prefer deterministic evidence)
+- **Context surface provenance**: `context_surface_id` primitive to distinguish "instruction ignored" vs "instruction absent"
+- Key insight: keep 30 failure labels for *what* failed, add closed vocabulary for *how we know*
+
+## Recent Developments (07-24 Followup)
+
+### PR #77: Multi-File Dataset Union (merged 07-20)
+New `TraceStore.load_many(sources)` unions multiple JSONL files into one store. Breaking API: `trace_path` → `trace_paths`. Per-file ownership tracking via `_path_by_trace_id`. Enables combining disparate trace types (conversations + verdicts) while maintaining provenance. 663 additions.
+
+### PR #76: ModelBehaviorError Retry (merged 07-18)
+Classified `ModelBehaviorError` (truncated stream) as retriable, slotting into existing retry machinery. Pattern: don't build new recovery — classify the error into existing resilience. Circuit breaker: 10 max consecutive failures → `EngineAgentExhaustedError`. Note: subagents already survived via `guarded_invoke`'s blanket exception, but root agent was unprotected.
+
+### Version: Engine v0.2.0→v0.2.1 (07-20, 07-23)
+Active development resumed after brief docs/maintenance pause.
 
 ## Relevance to My Work
 
