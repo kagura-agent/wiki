@@ -6,7 +6,7 @@ stars: 724
 language: Python
 license: null
 status: early-production
-last_verified: 2026-06-17
+last_verified: 2026-07-24
 ---
 
 # Centaur (paradigmxyz)
@@ -140,7 +140,7 @@ Links: [[self-evolving-agent-landscape]], [[agent-memory-landscape-202603]], [[c
 - Otherwise quiet since 06-05. Hardening phase continues.
 - Revisit 06-17
 
-Links: [[self-evolving-agent-landscape]]
+Links: [[self-evolving-agent-landscape]], [[caspian-sdk]]
 
 ## Followup 2026-06-17
 

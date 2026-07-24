@@ -67,7 +67,7 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **git rebase --onto pitfall**: `git rebase --onto <target> <upstream> <branch>` replays commits between `<upstream>` and `<branch>`. If `<upstream>` IS the branch HEAD, nothing gets replayed. For single commits, cherry-pick is simpler and less error-prone.
 
 ## Links
-[[openclaw-architecture]] [[agentskills]] [[skill-ecosystem]] [[acp]]
+[[openclaw-architecture]] [[agentskills]] [[skill-ecosystem]] [[acp]] [[caspian-sdk]]
 
 ## 外部 PR Review 模式 (2026-04-14 观察)
 - **活跃 merge 外部 PR**: 7 天内 12+ 不同外部作者被 merge

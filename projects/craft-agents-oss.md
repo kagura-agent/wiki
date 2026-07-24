@@ -89,4 +89,4 @@ Other interesting finds this session:
 - **oh-my-kimi** (54⭐, 6 days) — Multi-agent orchestration for Kimi Code CLI. DAG planning + MCP skill-hooks. Chinese ecosystem building agent tooling on domestic LLMs.
 - **master-skill** (33⭐, 5 days, actively pushed) — Meta-skill that auto-distills industry expertise into runnable skills. Explicitly compatible with OpenClaw. Novel idea: "skill compiler" from domain knowledge.
 
-Links: [[skill-ecosystem]], [[agent-skill-standard-convergence]], [[self-evolving-agent-landscape]], [[thin-harness-fat-skills]], [[oh-story-claudecode]]
+Links: [[skill-ecosystem]], [[agent-skill-standard-convergence]], [[self-evolving-agent-landscape]], [[thin-harness-fat-skills]], [[oh-story-claudecode]], [[caspian-sdk]]

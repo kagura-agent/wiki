@@ -5,12 +5,19 @@ language: TypeScript
 framework: React + Mantine + Vite + Vitest + Storybook
 relationship: new (first attempted PR, superseded)
 last_updated: 2026-06-15
-last_verified: 2026-06-21
+last_verified: 2026-07-24
 ---
 
 ## Repo Overview
 
-MCP (Model Context Protocol) Inspector — web-based debugging tool for MCP servers. Monorepo structure with `clients/web/` as the main web client.
+MCP (Model Context Protocol) Inspector — web-based debugging tool for MCP servers. Monorepo structure with `clients/web/` as the main web client. 10K+ stars, ~80% merge rate. Active v2 development on `v2/main` branch (v1 on `main`).
+
+- No special claim required for contributions
+- No CHANGELOG requirement observed
+- PR title conventions: `web:`, `tui:`, `fix(...):`
+- Screenshots encouraged in `pr-screenshots/` dir for UI changes
+- **⚠️ npm install requires significant RAM** — may fail on memory-constrained machines
+- Node.js 22 compatible
 
 ## Contribution History
 
@@ -59,6 +66,9 @@ MCP (Model Context Protocol) Inspector — web-based debugging tool for MCP serv
 - ⚠️ **Check for competing PRs** using `gh pr list --search "issue-number"` before starting
 - Fork remote: `fork` → `https://github.com/kagura-agent/inspector.git`
 - Branch naming: `fix/<descriptive-name>`
+
+### PR #1758 — fix(test): use non-base36 secret fixtures to prevent flaky redaction assertion (2026-07-24)
+- **Status**: Submitted
 
 ### Attempt 2: #1506 — CLI broken since v0.17.0 (package.json not in files) (2026-06-21)
 - **Result**: PENDING — PR #1506 submitted, awaiting CI approval (first-time contributor CI gating)

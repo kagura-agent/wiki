@@ -397,7 +397,7 @@
 - [Skill 作为行为触发机制](cards/skill-as-behavior-trigger.md)
 - [Skill Behavioral Testing](cards/skill-behavioral-testing.md)
 - [Skill Category Split](cards/skill-category-split.md)
-- [skill-compilation-pattern](cards/skill-compilation-pattern.md)
+- [Skill Compilation Pattern](cards/skill-compilation-pattern.md)
 - [Skill Context Compression Experiment](cards/skill-context-compression.md)
 - [Skill Creator](cards/skill-creator.md)
 - [Skill Crystallization Vs Design](cards/skill-crystallization-vs-design.md)
@@ -495,7 +495,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (543)
+## 📁 Project Notes (545)
 
 ### 2
 
@@ -602,6 +602,7 @@
 - [Berkeley Benchmark Gaming (trustworthy-env)](projects/berkeley-benchmark-gaming.md)
 - [Blueprint — Planning Copilot for Coding Agents](projects/blueprint.md)
 - [Bonsai Image 4B — 1-bit/Ternary Image Generation](projects/bonsai-image.md)
+- [BossConsole — JVM-Native Agent Harness](projects/bossconsole-jvm-harness.md)
 - [brain0 — The Black Box for AI-Written Code](projects/brain0-provenance.md)
 - [brain (codejunkie99/brain)](projects/brain-git-memory.md)
 - [brain.md — File-Based Project Memory for Coding Agents](projects/brain-md.md)
@@ -619,6 +620,7 @@
 - [cangjie-skill](projects/cangjie-skill.md)
 - [Capability Evolver (EvoMap)](projects/capability-evolver.md)
 - [Carry — VS Code Extension for OpenClaw](projects/carry.md)
+- [Caspian SDK — Cross-Platform Agent Identity Layer](projects/caspian-sdk.md)
 - [Caveman — Token Compression for AI Agents](projects/caveman.md)
 - [cavemem — Cross-Agent Persistent Memory](projects/cavemem.md)
 - [cc-connect (chenhg5/cc-connect)](projects/cc-connect.md)
@@ -1097,4 +1099,4 @@
 
 ---
 
-*440 cards, 543 project notes. Last generated: 2026-07-22 05:07 UTC.*
+*440 cards, 545 project notes. Last generated: 2026-07-24 14:44 UTC.*

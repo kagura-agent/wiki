@@ -41,4 +41,6 @@ The convergent evolution is striking. Different teams independently arriving at:
 - Worth watching for memory architecture patterns
 
 ---
+See also: [[caspian-sdk]] (pure transport layer alternative — bring your own agent logic, unlike Tara's opinionated runtime)
+
 *First noted: 2026-03-22*
