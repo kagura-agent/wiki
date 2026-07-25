@@ -2,17 +2,17 @@
 title: "AgentSmith — Universal Agent Operating Harness"
 slug: agentsmith
 created: 2026-07-18
-updated: 2026-07-18
+updated: 2026-07-25
 status: active
-tags: [agent-harness, coding-agent, claude-code, discipline, self-improving]
+tags: [agent-harness, coding-agent, claude-code, discipline, self-improving, security]
 links: [[coding-agent-ecosystem]], [[model-native-vs-model-agnostic]], [[self-evolving-agent-landscape]]
-last_verified: 2026-07-18
+last_verified: 2026-07-25
 ---
 
 # AgentSmith — Universal Agent Operating Harness
 
-**Repo:** PromptPartner/agentsmith | **Stars:** 100 (2d old) | **License:** MIT
-**Author:** PromptPartner (solo dev, 6 months of real production use behind it)
+**Repo:** PromptPartner/agentsmith | **Stars:** 255 (100→255 in 7d, +155%) | **License:** MIT
+**Author:** PromptPartner (solo dev, 6+ months real production use)
 
 ## What It Is
 
@@ -23,66 +23,78 @@ A portable, battle-tested "operating system" for AI coding agents (Claude Code p
 **Static/Dynamic context split** (first-class design decision):
 - **Static** = assembled `CLAUDE.md` = `core/` (universal rules, ~6 files) + chosen `profile(s)` — lean, paid every turn
 - **Dynamic** = skills, templates, docs, memory — loaded on demand
+- **600 line leanness budget** — hard cap for assembled instructions, measured precisely (max software-dev at 88%)
 
 **Core modules (6 files, ~60-70 lines each):**
 1. `00-identity` — operator identity template, explain-WHY-before-HOW
-2. `10-operating-model` — plan→do→verify→finalize→handoff, conductor vs orchestrator modes, when-to-pause rules (only 3 cases: missing credential, external surprise, first write to external system)
-3. `20-principle-rules` — 10 rigid rules, each from real failures. Chesterton's Fence, prove-it (failing test first), verify whole chain, atomic commits, finish-including-docs, never delete research, keep surface small
-4. `30-anti-rationalization` — STOP table mapping rationalizing thoughts to the rule being skipped. **This is the novel insight.** "I'll verify later" → Rule 5. "Too small to check" → Rule 5. Etc.
-5. `40-subagents-and-tools` — routing rules (self-contained → subagent, cross-concern → main), tool discipline, failure recovery (stop after 2 identical failures)
+2. `10-operating-model` — plan→do→verify→finalize→handoff, conductor vs orchestrator modes, three-case pause rule
+3. `20-principle-rules` — 10 rigid rules from real failures. Chesterton's Fence, prove-it (failing test first), verify whole chain, atomic commits, finish-including-docs, never delete research, keep surface small
+4. `30-anti-rationalization` — STOP table mapping rationalizing thoughts to the rule being skipped
+5. `40-subagents-and-tools` — routing rules, tool discipline, failure recovery (stop after 2 identical failures)
 6. `50-git-and-handoff` — handoff protocol: safe-state → write memory → emit kickoff block
 7. `60-evolving-the-harness` — meta-rule: fix the system not the symptom, feedback loop
 
-**9 Profiles:** software-dev, devops-setup, marketing-outreach, document-creation, data-crunching, deep-research, creative-design, general-admin, autonomous-loops
-
-**Skills (7 bundled):** verify, handoff, harness-doctor, harness-help, new-research, new-feedback, example-skill
+**10 Profiles:** software-dev, devops-setup, marketing-outreach, document-creation, data-crunching, deep-research, creative-design, general-admin, autonomous-loops, **security-audit** (new)
 
 ## Key Insights
 
 ### 1. Anti-Rationalization Table (STOP table)
-The most original contribution. Maps the internal thought patterns that precede rule violations to the specific rule being rationalized away. This is **addressing the metacognitive layer** — not just "what to do" but "what you'll think right before not doing it." Directly applicable to our DNA.
+Maps internal thought patterns that precede rule violations to the specific rule being rationalized away. Addresses the **metacognitive layer** — not just "what to do" but "what you'll think right before not doing it."
 
-### 2. "Agent = Model + Harness" (10%/90%)
-Credits Google's New SDLC whitepaper (Osmani/Saboo/Kartakis, May 2026). The harness IS the agent. Most agent failures are configuration failures. We already believe this but they articulate it more crisply.
+### 2. Two-Axis Security Model (NEW — PR#10, 2026-07-23)
+The most significant architectural insight from the July update:
+- **Axis 1: Agent safety** — can the agent hurt ME? (blast radius, sandboxing, secret-scan, leak-gate, pause-list)
+- **Axis 2: Product security** — is the code the agent WRITES safe? (IDOR, injection, authz, CVEs)
 
-### 3. Static vs Dynamic Context as Architecture
-Explicit about what goes in always-loaded rules vs on-demand. "Every line in static context makes the agent worse at everything else." We do this implicitly but they've made it a first-class principle.
+Most harnesses (including ours) only cover axis 1. "A perfectly sandboxed agent will happily write an IDOR."
 
-### 4. Rigor Spectrum (not binary)
-Match discipline to stakes — throwaway experiments can be vibe-coded, production needs full verification. The profile sets the floor, you raise with stakes. Good framing.
+**Implementation:** Two security checkboxes + two STOP rows per code profile, integrated into ordinary feature work rather than separate security ceremonies. The authz STOP row targets the HANDLER not the caller: "internal-only is the rationalization that survives exactly until the next routing change."
 
-### 5. Three-Case Pause Rule
-Agent only pauses for: (1) missing credentials, (2) external service surprise, (3) first write to external system. Everything else: decide and go. Very tight autonomy boundary.
+### 3. Deterministic Fix > Prose Reminder (core/60 principle)
+"A rule the model can skip isn't a guard." Mechanically detectable issues (CVE in deps, credentials in tracked files) belong in `verify.conf` where scripts enforce them, not in prose rules. The judgment call stays a checkbox; the detectable parts become automated guards.
 
-### 6. Conductor vs Orchestrator Modes
-Explicit naming of what we do implicitly — hands-on debugging vs delegated parallel work. "Neither is more advanced — choose by task."
+### 4. Security-Audit Profile: "A grep hit is a lead, not a finding"
+When security IS the deliverable (audit, pentest, threat model):
+- Reproduce findings, impact-rate for THIS deployment (not advisory CVSS), check remediation against breakage
+- Two rules stricter than core: (1) Authorization earlier than first-write line — "in this domain, reading is not free" (2) R8 > R7 in reports — "rotate first, name the resource, never the value"
+- A report of unreproduced scanner output costs more engineering time than it saves
+
+### 5. RED-by-Default Verify
+Fresh install's `verify.conf` uses an `unwired` phase that FAILS (exit 1) with a pointer, not a placeholder that passes. "A verify that lies is worse than no verify." This inverts the usual default-green pattern.
+
+### 6. Design System Awareness (PR#6)
+`DESIGN.md` as durable artifact for UI work. Once-per-session PreToolUse nudge hook (self-gating on DESIGN.md presence — backend projects stay silent). Three paths: bring brand, pick from catalog (awesome-design-md), generate with ui-ux-pro-max.
+
+### 7. Profile Stacking Budget Discipline
+Attempted stacking software-dev+security-audit → 635 lines, over 600 budget. Trimming didn't close the gap. Changed guidance instead: re-assemble for audit mode rather than stack. "Finding and shipping are different modes, carrying both rule sets contradicts it."
+
+### 8. rtk Integration (CLI Output Compression)
+[rtk](https://github.com/rtk-ai/rtk) (Rust Token Killer, ~71k⭐) — binary that compresses noisy CLI output 60-90% before it hits context window. Similar concept to our compress-output.sh but as a proper maintained tool. Auto-installed for code profiles.
 
 ## Relationship to Our Setup
 
-**Heavy overlap with OpenClaw DNA (AGENTS.md + SOUL.md):**
-- Their "prove it" = our "验证优先"
-- Their "fix the system" = our "beliefs-candidates → DNA升级"
-- Their handoff protocol ≈ our memory/YYYY-MM-DD.md system
-- Their "keep surface small" = our implicit lean-rules principle
-
-**What they have that we don't (worth considering):**
-- **Formalized STOP table** — we have beliefs-candidates but no explicit "thought → rule" mapping
-- **verify.sh runner** — deterministic verification script per project. We rely on ad-hoc checking
-- **Profile system** — work-type-specific quality gates. We use one DNA for everything
+**What they have that we should consider:**
+- **Two-axis security model** — our DNA covers blast radius but doesn't ask about output security
+- **STOP table** — explicit "thought → rule being skipped" mapping. We have beliefs-candidates but no rationalization-interception
+- **RED-by-default verify** — our ad-hoc checking has no "fail until wired" safety net
+- **rtk** — proper tool vs our bash script. Worth evaluating as replacement for compress-output.sh
 
 **What we have that they don't:**
 - **Runtime** — they're a static template; we have OpenClaw (cron, heartbeat, multi-session, tools)
 - **Memory system** — daily notes + MEMORY.md + wiki. They have handoff notes only
 - **Self-evolution pipeline** — beliefs-candidates → DNA promotion with frequency tracking
-- **Study/learning loop** — systematic knowledge acquisition. They only learn from incidents
+- **Study/learning loop** — systematic knowledge acquisition
 
-## Tradeoffs
+## Growth Trajectory
 
-- **Pros:** Very well-written, battle-tested (6 months), MIT licensed, model-agnostic, lean design
-- **Cons:** Claude Code-centric assembly (CLAUDE.md), no runtime/memory beyond handoff, solo dev (fragility risk), no community yet (1 issue)
+- 07-18: 100⭐ → 07-25: 255⭐ (+155% in 7 days)
+- 11 forks, 0 open issues (all closed)
+- Solo dev but extreme commit quality (every PR has detailed evidence, verification, multiple commits)
+- Community: NASCENT (1/6) — no external PRs yet, but 2 unique issue authors
+- GitHub star velocity suggests reaching 500+ within 2 weeks if sustained
 
 ## Verdict
 
-High-quality reference implementation of agent discipline. The STOP table and static/dynamic context split are the two most directly applicable ideas. Not a competitor to OpenClaw (no runtime), but a strong complement — their rules could inform our DNA, and our runtime could host their discipline.
+High-quality, rapidly growing reference implementation of agent discipline. The two-axis security model and STOP table are the most directly applicable ideas. PR#10's security work demonstrates mature systems thinking about where rules belong (prose vs guards vs deterministic checks).
 
-**Action:** Consider adapting the STOP table pattern into beliefs-candidates.md or AGENTS.md anti-patterns section.
+Links: [[coding-agent-ecosystem]], [[model-native-vs-model-agnostic]], [[self-evolving-agent-landscape]]
