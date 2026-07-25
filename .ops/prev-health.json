@@ -1,23 +1,39 @@
 {
-  "timestamp": "2026-07-23T20:17:00+08:00",
-  "total_files": 1069,
-  "cards": 440,
-  "projects": 543,
-  "wikilinks": 4435,
-  "errors": 0,
-  "warnings": 52,
-  "broken_links": 0,
-  "orphans": 0,
+  "timestamp": "2026-07-25T20:10:00+08:00",
+  "total_files": 1075,
+  "cards": 441,
+  "projects": 548,
+  "wikilinks": 4945,
+  "errors": 1,
+  "warnings": 58,
+  "broken_links": 1,
+  "broken_link_details": [
+    "projects/self-evolving-observations.md -> [[study-saturation-gate]]"
+  ],
+  "index_drift": 4,
+  "index_drift_files": [
+    "cards/coderankmbed.md",
+    "projects/agentacct.md",
+    "projects/secondwind.md",
+    "projects/vinv-ai.md"
+  ],
+  "orphans": 2,
+  "orphan_details": ["agentacct", "secondwind"],
   "stubs": 0,
-  "duplicate_slugs": 3,
-  "index_drift": 440,
-  "stale_files": 403,
+  "duplicate_slugs": 1,
+  "duplicate_slug_details": ["README (3 files)"],
+  "cards_index_stale": true,
+  "cards_index_unlisted": 441,
+  "frontmatter_ok": true,
+  "avg_wikilinks_per_file": 5.8,
+  "zero_outbound_cards": 49,
+  "secrets_detected": false,
+  "stale_files": 396,
   "unicode_suspicious": 25,
-  "zero_outbound_links": 59,
-  "avg_wikilinks_per_file": 5.3,
-  "details": {
-    "duplicate_slugs": ["README (3 instances: ./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
-    "cards_index_stale": true,
-    "unicode_issues": "variation selectors in eval/ and projects/ files (likely intentional emoji arrows)"
-  }
+  "invalid_facts": 0,
+  "error_book_new": 2,
+  "error_book_recurring": 56,
+  "error_book_clean": 3,
+  "error_book_auto_closed": 35,
+  "error_book_total_open": 61
 }

@@ -149,3 +149,12 @@
 - CI: All Tests pass (22/24/26), Lint & Format pass, TypeScript pass, verify-changesets pass. Vercel deploy needs maintainer auth (expected for external PRs)
 - Changeset: patch for `@ai-sdk/mistral`
 - Note: git push worked this time (no OOM) — sparse checkout helps with smaller push payloads
+
+### PR #17940 (2026-07-25) — PENDING
+- Fix: emit unsupported-setting warning for `seed` in prodia provider
+- Issue #17938: `doGenerate()` warned about 11 standard options but silently dropped `seed`
+- Approach: Added identical `if (options.seed !== undefined)` check + test assertion
+- CI: All green — Tests (22/24/26), Lint & Format, Docs Site, Build Examples. Vercel deploy needs maintainer auth (expected)
+- Changeset: patch for `@ai-sdk/prodia`
+- Fastest workloop round yet — mechanical fix, 6 lines total
+- Note: reizam opened 3 related issues (#17936/#17937/#17938) about missing warnings in prodia/google/xai — could be follow-up sibling PRs (rule #85)
