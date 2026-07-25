@@ -14,7 +14,7 @@
 Vinv sits alongside your coding agent and provides **runtime evidence** — not just static analysis. It:
 
 1. **Traces** your Python service at runtime (zero-edit, OTel-based) — timing, memory, args, returns, errors per call
-2. **Indexes** every function into a semantic code graph + local embeddings ([[CodeRankEmbed]])
+2. **Indexes** every function into a semantic code graph + local embeddings ([[coderankmbed]])
 3. **Serves** two MCP servers giving the agent trace-grounded context
 4. **Verifies** fixes independently: acceptance tests authored *before* the fix, never shown to the agent
 5. **Learns** via off-policy evaluation on retrieval config

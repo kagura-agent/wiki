@@ -21,7 +21,7 @@ Losslessly compresses the tool output your coding agent sends to the model. Sits
 
 ## Comparison with Our TACO-style Compression
 
-We use `compress-output.sh` ([[tools/compress-output]]) — a simple bash script that strips noise from npm/pip/git/test output (71-84% reduction). Key differences:
+We use `compress-output.sh` ([[compress-output]]) — a simple bash script that strips noise from npm/pip/git/test output (71-84% reduction). Key differences:
 
 | | Secondwind | Our TACO |
 |---|---|---|
