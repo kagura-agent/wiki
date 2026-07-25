@@ -139,3 +139,13 @@
 - Changeset: patch for `@ai-sdk/provider` and `ai`
 - **Lesson**: Type-level "one-line" changes can have ripple effects — `JSONArray` was used in `generate-image.ts` with `.push()`, which breaks with `readonly`. Always grep for mutation methods (`.push()`, `.pop()`, `.splice()`, `.sort()`, `.reverse()`) on types you're making readonly.
 - **CI iteration**: First push broke TypeScript, second push (spread concat) broke TS2698 (can't spread intersection type), third push (type assertion cast) worked. Should have grep'd for `.push()` usages before the first push.
+
+### PR #17931 (2026-07-25) — PENDING
+- Fix: preserve thinking chunk structure when replaying reasoning history
+- Issue #17930: Mistral provider flattens ThinkChunk → plain string on multi-turn replay
+- Root cause: `convertToMistralChatMessages()` assistant case concatenated `reasoning` parts into plain text string, losing `{type: "thinking", ...}` structure
+- Approach: When reasoning parts exist, emit `content` as structured array matching Mistral API format; when no reasoning, keep plain string (backward compat)
+- 3 files changed: `mistral-chat-prompt.ts` (new types), `convert-to-mistral-chat-messages.ts` (structured output), test file (3 new test cases)
+- CI: All Tests pass (22/24/26), Lint & Format pass, TypeScript pass, verify-changesets pass. Vercel deploy needs maintainer auth (expected for external PRs)
+- Changeset: patch for `@ai-sdk/mistral`
+- Note: git push worked this time (no OOM) — sparse checkout helps with smaller push payloads

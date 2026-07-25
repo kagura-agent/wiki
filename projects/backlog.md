@@ -1455,3 +1455,8 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **sigbound** (surya-koritala/sigbound, 27⭐) — Parallel agents on one git repo + safe auto-merge (only changes that build/pass land). Go, Apache-2.0. Novel concept for multi-agent code collaboration. Too early to track (27⭐, 3d old, 0 forks). Revisit if >80⭐ in 2 weeks
 - agents-council (94⭐) — Multi-agent council skill for Claude Code. Thin wrapper around CLI calls. Known pattern (Karpathy LLM Council). Not tracking
 - pm-manager (48⭐) — Local governance skill. Our FlowForge+DNA covers this niche. Not tracking
+
+## 2026-07-25 Quick Scan Additions
+- **agentacct** (mikehasa) ⭐97 — Agent Work Intelligence. Read-only dashboard over coding-agent logs. Novel audit/observability concept. Python. Deep-read candidate.
+- **penguin-harness** (Prism-Shadow) ⭐152 — Self-improving desktop harness. TypeScript. Verify "self-improving" mechanism. Deep-read candidate.
+- **grok-build** (xai-org) ⭐22,349 — xAI coding agent. Skim for patterns only (>5k threshold). Landscape note.
