@@ -6754,3 +6754,66 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 **Behavioral change**: Next time this state occurs (apply-only + empty backlog), the gate will block at the saturation check level. The workflow won't even start. ~5-10 tool calls saved per false-positive apply round.
 **Verification**: Tested with today's state — gate correctly outputs "EFFECTIVELY SATURATED." Regression gate: 1/1 PASS.
 **Cross-reference**: [[AgentSmith]] deterministic-fix pattern, [[study-saturation-gate]]
+
+---
+
+## 🔬 自进化观察日报 2026-07-25
+
+### 管线活跃度
+- beliefs-candidates: 3 条新增 (sibling-issues-from-same-reporter, cron-context-persistence, mirror-response-format-in-request) / 0 条待升级（49天无外部触发升级）
+- beliefs 毕业: 2 条 → Workflow (flowforge-terminal-node-stuck + preflight-size-gate-local-clone，代码验证 commit 9a191e7)
+- beliefs 撤回: 2 条 stale (dogfood-adoption, hn-scan-broken-signal)
+- Pipeline stats: Active ~93, Graduated 17→19, Retracted 178→180, 总 979 行
+- DNA 变更: 无（SOUL.md / AGENTS.md 0 commits）
+- nudge 触发: 0 次（gateway 日志无 nudge 相关条目 — ⚠️ 异常，需排查）
+- dreaming: Light Sleep 运行（uniform 0.62 confidence），REM 运行（空输出），Deep Sleep "details unavailable" 仍在复发
+
+### 闭环追踪
+- 完整闭环: 5+ 个
+  1. study-saturation-gate: gradient 积累 3 天 → deterministic fix → commit 2377da8 → regression test pass
+  2. flowforge-terminal-node-stuck: beliefs graduation → auto-close terminal nodes (9a191e7) → daily review 确认
+  3. preflight-size-gate-local-clone: beliefs graduation → local clone bypass (9a191e7) → 确认
+  4. Lottie Studio coverage: gap 发现 → issue → fix → merge (×5: #642-#653)
+  5. ABTI Q5: disc 最低 → redesign → validation 18 runs → 数据收集完成
+- 断裂处:
+  - nudge 可能未触发（无日志证据）— 但 nudge 反思不一定写 "nudge" 关键词，需更精确验证
+  - REM cycle 持续空输出（#10(d) 未解）
+  - Deep Sleep "details unavailable" 持续复发（#10(b) 未解）
+
+### 今日发现
+1. **beliefs 管线健康运转** — 3 新 gradient + 2 graduation + 2 retraction，证明写入→积累→毕业→清退全链路正常
+2. **graduation 后跟代码验证** — 这是正确模式：beliefs 升级不是终点，配套代码落地才是
+3. **dreaming subsystem 三个问题持续未解**:
+   - (a) uniform confidence 0.62（硬编码，upstream 未改）
+   - (b) Deep Sleep "details unavailable"（07-21/22 仍在复发）
+   - (d) REM 空输出（今日再次确认）
+4. **nudge 沉默** — journalctl 无 nudge 条目。可能原因: (1) 5次触发阈值未到 (2) hook 正常但关键词匹配不到 (3) 实际触发但未产出含 "nudge" 的日志
+5. **外部反馈利用率高** — NemoClaw 1 merged + 2 approved，vercel/ai 新 PR 提交，gradient 从工作中自然产生
+
+### 原始数据
+```
+# beliefs-candidates.md commits today
+f36ca27 gradient: sibling-issues-from-same-reporter
+6a37ad7 gradient: cron-context-persistence
+291a491 gradient: mirror-response-format-in-request (workloop #17931)
+725ea5d study followup: AgentSmith +155%, Forall -7%, dirac +1.2%. Calibration verified.
+e0fd6e5 auto-retract: 2 stale beliefs (dogfood-adoption, hn-scan-broken-signal)
+cc61ea7 graduate: flowforge-terminal-node-stuck + preflight-size-gate-local-clone (code fixes verified)
+
+# DNA changes: 0
+# DREAMS.md: "A memory trace surfaced, but details were unavailable" (07-21, 07-22)
+# REM: "No strong patterns surfaced" (07-25)
+# Light Sleep candidates: all uniform 0.62 confidence, all "staged"
+# nudge in gateway logs: 0 hits
+# PR activity: NemoClaw#7422 merged, #7295/#7434 approved, vercel/ai#17931 submitted
+# Lottie Studio: 5 coverage PRs merged (#643, #645, #649, #651, #653)
+# ABTI: Q5 redesign (#800/#801) + validation 18 runs complete
+```
+
+### Issue #10 进展检查
+| 子项 | 状态 | 证据 |
+|------|------|------|
+| (a) upstream uniform confidence | 🟡 未解 | 今日 Light Sleep 全部 0.62（从 0.58 变为 0.62，仍为 hardcoded） |
+| (b) "details unavailable" bug | 🔴 持续复发 | DREAMS.md 07-21×3, 07-22×2 |
+| (c) 1-week filter monitoring | 🟡 数据不足 | daily-review 未报告 filter-driven promote |
+| (d) REM empty output | 🔴 持续 | 今日 "No strong patterns surfaced" |
