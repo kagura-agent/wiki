@@ -442,3 +442,12 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Approach**: Manual edit — 7-line additive change, too simple for Claude Code.
 - **Pattern**: Desktop/Electron node stream error handling. Extends existing sync guard to async path.
 - **Note**: CI uses 4 checks (add-contributor-label, check-compliance, check-duplicates, check-standards). GitHub Actions queue delay is normal for this repo.
+
+### #38843 — fix(session): apply compaction.reserved to models without limit.input (2026-07-25)
+- **Status**: PENDING (CI all 4 checks green ✅, compliance fixed after template update)
+- **Issue**: #38835 — compaction.reserved silently ignored for models without limit.input (revival of #13980)
+- **Root cause**: `usable()` in `overflow.ts` has two branches; branch B (no `limit.input`) computes `reserved` but never subtracts it
+- **Fix**: Added `- reserved` to branch B (1-line change)
+- **Tests**: New `overflow.test.ts` — 12 unit tests covering both branches, default/explicit reserved, overflow integration
+- **Approach**: Local clone, manual 1-line fix + test file, bun test locally
+- **Lesson**: Compliance bot enforces PR template strictly — must use exact template sections or get 2h auto-close warning
