@@ -6742,3 +6742,15 @@ e51a1e8 gradient: tool-blockers-unresolved (preflight size gate, 3rd recurrence)
 **Signal**: Ecosystem is in stable derivative phase (councils, governance skills, credential gateways) rather than novel architecture emergence. Cross-pollination opportunities are exhausted at current abstraction level.
 
 ---
+
+## Apply: Effective Saturation Gate (2026-07-25 10:45)
+
+**Source insight**: AgentSmith's "deterministic fix > prose reminder" (core/60) — if a rule violation is mechanically detectable, replace prose with automated check.
+**Target problem**: `study-apply-structural-empty-no-fastpath` gradient — 3 consecutive days (07-23/24/25) of entering apply → full workflow → "nothing to apply," wasting 5-10 tool calls each time.
+**Fix**: Added "effective saturation" detection to both `study-saturation.sh` and `study-saturation-gate.sh`:
+  - When apply is the only remaining open mode AND unapplied.md has no unchecked items → exit as saturated
+  - Gate now catches this at Layer 3 (before workflow entry), saving the entire apply workflow cycle
+  - Also fixed followup-due consistency: gate now always checks followup due items, not only when followup is last resort
+**Behavioral change**: Next time this state occurs (apply-only + empty backlog), the gate will block at the saturation check level. The workflow won't even start. ~5-10 tool calls saved per false-positive apply round.
+**Verification**: Tested with today's state — gate correctly outputs "EFFECTIVELY SATURATED." Regression gate: 1/1 PASS.
+**Cross-reference**: [[AgentSmith]] deterministic-fix pattern, [[study-saturation-gate]]
