@@ -1460,3 +1460,7 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **agentacct** (mikehasa) ⭐97 — Agent Work Intelligence. Read-only dashboard over coding-agent logs. Novel audit/observability concept. Python. Deep-read candidate.
 - **penguin-harness** (Prism-Shadow) ⭐152 — Self-improving desktop harness. TypeScript. Verify "self-improving" mechanism. Deep-read candidate.
 - **grok-build** (xai-org) ⭐22,349 — xAI coding agent. Skim for patterns only (>5k threshold). Landscape note.
+
+## 2026-07-26 Quick Scan Additions
+- **caspian-sdk** (TryCaspian) ⭐243 — Multi-channel agent identity: one on_message handler across Slack/Discord/Telegram/WhatsApp/email/SMS/X. Python+TS+CLI. Relevant to OpenClaw multi-channel architecture. Deep-read candidate.
+- **onecli** (onecli) ⭐~100 — OSS credential gateway keeping secrets out of AI agents (HN 106pts). Agent security focus. Skim for patterns vs Claw Patrol approach.
