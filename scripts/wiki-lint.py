@@ -159,8 +159,12 @@ for fpath in all_files:
         if raw.startswith('#'):
             continue
         # Handle [[slug|display]] format (slug is first part)
+        # Also handle \| (escaped pipe in markdown tables)
         if '|' in raw:
             raw = raw.split('|')[0].strip()
+        # Strip trailing backslash from table-escaped pipes: [[slug\|display]]
+        if raw.endswith('\\'):
+            raw = raw[:-1]
         # Strip .md suffix if present
         if raw.endswith('.md'):
             raw = raw[:-3]

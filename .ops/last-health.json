@@ -1,39 +1,36 @@
 {
-  "timestamp": "2026-07-25T20:10:00+08:00",
-  "total_files": 1075,
-  "cards": 441,
-  "projects": 548,
-  "wikilinks": 4945,
-  "errors": 1,
-  "warnings": 58,
-  "broken_links": 1,
-  "broken_link_details": [
-    "projects/self-evolving-observations.md -> [[study-saturation-gate]]"
+  "timestamp": "2026-07-26T10:16:00+08:00",
+  "total_files": 1077,
+  "cards": 442,
+  "projects": 549,
+  "wikilinks": 4956,
+  "errors": 4,
+  "warnings": 60,
+  "broken_wikilinks": [
+    { "file": "projects/onecli.md", "target": "centaur-paradigm" },
+    { "file": "projects/onecli.md", "target": "clawpatrol" },
+    { "file": "projects/onecli.md", "target": "polypore" },
+    { "file": "projects/onecli.md", "target": "superserve" }
   ],
-  "index_drift": 4,
-  "index_drift_files": [
+  "index_drift": [
     "cards/coderankmbed.md",
+    "cards/study-saturation-gate.md",
     "projects/agentacct.md",
+    "projects/onecli.md",
     "projects/secondwind.md",
     "projects/vinv-ai.md"
   ],
-  "orphans": 2,
-  "orphan_details": ["agentacct", "secondwind"],
+  "orphans": ["agentacct", "secondwind"],
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "duplicate_slug_details": ["README (3 files)"],
+  "duplicate_slugs": [{ "slug": "README", "files": ["./README.md", "./skill-trajectories/README.md", "./experiments/README.md"] }],
+  "stale_files": 399,
+  "unicode_warnings": 25,
   "cards_index_stale": true,
-  "cards_index_unlisted": 441,
   "frontmatter_ok": true,
-  "avg_wikilinks_per_file": 5.8,
-  "zero_outbound_cards": 49,
-  "secrets_detected": false,
-  "stale_files": 396,
-  "unicode_suspicious": 25,
+  "secrets_ok": true,
   "invalid_facts": 0,
-  "error_book_new": 2,
-  "error_book_recurring": 56,
-  "error_book_clean": 3,
-  "error_book_auto_closed": 35,
-  "error_book_total_open": 61
+  "error_book_new": 5,
+  "error_book_recurring": 58,
+  "error_book_open": 63,
+  "error_book_auto_closed": 31
 }
