@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-07-24
+last_verified: 2026-07-26
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -718,3 +718,18 @@ Also: 5 focused regression tests covering each failure mode separately.
 - **TIMING_GAP**: #89122 merged Jun 14, my PR opened later and closed Jul 23. 6-week gap = I didn't check recent merges in the same area before opening.
 
 **Lesson**: Run `gh pr list --repo X --state merged --search "path:src/config/sessions" --limit 10` before PRing fixes in a module. If a recent refactor touched the same paths, read it first.
+
+## NemoClaw #7226 → #7562: Identity re-verification in retry paths (2026-07-26)
+
+**Issue**: PR Gate observer terminates on single transient GitHub API read failure (#7207)
+**My PR #7226**: Bounded retry (3 attempts, exponential backoff + jitter) targeting transient transport/HTTP failures (network errors, 5xx, 429). Fail-closed for identity mismatches.
+**Superseding PR #7562 (maintainer cv, merged 2026-07-26)**: Same retry concept but with three critical additions: (1) re-proves exact PR identity after each backoff before reading coordination state again, (2) stricter error classification (only `TypeError` for network, not generic `Error`), (3) redacts workflow-facing terminal errors.
+
+**Why superseded**: PR description explicitly says "maintainer-owned salvage supersedes #7226 after it lands." Core idea was accepted but execution needed tightening around identity safety.
+
+**Patterns**:
+- **IDENTITY_REPROVE_AFTER_DELAY**: In security-sensitive retry paths, state can change during backoff. After any delay, re-verify identity assumptions (PR SHA, base SHA) before proceeding. My PR retried the read but didn't re-check that the PR was still the same PR after waking up.
+- **TYPEOF_ERROR_CLASSIFICATION**: `TypeError("fetch failed")` (network layer) vs `Error("fetch failed")` (application layer) are semantically different. Only network-layer errors are safely retryable. Broad `message.includes("fetch failed")` matching conflates the two.
+- **REDACT_TERMINAL_ERRORS**: In CI/workflow contexts, leaked error details in stdout can expose internal state. Wrap terminal errors before surfacing.
+
+**Positive**: Maintainer explicitly called it a "salvage" not a rejection — core contribution was valued, just needed identity safety guarantees that only internal knowledge of the gate's invariants could provide. Relationship healthy.

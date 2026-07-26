@@ -36,6 +36,32 @@ AMD's open-source framework for running generative AI locally on AMD hardware.
 ## PRs
 - PR #1209: fix(web): preserve TLS hostname in PinnedIPAdapter for HTTPS (Closes #1207) — pending
 - PR #1210: fix(tests): update stale electron test assertions after #606 (#1204) — pending
+- **PR #2500: fix(tests): make unit suite hermetic by blocking real network connections (Closes #2499) — PENDING**
+
+## 2026-07-26 Session Notes
+
+### PR #2500 — fix(tests): make unit suite hermetic (fixes #2499)
+- **Issue**: Unit test suite passes/fails depending on host state (Lemonade server running)
+- **Root cause**: `_ensure_lemonade_installed()` probe hits real localhost:13305
+- **Fix**: Autouse `_block_network` socket guard in conftest + LemonadeClient mock on 3 tests
+- **Key discovery**: Socket guard affects many more tests than just the 3 mentioned in the issue
+  - 8 test modules need `allow_network` marker (start real uvicorn/sidecar/aiohttp servers)
+  - All use real `requests.get/post` or `httpx` to local servers for integration-style validation
+- **CI notes**: macOS smoke uses `--maxfail=1` — failures show one at a time
+- **Lint**: `python util/lint.py --fix` (black + isort), line length ~88 chars
+- **Gotcha**: `from gaia.installer...` must come BEFORE `from gaia.llm...` (isort alphabetical)
+
+### Maintainer Style (updated)
+- Issue #2499 extremely well-written (detailed root cause + code pointers)
+- Explicit "good candidate for a PR" invitation — welcoming to external contributions
+- No human review yet — check back in 2-3 days
+
+### CI Architecture
+- macOS smoke: fast (3m), `--maxfail=1`
+- py3.10/11/12: parallel full suite
+- Code Quality: black + isort + pylint + mypy (pre-existing errors in discovery.py)
+- Email Agent Tests: separate workflow
+- Integration: Windows + Linux CLI tests (uvicorn+sidecar)
 
 ## 2026-05-23 Session Notes
 
