@@ -1464,3 +1464,7 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 ## 2026-07-26 Quick Scan Additions
 - **caspian-sdk** (TryCaspian) ⭐243 — Multi-channel agent identity: one on_message handler across Slack/Discord/Telegram/WhatsApp/email/SMS/X. Python+TS+CLI. Relevant to OpenClaw multi-channel architecture. Deep-read candidate.
 - **onecli** (onecli) ⭐~100 — OSS credential gateway keeping secrets out of AI agents (HN 106pts). Agent security focus. Skim for patterns vs Claw Patrol approach.
+
+## 2026-07-26 Quick Scan #2 Additions
+- **agents-council** (0xwilliamortiz) ⭐111 — Multi-agent collaboration plugin for Claude Code. Orchestrates Codex CLI, Gemini CLI etc for diverse perspectives on same problem. Relevant to multi-agent coordination patterns. Skim candidate.
+- **sigbound** (surya-koritala) ⭐50 — Run parallel AI coding agents on one repo, auto-merge only changes that build+pass tests. Git-native, BYO model. Novel safe-merge approach. Skim candidate (small but interesting concept).

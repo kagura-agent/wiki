@@ -107,6 +107,7 @@
 - [Co-Activation Boost](cards/co-activation-boost.md)
 - [Code Review 教训](cards/code-review-lessons.md)
 - [Code Review](cards/code-review.md)
+- [CodeRankEmbed](cards/coderankmbed.md)
 - [Codex ON_USE AuthPolicy: 发现-按需授权模式](cards/codex-on-use-auth-policy.md)
 - [Codex Plusplus](cards/codex-plusplus.md)
 - [Coding Agent Ecosystem](cards/coding-agent-ecosystem.md)
@@ -427,6 +428,7 @@
 - [Structural Backpressure](cards/structural-backpressure.md)
 - [Structural Fix Over Behavioral Rule](cards/structural-fix-over-behavioral-rule.md)
 - [Study Saturation](cards/study-saturation.md)
+- [Study Saturation Gate](cards/study-saturation-gate.md)
 - [Study Workflow](cards/study-workflow.md)
 - [Subagent](cards/subagent.md)
 - [Subagent Usage Patterns](cards/subagent-usage-patterns.md)
@@ -903,6 +905,7 @@
 - [OmniAgent](projects/omniagent.md)
 - [Omnigent — Meta-Harness for AI Agents](projects/omnigent.md)
 - [OneWill / Wally — WAL for Agent Actions](projects/onewill-wally.md)
+- [OneCLI — Secret Vault for AI Agents](projects/onecli.md)
 - [OpenChronicle](projects/openchronicle.md)
 - [OpenClaude (Gitlawb/openclaude)](projects/openclaude.md)
 - [OpenClaw 架构概览 — 田野笔记](projects/openclaw-architecture.md)
@@ -1099,4 +1102,4 @@
 
 ---
 
-*440 cards, 545 project notes. Last generated: 2026-07-24 14:44 UTC.*
+*442 cards, 546 project notes. Last generated: 2026-07-26 14:51 UTC.*

@@ -6817,3 +6817,77 @@ cc61ea7 graduate: flowforge-terminal-node-stuck + preflight-size-gate-local-clon
 | (b) "details unavailable" bug | 🔴 持续复发 | DREAMS.md 07-21×3, 07-22×2 |
 | (c) 1-week filter monitoring | 🟡 数据不足 | daily-review 未报告 filter-driven promote |
 | (d) REM empty output | 🔴 持续 | 今日 "No strong patterns surfaced" |
+
+## 🔬 自进化观察日报 2026-07-26
+
+### 管线活跃度
+- beliefs-candidates: 5 条新增 (socket-guard-blast-radius, audit-carry-forward-independent-verify, calibration-commercial-backing-overweight, github-topic-filter-empty-for-new-repos, tool-blockers-unresolved) / 4 条待升级（第3次）/ 2 条自动撤回 (openclaw-pr-body-format, speed-over-scope)
+- Pipeline stats: 993 行, Active 278×第1次 + 6×第2次 + 4×第3次
+- DNA 变更: 无（SOUL.md / AGENTS.md 0 commits today）
+- nudge 触发: 0 次（journalctl 0 hits — ⚠️ 连续第 2 天无 nudge 日志证据）
+- dreaming: 全三阶段运行（Light/Deep/REM），但输出质量极低:
+  - Light Sleep: 6+ candidates，全部 confidence 0.62（硬编码），全部 "staged"，0 promoted
+  - Deep Sleep: "Repaired recall artifacts: rewrote recall store. Ranked 0, Promoted 0."
+  - REM: "No strong patterns surfaced. No strong candidate truths surfaced."
+  - DREAMS.md diary: "A memory trace surfaced, but details were unavailable" × 2 (3:15 AM)
+
+### 闭环追踪
+- 完整闭环: 6 个
+  1. ABTI Q3 redesign: hypothesis → attempt 3 design → validation 15 runs → PR #825 (whole arc today)
+  2. Lottie Studio /wiggle: gap → issue #670 → implement → merge #671
+  3. Lottie Studio /import: gap → issue #672 → implement → merge #673
+  4. auto-retract: 2 stale beliefs identified → retracted → commit 8a45572
+  5. memory hygiene: 8 stale promoted entries → archived → commit c34971d (164→158 lines)
+  6. gaia#2500: bot review → check timestamps → respond → commit 6d9cf22
+- 断裂处:
+  - dreaming "details unavailable" 持续复发（#10(b)）— 6 天未修
+  - nudge 沉默连续 2 天 — 未排查
+  - 4 条 beliefs 已达第3次但未升级（积压）
+
+### 今日发现
+1. **beliefs 管线写入活跃** — 5 条 gradient 来自 4 个不同来源 (workloop, study, audit, study)，证明多场景产出正常
+2. **beliefs auto-retract 工作正常** — 2 条 stale 被清退，管线自清洁功能在运行
+3. **dreaming 三阶段全部失效**:
+   - Light Sleep: 有 candidates 但 confidence 硬编码 0.62，无法区分质量，0 promote
+   - Deep Sleep: "repaired recall artifacts" 但 ranked 0（无可 promote 材料？还是评估逻辑问题？）
+   - REM: 空输出（"No strong patterns"），连续多天
+   - Diary: "details unavailable" × 2（#10(b) bug 持续复发）
+4. **nudge 连续 2 天沉默** — 可能原因: (1) agent_end hook 5次阈值未触发 (2) 今天 cron sessions 多，interactive sessions 少 (3) hook 本身异常
+5. **第3次 beliefs 积压** — 4 条已达升级阈值但未处理，daily-review 未触发升级动作
+6. **外部反馈转化**: QwenPaw#6470 诊断错误 → 承认但未写 gradient（遗漏）
+
+### Issue #10 状态追踪
+| 子项 | 状态 | 今日证据 |
+|------|------|----------|
+| (a) upstream uniform confidence | 🟡 未解 | 今日 0.62 hardcoded (从 0.58 变化过一次但仍为 uniform) |
+| (b) "details unavailable" bug | 🔴 每日复发 | DREAMS.md 07-26 3:15AM × 2 |
+| (c) 1-week filter monitoring | 🟡 无 promote 证据 | 0 candidates promoted, filter 无法验证有效性 |
+| (d) REM empty output | 🔴 持续 | "No strong patterns surfaced" |
+
+### 原始数据
+```
+# beliefs-candidates.md
+- Total: 993 lines | 第1次: 278 | 第2次: 6 | 第3次: 4
+- Today commits: 8a45572 (auto-retract), 5638676 (gradient), bbacf6d (study track)
+- Retracted: openclaw-pr-body-format, speed-over-scope
+
+# DNA
+- SOUL.md: 0 changes | AGENTS.md: 0 changes
+
+# Dreaming (07-26 3:15 AM)
+- Light: 6+ candidates, all confidence 0.62, all "staged", 0 promoted
+- Deep: "Repaired recall artifacts, Ranked 0, Promoted 0"
+- REM: "No strong patterns surfaced"
+- Diary: "details unavailable" × 2
+
+# nudge
+- journalctl grep: 0 hits (since 2026-07-26 00:00)
+
+# PR activity today
+- Merged: ABTI #822 (34 reliability runs)
+- Opened: ABTI #824, #825 (Q3 redesigns), Lottie #671, #673
+- Merged own: Lottie #671 (/wiggle), #673 (/import)
+- External: gaia#2500 (bot review responded)
+
+# workspace commits today: 7 (all workspace maintenance + study + gradient)
+```
