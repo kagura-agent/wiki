@@ -46,41 +46,48 @@ echo "📊 Indexed $(wc -l < "$TMP") notes" >&2
 
 # ── Step 2: Category matching + scoring ──
 # Each category: display text, then grep patterns for tags+slugs
+# FIXED 2026-07-27: Use awk for batch matching instead of per-line grep subprocesses
+# (previous version spawned ~54K+ subprocesses causing OOM/fork storm)
 generate_pointers() {
   local display="$1"
   shift
   # remaining args are grep -iE patterns to match against "slug tags" combined
 
-  local results=""
-  while IFS=$'\t' read -r path tags status age_days wlinks; do
-    local combined="$path $tags"
-    local matched=false
-    for pat in "$@"; do
-      if echo "$combined" | grep -qiE "$pat"; then
-        matched=true
-        break
-      fi
-    done
-    $matched || continue
+  # Build combined regex from all patterns (join with |)
+  local combined_pattern=""
+  for pat in "$@"; do
+    if [[ -n "$combined_pattern" ]]; then
+      combined_pattern="${combined_pattern}|${pat}"
+    else
+      combined_pattern="$pat"
+    fi
+  done
 
-    # Score
-    local score=1
-    case "$status" in
-      active) score=3 ;;
-      tracking|monitor) score=2 ;;
-    esac
-    (( age_days <= 14 )) && score=$((score + 2))
-    (( age_days > 14 && age_days <= 30 )) && score=$((score + 1))
-    (( wlinks >= 5 )) && score=$((score + 1))
+  # Single awk pass: match + score in one process (no per-line subprocess spawning)
+  local results
+  results=$(awk -F'\t' -v pat="$combined_pattern" '
+    BEGIN { IGNORECASE=1 }
+    {
+      combined = $1 " " $2
+      if (combined !~ pat) next
 
-    results="${results}${score}|${path}\n"
-  done < "$TMP"
+      score = 1
+      if ($3 == "active") score = 3
+      else if ($3 == "tracking" || $3 == "monitor") score = 2
+
+      age = $4 + 0
+      if (age <= 14) score += 2
+      else if (age <= 30) score += 1
+
+      wlinks = $5 + 0
+      if (wlinks >= 5) score += 1
+
+      print score "|" $1
+    }
+  ' "$TMP" | sort -t'|' -k1 -rn | head -4 | cut -d'|' -f2 | tr '\n' ',' | sed 's/,$//' | sed 's/,/, /g')
 
   if [[ -n "$results" ]]; then
-    # Sort by score desc, deduplicate, take top 4
-    local top
-    top=$(printf '%b' "$results" | sort -t'|' -k1 -rn | head -4 | cut -d'|' -f2 | tr '\n' ',' | sed 's/,$//' | sed 's/,/, /g')
-    echo "- ${display} → ${top}"
+    echo "- ${display} → ${results}"
   fi
 }
 
