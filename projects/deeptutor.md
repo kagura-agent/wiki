@@ -124,3 +124,15 @@
 - **Diff**: 13 lines added, 2 files
 - **Pattern**: REACT_STATE_LEAK — index-based keys + useState without reset effect = stale state across prop changes. Fix: content-derived key + defensive useEffect.
 - **Note**: DeepTutor has no CI on PR checks, rely on local tsc. Recent quiz UX PRs (#478) show active maintenance in this area.
+
+### PR #715 — fix: parse_language() collapses non-English codes to Chinese (2026-07-27)
+- **Issue**: #712 (我自己发现并提交的 issue + PR)
+- **根因**: `parse_language()` 是二元 zh/en 分类器，所有非 en 语言码都 fallback 到 zh
+- **修复**: alias table + ISO 639 pass-through + default zh→en 对齐系统其他部分
+- **状态**: PENDING (CI 11/11 ✅ all green — Import×4, Lint, Tests×4, WebNode, Summary)
+- **测试**: 31 parametrized tests
+- **Diff**: 3 files, +65/-17
+- **CI 变化**: 从 v1.3.x 的 3 checks 升级到 v1.5.x 的 11 checks (多 Python 版本 + lint + web)
+- **Pattern**: BINARY_CLASSIFIER_BUG — 二元硬编码 (zh/en) 在多语言场景天然有缺陷。alias table + pass-through 是最小改动方案
+- **Note**: issue 由我撰写 + 修复，PR 描述详细（root cause + design notes + downstream impact analysis）
+- **Target branch**: main (v1.5.x 不再用 dev branch)
