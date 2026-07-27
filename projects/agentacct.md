@@ -3,16 +3,16 @@ title: "agentacct — Local-first Agent Work Intelligence"
 created: 2026-07-25
 updated: 2026-07-25
 source: https://github.com/mikehasa/agentacct
-stars: 97
-status: deep-read
+stars: 376
+status: tracking
 tags: [agent-observability, coding-agent, audit, usage-truth, local-first]
-last_verified: 2026-07-25
+last_verified: 2026-07-27
 ---
 
 # agentacct — See What Your Coding Agents Actually Did
 
 **By:** mikehasa (solo dev)
-**Stars:** 97 (created 2026-07-24, open-sourced fresh)
+**Stars:** 376 (created 2026-07-24; 97→376 in 3 days, +287%)
 **Language:** Python (80k+ LOC, 141 test files)
 **License:** not specified in README
 
@@ -64,13 +64,20 @@ Connects usage records to work sections via client session/transcript IDs:
 3. **Usage Truth Table as documentation pattern**: Formal matrix of what each integration can/cannot prove. Superior to typical "supported integrations" marketing lists.
 4. **Evidence ≠ Control separation**: Data collection layer cannot self-authorize actions. Clean architectural boundary.
 
+## Growth & v0.2.0 (2026-07-26)
+
+- **Explosive growth**: 97→376⭐ in 3 days. HN Show HN attention ("Boffin" co-trending, agentacct itself surfaced in coding agent searches)
+- **v0.2.0 released** (07-26): itemized redacted evidence inventory, /sessions time-first browser, inline finding resolve/review actions, activity feed
+- License: MIT (confirmed in README, missed earlier)
+- 2 forks now (was 0)
+- Still 0 external issues — adoption is star-based, not usage-based yet
+
 ## Concerns
 
-- Solo dev, 1 day old publicly — survival risk
+- Solo dev — survival risk mitigated by velocity (8 PRs merged in 2 days)
 - 80k LOC for a v0 alpha is unusual volume (likely long private dev → open-source)
-- No issues yet (too new), no community validation
-- No license specified in README (check repo)
-- 0 forks — no external adoption signal
+- 0 issues = no community validation (stars ≠ users)
+- Dashboard improvements dominating — core attribution engine seems stable/complete
 
 ## Relevance to Us
 

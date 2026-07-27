@@ -1468,3 +1468,11 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 ## 2026-07-26 Quick Scan #2 Additions
 - **agents-council** (0xwilliamortiz) ⭐111 — Multi-agent collaboration plugin for Claude Code. Orchestrates Codex CLI, Gemini CLI etc for diverse perspectives on same problem. Relevant to multi-agent coordination patterns. Skim candidate.
 - **sigbound** (surya-koritala) ⭐50 — Run parallel AI coding agents on one repo, auto-merge only changes that build+pass tests. Git-native, BYO model. Novel safe-merge approach. Skim candidate (small but interesting concept).
+
+## 2026-07-27 Quick Scan Additions
+- **wmux** (openwong2kim/wmux) ⭐291 — Workspace multiplexer for AI coding agents. TypeScript, Electron, tmux-like UX for managing multiple agent sessions. Browser automation, multi-agent support. 4 months old, pushed today, steady growth. Directly relevant to multi-session orchestration. Deep-read candidate.
+- **BossConsole** (risa-labs-inc) ⭐198 — JVM/Kotlin multiplatform agent harness (already known, wiki page exists). 198⭐ in 6 days. Skip (JVM ecosystem, enterprise focus).
+- **Boffin** (MicSm) ⭐27 — "Staff-engineer layer" for AI coding agents: per-edit architectural constraints + verification. Interesting concept but too small (<50⭐). Monitor informally.
+- HN: Fly.io agent compute pivot (21pts), Dead Internet Theory bots 8000% growth (14pts) — trend signals, not directly actionable.
+- **agentacct** (mikehasa/agentacct) ⭐376 — Local-first Agent Work Intelligence: reads Claude Code/Codex session logs, joins with recorded work, shows tokens/cost/tasks on localhost dashboard. Python, MIT. Confidence-labeled attribution (exact/high/medium/low). Novel concept: agent work accounting. 376⭐ in 3 days. Deep-read candidate.
+- **cindy** (makecindy/cindy) ⭐473 — Multi-harness unified agent (Claude Code + Codex + more). Desktop app, pnpm monorepo. Shared memory/skills across harnesses, parallel execution. Product-level innovation, not novel architecture. Skim.
