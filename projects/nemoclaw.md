@@ -428,3 +428,13 @@
 - **Fresh-context review caught bug**: Original `--` handling did `return argv` (aborting merge even when flags appeared before `--`). Fixed to `break` so already-collected flags still merge. Added test for flags-only-after-`--` case.
 - **CI note**: Nemotron 3 Ultra reviewer is flaky — failed on first push (transient), passed on second
 - **DCO**: Used `--signoff` ✅
+
+## PR #7631 — uninstall exit nonzero when openshell unavailable (2026-07-27)
+- **Issue**: #7628 — `nemoclaw uninstall` silently skips OpenShell cleanup when openshell binary is unavailable
+- **Status**: PENDING, CI core checks pass (4/4: check-pr-limit ✅, codebase-growth-guardrails ✅, assign-linked-issue-author ✅, require-maintainer-edits ✅), CodeRabbit + review advisors pending
+- **Scope**: 2 files (+5/-3): `run-plan.ts` (1 return value + message upgrade), `run-plan-gateway-segregation.test.ts` (message assertion update)
+- **Root cause**: `removeOpenShellResources()` returned `!scopedToSelectedGateway` when openshell was missing. In the non-scoped case (host-wide uninstall), this returned `true`, signaling success and letting the uninstall plan continue to exit 0.
+- **Fix**: Always return `false` when openshell is not found. Upgrade `runtime.warn` to `runtime.error` with actionable message per docs.
+- **Note**: #7351 fix (merged in v0.0.95) masks this bug in practice — `inspectOtherGatewayEnvironments` forces `scopedToSelectedGateway = true` when openshell is missing via `liveNames === null` check. The fix makes the return value explicitly correct regardless of scoping.
+- **DCO**: Used `--signoff` ✅
+- **Pattern**: SEMANTIC_CORRECTNESS — even if a bug is masked by another check, fix the semantic incorrectness directly rather than relying on accidental protection from unrelated code paths.
