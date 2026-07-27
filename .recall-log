@@ -1991,3 +1991,5 @@
 2026-07-26T09:22:03+08:00|neutral|BossConsole kritt onecli VinvAI sigbound|projects/backlog,2026-05-10 Quick Scan (15:21),projects/bossconsole-jvm-harness,projects/open-kritt,backlog
 2026-07-26T09:22:29+08:00|neutral|onecli credential gateway agent secrets|cards/agent-credential-security,projects/hermes-agent,agent-credential-security,startup-credential-guard
 2026-07-26T09:22:30+08:00|neutral|agents-council multi-agent collaboration plugin|projects/collab-cli,cards/self-evolving-agent-landscape,omnigent,polypore
+2026-07-27T08:22:04+08:00|neutral|mentor|projects/mentor-smixs,projects/agent-apprenticeship,cards/skills-sh-marketplace,mentor-smixs,skills-sh-marketplace,agentacct
+2026-07-27T08:22:04+08:00|neutral|gensee|projects/gensee-crate-runtime-safety,projects/peerd-browser-agent,projects/backlog,2026-05-10 Quick Scan (15:21),gensee-crate-runtime-safety,qwen-agentworld,peerd-browser-agent

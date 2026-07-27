@@ -1,73 +1,128 @@
 ---
 title: "Gensee Crate — Runtime Safety for AI Coding Agents"
 created: 2026-06-25
-tags: [agent-safety, runtime-security, rust, macos, coding-agents]
+tags: [agent-safety, runtime-security, rust, macos, linux, coding-agents, transactional-runtime, parallel-agents]
 source: https://github.com/GenseeAI/gensee-crate
-status: skim
-last_verified: 2026-06-26
+status: following
+last_verified: 2026-07-27
 ---
 
-# Gensee Crate — Runtime Safety for AI Coding Agents
+# Gensee Crate — Runtime Safety + Transactional Runtime for AI Coding Agents
 
 ## What It Is
 
-Rust sidecar that provides full-stack, long-horizon runtime safety for AI coding agents (Claude Code, Codex). Watches system events, tool calls, skills, and memory. Real-time enforcement via agent hooks + offline lineage/provenance in a web dashboard.
+Rust sidecar that provides full-stack runtime safety AND transactional workspace management for AI coding agents (Claude Code, Codex, Antigravity). Two pillars:
+1. **Safety**: Policy enforcement + provenance lineage (original v0.1.x)
+2. **Transactional runtime**: Process-level forking via tclone for parallel agent exploration (v0.2.0)
 
-**Author:** GenseeAI (company)
-**Born:** 2026-06-23 (2 days old)
-**Stars:** 47⭐, 6 forks
-**Status:** Alpha, macOS-first
+**Author:** GenseeAI (company, small team: yiying-zhang, shengqi-gensee, jayanth-gensee)
+**Born:** 2026-06-23
+**Stars:** 112⭐, 10 forks (as of 07-27)
+**Status:** Active, v0.2.0 released 07-22. GROWING 4/6.
 
-## Key Features
+## v0.2.0 — Transactional Runtime (NEW, 07-22)
 
-1. **Deterministic policy enforcement** — PreToolUse hook → allow/ask/deny. Path/tool based, not regex (no ReDoS). Fail-closed on policy load failure.
-2. **Long-horizon provenance** — SQLite lineage graph linking prompts → tool calls → filesystem effects → artifacts → alerts
-3. **System event monitoring** — macOS `eslogger` for exec/file events (interim; signed EndpointSecurity client planned)
-4. **4 workflows**: `gensee watch` (sidecar audit), `gensee run` (sandboxed agent launch), `gensee policy` (management), dashboard (web UI)
-5. **AgentCanary benchmark** — preliminary results show defense improvement with low overhead
-6. **Encrypted local store** — AES at rest with local key
+The major evolution: from pure safety sidecar → full agent workspace orchestrator.
 
-## Architecture
+### Architecture: Process-Level Forking
+
+Uses [GenseeAI/os4agent](https://github.com/GenseeAI/os4agent) tclone (CRIU-based container clone) on Linux:
 
 ```
-Agent (Claude Code / Codex)
-  │ PreToolUse hook
+Source Container (running agent + workspace)
+  │ gensee run fork --copies N --approach "..."
   ▼
-Gensee Hook Bridge (per-agent integration)
-  │
+┌─────────────────────────────────────┐
+│  Fork 0: "minimal upgrade"          │
+│  Fork 1: "aggressive latest-version"│
+│  (full process + filesystem clones) │
+└─────────────────────────────────────┘
+  │ All finish → comparison prompt to source
   ▼
-Policy Engine (deterministic, path/tool matchers)
-  │ allow / ask / deny
-  ▼
-Local Store (JSONL + SQLite lineage graph)
-  │
-  ▼
-Dashboard (Vite web UI — timeline, lineage, policy, review)
+gensee run compare → gensee run choose --merge|--promote|--discard-all
 ```
 
-## Policy Categories
+**Key difference from file-system isolation** (git worktree, [[sigbound]]):
+- Forks include **live process state** — hot caches, running services, environment
+- Zero setup overhead (instant CRIU snapshot, not fresh checkout)
+- Operates at container level (rootful Podman + btrfs storage driver)
 
-- Secret reads, destructive ops, out-of-workspace writes
-- Cloud-metadata access, control-plane writes
-- Dangerous executable content
-- Resource governance (read sizes, fan-out, quotas, rate limits)
-- Egress allowlists, proxy requirements
+### Parallel Fork Orchestration
+
+1. Named fork groups (`--copies 2 --name try-upgrade`)
+2. Each fork gets a bounded `--approach` label (validated, not trusted as instruction)
+3. Forks work independently, report completion individually
+4. Source receives comparison prompt when all finish
+5. `run compare --json` gives size-and-test-status heuristic recommendation
+6. User approves → `run choose` merges winner, discards siblings
+7. Automatic timestamped suffix if clean names already taken
+
+### Merge Strategies
+
+| Strategy | Scope |
+|----------|-------|
+| `--git` (default) | Repo patch from fork point (includes staged + committed) |
+| `--filesystem` | Overlay delta (tclone upperdir → source) |
+| `--paths` | Selective paths under workspace |
+
+All three have rollback backups on failure. Conflict detection for `--filesystem`/`--paths`.
+
+### Security: Host-Control Bridge
+
+Container-side `gensee` invocations reach the host through a request/response spool:
+
+- **Scoped authority**: `TcloneHostControlTargetScope` enum
+  - `CallerOrDirectChild` — for `send` (source→fork only)
+  - `CallerOnly` — for `fork`, `exec`, `diff`
+- **Request freshness + liveness**: Prevents replay attacks on the spool
+- **Approval gate**: Every destructive lifecycle action requires user approval recorded in a hook before execution
+- **NOT an isolation boundary**: Explicitly trusts the fork agent; prevents confused-agent mistakes, not malicious tampering
+
+### Codex-Mediated Workflow
+
+Codex (or any supported agent) can:
+1. `run list --json` — poll available runs
+2. `run summary <fork-id> --json` — read changed files + test results  
+3. Present merge/promote/discard choices to user
+4. Execute lifecycle only after user approval
+
+This is "Codex as coordinator" — the agent orchestrates the exploration but can't autonomously merge.
+
+## Original Safety Features (v0.1.x)
+
+1. **Deterministic policy enforcement** — PreToolUse hook → allow/ask/deny
+2. **Long-horizon provenance** — SQLite lineage graph
+3. **System event monitoring** — macOS eslogger (Linux: tclone mode)
+4. **Dashboard** — now includes transaction history, dependency graph, live feed
 
 ## Comparison
 
 | vs | Difference |
 |----|-----------|
-| [[clawpatrol]] | Claw Patrol = network-level MITM. Gensee = application-level hooks + OS events |
-| [[peerd-browser-agent]] | peerd = built-in architecture. Gensee = bolt-on sidecar for existing agents |
-| OpenClaw native approvals | Similar hook model, but Gensee adds provenance/lineage graph + cross-session tracking |
+| [[clawpatrol]] | Network-level MITM vs application-level hooks + OS events |
+| [[sigbound]] | File-system OCC partition vs process-level fork (tclone includes live state) |
+| [[superserve]] | Firecracker microVM vs Podman+CRIU (lighter, faster fork) |
+| [[shikigami]] | Git worktree isolation vs full container clone |
+| OpenClaw native approvals | Similar hook model, but Gensee adds provenance + transactional runtime |
 
-## Relevance
+## Architectural Insights
 
-- **Corporate angle** — "Contact us" for fleet-wide enforcement. Targets enterprise security teams.
-- **Lineage graph** — cross-session provenance is novel. Most safety tools are session-scoped.
-- **Bolt-on model** — works with unmodified agents (just hooks). Low adoption friction.
-- **macOS-only currently** — limits immediate utility for our Linux setup.
+1. **Process forking > file forking for exploration**: When agents need to try multiple approaches, forking the running process (including caches, services, env) eliminates setup overhead. File-system isolation (worktrees) requires each fork to rebuild state from scratch.
+
+2. **Approval-gated lifecycle is the right trust model for agent tooling**: The confused-deputy problem (agent accidentally merges/discards) is the real threat, not malicious code inside the fork. Lightweight approval > heavyweight sandboxing.
+
+3. **Comparison heuristic ≠ correctness judgment**: Gensee explicitly frames its `run compare` recommendation as "smallest passing diff" heuristic, not a correctness claim. The human decides. Good epistemic humility.
+
+4. **Host-control bridge scoping** (CallerOnly vs CallerOrDirectChild) is a clean capability model for parent-child agent relationships.
+
+## Relevance to Our Work
+
+- **Parallel exploration pattern** directly applicable: OpenClaw subagents could use similar "try N approaches, compare, pick winner" flow
+- **Approval gate pattern** already exists in OpenClaw (native approvals) but lacks the structured comparison step
+- **Linux-first** now (tclone requires Linux) — directly usable on our setup
+- **Podman + btrfs requirement** is a deployment constraint worth noting
 
 ## Track
 
-- Revisit: 2026-07-02 (Linux support progress, community growth, benchmark reproducibility)
+- Next revisit: 2026-08-03
+- Watch for: concurrency hardening PR merge, community growth, enterprise adoption signals
