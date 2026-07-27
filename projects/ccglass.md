@@ -5,7 +5,7 @@ updated: 2026-05-25
 status: active
 depth: deep-dive
 stars: 389
-last_verified: 2026-06-11
+last_verified: 2026-07-27
 ---
 
 # ccglass — See What Your Coding Agent Sends
@@ -79,7 +79,7 @@ Agent CLI → plain HTTP → ccglass proxy (localhost) → HTTPS → real API
 
 Fills the **coding agent observability** gap. Competes with browser devtools and generic HTTP proxies but purpose-built for the agent use case. The turn-to-turn diff and MCP self-inspection are differentiators no generic tool has.
 
-Related: [[agentops]] (operational layer, different scope — fleet-level vs single-session), [[eval-view]] (eval framework, complementary)
+Related: [[agentops]] (operational layer, different scope — fleet-level vs single-session), [[eval-view]] (eval framework, complementary), [[agentacct]] (post-hoc log reader — complementary to proxy approach)
 
 ## Update Log
 

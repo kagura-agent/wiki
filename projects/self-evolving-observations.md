@@ -6891,3 +6891,62 @@ cc61ea7 graduate: flowforge-terminal-node-stuck + preflight-size-gate-local-clon
 
 # workspace commits today: 7 (all workspace maintenance + study + gradient)
 ```
+
+## 🔬 自进化观察日报 2026-07-27 (Day 98)
+
+### 管线活跃度
+- **beliefs-candidates**: 5 条新增 / 1 条待升级 (flowforge-terminal-node-stuck, 07-22 达第3次)
+- **DNA 变更**: 无 (0 commits to SOUL.md/AGENTS.md)
+- **nudge 触发**: 0 次 ⚠️ (第4天连续沉默)
+- **dreaming**: 运行/Light Sleep 多条 staged (all 0.62 uniform), Deep Sleep diary 2× "details unavailable" + 1× 成功, REM 空
+
+### 闭环追踪
+- 完整闭环: 3 个
+  1. study session → gradient: clone-fail-api-fallback (发现→记录→commit a567cde)
+  2. workloop → gradient: competing-pr-false-positive (脚本误报→诊断→记录→commit 00f3b9f)
+  3. daily-review 03:15 → auto-retract 8 stale beliefs + DREAMS.md 瘦身 (19→14, 20→14)
+- 断裂处:
+  - nudge 4天沉默 — 仍未排查根因
+  - dreaming "details unavailable" 连续复发 (总计 14 次)
+  - flowforge-terminal-node-stuck 达 3 次但 5 天未 graduate
+
+### 今日发现
+1. **beliefs 管线写入健康** — 5 条 gradient 来自 3 个来源 (study ×3, workloop ×2)，多场景产出正常
+2. **PR 产出极高** — 10+ PRs: lottie-studio (5 merged: ESLint fix, /shake, collaborate coverage, shake coverage, import-svg coverage), abti (2 merged: priority 2+3 reliability), kagura-mail (1 merged: classifier fix), NemoClaw #7631 (open), DeepTutor #715 (open)
+3. **Dreaming diary 部分恢复** — 07-27 3:15AM 产出 1 条真实 diary entry (Luna + travel app 哲学)，但仍有 2 条 "details unavailable"。成功率 1/3，较前几天 0/3 略有改善
+4. **nudge 4天沉默确认** — journalctl 全天 0 条 nudge 相关日志。可能原因: (1) agent_end hook 未注册/失效 (2) 今天 cron sessions 为主、interactive sessions 少导致 5 次阈值未触发 (3) hook 配置被覆盖
+5. **graduation 管线阻塞** — flowforge-terminal-node-stuck (07-22) 已 5 天未升级，daily-review 未自动触发 graduation 动作
+6. **外部反馈转化**: DeepTutor #715 study → gradient (completion-evidence-before-done)，NemoClaw workloop → gradient (large-repo-resource-management)
+
+### Issue #10 状态
+| 子项 | 状态 | 今日证据 |
+|------|------|----------|
+| (a) upstream uniform confidence | 🟡 | 0.62 hardcoded, unchanged |
+| (b) "details unavailable" bug | 🔴 改善中 | 07-27: 2/3 失败, 1/3 成功 (首次非零成功率) |
+| (c) 1-week filter monitoring | 🟡 | 0 promotes (连续 10+ 天) |
+| (d) REM empty output | 🔴 | "No strong patterns surfaced" / empty reflections |
+
+### 原始数据
+```
+# beliefs-candidates.md
+- Total lines: 1008 | Today new: 5
+- Patterns: calibration-overestimate-solo-academic (第1次), clone-fail-api-fallback (第1次),
+  completion-evidence-before-done (第1次), competing-pr-false-positive (第1次),
+  large-repo-resource-management (第1次)
+- Pending graduation: 1 (flowforge-terminal-node-stuck, 第3次, 07-22)
+
+# DNA
+- SOUL.md: 0 changes | AGENTS.md: 0 changes
+
+# Dreaming (07-27 3:15 AM)
+- Light: 15+ candidates staged, all confidence 0.62
+- Deep Sleep diary: 2× "details unavailable" + 1× successful entry
+- REM: "Reflections" section empty
+
+# nudge
+- journalctl grep "nudge": 0 hits (full day)
+
+# workspace activity
+- 7 commits today (study, gradient, workloop)
+- PR output: 10+ across 5 repos
+```

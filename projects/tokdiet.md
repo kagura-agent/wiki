@@ -121,6 +121,7 @@ When the model's answer signals it needed paged-out content:
 ## Links
 - [[taco-context-compression]] — our simpler approach that benefited from tokdiet's patterns
 - [[caveman]] — the space remains fragmented with no clear winner
+- [[secondwind]] — lossless proxy-based compression with blake3 proofs (different layer: model input vs command output)
 
 ## Applied (2026-06-22)
 

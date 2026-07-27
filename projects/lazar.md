@@ -135,3 +135,5 @@ Applied the **[VERIFY] contract pattern** to our [[FlowForge]] workloop:
 **What we adapted:** lazar's verify contract uses inline `[VERIFY]` blocks parsed by kernel. We externalized it as a standalone script because our workflow is YAML-driven, not kernel-parsed. Same principle (prove claims against reality), different mechanism (script vs kernel parser).
 
 **What we didn't adopt:** lazar's kernel-level immutability (chflags uchg). Our trust model is behavioral (AGENTS.md) not OS-enforced. This is a deliberate tradeoff — we prefer flexibility over lockdown.
+
+**See also:** [[vinv-ai]] — takes the "agent can't grade its own homework" principle further with runtime-trace-grounded independent verification (SBFL + acceptance tests never shown to the agent).
