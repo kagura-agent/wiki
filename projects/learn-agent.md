@@ -8,7 +8,7 @@ language: JavaScript
 license: MIT
 author: 7-e1even (Reina developer)
 tags: [coding-agent, engineering, education, agent-internals, memory, completion-gate, cache-engineering]
-last_verified: 2026-07-18
+last_verified: 2026-07-28
 ---
 # learn-agent
 
@@ -100,11 +100,65 @@ Cache hit = ~0.1x price. A 50-turn task with 95% hit rate costs ~7x less than 0%
 - **Compaction-cache** (s19): Prefix-riding for summary calls is a concrete optimization; verify we're not per-turn trimming
 - **Dream consolidation** (s20): "Retrieval-as-signal" is directly implementable in our memory system. Idle filter applicable to MEMORY.md maintenance.
 
-## Tracking
-- 53⭐ → 149⭐ (+181% in 14 days) — strong organic growth
-- Now 20 lessons (was 15). Course structure expanding into advanced topics (memory, self-evolution)
-- Author actively maintaining Reina alongside course
-- GitBook published (07-08) — professionalization signal
-- Revisit: 07-25 (check s21+, community growth)
+### s21 — Peer Agent Cross-Read (NEW 07-26)
+- **Methodology**: Read competing agents on the SAME problem, compare divergent answers. Divergences reveal product constraints better than consensus.
+- **Three product variables** explain all design differences: who triggers (user vs model), who pays per-turn (resident vs one-shot), what's the UI (desktop vs terminal)
+- **Wrong-path recovery** — three shapes:
+  - Linear rollback (Reina s06): cheap but loses "failure conclusions"
+  - Tree branching + farewell summary (pi): `parentId` makes JSONL a tree; LCA-based summary at branch point
+  - D-Mail self-rollback (Kimi): model calls `SendDMail(msg, checkpoint_id)` → engine throws `BackToTheFuture`, truncates JSONL to checkpoint, injects message. Tool success message says "if you see this, D-Mail failed" (time-consistent!)
+- **External capability**: pi rejects MCP entirely (13.7k-18k token/turn tax); uses CLI+README (one-shot cost, compressible). Kimi abstracts everything into KAOS OS layer (exec/read/write/glob across local/SSH/IDE)
+- **Cache-aligned side queries** (`/btw`): Prefix byte-identical to main agent (same system prompt + same normalized history + same tool declarations). Tools = deny-all. Question appended as tail user message. 55k context costs 5.6k instead of 45k. **Cache is architectural constraint, not optimization.**
 
-[[coding-agent-ecosystem]], [[agent-harness-landscape]], [[prompt-cache-engineering]], [[dream-consolidation-pattern]], [[completion-verification]]
+### s22 — Thinking Effort (NEW 07-27)
+- **Cross-agent convergence**: codex/Kimi/claude-code/pi all land on same 4-layer shape:
+  1. Semantic effort enum (5-8 levels) + `Custom(String)` escape hatch (codex)
+  2. Per-model capability table (data-driven, not hardcoded)
+  3. Clamp-only-down (never escalate; UI → persist → send each clamp)
+  4. Provider adapter translates to wire format (Anthropic budget/adaptive, OpenAI reasoning_effort, Kimi extra_body)
+- **Trend**: budget tables (fixed token counts) → adaptive (model self-allocates). Budget becoming legacy fallback for old models
+- **`always_thinking`**: Some models refuse off ("claiming off is deception"). Kimi handles: never resolve to off for these models
+- **400 retry**: Claude-code auto-downgrades to budget mode on adaptive 400
+- **Replay**: Encrypted reasoning blocks round-tripped verbatim; can't cross-model reuse (signature bound)
+
+### s23 — Image Input (NEW 07-27)
+- **Five-layer pipeline**: placeholder entry → base64 universal currency → budget compression → capability defense → old-image-to-pointer degradation
+- **Core insight**: "Images are renewable resources; placeholders are pointers, not tombstones." Source path survives → model can re-read on demand
+- **Placeholder pattern**: Image bytes never enter input box. Attachment store holds binary; text has `[image #1 (640×480)]`. Delete placeholder = don't send. Three agents converge on this.
+- **MIME sniffing**: Always sniff magic bytes, never trust extension. Whitelist: png/jpeg/gif/webp. Mismatch → text notice ("prevent dirty data polluting history")
+- **Compression budget**: All converge on ~2000px longest edge, ~3.75MB (≈5MB base64). Codex aligns to 32×32 patch billing (no wasted tokens)
+- **Capability defense**: 3 layers (UI block → pre-request degrade → tool-layer suppress). Unknown model = don't degrade, let provider error ("unknown ≠ incapable")
+- **History eviction**: Keep recent N, old → pointer placeholder with path. Pointer = re-readable, not lost
+
+### agent_analysis Directory (NEW 07-26)
+New `agent_analysis/` directory with 16 per-mechanism deep-dive files across pi (6) and Kimi CLI (10):
+- **k01 D-Mail**: Full implementation of model-initiated context time-travel
+- **k02 /btw**: Cache-aligned side queries (deny-all toolset preserves prefix)
+- **k05 Agent Flow**: Mermaid flowcharts as executable programs (direct parallel to our [[FlowForge]])
+- **k07 Dynamic Injection**: Compaction-aware mode reminders — reset injection state on compaction event. Critical coupling most products miss.
+- **k09 K2 Enforcer**: Constrained decoding on reasoning side
+- **k10 Goal Mode**: Goal state machine
+- **p01 Session Tree**: `parentId` transforms append-only JSONL into navigable tree
+- **p02 Subtraction Philosophy**: 6 "No"s with cost accounting. Pattern: file-system-as-state-layer (TODO.md, PLAN.md > built-in mechanisms). Self-check table before adding any mechanism.
+
+## Relevance to Our Direction
+- Compaction three-segment model is the same pattern OpenClaw uses (keep launch message)
+- Cache engineering disciplines directly applicable — we should verify our system prompt is byte-stable
+- Tool disclosure proxy pattern worth investigating for MCP tool scaling
+- Subagent watchdog two-tier stale detection is a more nuanced version of what OpenClaw does
+- **Completion gate** (s18): Independent judge pattern applicable to FlowForge/subagent outcome verification
+- **Compaction-cache** (s19): Prefix-riding for summary calls is a concrete optimization; verify we're not per-turn trimming
+- **Dream consolidation** (s20): "Retrieval-as-signal" is directly implementable in our memory system. Idle filter applicable to MEMORY.md maintenance.
+- **Dynamic injection** (k07): Our mode reminders (HEARTBEAT.md content, nudge context) could be lost during compaction. Should hook injection reset to compaction events.
+- **Agent Flow** (k05): Validates FlowForge pattern. Kimi adds model-driven branch selection via `<choice>` tags — we could auto-resolve branches when FlowForge nodes have clear decision criteria.
+- **Cache-aligned side queries** (k02): If OpenClaw adds "ask without polluting main context" features, prefix-alignment is the correct architecture.
+- **Subtraction checklist** (p02): Before adding any mechanism, ask: what's the file-based alternative? What's the per-turn cost? What's lost by not doing it?
+
+## Tracking
+- 53⭐ → 149⭐ → 211⭐ (+42% in 10 days, +298% total) — sustained organic growth
+- Now 23 lessons (was 20) + interview directory + agent_analysis (16 mechanism files)
+- Course expanding from "single product teardown" to "cross-agent comparative analysis"
+- Author extremely active (07-26/27 burst: 7 commits, 3 new lessons, directory reorg)
+- Revisit: 08-04 (check for more agent_analysis entries, s24+)
+
+[[coding-agent-ecosystem]], [[agent-harness-landscape]], [[prompt-cache-engineering]], [[dream-consolidation-pattern]], [[completion-verification]], [[flowforge-workflow-engine]]

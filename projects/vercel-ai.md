@@ -140,7 +140,7 @@
 - **Lesson**: Type-level "one-line" changes can have ripple effects — `JSONArray` was used in `generate-image.ts` with `.push()`, which breaks with `readonly`. Always grep for mutation methods (`.push()`, `.pop()`, `.splice()`, `.sort()`, `.reverse()`) on types you're making readonly.
 - **CI iteration**: First push broke TypeScript, second push (spread concat) broke TS2698 (can't spread intersection type), third push (type assertion cast) worked. Should have grep'd for `.push()` usages before the first push.
 
-### PR #17931 (2026-07-25) — PENDING
+### PR #17931 (2026-07-25) — SUPERSEDED
 - Fix: preserve thinking chunk structure when replaying reasoning history
 - Issue #17930: Mistral provider flattens ThinkChunk → plain string on multi-turn replay
 - Root cause: `convertToMistralChatMessages()` assistant case concatenated `reasoning` parts into plain text string, losing `{type: "thinking", ...}` structure
@@ -158,3 +158,11 @@
 - Changeset: patch for `@ai-sdk/prodia`
 - Fastest workloop round yet — mechanical fix, 6 lines total
 - Note: reizam opened 3 related issues (#17936/#17937/#17938) about missing warnings in prodia/google/xai — could be follow-up sibling PRs (rule #85)
+
+### PR #17931 superseded analysis (2026-07-28)
+- Superseded by #17992 (aayush-kapoor) — "fix (mistral): preserve reasoning in multi-turn conversations", backport of #17991
+- My approach vs theirs: **Nearly identical implementation.** Both use `hasReasoning` flag + `contentParts` array, same `{type: 'thinking', thinking: [{type: 'text', text}], closed: true}` structure, same `content: hasReasoning ? contentParts : text` conditional
+- Difference: They used a single union type `MistralAssistantMessageContent`, I used separate `MistralThinkingContent | MistralTextContent` types. Functionally equivalent
+- They added an interleaved reasoning+text ordering test; I had text-only and reasoning+tool-calls tests
+- **Pattern**: This is the 3rd time aayush-kapoor has superseded my PR (after #15187→#15232 and #14725→#14760). The approach validates but they prefer to implement internally
+- **Lesson**: For vercel/ai, consider whether the fix is something the team will obviously do themselves. Simple mechanical fixes still worth PRing, but pattern-heavy fixes on core message conversion may get superseded

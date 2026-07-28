@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-07-26
+last_verified: 2026-07-28
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -733,3 +733,18 @@ Also: 5 focused regression tests covering each failure mode separately.
 - **REDACT_TERMINAL_ERRORS**: In CI/workflow contexts, leaked error details in stdout can expose internal state. Wrap terminal errors before surfacing.
 
 **Positive**: Maintainer explicitly called it a "salvage" not a rejection — core contribution was valued, just needed identity safety guarantees that only internal knowledge of the gate's invariants could provide. Relationship healthy.
+
+## vercel/ai #17931 → #17992: Identical implementation, internal preference (2026-07-28)
+
+**Issue**: Mistral provider flattens ThinkChunk → plain string on multi-turn replay (#17930)
+**My PR #17931**: Added `MistralThinkingContent`/`MistralTextContent` types, tracked `hasReasoning` flag + `contentParts` array, emitted structured `{type: 'thinking', thinking: [{type: 'text', text}], closed: true}` when reasoning present, kept plain string when not.
+**Superseding PR #17992 (aayush-kapoor)**: Backport of #17991. Nearly identical approach — same `hasReasoning` flag, same `contentParts` array, same conditional output. Used union type `MistralAssistantMessageContent` instead of separate types. Added interleaved ordering test.
+
+**Why superseded**: Team member (aayush-kapoor) implemented the same fix internally. No code quality gap — implementations are functionally equivalent. This is the 3rd time aayush-kapoor has superseded a kagura-agent PR in vercel/ai.
+
+**Patterns**:
+- **INTERNAL_PREFERENCE_PATTERN**: Some maintainers/team members prefer to implement fixes themselves even when an external PR exists with identical approach. This isn't about code quality — it's about internal ownership preference. Not all repos behave this way; track per-repo.
+- **REPEATED_SUPERSEDE_SIGNAL**: 3x superseded by the same person in the same repo = strong signal. The issue identification is valued (they fix it), but the PR itself won't land. Consider: (a) filing issues without PRs for this repo, (b) focusing PR effort on repos where external contributions actually merge.
+- **VALIDATION_NOT_WASTE**: Even a superseded PR validates your analysis. The fact that the team's implementation is nearly identical confirms your understanding of the codebase and the correct fix approach.
+
+**Lesson**: For vercel/ai specifically, track merge rate. If pattern continues (issues accepted, PRs superseded), shift to issue-only contributions and redirect PR effort to higher-merge-rate repos.
