@@ -6,7 +6,7 @@ updated: 2026-07-27
 
 # Cards Index
 
-> All cards in wiki/cards/, grouped alphabetically. 442 total.
+> All cards in wiki/cards/, grouped alphabetically. 443 total.
 
 ## A
 - [[abort-masks-sink]]
@@ -212,6 +212,7 @@ updated: 2026-07-27
 - [[fact-decision-separation]]
 - [[ffn-free-routing]]
 - [[floway]]
+- [[flowforge-workflow-engine]]
 - [[flowforge-workflow-targeting]]
 - [[flux2-klein]]
 - [[followup-precheck-aggregation]]
