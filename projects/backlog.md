@@ -1476,3 +1476,8 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - HN: Fly.io agent compute pivot (21pts), Dead Internet Theory bots 8000% growth (14pts) — trend signals, not directly actionable.
 - **agentacct** (mikehasa/agentacct) ⭐376 — Local-first Agent Work Intelligence: reads Claude Code/Codex session logs, joins with recorded work, shows tokens/cost/tasks on localhost dashboard. Python, MIT. Confidence-labeled attribution (exact/high/medium/low). Novel concept: agent work accounting. 376⭐ in 3 days. Deep-read candidate.
 - **cindy** (makecindy/cindy) ⭐473 — Multi-harness unified agent (Claude Code + Codex + more). Desktop app, pnpm monorepo. Shared memory/skills across harnesses, parallel execution. Product-level innovation, not novel architecture. Skim.
+
+## 2026-07-28 Quick Scan Additions
+- **deer-workflow** (deerwork-ai/deer-workflow) ⭐251 — Graph engineering runtime for agent orchestration. TypeScript/Bun, MIT. Keeps orchestration in TS, delegates semantic work to replaceable Agent runtimes. 2 days old, active dev. Potentially relevant for FlowForge comparison. Too early to deep-read (<3d). Monitor.
+- **openclaude-improved** (0xwilliamortiz) ⭐494 — 🚫 Spam. 22 min of activity, 0 issues, NOASSERTION license, 19 SEO topic tags. Skip.
+- Ecosystem note: Cindy surging (476→854, +79% in 1 day). wmux confirmed on HN (12pts). Stable ecosystem otherwise.

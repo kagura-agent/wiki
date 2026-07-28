@@ -1,39 +1,37 @@
 {
-  "timestamp": "2026-07-27T20:21:00+08:00",
+  "timestamp": "2026-07-28T10:09:00+08:00",
   "total_files": 1082,
   "cards": 442,
   "projects": 553,
-  "wikilinks": 4980,
-  "errors": 0,
-  "warnings": 63,
-  "broken_links": 0,
-  "index_drift": 7,
-  "index_drift_files": [
-    "projects/agentacct.md",
-    "projects/cindy.md",
-    "projects/optmem-binary-merge-memory.md",
-    "projects/secondwind.md",
-    "projects/sigbound.md",
-    "projects/vinv-ai.md",
-    "projects/wmux.md"
+  "wikilinks": 4985,
+  "errors": 1,
+  "warnings": 52,
+  "broken_links": [
+    {
+      "source": "./projects/learn-agent.md",
+      "target": "flowforge-workflow-engine"
+    }
   ],
-  "orphans": 4,
-  "orphan_list": ["cindy", "optmem-binary-merge-memory", "secondwind", "wmux"],
+  "orphans": 0,
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "duplicate_slug_details": {
-    "README": ["./README.md", "./skill-trajectories/README.md", "./experiments/README.md"]
-  },
+  "index_consistent": true,
+  "duplicate_slugs": [
+    {
+      "slug": "README",
+      "files": ["./README.md", "./skill-trajectories/README.md", "./experiments/README.md"]
+    }
+  ],
   "cards_index_stale": true,
-  "cards_index_missing": 442,
+  "cards_not_indexed": 442,
   "frontmatter_ok": true,
-  "avg_wikilinks_per_file": 5.8,
+  "avg_wikilinks_per_linked_file": 5.8,
   "cards_zero_outbound": 49,
-  "secrets_found": 0,
-  "stale_files": 398,
+  "secrets_detected": false,
+  "stale_files": 399,
   "unicode_suspicious": 25,
   "invalid_facts": 0,
-  "error_book_new": 0,
-  "error_book_recurring": 62,
-  "error_book_auto_closed": 35
+  "error_book_new": 1,
+  "error_book_recurring": 51,
+  "error_book_auto_closed": 41,
+  "error_book_total_open": 52
 }

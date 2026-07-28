@@ -438,3 +438,10 @@
 - **Note**: #7351 fix (merged in v0.0.95) masks this bug in practice — `inspectOtherGatewayEnvironments` forces `scopedToSelectedGateway = true` when openshell is missing via `liveNames === null` check. The fix makes the return value explicitly correct regardless of scoping.
 - **DCO**: Used `--signoff` ✅
 - **Pattern**: SEMANTIC_CORRECTNESS — even if a bug is masked by another check, fix the semantic incorrectness directly rather than relying on accidental protection from unrelated code paths.
+
+## PR #7684 — ci: prefer preinstalled shellcheck over apt-get (2026-07-28)
+- Issue #7535: apt-get update stalls on slow mirrors, causing CI timeout
+- Fix: conditional `command -v shellcheck` check before apt fallback
+- CodeRabbit suggested validating --format=json1 support — skipped because the downstream SARIF step already handles incompatible versions gracefully
+- Claim-to-PR: 2 days (claimed 07-26, delivered 07-28) — acceptable but could be tighter
+- CI: fork-origin PR Review Advisor skipped (expected — rule #68), core gates pass
