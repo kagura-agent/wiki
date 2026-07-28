@@ -1,7 +1,7 @@
 ---
 title: Index
 created: 2026-04-10
-last_verified: 2026-07-18
+last_verified: 2026-07-28
 ---
 # Wiki Cards Index
 
@@ -530,6 +530,7 @@ Last updated: 2026-07-18
 - [Existence Encoding](existence-encoding.md)
 - [EXP: Daily Review 质量保证](exp-daily-review-quality.md)
 - [External Contributor Success Pattern](external-contributor-success.md)
+- [FlowForge Workflow Engine](flowforge-workflow-engine.md)
 - [FlowForge Workflow Targeting](flowforge-workflow-targeting.md)
 - [Flux2 Klein](flux2-klein.md)
 - [Frozen Trust vs Time Decay](frozen-trust-vs-time-decay.md)
