@@ -1,16 +1,16 @@
 ---
 title: open-kritt — AI Security Research Platform
 created: 2026-07-22
-updated: 2026-07-22
+updated: 2026-07-29
 status: active
 links: [[agent-credential-security]], [[coding-agent-ecosystem]], [[clawpatrol]]
-last_verified: 2026-07-22
+last_verified: 2026-07-29
 ---
 
 # open-kritt — AI Security Research Platform
 
 **Repo**: [Kritt-ai/open-kritt](https://github.com/Kritt-ai/open-kritt)
-**Stars**: 259 (2026-07-22)
+**Stars**: 438 (2026-07-29, +69% from 259 on 07-22)
 **License**: AGPL-3.0
 **Stack**: Python engine + Express/Prisma backend + React frontend + Postgres + Docker
 **Provenance**: Team "Blockian" — $1.5M+ bug bounty payouts (Immunefi/HackenProof)
@@ -78,12 +78,21 @@ Reusable Markdown instruction blocks (slug + name + content + metadata). Attache
 - **Repeat runs** pattern: useful for our own tooling — run analysis N times, merge unique results. Statistically reduces LLM blind spots.
 - **Sandboxing via Docker-in-Docker** contrasts with [[clawpatrol]]'s MITM proxy approach. Kritt trusts the container boundary; Clawpatrol inspects the wire.
 
+## Update 2026-07-29 — v1.2.0
+
+- **Model-per-depth selection**: Each workflow depth can now specify a different model. Pattern: use cheap/fast models for enumeration (depth 0), expensive/capable models for deep analysis (depth 2). Cost optimization without sacrificing quality where it matters. Implementation: Prisma schema + SQL migration for `scan_model_overrides`, engine resolves model per step, validation layer + serialization. 148-line data integrity test suite added.
+- **Scan runtime hardening**: account handling improvements, runtime safety
+- **Community links**: Frontend now includes community resources
+- **Issue #30**: External contributor requesting OpenCode Zen as 4th provider (validates multi-provider architecture)
+- **Community health**: 29 external PRs/30d, 12 unique issue authors, 90 forks. Significant growth from 2 issues → 25 open issues in 7 days. Transitioning from solo project to community project.
+- **Only 2 GitHub issues** from initial review → now 25 open issues. Community bootstrapping successful.
+
 ## Critique & Limitations
 
 - **AGPL-3.0**: Cannot integrate code without open-sourcing. Pattern-learning only.
 - **Unauthenticated by default**: No builtin auth — relies on operator to add reverse proxy. Security tool with no auth is ironic.
 - **Root-in-container as feature**: Explicitly not a security boundary. Pragmatic for security research (agents need to compile, install, test) but limits deployment trust model.
-- **Only 2 GitHub issues**: Very early community. Will need to watch if external contributors appear.
+- ~~**Only 2 GitHub issues**: Very early community.~~ → Now 25 open issues, 29 external PRs/30d. Community bootstrapped successfully.
 - **No model provider diversity signal**: Only Codex/Claude/OpenRouter supported. No Gemini, no local models.
 
 ## Ecosystem Position
