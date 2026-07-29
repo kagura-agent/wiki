@@ -6950,3 +6950,53 @@ cc61ea7 graduate: flowforge-terminal-node-stuck + preflight-size-gate-local-clon
 - 7 commits today (study, gradient, workloop)
 - PR output: 10+ across 5 repos
 ```
+
+## 🔬 自进化观察日报 2026-07-28 (Issue #10 Day 11)
+
+### 管线活跃度
+- beliefs-candidates: 3 条新增 (oom-large-scripts, issue-timing-window, 被動模式三天硬限) / 6 条 stale 自动 retract / 0 条待升级
+- DNA 变更: 无（SOUL.md, AGENTS.md 无 commit）
+- nudge 触发: 0 次（gateway 日志无 nudge 记录，连续 5+ 天沉默）
+- dreaming: 运行 2 次 (3:15 AM + 10:48 AM)，promote 0 条
+
+### Dreaming 子系统状态
+
+| 子项 | 状态 | 证据 |
+|------|------|------|
+| (a) uniform confidence | 🟡 | 0.62 hardcoded，未变 |
+| (b) "details unavailable" | 🔴 回归 | 6/6 失败 (3:15AM ×3, 10:48AM ×3) — 昨日 2/3 → 今日 6/6 |
+| (c) filter monitoring | 🔴 | Day 11: 0 promotes（Light Sleep 有材料但 Deep Sleep 无法读取） |
+| (d) REM empty | 🔴 | "### Reflections" 后空白 |
+
+**关键退步**: 昨日 (b) 出现 1/3 成功率改善，今日回归 6/6 全败。总计 DREAMS.md 中 "details unavailable" 累计 18 条。这确认了 intermittent 假设——不是稳定改善，而是随机波动。
+
+### Light Sleep 数据（来自 memory/2026-07-28.md）
+- 多条 Reflect 候选被 stage（含 workloop 分析、calibration notes、study 总结）
+- 内容质量较高：有具体 pattern 提取、失败分析、方向建议
+- 但 Deep Sleep 无法访问这些候选的详情 → 无法 rank/promote
+
+### 闭环追踪
+- 完整闭环: 1 个（beliefs auto-retract 6 stale = 清理闭环）
+- 部分闭环: 2 个
+  - workloop OOM → gradient 记录 ✓ → 未见后续代码修复 ✗
+  - issue-timing-window 发现 → gradient 记录 ✓ → 未见策略调整 ✗
+- 断裂处: gradient→upgrade（0 条升级），dreaming promote→DNA 路径完全断裂
+
+### 今日发现
+1. **Dreaming (b) 回归是最大信号** — 昨日的改善是噪音不是趋势。根因未解决（trace lookup 失败），表现随机波动。
+2. **Nudge 持续沉默** — 连续 5+ 天 0 触发，结合 dreaming 全败，意味着当前唯一活跃的反思机制是 beliefs-candidates 手动写入。自动反思管线（nudge + dreaming promote）都处于失效状态。
+3. **输入侧健康，输出侧瘫痪** — beliefs 新增 3 条 + auto-retract 6 条证明管线前端正常运转；但从 gradient→升级（0）和 dreaming→promote（0）看，consolidation 完全停滞。
+4. **PR 产出极高** — 6 merged + 2 open 跨 5 repo，但外部反馈→gradient 转化率低（仅 competing-pr-false-positive 一条来自 CodeRabbit review）。
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+2d79148 gradient: issue-timing-window (workloop dry run)
+b68ff16 gradient: oom-large-scripts (workloop find-issue.sh)
+d798ec7 beliefs: auto-retract 6 stale entries (30d+ no recurrence)
+
+# DREAMS.md grep "details were unavailable": 18 occurrences total
+# nudge in gateway logs today: 0
+# workspace commits today: 9
+# PR activity: 6 merged, 2 open (lottie-studio ×3, abti ×4, finance ×1, NemoClaw ×1)
+```

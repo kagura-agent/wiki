@@ -358,3 +358,12 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - **CI**: Ubuntu PASS, Windows/Docker in progress
 - **Note**: archon-release.yaml has complex bash with multiple $node.output inside echo strings — required variable extraction pattern
 - **Pattern**: YAML-only fixes are fast to implement manually, no need for Claude Code
+
+### 2026-07-29: PR #2262 review fixes pushed
+- **Context**: Wirasm did thorough e2e verification and requested assignment-form conversion for 8 bare-arg sites
+- **Issue found**: The review-fix commit (71dddc20) was accidentally committed to WRONG BRANCH (fix/unknown-node-keys instead of fix/sweep-double-quoted-node-output). This caused Day 6 debt.
+- **Resolution**: Rebased on upstream/dev, manually applied the same changes to the correct branch, force-pushed
+- **Validation**: `bun validate workflows 2>&1 | grep "WARNING [bash]" | wc -l` → 0
+- **Lesson**: After committing review fixes, ALWAYS verify `git branch` shows the correct PR branch before pushing. The previous session was likely on the wrong branch due to switching between PRs.
+- **Maintainer pattern**: Wirasm does end-to-end testing (runs workflows, compares outputs). Review is thorough and constructive. Ship-with-fixes style.
+- **Status**: 2 commits, rebased on latest upstream/dev, awaiting merge

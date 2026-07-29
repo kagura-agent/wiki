@@ -451,3 +451,12 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Tests**: New `overflow.test.ts` — 12 unit tests covering both branches, default/explicit reserved, overflow integration
 - **Approach**: Local clone, manual 1-line fix + test file, bun test locally
 - **Lesson**: Compliance bot enforces PR template strictly — must use exact template sections or get 2h auto-close warning
+
+### 2026-07-29: PR #39425 — fix(acp): respect provider currency in usage_update
+- **Issue**: #38667 — ACP usage_update hardcodes "USD" for all providers
+- **Fix**: Add optional `currency` field to ProviderCost schema, thread through cached lookups to both sendUpdate call sites (usage.ts Effect layer + service.ts ACP client)
+- **Approach**: Followed existing `contextLimit` caching pattern exactly (SynchronizedRef in layer, Map<string,Promise> in client). Default "USD" for backward compat.
+- **DinahK-2SO response**: Approved approach in comments (optional field + default), no pushback
+- **Architecture note**: opencode has TWO parallel usage_update paths: (1) Effect-based layer in usage.ts used by local sessions, (2) ACP client SDK in service.ts used by remote sessions. Both need identical changes.
+- **CI note**: Cannot run tsc locally — monorepo uses bundler resolution that requires full project context. Bun not in default PATH.
+- **Lesson**: When opencode has a code pattern that exists in two parallel implementations (Effect layer vs SDK client), always check both. Grep for the literal string being replaced.
