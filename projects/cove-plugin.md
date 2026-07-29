@@ -79,6 +79,10 @@ issue #398 想换的是把这个手写 deliver 换成 framework 的 `sendDurable
 - 重置方法：mv jsonl → `.reset.<ts>` + sessions.json 里把对应 key 的 `sessionId/sessionFile` 清成 null，`status` 改 `idle`，`contextTokens/inputTokens/outputTokens` 归零
 - `/new` 这种 trigger 是 OpenClaw CLI/TUI 层的命令，cove channel **不会**把它翻译成 reset，要从文件层操作
 
+## Related
+
+- [[cove-plugin-message-actions]] — message tool action dispatch 架构调研
+
 ## 已知坑
 
 - **Anthropic `thinking` block signature**：用 extended thinking 的 session 历史里有 `thinking` block 时，model 切换或签名过期会导致后续 replay 报 `Invalid signature in thinking block`，runtime 显示为 `replay_invalid` —— 这种 session 救不回来，只能 reset

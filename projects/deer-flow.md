@@ -2,6 +2,8 @@
 
 > bytedance/deer-flow | 47k⭐ | Python | SuperAgent 编排框架
 
+**See also:** [[deer-workflow]] — TypeScript spin-off (DeerWork pilot, code-first workflow runtime)
+
 ## 概要
 字节跳动的 multi-agent 编排框架，带本地沙箱模式（安全隔离执行）。
 基于 LangGraph 构建，前端 Next.js + 后端 FastAPI。
