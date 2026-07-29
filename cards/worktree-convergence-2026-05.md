@@ -2,6 +2,7 @@
 title: Worktree Isolation Convergence (May 2026)
 created: 2026-05-02
 type: trend
+last_verified: 2026-07-29
 ---
 
 # Worktree Isolation Convergence
@@ -56,4 +57,4 @@ Grew 31→112⭐ in 5 days. The novel piece is `preflight_intent.py`:
 - [[agent-memory-landscape-202603]] — parallel convergence in memory space
 - [[team-lead]] — our multi-agent coordination approach
 - [[coding-agent]] — single-agent approach
-- [[cadis]], [[oh-my-kimichan]], [[paragents]]
+- [[cadis]], [[oh-my-kimichan]], [[paragents]], [[sigbound]]
