@@ -445,3 +445,14 @@
 - CodeRabbit suggested validating --format=json1 support — skipped because the downstream SARIF step already handles incompatible versions gracefully
 - Claim-to-PR: 2 days (claimed 07-26, delivered 07-28) — acceptable but could be tighter
 - CI: fork-origin PR Review Advisor skipped (expected — rule #68), core gates pass
+
+## PR #7812 — fix(rebuild): emit actionable diagnostic on all preflight failures (2026-07-29)
+- **Issue**: #7794 — rebuild exits without actionable diagnostic when failing during preflight
+- **Status**: PENDING, core CI gates pass, CodeRabbit minor feedback addressed (issue suffix + sandbox-safety assertion)
+- **Scope**: 5 files (+70/-18): `rebuild-preflight-error.ts` (1-line text change), `rebuild-preflight-guards.ts` (4 functions refactored to use shared helper), `rebuild-preflight-phase.ts` (MCP error catch routed through helper), `rebuild-preflight-error.test.ts` (new), `rebuild-preflight-confirmation.test.ts` (1-line assertion update)
+- **Root cause**: `printRebuildPreflightFailure` said "Sandbox is untouched" but not "Aborting rebuild". CI test expects `/Failed to back up|Aborting rebuild/i`. Additionally, 5 guard functions called `bail()` directly without going through the shared helper, producing no structured diagnostic at all.
+- **Fix**: Changed shared helper output to include "Aborting rebuild" and routed all bare-bail paths through the centralized function.
+- **Pattern**: CENTRALIZED_DIAGNOSTIC — when CI tests check for specific output patterns, ALL failure paths must route through a single formatting function to guarantee pattern coverage
+- **Process note**: Plan was reviewed by subagent (8/10 APPROVED) in previous cron session but flowforge wasn't advanced. Current session recovered context and completed implementation.
+- **DCO**: Used `--signoff` ✅
+- **Competing PR**: #7789 (lyral-commits) attempted same fix but was CLOSED — validates the issue is real and our approach correct
