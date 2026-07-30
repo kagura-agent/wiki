@@ -1,7 +1,7 @@
 ---
 title: Cron Observability Metrics
 created: 2026-04-13
-last_verified: 2026-06-20
+last_verified: 2026-07-30
 ---
 # cron-observability-metrics
 
@@ -74,6 +74,7 @@ Tracking token cost, success rate, and duration per cron job / routine.
 - [[flowforge]] — 可加 metrics 的执行引擎
 - [[cron-progress-suppression]] — cron 输出管理的另一面
 - [[multica]] — #824 实现了跨平台 token usage 扫描（OpenClaw+Hermes+OpenCode session 文件解析），验证这个方向是 production 刚需
+- [[wattage]] — token-spend profiler，专注 per-session/per-cron cost breakdown
 
 ## multica 实现参考 (2026-04-13 #824)
 

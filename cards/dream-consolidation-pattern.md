@@ -2,7 +2,7 @@
 title: Dream Consolidation Pattern
 tags: [agent-memory, knowledge-management, architecture-pattern]
 created: 2026-05-12
-last_verified: 2026-07-20
+last_verified: 2026-07-30
 ---
 
 # Dream Consolidation Pattern
@@ -46,6 +46,7 @@ Memory needs an explicit delete path or it bloats over time. Consolidation agent
 - [[thclaws]] `/dream` command (v0.9.0, 2026-05-12) — first known implementation. Spawns side-channel agent with `KmsRead/Search/Write/Append/Delete` tools. Embedded AgentDef compiled into binary, overridable by user.
 - [[agent-memory-hooks-neo4j]] dream.py (tomasonjo, 2026-05-05) — Neo4j graph-backed. Watermark-based incremental processing, DERIVED_FROM provenance edges, markdown-as-graph-nodes. Multi-client (Claude Code + Codex + Cursor).
 - [[buddyme]] memory decay (virgo777, 2026-05-10) — Simpler variant: SequenceMatcher-based relevance scoring with 30-day linear decay, automatic archive/clean lifecycle. Not strictly "dream" but overlapping pattern (offline consolidation + dedup).
+- [[memory-forest]] structured sweep (kagura, 2026) — Tree-structured memory with periodic sweep-based consolidation, combining dream-style background processing with hierarchical organization.
 - **learn-agent s20** (7-e1even, 2026-07-17) — Three-channel write + idle filter + retrieval-as-signal + stamp-as-lock. Comparison of 9 implementations (claude-code, codex, grok, hermes, etc.). Adopted grok skeleton + codex idle filter + claude-code pruning + novel retrieval-as-signal.
 - **claude-code** (Anthropic) — Most complete: per-turn extraction + 24h/5-session dream sweep + per-turn top-5 injection. Most expensive.
 - **codex** (OpenAI) — Heaviest: startup dual-pipeline, SQLite task lease, git-based memory repo with diff-based forgetting.

@@ -1,26 +1,19 @@
 {
-  "timestamp": "2026-07-30T10:22:00+08:00",
+  "timestamp": "2026-07-30T20:23:00+08:00",
   "total_md_files": 1089,
   "total_cards": 443,
   "total_projects": 558,
-  "total_wikilinks": 5019,
+  "total_wikilinks": 5022,
   "orphans": 0,
   "broken_links": 0,
   "collisions": 3,
   "collision_details": ["README (./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
   "index_drift": 443,
-  "index_drift_detail": "cards-index.md lists ~0 slugs, cards/ has 443 files",
-  "stale_files": 422,
+  "index_drift_note": "cards-index.md lists ~0 slugs, cards/ has 443 files",
   "stubs": 0,
+  "stale_files": 422,
   "unicode_warnings": 25,
   "errors": 0,
   "warnings": 52,
-  "error_book": {
-    "new_issues": 30,
-    "recurring_issues": 21,
-    "clean_passes": 30,
-    "auto_closed": 11,
-    "total_open": 81
-  },
   "status": "healthy_with_warnings"
 }

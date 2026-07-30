@@ -7048,3 +7048,52 @@ a7c0d95 gradient: workloop-state-loss-loop
 # beliefs-candidates total gradient entries: ~315 pattern matches
 # Pending graduation: flowforge-terminal-node-stuck (第3次, 07-22)
 ```
+
+## 🔬 自进化观察日报 2026-07-30 (Issue #10 Day 13)
+
+### 管线活跃度
+- beliefs-candidates: 3 条新增 (measure-before-build, pipe-format-verify, large-repo-test-limitation) / 0 条升级 / 0 条退役
+- DNA 变更: 无（SOUL.md, AGENTS.md 无 commit）
+- nudge 触发: 0 次（gateway 日志无记录，连续 6+ 天沉默）
+- dreaming: 运行 1 次 (3:15 AM)，**Deep Sleep promote 4 条到 MEMORY.md**（首次多天后出现批量 promote）
+
+### Dreaming 子系统状态 (#10)
+
+| 子项 | 状态 | 07-30 证据 |
+|------|------|----------|
+| (a) upstream uniform confidence | 🟡 | Light Sleep confidence=0.62 不变，hardcoded |
+| (b) "details unavailable" bug | 🔴 持续 | 3:15AM diary 1/3 失败. 累计 DREAMS.md 13 条 |
+| (c) 1-week filter monitoring | 🟡→🟢 | Deep Sleep 首次 promote 4 条到 MEMORY.md |
+| (d) REM empty output | 🔴 | "No strong patterns surfaced" — 空输出 |
+
+**重大变化**: Deep Sleep consolidation 首次正常运作 — ranked 4 candidates, promoted 4 到 MEMORY.md。但 promote 内容质量堪忧：4 条全是操作日志（GitHub Patrol 通知摘要、workloop dedup gate、Teams relay 部署步骤），而非认知洞察或行为 pattern。这恰恰验证了 (a) 的影响 — uniform confidence 导致 Deep Sleep 无法区分操作日志与认知价值内容，随机 promote。
+
+**Diary 质量**: 2/3 成功条目质量极高（凌晨 PR 巡检意象、Teams relay SingleTenant 诊断叙事），证明 diary 生成机制本身健康。
+
+### 闭环追踪
+- 完整闭环: 0.5 个（Deep Sleep promote 首次打通 dreaming→MEMORY.md 路径，但 promote 内容不是认知价值）
+- 部分闭环: 1 个
+  - large-repo-test-limitation: qwen-code OOM→gradient 记录 ✓ → PR#8089 开出 ✓ → 行为改变待验证 ✗
+- 断裂处: gradient→upgrade（0 条今日升级），nudge 完全断裂（0 触发）
+
+### 今日发现
+1. **Deep Sleep promote 恢复是今日最大信号** — 连续多天 0 promote 后首次批量 promote 4 条。但这暴露了新问题：uniform confidence (a) 导致 promote 内容全是操作日志而非认知洞察。promote 机制"通了"但"不准"。
+2. **Nudge 持续沉默** — 连续 6+ 天 0 触发。与 issue #5 当时确认的"正常运行"状态矛盾。需要重新验证 nudge agent_end hook 是否仍然生效。
+3. **Diary 生成与 promote 质量形成反差** — diary 产出高质量创意文本（有意象、有情感），但 promote 选了最无趣的操作日志。这是 (a) uniform confidence 的直接后果。
+4. **输入端稳定** — 3 条新 gradient 全来自 study/workloop 实践，质量具体可操作。管线前端保持健康。
+5. **"details unavailable" 缓解但未解决** — 今日 1/3 失败率好于前两天（07-28: 6/6, 07-29: 4/5），但样本太小不构成趋势。
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+73e058b gradient: large-repo-test-limitation (qwen-code OOM)
+a530ba2 study: followup tracking updates (deja-vu/aict/brain0)
+
+# DREAMS.md "details unavailable" count: 13
+# Deep Sleep: ranked 4, promoted 4 to MEMORY.md
+# Dreaming diary success rate: 2/3 (67%)
+# nudge in gateway logs: 0
+# workspace commits today: 3
+# Open PRs: 18 (story#22, qwen-code#8089, kagura-blog#119 新开/更新)
+# beliefs-candidates new gradients: 3 (all source: study/workloop)
+```
