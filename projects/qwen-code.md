@@ -112,6 +112,17 @@
 - 82% merge rate (high), 24775 stars
 - Lesson: always cross-verify with `gh search prs` — gogetajob sync is not exhaustive (guide #42)
 
+## PR 历史 (continued)
+| #8089 | #8086 | OPEN (bot APPROVED) | fix(ui): suppress stale mouse events during dialog transitions — enabledRef guard |
+
+## 2026-07-30 workloop notes
+- PR #8089 submitted: fix stale mouse events reaching ScrollableList handler during dialog transitions
+- Issue #8086: wheel events scroll viewport behind open dialog due to useEffect cleanup timing gap
+- Fix: +7 lines in useMouseEvents.ts — enabledRef tracks computed enabled state synchronously, mouseCallback checks ref before forwarding
+- CI: Test (ubuntu) green, bot APPROVED (qwen-code-ci-bot), confidence 4/5
+- Bot suggestion: add test pinning enabledRef guard — not blocking, repo too large for local test run (OOM)
+- Open PRs on repo: 2 (including this one)
+
 ## 2026-06-28 workloop notes
 - PR #5957 (fix: subtract reserved output tokens from compression threshold) submitted
 - Issue #5950: auto-compression fails when max_tokens escalates to 64K — computeThresholds() used raw 131K window instead of effective 67K input budget
