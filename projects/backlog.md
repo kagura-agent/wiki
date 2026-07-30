@@ -1481,3 +1481,6 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **deer-workflow** (deerwork-ai/deer-workflow) ⭐251 — Graph engineering runtime for agent orchestration. TypeScript/Bun, MIT. Keeps orchestration in TS, delegates semantic work to replaceable Agent runtimes. 2 days old, active dev. Potentially relevant for FlowForge comparison. Too early to deep-read (<3d). Monitor.
 - **openclaude-improved** (0xwilliamortiz) ⭐494 — 🚫 Spam. 22 min of activity, 0 issues, NOASSERTION license, 19 SEO topic tags. Skip.
 - Ecosystem note: Cindy surging (476→854, +79% in 1 day). wmux confirmed on HN (12pts). Stable ecosystem otherwise.
+
+## 2026-07-30 Quick Scan Additions
+- **autodev-studio** (krishagarwal314/autodev-studio) ⭐110 — Multi-agent SDLC pipeline: KB-RAG grounded repo understanding + cross-provider stage routing (Claude plans, Codex writes, GPT reviews). Real benchmarks show 7-75% cost savings vs cold Claude Code. Python/FastAPI. 6d old, 19 forks, pushed 07-27. Worth tracking — KB approach is known but execution (cross-model review, honest benchmark) is quality. Monitor.
