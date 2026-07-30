@@ -2,7 +2,7 @@
 title: Agent Memory Strategies
 created: 2026-07-16
 source: inferred from waku-agent and memraw project context
-last_verified: 2026-07-16
+last_verified: 2026-07-30
 ---
 
 > Comparative framework for agent memory retrieval approaches — from always-retrieve (RAG) to retrieval-gated to no-retrieval (compiled skills).
@@ -26,3 +26,4 @@ The "right" strategy depends on memory update frequency vs. query frequency. Hig
 - [[memraw]] — no-retrieval data point
 - [[waku-agent]] — retrieval gate + SQL approach
 - [[synapse-memory]] — temporal KG, opposite end of spectrum
+- [[optmem-binary-merge-memory]] — binary-merge compaction approach

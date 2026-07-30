@@ -7000,3 +7000,51 @@ d798ec7 beliefs: auto-retract 6 stale entries (30d+ no recurrence)
 # workspace commits today: 9
 # PR activity: 6 merged, 2 open (lottie-studio ×3, abti ×4, finance ×1, NemoClaw ×1)
 ```
+
+## 🔬 自进化观察日报 2026-07-29 (Issue #10 Day 12)
+
+### 管线活跃度
+- beliefs-candidates: 4 条新增 (workloop-state-loss-loop, wrong-branch-commit, targets-todo-crossref-mismatch, saturation-signal-is-valid-outcome) / 0 条升级 / 1 条待升级 (flowforge-terminal-node-stuck 第3次, 07-22, 7天未行动)
+- DNA 变更: 无（SOUL.md, AGENTS.md 无 commit）
+- nudge 触发: 0 次（gateway 日志无记录）
+- dreaming: 运行 2 次 (3:15 AM + 11:40 AM)，promote 0 条
+
+### Dreaming 子系统状态 (#10)
+
+| 子项 | 状态 | 07-29 证据 |
+|------|------|----------|
+| (a) upstream uniform confidence | 🟡 | Light Sleep candidate confidence=0.62, hardcoded unchanged |
+| (b) "details unavailable" bug | 🔴 持续 | 4/5 失败 (3:15AM ×2 fail + 1 success, 11:40AM ×2 fail). 累计 17 条 |
+| (c) 1-week filter monitoring | 🔴 | Day 12+: 0 promotes. 管线断裂确认 |
+| (d) REM empty output | 🔴 | "No strong patterns surfaced" — 空输出 |
+
+**趋势**: 07-27: 1/3 成功 → 07-28: 0/6 → 07-29: 1/5. 波动而非趋势，证实 (b) 是 intermittent 故障，根因未解决。
+
+### 闭环追踪
+- 完整闭环: 0 个
+- 部分闭环: 2 个
+  - wrong-branch-commit: 发现6天表面无行动根因→gradient记录 ✓ → 行为改变待验证 ✗
+  - workloop-state-loss-loop: 识别cron跨session状态丢失→gradient记录 ✓ → persist方案未实施 ✗
+- 断裂处: gradient→upgrade（flowforge-terminal-node-stuck 7天未升级），dreaming→promote 完全断裂
+
+### 今日发现
+1. **Dreaming (b) 仍是核心瓶颈** — 17 条 "details unavailable" 积累，成功率波动在 0-33% 之间。上游 trace lookup 失败是根因，local filter 无法补偿。
+2. **Nudge 持续沉默** — 连续多天 0 触发。自动反思管线两条路（nudge + dreaming promote）均失效，beliefs-candidates 手动写入是唯一存活的反思渠道。
+3. **Graduation backlog** — flowforge-terminal-node-stuck 第3次记录于 07-22，至今 7 天未处理升级。违反"被動模式三天硬限"原则（该原则本身在 07-28 才记录，但精神适用）。
+4. **输入端健康** — 4 条新 gradient 来源多样（workloop×2, study×2），质量具体可操作。管线前端运转正常。
+5. **Deep Sleep 偶尔产出高质量内容** — 3:15 AM 的成功条目是一篇有诗意的创意日记（关于 cove-ops 发布和旅行规划讨论），证明机制本身有价值，只是可靠性不足。
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+a7c0d95 gradient: workloop-state-loss-loop
+577bc7c gradient: wrong-branch-commit pattern
+995b41d study followup: 3 due items, 2 calibration verified, open-kritt deep read
+
+# DREAMS.md "details unavailable" count: 17
+# Dreaming success rate today: 1/5 (20%)
+# nudge in gateway logs: 0
+# workspace commits today: 6
+# beliefs-candidates total gradient entries: ~315 pattern matches
+# Pending graduation: flowforge-terminal-node-stuck (第3次, 07-22)
+```
