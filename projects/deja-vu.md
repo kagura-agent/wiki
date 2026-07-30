@@ -94,12 +94,60 @@ Claude Code, Codex, opencode, aider, Gemini CLI, Cursor, Antigravity, Grok Build
 6. **Trust scopes as policy** — declarative JSON rules for what memory activates where (search/MCP/auto × local/imported/per-peer), with audit receipts
 7. **Entropy-based redaction** — beyond pattern matching: high-entropy values in secret-shaped positions (assignment RHS, standalone lines) with exclusions for hex digests, UUIDs, paths
 
-## Community Health (2026-07-23)
+## v0.16.0–v0.16.2 (2026-07-28–29) — Ranking & Corpus Intelligence
 
-- THRIVING 5/6: 5 unique issue authors, 5 external PRs/30d, 30/30 PRs merged
-- Solo dev (vshulcz) but growing community engagement
-- 454⭐ (+115% from 211 at discovery 07-16)
-- Active: 15+ commits on 07-22 alone, 2 releases in one day
+### corpusprobe — Measure Before You Build
+
+New tool (`scripts/corpusprobe/main.go`) that validates feature ideas against real index data. Each probe maps to a GitHub issue (#526-#546) and answers: "does the corpus actually contain what this feature needs?"
+
+**What it measures:**
+1. Role distribution (user/assistant/system) — counts + bytes
+2. Command evidence — shell commands, exit statuses, test outputs in records
+3. File content — numbered listings, source code structure
+4. Corrections — short user pushbacks ("don't", "stop", "instead...") — bilingual EN+RU regex
+5. Claims of work done — assistant turns claiming "tests pass", "all green"
+6. Repeated failures — error lines normalized (hex→H, nums→N) seen across 2+ sessions
+
+**Key principle:** Never prints corpus text, only counts/shapes. Privacy-first: the corpus is someone's private history.
+
+**Applicable pattern:** Before building a feature, validate the data exists. If only 2% of records have command output, "recall the failing test" is low-value. This is the "measure before you build" discipline applied to agent memory systems.
+
+### Decision Ranking (PR #509)
+
+**Problem:** TF-based ranking puts noise above signal. Sessions where someone *kept asking* repeat query terms more than the session that *solved it* (which says the term once, then explains). Structural, not a tuning miss.
+
+**Solution:** Sessions whose non-user turns contain decision language ("we pinned", "root cause", "fixed by", "traced it to", "decision:") score ×2.0.
+
+**Nuances:**
+- Only non-user turns count — user saying "root cause is obvious" is a proposal; assistant saying it is a record
+- ×2.0 constant sized to overcome the ~3× term repetition advantage of "still asking" sessions after BM25 saturation
+- A conclusion about a *different* topic must not outrank a direct match — asserted separately
+
+**Methodology:** Built `scripts/decisionbench` — adversarial benchmark where one session concluded, three louder ones mentioned terms more. Before: 0/8. After: 8/8.
+
+### Other v0.16.x Highlights
+- **CJK bigram indexing** (#337-#338) — Traditional→Simplified fold for bidirectional recall. Cost: +17.5% build time (measured on 12.2GB corpus by external contributor)
+- **RecallWorn** — sessions that agents actually pulled back get 1.2× ceiling boost (reuse signal > text similarity)
+- **Per-session bound** — max 64 sampled matches per session (query worst-case: 61.8ms→26.9ms)
+- **Coalesced disk reads** — pread merging (44.1ms→40.5ms for common-term search)
+- **Actual latency** — corrected from "~12ms" to measured 1.3ms median, 17ms on most common word
+- **Pasted log demotion** (PR #510) — logs rank below answers (0/8→8/8 on adversarial set)
+- **Harness expansion** — aider, Cline (plugin), Goose, Hermes (resume), Pi
+- **opencode** — recall on every prompt (not just session start), index before compaction
+- **`deja view`** — browse memory in one local HTML page
+
+### Open Architecture Issues (07-30)
+- "Index the work, not just the conversation" — direction shift toward action indexing
+- "Mine the user's own corrections into portable style rules" — [[beliefs-upgrade-mechanism]] territory
+- "Measure how much agent work is redone" — waste quantification
+- "First build is 14s" — UX-critical first-impression window
+
+## Community Health (2026-07-30)
+
+- THRIVING 5/6: 5 unique issue authors, 4 external PRs/30d, 25/30 PRs merged
+- Solo dev (vshulcz) but growing: external contributor measured CJK perf impact
+- 497⭐ (+9.5% from 454 at last check 07-23; +135% from 211 at discovery 07-16)
+- Active: 3 releases in 2 days (07-28~29), corpusprobe + perf engineering
 
 ## Ecosystem Position
 
