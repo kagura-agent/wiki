@@ -1,11 +1,11 @@
 ---
 title: AgentFactory — Self-Evolving via Executable Subagent Accumulation
 created: 2026-04-05
-updated: 2026-04-08
+updated: 2026-07-31
 source: arxiv 2603.18000, GitHub zzatpku/AgentFactory
 tags: [self-evolving, skill, code-as-memory, subagent]
 depth: deep-read
-last_verified: 2026-07-15
+last_verified: 2026-07-31
 ---
 
 ## 概述

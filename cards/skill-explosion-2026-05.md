@@ -1,7 +1,8 @@
 ---
 title: Claude Code Skill Explosion (May 2026)
 created: 2026-05-05
-updated: 2026-05-05
+updated: 2026-07-31
+last_verified: 2026-07-31
 ---
 
 # Claude Code Skill Explosion (May 2026)

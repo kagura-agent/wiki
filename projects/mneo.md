@@ -1,10 +1,11 @@
 ---
 title: mneo — Git Refs as Memory Scopes
 created: 2026-05-02
-updated: 2026-05-02
-status: new
+updated: 2026-07-31
+status: archive
 stars: 1
 url: https://github.com/HugoLopes45/mneo
+last_verified: 2026-07-31
 ---
 
 # mneo

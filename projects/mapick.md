@@ -1,11 +1,11 @@
 ---
 title: Mapick — OpenClaw Skill Manager & Privacy Layer
 created: 2026-04-30
-updated: 2026-04-30
+updated: 2026-07-31
 status: active
 stars: 14
 url: https://github.com/mapick-ai/mapick
-last_verified: 2026-05-31
+last_verified: 2026-07-31
 ---
 
 # Mapick

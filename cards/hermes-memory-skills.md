@@ -1,8 +1,9 @@
 ---
 title: "Hermes Memory Skills"
 created: 2026-04-27
-updated: 2026-04-27
+updated: 2026-07-31
 tags: [memory, consolidation, hermes, scoring, skill-ecosystem]
+last_verified: 2026-07-31
 ---
 
 # Hermes Memory Skills

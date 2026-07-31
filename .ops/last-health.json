@@ -1,19 +1,8 @@
 {
-  "timestamp": "2026-07-30T20:23:00+08:00",
-  "total_md_files": 1089,
+  "timestamp": "2026-07-31T02:23:00Z",
   "total_cards": 443,
-  "total_projects": 558,
-  "total_wikilinks": 5022,
   "orphans": 0,
   "broken_links": 0,
-  "collisions": 3,
-  "collision_details": ["README (./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
-  "index_drift": 443,
-  "index_drift_note": "cards-index.md lists ~0 slugs, cards/ has 443 files",
-  "stubs": 0,
-  "stale_files": 422,
-  "unicode_warnings": 25,
-  "errors": 0,
-  "warnings": 52,
-  "status": "healthy_with_warnings"
+  "collisions": 1,
+  "index_drift": 443
 }

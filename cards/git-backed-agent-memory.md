@@ -1,7 +1,8 @@
 ---
 title: Git-Backed Agent Memory
 created: 2026-05-03
-updated: 2026-05-03
+updated: 2026-07-31
+last_verified: 2026-07-31
 ---
 
 # Git-Backed Agent Memory

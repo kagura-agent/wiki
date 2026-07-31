@@ -2,9 +2,10 @@
 title: Signet AI
 type: project
 created: 2026-05-03
-updated: 2026-05-04
+updated: 2026-07-31
 status: tracking
 stars: 135
+last_verified: 2026-07-31
 ---
 
 # Signet AI — Portable Context Layer for AI Agents

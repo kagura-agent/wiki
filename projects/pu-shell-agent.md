@@ -1,11 +1,12 @@
 ---
 title: "pu.sh — Minimal Shell Coding Agent"
 created: 2026-05-01
-updated: 2026-05-01
+updated: 2026-07-31
 tags: [agent-harness, shell, minimal, coding-agent]
 source: https://github.com/NahimNasser/pu
 stars: 53
 status: active
+last_verified: 2026-07-31
 ---
 
 # pu.sh — A Coding Agent in 400 Lines of Shell

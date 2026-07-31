@@ -1,10 +1,11 @@
 ---
 title: oh-my-kimichan — Multi-Agent Orchestration for Kimi Code CLI
 created: 2026-05-01
-updated: 2026-05-01
+updated: 2026-07-31
 status: active
 stars: 12
 url: https://github.com/dmae97/oh-my-kimichan
+last_verified: 2026-07-31
 ---
 
 # oh-my-kimichan
