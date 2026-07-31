@@ -523,3 +523,18 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - **Fix pushed**: Replaced `import { find } from "linkifyjs"` → `import { detectLinks } from "@multica/ui/markdown/linkify"`. API mapping: `match.value` → `match.text`, `match.href` → `match.url`
 - **Lesson**: Before using transitive deps, check if the monorepo has internal wrappers. `@multica/ui/markdown/linkify` wraps `linkify-it` and provides `detectLinks` with email support
 - **New reviewer**: feifeigood — provides exact code diffs, constructive, prefers zero-new-dep solutions
+
+## 2026-07-31 PR #6247: fix(studio): archive builder session on unmount (#6246)
+- **Issue**: #6246 — Agent Creation Studio hard-deletes builder chat session on unmount
+- **PR**: #6247
+- **Status**: PENDING (CI all green: backend ✅, frontend-build ✅, frontend-test ✅, installers ✅)
+- **Root cause**: `useEffect` cleanup in `agent-creation-studio.tsx` called `api.deleteChatSession()` on every unmount (sidebar click, tab close), permanently destroying the builder conversation
+- **Fix**: Replaced `deleteChatSession` with `setChatSessionArchived(sessionId, true)` in the unmount effect only. Explicit back-button and post-create paths unchanged.
+- **Scope**: 1 file, +3/-2 lines. One API method swap
+- **Pattern**: SOFT_DELETE_ON_ACCIDENTAL_NAVIGATION — destructive cleanup effects on unmount should use soft-delete (archive) not hard-delete. Hard-delete appropriate only for intentional user actions (explicit back button) or post-commit cleanup
+- **Notes**: 
+  - First PR since long gap — all previous open PRs eventually closed/merged, 0 open at time of submission
+  - gogetajob scan --all was getting OOM-killed this session (memory pressure)
+  - NemoClaw #7996 was first choice but already assigned to yanyunl1991
+  - deer-flow was second choice but CLA blocker still active
+  - `setChatSessionArchived` already existed in API client (line 2285 of client.ts), no new interface needed
