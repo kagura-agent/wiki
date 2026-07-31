@@ -367,3 +367,11 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - **Lesson**: After committing review fixes, ALWAYS verify `git branch` shows the correct PR branch before pushing. The previous session was likely on the wrong branch due to switching between PRs.
 - **Maintainer pattern**: Wirasm does end-to-end testing (runs workflows, compares outputs). Review is thorough and constructive. Ship-with-fixes style.
 - **Status**: 2 commits, rebased on latest upstream/dev, awaiting merge
+
+### 2026-07-31: PR #2350 — fix(ci): add missing generated-file guards
+- **Issue**: #2341 — test.yml missing check:bundled-skill, check:bundled-schema, check:pi-vendor-map
+- **Fix**: Added 3 steps to .github/workflows/test.yml matching validate order
+- **CI**: ubuntu-latest ✅, CodeRabbit no comments ✅
+- **Pattern**: CI drift fixes are low-risk XS PRs, good for maintaining per-repo presence
+- **Note**: bun not installed locally — can't run check scripts, but CI validates them
+- **Status**: Pending review
