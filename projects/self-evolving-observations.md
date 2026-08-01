@@ -7097,3 +7097,53 @@ a530ba2 study: followup tracking updates (deja-vu/aict/brain0)
 # Open PRs: 18 (story#22, qwen-code#8089, kagura-blog#119 新开/更新)
 # beliefs-candidates new gradients: 3 (all source: study/workloop)
 ```
+
+## 🔬 自进化观察日报 2026-07-31
+
+### 管线活跃度
+- **beliefs-candidates**: 6 条新增（全部第1次），0 条升级。累计 1060 行，104 条本月新增
+  - find-issue-oom-fallback, filesystem-mode-artifacts, pipe-format-verify, targets-crossref, OOM_SCAN_FALLBACK, feed-lacks-competition-filter
+  - 来源: workloop ×4, study ×2。全部是工具操作层面的经验，无认知/行为层面洞察
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 未改动）
+- **nudge 触发**: 0 次（journalctl grep 无结果，连续多日沉默）
+- **dreaming**: Light Sleep 运行（候选全部 confidence 0.62 uniform）; Deep Sleep 排名 1 条、promote 1 条; Diary **3/3 失败**（100% "details unavailable"）; REM 空
+
+### 闭环追踪
+- **完整闭环**: 0 个
+- **部分闭环**: 2 个
+  - OOM 系列: 脚本 OOM → 3 条 gradient 记录 ✓ → 行为改变待验证 ✗
+  - pipe-format-verify: 07-30 首次 + 07-31 复发 → 模式识别 ✓ → 升级阈值未达 ✗
+- **断裂处**:
+  - gradient→upgrade: flowforge-terminal-node-stuck 已达 3 次（07-22）但至今未升级 ← **管线断裂**
+  - nudge 完全断裂（0 触发）
+  - diary 生成完全失败（3/3 unavailable）
+
+### 今日发现
+1. **Diary "details unavailable" 恶化至 100%** — 07-30 是 1/3 失败，今天 3/3 全部失败，DREAMS.md 累计 14 次。Issue #10(b) 状态从"缓解"变为"加速恶化"。这是当前最严重的 dreaming 子系统故障。
+2. **Gradient 输入端依然健康但高度同质** — 6 条全是工具操作层 pattern（OOM fallback, pipe format, filesystem mode），缺乏认知/行为/策略层面的洞察。这可能反映当前工作内容（workloop 密集运行）的特征，不一定是管线问题。
+3. **升级管线断裂**: flowforge-terminal-node-stuck 达到 3 次后未执行升级，违反 beliefs-candidates.md 的"3 次升级"规则。这是管线的执行缺口，不是设计缺口。
+4. **Nudge 持续沉默** — 与 issue #5 关闭时确认的"正常运行"矛盾。但按 AGENTS.md 指示，不应通过 grep memory 来判断 nudge 状态；journalctl 是正确检测手段，但今天返回空。可能原因：(a) 今天 agent sessions 少于 5 次（nudge 每 5 次触发一次）(b) nudge 配置失效。
+5. **Deep Sleep promote 持续运行** — promote 1 条，说明 deep sleep 核心机制正常。但 uniform confidence (issue #10a) 导致 promote 选择质量无法保证。
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+26a2169 gradient: feed-lacks-competition-filter
+7c309e2 gradient: OOM_SCAN_FALLBACK
+4a9d391 gradient: filesystem-mode-artifacts + pipe-format-verify + targets-crossref
+3f19332 gradient: find-issue-oom-fallback
+
+# DREAMS.md stats
+"details unavailable" total count: 14
+Deep Sleep: ranked 1, promoted 1
+Diary success rate: 0/3 (0%) ← worst ever
+REM: empty
+
+# nudge in gateway logs: 0
+# workspace commits today: 6
+# beliefs-candidates.md: 1060 lines, 6 new entries today
+# patterns near upgrade threshold:
+#   flowforge-terminal-node-stuck: 3次 (07-22) — OVERDUE for upgrade
+#   pipe-format-verify: 2次 (07-30, 07-31)
+#   targets-todo-crossref-mismatch: 2次 (07-29, 07-31)
+```

@@ -90,3 +90,44 @@ Connects usage records to work sections via client session/transcript IDs:
 - [[ccglass]] — proxy-based observability (complementary approach)
 - [[halo-agent-trace-optimizer]] — RL-based trace optimization (different goal)
 - [[agent-harness-landscape]] — broader ecosystem context
+
+## v0.5.3 Update (2026-08-01 followup)
+
+**Growth**: 376→540⭐ (+44% in 6 days), 67 forks, 4 external PR authors. Still 0 issues (odd at this scale — likely solo dev closing fast or users not reporting).
+
+### SQLite Event Store Migration (PR#36)
+
+Core architectural shift: flat `events.jsonl` → SQLite (`event_log.py`).
+
+**Migration pattern (adoptable)**:
+1. **Dual-write**: Both stores updated simultaneously
+2. **Parity proof**: `verify_against_file` proves line-for-line equivalence
+3. **Durable marker**: Store marker persists cutover state across restarts — no env var needed
+4. **Self-healing + fail-loud**: Never serves empty/half-migrated store
+5. **CLI cutover**: `event verify-log` → `event drop-flat-ledger --confirm`
+6. **Off by default**: Conservative rollout, user opts in after proof
+
+**Adversarial review process**: 3 passes finding 9→3→1→0 defects (notable: env-only authoritative state could let one env-less open wipe the log).
+
+**Relevance**: Our own study/ tools use jsonl files (calibration.jsonl, etc). This pattern shows how to migrate safely without data loss or downtime.
+
+### Honest Work States (PR#34)
+
+New state model that prevents false representation:
+- `handed_off`: terminal status for clean stops (vs eternally "in progress")
+- `mostly_done`: requires cross-session evidence (24h gap + activity elsewhere) — **absence of activity ≠ abandonment**
+- Partial verification: `3 of 5 steps verified` instead of all-or-nothing
+- Real impact: 66/905 sections were stranded as "in progress", 9 tasks correctly reclassified
+
+**Philosophy**: Aligns with our "I'm not sure beats confident wrong" — better to say "mostly_done" than falsely claim complete or stuck.
+
+### Other Notable PRs
+- #32: Agent recording fails loudly (not silently) — fail-loud over silent corruption
+- #31: Stop secret redaction from destroying records — safety mechanism caused data loss
+- #33: Fixed check no longer shown as unresolved finding
+
+## Links
+
+- [[ccglass]] — proxy-based observability (complementary approach)
+- [[halo-agent-trace-optimizer]] — RL-based trace optimization (different goal)
+- [[agent-harness-landscape]] — broader ecosystem context

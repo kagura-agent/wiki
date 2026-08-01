@@ -1,37 +1,28 @@
 {
-  "timestamp": "2026-07-28T10:09:00+08:00",
-  "total_files": 1082,
-  "cards": 442,
-  "projects": 553,
-  "wikilinks": 4985,
-  "errors": 1,
+  "timestamp": "2026-07-31T20:46:00+08:00",
+  "total_files": 1089,
+  "cards": 443,
+  "projects": 558,
+  "wikilinks": 5026,
+  "errors": 0,
   "warnings": 52,
-  "broken_links": [
-    {
-      "source": "./projects/learn-agent.md",
-      "target": "flowforge-workflow-engine"
-    }
-  ],
   "orphans": 0,
+  "broken_links": 0,
+  "duplicate_slugs": 3,
+  "stale_files": 419,
   "stubs": 0,
-  "index_consistent": true,
-  "duplicate_slugs": [
-    {
-      "slug": "README",
-      "files": ["./README.md", "./skill-trajectories/README.md", "./experiments/README.md"]
-    }
-  ],
-  "cards_index_stale": true,
-  "cards_not_indexed": 442,
-  "frontmatter_ok": true,
-  "avg_wikilinks_per_linked_file": 5.8,
-  "cards_zero_outbound": 49,
-  "secrets_detected": false,
-  "stale_files": 399,
+  "index_drift": {
+    "cards_index_lists": 0,
+    "actual_cards": 443,
+    "stale": true
+  },
   "unicode_suspicious": 25,
-  "invalid_facts": 0,
-  "error_book_new": 1,
-  "error_book_recurring": 51,
-  "error_book_auto_closed": 41,
-  "error_book_total_open": 52
+  "secret_patterns": 0,
+  "error_book": {
+    "new_issues": 4,
+    "recurring_issues": 47,
+    "clean_passes": 4,
+    "auto_closed": 30,
+    "total_open": 55
+  }
 }
