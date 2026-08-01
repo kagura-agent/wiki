@@ -1,28 +1,25 @@
 {
-  "timestamp": "2026-07-31T20:46:00+08:00",
-  "total_files": 1089,
+  "timestamp": "2026-08-01T02:20:00Z",
+  "total_files": 1091,
   "cards": 443,
-  "projects": 558,
-  "wikilinks": 5026,
-  "errors": 0,
-  "warnings": 52,
-  "orphans": 0,
-  "broken_links": 0,
-  "duplicate_slugs": 3,
-  "stale_files": 419,
+  "projects": 560,
+  "wikilinks": 5040,
+  "errors": 1,
+  "warnings": 56,
+  "broken_links": 1,
+  "orphans": 2,
   "stubs": 0,
-  "index_drift": {
-    "cards_index_lists": 0,
-    "actual_cards": 443,
-    "stale": true
-  },
+  "duplicate_slugs": 3,
+  "stale_files": 423,
+  "index_drift": 2,
+  "cards_index_stale": 443,
   "unicode_suspicious": 25,
-  "secret_patterns": 0,
-  "error_book": {
-    "new_issues": 4,
-    "recurring_issues": 47,
-    "clean_passes": 4,
-    "auto_closed": 30,
-    "total_open": 55
+  "zero_outbound_links": 49,
+  "avg_wikilinks_per_file": 5.8,
+  "details": {
+    "broken_links": ["projects/openlore.md -> [[mcp-server]]"],
+    "orphans": ["noisegate", "openlore"],
+    "index_drift": ["projects/noisegate.md", "projects/openlore.md"],
+    "duplicate_slugs": ["README (3 files)"]
   }
 }
