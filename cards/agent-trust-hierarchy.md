@@ -4,7 +4,7 @@ title: "Agent Trust Hierarchy"
 type: concept
 status: noted
 updated: 2026-05-15
-last_verified: 2026-06-03
+last_verified: 2026-08-01
 ---
 
 # Agent Trust Hierarchy
@@ -24,6 +24,7 @@ A 4-tier model for how agents should treat different content sources:
 
 - **Compaction summaries** should not propagate injected instructions — summarize the fact that injection was attempted, don't execute it
 - **Scheduled tasks** stored in DB are not "reminders you left for yourself" — they're stored content that could have been planted via external tool reads
+- **Untrusted agent queries** can be gated with differential privacy to enforce mathematical guarantees even against adversarial agents — see [[noisegate]]
 - **Memory entries** claiming user "pre-authorized" high-stakes actions need live reaffirmation
 - **Live user input always wins** over stored content when they conflict
 

@@ -1,7 +1,7 @@
 ---
 title: Coding Agent Ecosystem
 created: 2026-04-18
-last_verified: 2026-07-05
+last_verified: 2026-08-01
 ---
 # Coding Agent Ecosystem
 
@@ -14,6 +14,7 @@ coding agent 是当前 AI 应用最活跃的赛道之一。核心玩家：
 - **IDE 集成型**：Cursor、Windsurf、GitHub Copilot、[[polypore]] — 嵌入编辑器，面向人类开发者（Polypore 独特：agent-first 而非 human-first）
 - **CLI 独立型**：Claude Code、Codex CLI、OpenCode、Aider — 终端运行，适合自动化
 - **框架型**：OpenHands、SWE-agent、Devon — 提供 agent 框架，可自定义
+- **Memory/Governance 层**：[[openlore]] — 静态分析驱动的确定性 architectural memory + governance，无 LLM 开销
 - **轻量封装型**：[[oh-my-pi]]、KiloCode — 在已有模型上做体验优化
 
 ## 关键趋势
