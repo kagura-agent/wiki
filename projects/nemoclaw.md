@@ -457,4 +457,5 @@
 - **DCO**: Used `--signoff` ✅
 - **Competing PR**: #7789 (lyral-commits) attempted same fix but was CLOSED — validates the issue is real and our approach correct
 - **Update 2026-07-31**: Pushed 3rd commit (route remaining preflight failures + no-op return in lock-acquire), rebased on latest origin/main to fix spurious `codebase-growth-guardrails` CI failure caused by stale base commit. CodeRabbit Major finding (acquireRebuildOnboardLock no-op return) addressed defensively — `bail: never` prevents runtime fallthrough but return-on-failure is cleaner.
-- **Lesson**: `core.fileMode false` needed for this repo on data partition (mode 755 artifacts). Always rebase on latest main before pushing to avoid CI guardrails false positives.
+- **Update 2026-08-01**: Rebased on upstream/main (8 new commits since last push) due to E2E gate timeout. CI re-running. Previous timeout was infrastructure — E2E coordination job stalled for 6h before being killed.
+- **Lesson**: `core.fileMode false` needed for this repo on data partition (mode 755 artifacts). Always rebase on latest main before pushing to avoid CI guardrails false positives. E2E gate timeout (6h) is infra, not code — just rebase and re-push.
