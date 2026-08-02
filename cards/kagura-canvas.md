@@ -2,11 +2,11 @@
 title: Kagura Canvas
 created: 2026-05-31
 tags: [project, image-generation]
-last_verified: 2026-06-20
+last_verified: 2026-08-02
 ---
 # Kagura Canvas
 
-Local ComfyUI integration for image generation and manipulation.
+Local ComfyUI integration for image generation and manipulation. Part of [[on-device-inference]] strategy.
 
 ## Project Goals
 
@@ -26,7 +26,7 @@ Local ComfyUI integration for image generation and manipulation.
 
 持续评估新模型，通过 GitHub Issues 驱动：
 - **#23** — Z-Image-Turbo GGUF（阿里通义，6B，中英文字渲染，最有前景的升级）
-- **#22** — Bonsai Image（1.58-bit FLUX.2 Klein）
+- **#22** — Bonsai Image（1.58-bit FLUX.2 Klein, see [[bonsai-image-4b]]）
 - **#21** — Anima v1.0
 
 **评估标准：** VRAM ≤ 12GB / 质量对比现有 / 速度 / prompt 理解力（尤其多风格融合）/ 中文支持
@@ -35,7 +35,7 @@ Local ComfyUI integration for image generation and manipulation.
 
 - **ComfyUI** (`/mnt/data/code/ComfyUI`) — 主推理引擎
 - **ComfyUI-GGUF** plugin — 量化模型支持
-- **kagura-canvas skill** — channel-as-service，其他 session 通过 sessions_send 请求生图
+- **kagura-canvas skill** — [[channel-as-service]]，其他 session 通过 sessions_send 请求生图
 - 生成脚本: `scripts/` 目录
 
 ## Repo

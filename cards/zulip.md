@@ -1,7 +1,7 @@
 ---
 title: Zulip
 created: 2026-05-16
-last_verified: 2026-06-20
+last_verified: 2026-08-02
 ---
 # Zulip
 
@@ -17,15 +17,15 @@ last_verified: 2026-06-20
 - Atolio integration (self-hosted AI search) added 2026-04-14
 
 ## Relevance to chat-infra
-- **Threaded chat model** — Zulip's topic-based threading is more structured than Discord/Slack. Relevant reference for our chat-infra direction
+- **Threaded chat model** — Zulip's topic-based threading is more structured than Discord/Slack. Relevant reference for our [[channel-as-service|chat-infra]] direction
 - **Nonprofit + open source** — now Foundation-backed, potentially more sustainable than Sharkord
-- **Security-first** — aligns with our privacy positioning
+- **Security-first** — aligns with our [[permission-hardening|privacy positioning]]
 - **Tim → Anthropic connection** — may influence Zulip's AI integration direction
 
 ## Assessment
 - Add to **observation list** for chat-infra
 - Not urgent to act on, but worth tracking as the Foundation stabilizes
-- If chat-infra needs a self-hosted option, Zulip is now the most credible one
+- If [[chat-first-product|chat-infra]] needs a self-hosted option, Zulip is now the most credible one
 
 ## Tags
 chat, open-source, foundation, threading, self-hosted

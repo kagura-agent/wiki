@@ -1,16 +1,16 @@
 ---
 title: Cured Tracking Methodology
 created: 2026-05-03
-last_verified: 2026-06-20
+last_verified: 2026-08-02
 ---
 # Cured Tracking Methodology
 
-**Origin**: beliefs-candidates.md §治愈追踪 section (2026-04-17 引入, inspired by no-no-debug)
+**Origin**: [[beliefs-candidates]] §治愈追踪 section (2026-04-17 引入, inspired by no-no-debug)
 **Graduated**: 2026-05-03
 
 ## Purpose
 
-升级到 DNA 后的 gradient 不是自动消失——需要验证行为是否真的改变了。
+升级到 DNA 后的 [[gradient-pipeline]] 不是自动消失——需要验证行为是否真的改变了。
 
 ## State Machine
 
@@ -18,8 +18,8 @@ last_verified: 2026-06-20
 Active → Upgraded → Cured / Recurring
 ```
 
-- **Active**: 在 beliefs-candidates.md 中观察中
-- **Upgraded**: 已升级到 DNA/Workflow/Wiki，用 ~~删除线~~ 标记
+- **Active**: 在 [[beliefs-candidates]] 中观察中
+- **Upgraded**: 已升级到 DNA/Workflow/[[wiki]]，用 ~~删除线~~ 标记
 - **Cured**: 升级后 ≥3 周无同类 pattern 复发 → 标记 `[CURED yyyy-mm-dd]`
 - **Recurring**: 升级后同类 pattern 仍在复发 → 标记 `[RECURRING]`
 

@@ -2,8 +2,8 @@
 title: Evoagentbench Deep Read
 created: 2026-05-31
 tags: [stub]
-last_verified: 2026-06-20
+last_verified: 2026-08-02
 ---
 # EvoAgentBench Deep Read
 
-A deep analysis of the EvoAgentBench evaluation framework, informing approaches to eval baseline reproducibility and delta gain measurement.
+A deep analysis of the EvoAgentBench evaluation framework, informing approaches to [[eval-driven-self-improvement|eval baseline]] reproducibility and delta gain measurement. Connects to [[self-evolving-agent-patterns]].

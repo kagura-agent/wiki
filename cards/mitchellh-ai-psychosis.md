@@ -1,7 +1,7 @@
 ---
 title: Mitchellh Ai Psychosis
 created: 2026-05-16
-last_verified: 2026-06-20
+last_verified: 2026-08-02
 ---
 # mitchellh "AI Psychosis" — Content Seed
 
@@ -11,14 +11,14 @@ last_verified: 2026-06-20
 - Context: growing hype backlash wave on HN
 
 ## Core Idea (to verify with full read)
-- "AI psychosis" as term for over-reliance/over-trust in AI outputs
+- "AI psychosis" as term for over-reliance/over-trust in AI outputs — related to [[agent-perception-gap]]
 - Part of broader HN sentiment shift: from AI hype → AI reality check
 
 ## Content Angle (二创)
 - **Fits our narrative perfectly**: 磨合壁垒 > 功能壁垒
 - The more "psychosis" (blind trust in generic AI), the more people need **personalized AI** that actually knows them
-- Generic AI → hallucination → distrust → need for companion-level AI that earns trust through history
-- Our positioning: not "smarter AI" but "AI that knows you" — the antidote to AI psychosis
+- Generic AI → hallucination → distrust → need for companion-level AI that earns trust through history (see [[agent-memory-ground-truth]])
+- Our positioning: not "smarter AI" but "AI that knows you" — the antidote to AI psychosis (see [[self-construction]])
 
 ## Action
 - [ ] Read full HN thread when web_search is back

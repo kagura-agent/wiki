@@ -1,7 +1,7 @@
 ---
 title: "自进化机制全盘点"
 created: 2026-03-27
-last_verified: 2026-07-15
+last_verified: 2026-08-02
 ---
 ## 总览
 
@@ -9,12 +9,12 @@ last_verified: 2026-07-15
 |------|-----------|-----------|---------|-----------|
 | MEMORY.md | 手动写 | session 启动自动注入 | 每次对话开始 | ⚠️ 注入了但太长，不一定被注意 |
 | memory/日记 | 手动写 / nudge 提醒 | session 启动注入今天+昨天 | 每次对话开始 | ⚠️ 同上 |
-| beliefs-candidates | nudge 触发写入 | 手动 grep / daily-review | 无自动读取时机 | ⚠️ 写入有效，读取基本没有 |
-| DNA (AGENTS.md/SOUL.md) | 手动升级（3次阈值） | session 启动自动注入 system prompt | 每次对话开始 | ❌ 注入了但行为不改（知行鸿沟） |
+| [[beliefs-candidates]] | nudge 触发写入 | 手动 grep / daily-review | 无自动读取时机 | ⚠️ 写入有效，读取基本没有 |
+| DNA (AGENTS.md/SOUL.md) | 手动升级（3次阈值） | session 启动自动注入 system prompt | 每次对话开始 | ❌ 注入了但行为不改（[[knowledge-action-gap]]） |
 | knowledge-base | 手动写 / study workflow | 手动 cat / workloop study 节点 | FlowForge study 节点 | ❓ 有写，读取不可审计 |
 | self-improving | 手动写 | AGENTS.md 说"干活前读" | 靠自觉 | ❌ 基本不读 |
-| memory_search | N/A（检索工具） | 语义搜索 | system prompt 说"回答前先搜" | ❌ 从未工作（未配置 provider） |
-| FlowForge | workflow yaml 定义 | 节点 task 描述指导行动 | skill 意图匹配 / 手动 start | ✅ 触发有效，但执行内容不可审计 |
+| [[memory-search]] | N/A（检索工具） | 语义搜索 | system prompt 说"回答前先搜" | ❌ 从未工作（未配置 provider） |
+| [[flowforge-workflow-engine]] | workflow yaml 定义 | 节点 task 描述指导行动 | skill 意图匹配 / 手动 start | ✅ 触发有效，但执行内容不可审计 |
 | Nudge | 自动触发写 beliefs | 不涉及读 | agent_end hook，每5次 | ✅ 写入管线有效 |
 | Heartbeat | HEARTBEAT.md 定义任务 | 执行时读 HEARTBEAT.md | 每30分钟 | ✅ 触发有效（3/24 修复后） |
 | Cron (8个job) | 各 job 独立输出 | 各 job 独立 session | 定时触发 | ⚠️ 触发有效，输出质量参差 |
@@ -172,14 +172,14 @@ last_verified: 2026-07-15
 ### 2. 注入 ≠ 执行
 - DNA 规则注入到 system prompt，但行为不改
 - 可能原因：prompt 太长规则被淹没 / 规则太抽象不够具体 / 没有情境触发只是背景知识
-- 这是 EXP-006（知识-行为鸿沟）的核心问题，至今未解
+- 这是 EXP-006（[[knowledge-action-gap]]）的核心问题，至今未解
 
 ### 3. 触发时机的三种模式
 - **自动注入**（session start）: MEMORY.md, DNA → 可靠但被动，信息过多时被忽略
 - **流程嵌入**（FlowForge node）: workloop study → 确定性高但僵硬，只在走流程时触发
 - **自觉调用**（靠 agent 想起来）: memory_search, self-improving → 基本无效
 
-缺少的第四种：**情境感知的主动推送**——检测到当前意图后自动加载相关知识。这是 EXP-012（图书管理员）要解决的。
+缺少的第四种：**情境感知的主动推送**——检测到当前意图后自动加载相关知识。这是 EXP-012（[[librarian-problem]]）要解决的。
 
 ### 4. 质量保证缺失
 - Daily review 质量差（审计抓14个错）

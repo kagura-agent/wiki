@@ -1,7 +1,7 @@
 ---
 title: Openhuman
 created: 2026-05-16
-last_verified: 2026-06-20
+last_verified: 2026-08-02
 ---
 # OpenHuman
 
@@ -13,9 +13,9 @@ last_verified: 2026-06-20
 
 ## What It Is
 
-Open-source "Personal AI super intelligence" — a desktop agentic assistant that integrates with your daily life through 118+ third-party OAuth integrations. Positions itself as the **UI-first, privacy-forward** alternative to terminal-based agent harnesses (OpenClaw, Hermes, etc.).
+Open-source "Personal AI super intelligence" — a desktop agentic assistant that integrates with your daily life through 118+ third-party OAuth integrations. Positions itself as the **UI-first, privacy-forward** alternative to terminal-based [[agent-harness-landscape|agent harnesses]] (OpenClaw, Hermes, etc.).
 
-Key selling point: **context in minutes, not weeks** — connect your accounts, auto-fetch syncs data every 20 minutes, Memory Tree compresses everything into a local knowledge base. No training period.
+Key selling point: **context in minutes, not weeks** — connect your accounts, auto-fetch syncs data every 20 minutes, Memory Tree compresses everything into a local knowledge base powered by [[agent-memory]] techniques. No training period.
 
 ## Tech Stack & Architecture
 
@@ -32,7 +32,7 @@ React Frontend (Vite + Tailwind) → JSON-RPC → Rust Core → Tauri v2 Shell
   - Voice: STT in, ElevenLabs TTS out, lip-sync, Google Meet agent
 - **Desktop Shell:** Tauri v2 + CEF child webviews for integration providers
 - **Frontend:** React — presentation only, no business logic
-- **Data:** SQLite (Memory Tree chunks), Obsidian-compatible Markdown vault
+- **Data:** SQLite (Memory Tree chunks), Obsidian-compatible Markdown vault (similar to [[git-backed-agent-memory]])
 - **Build:** Node 24+, pnpm 10.10, Rust 1.93, CMake
 - **Distribution:** DMG, EXE, curl install script, Homebrew, npm, deb
 
@@ -45,14 +45,14 @@ Inspired by Karpathy's Obsidian-wiki workflow. Data flow:
 4. Hierarchical summary trees (source/topic/global)
 5. Agent queries Memory Tree at runtime
 
-All memory stays local on device. The Obsidian vault is human-browsable and editable.
+All memory stays local on device. The Obsidian vault is human-browsable and editable — a form of [[progressive-disclosure-memory]].
 
 ### Privacy Model
 
 **On device:** Memory Tree DB, Obsidian vault, audio buffers, local model state
 **Through backend:** LLM calls (proxied under one subscription), web search proxy, OAuth token storage, integration request brokering
 
-OAuth tokens held server-side (never plaintext on device). OS keychain for sensitive local tokens. No training on user data. Optional local AI via Ollama for fully on-device operation.
+OAuth tokens held server-side (never plaintext on device). OS keychain for sensitive local tokens. No training on user data. Optional local AI via Ollama for fully [[on-device-inference|on-device operation]].
 
 ## Growth Trajectory
 

@@ -1,6 +1,6 @@
 ---
 created: 2026-06-07
-last_verified: 2026-07-01
+last_verified: 2026-08-02
 tags: [finance, economics, study]
 title: Yield Curve & Interest Rate Term Structure
 ---
@@ -9,7 +9,7 @@ title: Yield Curve & Interest Rate Term Structure
 
 _收益率曲线与利率期限结构_
 
-**Created:** 2026-06-07 | **Source:** Self-study (Kagura finance study #1)
+**Created:** 2026-06-07 | **Source:** Self-study (Kagura finance [[study-workflow|study]] #1)
 
 ## What Is a Yield Curve?
 
@@ -111,4 +111,4 @@ It answers: **How much more do investors demand to lock up money for longer?**
 
 ---
 
-_First finance study card. Building from macro fundamentals → fixed income → derivatives → portfolio theory._
+_First finance study card. Building from macro fundamentals → fixed income → derivatives → portfolio theory. Part of [[study-workflow]] and [[knowledge-is-a-graph]]._

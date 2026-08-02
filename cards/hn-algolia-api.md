@@ -1,13 +1,13 @@
 ---
 created: 2026-06-19
-last_verified: 2026-07-01
+last_verified: 2026-08-02
 tags: [api, hacker-news, tools]
 title: HN Algolia API
 ---
 
 # HN Algolia API
 
-Use `hn.algolia.com/api/v1/search` directly for Hacker News scouting instead of `web_search`.
+Use `hn.algolia.com/api/v1/search` directly for Hacker News scouting instead of `web_search`. Preferred over generic [[search-engineering]] approaches for HN-specific data.
 
 ## Why
 - Structured JSON response (title, points, num_comments, url, objectID)
@@ -33,4 +33,4 @@ Tags: `story`, `comment`, `ask_hn`, `show_hn`
 Numeric filters: `points`, `num_comments`, `created_at_i` (unix)
 
 ---
-*Graduated from beliefs-candidates 2026-06-19. Pattern: hn-algolia-direct (6 occurrences across study sessions).*
+*Graduated from [[beliefs-candidates]] 2026-06-19. Pattern: hn-algolia-direct (6 occurrences across [[study-workflow]] sessions).*

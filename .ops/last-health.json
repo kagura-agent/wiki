@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-08-02T10:09:00+08:00",
-  "total_md_files": 1095,
+  "timestamp": "2026-08-02T20:09:00+08:00",
+  "total_md_files": 1096,
   "total_cards": 444,
-  "total_projects": 563,
-  "total_wikilinks": 5058,
-  "orphans": 1,
-  "orphan_details": ["projects/langwatch.md"],
+  "total_projects": 564,
+  "total_wikilinks": 5069,
+  "orphans": 0,
+  "orphan_details": [],
   "broken_links": 0,
   "collisions": 1,
   "collision_details": ["README (3 files: ./README.md, ./skill-trajectories/README.md, ./experiments/README.md)"],
-  "index_drift": 1,
-  "index_drift_details": ["projects/langwatch.md not in index.md"],
+  "index_drift": 0,
+  "index_drift_details": [],
   "cards_index_stale": true,
   "cards_index_missing": 444,
   "stubs": 0,
@@ -21,12 +21,12 @@
   "avg_wikilinks_per_file": 5.8,
   "cards_zero_outbound": 49,
   "errors": 0,
-  "warnings": 54,
+  "warnings": 52,
   "error_book": {
-    "new_issues": 32,
-    "recurring_issues": 21,
-    "clean_passes": 39,
-    "auto_closed": 1,
-    "total_open": 92
+    "new_issues": 0,
+    "recurring_issues": 51,
+    "clean_passes": 2,
+    "auto_closed": 39,
+    "total_open": 53
   }
 }

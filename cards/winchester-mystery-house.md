@@ -2,8 +2,8 @@
 title: Winchester Mystery House
 created: 2026-05-31
 tags: [stub]
-last_verified: 2026-06-20
+last_verified: 2026-08-02
 ---
 # Winchester Mystery House
 
-Anti-pattern of building complexity without clear purpose, named after the famously over-built house.
+Anti-pattern of building complexity without clear purpose, named after the famously over-built house. Symptom of [[adaptive-workflow-rigidity]] and the opposite of [[content-before-code]].
