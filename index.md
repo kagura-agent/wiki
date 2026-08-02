@@ -499,7 +499,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (562)
+## 📁 Project Notes (564)
 
 ### 2
 
@@ -579,6 +579,7 @@
 - [AIDE — Self-Recursive Agent](projects/aide-recursive-agent.md)
 - [ai-memory — Cross-Agent Long-Term Memory](projects/ai-memory.md)
 - [ai-rules-sync (agentsync)](projects/ai-rules-sync.md)
+- [ALBERT — Autonomous Multi-Agent Harness for Claude Code](projects/albert-orchestrator.md)
 - [Alibaba Open-Code-Review](projects/alibaba-open-code-review.md)
 - [Anthropic 2026 Agentic Coding Trends Report](projects/anthropic-agentic-coding-2026.md)
 - [Anthropic Fable Guardrails Controversy (June 2026)](projects/anthropic-fable-guardrails-controversy.md)
@@ -824,6 +825,7 @@
 ### L
 
 - [L1 Index Layer Evaluation — Should We Adopt It?](projects/l1-index-layer-evaluation.md)
+- [LangWatch (langwatch/langwatch)](projects/langwatch.md)
 - [Anthropic launch-your-agent — CMA Reference Skill](projects/launch-your-agent.md)
 - [Lazar](projects/lazar.md)
 - [LazyCodex — Codex Agent Harness with Project Memory, Planning & Verified Completion](projects/lazycodex.md)
@@ -1120,4 +1122,4 @@
 
 ---
 
-*444 cards, 562 project notes. Last generated: 2026-08-01 14:38 UTC.*
+*444 cards, 564 project notes. Last generated: 2026-08-02 04:38 UTC.*

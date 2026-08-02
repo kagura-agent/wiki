@@ -2,7 +2,7 @@
 title: Agent Memory Taxonomy (Forms-Functions-Dynamics)
 created: 2026-03-25
 source: "Memory in the Age of AI Agents" (arxiv 2512.13564, 47 authors, HF Daily Paper #1)
-last_verified: 2026-07-11
+last_verified: 2026-08-02
 ---
 
 > Agent memory taxonomy and comparison framework. Three dimensions for analyzing agent memory systems: Forms (token/parametric/latent), Functions (factual/experiential/working), Dynamics (formation/evolution/retrieval).
@@ -77,3 +77,4 @@ Also introduces the **Extractor → Store → Retriever** anatomy as a simpler f
 
 - [[memsyco-bench]] — benchmarking sycophancy in agent memory systems
 - [[agentmemory]] — TypeScript memory library (rohitg00), contribution target
+- [[poirot]] — five-layer cognitive memory (lazy Ebbinghaus decay, HumanMessage injection, consolidation daemon)

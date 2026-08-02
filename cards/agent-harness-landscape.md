@@ -2,7 +2,7 @@
 title: Agent Harness Landscape (2026)
 created: 2026-06-19
 tags: [agent-harness, landscape, coding-agent, orchestration]
-last_verified: 2026-07-30
+last_verified: 2026-08-02
 ---
 
 # Agent Harness Landscape (2026)
@@ -25,7 +25,7 @@ Despite different entry points, the ecosystem is converging on shared patterns:
 
 - **Filesystem as interface**: CLAUDE.md, AGENTS.md, Eve's `instructions.md + skills/`, Loom's `.loom/` — configuration lives in files, not databases. This enables version control, portability, and human auditability.
 - **Durable sessions**: Eve's Workflow SDK, Loom's state persistence, OpenClaw's session resume — all solve the same problem: long-running agent tasks that survive interruptions, compaction, and context loss.
-- **Verification as first-class step**: Loom separates verification from implementation. agent-harness-kit enforces health gates before/after work. Eve sandboxes execution. The industry learned that self-check bias requires structural separation.
+- **Verification as first-class step**: Loom separates verification from implementation. agent-harness-kit enforces health gates before/after work. Eve sandboxes execution. [[hwatu]] takes this further with a dedicated verification browser (pixel diffs, rendered-page checks) that forces agents to prove correctness visually. The industry learned that self-check bias requires structural separation.
 - **Skill/tool portability**: The SKILL.md convention appears in Eve, OpenClaw, and MetaHarness templates. ACP is becoming the transport layer. An agent skill authored for one harness increasingly works across others.
 
 ## Strategic Spectrum
