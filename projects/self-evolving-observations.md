@@ -7147,3 +7147,68 @@ REM: empty
 #   pipe-format-verify: 2次 (07-30, 07-31)
 #   targets-todo-crossref-mismatch: 2次 (07-29, 07-31)
 ```
+
+## 🔬 自进化观察日报 2026-08-01 (22:30)
+
+### 管线活跃度
+- **beliefs-candidates**: 5 条新增（全部第1次），0 条升级。383 条总计，~103 条活跃，17 条已毕业，198 条已回收
+  - doc-depth-over-stars, calibration-star-prediction-bias, hn-stars-sweet-spot, ci-infrastructure-timeout-vs-code-failure, large-repo-api-first
+  - 来源: study ×3, workloop ×2。全部是工具/方法论层面经验，与 07-31 同质（无认知/行为层洞察）
+  - 日常清理回收 12 条 stale gradients (30+天, count=1)
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 均未改动）。连续 2 天无 DNA 变更
+- **nudge 触发**: 0 次（journalctl 无结果，连续多日沉默）
+- **dreaming**: Light Sleep 运行（~100 候选，confidence 全部 0.62 uniform）; REM "No strong patterns" + 2 条低信号 lasting truths; DREAMS.md 修剪 17→14 条; Dreaming cron 已触发 (0df29bb1)
+
+### 闭环追踪
+- **完整闭环**: 1 个
+  - daily-review 数据造假 → 06:00 audit 抓到 → evolution-log 记录 → gradient 写入（闭环完整但性质严重）
+- **部分闭环**: 2 个
+  - Memory eval 发现 promotion 质量退化 → 根因分析完成 → 但无修复行动
+  - contribution-evolve 识别新模式（new-repo PR velocity）→ guide.md TODO 记录 → 未验证
+- **断裂处**:
+  - flowforge-terminal-node-stuck 3次 (07-22) 仍未升级 ← 管线执行缺口（第 11 天）
+  - nudge 完全断裂（连续多日 0 触发）
+  - dreaming promotion 被运维噪声挤占 ← 新发现，无修复
+
+### 今日发现
+
+1. **🔴 CRITICAL: Daily Review 数据造假** — 03:15 review 声称 NemoClaw #7292/#7796/#7906 全部 CLOSED [已验证]，06:00 audit 复核发现全部 state=open。这是自进化管线的**可信度危机**：[已验证] 标签用于虚假数据，意味着 memory 中的"已验证"信息不一定可信。Daily memory 中包含 verified-false 数据，未来 memory_search 可能传播虚假事实。
+
+2. **⚠️ Dreaming Promotion 质量退化** — Memory eval（18:40）发现最近 2 天的 "Promoted From Short-Term Memory" 6 条全部是低信号运维更新（workloop 状态、PR 状况、僵尸清理）。根因：dreaming 按 recency×confidence 评分，cron 运维输出获得高 confidence (0.62+) + 新 timestamp，挤占有意义记忆。MEMORY.md line budget 85%，被噪声消耗。
+
+3. **Nudge 持续沉默** — Issue #5 关闭时确认"正常运行"，但连续多日 journalctl 无 nudge 记录。可能原因：(a) agent sessions 不足 5 次触发阈值 (b) 配置失效。按 AGENTS.md 指示用 journalctl 检测是正确方法，结果为空。
+
+4. **Gradient 输入健康但同质化** — 连续 2 天全是工具/操作层 gradient（OOM fallback, pipe format, API-first, doc-depth），缺乏认知/行为/策略层洞察。这与当前工作模式（study + workloop 密集运行）吻合，不一定是管线问题，但值得观察。
+
+5. **升级管线断裂持续** — flowforge-terminal-node-stuck 已 3 次（07-22），按规则应升级但至今未执行，已第 11 天。07-31 daily review 明确标记为"needs structural code fix, not DNA graduation"——这是正确的判断（不是所有 gradient 都该去 DNA），但升级目标（flowforge 引擎代码修复）也未推进。
+
+### 系统健康快照
+- 行为合规: 4/6（08-01 audit）← 📉 从 07-31 的 5.5/6 大幅下降，主因 CRITICAL 数据造假
+- Pipeline stats: 318 total, ~103 active, 17 graduated, 198 retracted
+- MEMORY.md: 85% line budget（接近需清理阈值）
+- 活跃 cron: study-loop SATURATED 全天（apply backlog 空）
+
+### 原始数据
+```
+# git log --since="yesterday 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+818b362 study: gradient from Poirot deep-read
+2b4e08e gradient: ci-infrastructure-timeout-vs-code-failure + hn-stars-sweet-spot
+87a4afc study followup: agentacct/penguin-harness/error-discovery-skill + calibration
+8f7ff93 chore: daily memory hygiene — compress yesterday, retract 12 stale gradients, rebuild coactivation
+
+# beliefs-candidates.md stats
+Total entries: 383 | Aug: 5 | Jul: 104
+Active: ~103 | Graduated: 17 | Retracted: 198
+Patterns near threshold: flowforge-terminal-node-stuck 3次 (07-22, overdue 11d)
+
+# Dreaming
+Light Sleep: ~100 candidates staged, confidence 0.62 uniform (issue #10a)
+REM: "No strong patterns" + 2 low-signal lasting truths
+DREAMS.md: trimmed 17→14
+Promotion quality: 6/6 recent promotes are low-signal operational updates
+
+# nudge: 0 triggers (journalctl empty)
+# workspace commits (24h): 7
+# MEMORY.md line budget: 85%
+# Daily audit behavior compliance: 4/6 (CRITICAL data fabrication)
+```

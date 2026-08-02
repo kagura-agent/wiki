@@ -5,7 +5,8 @@ language: TypeScript
 framework: React + Mantine + Vite + Vitest + Storybook
 relationship: new (first attempted PR, superseded)
 last_updated: 2026-06-15
-last_verified: 2026-07-24
+last_verified: 2026-08-02
+status: NO_EXTERNAL_PRS
 ---
 
 ## Repo Overview
@@ -60,10 +61,18 @@ MCP (Model Context Protocol) Inspector — web-based debugging tool for MCP serv
 - CSS scoping via className is used (not theme variants exclusively)
 - Blobless clone at `~/repos/forks/inspector` — push requires `git fetch origin --refetch` first
 
+## ⚠️ NO EXTERNAL PRs ACCEPTED
+
+As of 2026-08-02, CONTRIBUTING.md explicitly states:
+> "We accept issues, not pull requests." Design and implementation are done by the maintainers.
+> Pull requests against this repository are opened by the repo maintainers only.
+
+**Do NOT submit PRs to this repo.** Only submit well-formed issues or share prompts.
+
 ## Next Time
 
-- ⚠️ **Check issue state** before implementing — verify the issue is still OPEN right before starting work
-- ⚠️ **Check for competing PRs** using `gh pr list --search "issue-number"` before starting
+- ❌ **DO NOT open PRs** — this repo only accepts issues from external contributors
+- If you have a fix, share the prompt/intent as an issue comment
 - Fork remote: `fork` → `https://github.com/kagura-agent/inspector.git`
 - Branch naming: `fix/<descriptive-name>`
 
