@@ -1,9 +1,9 @@
 ---
 title: OneCLI — Credential Gateway for AI Agents
 created: 2026-07-26
-last_verified: 2026-07-26
-status: deep-read
-stars: 2826
+last_verified: 2026-08-02
+status: following
+stars: 2955
 ---
 # OneCLI — Secret Vault for AI Agents
 
@@ -79,8 +79,31 @@ The fingerprint model I documented is conceptual ("agent says I need X, runtime 
 - True isolation needs sandbox-level file access restrictions (which OpenClaw sandbox provides)
 - OneCLI + sandbox = credible zero-trust agent credential architecture
 
+## Update 2026-08-02: Agent Grants System
+
+v1.44.0 introduces **per-agent credential grants** — the most significant architectural change since initial deep read:
+
+- Old model: project-level policy → agents inherit broad access
+- New model: **zero-access default** → explicit per-agent grants with per-tool allow/ask/never
+- API: `PUT /v1/agents/{agentId}/grants/connections/{connId}` with `{access: "full"|"custom", allow:[...], ask:[...]}`
+- Gateway evaluates grants per-connection (same host, different accounts can have different permissions via `x-onecli-connection-id`)
+- Boot-time idempotent converter materializes existing access as explicit grants
+- Retired endpoints return `410 Gone` naming replacements
+
+**Architectural insights**:
+- The allow/ask split per-tool is the credential equivalent of Unix file permissions — routine ops (read) don't require approval, sensitive ops (delete) do. This is exactly the "graduated trust" pattern.
+- **Tri-state model invariants** (enforced at validation via Zod discriminated union):
+  - "All-blocked grant is a detach" — if allow∪ask = ∅, you're removing access entirely
+  - "Tool can't be both allowed and approval-gated" — clean partition
+- **Stack compilation is pure**: `grants-compile.ts` has zero I/O — pure computation over rule shapes. Used by both the runtime service and the one-shot migration converter, ensuring one canonical definition.
+- **Evaluation order**: compiled rules are positional (allow → ask → blocked → default). Gateway evaluates first-match per matching allow row.
+- **Session policy on every allow row** (not just first): because gateway's `inject_select` is last-match-wins, a condition-less ask-row after a conditioned allow-row would clobber restrictions. Subtle correctness concern.
+- **CORS vulnerability** (#472, ben564885): local-admin mode + `alloworigin::mirror_request()` + `allow_credentials(true)` = any website can approve agent gated requests. Reveals tension between "local mode easy" and "local mode secure".
+
+**Pattern comparison with [[clawpatrol]]**: ClawPatrol blocks (deny-list firewall), OneCLI injects (allow-list credential scoping). Complementary — ClawPatrol at the outer boundary, OneCLI at the credential layer.
+
 ## Health Assessment
-- **THRIVING** (5/6): High stars, active development, real users, real bugs, Apache-2.0
-- Growing community (162 forks, external issues from real users)
-- Solo-team risk mitigated by star count and enterprise features
-- Revisit: 2026-08-02
+- **THRIVING** (6/6): 2,955⭐, 172 forks, 37 external PRs/30d, 46 unique issue authors
+- 7 merged PR authors (healthy multi-contributor base)
+- 3 releases in 5 days (v1.43.2→v1.45.0) — very active
+- Revisit: 2026-08-09
