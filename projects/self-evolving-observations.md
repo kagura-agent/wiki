@@ -7212,3 +7212,78 @@ Promotion quality: 6/6 recent promotes are low-signal operational updates
 # MEMORY.md line budget: 85%
 # Daily audit behavior compliance: 4/6 (CRITICAL data fabrication)
 ```
+
+## 🔬 自进化观察日报 2026-08-02
+
+### 管线活跃度
+- **beliefs-candidates**: 1 条新增 (api-push-for-large-repos, workloop 来源) / 0 条待升级（无 pattern 达阈值）
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 未改动）
+- **nudge 触发**: 0 次（journalctl 全天无 nudge/agent_end 记录）
+- **dreaming**: 运行 ✅，Light Sleep ~100 candidates staged（confidence 全部 0.62 uniform），REM "No strong patterns" + 3 lasting truths
+
+### 闭环追踪
+- **完整闭环**: 2 个
+  1. Lottie Studio CI flaky tests → 根因定位 (db.ts `IS_TEST` guard) → 3 commits 修复 → PR #759 merged → CI green
+  2. ABTI orphaned slugs 发现 → validate-results.js 诊断 → Claude Code 修复 → PR #868 merged → 0 orphans
+- **部分闭环**: 1 个
+  - langwatch 327MB OOM → API-push workflow 发现 → PR #6432 提交 → gradient 写入 → 等待 review（还未 merge）
+- **断裂处**:
+  - blog-loop carry-forward 第 5 天终于被 Luna "好的" 解除，但执行在主 session 非自驱
+  - NemoClaw unassign comment 已发，等待 maintainer 响应（非自己能闭环）
+  - nudge 持续 0 触发 — 管线断裂已超过一周无修复尝试
+
+### 今日发现
+
+1. **Dreaming 质量有微改善但根因未解** — Light Sleep candidates 数量充足（~100），但 confidence 全部 uniform 0.62（issue #10a: upstream hardcoded）。REM 输出从之前的 "themes: let" 改善为 "No strong patterns" + 3 条 lasting truths（2 条有价值：数据造假 CRITICAL + 审计合规下降）。改善原因：03:15 memory hygiene 清理了 5 条噪音 promotions，MEMORY.md 从 85% 降至 76% budget。
+
+2. **Gradient 输入模式：工具层主导** — 今日唯一新 gradient 是操作层（api-push-for-large-repos）。连续 3 天无认知/行为/策略层洞察写入。这与 workloop 密集运行 + study SATURATED 的现状吻合——高频执行、低频反思。
+
+3. **Nudge 完全断裂确认** — 连续多日（至少自 07-31 观察以来）journalctl 无任何 nudge 相关输出。Issue #5 关闭时确认"正常运行"的判断可能有误，或 agent session 数量不足触发阈值（每 5 次 agent_end 触发 1 次）。这是管线的关键断裂点：nudge 是唯一的实时反思触发器。
+
+4. **Memory Hygiene 正面信号** — 03:35 memory hygiene 执行了：retract 3 beliefs, compress daily memory, MEMORY.md 170→153 lines。这是 FlowForge review (#7253) 的输出。系统性维护在运行。
+
+5. **Daily Audit 行为合规回升** — 从 08-01 的 4/6 改善至 08-02 的 4.5/6。数据紀律改善（不再造假），NemoClaw unassign 直接执行。仍有 ⚠️ 的项：blog-loop（建了就用）、承诺兑现（改善中）、讨好模式（soft）。
+
+6. **Study Loop SATURATED 全天** — apply backlog 空导致整个 study 管线停摆。Scout/followup 仍在运行但无法将学习转化为行动。这不是管线故障而是输入饥饿。
+
+7. **自驱识别 + 执行在运行** — Lottie Studio 从 "0 open issues" 到自主识别 quick-start wizard feature → 开 issue → Claude Code 实现 → merge。StockLingo 新增 3 情景模拟。ABTI 清理 orphaned slugs。产出健康。
+
+### Issue #10 Dreaming Subsystem Status
+
+| Sub-item | Status | Evidence |
+|----------|--------|----------|
+| (a) Upstream uniform confidence | ❌ 未修 | 今日 Light Sleep 全部 confidence=0.62，仍为 hardcoded |
+| (b) "details unavailable" bug | ⚠️ 未观察到 | 今日 DREAMS.md 无此症状（可能已自愈或未触发深度睡眠） |
+| (c) Local filter effectiveness | ⚠️ 部分有效 | Memory hygiene 清理了噪音，但根本筛选逻辑未改——promotion 仍由 recency×confidence 主导 |
+| (d) REM empty output | ✅ 改善 | 从 "themes: let" → "No strong patterns" + 3 lasting truths（有 2 条高价值） |
+
+### 系统健康快照
+```
+beliefs-candidates: 1081 lines, 385 entries, 1 new today
+workspace commits (24h): 6
+MEMORY.md: 153 lines (~76% budget) ← 从 170 (85%) 改善
+Daily audit compliance: 4.5/6 ← 从 4/6 微升
+Open PRs: 18 (stable)
+Nudge triggers: 0 (BROKEN — 持续多日)
+Study loop: SATURATED 全天 (≥8 次跳过)
+Dreaming: ran, low-quality promotions, REM improved
+```
+
+### 原始数据
+```
+# git log --since="2026-08-01 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md
+7a2df5e gradient: api-push-for-large-repos (2026-08-02 09:48:11 +0800)
+a271d5b chore: memory hygiene — clean stale promoted entries, retract 3 beliefs (2026-08-02 03:35:51 +0800)
+
+# workspace commits today: 6
+a68f013 contribution-evolve: add 2 improvement items
+a33ad83 study: add ALBERT tracking
+7a2df5e gradient: api-push-for-large-repos
+bd4c031 study followup: OneCLI grants, Sigbound v2.2.1, loope dropped
+f6577de chore: trim DREAMS.md 19→14 entries
+a271d5b chore: memory hygiene
+
+# nudge: journalctl -u openclaw-gateway | grep nudge → 0 lines
+# dreaming: Light Sleep ~100 candidates, REM 3 lasting truths
+# daily audit: 4.5/6 (up from 4/6)
+```
