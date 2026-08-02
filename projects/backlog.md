@@ -1484,3 +1484,9 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 
 ## 2026-07-30 Quick Scan Additions
 - **autodev-studio** (krishagarwal314/autodev-studio) ⭐110 — Multi-agent SDLC pipeline: KB-RAG grounded repo understanding + cross-provider stage routing (Claude plans, Codex writes, GPT reviews). Real benchmarks show 7-75% cost savings vs cold Claude Code. Python/FastAPI. 6d old, 19 forks, pushed 07-27. Worth tracking — KB approach is known but execution (cross-model review, honest benchmark) is quality. Monitor.
+
+## 2026-08-02 Quick Scan — Ecosystem Stability Confirmed
+- **Signal**: No genuinely novel projects in ai-agent/coding-agent space this week. Top new repos are either derivative (dscode ⭐81 — yet another DeepSeek CLI agent), domain-specific (vibe-astock, Gendangzou-skill), or already-tracked (Noisegate, Poirot).
+- **Trend: Skill-as-plugin proliferation** — 5/10 GitHub ai-agent results were Claude Code/Codex skills (architecture-drawer, paper-tutor-skills, Gendangzou-skill, jasoseo-plugin, fable-method). The "skill package" is becoming the dominant distribution unit for agent capabilities. [[agent-skill-standard-convergence]]
+- **HN**: MarbleOS (131pts) — "What should the GUI for AI agents look like?" — file/task-oriented workspace UI vs chat. Closed-source product but validates non-chat agent UX demand.
+- **Verdict**: Consolidation phase. No new tracking candidates this round.
