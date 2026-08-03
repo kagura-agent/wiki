@@ -1490,3 +1490,52 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **Trend: Skill-as-plugin proliferation** — 5/10 GitHub ai-agent results were Claude Code/Codex skills (architecture-drawer, paper-tutor-skills, Gendangzou-skill, jasoseo-plugin, fable-method). The "skill package" is becoming the dominant distribution unit for agent capabilities. [[agent-skill-standard-convergence]]
 - **HN**: MarbleOS (131pts) — "What should the GUI for AI agents look like?" — file/task-oriented workspace UI vs chat. Closed-source product but validates non-chat agent UX demand.
 - **Verdict**: Consolidation phase. No new tracking candidates this round.
+
+## 2026-08-03 Quick Scan (08:46)
+
+**GitHub (ai+agent, created last 7d, sorted by stars, spam-filtered):**
+
+| Repo | ⭐ | Verdict | Notes |
+|---|---|---|---|
+| ponytail-improved | 580 | 已知 | Ponytail derivative (original 40k+, already tracked/downgraded) |
+| trace-file-lineage | 195 | 不相关 | File provenance tracking, not agent-pattern |
+| aws/context-ontology-accelerator | 158 | 有趣 | Ontology-based semantic context for agents. Enterprise/AWS. Interesting but heavyweight |
+| deltafin | 620 | 不相关 | Local Kimi K3 runner. Model infra, not agent patterns |
+| dscode (thinkany-ai) | 100 | 已知模式 | DeepSeek coding agent. Standard harness |
+| Trajex (wutongyuonce) | 57 | **值得深入** | Cross-harness session indexer: Claude Code/Codex/Kimi JSONL → SQLite. CLI + App. Relevant to multi-harness work |
+| axern (cofy-x) | 56 | **值得关注** | Open-source agent sandboxes + untrusted code exec. Sandbox patterns relevant to OpenClaw |
+| CoordClaw | 45 | 太早 | Multi-agent-as-company. 5d old, 0 forks. Track later |
+| litecoder | 44 | 已知模式 | Terminal coding agent |
+
+**HN (3d, ≥10pts, 4 matches):**
+- MarbleOS agent GUI (134pts/79💬) — Agent UX design exploration. Interesting demo
+- Sprocket hardware+software agent (117pts) — Niche but novel intersection
+- "Why do agents need skills?" (14pts/13💬) — Relevant to our skill architecture
+- Greenhouse/Lens agentic modes (10pts) — Conceptual framework, two modes of agent work
+
+**Saturation**: 4/15 known/derivative — ecosystem active. Two items worth depth (Trajex, axern).
+
+## 2026-08-03 Quick Scan (09:16)
+
+**GitHub Trending (agent space, past week):**
+
+| Repo | ⭐ | Verdict | Notes |
+|---|---|---|---|
+| HezaoHezao/poirot | 100 | 值得深入 | "Deep research agent kernel" — architecturally focused, Python |
+| thinkany-ai/dscode | 101 | 可能已知 | DeepSeek coding agent, TypeScript — likely derivative |
+| simonlin1212/vibe-astock | 106 | 不相关 | A股复盘看板，domain finance |
+| talivia-group/agent | 71 | 不相关 | Analytics via MCP |
+| OfficeBuddy | 50 | 不相关 | Office doc editing agent |
+
+**HN (3d, ≥10pts):**
+
+| Topic | Points | Verdict | Notes |
+|---|---|---|---|
+| MarbleOS (agent GUI) | 134 | 值得一看 | Agent UX design exploration, demo available |
+| Sprocket (HW+SW agent) | 117 | 值得深入 | Novel domain (hardware), Show HN with demo |
+| "Why agents need skills" | 14 | 已知 | Philosophical, not actionable |
+| "Greenhouse and Lens" | 10 | 留意 | Two modes of agentic work blog post |
+
+**Saturation**: 2/10 worth deep-read (poirot, sprocket). Ecosystem active.
+
+---
