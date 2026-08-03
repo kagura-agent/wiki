@@ -1,12 +1,12 @@
 ---
 title: Wiki Cards Index
 created: 2026-04-10
-updated: 2026-07-27
+updated: 2026-08-03
 ---
 
 # Cards Index
 
-> All cards in wiki/cards/, grouped alphabetically. 443 total.
+> All cards in wiki/cards/, grouped alphabetically. 445 total.
 
 ## A
 - [[abort-masks-sink]]
@@ -39,10 +39,10 @@ updated: 2026-07-27
 - [[agent-lifecycle-fsm]]
 - [[agentmail]]
 - [[agent-marketplace-landscape]]
-- [[agent-memory]]
 - [[agent-memory-architecture]]
 - [[agent-memory-ground-truth]]
 - [[agent-memory-landscape-202603]]
+- [[agent-memory]]
 - [[agent-memory-strategies]]
 - [[agent-memory-taxonomy]]
 - [[agent-native-code-search]]
@@ -58,8 +58,8 @@ updated: 2026-07-27
 - [[agent-session-resume]]
 - [[agent-skill-ecosystem]]
 - [[agent-skill-ecosystems]]
-- [[agentskills]]
 - [[agentskills-io]]
+- [[agentskills]]
 - [[agent-skill-standard-convergence]]
 - [[agent-to-agent-communication]]
 - [[agent-trust-hierarchy]]
@@ -109,8 +109,8 @@ updated: 2026-07-27
 - [[closed-loop-vs-open-pipe]]
 - [[co-activation-boost]]
 - [[coderankmbed]]
-- [[code-review]]
 - [[code-review-lessons]]
+- [[code-review]]
 - [[codex-on-use-auth-policy]]
 - [[codex-plusplus]]
 - [[coding-agent-ecosystem]]
@@ -133,9 +133,9 @@ updated: 2026-07-27
 - [[constitution-layering]]
 - [[content-addressable-editing]]
 - [[content-before-code]]
-- [[context-budget]]
 - [[context-budget-baseline-2026-04-14]]
 - [[context-budget-constraint]]
+- [[context-budget]]
 - [[context-compaction]]
 - [[context-is-software]]
 - [[context-management]]
@@ -241,6 +241,7 @@ updated: 2026-07-27
 - [[honcho]]
 
 ## I
+- [[idempotent-agent-infrastructure-ops]]
 - [[identity-drift-detection]]
 - [[idle-cached-session-resume]]
 - [[immutable-evaluation]]
@@ -276,6 +277,7 @@ updated: 2026-07-27
 - [[mastra-blacklist-agent-pr-backlash]]
 - [[mastra-growth-playbook]]
 - [[mcp-ecosystem]]
+- [[mcp-server]]
 - [[mcp-vs-native-tools]]
 - [[mechanical-enforcement-via-topology]]
 - [[mechanical-preflight-check]]
@@ -431,8 +433,8 @@ updated: 2026-07-27
 - [[stem-aware-slug-matching]]
 - [[structural-backpressure]]
 - [[structural-fix-over-behavioral-rule]]
-- [[study-saturation]]
 - [[study-saturation-gate]]
+- [[study-saturation]]
 - [[study-workflow]]
 - [[subagent]]
 - [[subagent-usage-patterns]]
@@ -481,11 +483,11 @@ updated: 2026-07-27
 ## W
 - [[warm-start-agents]]
 - [[what-makes-an-agent-me]]
-- [[wiki]]
 - [[wiki-as-compiled-knowledge]]
 - [[wiki-health-check]]
 - [[wikilinks]]
 - [[wiki-lint]]
+- [[wiki]]
 - [[winchester-mystery-house]]
 - [[wire-protocol-as-contract]]
 - [[workflow-bypass]]
@@ -500,4 +502,3 @@ updated: 2026-07-27
 ## Z
 - [[zettelkasten]]
 - [[zulip]]
-
