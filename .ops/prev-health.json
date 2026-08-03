@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-08-03T10:24:00+08:00",
+  "timestamp": "2026-08-03T20:11:00+08:00",
   "total_files": 1099,
   "cards": 445,
   "projects": 565,
-  "wikilinks": 5190,
+  "wikilinks": 5193,
   "errors": 0,
-  "warnings": 58,
-  "orphans": 2,
+  "warnings": 54,
+  "orphans": 0,
   "broken_links": 0,
-  "index_drift": 2,
+  "duplicate_slugs": 1,
+  "duplicate_slug_details": ["README (3 files)"],
+  "index_drift": 445,
   "stale_files": 386,
   "stubs": 0,
-  "duplicate_slugs": 1,
-  "unicode_suspicious": 25,
-  "error_book": {
-    "new_issues": 4,
-    "recurring_issues": 53,
-    "clean_passes": 0,
-    "auto_closed": 30,
-    "total_open": 57
-  }
+  "unicode_warnings": 25,
+  "zero_outbound_links": 2,
+  "secret_scan": "clean",
+  "error_book_open": 57,
+  "error_book_new": 0,
+  "error_book_recurring": 53,
+  "error_book_auto_closed": 0
 }

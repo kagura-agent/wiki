@@ -538,3 +538,9 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
   - NemoClaw #7996 was first choice but already assigned to yanyunl1991
   - deer-flow was second choice but CLA blocker still active
   - `setChatSessionArchived` already existed in API client (line 2285 of client.ts), no new interface needed
+
+## 2026-08-03 — #6247 superseded by #6307
+- My PR just changed `deleteChatSession` → `setChatSessionArchived` (1 file)
+- Upstream's fix: made creation conversations durable objects with their own address, full server-side persistence (74 files, 5608 LOC)
+- Lesson: "archive on unmount" doesn't solve recoverability — archived system sessions are unreachable from any UI. The real fix needed server-side builder draft persistence + UI resumption flow.
+- Pattern: When fixing a UX data-loss bug, consider whether the data needs to be merely preserved OR actively accessible. Mine was "preserve" (archive), theirs was "make resumable" (much better UX)
