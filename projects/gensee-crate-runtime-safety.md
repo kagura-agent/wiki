@@ -201,3 +201,4 @@ Managed CLI adds its own file lock but underlying store still lacks proper locki
 
 - Next revisit: 2026-08-10
 - Watch for: perf PR merges (fork latency numbers), concurrency fix for Issue #2, community growth
+- [[idempotent-agent-infrastructure-ops]] — idempotent operation journaling pattern extracted from this project
