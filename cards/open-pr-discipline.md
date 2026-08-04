@@ -2,7 +2,7 @@
 title: Open PR Discipline
 created: 2026-03-24
 source: Luna feedback + NemoClaw check-pr-limit experience
-last_verified: 2026-07-15
+last_verified: 2026-08-04
 ---
 ## Core Rule
 一个 repo 的 open PR 不超过 3 个。超过就停下来等已有 PR 被消化。
@@ -16,6 +16,11 @@ last_verified: 2026-07-15
 ## Related Signals
 - NemoClaw #748 被 check-pr-limit 自动关闭（超限）
 - 我关闭了 #279、#292 腾位置，但还是有 9 个 open
+
+## New-repo admission gate (2026-08-04)
+PR limit only controls commitments *after* entering a repository; it cannot recover time spent in a repo that never reviews outsiders. Before a first PR, sample five recent external PRs: skip when median time to first review exceeds 10 days or more than half close without review/comment. This turns review velocity into a selection gate rather than a followup symptom.
+
+**Prediction:** repos failing this gate will consume maintainer-followup time without producing an external merge; validate against the next such candidate by 2026-09-04.
 
 ## Links
 - [[closed-pr-lessons]] — 被关闭 PR 的五种失败模式
