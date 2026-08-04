@@ -220,3 +220,13 @@ Read `flowforge/src/engine.ts` while completing an offline workloop fallback.
 - **Decision:** the finder outcome was unavailable, so the workflow advanced to `fallback_offline` rather than treating the partial output as an empty queue or selecting an unsourced issue.
 - **Deep read:** reviewed `flowforge/src/engine.ts`. `requireActiveInstance()` deliberately rejects unqualified operations when more than one instance is active, while `status(workflowName)` and `next(..., workflowName)` select the named active instance. This directly explains—and validates—the required `-w workloop` recovery commands used in this run.
 - **Operational boundary:** the `SIGKILL` establishes only that the finder did not finish within the available execution window; it does **not** establish an OOM root cause. Resource profiling is still needed before attributing the recurring termination to memory pressure.
+
+## Terminal Transition and Loop-Guard Ordering (2026-08-04)
+
+Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#7385`.
+
+- A transition **into** a terminal node passes through the destination-node visit check before `next()` closes its history row and marks the instance `done`. Consequently a terminal destination can be blocked by its `max_visits` guard; `--force` is required only when that guard reaches its block threshold, not merely because the node is terminal.
+- `next()` returns the origin from the instance object after `updateInstanceNode()`. Because the in-memory `inst` is not mutated by that database call, the returned `from` remains the prior node as intended. The terminal fast path returns `hasNext: false`, while a direct `next()` called on an already-terminal current node returns `to: "(end)"`.
+- Tests should cover both terminal paths separately: arriving at a terminal node (automatic closure) and invoking `next()` while already on one (explicit closure). They exercise different branches despite both producing `done` status.
+
+**Operational implication:** automation should treat `terminal: true` from a transition as completion and must not issue a redundant final `next`; doing so will find no active instance after automatic closure.
