@@ -213,3 +213,10 @@ Read `flowforge/src/engine.ts` while completing an offline workloop fallback.
 - **Flywheel:** no guide or workflow change was warranted: the current recovery procedure, explicit `-w` targeting, and scoped-commit discipline all operated as intended.
 
 **Publication:** local wiki commit completed; push intentionally not performed because this scheduled run has no explicit authorization for an external Git remote operation.
+
+## Offline Fallback — Instance #7381 (2026-08-04)
+
+- **Evidence:** capacity gate passed with `Assigned: 4 | Open PRs: 16`. `workloop-find-issue.sh` was invoked twice but produced only its scan banner; the second run was terminated by the execution timeout with `SIGKILL` before emitting `SUMMARY` or `RECOMMENDED ISSUES`.
+- **Decision:** the finder outcome was unavailable, so the workflow advanced to `fallback_offline` rather than treating the partial output as an empty queue or selecting an unsourced issue.
+- **Deep read:** reviewed `flowforge/src/engine.ts`. `requireActiveInstance()` deliberately rejects unqualified operations when more than one instance is active, while `status(workflowName)` and `next(..., workflowName)` select the named active instance. This directly explains—and validates—the required `-w workloop` recovery commands used in this run.
+- **Operational boundary:** the `SIGKILL` establishes only that the finder did not finish within the available execution window; it does **not** establish an OOM root cause. Resource profiling is still needed before attributing the recurring termination to memory pressure.
