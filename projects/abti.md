@@ -129,7 +129,7 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 ## Operational Status — 2026-08-04
 
 - **Current delivery blocker:** issue [#866](https://github.com/kagura-agent/abti/issues/866) is the sole `next` item, to refresh reliability results for stale models.
-- **Verified constraints:** local Ollama can enumerate installed models but cannot perform inference because its `llama-server` executable is absent; no authenticated OpenRouter, DeepSeek, Mistral, or Cohere provider path is available in the cron environment.
+- **Verified constraints:** at 2026-08-04 16:50 CST, local Ollama cannot connect at all and `/usr/local/lib/ollama/llama-server` is absent; no authenticated OpenRouter, DeepSeek, Mistral, or Cohere provider path is available in the cron environment.
 - **Decision:** do not fabricate model results or change registry data without a completed test run. Resume #866 only after a working local runner or an explicitly provisioned provider credential is available.
 - **Maintenance note:** all remaining open issues are explicitly `blocked` or `icebox`; a loop with no newly available execution environment has no safe data or code task to create.
 
