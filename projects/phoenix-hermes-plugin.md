@@ -47,7 +47,7 @@ That is a useful refinement of [[tool-execution-policy-enforcement]]: an enforce
 
 A Loop requires a checklist before most tools run, but `delegate_task` must be allowed so it can obtain the required evaluator. It is also exempted from the high-tier evaluator rule itself. The project records a real three-tool deadlock (`todo` / `delegate_task` / `terminal`) that motivated the exception.
 
-**Portable insight:** any policy that says “do X before Y” must test whether the mechanism for doing X is itself caught by Y. Safety gates need a deliberately narrow progress path, not blanket exemptions.
+**Portable insight:** any policy that says “do X before Y” must test whether the mechanism for doing X is itself caught by Y. Safety gates need a deliberately narrow progress path, not blanket exemptions—see [[policy-gate-progress-path]].
 
 ### 4. Trust is scoped; hardlines are not learned away
 
@@ -68,4 +68,4 @@ Phoenix validates two existing instincts behind [[flowforge]] and OpenClaw's app
 
 The project does **not** justify copying its keyword-weight model or adaptive approval immediately: those thresholds are declared initial heuristics, and it has no demonstrated community validation. The durable lesson is the policy-state-machine shape and its regression tests for past deadlocks.
 
-Links: [[hermes-agent]], [[tool-execution-policy-enforcement]], [[clawpatrol]], [[flowforge]], [[agent-security]]
+Links: [[hermes-agent]], [[tool-execution-policy-enforcement]], [[policy-gate-progress-path]], [[clawpatrol]], [[flowforge]], [[agent-security]]
