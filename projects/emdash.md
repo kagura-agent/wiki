@@ -52,6 +52,13 @@
 - The filtered wrapper delegates signing and optionally binds `getStream` to the underlying agent. ssh2 checks agent instances at runtime, so the wrapper must inherit from its runtime `BaseAgent` export—not merely satisfy the TypeScript interface. This is the rationale for PR #2902.
 - Failure paths are explicit and user-facing: disabled agent config, missing agent socket, and an `IdentitiesOnly` config whose listed keys cannot be loaded all throw before connection setup.
 
+### Reflection
+
+- **PR result:** #2902 remains pending. The only recent human signal is arnestrickmann acknowledging the earlier ping; it adds no implementation request. Do not send another ping before the lifecycle threshold.
+- **Maintainer/review pattern:** the actionable technical feedback was a runtime-semantics constraint: a structural `instanceof BaseAgent` check requires inheritance, not a TypeScript-only interface. For SSH/auth fixes, inspect dependency runtime checks alongside type declarations.
+- **Validation:** standard commands remain `pnpm run test`, `pnpm run format`, `pnpm run lint`, and `pnpm run typecheck`; this offline read did not run them because no source change was made and dependency installation is resource-heavy.
+- **Next round:** keep #2902 focused on the runtime wrapper contract; check its review/age first, then avoid unrelated SSH issues while the team's SSH overhaul remains active. See also [[flowforge]] for the offline-fallback evidence discipline used in this round.
+
 ## Code Style
 - Uses oxfmt formatter (not prettier)
 - Imports from path aliases like `@main/`, `@shared/`
