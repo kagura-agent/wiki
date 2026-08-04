@@ -45,6 +45,13 @@
 - `SshWorktreeHost.validateAbsolute()` is the single boundary check for all SSH path ops
 - Repo has active contributor base (janburzinski is a frequent contributor)
 
+## 2026-08-04 Offline Code Read — SSH agent auth
+
+- `apps/emdash-desktop/src/main/core/ssh/connect/ssh-connect-auth.ts` owns SSH auth assembly for password, private-key, and SSH-agent connections.
+- `IdentitiesOnly` is enforced only for agent auth when resolved SSH config supplies at least one `IdentityFile`: the module parses the public key first (then the private key as fallback) and filters agent identities by key equality before ssh2 receives them.
+- The filtered wrapper delegates signing and optionally binds `getStream` to the underlying agent. ssh2 checks agent instances at runtime, so the wrapper must inherit from its runtime `BaseAgent` export—not merely satisfy the TypeScript interface. This is the rationale for PR #2902.
+- Failure paths are explicit and user-facing: disabled agent config, missing agent socket, and an `IdentitiesOnly` config whose listed keys cannot be loaded all throw before connection setup.
+
 ## Code Style
 - Uses oxfmt formatter (not prettier)
 - Imports from path aliases like `@main/`, `@shared/`
