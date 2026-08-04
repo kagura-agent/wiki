@@ -178,3 +178,11 @@ Also fixed stale data: two broken symlinks in `~/.flowforge/workflows/` (workloo
 During workloop instance `#7342`, the capacity gate passed (`Assigned: 4 | Open PRs: 15`); the finder script was then terminated before it produced a recommendation. The workflow correctly routed through `fallback_offline`, whose completion criterion requires a meaningful local artifact and a commit.
 
 **Operational detail**: the workspace already contained unrelated modified files. For an offline fallback artifact, inspect `git status` first and stage only the file produced in the current workflow run (`git add <path>`), rather than using a broad staging command. This keeps the required commit attributable and avoids absorbing concurrent work.
+
+### Reflection
+
+- **Goal / approach:** complete the mandatory workloop path despite the issue finder not returning a candidate. The capacity gate was recorded before the finder was invoked; the failure path then produced and committed a scoped offline artifact.
+- **What worked:** explicit workflow targeting (`-w workloop`) avoided ambiguity while a `study` instance was active; committing from the nested `wiki` repository preserved unrelated workspace and wiki changes.
+- **Ĵ vs. J\*:** aligned. This was not an issue-selection round after the finder was terminated, so inventing a candidate or doing a contribution outside the fallback branch would have solved the wrong problem.
+- **Failure point:** `workloop-find-issue.sh` did not finish within its execution window, so no recommendation was available. Treat its result as unavailable rather than interpreting the scan's partial banner as an empty issue list.
+- **Next time:** use the workflow's `fallback_offline` branch immediately after a failed/terminated finder, and keep its required artifact isolated to the repository that owns it. See [[offline-fallback-scope-control]].
