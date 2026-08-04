@@ -203,3 +203,13 @@ Read `flowforge/src/engine.ts` while completing an offline workloop fallback.
 - `start()` still auto-closes any active instance with the same workflow name. Operational cron recovery should therefore inspect age/status before starting a replacement rather than relying on `start()` to distinguish a healthy active run from a stale one.
 
 **Verification:** `npm test` in the FlowForge repository completed successfully on 2026-08-04: 4 test files, 84 tests passed (source and built test suites). The standard check command is `npm test`.
+
+## Offline Fallback Reflection — Instance #7364 (2026-08-04)
+
+- **Goal / approach:** resume the active `fallback_offline` node rather than start a replacement; inspect local state, deep-read the FlowForge engine, update this project note, and commit only the generated note.
+- **What worked:** `flowforge status -w workloop` supplied the current-node contract; `git status` exposed unrelated workspace and wiki changes before staging. The artifact was committed in the clean owning repository as `e8392bd`.
+- **Ĵ vs. J\*:** aligned. The workflow required offline work after `gh`/network failure; selecting a new issue or changing unrelated source would have violated that fallback scope.
+- **Failure point / prevention:** the initial gradient text duplicated the already-recorded `offline-fallback-scope-control` lesson. The mandatory gradient was consolidated into that existing pattern (now **第2次**) instead of creating a near-duplicate. When the gradient helper flags a duplicate, consolidate or increment the existing pattern before proceeding.
+- **Flywheel:** no guide or workflow change was warranted: the current recovery procedure, explicit `-w` targeting, and scoped-commit discipline all operated as intended.
+
+**Publication:** local wiki commit completed; push intentionally not performed because this scheduled run has no explicit authorization for an external Git remote operation.
