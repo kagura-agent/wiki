@@ -186,3 +186,9 @@ During workloop instance `#7342`, the capacity gate passed (`Assigned: 4 | Open 
 - **Ĵ vs. J\*:** aligned. This was not an issue-selection round after the finder was terminated, so inventing a candidate or doing a contribution outside the fallback branch would have solved the wrong problem.
 - **Failure point:** `workloop-find-issue.sh` did not finish within its execution window, so no recommendation was available. Treat its result as unavailable rather than interpreting the scan's partial banner as an empty issue list.
 - **Next time:** use the workflow's `fallback_offline` branch immediately after a failed/terminated finder, and keep its required artifact isolated to the repository that owns it. See [[offline-fallback-scope-control]].
+
+## Repeated Finder Termination (2026-08-04)
+
+A second `workloop-find-issue.sh` invocation started normally but was SIGKILLed before producing `RECOMMENDED ISSUES`, despite the capacity gate passing (`Assigned: 4 | Open PRs: 15`). Treat this as an unavailable finder result, not as evidence that the tracked-repository queue is empty. The workflow must take `fallback_offline`; it must not select an unsourced issue or silently bypass the remaining nodes.
+
+**Follow-up:** profile the finder’s resource use and provide a bounded, machine-readable fallback candidate source. Until then, preserve the script output and use the existing offline-artifact path.
