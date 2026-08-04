@@ -93,3 +93,11 @@ This is forward-looking: **task pools** where agents discover and claim work, vs
 
 ---
 *First noted: 2026-07-28 (quick scan → deep read)*
+
+## Follow-up — 2026-08-04
+
+- **Signal**: 384 stars (from 254, +51%), 30 forks, 2 open issues; last push remains 2026-07-27. The project gained attention without new code during this interval, so the adoption signal is stronger than the development-velocity signal.
+- **Last release direction**: v0.2.0 added harness selection and a `ClaudeAgent` CLI runtime beside `CodexAgent`; the next commit removed the standalone `agent` CLI command. The useful design reading is that agent choice belongs at the workflow/runtime boundary, not as a separate user-facing control plane.
+- **Ecosystem position**: Its TypeScript graph authoring contrasts with [[FlowForge]]’s declarative process enforcement. Both make paths explicit, but deer-workflow optimizes for composing semantic calls in code, whereas FlowForge optimizes for making an agent’s operating discipline auditable.
+- **Applied takeaway**: Keep provider choice behind a small runtime interface, but make gate and transition semantics explicit. A portable agent abstraction is valuable only when its observability and approval/verification boundaries remain visible; otherwise it becomes another mechanism without feedback, per [[mechanism-vs-evolution]].
+- **Assessment**: Do not infer a thriving maintainer cadence from the star jump alone. Revisit after a new release or sustained contributor activity, rather than treating popularity as proof of runtime maturity.
