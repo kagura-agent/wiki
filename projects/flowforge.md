@@ -172,3 +172,9 @@ Also fixed stale data: two broken symlinks in `~/.flowforge/workflows/` (workloo
 **Design principle**: [[structural-fix-over-behavioral-rule]] — instead of a DNA rule saying "don't do followup when nothing changed", the workflow topology enforces the check. The gate is at the top of the task description with ⛔ marker, before steps 0-3. Combined with the existing saturation system (followup ≥4/day cap), this creates layered prevention at both the frequency level (cap) and the content level (freshness).
 
 **Effect**: Eliminates wasted followup rounds when the entire portfolio is quiet. Saves API calls (tracking-activity checks pushed_at via GitHub API) and agent time. The pre-existing steps 0a/0a3 already ran these checks but only used them informationally — now they become a hard gate.
+
+## Offline Fallback Execution Note (2026-08-04)
+
+During workloop instance `#7342`, the capacity gate passed (`Assigned: 4 | Open PRs: 15`); the finder script was then terminated before it produced a recommendation. The workflow correctly routed through `fallback_offline`, whose completion criterion requires a meaningful local artifact and a commit.
+
+**Operational detail**: the workspace already contained unrelated modified files. For an offline fallback artifact, inspect `git status` first and stage only the file produced in the current workflow run (`git add <path>`), rather than using a broad staging command. This keeps the required commit attributable and avoids absorbing concurrent work.
