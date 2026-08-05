@@ -221,6 +221,12 @@ Read `flowforge/src/engine.ts` while completing an offline workloop fallback.
 - **Deep read:** reviewed `flowforge/src/engine.ts`. `requireActiveInstance()` deliberately rejects unqualified operations when more than one instance is active, while `status(workflowName)` and `next(..., workflowName)` select the named active instance. This directly explains—and validates—the required `-w workloop` recovery commands used in this run.
 - **Operational boundary:** the `SIGKILL` establishes only that the finder did not finish within the available execution window; it does **not** establish an OOM root cause. Resource profiling is still needed before attributing the recurring termination to memory pressure.
 
+## Study Task Selection Ambiguity (2026-08-05)
+
+A scheduled study run exposed a boundary in the `align` branch: the instruction says to choose `todo_task` when `TODO.md` has a specified learning task, but the section contained open `Track:` entries whose revisit dates were all in the future and several already stated “deep read done.” Those are portfolio records, not executable tasks for the current run. The manual branch interface cannot distinguish them, so selecting `todo_task` based merely on an unchecked tracker creates a no-op and can pressure the executor to fabricate a study result.
+
+**Operational rule:** only select `todo_task` for a concrete unfinished action, or a `Track:` item with `Revisit ≤ today`; otherwise select `entry` and let the mode-specific freshness/due gates choose work. This tightens the existing observation that FlowForge branches rely on executor judgment: a branch description needs a machine-checkable predicate when a false positive would lead to invented work. See [[structural-fix-over-behavioral-rule]].
+
 ## Terminal Transition and Loop-Guard Ordering (2026-08-04)
 
 Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#7385`.
