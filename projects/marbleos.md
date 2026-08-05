@@ -25,6 +25,12 @@ For our tools, preserve the separation between **visible workflow state** and **
 - MarbleOS demo and learn pages, accessed 2026-08-05
 - HN "What should the GUI for AI agents look like?" (136 points in `tools/hn-scan.sh`, 2026-08-05)
 
+## Deep-read boundary check (2026-08-05)
+
+The public Learn gallery is narrowly oriented around **reviewable first passes**: lead sheets, meeting briefs, candidate workbooks, research spreadsheets, outreach drafts, and recurring brief/reminder tasks. This makes MarbleOS less a general autonomous-agent claim than a product bet on batching low-stakes knowledge work into editable artifacts before a human returns.
+
+There is still no inspectable implementation: `marbleos/demo` returns GitHub repository-not-found for both clone and issue-list requests, so no source, tests, issue critiques, permissions model, or task-state semantics could be assessed. The earlier [[wmux]] pattern remains the useful contrast: its completion-evidence gate can be inspected and tested, whereas MarbleOS's workspace visibility is only a UX claim. Treat it as evidence for the visible-artifacts direction in [[agent-harness-landscape]], not as evidence that it delivers verifiable execution.
+
 ## Re-check (2026-08-05)
 
 A GitHub API lookup for `marbleos/demo` returned 404; there remains no public repository to inspect for code, tests, or issues. The HN attention therefore strengthens the **product-direction** signal only, not any claim about implementation quality or agent reliability.
