@@ -227,6 +227,12 @@ A scheduled study run exposed a boundary in the `align` branch: the instruction 
 
 **Operational rule:** only select `todo_task` for a concrete unfinished action, or a `Track:` item with `Revisit ≤ today`; otherwise select `entry` and let the mode-specific freshness/due gates choose work. This tightens the existing observation that FlowForge branches rely on executor judgment: a branch description needs a machine-checkable predicate when a false positive would lead to invented work. See [[structural-fix-over-behavioral-rule]].
 
+## Fallback Recovery and Qualified Advancement (2026-08-05)
+
+- **Evidence preserved:** workloop capacity gate returned `Assigned: 3 | Open PRs: 17`. The subsequent `workloop-find-issue.sh` invocation emitted only its scanning banner and was terminated with `SIGKILL`; no stderr was retained. This establishes an unavailable finder result only, not a network/authentication/limit diagnosis and not an empty issue queue.
+- **Deep read:** `requireActiveInstance(workflowName?)` rejects an unqualified command whenever multiple instances are active, before it looks up an active row. Passing `-w workloop` therefore is not merely defensive convention: it is required to target the intended instance. `status(workflowName)` and `next(branch, workflowName, ...)` forward that selector through the same guard.
+- **Maintenance command:** `npm test` remains the repository's standard regression command (84 tests passed in the 2026-08-04 verification). No FlowForge source changed in this fallback, so this run limited verification to source inspection and a scoped wiki commit.
+
 ## Terminal Transition and Loop-Guard Ordering (2026-08-04)
 
 Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#7385`.
