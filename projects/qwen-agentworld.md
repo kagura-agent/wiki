@@ -5,7 +5,7 @@ date_read: 2026-06-27
 status: deep-read
 stars: 568
 created: 2026-06-22
-last_verified: 2026-06-27
+last_verified: 2026-08-05
 ---
 
 # Qwen-AgentWorld — Language World Model for Agents
@@ -103,3 +103,10 @@ Part of a broader "agent accountability infrastructure" wave:
 The field is shifting from "make agents more capable" → "make agents trustable and trainable at scale."
 
 Links: [[agent-harness-landscape]], [[clawpatrol]], [[self-evolving-agent-landscape]]
+
+## Follow-up — 2026-08-05
+
+- GitHub check: **927 stars** and 90 forks, but the last push was 2026-07-20. The two July fixes repaired evaluation-message construction and reconstructed multi-turn inference history; they improve the benchmark/simulator's state fidelity rather than extend the architecture.
+- Community remains thin: 6 open issues, with only one new issue since the prior check. The active user discussion is about model lineage; the evaluation-verification issue has received no follow-up. This is an adoption signal, not independent validation of the headline benchmark claims.
+- The multi-turn-history regression is a concrete reminder for our own harness work: stateful evaluation must replay the full causal transcript, not merely score a final action against a context the evaluated agent never received. That aligns with [[mechanism-vs-evolution]]: retain evidence of how state was produced, not only its current value.
+- Position: an upstream training/evaluation substrate rather than a runtime harness competitor. Its controllable-perturbation idea remains relevant to [[agent-harness-landscape]], but our near-term work should use deterministic, real-path checks before considering learned environment simulation.
