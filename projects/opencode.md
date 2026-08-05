@@ -461,6 +461,15 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **CI note**: Cannot run tsc locally — monorepo uses bundler resolution that requires full project context. Bun not in default PATH.
 - **Lesson**: When opencode has a code pattern that exists in two parallel implementations (Effect layer vs SDK client), always check both. Grep for the literal string being replaced.
 
+### 2026-08-05 Offline deep read — session compaction
+
+**Source read:** `packages/opencode/src/session/overflow.ts` and `packages/opencode/src/session/compaction.ts` at local commit `6e46a496ac`.
+
+- Overflow uses `tokens.total` when available, otherwise sums input, output, and cache reads/writes. It compares that count with `usable()`, which reserves either configured `compaction.reserved` or the smaller of 20k and the model's maximum output; models with `limit.input` and models without it use different usable-budget branches.
+- Tail preservation is a bounded selection step, not an unconditional last-two-turn replay: it considers up to `tail_turns` (default 2) within a configurable or 25%-of-usable 2k–8k token budget. If a turn does not fit, it can retain only its newest message suffix; otherwise it logs a fallback rather than exceeding budget.
+- Pruning walks backward through completed tool parts after protecting the newest 40k tool-output tokens and skips `skill` calls. It only marks output compacted after it finds more than 20k prunable tokens, avoiding low-value churn.
+- Compaction excludes completed prior summary request/response pairs, feeds the prior summary into the next prompt, permits the `experimental.session.compacting` hook to add context or replace that prompt, and strips media plus caps tool output at 2,000 characters before model submission. Changes to this path need to preserve the separate overflow replay and plugin auto-continue behavior; see [[context-compaction]] for the earlier architecture comparison.
+
 ### 2026-08-05 Offline deep read — ACP session store
 
 **Source read:** `packages/opencode/src/acp/session.ts` at local commit `6e46a496ac`.
