@@ -250,3 +250,10 @@ Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#
 - **Local maintenance:** workspace `git log @{upstream}..HEAD` contains four unpushed commits (`d18cf00`, `c787ed8`, `889a9be`, `b94b92c`); no new unpushed commit was found or altered. Existing unrelated workspace and wiki modifications were left unstaged.
 - **Deep read:** in `flowforge/src/engine.ts`, `requireActiveInstance(workflowName?)` rejects unqualified commands when more than one workflow is active, then retrieves only the named active instance. The failed unqualified `flowforge next --branch 3` and succeeding `flowforge next -w workloop --branch 3` directly verify that the selector is operationally required in concurrent runs.
 - **Belief review:** `bounded-finder-failure-evidence` is still at its first recorded occurrence (the earlier same-day entry predated this run); no promotion or duplicate candidate was added.
+
+## Offline Fallback — Instance #7494 (2026-08-05 15:04 CST)
+
+- **Failure evidence:** the capacity gate returned `Assigned: 3 | Open PRs: 16`. `workloop-find-issue.sh` printed its scan banner, produced no recommendation or stderr, and was terminated with `SIGKILL`. This is only an unavailable finder result; it does not identify a network, authentication, rate-limit, or resource root cause.
+- **PR maintenance:** local cove `git log @{upstream}..HEAD` returned no unpushed commits. Existing unrelated workspace and wiki changes were not staged.
+- **Deep read:** `engine.start(workflowName)` always marks an existing active instance with that name `done` before creating the replacement; it has no age/staleness check. Thus the workloop's required `active → log age → cleanup only if >2h → resume otherwise` sequence is a necessary safety boundary, not redundant ceremony: calling `start` on a healthy instance would discard its active state.
+- **Artifact discipline:** this note is the scoped offline-fallback artifact. Stage only `projects/flowforge.md` when committing, because the wiki worktree contains concurrent unrelated changes.
