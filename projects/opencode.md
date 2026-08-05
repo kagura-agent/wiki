@@ -460,3 +460,22 @@ if (p.type === "compaction" && p.tail_start_id) {
 - **Architecture note**: opencode has TWO parallel usage_update paths: (1) Effect-based layer in usage.ts used by local sessions, (2) ACP client SDK in service.ts used by remote sessions. Both need identical changes.
 - **CI note**: Cannot run tsc locally — monorepo uses bundler resolution that requires full project context. Bun not in default PATH.
 - **Lesson**: When opencode has a code pattern that exists in two parallel implementations (Effect layer vs SDK client), always check both. Grep for the literal string being replaced.
+
+### 2026-08-05 Offline deep read — ACP session store
+
+**Source read:** `packages/opencode/src/acp/session.ts` at local commit `6e46a496ac`.
+
+- `ACPSession.Service` is an in-memory Effect service backed by `Ref<Map<string, Info>>`; `create` and `load` both call the same `store` operation, so neither persists session state across process restarts.
+- Every externally returned `Info` is copied by `snapshot()`: the MCP-server list, `Date`, and `knownParts` map are recreated. This prevents callers from mutating the store through a returned reference.
+- `recordPartMetadata()` uses a composite `messageId:partId` key and replaces the map immutably through `update()`. The metadata captures protocol-facing part type, role, ignored state, tool-call ID, and opaque metadata without coupling the session store to event-specific schema.
+- The module distinguishes `getPartMetadata()` (missing session is an `ACPError.SessionNotFoundError`) from `tryGetPartMetadata()` (missing session returns `undefined`). Use the strict form when a caller requires an established ACP session; use the tolerant form for event races/cleanup paths.
+- Cross-reference: `recordPartMetadata` and `tryGetPartMetadata` are used in `src/acp/event.ts`; before changing their key or missing-session behavior, audit that event translation path as the primary consumer.
+
+### 2026-08-05 Offline deep read — ACP service lifecycle
+
+**Source read:** `packages/opencode/src/acp/service.ts` at local commit `6e46a496ac`.
+
+- `newSession`, `loadSession`, `resumeSession`, and `forkSession` each cache a per-session `Directory.Snapshot` and register MCP servers; they differ in whether they create, retrieve, or fork the backing OpenCode session and whether they replay historic messages.
+- `closeSession` removes in-memory ACP state plus the MCP-registration and directory-snapshot caches *before* attempting to abort the backing OpenCode session. `abortBackingSession()` logs and absorbs abort failure, so local cleanup remains idempotent even if the backing request fails.
+- Configuration mutations validate against the cached directory snapshot: `setSessionConfigOption` returns refreshed options, whereas dedicated `setSessionMode` and `setSessionModel` return empty responses after updating state. Any config-option change must keep those three paths aligned.
+- `listSessions` merges persisted SDK sessions with in-memory ACP-only sessions, excludes duplicates by ID, sorts newest first, and uses updated-at milliseconds as its cursor. Changing session persistence or timestamps must preserve this merge/dedup/pagination behavior.
