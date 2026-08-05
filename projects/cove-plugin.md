@@ -79,9 +79,17 @@ issue #398 想换的是把这个手写 deliver 换成 framework 的 `sendDurable
 - 重置方法：mv jsonl → `.reset.<ts>` + sessions.json 里把对应 key 的 `sessionId/sessionFile` 清成 null，`status` 改 `idle`，`contextTokens/inputTokens/outputTokens` 归零
 - `/new` 这种 trigger 是 OpenClaw CLI/TUI 层的命令，cove channel **不会**把它翻译成 reset，要从文件层操作
 
+## PR #502 — task-level recurrence (pending, 2026-08-05)
+
+- **Result:** pending review. The PR exposes optional recurrence through the task API while retaining the legacy recurring-task surface. Copilot’s first review flagged schedule re-anchoring; the follow-up commit `3228fc0` preserves `next_run_at` when clients resend an unchanged `interval_ms`.
+- **Review style:** the only feedback so far is Copilot, not a human maintainer. It checks state-reset defaults, shared-contract duplication, and schedule stability. The latter two suppressed findings were already addressed on current HEAD: client re-exports the shared occurrence-mode type, and the creation dialog resets heartbeat to its `true` default.
+- **Test / CI notes:** `pnpm --filter @cove/server test -- src/__tests__/recurring-tasks.test.ts` completed the full server suite (21 files / 357 tests), rather than filtering to that one file. `pnpm --filter @cove/client exec tsc --noEmit` and `pnpm --filter @cove/client test -- src/components/CreateTaskDialog.test.ts` passed (the latter ran 13 files / 60 tests). Use `git diff --check main...HEAD` before review follow-up.
+- **Next time:** recurrence editor saves may resend fields unrelated to the user’s change. Test all three schedule cases explicitly: omitted interval, unchanged interval, and changed interval. Prefer shared contract imports/re-exports over duplicate client unions, and reset dialog state to its initialization defaults.
+
 ## Related
 
 - [[cove-plugin-message-actions]] — message tool action dispatch 架构调研
+- [[gogetajob]] — this workloop’s finder failure was recorded as unavailable discovery evidence, not as an absence of contribution candidates
 
 ## 已知坑
 
