@@ -13,7 +13,7 @@ A guardrail should label the strength of its evidence and match enforcement to t
 - **Likely:** structural signal with context-dependent meaning (for example, a thin wrapper or duplicate normalized symbol). It should ask for justification, not declare the code wrong.
 - **Heuristic:** shape match or smell. It belongs in advisory feedback only.
 
-[[Ratchet]] makes this distinction at the edit boundary; [[OpenLoop (thu-nmrc/openloop)]] applies the stronger form to task completion via independent verification; [[FlowForge]] routes process decisions but relies on external checks for hard claims.
+[[Ratchet]] makes this distinction at the edit boundary; [[openloop-thu|OpenLoop (thu-nmrc/openloop)]] applies the stronger form to task completion via independent verification; [[FlowForge]] routes process decisions but relies on external checks for hard claims.
 
 ## Design rule
 

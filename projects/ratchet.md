@@ -17,7 +17,7 @@ last_verified: 2026-08-05
 
 [[Ratchet]] closes the gap between prompt-only coding rules and actual edits. A `SessionStart` hook injects a minimalism ruleset; a `PostToolUse` hook measures each write, detects a small fixed set of patterns, and returns findings to the agent while the task is still active. It maintains a per-session budget for new files, dependencies, and net added lines, then records a per-repository baseline/ledger.
 
-The model is a practical sibling to [[OpenLoop (thu-nmrc/openloop)]] and [[verify-claims]]: the builder does not self-certify. But it applies the gate to code-complexity heuristics rather than task outcomes.
+The model is a practical sibling to [[openloop-thu|OpenLoop (thu-nmrc/openloop)]] and [[verify-claims]]: the builder does not self-certify. But it applies the gate to code-complexity heuristics rather than task outcomes.
 
 ## Architecture observed in source
 
