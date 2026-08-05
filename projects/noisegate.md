@@ -86,4 +86,13 @@ Every answer comes with a calibrated confidence interval: "the true value is wit
 - The "attack gallery as CI" pattern will be adopted by other security-focused agent projects within 6 months
 - Solo dev + no community = fragility risk; watch for stagnation after initial burst
 
-Links: [[agent-security]], [[clawpatrol]], [[openclaw]], [[agent-trust-hierarchy]]
+## Deep-read update — 2026-08-05
+
+- **The test suite proves the negative at the real boundary.** `test_validation.py` sends adversarial ASTs directly to `Validator`, deliberately bypassing MCP schema guidance and any LLM compiler. That makes the important claim falsifiable: generated tool schemas are ergonomics, whereas policy enforcement is the deterministic authority.
+- **Its composition upgrade preserves migration safety as a data invariant.** `HybridZCDPComposition` persists named pure-ε and ρ ledgers; when upgrading an old pure-ε record, it reconstructs ρ as `spent_epsilon² / 2`, the conservative worst case. An unrecognised accounting tag hard-fails instead of silently reinterpreting privacy state.
+- **The attack gallery is more rigorous than a happy-path demo.** The differencing test asserts exact secret recovery with DP disabled, then uses a test-only seeded randomness seam to measure DP-on error; a separate test asserts production uses `SecretsSource`. This avoids the common mistake of making a security demonstration reproducible by weakening the deployed path.
+- **Current critique surface is absent, not positive evidence.** GitHub issue listing returned `[]` on 2026-08-05. Its filter-narrowing guard explicitly documents itself as a structural heuristic layered above DP, so it should not be mistaken for a k-anonymity guarantee.
+
+**Ecosystem position:** [[noisegate]] is a stronger instance of [[deterministic-envelope-for-small-agents]] than a conventional MCP gateway: it treats every model-produced query as hostile input, while [[clawpatrol]] controls whether a tool call may happen at all. Together they separate *authority* from *information leakage*.
+
+Links: [[agent-security]], [[clawpatrol]], [[openclaw]], [[agent-trust-hierarchy]], [[deterministic-envelope-for-small-agents]]
