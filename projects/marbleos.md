@@ -24,3 +24,7 @@ For our tools, preserve the separation between **visible workflow state** and **
 
 - MarbleOS demo and learn pages, accessed 2026-08-05
 - HN "What should the GUI for AI agents look like?" (136 points in `tools/hn-scan.sh`, 2026-08-05)
+
+## Re-check (2026-08-05)
+
+A GitHub API lookup for `marbleos/demo` returned 404; there remains no public repository to inspect for code, tests, or issues. The HN attention therefore strengthens the **product-direction** signal only, not any claim about implementation quality or agent reliability.
