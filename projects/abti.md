@@ -138,6 +138,7 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 - **Re-verified at 12:44 CST:** [#866](https://github.com/kagura-agent/abti/issues/866) remains the only `next` issue. `ollama ps` cannot connect; `llama-server` is absent from `PATH`; OpenRouter, DeepSeek, Mistral, and Cohere credentials remain unset in this cron environment.
 - **Decision:** #866 cannot safely advance; the other seven open issues remain explicitly `blocked` or `icebox`. No source, result-data, label, branch, or PR change was made.
 - **Next run:** only resume data refresh when a working local Ollama runner or explicitly provisioned provider credential is actually available. Do not create a speculative replacement issue while active blockers exist.
+- **Re-verified at 20:21 CST:** the issue’s latest diagnosis continues to require elevated Ollama reinstall (about a 1.3 GB release download) and/or approved provider credentials. `ollama ps` now specifically reports no running server; the runner remains unavailable. The result is still a scoped external blocker, not a reason to invent a replacement issue.
 
 ## Next Steps
 
