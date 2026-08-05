@@ -98,3 +98,7 @@ Sandtrace explicitly supports E2B/Daytona as providers → positioning as audit 
 ## Deep Read Date
 
 2026-07-22 (first study). Revisit 07-29.
+
+## 2026-08-05 — Follow-up: operator UX follows infrastructure breadth
+
+At 438⭐, Superserve shipped multi-region team creation/switching and then a console affordance to copy a complete sandbox ID (2026-08-04). This is unglamorous but consistent with a sandbox product moving from core isolation toward operating many sandboxes. It reinforces the positioning described in [[agent-credential-security]]: secure agent execution needs usable operator controls, not only a strong containment boundary.

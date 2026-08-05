@@ -133,3 +133,7 @@ Implemented the core progressive thinning insight: reduce orchestration overhead
 - Structural fixes (recommended by the recidivism alert) remain the full resolution; thinning is the interim noise reduction
 
 Links: [[structural-fix-over-behavioral-rule]], [[self-evolving-observations]], [[tokdiet]], [[progressive-thinning]]
+
+## 2026-08-05 — Follow-up: the release gate is now the active surface
+
+sofagent reached 31⭐ and was active through 2026-08-04, but the newest changes are v1.2.6 acceptance-script false-positive fixes and release-checklist documentation. There is no new orchestration architecture this round. The useful confirmation is narrower: governance systems need their gates calibrated, or they become noise generators—exactly the failure [[dna-preflight]] is designed to expose. Retain at a longer revisit interval because the project remains solo and low-traction.

@@ -85,3 +85,7 @@ Classification: trailing streak of sub-threshold iterations → productive / thr
 ## 2026-07-29 — Deep Read (Initial)
 
 Scout found via GitHub API (topic:ai-agent, created:>2026-07-22). 20⭐ at discovery. HN post (6pts, "Wattage: A token-spend profiler and cost-regression gate"). Read: full source of models.py, convergence/ (classify, signals, embed), detectors/prefix_churn.py, ci.py, scoring/score.py, pricing/registry.py. Tests use hypothesis property testing. CI via GitHub Actions. No issues filed yet (too new).
+
+## 2026-08-05 — Follow-up: abandoned before adoption
+
+GitHub metadata and the five newest commits show only Dependabot GitHub Actions bumps on 2026-07-26; the repository is 21⭐ with 0 forks. No implementation change appeared after the initial deep read. **Tracking decision: drop** — the [[convergence-engine]] idea remains useful, but this project provides no new evidence of adoption or iteration.

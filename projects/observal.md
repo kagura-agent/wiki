@@ -118,3 +118,7 @@ Added to gogetajob blocklist 2026-07-22.
 - Pre-commit hooks: `make hooks`
 
 Links: [[agent-harness-landscape]], [[ccglass]], [[waggle]], [[deja-vu]], [[openclaw]], [[acp]]
+
+## 2026-08-05 — Follow-up: operational maturity, not feature expansion
+
+At 2,254⭐, work through 2026-08-03 focused on a fresh-database Alembic guard and resume-safe release/attestation jobs. This is a useful ecosystem signal: once an agent platform reaches enterprise integrations, reliability of install and release paths becomes a product concern. No new architecture surfaced; retain as a mature reference alongside [[ccglass]] rather than chase each maintenance release.

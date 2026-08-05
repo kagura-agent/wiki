@@ -6,6 +6,7 @@ source: https://github.com/Optim-Agent/optim-plans
 stars: 86
 status: active
 category: agent-harness
+last_verified: 2026-08-05
 ---
 
 # optim-plans
@@ -72,3 +73,7 @@ Competes loosely with [[centaur-loop]] (human-governed AI feedback loop) and [[l
 Worth tracking short-term for the verification patterns. Check in 1 week for: community growth signal, real adoption evidence, architecture changes.
 
 Links: [[agent-harness-landscape]], [[centaur-loop]], [[lazycodex]], [[self-evolving-agent-landscape]]
+
+## 2026-08-05 — Follow-up: validator behavior is becoming the product
+
+The repository grew 86→301⭐ and remained active through 2026-07-31. Recent changes add a `research-and-plan` alias, PLAN_v2 “retry until blocked” behavior, and stable validator plan-context/recovery diagnostics. The notable direction is not broader orchestration: it makes the plan validator more explicit about bounded recovery. That supports the [[failable-verification]] principle already used by [[flowforge]], while its single-fork community signal means adoption remains unproven.

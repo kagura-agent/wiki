@@ -4,7 +4,7 @@ created: 2026-07-22
 updated: 2026-07-29
 status: active
 links: [[agent-credential-security]], [[coding-agent-ecosystem]], [[clawpatrol]]
-last_verified: 2026-07-29
+last_verified: 2026-08-05
 ---
 
 # open-kritt — AI Security Research Platform
@@ -100,3 +100,7 @@ Reusable Markdown instruction blocks (slug + name + content + metadata). Attache
 Competes with: manual security audits, Snyk/SonarQube (static analysis), manual bug bounty hunting.
 Complements: [[clawpatrol]] (network-level agent security), [[agent-credential-security]] patterns.
 Category: **Agent-orchestrated domain-specific automation** — not a general coding agent, but a security-research-specific multi-agent pipeline.
+
+## 2026-08-05 — Follow-up: collaboration becomes privacy-scoped
+
+open-kritt grew 438→1,360⭐ and released v1.3.0 on 2026-08-04. The release adds a **privacy-safe sharing loop** and repairs report-creation context/share-request behavior. The counterintuitive security-tool lesson: growth pushes a research workflow to make sharing safer and clearer, rather than merely increase scan sophistication. Its domain workflow remains distinct from [[flowforge]], but the privacy-by-default collaboration boundary aligns with [[agent-credential-security]].
