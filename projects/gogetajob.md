@@ -108,6 +108,13 @@ work_type 支持 `pr` 和 `issue` 两种。
 - `import` 是 JS 保留字，文件命名为 `import-cmd.ts` 规避
 - 拆分后每个命令文件 50-150 行，可读性大幅提升
 
+## 2026-08-05 Workloop offline fallback
+
+- **结果：**本轮未创建或更新 PR。FlowForge instance `#7466` 的 `find_work` 进入“gogetajob/gh 命令失败（网络、认证、API 限流）”分支，随后走 `fallback_offline`；没有持久化的原始 stderr，因此不能把失败归因到网络、认证或限流中的任一项。
+- **维护者 / PR 模式：**本轮没有目标仓库或 maintainer 交互，故无新增维护者偏好可记录。
+- **CI / 测试：**未运行候选仓库测试；这只是发现阶段失败，不得把它表述为项目 CI 状态。
+- **下次：**发现命令必须保留结构化错误输出（命令、退出码、stderr 摘要），再决定是重试 API、使用本地 DB，还是进入离线回退。与 [[flowforge]] 的 workloop 交接应把“发现不可用”和“无候选”明确区分，避免无证据地选择 issue。
+
 ## 下一步
 
 - [x] ~~拆分 index.ts~~ ✅ 04-19
