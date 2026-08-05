@@ -115,6 +115,12 @@ work_type 支持 `pr` 和 `issue` 两种。
 - **CI / 测试：**未运行候选仓库测试；这只是发现阶段失败，不得把它表述为项目 CI 状态。
 - **下次：**发现命令必须保留结构化错误输出（命令、退出码、stderr 摘要），再决定是重试 API、使用本地 DB，还是进入离线回退。与 [[flowforge]] 的 workloop 交接应把“发现不可用”和“无候选”明确区分，避免无证据地选择 issue。
 
+### 12:07 CST evidence and script path
+
+- [已验证] `bash tools/workloop-find-issue.sh 2>&1` printed its heading and `SCANNING TRACKED REPOS`, then exited by `SIGKILL` before `gogetajob scan --all` returned. No stderr was emitted/captured, so the termination cause is **unverified**; do not label it OOM, auth, network, or rate limiting.
+- [已验证] The script blocks in `SCAN_OUT=$(... gogetajob scan --all 2>&1 | tail -5)` before it can query the cached JSON feed or apply any issue gates. Consequently this result is unavailable discovery evidence, not `NO VIABLE ISSUES`.
+- [已验证] Capacity immediately beforehand was `Assigned: 3 | Open PRs: 17`; the workflow’s assigned-issue gate passed because 17 is not less than `3 - 1`.
+
 ## 下一步
 
 - [x] ~~拆分 index.ts~~ ✅ 04-19
