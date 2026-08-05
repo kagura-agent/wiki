@@ -242,3 +242,11 @@ Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#
 - Tests should cover both terminal paths separately: arriving at a terminal node (automatic closure) and invoking `next()` while already on one (explicit closure). They exercise different branches despite both producing `done` status.
 
 **Operational implication:** automation should treat `terminal: true` from a transition as completion and must not issue a redundant final `next`; doing so will find no active instance after automatic closure.
+
+## Offline Fallback — Instance #7488 (2026-08-05 14:02 CST)
+
+- **Failure evidence:** ran `ASSIGNED=$(gh search issues --assignee kagura-agent --state open --json number --jq "length"); OPEN_PRS=$(gh search prs --author kagura-agent --state open --json number --jq "length"); echo "Assigned: $ASSIGNED | Open PRs: $OPEN_PRS"; bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1`. The capacity gate printed `Assigned: 3 | Open PRs: 16`, so its assigned/PR inequality did not block discovery. The finder emitted only `FIND WORK — 2026-08-05 14:02` and `SCANNING TRACKED REPOS`, then the process ended with `SIGKILL`. No stderr was retained.
+- **Decision:** this is an unavailable finder result, not a GitHub/network/authentication diagnosis and not proof of an empty queue. Advanced through `flowforge next -w workloop --branch 3` to the required offline fallback.
+- **Local maintenance:** workspace `git log @{upstream}..HEAD` contains four unpushed commits (`d18cf00`, `c787ed8`, `889a9be`, `b94b92c`); no new unpushed commit was found or altered. Existing unrelated workspace and wiki modifications were left unstaged.
+- **Deep read:** in `flowforge/src/engine.ts`, `requireActiveInstance(workflowName?)` rejects unqualified commands when more than one workflow is active, then retrieves only the named active instance. The failed unqualified `flowforge next --branch 3` and succeeding `flowforge next -w workloop --branch 3` directly verify that the selector is operationally required in concurrent runs.
+- **Belief review:** `bounded-finder-failure-evidence` is still at its first recorded occurrence (the earlier same-day entry predated this run); no promotion or duplicate candidate was added.
