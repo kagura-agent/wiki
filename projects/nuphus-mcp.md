@@ -43,7 +43,7 @@ One documentation-maintenance signal: `SECURITY.md` still says 23 write tools wh
 
 ## Links
 
-[[computer-use]], [[browser-automation]], [[mcp-server]], [[agent-harness-landscape]], [[security-boundary]]
+[[computer-use]], [[browser-automation]], [[mcp-server]], [[agent-harness-landscape]], [[agent-security]]
 
 ---
 *Deep read: 2026-08-04 | Scout sources: GitHub API (spam-filtered) + HN scan*

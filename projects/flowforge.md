@@ -185,7 +185,7 @@ During workloop instance `#7342`, the capacity gate passed (`Assigned: 4 | Open 
 - **What worked:** explicit workflow targeting (`-w workloop`) avoided ambiguity while a `study` instance was active; committing from the nested `wiki` repository preserved unrelated workspace and wiki changes.
 - **Ĵ vs. J\*:** aligned. This was not an issue-selection round after the finder was terminated, so inventing a candidate or doing a contribution outside the fallback branch would have solved the wrong problem.
 - **Failure point:** `workloop-find-issue.sh` did not finish within its execution window, so no recommendation was available. Treat its result as unavailable rather than interpreting the scan's partial banner as an empty issue list.
-- **Next time:** use the workflow's `fallback_offline` branch immediately after a failed/terminated finder, and keep its required artifact isolated to the repository that owns it. See [[offline-fallback-scope-control]].
+- **Next time:** use the workflow's `fallback_offline` branch immediately after a failed/terminated finder, and keep its required artifact isolated to the repository that owns it.
 
 ## Repeated Finder Termination (2026-08-04)
 
