@@ -479,3 +479,11 @@ if (p.type === "compaction" && p.tail_start_id) {
 - `closeSession` removes in-memory ACP state plus the MCP-registration and directory-snapshot caches *before* attempting to abort the backing OpenCode session. `abortBackingSession()` logs and absorbs abort failure, so local cleanup remains idempotent even if the backing request fails.
 - Configuration mutations validate against the cached directory snapshot: `setSessionConfigOption` returns refreshed options, whereas dedicated `setSessionMode` and `setSessionModel` return empty responses after updating state. Any config-option change must keep those three paths aligned.
 - `listSessions` merges persisted SDK sessions with in-memory ACP-only sessions, excludes duplicates by ID, sorts newest first, and uses updated-at milliseconds as its cursor. Changing session persistence or timestamps must preserve this merge/dedup/pagination behavior.
+
+### 2026-08-05 Offline deep read — ACP event metadata recovery
+
+**Source read:** `packages/opencode/src/acp/event.ts` at local commit `6e46a496ac`.
+
+- `message.part.updated` records the metadata before it emits tool updates, while `message.part.delta` reads that metadata to decide whether a delta is an assistant text chunk or reasoning chunk. That cache is therefore part of the event-ordering contract, not merely an optimization.
+- A delta that arrives without cached metadata takes a bounded recovery path: fetch the exact session message, locate the part by ID, record it, and only then emit a protocol update. Missing sessions, messages, or parts are silently ignored, which makes reconnect/race paths safe without fabricating output.
+- Replay follows the same `recordFetchedPart()` path before rendering content or tool state, keeping live events and historical replay aligned. Any change to stored metadata fields or the composite key needs tests for both the live-delta and replay paths.
