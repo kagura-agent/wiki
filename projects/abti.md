@@ -133,6 +133,12 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 - **Decision:** do not fabricate model results or change registry data without a completed test run. Resume #866 only after a working local runner or an explicitly provisioned provider credential is available.
 - **Maintenance note:** all remaining open issues are explicitly `blocked` or `icebox`; a loop with no newly available execution environment has no safe data or code task to create.
 
+## Operational Status — 2026-08-05
+
+- **Re-verified at 12:44 CST:** [#866](https://github.com/kagura-agent/abti/issues/866) remains the only `next` issue. `ollama ps` cannot connect; `llama-server` is absent from `PATH`; OpenRouter, DeepSeek, Mistral, and Cohere credentials remain unset in this cron environment.
+- **Decision:** #866 cannot safely advance; the other seven open issues remain explicitly `blocked` or `icebox`. No source, result-data, label, branch, or PR change was made.
+- **Next run:** only resume data refresh when a working local Ollama runner or explicitly provisioned provider credential is actually available. Do not create a speculative replacement issue while active blockers exist.
+
 ## Next Steps
 
 - [x] Design assessment questionnaire → [`abti-questionnaire.md`](abti-questionnaire.md) (16 questions, 4 per dimension)
