@@ -13,10 +13,19 @@ For broad finance discovery issues, split by evidence boundary before implementa
 
 ## 2026-08-06 — watchlist quote-code mapping (#1603)
 
-- Local implementation is committed in the isolated `finance-issue-1603` worktree: `04c975e` maps each batch quote through returned `f12` before enriching it with watchlist metadata or K-line data. Two mocked tests prove out-of-order responses and a missing middle quote cannot shift later stocks.
-- Verification: `tests/test_watchlist.py` passed 66 tests; the focused watchlist/compact/breakdown set passed 84 tests. A full suite attempt timed out at 19% in untouched `daily_combined` external-market-data work, so it is not evidence of a full-suite pass.
-- Delivery state: **local commit only, issue remains open**. Current code-execution policy forbids Claude Code from pushing or opening PRs, so there is no remote artifact that would justify closing #1603. [[finance]]
+- Result: **merged**. The reviewed local commit was rebased as `b7ef1af`, pushed on `fix/watchlist-quote-code-map`, and merged as PR [#1607](https://github.com/kagura-agent/finance/pull/1607) at `2026-08-06T11:53:00Z`; its `Fixes #1603` linkage auto-closed #1603 one second later.
+- Implementation maps each batch quote through returned `f12` before enriching it with watchlist metadata or K-line data. Two mocked regressions cover out-of-order responses and a missing middle quote, proving later stocks are not positionally shifted.
+- CI/testing: `python3 -m pytest tests/test_watchlist.py -q` passed **64 tests** on the delivery commit; `git diff --check origin/main...b7ef1af` passed. Do not represent earlier, broader test counts or an externally-data-dependent full-suite timeout as PR-delivery evidence.
+- Maintainer/review evidence: this was a clean, no-review merge. There is no maintainer-comment evidence yet for a preferred narrative or style; retain the narrow, issue-derived regression approach rather than inventing one. [[finance]]
+- Future study: inspect recent merged Finance PRs for conventions not exposed by this no-review merge—especially mock construction, test scope, and PR description style.
 - Next time: preserve the `f12` field in quote mocks whenever testing `collect_watchlist_data()`; positional response order is not a valid API contract.
+
+## 2026-08-06 — workloop reflection
+
+- Goal and outcome: the intended contribution was a bounded #1603 fix; it was delivered and merged with the exact issue linkage. The later generic finder failure was not a second selection result and correctly took the workflow fallback.
+- Effective approach: map API responses by the returned identifier and test the two ordering boundaries from the issue. This aligns the implementation and proof with the actual contract rather than an assumed list position.
+- Goal-drift check: no drift found for #1603—the merged behavior and regressions address its stated acceptance criteria. A discovery helper that stopped before a recommendation was kept distinct from the completed contribution.
+- Improvement: when discovery has no complete structured output, preserve that boundary; do not recast it as an empty queue, an API/network diagnosis, or a reason to reopen completed Finance work. [[work-targets]]
 
 ## 2026-08-06 — patrol helper fallback evidence
 
