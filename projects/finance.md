@@ -17,3 +17,8 @@ For broad finance discovery issues, split by evidence boundary before implementa
 - Verification: `tests/test_watchlist.py` passed 66 tests; the focused watchlist/compact/breakdown set passed 84 tests. A full suite attempt timed out at 19% in untouched `daily_combined` external-market-data work, so it is not evidence of a full-suite pass.
 - Delivery state: **local commit only, issue remains open**. Current code-execution policy forbids Claude Code from pushing or opening PRs, so there is no remote artifact that would justify closing #1603. [[finance]]
 - Next time: preserve the `f12` field in quote mocks whenever testing `collect_watchlist_data()`; positional response order is not a valid API contract.
+
+## 2026-08-06 — patrol helper fallback evidence
+
+- The required generic command `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1` printed only its scan banner and then terminated with `SIGKILL`; it emitted neither candidates nor its declared summary/recommended branch. This is an unavailable helper result, not evidence of a network, authentication, rate-limit, or empty-work-queue condition.
+- A direct scoped query of `kagura-agent/finance` still returned nine open issues. The only bounded implementation issue remains #1603, whose independently verified local commit is described above; its remote lifecycle is still blocked because no PR or push has been authorized by the code-execution policy.
