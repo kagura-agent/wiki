@@ -286,3 +286,10 @@ Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#
 - **Local PR check:** began checking fork worktrees for unpushed commits. The broad scan encountered several independently dirty worktrees (including large generated/untracked/deleted trees) and was stopped to avoid interacting with concurrent work. No change was made in any fork.
 - **Deep read:** reviewed `flowforge/src/engine.ts`. `requireActiveInstance()` makes `-w workloop` mandatory in a multi-active-instance environment. `next()` checks the optional `fromNode` compare-and-advance guard before selecting the successor, then applies visit-count loop protection to the destination; terminal destinations are closed and marked `done` in the same transition.
 - **Maintenance:** `npm test` is documented as the FlowForge regression command; this offline note changes no source, so no test run was required. The note is staged and committed alone in the wiki repository; no push is performed.
+
+## Offline Fallback — Instance #7608 (2026-08-06 15:06 CST)
+
+- **Recovery:** the active instance had entered `plan` at 14:49 CST, below the two-hour threshold. Its prior issue/plan context was absent from FlowForge history, which stores node transitions but not node outputs. Rather than invent a plan, the required `plan → find_work` re-selection branch was used.
+- **Failure evidence:** the capacity gate completed with `Assigned: 2 | Open PRs: 18`, so its inequality did not block discovery. `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1` printed `FIND WORK — 2026-08-06 15:06` and `SCANNING TRACKED REPOS`, then ended with `SIGKILL` without `SUMMARY`, `RECOMMENDED ISSUES`, or stderr diagnostics.
+- **Decision:** discovery was unavailable; this is neither evidence of an empty issue queue nor a diagnosis of network, auth, rate-limit, or resource failure. The workflow advanced to `fallback_offline` exactly as specified.
+- **Local maintenance:** `git log --all --not --remotes --oneline -20` showed existing workspace-only commits; `git status` found concurrent unrelated workspace/wiki changes. They are left unstaged. This scoped note is the fallback artifact.
