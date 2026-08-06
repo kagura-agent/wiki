@@ -57,6 +57,7 @@ index.ts (CLI, commander) → engine.ts (状态机逻辑) → db.ts (SQLite)
 - 与 [[gogetajob]] 配合：打工循环通过 FlowForge workloop 驱动
 - [[openclaw]] 的 cron 触发 flowforge start
 - 设计思路接近 [[mechanism-vs-evolution]] 中的 mechanism 端——显式约束而非自动进化
+- [[approving|Approving]] — 在状态机执行图上补足可审阅产物与显式人工决策门
 
 ## 测试覆盖 (04-19 新增)
 - vitest, db 模块全 mock（in-memory store 模拟 SQLite 行为）

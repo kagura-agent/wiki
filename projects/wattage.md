@@ -74,7 +74,7 @@ Classification: trailing streak of sub-threshold iterations → productive / thr
 
 **For OpenClaw sessions**: If OpenClaw emitted OTel traces (it doesn't yet), Wattage could gate on per-PR agent cost regression. The pattern: baseline.json committed to repo → every PR compared against it.
 
-**Practical barrier**: We don't emit OTel traces. Would need an adapter (or our own session-log → Wattage-normalized-model converter). The normalized model (Session/Task/Loop/Iteration) is clean enough that this is tractable.
+**Practical barrier**: We don't emit OTel traces. Would need an adapter (or our own session-log → Wattage-normalized-model converter). The normalized model (Session/Task/Loop/Iteration) is clean enough that this is tractable. See [[otel-genai-agent-tracing]] for the current decision to retain native session/cron evidence and defer a GenAI OTel adapter until there is a concrete trace consumer.
 
 ## Predictions
 

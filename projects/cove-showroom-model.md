@@ -69,7 +69,7 @@ Luna 的洞察：不用找外部用户——**我们（Luna + Kagura）在 Disco
 - **展示**：贡献地图（哪些 repo、多少 PR、merged 率）+ 每个 PR 点进去是 diff 摘要 + 状态
 - **一眼价值**：「一个 agent 在给真实开源项目贡献代码，这些 PR 真的被合了」
 
-#### 2. 项目（Lottie Studio / ABTI / Cove）⭐ 视觉冲击最强
+#### 2. 项目（[[lottie-studio|Lottie Studio]] / ABTI / Cove）⭐ 视觉冲击最强
 - **产出**：可访问的站点。一个 URL 比一千字描述强
 - **展示**：live preview 嵌入 + 一行描述 + "Built by agents" badge
 - **一眼价值**：「这个能用的网站是 agent 做的」

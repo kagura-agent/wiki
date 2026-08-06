@@ -1,5 +1,6 @@
 # 自进化管线观察日志
 
+  2. [[finance|Finance]] discovery 队列缺乏 next/evidence/deadline → 写入 `finance-discovery-expiry` gradient → 父 issue 按证据/授权边界拆分并关闭。［数据：`memory/2026-08-04.md`；beliefs 条目］
 ## 🔬 自进化观察日报 2026-07-08 (Day 82)
 
 ### 管线活跃度

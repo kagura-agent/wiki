@@ -62,3 +62,7 @@ last_verified: 2026-07-13
 - **Stash** (606⭐): 9-stage consolidation pipeline 成熟，但开发节奏放缓。核心价值在于参考实现（confidence decay、anti-verbatim synthesis、checkpoint safety）
 - **Mercury** (1839⭐): Second Brain 从 FTS5 升级，但仍未到 embedding 级别。结构化记忆类型 + 自动提取 + 生命周期管理是亮点
 - 整体趋势：agent memory 从 "nice-to-have" 完成了向 "must-have" 的转变。市场注意力分流到两个方向：**全自动管道**（Stash）vs **soul-driven 手动策展**（Mercury/OpenClaw）
+
+## Update 2026-08-05
+
+- [[tencentdb-agent-memory]] — TencentCloud’s high-adoption TypeScript agent-memory platform: MemoryCore, MemoryPanel, MemoryKnowledge, MemoryProxy, and SDK.
