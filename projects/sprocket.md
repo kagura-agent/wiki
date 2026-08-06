@@ -48,7 +48,7 @@ This is the most transferable pattern from Sprocket: a conversational confirmati
 
 ## Ecosystem position and relevance
 
-Sprocket sits between local-first coding harnesses and commerce-capable computer-use agents. It is complementary to [[super-simple-software-factory]]: both make controls executable rather than prompt-only, but Sprocket puts durable distributed run ownership and host-local authority at the center. For Kagura, the direct adoption value is low (Sprocket is a full end-user platform), while the architectural value is high: **durable state, local capability, and spend authority should be three different objects with three different lifetimes**.
+Sprocket sits between local-first coding harnesses and commerce-capable computer-use agents. It is complementary to [[super-simple-software-factory]]: both make controls executable rather than prompt-only, but Sprocket puts durable distributed run ownership and host-local authority at the center. For Kagura, the direct adoption value is low (Sprocket is a full end-user platform), while the architectural value is high: [[durable-state-local-capability-spend-authority|durable state, local capability, and spend authority]] should be three different objects with three different lifetimes.
 
 ## References
 
