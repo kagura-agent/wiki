@@ -95,4 +95,10 @@ Every answer comes with a calibrated confidence interval: "the true value is wit
 
 **Ecosystem position:** [[noisegate]] is a stronger instance of [[deterministic-envelope-for-small-agents]] than a conventional MCP gateway: it treats every model-produced query as hostile input, while [[clawpatrol]] controls whether a tool call may happen at all. Together they separate *authority* from *information leakage*.
 
+## Scout gate update — 2026-08-06
+
+- A HN result surfaced this repository again (9 points), but the deep-read entry gate caught that it was already documented yesterday (116 lines, deep-read update 2026-08-05). The apparent "new" candidate came from the repository name differing from the wiki slug (`llm-differential-privacy-gateway` vs `noisegate`); no duplicate deep read was performed.
+- [Verified 2026-08-06] GitHub reports 24⭐, last push 2026-08-04; no open or closed issues. This is only a small attention signal after the HN mention, not evidence of community adoption or a new architectural direction.
+- **Scout-level ecosystem signal:** a project with a strong deterministic security boundary can be rediscovered by generic repository search while remaining below the contribution/critique threshold. Retain [[noisegate]] as a watch item; do not treat star count or HN visibility as validation of its differential-privacy claims.
+
 Links: [[agent-security]], [[clawpatrol]], [[openclaw]], [[agent-trust-hierarchy]], [[deterministic-envelope-for-small-agents]]
