@@ -3,6 +3,7 @@ title: Cangjie-Skill Ecosystem (Book/Person → Skill Distillation)
 created: 2026-05-09
 source: github.com/kangarooking/cangjie-skill, alchaincyf/nuwa-skill, alchaincyf/darwin-skill
 tags: [skill-distillation, knowledge-management, self-evolution]
+last_verified: 2026-08-06
 ---
 
 # Cangjie-Skill Ecosystem
@@ -96,3 +97,4 @@ Connected to: [[skill-type-taxonomy]] (these are "methodology skills" — a type
 ## Applied
 
 - **2026-05-09**: Triple Verification adapted as Promotion Gate for [[beliefs-candidates]]. V1→Cross-context (≥3 occurrences), V2→Predictive Power, V3→Non-obvious. AGENTS.md DNA self-governance updated to reference structured gate. Commit `3280a2a`.
+- **2026-08-06 validation**: The deferred V2 evaluation is already operational, not merely aspirational: the [[beliefs-candidates]] promotion gate requires a concrete unseen-scenario statement (`if X happens, do Y differently`) and rejects purely descriptive retrospectives. No additional mechanism is warranted; the useful next control is enforcing that existing checklist at each graduation.
