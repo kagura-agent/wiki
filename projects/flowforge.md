@@ -293,3 +293,9 @@ Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#
 - **Failure evidence:** the capacity gate completed with `Assigned: 2 | Open PRs: 18`, so its inequality did not block discovery. `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1` printed `FIND WORK — 2026-08-06 15:06` and `SCANNING TRACKED REPOS`, then ended with `SIGKILL` without `SUMMARY`, `RECOMMENDED ISSUES`, or stderr diagnostics.
 - **Decision:** discovery was unavailable; this is neither evidence of an empty issue queue nor a diagnosis of network, auth, rate-limit, or resource failure. The workflow advanced to `fallback_offline` exactly as specified.
 - **Local maintenance:** `git log --all --not --remotes --oneline -20` showed existing workspace-only commits; `git status` found concurrent unrelated workspace/wiki changes. They are left unstaged. This scoped note is the fallback artifact.
+
+## Offline Fallback — Instance #7617 (2026-08-06 16:04 CST)
+
+- **Failure evidence:** `bash ~/.openclaw/workspace/tools/workloop-followup.sh 2>&1` began normally and reported two assigned issues as fulfilled. It then reported `Total open PRs: 19` and partial status through `anomalyco/opencode#39425`, but was terminated with `SIGKILL` before emitting the required `SUMMARY` or `RECOMMENDED BRANCH`; no stderr diagnostic was retained.
+- **Decision:** followup output is incomplete and therefore unavailable for branch selection. The termination does not establish a GitHub/network/authentication/rate-limit/resource root cause, does not prove that the remaining PRs have no action items, and does not authorize an out-of-workflow PR operation. The workflow took its prescribed offline fallback.
+- **Local maintenance:** the workspace and wiki worktrees already contained unrelated modifications. This note is the sole fallback artifact and must be staged independently.
