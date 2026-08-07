@@ -3,6 +3,7 @@ title: agent-harness-kit
 created: 2026-05-08
 updated: 2026-05-08
 status: active
+last_verified: 2026-08-07
 ---
 
 # agent-harness-kit
@@ -66,6 +67,26 @@ This prevents race conditions when multiple agents try to claim the same task. W
 
 - Medium-high. Not directly competing (we're a personal agent platform, they're a coding scaffolding tool), but the patterns (atomic claiming, health gates, acceptance criteria, MCP coordination) are directly applicable.
 - The "harness" concept (structured environment that constrains agent behavior) is gaining traction as a response to "agents roaming freely" concerns.
+
+## Offline workloop note — 2026-08-07
+
+### Finder failure evidence
+
+- At 12:03 Asia/Shanghai, `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1` exited **0**, but its scanner reported `scan_status status=124 timeout=true` and `scan_unavailable status=124 timeout=true`.
+- The feed then reported `JSON feed unavailable, showing text. Agent must parse manually.` The captured stderr tail was empty. This record does **not** assign a network, authentication, or rate-limit cause.
+- Capacity evidence from the preceding required command: `Assigned: 2 | Open PRs: 21`.
+
+### Local maintenance check
+
+- Inspected local fork status and commit history. `agent-harness-kit` was clean and at commit `1682c31 fix(docs): update Node.js version requirement to 22.5 in README`; no local commit ahead of its upstream was reported. Other forks with ahead commits were left untouched (outside this offline-maintenance scope).
+- Verified current package scripts: `npm run build` builds the dashboard, runs `tsup`, then copies assets; `npm test` is `node --test --import tsx/esm src/tests/*.test.ts`; `prepublishOnly` runs build then test.
+
+### MCP server deep-read (`src/core/mcp-server.ts`)
+
+- `startMcpServer()` opens the project database once, resolves the configured docs path, and exposes the tool registry over stdio. Tool calls go through one `dispatch()` switch, which makes the supported state mutations auditable in one module.
+- The server intentionally converts dispatched exceptions to MCP tool results with `isError: true`, rather than allowing the stdio server to crash. Successful domain operations return JSON text through the same `ok()` helper.
+- `tasks.update` closes orphaned actions before marking a task `done`; this preserves action-state consistency at the protocol boundary.
+- `docs.search` recursively enumerates Markdown/text files, returns at most ten lines matching **all** lower-cased query terms, and tolerates unreadable files and absent docs directories. This is simple deterministic substring search, not semantic retrieval.
 
 ## Links
 
