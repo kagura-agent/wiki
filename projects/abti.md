@@ -141,6 +141,14 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 - **Re-verified at 20:21 CST:** the issue’s latest diagnosis continues to require elevated Ollama reinstall (about a 1.3 GB release download) and/or approved provider credentials. `ollama ps` now specifically reports no running server; the runner remains unavailable. The result is still a scoped external blocker, not a reason to invent a replacement issue.
 - **Re-verified at 22:26 CST:** #866 is still the only `next` issue. `/usr/local/lib/ollama/llama-server` is missing, `ollama` is inactive and unreachable, and OpenRouter/DeepSeek/Mistral/Cohere credentials are unset. Keep the result set unchanged rather than fabricating refresh output; resume only after a functioning runner or an explicitly provisioned credential is available. The generic FlowForge follow-up helper terminated before its summary, so it was treated strictly as an unknown command termination and not as evidence about ABTI or GitHub availability.
 
+## Operational Status — 2026-08-07 18:28–18:34 CST
+
+- [已验证] Open-issue query returned nine items: [#869](https://github.com/kagura-agent/abti/issues/869) is the sole `next`; the remaining items are six `blocked` and two `icebox`.
+- [已验证] Its delivery PR [#870](https://github.com/kagura-agent/abti/pull/870) is OPEN, non-draft, CLEAN, and explicitly `Closes #869`; it has no comments/reviews and its sole `test` check succeeded at 2026-08-06T05:03:49Z.
+- [已验证] No implementation is appropriate until CI, review, or issue state changes. The required Claude Code path is therefore not invoked: there is no uncovered code task.
+- [已验证] Generic contribution discovery was unavailable: `workloop-find-issue.sh` emitted `scan_status status=124 timeout=true`, then `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`, and exited 2. This does not establish a network/authentication/rate-limit cause and is not an empty-queue result.
+- **Decision:** retain the existing review-ready delivery; do not create a duplicate branch, issue, code change, or PR. Resume on a verifiable change to #870.
+
 ## Next Steps
 
 - [x] Design assessment questionnaire → [`abti-questionnaire.md`](abti-questionnaire.md) (16 questions, 4 per dimension)
