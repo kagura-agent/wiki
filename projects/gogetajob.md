@@ -166,4 +166,10 @@ Applied accumulated lessons from [[pr-superseded-lessons]] into the `check` comm
 
 **Pattern**: wiki card → tool code is the strongest form of knowledge application. The checklist in [[pr-superseded-lessons]] existed as human-readable text for weeks; now it's automated and runs every time `gogetajob check` is called.
 
+## Finder Structured-Output Boundary (2026-08-07)
+
+- [已验证] `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1` emitted `scan_status status=124 timeout=true` and `scan_unavailable status=124 timeout=true` during the tracked-repository scan, then printed a text-only feed with `JSON feed unavailable, showing text`.
+- [已验证] The helper therefore did not supply its declared structured recommendation. The workflow selected `fallback_offline`; no issue was chosen from the printed text candidates.
+- **Operational rule:** Preserve the command, observed status, and unavailable boundary. Do not reinterpret this as an empty queue or infer network, authentication, API-limit, or resource root cause without further evidence. Retry issue selection only after a future run provides the structured result.
+
 Links: [[pr-superseded-lessons]], [[gogetajob]], [[error-handling-in-cli]], [[loope]]
