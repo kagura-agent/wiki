@@ -105,6 +105,13 @@ This prevents race conditions when multiple agents try to claim the same task. W
 - `tools/gradient-scan.sh` reported `finder-structured-output-gate` at six JSONL hits and the closely related `bounded-finder-failure-evidence` at three. This is a tool-contract recurrence, not a candidate for another behavioral rule.
 - Claude Code implemented and locally committed `b712aa8` (`fix(workloop): fail unavailable issue discovery`): `workloop-find-issue.sh` now emits `FINDER_RESULT=UNAVAILABLE reason=<...> status=<...>` and exits 2 when the required scan, JSON feed, or JSON-array contract is unavailable; a structured empty feed retains a successful explicit `NO VIABLE ISSUES` outcome. `bash -n tools/workloop-find-issue.sh` passed. No push or PR was made.
 
+## Offline Fallback — Workloop #7744 (2026-08-07 18:03 CST)
+
+- **Failure evidence:** The required capacity command completed with `Assigned: 2 | Open PRs: 18`; it did not trigger the assignment-capacity stop. The exact discovery command, `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1`, returned **2** after its tracked-repository scan hit the script's timeout: `scan_status status=124 timeout=true`, `scan_unavailable status=124 timeout=true`, and `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`. Its retained stderr tail was empty. This establishes only an unavailable finder result—not an empty issue queue or a network/authentication/rate-limit diagnosis.
+- **Local maintenance:** `agent-harness-kit` was clean with no local commit ahead of its configured upstream. The Cove worktree had pre-existing edits and was not touched.
+- **Configuration deep-read:** `src/core/config.ts` searches only three project-root config names, loads the first match with `jiti`, accepts either a default export or a direct object export, and rejects missing/non-object configuration before defaults are applied. `applyDefaults()` establishes project paths, four built-in agent roles, SQLite at `.harness/harness.db`, a local task adapter, a Markdown fallback, required `./health.sh`, and MCP/script tool defaults. Its shallow spreads mean a provided nested section replaces that section's defaults rather than being recursively merged—for example, a partial `storage.sections` object would omit the other default section flags. This is source inspection, not a confirmed bug or user-facing behavior test.
+- **Verification boundary:** `npm test` remains `node --test --import tsx/esm src/tests/*.test.ts`; no source changed in this documentation-only fallback, so the test suite was not run.
+
 ## Links
 
 - [[flowforge]]: Our workflow engine, more flexible but without role-based separation
