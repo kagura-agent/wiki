@@ -2,7 +2,7 @@
 title: Kagura Canvas
 created: 2026-05-31
 tags: [project, image-generation]
-last_verified: 2026-08-02
+last_verified: 2026-08-07
 ---
 # Kagura Canvas
 
@@ -37,6 +37,12 @@ Local ComfyUI integration for image generation and manipulation. Part of [[on-de
 - **ComfyUI-GGUF** plugin — 量化模型支持
 - **kagura-canvas skill** — [[channel-as-service]]，其他 session 通过 sessions_send 请求生图
 - 生成脚本: `scripts/` 目录
+
+## Loop state — 2026-08-07
+
+- [已验证] `gh issue list --repo kagura-agent/kagura-canvas --state open --limit 100` returned no open issues at 14:35 CST.
+- The local repository was clean on `main...origin/main` except for an existing untracked `scripts/krea2_vs_flux_compare.py`; it was left untouched.
+- The shared workloop finder reported `FINDER_RESULT=UNAVAILABLE` after its tracked-repository scan timed out (`scan_status=124`, process exit `2`). This is not an empty-queue result and does not establish a network, credential, or rate-limit cause. Resume Canvas-specific GitHub/Hugging Face discovery in a later issue-driven run.
 
 ## Repo
 
