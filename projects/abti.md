@@ -139,6 +139,7 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 - **Decision:** #866 cannot safely advance; the other seven open issues remain explicitly `blocked` or `icebox`. No source, result-data, label, branch, or PR change was made.
 - **Next run:** only resume data refresh when a working local Ollama runner or explicitly provisioned provider credential is actually available. Do not create a speculative replacement issue while active blockers exist.
 - **Re-verified at 20:21 CST:** the issue’s latest diagnosis continues to require elevated Ollama reinstall (about a 1.3 GB release download) and/or approved provider credentials. `ollama ps` now specifically reports no running server; the runner remains unavailable. The result is still a scoped external blocker, not a reason to invent a replacement issue.
+- **Re-verified at 22:26 CST:** #866 is still the only `next` issue. `/usr/local/lib/ollama/llama-server` is missing, `ollama` is inactive and unreachable, and OpenRouter/DeepSeek/Mistral/Cohere credentials are unset. Keep the result set unchanged rather than fabricating refresh output; resume only after a functioning runner or an explicitly provisioned credential is available. The generic FlowForge follow-up helper terminated before its summary, so it was treated strictly as an unknown command termination and not as evidence about ABTI or GitHub availability.
 
 ## Next Steps
 
@@ -151,3 +152,22 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 ---
 
 *"Know thyself" — but make it for robots.*
+
+## Operational Status — 2026-08-07
+
+- [已验证] Issue [#869](https://github.com/kagura-agent/abti/issues/869) remains the only `next` item. Its delivery PR [#870](https://github.com/kagura-agent/abti/pull/870) is OPEN and MERGEABLE; the `test` check passed, with no review or comment to act on.
+- [已验证] `stale-pr-check.sh kagura-agent/abti 869` exited 10 (own PR exists with green CI). The general preflight reported no competing PR, but the stale-PR check correctly found the first-party PR; use the latter as the delivery-deduplication source.
+- **Decision:** preserve the existing review-ready PR and do not create a duplicate issue, branch, or PR. Resume only on new review/CI feedback or after #870 changes state.
+
+## Operational Status — 2026-08-07 15:00 CST
+
+- [已验证] `gh issue list -R kagura-agent/abti --state open --limit 100` returned 9 open issues. #869 remains the sole `next`; the remaining issues are six `blocked` and two `icebox`.
+- [已验证] #870 remains OPEN, non-draft, and CLEAN. It explicitly closes #869; its sole `test` check is SUCCESS, and it has no comments or reviews.
+- [已验证] Generic contribution discovery was unavailable: `workloop-find-issue.sh` emitted `scan_status=124`, `FINDER_RESULT=UNAVAILABLE reason=tracked_scan`, and exited 2. This is not evidence of an empty queue or a network/authentication root cause.
+- **Decision:** #870 is already the review-ready delivery for the active item. No duplicate implementation, issue, label, branch, or PR is justified; wait for a verifiable PR state or feedback change.
+
+## Operational Status — 2026-08-07 17:16 CST
+
+- [已验证] `gh issue list -R kagura-agent/abti --state open --limit 100` returned nine open issues: #869 is the only `next`; six are `blocked` and two are `icebox`.
+- [已验证] #869 is already delivered by PR [#870](https://github.com/kagura-agent/abti/pull/870): OPEN/CLEAN, explicitly `Closes #869`, with the `test` check successful and no comments or reviews.
+- **Decision:** retain #870 as the branch-and-PR delivery. No Claude Code implementation run is warranted without a failed check, review request, or uncovered `next` work.
