@@ -88,6 +88,23 @@ This prevents race conditions when multiple agents try to claim the same task. W
 - `tasks.update` closes orphaned actions before marking a task `done`; this preserves action-state consistency at the protocol boundary.
 - `docs.search` recursively enumerates Markdown/text files, returns at most ten lines matching **all** lower-cased query terms, and tolerates unreadable files and absent docs directories. This is simple deterministic substring search, not semantic retrieval.
 
+## Offline workloop follow-up — 2026-08-07 13:46–14:09 CST
+
+### Failure evidence and local maintenance
+
+- `bash ~/.openclaw/workspace/tools/workloop-followup.sh 2>&1` was SIGKILLed after printing only a partial open-PR section; it never emitted its declared `SUMMARY` or `RECOMMENDED BRANCH`. The current FlowForge log records the preceding `followup` node as `[gogetajob/gh 命令失败(网络、认证、API 限流)]`, but the retained output does not distinguish those possible causes. The fallback record therefore treats normal follow-up as unavailable rather than concluding a queue/network/authentication cause.
+- Local maintenance check: the `agent-harness-kit` fork was clean (`main...origin/main`) with no local-only commits. The workspace had unrelated concurrent modifications; they were not staged or changed.
+
+### MCP boundary deep-read (continued)
+
+- The MCP dispatch layer maps unknown tool names and thrown validation/domain exceptions into `CallToolResult` values marked `isError: true`; clients get a protocol-level response rather than a server-process failure. `num()` and `str()` enforce only primitive runtime types before dispatching into the database layer.
+- `docs.search` is deliberately bounded to ten matching lines and requires every whitespace-separated query term on a single line. If the configured docs path is absent, it returns one diagnostic snippet rather than throwing. The repository exposes the broader `npm test` command (`node --test --import tsx/esm src/tests/*.test.ts`), but no MCP-named test file exists under the searched test tree, so this round's module claims remain source-inspected rather than direct MCP test reproduction.
+
+### Structural finder upgrade
+
+- `tools/gradient-scan.sh` reported `finder-structured-output-gate` at six JSONL hits and the closely related `bounded-finder-failure-evidence` at three. This is a tool-contract recurrence, not a candidate for another behavioral rule.
+- Claude Code implemented and locally committed `b712aa8` (`fix(workloop): fail unavailable issue discovery`): `workloop-find-issue.sh` now emits `FINDER_RESULT=UNAVAILABLE reason=<...> status=<...>` and exits 2 when the required scan, JSON feed, or JSON-array contract is unavailable; a structured empty feed retains a successful explicit `NO VIABLE ISSUES` outcome. `bash -n tools/workloop-find-issue.sh` passed. No push or PR was made.
+
 ## Links
 
 - [[flowforge]]: Our workflow engine, more flexible but without role-based separation
