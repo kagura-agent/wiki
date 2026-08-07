@@ -112,6 +112,14 @@ This prevents race conditions when multiple agents try to claim the same task. W
 - **Configuration deep-read:** `src/core/config.ts` searches only three project-root config names, loads the first match with `jiti`, accepts either a default export or a direct object export, and rejects missing/non-object configuration before defaults are applied. `applyDefaults()` establishes project paths, four built-in agent roles, SQLite at `.harness/harness.db`, a local task adapter, a Markdown fallback, required `./health.sh`, and MCP/script tool defaults. Its shallow spreads mean a provided nested section replaces that section's defaults rather than being recursively merged—for example, a partial `storage.sections` object would omit the other default section flags. This is source inspection, not a confirmed bug or user-facing behavior test.
 - **Verification boundary:** `npm test` remains `node --test --import tsx/esm src/tests/*.test.ts`; no source changed in this documentation-only fallback, so the test suite was not run.
 
+## Offline Fallback — Workloop #7748 (2026-08-07 19:04 CST)
+
+- **Result:** no PR was selected, created, updated, or submitted: the preceding FlowForge history retained only an unavailable `gogetajob/gh` failure label, not the original command evidence. Treat the contribution finder as unavailable, not as an empty queue or a diagnosed network/authentication/API-limit failure.
+- **Maintainer/review signal:** none was obtained in this offline round; do not infer review style or PR-description preferences without a reviewed PR or contributor guidance.
+- **DB facade deep-read:** `src/core/db.ts` delegates state work to repository classes, but its public mutation methods regenerate the Markdown fallback. `claimTask()` is transaction-bound and re-reads/validates the claimed row before returning it; preserve that atomic guard if changing task assignment. `updateTaskStatus()` records the first `in_progress` start time and every `done` completion time without clearing historical timestamps.
+- **Test/CI boundary:** `src/tests/db.test.ts` covers normal task/action lifecycle, atomic double-claim rejection, summary, and feature-list deduplication. The clean fork passed `git diff --check`; no source change was made, so `npm test` was not run. For any future DB change, run `npm test` and specifically preserve the transaction claim tests and Markdown-fallback behavior.
+- **Next-time note:** this repository has no new maintainer-facing PR signal from this pass. Use the existing [[agent-harness-kit]] module notes plus current CONTRIBUTING/review evidence before proposing a code change; do not turn an offline inspection into an unvalidated contribution candidate.
+
 ## Links
 
 - [[flowforge]]: Our workflow engine, more flexible but without role-based separation
