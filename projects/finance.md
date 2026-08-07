@@ -31,3 +31,20 @@ For broad finance discovery issues, split by evidence boundary before implementa
 
 - The required generic command `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1` printed only its scan banner and then terminated with `SIGKILL`; it emitted neither candidates nor its declared summary/recommended branch. This is an unavailable helper result, not evidence of a network, authentication, rate-limit, or empty-work-queue condition.
 - A direct scoped query of `kagura-agent/finance` still returned nine open issues. The only bounded implementation issue remains #1603, whose independently verified local commit is described above; its remote lifecycle is still blocked because no PR or push has been authorized by the code-execution policy.
+
+## 2026-08-07 — finance patrol (#1614)
+
+- **Closed and verified:** patrol found all open Finance issues were broad project/exploration tickets or a credential-blocked MCP smoke test. Parent #1553 had already been decomposed; this patrol added and completed bounded child #1614, a read-only verification of `gameworkerkim/vibe-investing` Python dependency and install-entry documentation.
+- At `main` (repo API reported `pushed_at=2026-08-07T00:49:53Z`), root `requirements.txt` lists `pandas`, `numpy`, `scipy`, `matplotlib`, `requests`, `tqdm`, and `yfinance`. The root README exposes an ARDS-X entry point (`cd .../quant && python run.py`), and that `run.py` documents `python run.py`, `--print`, and `--out`.
+- Evidence boundary: the root README does **not** connect `requirements.txt` to a minimum install command such as `pip install -r requirements.txt`; do not describe it as an end-to-end reproducible installation guide. No clone, dependency installation, execution, data download, credential use, or trading occurred. GitHub API verification after mutation showed #1614 `CLOSED`.
+
+## 2026-08-07 — workloop finder unavailable evidence
+
+- Required command `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1` ended with exit code `2` and `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`; its captured stderr tail was `Failed: gh command failed: spawnSync /bin/sh ETIMEDOUT`. This is a helper timeout/unavailability record, not evidence of network, authentication, rate-limit, or an empty issue queue.
+- The scoped command `gh issue list -R kagura-agent/finance --state open --limit 100` remained available afterward and returned the Finance queue; it supported the independent, user-requested Finance patrol above.
+
+## 2026-08-07 — bounded source verification (#1613)
+
+- Parent #1512’s broad walk-forward claim was split into #1613, then completed and closed after GitHub re-verification.
+- At `GeneralTradingSarl/quantsphere-terminal` `main@c4cb2f9fece7e5e3c6ddfb65905aa00bbb9abbba`, `quantsphere.optimize.grid_search()` is the callable chronological train/test optimizer. It takes a caller-provided `pandas.Series` close-price input and calls local `quantsphere.backtest.run_backtest()`; the inspected paths contain no market-data client, file read, credential lookup, order placement, or network call.
+- Terminology boundary: source calls this an honest chronological train/test split, not a rolling-window walk-forward loop. No code was cloned or run, no dependencies/data/credentials were used, and no trading action occurred.
