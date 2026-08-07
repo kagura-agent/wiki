@@ -222,6 +222,17 @@ Read `flowforge/src/engine.ts` while completing an offline workloop fallback.
 - **Deep read:** reviewed `flowforge/src/engine.ts`. `requireActiveInstance()` deliberately rejects unqualified operations when more than one instance is active, while `status(workflowName)` and `next(..., workflowName)` select the named active instance. This directly explains—and validates—the required `-w workloop` recovery commands used in this run.
 - **Operational boundary:** the `SIGKILL` establishes only that the finder did not finish within the available execution window; it does **not** establish an OOM root cause. Resource profiling is still needed before attributing the recurring termination to memory pressure.
 
+## Finder Timeout Signaling — Offline Fallback (2026-08-07)
+
+Source review: `tools/workloop-find-issue.sh`, after a run whose internal `gogetajob scan --all` returned status `124`.
+
+- The script bounds only the scan stage with `timeout --signal=TERM --kill-after=10s "${SCAN_TIMEOUT_SECONDS}s"`; it captures stdout and stderr in temporary files, prints their tails, and emits `scan_status status=<n> timeout=<bool>` plus `scan_unavailable` for every non-zero scan result.
+- **Important control-flow boundary:** after reporting that scan failure, the script continues to `gogetajob feed`. If JSON feed retrieval also fails, it prints a manual text feed and exits **0** after `CANDIDATES (text mode — parse above)`, without `RECOMMENDED ISSUES` or a structured `SUMMARY`.
+- Therefore the runner must treat either `scan_unavailable` or text-only output without a structured recommendation as **finder unavailable**, even when the wrapper's exit status is zero. The process exit code alone cannot decide `find_work → fallback_offline`.
+- The source establishes the reporting/control-flow behavior, not the root cause of the scan timeout. It does not demonstrate a network, authentication, API-limit, or resource failure.
+
+Operational follow-up: retain the exact command/output boundary in the daily record, take the workflow fallback branch, and do not select an issue from the unvalidated text feed. This is already structurally aligned with the finder output gate; do not create a new near-duplicate behavioral gradient for each recurrence.
+
 ## Study Task Selection Ambiguity (2026-08-05)
 
 A scheduled study run exposed a boundary in the `align` branch: the instruction says to choose `todo_task` when `TODO.md` has a specified learning task, but the section contained open `Track:` entries whose revisit dates were all in the future and several already stated “deep read done.” Those are portfolio records, not executable tasks for the current run. The manual branch interface cannot distinguish them, so selecting `todo_task` based merely on an unchecked tracker creates a no-op and can pressure the executor to fabricate a study result.
