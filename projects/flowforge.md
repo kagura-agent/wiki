@@ -318,3 +318,10 @@ Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#
 - **Capacity evidence:** `Assigned: 2 | Open PRs: 19`; the capacity inequality did not block discovery.
 - **Failure evidence:** the exact finder command, `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1`, emitted `FIND WORK — 2026-08-06 18:07` and `SCANNING TRACKED REPOS`, then ended with `SIGKILL` before it emitted a recommendation, `SUMMARY`, or stderr diagnostics. This establishes only an unavailable finder result—not a network, authentication, rate-limit, resource, or empty-queue diagnosis.
 - **Local maintenance:** a read-only scan of fork worktrees found no uncommitted or local-only commits to repair or publish. The workspace itself contains concurrent unrelated modifications; this single-file wiki note is staged and committed independently.
+
+## Discovery-Only Round — Instance #7714 (2026-08-07 11:02 CST)
+
+- **Capacity evidence:** `Assigned: 2 | Open PRs: 21`; the assignment gate did not block discovery.
+- **Finder result:** the bounded tracked-repository scan reported `scan_status status=124 timeout=true` and `scan_unavailable status=124 timeout=true`; the wrapper exited 0 but only emitted a text-mode feed, without structured `RECOMMENDED ISSUES` or an explicit `NO VIABLE ISSUES` result.
+- **Decision:** no candidate was selected from the unvalidated text feed. The workflow took its `discover` branch; its TypeScript/Python agent-topic results did not meet the self-evolving-agent alignment gate, then advanced to reflection. This preserves the distinction between unavailable structured discovery and a verified empty candidate queue.
+- **Maintenance:** no FlowForge source or workflow change is supported by this repeat observation; the existing structured-output gate remains the applicable control.
