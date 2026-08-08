@@ -1,6 +1,47 @@
 # 自进化管线观察日志
 
+## 🔬 自进化观察日报 2026-08-04
+
+### 管线活跃度
+- **beliefs-candidates：11 条新增 / 0 条待升级。** 22:30 后有 11 个仅修改 `beliefs-candidates.md` 的提交；今日条目均为第 1–2 次，历史已达阈值的 `flowforge-terminal-node-stuck` 与本地 clone preflight 条目已于 07-25 毕业。［数据：`git log --since='2026-08-03 22:30 +0800'`；`beliefs-candidates.md`］
+- **DNA 变更：无。** SOUL.md、AGENTS.md 在观察窗口内无提交。［数据：同上 git log 路径过滤］
+- **nudge：运行状态此前已确认正常；本次日志查询没有可计数的 `nudge` / `system event enqueued` 行，不能据此断言触发次数为 0。** ［数据：gateway journal 查询；计数口径限制］
+- **dreaming：未观察到当日 memory 中的 dreaming/promote 记录；且 daily-review 触发仍缺失，不能把“无记录”误报为“未运行”。** ［数据：`memory/2026-08-04.md`、`evolution-log/2026-08-04.md`］
+
+### 闭环追踪
+- **完整闭环：2 个。**
+  1. 发现 FlowForge 多实例选择摩擦 → 写入 `flowforge-instance-selection` gradient → 当次实际以 `status -w` 诊断，避免将未验证的 CLI 参数当作事实。［数据：beliefs 条目；本次 FlowForge 命令输出］
   2. [[finance|Finance]] discovery 队列缺乏 next/evidence/deadline → 写入 `finance-discovery-expiry` gradient → 父 issue 按证据/授权边界拆分并关闭。［数据：`memory/2026-08-04.md`；beliefs 条目］
+- **断裂处：** daily-review 连续缺少独立 cron 触发，导致 dreaming/DNA 审阅缺少原定的独立产出；该问题在 `evolution-log/2026-08-04.md` 中已标为 HIGH，当前 cron 权限无法自行创建修复 job。［数据：evolution log］
+
+### 今日发现
+1. **输入端很活跃，但仍偏向执行摩擦。** 11 条新 gradient 覆盖 memory 写入安全、FlowForge、工作流 scope、coding-agent 中断和研究回退；没有 SOUL/AGENTS 升级，符合“先记录、待独立验证”的门槛设计。［数据：git log、beliefs 条目］
+2. **不要把日志缺口当作运行故障。** nudge 的关键词日志本轮为空，而既有状态已确认正常；dreaming 同样只有“当日未记录”这一事实。［数据：journal / memory；结论限于可观测性］
+3. **外部反馈利用：有 PR 活动但未见可归因的新 review→gradient。** 今日更新的 5 个 PR 中，NemoClaw #7812 的 review 后修复被记录为未验证完成、Lottie #782 的 E2E 仍阻塞；未将这些未完成状态过早固化为经验。［数据：`gh search prs`；memory］
+4. **Skill 提取缺口：** 08-04 出现的“coding agent 无输出/失控重试”已被记录为 gradient，但尚未有跨场景验证，暂不应提取为 reusable skill。［数据：beliefs 条目］
+
+### 原始数据
+```text
+# DNA / beliefs change window
+$ git log --since='2026-08-03 22:30:00 +0800' --all -- beliefs-candidates.md SOUL.md AGENTS.md
+beliefs-candidates.md: 11 commits (10:15–21:36 CST)
+SOUL.md: 0 commits
+AGENTS.md: 0 commits
+
+# nudge observation
+$ journalctl -u openclaw-gateway --since '2026-08-04 00:00:00' | grep -Ei 'nudge|system event enqueued'
+(no output; not a valid proxy for trigger count)
+
+# current PR activity (updated today)
+Lottie Studio #782; Cove #499; Langwatch #6432; NemoClaw #7812; emdash #2885
+
+# dreaming record
+$ grep -inE 'dreaming|dream|promot' memory/2026-08-04.md
+(no output)
+```
+
+---
+
 ## 🔬 自进化观察日报 2026-07-08 (Day 82)
 
 ### 管线活跃度
@@ -7287,4 +7328,252 @@ a271d5b chore: memory hygiene
 # nudge: journalctl -u openclaw-gateway | grep nudge → 0 lines
 # dreaming: Light Sleep ~100 candidates, REM 3 lasting truths
 # daily audit: 4.5/6 (up from 4/6)
+```
+
+## 🔬 自进化观察日报 2026-08-03 (Day 108)
+
+### 管线活跃度
+- **beliefs-candidates**: 1 条新增 (`api-push-when-clone-fails`, 20:42 commit)。总量 1087 行 / ~389 条目。增速：今日 1 条（低于 W32 日均 4.3 条）
+- **DNA 变更**: 无（SOUL.md / AGENTS.md 未修改）
+- **nudge**: ❌ 0 triggers（journalctl 全天 0 条 nudge 日志。**连续断裂已超过 3 周**，自 07-08 观察以来每次观察结果相同）
+- **dreaming**: Light Sleep 运行（~80+ candidates，confidence 全部 0.62 uniform）。REM: "No strong patterns" + 1 lasting truth（PR 数量快照）。质量：低——无认知洞察被 promote
+
+### 闭环追踪
+- **完整闭环**: 8+ 个（全部来自 Lottie Studio + StockLingo 自驱循环）
+  - Lottie: #768→#769, #770→#771, #772→#773, #774→#775, #776→#777, #778→#779（发现→修复→验证→merge）
+  - StockLingo: #38 HomeDashboard, #39→#40 LearningPathMap（规划→实现→部署）
+  - TradingAgents: issue #14 → PR #16（Luna 指导→正确方案→实现→部署）
+- **断裂处**:
+  - Nudge 管线完全断裂 → 实时反思为零（无人推进修复，issue #5 已关错误）
+  - Study loop 全天 SATURATED（≥12 次跳过）— apply backlog 空，学习→行动转化断裂
+  - ABTI #866 连续 3 天 blocked（Ollama + API keys），无人推进解锁
+  - memory_search TIMEOUT（13:40 发现）— 语义检索不可用，影响知识利用
+
+### 今日发现
+
+1. **Gradient 输入极度贫乏** — 仅 1 条工具层 gradient，连续多天无认知/行为/策略层洞察写入。高频执行（Lottie 6 PRs, StockLingo 2 PRs）但零反思输入。闭环存在但全部停留在"做→完成"层面，缺少"做→反思→改进"层面。
+
+2. **Nudge 断裂是系统性问题** — 从 07-08 Day 82 观察至今（Day 108，26 天），每次观察结果一致：0 triggers。Issue #5 关闭时声称"已确认正常运行"但数据持续否定这一结论。**建议：重开 issue 或在 #10 下新建子任务追踪。**
+
+3. **Dreaming confidence 从 0.58→0.62** — 数值变了但问题不变：仍为 uniform hardcoded。Issue #10(a) 的 upstream 问题从未 file。本地 filter 在运行但输入质量无区分度。
+
+4. **Luna 设计哲学产出了故事但未产出 gradient** — "做正确的事" 被写入日记和 story，但未转化为 beliefs-candidates 条目。这是一个有价值的行为模式洞察（"正确抽象层 > 快速修复"），应该被机制化。
+
+5. **自驱循环产出健康但方向单一** — Lottie Studio 独占 6/8 闭环，但项目已声明"所有 phase 完成"。继续产出 micro-fixes 是否有战略价值存疑。StockLingo 进入 Phase 4 正常。
+
+6. **外部 PR 合并**: Archon #2350 merged（今日唯一外部合并）。16 个 open PR 全部等 review，最老的 9 天。
+
+### Issue #10 Dreaming Subsystem Check
+
+| Sub-item | Status | 今日证据 |
+|----------|--------|----------|
+| (a) Upstream uniform confidence | ❌ 未修 | candidates 全部 0.62（值从 0.58 变为 0.62 但仍 hardcoded） |
+| (b) "details unavailable" bug | ✅ 未复现 | 今日 dreaming 输出无此症状 |
+| (c) Local filter effectiveness | ⚠️ 弱效 | Memory hygiene 清理噪音，但无高质量 promote 可归因于 filter |
+| (d) REM empty output | ✅ 改善 | 从 "themes: let" → 有内容输出（虽质量仍低） |
+
+### 系统健康快照
+```
+beliefs-candidates: 1087 lines, ~389 entries, 1 new today
+DNA changes: 0
+workspace commits (24h): 2 (workspace repo only)
+MEMORY.md: 153 lines (76% budget)
+Daily audit compliance: 5/6
+Open PRs: 15-18 (fluctuated, stable)
+Nudge triggers: 0 (BROKEN — Day 26+ of silence)
+Study loop: SATURATED 全天 (≥12 skips)
+Dreaming: ran, uniform 0.62 confidence, REM low-quality
+External merges today: 1 (Archon #2350)
+Self-driven closures: 8+ (Lottie 6, StockLingo 2, TradingAgents 1)
+memory_search: TIMEOUT (regression discovered today)
+```
+
+### 原始数据
+```
+$ git log --since="2026-08-02 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md
+610819b gradient: api-push-when-clone-fails (2026-08-03 20:42:37 +0800)
+
+$ journalctl -u openclaw-gateway --since "2026-08-03 00:00" | grep -ci nudge
+0
+
+$ dreaming: Light Sleep ~80 candidates @ 0.62, REM "No strong patterns" + 1 truth
+$ memory_search: 2x TIMEOUT (15s) at 13:40 — regression since ~07-24
+```
+
+### 管线诊断总结
+
+| 管线组件 | 状态 | 健康度 |
+|----------|------|--------|
+| beliefs-candidates 写入 | 运行但极低频 | 🟡 |
+| DNA 升级 | 休眠（0 升级本周） | 🔴 |
+| nudge 实时反思 | 完全断裂 | 🔴 |
+| dreaming 夜间巩固 | 运行但质量差 | 🟡 |
+| study 学习管线 | SATURATED/停摆 | 🟡 |
+| 闭环执行 | 健康（8+ closures/day） | 🟢 |
+| memory 系统 | 部分故障（search timeout） | 🟡 |
+| 外部贡献 | 稳定等待中 | 🟢 |
+
+**整体判断**: 执行力健康（大量闭环），但自进化管线的核心组件（nudge → gradient → DNA）处于断裂/休眠状态。系统在"做事"但不在"进化"。这是从 Day 82 以来持续的结构性问题。
+
+---
+
+## 🔬 自进化观察日报 2026-08-05
+
+### 管线活跃度
+- **beliefs-candidates：43 条当天新增 list entry + 2 条具名 candidate；1 条达到第 3 次。** `git log --since="2026-08-04 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md` 显示 14 个相关提交，均落在 `beliefs-candidates.md`；其中 `bounded-finder-failure-evidence` 标为第 3 次，但本轮未见毕业/目标载体变更。 **[已验证]**
+- **DNA 变更：无。** 同一 git 范围内未见 `SOUL.md` 或 `AGENTS.md` 文件变更，因此也不存在主动/被动 DNA 改动可归因。 **[已验证]**
+- **nudge：触发次数不可从本次日志可靠得出。** `journalctl -u openclaw-gateway --since "2026-08-05 00:00" | grep -Ei "nudge|system event enqueued"` 无匹配；该关键词查询不构成“0 次触发”的证据。按既有结论，nudge 已确认正常运行；本轮无法评估新增反思质量。 **[已验证：日志空；未验证：实际触发数/质量]**
+- **dreaming：今日 memory 未出现可归属的 dreaming / promote 记录。** 这只能说明日报中没有可观察证据，不能据此判断 dreaming 未运行或 0 promote。 **[已验证：记录缺失；未验证：运行状态/提升数]**
+
+### 闭环追踪
+- **完整闭环：0 个可由本轮材料完整证明。** 今日存在“外部反馈/执行问题 → gradient 记录”的多条输入，但本轮未逐一获得“结构改进已实施且已验证”的闭环证据。 **[已验证]**
+- **断裂处：**
+  1. `bounded-finder-failure-evidence` 已达到第 3 次，但没有同日 graduation/目标载体记录；
+  2. 43 条新增 list entry 显示输入密度高，多个相近模式（finder termination、仓库 scope、green linked PR）仍分散记录，尚未见本轮合并/提炼结果；
+  3. dreaming 与 nudge 的当日可观测性仍不足，无法对运行质量给出可靠计数。 **[已验证]**
+
+### 今日发现
+1. **管线输入异常活跃、输出未同步。** 当日新增记录主要来自 workloop / study / reflect 与外部纠正；DNA 层没有变动，且唯一达到“第 3 次”的模式没有在本轮完成可见升级。 **[已验证]**
+2. **外部反馈有被利用，但 PR feedback 转化未被独立归因。** 当日可见 Luna/manual 纠正已写入候选；PR 活动有 12 条更新（4 merged、2 closed、6 open），但没有可归属于具体 PR review 的新增 gradient 证据。 **[已验证]**
+3. **Skill 提取缺口：**相近的“工作流终止证据保留”“仓库范围守护”“已有关联绿 PR 时等待”反复出现，当前仍以细粒度 gradient 为主；本轮未见将其整理为可复用 skill/tip 的记录。 **[已验证]**
+
+### 原始数据
+- workspace git：`git log --since="2026-08-04 22:30" --all -- beliefs-candidates.md SOUL.md AGENTS.md`（14 commits；仅 beliefs-candidates.md）
+- candidate 检索：`grep -c '^- 2026-08-05:' beliefs-candidates.md` = 43；`grep -c '^### 2026-08-05:' beliefs-candidates.md` = 2；第 3 次模式 = 1
+- gateway：上述 `journalctl` 关键词查询无匹配（不作为 nudge 计数）
+- GitHub：`gh search prs --author kagura-agent --updated '>=2026-08-05'`（12 条）
+
+---
+
+## 🔬 自进化观察日报 2026-08-06
+
+### 管线活跃度
+- **beliefs-candidates：36 条当天 gradient entry；无本轮达到毕业评估门槛的候选。** 观察窗口内有 13 个 `beliefs-candidates.md` 提交（09:54–21:32 CST）；`graduation-pipeline.sh` 的 14 天、阈值 ≥6 扫描返回 0 个可评估 pattern。历史上仍能检出 `flowforge-terminal-node-stuck` 与 `bounded-finder-failure-evidence` 的“第 3 次”原始标记，但前者已有结构性处置记录，后者仍未通过现行加权独立性门槛；不应把它们误报为本轮待升级。**[已验证]**
+- **DNA 变更：无已提交变更。** 同一 git 路径范围没有 `SOUL.md` 或 `AGENTS.md` 提交。工作树中的 `AGENTS.md` 有未提交改动，缺少本轮归因与提交证据，因此不判定主动或被动 DNA 变更。**[已验证]**
+- **nudge：运行正常，质量无法按单日精确归因。** `nudge-health.sh` 读取 audit log：近 3 天记录 53 次触发、0 errors，最近一次反思事件为 22:25 CST；本 cron 的 gateway keyword 查询无匹配，不能用它计数。该健康脚本同时显示“successful deliveries: 0”，与其“HEALTHY”摘要不一致，故不从该字段推导单日成功交付/质量。**[已验证：触发与无错误；未验证：今日精确次数、产出质量]**
+- **dreaming：无当日可归属记录。** `memory/2026-08-06.md`（55 行）未匹配 dreaming/dream/sleep/promote；这只证明日报无可观察记录，不证明未运行或 0 promote。**[已验证：记录缺失；未验证：运行/提升数]**
+
+### 闭环追踪
+- **完整闭环：1 个。** Finance 静态核验子 issue #1609：重查上游源码/提交 → 在父 #1553 留下可复现证据 → 关闭子 issue → GitHub API 独立确认 CLOSED。**[已验证：`memory/2026-08-06.md`]**
+- **断裂处：** 高密度 gradient 输入尚未形成当日可验证的毕业/结构性改进；dreaming 的运行与 promote 缺少可审计的当日记录；nudge audit 的 delivery 计数字段与健康摘要互相矛盾。**[已验证]**
+
+### 今日发现
+1. **输入端强、升级端按门槛克制。** 36 个新 entry 不等于 36 个独立模式；graduation scan 为 0，当前没有证据支持为追求“有升级”而修改 DNA。**[已验证]**
+2. **Skill 提取存在候选但证据不足。** “工作流 helper 提前终止时保留退出证据、保持仓库 scope、不据此臆测根因”在当天多个 gradient 中反复出现，但尚未完成跨场景合并与可复用程序验证，不创建 skill。**[已验证]**
+3. **外部反馈利用：无可归因的 review→gradient 转化。** 今日 9 条 authored PR 更新中 5 条已 merged、4 条仍 open；巡检的 19 条 open PR 中，唯一 `CHANGES_REQUESTED`（Langwatch #6432）为 08-04 的既有请求，已由后续提交处理，今日没有新的人类 review 输入可归因为 gradient。**[已验证]**
+
+### 原始数据
+```text
+$ git log --since='2026-08-05 22:30' --all -- beliefs-candidates.md SOUL.md AGENTS.md
+13 commits, all beliefs-candidates.md (09:54–21:32 CST)
+
+$ ./tools/graduation-pipeline.sh
+Found 0 pattern(s) meeting threshold (≥6 hits)
+
+$ ./tools/nudge-health.sh
+Audit log (3d): 53 triggers, 0 errors; last nudge 2026-08-06 22:25:16
+
+$ grep -inE 'dreaming|dream|sleep|promot' memory/2026-08-06.md
+(no output)
+
+$ gh search prs --author kagura-agent --updated '>=2026-08-06'
+9 updated PRs: 5 merged, 4 open
+```
+
+### 22:30 evidence correction — dreaming
+The daily memory file has no dreaming text, but that is not the strongest available source. `./tools/dream-health.sh` directly verified `memory.dream.completed` at `2026-08-06T02:32:47.087Z`, all light/deep/REM reports present for 2026-08-06, 11 promoted candidates cumulatively, and a HEALTHY pipeline verdict. This corrects the earlier report’s **operational state** from “unverified” to **running/healthy**; the command does not expose a per-day promotion count, so today’s promotion count remains **unverified**. [已验证]
+
+---
+
+## 🔬 自进化观察日报 2026-08-07
+
+### 管线活跃度
+- **beliefs-candidates：39 条已提交的 pattern entry，来自 16 个相关提交；未见当天完成 graduation。** 这些 entry 高度集中于 `finder-structured-output-gate` / `finder-unavailable-evidence-boundary` 与 green-PR 去重等相近 workloop 情境；当天新增的具名 `candidate` 标题为 0（文件中保留的两条 candidate 均为 08-05）。仅一条记录标为第 2 次，不能据此越过独立性/加权门槛。**[已验证]**
+- **DNA：无已提交的 `SOUL.md` / `AGENTS.md` 变更。** 当前工作树有未提交的 AGENTS.md 修改，但其归因和完成状态不能从本轮观察窗口证明，故不计作 DNA 变更。**[已验证]**
+- **nudge：运行信号健康，但本 cron 不适用作质量计数。** `nudge-health.sh` 显示近 3 日 audit 有 24 次 trigger、0 errors；同一输出的 `successful deliveries: 0` 与最终“delivering successfully/HEALTHY”结论互相矛盾，因此不报告单日成功数或质量。gateway 关键词日志为空，且不作为 trigger=0 的代理。当前 cron session 也被配置为 skipped。**[已验证：trigger/error 与字段冲突；未验证：单日质量]**
+- **dreaming：运行健康。** `dream-health.sh` 显示最后一次 `memory.dream.completed` 为 2026-08-07 04:34:11 CST，light/deep/REM 当日报告均存在；512 个候选中 17 个累计 promoted，11 个目前满足 promotion eligibility。工具未给出当天 promote 数，故不推断日增量。**[已验证]**
+
+### 闭环追踪
+- **完整闭环：0 个可从本观察集独立证明。** 虽然有大量“巡检/反思 → gradient”输入，但未看到这些相近 pattern 在本日完成独立评估、目标载体升级与事后验证的完整链路。**[已验证]**
+- **断裂处：**
+  1. 相近 finder / green-PR 去重经验被反复以新名称写入，尚未见当日归并或升级；
+  2. nudge 健康摘要与 delivery 字段冲突，质量观测不可审计；
+  3. 本轮 workloop followup 脚本在输出完整 SUMMARY/RECOMMENDED BRANCH 前被 SIGKILL，失败只记录为命令终止，不归因网络、认证或限流。**[已验证]**
+
+### 今日发现
+1. **输入活跃但冗余风险显著。** 39 条 pattern entry 中，同一类 “finder unavailable 时不要把文本 fallback 当候选” 与“已有绿色自有 PR 时等待 review”被多次重述；这不等于独立跨场景证据。观察期不合并、不改机制。**[已验证]**
+2. **Dreaming 的可验证性已明显优于旧的 memory-keyword 方法。** 直接健康检查确认了完成事件、phase reports 和 eligibility；日报文字是否出现 dreaming 不应再作为运行状态判断。**[已验证]**
+3. **外部反馈使用有限但可见。** 当天有两条 Luna correction 来源的 gradient（邀请叙事与完整工件结构）；GitHub 搜索未发现当天可归因的人类 PR review 事件，故不声称 PR review → gradient 转化。**[已验证]**
+4. **Skill 提取缺口仍在。** 当前重复项看起来更适合作为 workloop 去重/发现边界的结构化合并候选，而不是继续积累同义 gradient；但独立证据与 reusable procedure 验证不足，本轮不创建 skill。**[已验证]**
+
+### 原始数据
+```text
+$ git log --since='2026-08-06 22:30 +0800' --all -- beliefs-candidates.md SOUL.md AGENTS.md
+16 commits; only beliefs-candidates.md changed
+
+$ ... | grep '^+.*(pattern:' | wc -l
+39
+
+$ ./tools/nudge-health.sh
+Audit log (3d): 24 triggers, 0 errors; successful-deliveries field: 0; HEALTHY verdict
+
+$ ./tools/dream-health.sh
+last dream: 2026-08-07T04:34:11.756Z; 17/512 cumulative promoted; 11 currently eligible; HEALTHY
+
+$ gh search prs --owner kagura-agent --updated '>=2026-08-07'
+5 updated: 3 merged, 1 closed, 1 open
+
+$ gh api 'search/issues?q=org:kagura-agent+is:pr+reviewed:>=2026-08-07'
+0
+
+$ bash tools/workloop-followup.sh
+SIGKILL before SUMMARY/RECOMMENDED BRANCH (partial output only)
+```
+
+Observation only: no mechanism, scheduler, or promotion rule was changed.
+
+---
+
+## 🔬 自进化观察日报 2026-08-08
+
+### 管线活跃度
+- **beliefs-candidates：23 条新增 pattern entry，15 个相关提交，未见当天 graduation。** 条目主要来自 workloop 的 structured finder `UNAVAILABLE` / fallback 与 review-wait 边界；同义表述多次出现，不能视作独立跨场景证据。`SOUL.md`、`AGENTS.md` 在观察窗口内均无已提交变更。**[已验证]**
+- **DNA 变更：无。** 观察窗口内没有提交触及 `SOUL.md` 或 `AGENTS.md`；因此不把既有文件内容或未提交状态计为 DNA 演进。**[已验证]**
+- **nudge：插件已启用、近 3 日有 18 次 trigger、0 errors，但 audit 同时报 successful deliveries=0 与 HEALTHY/delivering successfully，质量/交付计数不可审计。** gateway journal 的关键词查询为空，不作为“0 次触发”的依据；本 cron 属 skip 范围，最新 audit 记录也为 skipped。**[已验证：配置、audit；未验证：单日高质量反思数]**
+- **dreaming：运行健康。** `dream-health.sh` 直接验证 last `memory.dream.completed` 为 2026-08-08 08:49:24 CST，当日 light/deep/rem 三类 report 均存在；累计 10/512 promoted、12 个候选当前满足 promotion eligibility。工具不提供本日 promotion 增量，故不估算。当天 memory 中的 Light/REM 内容仍主要是历史巡检片段，REM 的 `cst` theme 与混杂长片段不构成可验证的新 lasting truth。**[已验证]**
+
+### 闭环追踪
+- **完整闭环：1 个。** daily-review 发现同日 self-generated dreaming 候选重复会夸大 graduation 计数 → 没有为凑升级而 promotion → 清理 DREAMS main/ruantang 20→14、压缩 08-07 daily memory 1,109→705 行，并由 daily-audit 复核 FlowForge self-test 13/13 通过与维护动作存在。该闭环是“发现→保留证据门槛→清理/验证”，不是机制改动。**[已验证：`memory/2026-08-08.md`]**
+- **断裂处：**
+  1. 23 条新增 entry 大量重述 finder-unavailable 边界，尚未见归并或独立 graduation 评估；
+  2. nudge 的 audit delivery 字段与健康结论相互冲突，无法评估触发质量；
+  3. `workloop-followup.sh` 曾在 SUMMARY/RECOMMENDED BRANCH 前 SIGKILL，只有终止事实，未归因。**[已验证]**
+
+### Skill 提取缺口
+- finder 的“结构化 unavailable → 记录 exit/status → fallback_offline、不得从 partial output 选题”已形成重复的工作流经验，但当前材料集中于同一 workloop 失败模式，未满足独立性和可复用流程验证；本轮不提取 skill。**[已验证]**
+
+### 外部反馈利用
+- `kagura-agent/self-evolving-agent` 今日无 PR 或 issue 更新；仓库当前 open issues 为 #10、#3、#2、#1。今日未发现可归因的 GitHub review/评论→gradient 转化。**[已验证]**
+
+### 今日发现
+1. **输入活跃不等于学习质量。** 23 条 entry 的增长主要来自同一可用性边界的同义重复；Triple Verification 应阻止这些自生成重复直接推动 DNA。**[已验证]**
+2. **Dreaming 可用性恢复为直接可验证指标。** 本日不再用 daily memory 是否含关键词判断运行，而以 state/event 与 phase reports 为准；但输出内容的语义质量仍需独立评估。**[已验证]**
+3. **观察期遵守边界。** 本轮只追加证据，未改机制、scheduler、DNA 或 promotion 规则。**[已验证]**
+
+### 原始数据
+```text
+$ git log --since='2026-08-07 22:30' --all -- beliefs-candidates.md SOUL.md AGENTS.md
+15 commits; SOUL.md / AGENTS.md: 0
+
+$ git show ... | grep '^+' | grep '(pattern:' | wc -l
+23
+
+$ ./tools/nudge-health.sh
+enabled; 18 triggers / 0 errors (3d); successful deliveries: 0; verdict HEALTHY
+
+$ ./tools/dream-health.sh
+last dream: 2026-08-08 08:49:24 CST; 10/512 promoted; 12 eligible; light/deep/rem reports current; HEALTHY
+
+$ gh pr|issue list -R kagura-agent/self-evolving-agent --search 'updated:>=2026-08-08'
+[] / []
 ```

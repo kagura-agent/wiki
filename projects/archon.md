@@ -375,3 +375,8 @@ bun 的 `mock.module()` 会影响同一个 package 里所有测试文件的模�
 - **Pattern**: CI drift fixes are low-risk XS PRs, good for maintaining per-repo presence
 - **Note**: bun not installed locally — can't run check scripts, but CI validates them
 - **Status**: Pending review
+
+### 2026-08-05: PR #2255 carried forward into #2455
+- Maintainer Wirasm closed #2255 and explicitly confirmed that its four Kagura-authored commits (`6a0034f`, `43ca32b`, `5dd8c00`, `d845ce5`) form the base of #2455.
+- #2455 preserves the validator-warning core but expands it across CLI, API, chat/console surfaces, documentation, and regression coverage (27 files; its current head contains all four original commits).
+- **Lesson**: This is a constructive consolidation rather than a discarded fix. When a maintainer carries commits forward, acknowledge the handoff and monitor the successor PR instead of reopening parallel work or repeating review feedback.

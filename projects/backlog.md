@@ -1539,3 +1539,21 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 **Saturation**: 2/10 worth deep-read (poirot, sprocket). Ecosystem active.
 
 ---
+
+## 2026-08-06 Quick Scan (21:15)
+
+**GitHub (agent-related repos created since 07-30, sorted by stars, spam-filtered):**
+- **trycompai/crm** ⭐6,921 — Agentic-first CRM. **不相关**：business SaaS application, not a reusable agent/harness pattern.
+- **Binaryify/open-kimi-ppt-skill** ⭐1,099 — Kimi slide-generation skill. **不相关**：single-purpose content workflow.
+- **Accio-org/RealReplicaBench** ⭐1,035 — **已知**：already tracked today; stateful long-horizon benchmark.
+- **0xwilliamortiz/ratchet** ⭐435 — Agent reads rules, then this tool checks whether it followed them. **值得深入**：directly relevant to executable governance / FlowForge enforcement; inspect architecture and verification boundary.
+- **AMAP-ML/LongHorizon-Harness** ⭐318; **cristicretu/diri** ⭐209 — **已知**：already tracked, revisit due 08-12.
+- **HaddenHunter/SkillForge** ⭐74 — **已知**：already tracked today.
+
+**HN (3d, ≥10pts):**
+- Computer Anthology (27pts) — **已知**：already tracked today; public artifacts still insufficient.
+- Local $50 Arduino voice agent (21pts) — **不相关**：hardware demo.
+- Stanford CS329A Self-Improving AI Agents (20pts, plus duplicate posts) — **值得一看**：course material, but not a new project; defer unless a specific practice gap emerges.
+- Paper-trading agent (15pts) — **不相关**：consumer finance application.
+
+**Verdict:** one depth candidate: `0xwilliamortiz/ratchet`.

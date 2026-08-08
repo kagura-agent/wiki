@@ -86,6 +86,13 @@ issue #398 想换的是把这个手写 deliver 换成 framework 的 `sendDurable
 - **Test / CI notes:** `pnpm --filter @cove/server test -- src/__tests__/recurring-tasks.test.ts` completed the full server suite (21 files / 357 tests), rather than filtering to that one file. `pnpm --filter @cove/client exec tsc --noEmit` and `pnpm --filter @cove/client test -- src/components/CreateTaskDialog.test.ts` passed (the latter ran 13 files / 60 tests). Use `git diff --check main...HEAD` before review follow-up.
 - **Next time:** recurrence editor saves may resend fields unrelated to the user’s change. Test all three schedule cases explicitly: omitted interval, unchanged interval, and changed interval. Prefer shared contract imports/re-exports over duplicate client unions, and reset dialog state to its initialization defaults.
 
+## Dispatch implementation re-read — 2026-08-07 [已验证]
+
+- Evidence: `cove/packages/plugin/src/dispatch.ts` (read 2026-08-07) now uses SDK primitives rather than the older fully handwritten lifecycle described above: `createFinalizableDraftLifecycle`, `createChannelProgressDraftCompositor`, and `deliverWithFinalizableLivePreviewAdapter`.
+- The plugin still owns Cove-specific transport and failure boundaries: `sendOrEdit` streams preview updates through `CoveRestClient`; `freshSend` delegates final delivery to `createCoveOutboundBridgeAdapter`; a final send failure retains `coveFinalPayload` on the error and logs it as recoverable rather than claiming delivery.
+- Finalization invariant: `deliver()` cleans typing before final delivery; in-place final editing seals the draft and sets `draftState.stopped`; if the final reply was not edited in place, `finally` discards/deletes any orphaned draft. All callbacks are abort-gated.
+- Test focus for future changes: preserve these observable boundaries—no post-final preview overwrite, no delivery claim after `sendText` fails, and draft cleanup after fallback/abort. `dispatch-behavior.test.ts` contains the behavior suite; do not infer current behavior from the June-era manual-delivery description without re-reading this module.
+
 ## Related
 
 - [[cove-plugin-message-actions]] — message tool action dispatch 架构调研

@@ -118,6 +118,10 @@ Explicit README commit: "name the category in the README lede, and separate us f
 - **Internship-as-growth-strategy** → interesting community engineering pattern (not applicable to us directly)
 - **Slack Socket Mode** → if we ever add Slack natively, BYO-token approach is cleaner than OAuth-first
 
+## 2026-08-07 Follow-up — Dropped
+
+The prior 07-31 metrics were stale. GitHub API now reports 215⭐, 4 forks, 3 open issues, and no commits after 2026-02-15; there is no continuing release or contributor signal. The earlier internship-driven expansion therefore did not establish a durable project. **Removed from the active watch list.** The capability-negotiation, CP/non-CP circuit separation, and channel-etiquette patterns remain useful as concepts, but no longer justify monitoring the repository.
+
 ## Links
 
 - [[openclaw]], [[agent-harness-landscape]], [[agentara]], [[craft-agents-oss]], [[centaur-paradigm]]

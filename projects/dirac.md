@@ -589,3 +589,9 @@ dirac's autonomous tool building is the first production implementation of **bou
 **Applicable pattern**: Our `skill_workshop` could automate the implementation step using a similar bounded-repair subagent. Current flow requires manual proposal content; dirac proves you can automate "fill in the implementation" with bounded retries and smoke testing.
 
 *Field note: 2026-07-18 (followup → deep-read on new feature)*
+
+## Followup: 2026-08-08 — active maintenance, no new direction
+
+**Verified:** 1,449⭐, 82 forks, 15 open issues; five fixes merged on 2026-08-07 covering dependency injection, configuration constants, error messages, and TypeScript typing. The project remains actively maintained, but these are stabilization changes rather than a new architecture.
+
+**Strategic read:** Dirac’s durable lesson remains the constrained self-modification pipeline (stage → validate → promote/rollback), already captured above and aligned with [[mechanism-vs-evolution]]. No new product or study track is warranted this round; its desktop-coding-agent scope stays adjacent to, not a driver of, our mirror-world direction.

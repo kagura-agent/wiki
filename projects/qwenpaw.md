@@ -24,15 +24,15 @@
 
 ## Clone 方式
 - Sparse checkout (tree:0 filter) — repo is ~93MB
-- Full checkout gets OOM killed on this machine
-- Used GitHub API for push (create blob → tree → commit → ref)
+- Full checkout gets OOM killed on this machine; use GitHub API for small branch repairs (create blob → tree → commit → ref) rather than retrying full clone.
+- Never commit local-path pointer text (for example `@/tmp/...`) in place of file contents; validate remote blobs after API-based push with JSON/YAML/plain-text parsers.
 
 ## 维护者
 - Bot: github-actions welcome, AI review bot
 - Human reviewers: TBD (first PR pending)
 
 ## 注意事项
-- Node.js 20 for all frontend (CI pins it)
+- Website requires Node.js 22+: `@supabase/supabase-js@2.110.4` in `website/pnpm-lock.yaml` declares `>=22.0.0`; website deploy CI and docs must match. Console retains its independent `>=20` declaration.
 - Python version: check .python-version file
 - Website uses pnpm, console uses npm
 - Fork PRs can't push labels (permission limitation)
@@ -40,4 +40,4 @@
 ## PR History
 | # | Title | Status | Notes |
 |---|-------|--------|-------|
-| 6331 | chore(console): specify Node.js version requirement | pending | First PR, config-only |
+| 6331 | chore(console): specify Node.js version requirement | pending | First PR; reviewer found website dependency requires Node 22. A bad pointer-file commit was replaced by API-built commit `70d0917` based on current upstream main; remote JSON/.nvmrc/README/workflow structure verified. |

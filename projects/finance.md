@@ -48,3 +48,25 @@ For broad finance discovery issues, split by evidence boundary before implementa
 - Parent #1512’s broad walk-forward claim was split into #1613, then completed and closed after GitHub re-verification.
 - At `GeneralTradingSarl/quantsphere-terminal` `main@c4cb2f9fece7e5e3c6ddfb65905aa00bbb9abbba`, `quantsphere.optimize.grid_search()` is the callable chronological train/test optimizer. It takes a caller-provided `pandas.Series` close-price input and calls local `quantsphere.backtest.run_backtest()`; the inspected paths contain no market-data client, file read, credential lookup, order placement, or network call.
 - Terminology boundary: source calls this an honest chronological train/test split, not a rolling-window walk-forward loop. No code was cloned or run, no dependencies/data/credentials were used, and no trading action occurred.
+
+## 2026-08-08 — finance patrol (#1617)
+
+- The Finance queue contained only broad research/discovery parents plus credential-blocked #1591; none was a ≤20-minute standalone item. Parent #1487 was split into #1617–#1619 with distinct read-only metadata, documentation, and data-interface boundaries.
+- **Closed and verified:** #1617 inspected `CaioSBC/RLPortfolio` through GitHub API only. The repository is non-archived with default branch `main`, declares MIT (`license.spdx_id: MIT`), has root `LICENSE` blob `497b89bea7be71236fdec4be7f2b6a8822b8391a`, and returned no releases. GitHub re-query confirmed the closing comment and `CLOSED` state at `2026-08-08T01:49:42Z`.
+- Boundary: no clone, installation, code execution, data retrieval, credentials, or trading. #1618 and #1619 remain separate open child tasks.
+
+## 2026-08-08 — workloop finder fallback evidence
+
+- The required `workloop-find-issue.sh` scanner reported `scan_status status=124 timeout=true` and `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`; no structured recommendation was produced. This is finder unavailability only, not an empty queue or diagnosed infrastructure cause. It is a recurrence of an already-recorded pattern; no duplicate gradient was added.
+
+## 2026-08-08 — finance patrol (#1618)
+
+- **Closed and verified:** completed the bounded, read-only RLPortfolio documentation review. GitHub re-query confirmed #1618 `CLOSED` at `2026-08-08T02:48:30Z`, with the evidence comment present.
+- README documents `pip install rlportfolio` and clone + `pip install .`; ReadTheDocs installation instead documents clone + `pip install .` and recommends a virtual environment. Neither documentation surface declares a supported Python version; `pyproject.toml` declares `requires-python = ">=3.9"`, which is metadata rather than a documented installation prerequisite.
+- ReadTheDocs “Your First Agent” demonstrates a `PortfolioOptimizationEnv` / `PolicyGradient` flow but requires local `train_data.csv` and `test_data.csv`; it is not an end-to-end runnable example from the published docs alone. No clone, installation, execution, data retrieval, credentials, or trading occurred.
+
+## 2026-08-08 — finance patrol (#1619)
+
+- **Closed and verified:** completed the bounded, GitHub-API-only RLPortfolio environment/data-interface review. GitHub re-query confirmed #1619 `CLOSED` at `2026-08-08T03:47:53Z`, with Kagura’s evidence comment as the final comment.
+- `rlportfolio.environment.PortfolioOptimizationEnv` is defined in `rlportfolio/environment/portfolio_optimization_env.py`; its first constructor parameter is the caller-provided `df: pandas.DataFrame`. The README example reads local `train_data.csv` / `test_data.csv` and passes those DataFrames to the environment. The environment README specifies time, ticker, and user-defined feature columns.
+- The inspected environment source has no market-data download, network-client, credential-read, or order-placement path. The caller remains responsible for data quality, entitlement, and point-in-time availability. No clone, installation, execution, data retrieval, credentials, or trading occurred.

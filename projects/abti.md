@@ -179,3 +179,17 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 - [已验证] `gh issue list -R kagura-agent/abti --state open --limit 100` returned nine open issues: #869 is the only `next`; six are `blocked` and two are `icebox`.
 - [已验证] #869 is already delivered by PR [#870](https://github.com/kagura-agent/abti/pull/870): OPEN/CLEAN, explicitly `Closes #869`, with the `test` check successful and no comments or reviews.
 - **Decision:** retain #870 as the branch-and-PR delivery. No Claude Code implementation run is warranted without a failed check, review request, or uncovered `next` work.
+
+## Operational Status — 2026-08-07 23:10–23:12 CST
+
+- [已验证] Re-read `channels/abti.md`; #869 remains the only `next` item. Its linked delivery PR [#870](https://github.com/kagura-agent/abti/pull/870) remains OPEN and clean, explicitly closes #869, has no reviews/comments, and its `test` check is successful.
+- [已验证] Local ABTI checkout is on the existing `docs/openclaw-self-test-guide` branch with no working-tree changes; no safe uncovered implementation task exists for Claude Code.
+- [已验证] Generic work discovery capacity was `Assigned: 2 | Open PRs: 18`. `tools/workloop-find-issue.sh` emitted `scan_status status=124 timeout=true`, `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`, and exited 2. This is scanner unavailability only—not an empty queue and not evidence of a network/authentication/rate-limit cause.
+- **Decision:** retain #870 as the existing branch-and-PR delivery; do not create a duplicate issue, label mutation, branch, code change, or PR. Resume only on verifiable review, CI, or issue-state change.
+
+## Operational Status — 2026-08-08 11:51–11:55 CST
+
+- [已验证] #869 remains the sole `next` issue and is already covered by PR #870; no review, CI, or state change justified implementation. Its verified delivery state remains review-wait.
+- [已验证] Capacity was Assigned 2 / Open PRs 18. The shared finder ended with `scan_status status=124 timeout=true` and `FINDER_RESULT=UNAVAILABLE` / exit 2; this is unavailable discovery, not a valid empty queue or an attributed infrastructure cause.
+- [已验证] Read-only audit of `action/index.js` confirmed explicit provider routing, including an immediate error for the retired GitHub Models provider. No maintainer preference, test command, or code defect was newly evidenced.
+- **Next:** re-check #870 only on a concrete review, CI, or state transition; retry general discovery only after a structured finder result is available.

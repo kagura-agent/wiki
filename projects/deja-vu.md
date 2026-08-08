@@ -149,6 +149,13 @@ New tool (`scripts/corpusprobe/main.go`) that validates feature ideas against re
 - 497⭐ (+9.5% from 454 at last check 07-23; +135% from 211 at discovery 07-16)
 - Active: 3 releases in 2 days (07-28~29), corpusprobe + perf engineering
 
+## 2026-08-06 Follow-up — Trustworthy Memory Operations
+
+- **578⭐** (from 497 on 07-30), last push **2026-08-05**; the project remains highly active, with recent merged fixes focused on operational truthfulness: source provenance, non-writable indexes, lifecycle/forget behavior, and consistent `doctor` explanations.
+- The 56 open issues reveal the next hard layer: import performance at 100k records, lock visibility, selector transparency for refusal paths, and ensuring direct-ID lookups honor the trust policy. The product is treating memory integrity as an operational contract, not merely a ranking problem.
+- This reinforces [[failable-verification]] and [[agent-memory-landscape-202603]]: a memory system needs an explainable answer for *why* data was included, hidden, unavailable, or rejected. Our own mirror-world memory layer should make those states visible instead of silently falling back.
+- No new portable architecture beyond the existing corpusprobe/provenance patterns; retain as an ecosystem reference rather than expanding the implementation backlog.
+
 ## Ecosystem Position
 
 Sits in the [[agent-memory-landscape-202603]] as a **retrieval + curated notes, local-first** tool. Now has a write path via `deja remember` and `promote`. Closest comparisons:

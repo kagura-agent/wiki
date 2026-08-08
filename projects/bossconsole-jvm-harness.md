@@ -3,7 +3,7 @@ title: "BossConsole — JVM-Native Agent Harness"
 created: 2026-07-24
 verified: 2026-07-24
 tags: [agent-harness, jvm, kotlin, microkernel, mcp, deep-read]
-last_verified: 2026-07-24
+last_verified: 2026-08-08
 ---
 
 # BossConsole (risa-labs-inc/BossConsole)
@@ -115,8 +115,12 @@ An agent can modify a plugin's code and see it live (hot-reload without app rest
 **Differentiators**: Open-source, JVM-native, multi-agent, self-healing, tool evolution
 **Unique niche**: Enterprise/research users who need process isolation + RBAC + multi-agent
 
-## Tracking Decision
+## 2026-08-07 Follow-up
 
-**Track** — novel architecture (only JVM harness), active development, in sweet spot (167⭐). Revisit 07-31 to check growth trajectory and community formation.
+GitHub API check: 215⭐ / 7 forks, 28 open issues, and three external PR authors among the most recent 100 PRs. Releases v9.4.0–v9.4.2 shipped in three days (Aug 4–6); current work adds multi-tenancy and tightens organisation/plugin callback wiring. This confirms sustained delivery and a small, real contributor surface, but not a broad community yet.
+
+**Direction signal:** the harness market is moving from “run agents” to **multi-tenant, governable operating environments**. That reinforces [[FlowForge]]'s evidence/handoff emphasis and our mirror-world need for separate user/world boundaries; it does *not* make the JVM/desktop architecture an immediate implementation target.
+
+**Track** — novel architecture (only JVM harness), active development, now small-team rather than solo. Revisit 08-14.
 
 Links: [[agent-harness-landscape]], [[metaharness-agent-harness-generator]], [[FlowForge]], [[clawpatrol]]

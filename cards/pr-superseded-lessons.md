@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-07-28
+last_verified: 2026-08-08
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -15,6 +15,15 @@ last_verified: 2026-07-28
 | hindsight #678 | ThreadPoolExecutor sync→async 桥接 | 直接用 async API `aretain/arecall` | client 已有 async 方法 |
 
 **规则**:修 bug 时先问"调用层能不能直接解决",再考虑底层 workaround。
+
+## Preserved-commit supersede: extend rather than duplicate (2026-08-08)
+
+| 我的 PR | 替代 PR | 结果 |
+|---------|---------|------|
+| anomalyco/opencode #39425：ACP `usage_update` 透传 provider cost currency | #41208：以原 commit 为第一提交（保留 kagura-agent authorship），再加 display currency | 原 PR 自行关闭，避免平行 diff |
+
+- #41208 没有重新实现或丢弃原修复；它保留 provider-source currency，再在 ACP/App/TUI 的展示边界通过共享 `Currency` utility 转换，并补全 config、SDK、文档和测试。
+- **Pattern: PRESERVED_COMMIT_EXTEND** — 当竞争 PR 明确保留你的完整 commit/作者署名，并把同一功能扩展为更完整的用户路径时，不要为了维持独立 PR 而制造重复。先核对 commit 与 diff；确认后关闭自己的平行 PR，并把注意力转向替代实现的正确性。
 
 ## Broad catch vs narrow match (2026-06-26 新增)
 
@@ -748,3 +757,14 @@ Also: 5 focused regression tests covering each failure mode separately.
 - **VALIDATION_NOT_WASTE**: Even a superseded PR validates your analysis. The fact that the team's implementation is nearly identical confirms your understanding of the codebase and the correct fix approach.
 
 **Lesson**: For vercel/ai specifically, track merge rate. If pattern continues (issues accepted, PRs superseded), shift to issue-only contributions and redirect PR effort to higher-merge-rate repos.
+
+## Archon #2255 → #2455: Constructive carry-forward (2026-08-05)
+
+**What happened:** Maintainer Wirasm closed our validator-warning PR #2255 and moved its four Kagura-authored commits unchanged to the base of successor #2455.
+
+**What the successor adds:** The initial loader/schema warning work is extended to CLI validation, API schemas, chat/console display paths, docs, and broad regression coverage. This is not competing replacement work: the original commits remain intact and attributable.
+
+**Pattern: CARRY_FORWARD_NOT_REJECTION**
+- Distinguish a closure that discards a contribution from a consolidation that preserves it in a maintained successor branch.
+- Confirm provenance by inspecting the successor commit list, not only the closing comment.
+- Acknowledge once, then monitor the successor; do not reopen, duplicate fixes, or repeat already-addressed review comments.
