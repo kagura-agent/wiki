@@ -496,3 +496,9 @@ if (p.type === "compaction" && p.tail_start_id) {
 - `message.part.updated` records the metadata before it emits tool updates, while `message.part.delta` reads that metadata to decide whether a delta is an assistant text chunk or reasoning chunk. That cache is therefore part of the event-ordering contract, not merely an optimization.
 - A delta that arrives without cached metadata takes a bounded recovery path: fetch the exact session message, locate the part by ID, record it, and only then emit a protocol update. Missing sessions, messages, or parts are silently ignored, which makes reconnect/race paths safe without fabricating output.
 - Replay follows the same `recordFetchedPart()` path before rendering content or tool state, keeping live events and historical replay aligned. Any change to stored metadata fields or the composite key needs tests for both the live-delta and replay paths.
+
+### 2026-08-08 Offline fallback evidence + compaction recheck
+
+- [已验证] `tools/workloop-find-issue.sh` returned exit code 2 with `FINDER_RESULT=UNAVAILABLE`: its tracked-repository scan timed out (`scan_status status=124 timeout=true`); stderr was empty. This is an availability failure, not an empty candidate feed.
+- [已验证] Local `~/repos/forks/opencode` worktree is clean, but `master` is one commit ahead of `upstream/dev`: `6e46a496ac fix(acp): respect provider currency in usage_update instead of hardcoding USD`. It was recorded for follow-up; no push was attempted during offline fallback.
+- [已验证] Re-read `packages/opencode/src/session/overflow.ts` and `session/compaction.ts` at `6e46a496ac`: configured `compaction.reserved` is consumed by `usable()` before overflow detection, while tail preservation separately derives its 2k–8k / 25%-of-usable budget from that same usable value. Any change to the reserved budget therefore needs boundary tests for both overflow timing and tail-selection size, rather than treating those paths as independent.
