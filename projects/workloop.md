@@ -21,3 +21,9 @@
 - **Source review:** `flowforge/src/engine.ts` shows that `next()` persists only a trimmed, ≤2,000-character result summary when it closes node history, then adds the next-node history entry. `getAction()` retrieves that most-recent result and injects it as the redacted recovery handoff. Thus detailed failure evidence belongs in a durable artifact such as this note, while the FlowForge handoff should remain concise.
 - **Local hygiene:** the workspace contains local-only commits and unrelated existing changes; none were staged or altered. This note is the bounded offline artifact for this run.
 - **Next time:** retain the `status=124`/exit-2 contract and begin again with the required follow-up and capacity gates; select work only from a later structured finder result.
+
+## 2026-08-08 — instance #7842 (finder unavailable, repeated)
+
+- **Result:** no candidate or PR was selected. Capacity passed with `Assigned: 2 | Open PRs: 17`; the same bounded tracked scan timed out (`status=124`) and returned `FINDER_RESULT=UNAVAILABLE` with original exit code 2. This remains unknown discovery state, not an empty queue or a diagnosed infrastructure failure.
+- **Follow-up / review signal:** both assignments are fulfilled. The three flagged comments still require no action: batch-review acknowledgement on TencentDB-Agent-Memory #729, automated Cove #487 preview notification, and a maintainer thank-you on Emdash #2902. No new maintainer, CI, test, or PR-description preference was observed.
+- **Local audit / next time:** lottie-studio's `useChatSend` carries the animation ID through the chat request and has focused callback tests; its checkout has no ahead commits. The recurring finder timeout remains a tracked TODO for bounded per-repo timing/resource profiling. Retry only the prescribed structured finder on a future run; do not add a candidate or mutate tooling from this run. See [[workloop-fallback-2026-08-08]] and [[github-contribution]].
