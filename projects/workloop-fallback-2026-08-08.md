@@ -24,3 +24,9 @@ Read `lottie-studio/src/hooks/chat/useChatSend.ts`.
 ## Gradient review
 
 Reviewed `beliefs-candidates.md` entries at the 3+ occurrence threshold. `flowforge-terminal-node-stuck` is already graduated to the FlowForge terminal-node auto-close mechanism (recorded there as the 2026-07-25 engine change). The finder-unavailable rule has just reached its third observation and is already enforced by the current `find_work` node's explicit `FINDER_RESULT=UNAVAILABLE` → `fallback_offline` branch. No separate candidate required promotion in this fallback.
+
+## Maintenance note — resumed unavailable branches (13:02 CST)
+
+When a resumed FlowForge instance reaches `fallback_offline` but the original finder stdout/stderr is unavailable, record only **发现不可用**. Do not reconstruct an exit code, guess a network/authentication/rate-limit cause, or convert it into an empty-queue result. The appropriate record is a dated artifact under `memory/workloop-fallback-*.md`.
+
+For FlowForge itself, `engine.next()` intentionally preserves only a bounded redacted handoff summary (2,000 characters); raw diagnostic output must therefore be saved outside its SQLite history before a node is advanced. Its direct focused test command is `npm test` from the `flowforge/` repository.
