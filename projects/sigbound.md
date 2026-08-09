@@ -102,4 +102,8 @@ Presets for common tools: `claude`, `codex`, `aider` for agents; `go`, `node`, `
 
 ---
 
-*Deep-read: 2026-07-26. Source: GitHub search `coding+agent` sorted by stars, created >2026-07-19.*
+## Follow-up 2026-08-09 — Tracking Dropped
+
+GitHub API check: **79⭐ / 9 forks / 0 open issues**; the last push was the 2026-08-03 v2.3.0 bounded Git-object-reader change (one product commit since 2026-07-28). The repository has not converted its early implementation velocity into issue or contributor signal, and its star count fell from 95 on 2026-08-02. The OCC partitioning and verified-landing patterns remain useful reference material, but there is insufficient live project signal to justify another portfolio slot.
+
+*Deep-read: 2026-07-26. Follow-up: 2026-08-09. Sources: GitHub REST API repository, commits, and issues endpoints.*

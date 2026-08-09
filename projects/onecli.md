@@ -1,9 +1,9 @@
 ---
 title: OneCLI — Credential Gateway for AI Agents
 created: 2026-07-26
-last_verified: 2026-08-02
+last_verified: 2026-08-09
 status: following
-stars: 2955
+stars: 3007
 ---
 # OneCLI — Secret Vault for AI Agents
 
@@ -106,4 +106,13 @@ v1.44.0 introduces **per-agent credential grants** — the most significant arch
 - **THRIVING** (6/6): 2,955⭐, 172 forks, 37 external PRs/30d, 46 unique issue authors
 - 7 merged PR authors (healthy multi-contributor base)
 - 3 releases in 5 days (v1.43.2→v1.45.0) — very active
-- Revisit: 2026-08-09
+- Revisit: 2026-08-16
+
+## Follow-up 2026-08-09 — Grants Need Production Proof
+
+GitHub API reports **3,007⭐ / 178 forks / 111 open issues**. The code line is quiet after v1.45.0 (last push 2026-07-31), but the issue stream remains active and is more informative than the star growth:
+
+- [#482](https://github.com/onecli/onecli/issues/482) reports that a correctly published `policy_rules_v2` grant returns `credential_not_found`, directly challenging the new grant path described above.
+- [#484](https://github.com/onecli/onecli/issues/484) reports gateway file-descriptor exhaustion after days of operation; [#485](https://github.com/onecli/onecli/issues/485) reports host-pattern port matching is lost before evaluation.
+
+This is a valuable counterweight to the earlier architecture assessment: **zero-default grants are only a security boundary once policy publication, lookup, and injection have an end-to-end regression suite.** Keep following until a release or reproducible fix closes #482; do not treat the design as production-ready merely because its pure compilation layer is well structured.
