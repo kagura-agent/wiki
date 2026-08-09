@@ -22,6 +22,13 @@
 - **Local hygiene:** the workspace contains local-only commits and unrelated existing changes; none were staged or altered. This note is the bounded offline artifact for this run.
 - **Next time:** retain the `status=124`/exit-2 contract and begin again with the required follow-up and capacity gates; select work only from a later structured finder result.
 
+## 2026-08-09 — instance #7877 (finder unavailable)
+
+- **Result:** no contribution candidate or PR was selected. Capacity passed (`Assigned: 2 | Open PRs: 19`), then the required wrapped finder exited 2 with `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`. Durable command evidence is `github-contribution/offline/evidence/2026-08-09/20260809T110816+0800-find-work.md`; this result does not establish an empty queue or diagnose an infrastructure cause.
+- **Maintainer / PR pattern:** direct comment triage again found no actionable review work: TencentDB-Agent-Memory #729 is Maxwell-Code07's batch-review acknowledgement, Cove #487 is a GitHub Actions staging-preview notice, and Emdash #2902 has Greptile's positive summary plus arnestrickmann's thank-you. No code, CI, test, or reply action was requested.
+- **Tool / CI note:** `run-workloop-step.sh` preserves a bounded evidence artifact only after its child returns, containing command, exit status, and redacted output tails. Cite that artifact in the FlowForge handoff; do not reconstruct a root cause from partial scan text. See [[github-contribution]] and [[flowforge]].
+- **Next time:** retry only the prescribed structured finder in a later workloop. Keep the existing local-only fallback documentation scoped, and do not hand-pick a candidate from the incomplete scan.
+
 ## 2026-08-08 — instance #7842 (finder unavailable, repeated)
 
 - **Result:** no candidate or PR was selected. Capacity passed with `Assigned: 2 | Open PRs: 17`; the same bounded tracked scan timed out (`status=124`) and returned `FINDER_RESULT=UNAVAILABLE` with original exit code 2. This remains unknown discovery state, not an empty queue or a diagnosed infrastructure failure.
