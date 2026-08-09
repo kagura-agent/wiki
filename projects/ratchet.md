@@ -3,7 +3,7 @@ title: "Ratchet — post-edit complexity guard for coding agents"
 created: 2026-08-05
 updated: 2026-08-05
 tags: [agent-hooks, code-quality, verification, supply-chain-security]
-last_verified: 2026-08-05
+last_verified: 2026-08-09
 ---
 
 # Ratchet (0xwilliamortiz/ratchet)
@@ -30,7 +30,7 @@ The model is a practical sibling to [[openloop-thu|OpenLoop (thu-nmrc/openloop)]
 
 The strongest transferable idea is **graded, evidence-labeled feedback delivered at the edit boundary**. Ratchet does not pretend regex is a type checker: only manifest facts and a few syntactic matches are `certain`; structure and shape matches are weaker. That is a sharper interaction contract than a generic “keep it simple” prompt.
 
-For our [[FlowForge]] workflow, the analogous safe adoption is already closer to [[regression-gate]] than to an edit hook: use deterministic verification for hard claims, surface advisory heuristics as advisory, and require an explicit reason when deliberately exceeding a budget. Do not adopt Ratchet itself or its launcher.
+For our [[FlowForge]] workflow, the analogous safe adoption is already closer to [[openloop-thu|OpenLoop's regression gate]] than to an edit hook: use deterministic verification for hard claims, surface advisory heuristics as advisory, and require an explicit reason when deliberately exceeding a budget. Do not adopt Ratchet itself or its launcher.
 
 ## Important limits and contradictions
 

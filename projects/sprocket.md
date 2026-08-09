@@ -1,7 +1,7 @@
 ---
 title: "Sprocket — Durable cloud-local hardware/software agent platform"
 created: 2026-08-06
-last_verified: 2026-08-06
+last_verified: 2026-08-09
 tags: [deep-dive, agent-harness, hardware, durable-runs, local-execution, payments]
 tracking: scout
 stars: 16
@@ -29,7 +29,7 @@ Browser work has the same continuity shape: a Browserbase session is stored per 
 
 ## The useful design boundary
 
-Sprocket’s separation is stricter than a normal cloud coding agent: Convex never owns a machine path, and the browser does not retain a general-purpose local authority. It has to pair with the local server, then delegates only a run-scoped capability. That makes it relevant to [[FlowForge]] and [[LoopX]]: durable orchestration should persist *coordination evidence*, but capability to execute on a host should stay local and narrow.
+Sprocket’s separation is stricter than a normal cloud coding agent: Convex never owns a machine path, and the browser does not retain a general-purpose local authority. It has to pair with the local server, then delegates only a run-scoped capability. That makes it relevant to [[FlowForge]] and [[loopx|LoopX]]: durable orchestration should persist *coordination evidence*, but capability to execute on a host should stay local and narrow.
 
 The project explicitly acknowledges that workspace patches and commands are **not sandboxed**: they run as the local Sprocket OS user. That is a meaningful honesty boundary, not a solved containment story.
 
@@ -54,4 +54,4 @@ Sprocket sits between local-first coding harnesses and commerce-capable computer
 
 - Repository source and tests inspected: 2026-08-06
 - HN discovery: “Show HN: Sprocket – The Best AI Agent for Hardware and Software Development” (2026-08-06 scan)
-- Related: [[FlowForge]], [[LoopX]], [[durable-agent-runs]], [[agent-security]], [[super-simple-software-factory]]
+- Related: [[FlowForge]], [[loopx|LoopX]], [[durable-agent-runs]], [[agent-security]], [[super-simple-software-factory]]
