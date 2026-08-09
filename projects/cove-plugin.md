@@ -93,6 +93,13 @@ issue #398 想换的是把这个手写 deliver 换成 framework 的 `sendDurable
 - Finalization invariant: `deliver()` cleans typing before final delivery; in-place final editing seals the draft and sets `draftState.stopped`; if the final reply was not edited in place, `finally` discards/deletes any orphaned draft. All callbacks are abort-gated.
 - Test focus for future changes: preserve these observable boundaries—no post-final preview overwrite, no delivery claim after `sendText` fails, and draft cleanup after fallback/abort. `dispatch-behavior.test.ts` contains the behavior suite; do not infer current behavior from the June-era manual-delivery description without re-reading this module.
 
+## Offline source review — 2026-08-09 [已验证]
+
+- Context: [[workloop]] entered `fallback_offline` because the required structured finder returned `FINDER_RESULT=UNAVAILABLE`; this was not a Cove PR or a request to change plugin behavior.
+- `packages/plugin/src/dispatch.ts` and `dispatch-behavior.test.ts` at local Cove commit `98e6f5d` show the current delivery boundary: previews are deduplicated, throttled (250ms), and bounded; an active draft is finalized in place via `deliverWithFinalizableLivePreviewAdapter`, otherwise `freshSend` deletes the draft before using `createCoveOutboundBridgeAdapter`.
+- On a failed final outbound send, the code attaches `coveFinalPayload` to the error and logs a recoverable failure instead of asserting a successful delivery. The behavioral suite covers preview POST/PATCH, duplicate suppression, final-edit fallback, and failed-fallback recovery.
+- Next time: any dispatch change needs these observable contracts preserved by `dispatch-behavior.test.ts` plus a real transport-path check; a typecheck alone cannot establish delivery correctness. See [[workloop]].
+
 ## Related
 
 - [[cove-plugin-message-actions]] — message tool action dispatch 架构调研
