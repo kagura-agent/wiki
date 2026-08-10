@@ -2,7 +2,7 @@
 title: LongHorizon-Harness — verified-state control loop for computer-use agents
 created: 2026-08-05
 tags: [agent-harness, computer-use, verification, long-horizon, orchestration]
-last_verified: 2026-08-05
+last_verified: 2026-08-10
 source: https://github.com/AMAP-ML/LongHorizon-Harness
 ---
 
@@ -45,7 +45,11 @@ This agrees with [[FlowForge]]'s explicit transitions and our verification-first
 
 LongHorizon-Harness is evidence-first orchestration at the computer-use boundary: it combines the durable-state/verification strand in [[agent-harness-landscape]] with GUI/CLI routing and replayable per-round artifacts. Its emergence alongside HN discussion about the GUI for agents suggests attention is moving from single-agent desktop control toward controls that make multi-hour computer work inspectable. Track it for whether the verified-state protocol survives beyond a paper/release burst.
 
-## Follow-up
+## Follow-up — 2026-08-10
 
-- Revisit **2026-08-12**: check trajectory publication, commits, issue/PR participation, and whether the OpenClaw CLI adapter matches current OpenClaw invocation semantics.
+GitHub API check at `7580d808285cb21d409adea48f4602d13c75aa97`: the project is no longer a launch-day paper/release burst. It reached **517 stars / 63 forks / 6 open items** and merged PR #15, adding a Terminal-Bench harness. The immediately preceding work adds a user-facing final reply and runs agents in the launch directory, so execution-environment ergonomics is receiving active attention.
+
+External participation is now visible but immature: issue #13 proposes deterministic/cost-aware executor-tier escalation, and external PR #11 proposes loopback-Host plus JSON-content-type gates for the unauthenticated local dashboard. Neither change is merged as of this check; the latter is evidence that the dashboard control plane needs an explicit browser-origin boundary, not merely a loopback bind.
+
+- Revisit **2026-08-17**: check whether Terminal-Bench ships reproducible results, whether the dashboard hardening lands, and whether user-reported nested-workspace/config inheritance is resolved.
 - Do **not** adopt a new harness now: our FlowForge + evidence gates already cover the principle; a concrete recurring long-running GUI task would be the appropriate trigger for evaluating a small adaptation.
