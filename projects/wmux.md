@@ -2,12 +2,12 @@
 title: wmux — Workspace Multiplexer for AI Coding Agents
 created: 2026-07-27
 tags: [agent-harness, desktop, multi-agent, workspace-management]
-last_verified: 2026-07-27
+last_verified: 2026-08-10
 ---
 # wmux (openwong2kim/wmux)
 
-> Workspace multiplexer for AI coding agents. TypeScript/Electron. 291⭐ (2026-07-27). MIT.
-> Created 2026-03-20, pushed daily. Windows + macOS native, Linux experimental.
+> Workspace multiplexer for AI coding agents. TypeScript/Electron. 333⭐ / 55 forks (2026-08-10). MIT.
+> Created 2026-03-20; Windows + macOS native, Linux experimental.
 
 ## What It Solves
 
@@ -68,6 +68,14 @@ tmux splits terminals. wmux multiplexes **whole workspaces** — terminals, agen
 - Perf gate flakes on CI (runner variability)
 - Web remote access doesn't survive daemon restart
 
+## Follow-up — 2026-08-10
+
+[已验证] The project remains actively maintained: GitHub API reported a push at `2026-08-09T22:35:53Z`, 333⭐ (from 291 on 07-27), 55 forks, and 10 open issues/PRs. Release 3.40.2 includes a security fix for privileged-RPC allowlist inheritance: an approved UI plugin could collide with a recognised privileged client name and inherit its curated RPC permissions. The patch qualifies the client provenance and adds a regression test.
+
+[已验证] The current work moves browser isolation from target-derived routing toward caller-derived policy in staged, test-backed changes: PR #845 scopes in-wmux CLI navigation to verified pane/workspace identity while retaining the external active-target fallback; draft PR #846 shadow-evaluates caller-derived scope and writes only would-reject events to the bounded audit log, explicitly deferring enforcement. This is a credible migration strategy: instrument and validate policy mismatches before turning a cross-workspace boundary into an enforcement point.
+
+**Takeaway:** the earlier warning about fragile approval remains, but the repository now shows concrete security maintenance and an external contributor (`snowyukitty`) producing reviewed, test-backed boundary work. Keep tracking as **warm**; revisit 2026-08-17 for whether the shadow telemetry graduates to enforcement without breaking existing browser workflows.
+
 ## Position in Ecosystem
 
 | Dimension | wmux | [[openclaw]] | [[dirac]] |
@@ -84,5 +92,6 @@ tmux splits terminals. wmux multiplexes **whole workspaces** — terminals, agen
 - **Runaway guard** pattern applicable to cron job failure handling
 - **Channel model** is richer than our point-to-point `sessions_send` — persistent rooms with mentions could be useful for multi-agent coordination
 - Not directly usable by us (desktop-only, different architecture), but patterns are portable
+- The staged caller-scope rollout is a useful model for tightening an existing authority boundary: shadow decision → bounded audit evidence → enforced policy, rather than switching routing semantics in one release.
 
 Links: [[agent-harness-landscape]], [[acp]], [[openclaw]], [[sigbound]], [[multi-agent-coordination]], [[tmux]]
