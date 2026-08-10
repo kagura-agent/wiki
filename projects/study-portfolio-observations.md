@@ -18,3 +18,13 @@ The saturation gate was open, but a date-level check of every unchecked `Track:`
 **Ecosystem position / relevance:** tracked agent-harness projects are becoming more numerous, so portfolio discipline—not additional discovery—is currently the limiting capability. [[flowforge]] supplies explicit branch state, while [[study-saturation-gate]] limits repeat noise; the missing connective invariant is a due-date-aware selector before follow-up execution.
 
 Links: [[study-saturation]], [[flowforge-workflow-engine]], [[study-workflow]], [[mechanism-vs-evolution]]
+
+## 2026-08-10 — Numeric Selector Audit Found No Due Follow-ups
+
+A numeric parse of unchecked `Track:` entries found zero `Revisit` dates on or before 2026-08-10; the earliest due items are 08-12. Open saturation capacity is therefore not evidence that follow-up work is eligible. A manual branch selection briefly contradicted that predicate, but no portfolio entry was altered.
+
+**Architecture insight:** [[flowforge]] preserves the branch decision as state, yet the decision must be fed by an executable date predicate rather than a visual scan of TODO text. This strengthens [[mechanism-vs-evolution]]: make invalid follow-up mechanically hard, not merely easy to notice after entry.
+
+**Ecosystem position / relevance:** a mature agent-study portfolio needs two distinct controls—[[study-saturation-gate]] for capacity and a due-date selector for eligibility. Conflating them causes premature maintenance rather than learning; the next legitimate portfolio review begins on 08-12.
+
+Links: [[study-workflow]], [[study-saturation]], [[flowforge-workflow-engine]], [[mechanism-vs-evolution]]
