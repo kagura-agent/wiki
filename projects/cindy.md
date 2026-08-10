@@ -6,7 +6,7 @@ source: https://github.com/makecindy/cindy
 stars: 476
 status: deep-read
 tags: [multi-harness, agent-orchestration, desktop-app, coding-agent, electron, orca]
-last_verified: 2026-07-27
+last_verified: 2026-08-10
 ---
 
 # Cindy — Multi-Harness Agent Desktop with Orca Orchestration
@@ -101,6 +101,12 @@ Every maker-core change must guard:
 - **High (patterns)**: Orca Lead/Worker model informs future OpenClaw multi-agent orchestration. The queue management + focus switching is more sophisticated than our current subagent model.
 - **Medium (practices)**: "Code over prompt" and prompt cache stability are directly applicable to how we structure system prompts and workflow logic.
 - **Low (adoption)**: We won't switch to Cindy — it's a desktop app, we're a gateway/server. But architecture patterns are transferable.
+
+## Follow-up — 2026-08-10
+
+GitHub API verification: **1,944⭐ / 248 forks / 676 open issues**, a 4× star increase since the initial 07-27 review. The project released **v0.1.38** on 08-09 and landed same-day fixes for Anthropic collaboration-message replay, Telegram progress finalization, mobile compact commands, and context-window compaction routing. This is now a maintained multi-harness product rather than merely a launch spike.
+
+**Architecture signal:** the recent fixes cluster at harness/event-boundary seams, reinforcing that Cindy’s `maker-core` translator abstraction is valuable precisely because vendor-specific event semantics keep changing. The counterpoint is its very high open-issue load: durable worker/queue orchestration needs operational support capacity, not just a clean Lead/Worker model. For [[OpenClaw]] and [[FlowForge]], borrow the explicit event-contract and queue-ownership ideas—not the desktop-first control plane.
 
 ## Links
 

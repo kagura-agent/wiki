@@ -126,6 +126,12 @@ Architecturally rich, many novel patterns worth studying. But 26⭐/3d, solo dev
 
 **Verification**: Ran preflight with --context study and --context workloop. Protected count = 3, displayed in output with 🛡️ icon. No regression (gate passed).
 
+## Follow-up — 2026-08-10
+
+GitHub API verification: **123⭐ / 0 forks / 0 open issues**. Development resumed on 07-30 with a merged retrieval-safety series: `head_commit` is threaded through recall requests for compact provenance, documentation defines that provenance semantic, and strict typing/test fixes accompany it. This improves the internal evidence path, but it is still a single-author project with no external usage or review signal.
+
+**Architecture signal:** compact provenance is the right complement to a memory tree: retrieval should identify the source revision, not merely a remembered claim. It aligns with [[agent-memory-ground-truth]] and [[mechanism-vs-evolution]], where state mutation must remain attributable to evidence. Our preflight’s protected-pattern rule already addresses a related retention concern; branch-aware provenance would be a separate, evidence-backed enhancement rather than a reason to import this runtime.
+
 ## Links
 
-[[agent-memory-taxonomy]], [[agent-memory-ground-truth]], [[beliefs-candidates]], [[self-evolving-observations]], [[pmb-memory]], [[git-backed-agent-memory]]
+[[agent-memory-taxonomy]], [[agent-memory-ground-truth]], [[beliefs-candidates]], [[self-evolving-observations]], [[pmb-memory]], [[git-backed-agent-memory]], [[mechanism-vs-evolution]]
