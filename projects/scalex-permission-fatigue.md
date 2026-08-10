@@ -1,7 +1,7 @@
 ---
 title: Scalex HITL Permission-Fatigue Data
 created: 2026-08-07
-last_verified: 2026-08-07
+last_verified: 2026-08-10
 source: https://scalex.dev/blog/ai-agent-permissions-stats/
 ---
 # Scalex HITL Permission-Fatigue Data
@@ -16,7 +16,7 @@ The most informative result is contextual: `npm run analyze` was approved 64.7% 
 
 ## Architecture implication
 
-[[agent-security]] distinguishes action authorization from context integrity. This dataset shows why command-level HITL conflates them: a human must reconstruct both *what will execute* and *what state made it execute* from a terse prompt, repeatedly and under interruption. More prompts create fatigue; broad blocking creates an operational bottleneck; neither grants reliable authorization.
+[[agent-security]] distinguishes action authorization from context integrity. This dataset shows why command-level HITL conflates them: a human must reconstruct both *what will execute* and *what state made it execute* from a terse prompt, repeatedly and under interruption. [[command-approval-context-gap]] states the resulting approval rule: authorize the effective capability and its evidence, not the command text alone. More prompts create fatigue; broad blocking creates an operational bottleneck; neither grants reliable authorization.
 
 The safer pattern is layered and state-aware:
 

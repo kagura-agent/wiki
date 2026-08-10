@@ -5,7 +5,7 @@ updated: 2026-08-06
 tags: [deep-dive, workflow, agent-harness, observability, safety]
 tracking: scout
 stars: 432
-last_verified: 2026-08-06
+last_verified: 2026-08-10
 ---
 
 # Super Simple Software Factory (disler/super-simple-software-factory)
@@ -29,7 +29,7 @@ This is closest to [[agentic-sop-to-work]] and [[flowforge]], but is aimed at a 
 
 ## The revealing boundary: gates versus authority
 
-The implementation separates an agent’s authority from whether its report is mechanically true. This is a useful sharpening of the [[deterministic-envelope-for-small-agents]] pattern: permissions abort a phase because a breach cannot be safely corrected by another prompt, while gates can return an actionable violation to the same session.
+The implementation separates an agent’s authority from whether its report is mechanically true. This is a useful sharpening of the [[deterministic-envelope-for-small-agents]] pattern and of [[authority-breach-vs-quality-gate]]: permissions abort a phase because a breach cannot be safely corrected by another prompt, while gates can return an actionable violation to the same session.
 
 However, the top-level safety claim is not yet fully realized. `diff_matches_claims()` only verifies that every claimed path exists; it does **not** compare claims with the actual Git diff. A detailed open issue demonstrates both false passes: unchanged files can be claimed, and unclaimed changes can still reach `commit_all()` because it commits the whole tree. The project already has the needed `git status --porcelain` plumbing, so bidirectional claimed-vs-actual reconciliation is a concrete missing control rather than a conceptual impossibility.
 

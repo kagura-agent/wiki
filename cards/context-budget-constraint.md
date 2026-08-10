@@ -1,7 +1,7 @@
 ---
 title: Context Budget Constraint
 created: 2026-04-14
-last_verified: 2026-06-20
+last_verified: 2026-08-10
 ---
 # Context Budget 约束
 
@@ -39,6 +39,7 @@ System prompt / context window 注入的内容需要 **硬性 budget 约束**，
 - 统计当前注入 token 数 → 建立 baseline
 - 识别低频内容（如 TOOLS.md 的 Repo 测试状态表）→ 移到按需加载
 - 为核心行为规则保留固定 budget
+- 将 [[context-diet-claude-code|Context Diet]] 的 measure → rank → review 流程作为测量清单，而非安装候选：先保留 baseline、allowlist、dry-run diff 和任务级回归检查。
 
 ## 关联
 

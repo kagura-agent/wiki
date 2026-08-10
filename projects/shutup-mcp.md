@@ -34,3 +34,5 @@ The embedding-based approach is simple but effective. Could inspire similar filt
 ## Architecture Pattern
 
 **Proxy-layer context reduction**: don't change the tools, don't change the agent — just filter what connects them. Zero-config, works with existing setups.
+
+[[mcp-slim-guard|MCP Slim Guard]] takes a complementary proxy approach: authorize before exposure, defer schemas behind wrappers, and retain an immutable result snapshot for bounded replay without repeating upstream side effects.

@@ -3,7 +3,7 @@ title: RealReplicaBench — stateful, reproducible business-workflow benchmark
 created: 2026-08-06
 updated: 2026-08-06
 tags: [agent-evaluation, long-horizon, openclaw, verification, reproducibility]
-last_verified: 2026-08-06
+last_verified: 2026-08-10
 source: https://github.com/Accio-Lab/RealReplicaBench
 ---
 
@@ -26,7 +26,7 @@ The useful distinction is **reproducible execution environment versus independen
 
 ## Relation to our direction
 
-[[LongHorizon-Harness]] evaluates whether an outer control loop carries forward only auditor-approved state. RealReplicaBench instead evaluates whether an agent can make durable, verifiable changes within a realistic stateful environment. Together they separate two often-collapsed questions: *can the harness preserve trustworthy progress?* and *can the agent actually operate a stateful surface?*
+[[LongHorizon-Harness]] evaluates whether an outer control loop carries forward only auditor-approved state. RealReplicaBench instead evaluates whether an agent can make durable, verifiable changes within a realistic stateful environment. Together they separate two often-collapsed questions: *can the harness preserve trustworthy progress?* and *can the agent actually operate a stateful surface?* [[computer-anthology|Computer Anthology]] is a watch item for the next question: whether those task and harness choices remain discriminative under semantic perturbation.
 
 For [[OpenClaw]] and [[FlowForge]], its transferable pattern is **preserve a replay bundle at the boundary where a claim is scored**: resolved config, trajectory, verifier output, artifacts, logs, and environment metadata. FlowForge already provides explicit transition history; a small future evaluation harness should add task-scoped artifact manifests and deterministic state assertions before treating a workflow as empirically validated.
 
