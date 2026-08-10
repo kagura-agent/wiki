@@ -3,7 +3,7 @@ title: tracking-health.sh
 type: tool
 created: 2026-05-05
 status: active
-last_verified: 2026-06-21
+last_verified: 2026-08-10
 ---
 
 # tracking-health.sh — Tracking Portfolio Health Dashboard
@@ -113,3 +113,11 @@ Gate 3b added to `issue-funnel.sh` — blocks issues that already have an open P
 
 **Source:** [[duplicate-issue-selection]] gradient (oh-my-pi#2612 re-selected while PR already open).
 **Verification:** memex#174 correctly blocked.
+
+## 2026-08-10 Observation: Due-branch source disagreement
+
+During the study workflow, `bash study/tracking-due.sh` reported overdue entries exclusively from `study/targets.md` (including historical items such as agentic-stack and nanobot). A direct check of live `TODO.md` lines — `grep '^\- \[ \] Track:' TODO.md | grep -E 'Revisit (0[1-7]-|08-(0[1-9]|10)([^0-9]|$))'` — returned no unfinished track due on or before 08-10.
+
+**Boundary:** this is not evidence that the tracked projects need follow-up. `tracking-due.sh` intentionally aggregates a portfolio table whose historical rows are not necessarily live TODO obligations, while the FlowForge `align` branch is defined by unfinished TODO tracks. Use `TODO.md` as the branch authority; treat targets output as portfolio context unless its row is cross-referenced to an open Track.
+
+**Ecosystem implication:** learning automation needs an explicit authority hierarchy: a broad observability source can inform prioritization, but it must not silently promote historical metadata into executable work. This is the same evidence/provenance boundary captured in [[mechanism-vs-evolution]] and complements [[study-workflow]].
