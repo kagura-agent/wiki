@@ -1,13 +1,13 @@
 ---
 title: "Waggle — Attributed Artifact References for Agent Handoffs"
 created: 2026-07-21
-updated: 2026-07-21
-status: active
-stars: 909
+updated: 2026-08-10
+status: dropped
+stars: 755
 repo: modiqo/waggle
 language: Rust
-license: Apache-2.0/MIT
-last_verified: 2026-07-21
+license: Apache-2.0
+last_verified: 2026-08-10
 ---
 
 # Waggle — Attributed Artifact References for Agent Handoffs
@@ -94,6 +94,10 @@ Multi-agent systems duplicate context across agents at every handoff:
 | Telemetry | Impossible | Append-only event log | None |
 | Cross-machine | Fails | Edge workers | Manual re-paste |
 | Score (benchmark) | 90% | 96% | ~100% |
+
+## Follow-up — 2026-08-10
+
+**Dropped from active tracking.** GitHub API verification found 755 stars (down from 860 on 2026-07-28), 97 forks, zero open issues or pull requests, and no commit since 2026-07-20; the latest commit only adds README badges. The 0.5.3 release from 2026-07-14 remains the last substantive release. The token/attribution design is documented above, but there is no current development or external-community signal to justify an active tracking slot.
 
 ## Links
 
