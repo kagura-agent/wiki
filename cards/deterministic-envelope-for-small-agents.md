@@ -1,3 +1,10 @@
+---
+title: Deterministic Envelope for Small Agents
+created: 2026-08-04
+tags: [agents, validation, authorization, safety]
+last_verified: 2026-08-10
+---
+
 # Deterministic Envelope for Small Agents
 
 A weak or local model can still operate usefully when it is embedded inside deterministic systems that constrain its authority, preserve only valid context, and recover from known failure modes.
