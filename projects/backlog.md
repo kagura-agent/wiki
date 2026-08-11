@@ -1,4 +1,10 @@
 
+## 2026-08-11 Quick Scan (09:16)
+
+- **Docker Sandboxes for AI agents** — HN 624 points / 349 comments. Disposable, isolated sandbox product is a high-signal security/reliability direction; worth examining its concrete boundary model and whether any independently inspectable implementation or documentation supports the claims.
+
+---
+
 ## 2026-05-10 Quick Scan (15:21)
 
 **GitHub Trending (agent space, past week):**
