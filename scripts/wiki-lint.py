@@ -119,7 +119,7 @@ all_files = []
 slug_to_paths = defaultdict(list)  # slug -> [paths]
 
 for root, dirs, files in os.walk('.'):
-    dirs[:] = [d for d in dirs if d not in ('.git', '.memex')]
+    dirs[:] = [d for d in dirs if d not in ('.git', '.memex', '.worktrees')]
     for f in files:
         if f.endswith('.md'):
             path = os.path.join(root, f)

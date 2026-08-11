@@ -4,7 +4,7 @@ created: 2026-06-25
 tags: [agent-safety, runtime-security, rust, macos, linux, coding-agents, transactional-runtime, parallel-agents, idempotent-operations, crash-recovery]
 source: https://github.com/GenseeAI/gensee-crate
 status: following
-last_verified: 2026-08-10
+last_verified: 2026-08-11
 ---
 
 # Gensee Crate — Runtime Safety + Transactional Runtime for AI Coding Agents
@@ -201,7 +201,7 @@ Managed CLI adds its own file lock but underlying store still lacks proper locki
 
 GitHub API verification: unchanged at **116⭐ / 9 forks / 0 open issues**. No commits have landed since 08-03; the five latest commits are the already-noted tclone context/credential performance work, and **v0.2.0** (07-22) remains the latest release. The previous burst of performance PRs did not yet translate into public latency evidence, an issue discussion, or external-maintainer feedback.
 
-**Trend:** a strong idempotent-operation design can coexist with weak validation pressure. The project remains a useful source for [[idempotent-agent-infrastructure-ops]] and [[reconciliation]], but a zero-issue public surface cannot confirm its crash-recovery or concurrent-state claims. Do not treat its managed runtime as an adoption candidate until an independent workload exercises those boundaries.
+**Trend:** a strong idempotent-operation design can coexist with weak validation pressure. The project remains a useful source for [[idempotent-agent-infrastructure-ops]], but a zero-issue public surface cannot confirm its crash-recovery or concurrent-state claims. Do not treat its managed runtime as an adoption candidate until an independent workload exercises those boundaries.
 
 ## Track
 
