@@ -1,7 +1,7 @@
 ---
 title: Agent Credential Security
 created: 2026-04-07
-last_verified: 2026-07-26
+last_verified: 2026-08-11
 ---
 # Agent 凭证安全：指纹模式
 
@@ -33,6 +33,7 @@ Agent 需要使用凭证（API key、OAuth token、app secret），但不应该�
 - [x] **[[polypore]] Secret Broker** (2026-06-17): Agent 启动时 strip 所有 secrets → 替换为 sentinel handle → agent 调 `polypore.secrets.use` 描述 HTTP 请求意图 → runtime 注入 secret 并 mask 返回值。模型永远不接触明文。与 Centaur 区别：desktop IDE 场景，per-request mediation 而非 token delivery。
 - [x] **[[cloudflare-agent-accounts]]** (2026-06-19): 平台级方案 — `--temporary` deploy 给 agent 60 分钟有限身份，无需人类 OAuth。Pattern: "identity without permanent commitment"。
 - [x] **[[onecli]] OneCLI** (2026-07-26): OSS MITM proxy credential gateway (Rust, 2.8k⭐). Transparent injection — agent goes through HTTP proxy, gateway swaps placeholder keys for real credentials. Agent never sees secrets. Bitwarden vault integration for zero-stored-secrets mode. Most production-ready implementation of the fingerprint model observed. Key limit: HTTP-only (SSH/local signing need different pattern).
+- [x] **[[docker-sandboxes]]** (2026-08-11): Closed-source microVM product with a host-side HTTP(S) proxy that substitutes sentinel credentials at declared domains. The key caveat strengthens this card's scope: injection protects secret material, but writable workspaces, shared skills, and host-local MCP servers remain separate authority bridges and must be constrained independently. Evidence is vendor documentation, not source/test reproduction.
 - [ ] OpenClaw 自身的 sandbox/exec 机制
 - [ ] Claude Code 的 permission model
 - [ ] Hermes agent 的凭证管理
