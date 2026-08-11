@@ -2,7 +2,7 @@
 title: Agent Harness Landscape (2026)
 created: 2026-06-19
 tags: [agent-harness, landscape, coding-agent, orchestration]
-last_verified: 2026-08-03
+last_verified: 2026-08-11
 ---
 
 # Agent Harness Landscape (2026)
@@ -40,4 +40,4 @@ This mirrors the web's own evolution: raw HTTP â†’ frameworks (Express, Rails) â
 
 ## Links
 
-[[vercel-eve]], [[openclaw]], [[valkor-ai-loom]], [[agent-harness-kit]], [[metaharness-agent-harness-generator]], [[agent-skill-standard-convergence]], [[acp]], [[foreman-orchestrator]], [[napaxi-mobile-agent-sdk]], [[pocketdev]], [[learn-agent]], [[agentspace]] (agent-in-channel workspace pattern), [[easylink-agent-runtime]] (extracted runtime kernel study), [[bossconsole-jvm-harness]] (JVM-native microkernel harness), [[caspian-sdk]] (cross-platform agent channel layer), [[cindy]] (multi-harness unified AI agent desktop), [[wmux]] (windowed-mux session manager), [[optim-plans]] (planning+execution optimization harness), [[dscode]] (DeepSeek-first multi-provider coding agent)
+[[vercel-eve]], [[openclaw]], [[valkor-ai-loom]], [[agent-harness-kit]], [[metaharness-agent-harness-generator]], [[agent-skill-standard-convergence]], [[acp]], [[foreman-orchestrator]], [[napaxi-mobile-agent-sdk]], [[pocketdev]], [[learn-agent]], [[agentspace]] (agent-in-channel workspace pattern), [[easylink-agent-runtime]] (extracted runtime kernel study), [[bossconsole-jvm-harness]] (JVM-native microkernel harness), [[caspian-sdk]] (cross-platform agent channel layer), [[cindy]] (multi-harness unified AI agent desktop), [[wmux]] (windowed-mux session manager), [[optim-plans]] (planning+execution optimization harness), [[dscode]] (DeepSeek-first multi-provider coding agent), [[moli]] (DOM-first agent-browser kernel)

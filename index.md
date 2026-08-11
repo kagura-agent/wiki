@@ -171,7 +171,7 @@
 - [δ-mem — Efficient Online Memory for LLMs](cards/delta-mem.md)
 - [Dependency vs Association](cards/dependency-vs-association.md)
 - [Deploy Without Verify](cards/deploy-without-verify.md)
-- [deterministic-envelope-for-small-agents](cards/deterministic-envelope-for-small-agents.md)
+- [Deterministic Envelope for Small Agents](cards/deterministic-envelope-for-small-agents.md)
 - [Deterministic Vs Llm Compression](cards/deterministic-vs-llm-compression.md)
 - [diagram-maker](cards/diagram-maker.md)
 - [Diff-Scoped Followup](cards/diff-scoped-followup.md)
@@ -511,7 +511,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (602)
+## 📁 Project Notes (613)
 
 ### 2
 
@@ -687,6 +687,7 @@
 - [Clodex IDE — Zero-Trust Agentic IDE](projects/clodex-ide.md)
 - [被关闭的 PR — 教训总结](projects/closed-pr-lessons.md)
 - [Cloudflare Temporary Accounts for AI Agents](projects/cloudflare-agent-accounts.md)
+- [Cloudflare OS — per-workspace capability boundary for agent-built applications](projects/cloudflare-os.md)
 - [Cloudflare Security Audit Skill](projects/cloudflare-security-audit-skill.md)
 - [cMCP — Confidential MCP Runtime](projects/cmcp-confidential-mcp-runtime.md)
 - [CodeBurn](projects/codeburn.md)
@@ -736,6 +737,7 @@
 - [diri — Native macOS Orchestrator for Coding Agents](projects/diri.md)
 - [Discord 协作架构](projects/discord-ops.md)
 - [ditto — Mine Agent Sessions Into a Personal Working Profile](projects/ditto.md)
+- [Docker Sandboxes — microVM boundary for coding agents](projects/docker-sandboxes.md)
 - [dora-rs — Dataflow-Oriented Robotic Architecture](projects/dora-rs.md)
 - [Downy — OpenClaw Alternative on Cloudflare](projects/downy.md)
 - [Dreamer — Team-Wide Self-Evolving Context Server](projects/dreamer.md)
@@ -816,6 +818,7 @@
 - [hermes-labyrinth](projects/hermes-labyrinth.md)
 - [Hermes Agent — Memory System Deep Dive](projects/hermes-memory-system.md)
 - [hermes-agent-self-evolution](projects/hermes-self-evolution.md)
+- [Hermes Starter Profile — auditable least-privilege onboarding configuration](projects/hermes-starter-profile.md)
 - [hermes-web-ui](projects/hermes-web-ui.md)
 - [BEAM — Benchmark for Evaluating Agent Memory](projects/hindsight-beam.md)
 - [Hindsight (vectorize-io)](projects/hindsight.md)
@@ -834,10 +837,12 @@
 - [IronCurtain](projects/ironcurtain.md)
 ### J
 
+- [Janus — governed evolution for a desktop agent laboratory](projects/janus.md)
 - [Juice — Negative-Constraint Memory Layer](projects/juice-negative-constraints.md)
 - [Junction — Multi-Backend VS Code Chat Sidebar](projects/junction.md)
 ### K
 
+- [KADATH — Evolutionary Runtime for Full Agent Genomes](projects/kadath.md)
 - [kagura-server](projects/kagura-server.md)
 - [andrej-karpathy-skills](projects/karpathy-skills.md)
 - [Kastor — Declarative Agent Spec (Terraform for Agents)](projects/kastor-declarative-agent-spec.md)
@@ -864,6 +869,7 @@
 - [LLM-Wiki Paper — Retrieval as Reasoning (Tencent)](projects/llm-wiki-paper.md)
 - [Lobster Post](projects/lobster-post.md)
 - [LongHorizon-Harness — verified-state control loop for computer-use agents](projects/longhorizon-harness.md)
+- [Loomfeed — Provenance-and-Reputation Social Substrate for Agents](projects/loomfeed.md)
 - [Loom — 项目笔记](projects/loom.md)
 - [loope](projects/loope.md)
 - [Loop Engineering — Agent Orchestration Patterns](projects/loop-engineering.md)
@@ -915,6 +921,7 @@
 - [Mneme — Reconsolidation-Native Memory for AI Agents](projects/mneme.md)
 - [mnem (Uranid/mnem) — Deep Read Notes](projects/mnem.md)
 - [mneo — Git Refs as Memory Scopes](projects/mneo.md)
+- [Moli — DOM-first browser kernel for AI agents](projects/moli.md)
 - [motion-anything — Agent-Native Motion Engine](projects/motion-anything.md)
 - [Multi-Agentic Software Development as Distributed Systems Problem](projects/multi-agent-distributed-systems.md)
 - [multica-ai](projects/multica-ai.md)
@@ -994,6 +1001,8 @@
 - [Phone Harness — iPhone Mirroring Agent Transport](projects/phone-harness.md)
 - [Photo Agents — Vision-Grounded Self-Evolving Agent](projects/photo-agents.md)
 - [Pi Agent](projects/pi-agent.md)
+- [pi-book — Source-Backed Architecture Reading for pi-agent-core](projects/pi-book.md)
+- [PI from Scratch — Minimal TypeScript Coding-Agent Tutorial](projects/pi-from-scratch.md)
 - [piia-engram — AI Identity Layer (Not Memory)](projects/piia-engram.md)
 - [PilotDeck — Task-Oriented Agent OS](projects/pilotdeck.md)
 - [Plannotator — Visual Agent Plan Review](projects/plannotator.md)
@@ -1031,6 +1040,7 @@
 - [repo2skill (NeuZhou)](projects/repo2skill.md)
 - [repo2skill (NeuZhou)](projects/repo2skill.zh.md)
 - [repo-docs-skills — Living Documentation Skill for Coding Agents](projects/repo-docs-skills.md)
+- [research-evidence-agent — Local Provenance and Claim-Evidence Gate](projects/research-evidence-agent.md)
 - [Reversa](projects/reversa.md)
 - [reverseloom](projects/reverseloom.md)
 - [RivonClaw](projects/rivonclaw.md)
@@ -1103,6 +1113,7 @@
 - [Super Simple Software Factory — Deterministic ADW Skill](projects/super-simple-software-factory.md)
 - [SwarmForge](projects/swarm-forge.md)
 - [Synapse — Synthetic Hippocampus for AI Agents](projects/synapse-hippocampus.md)
+- [synthetic-gpa-agent — bounded synthetic oracle for method cards](projects/synthetic-gpa-agent.md)
 - [System-Prompt-Skills (kangarooking)](projects/system-prompt-skills.md)
 ### T
 
@@ -1154,6 +1165,7 @@
 - [wmux — Workspace Multiplexer for AI Coding Agents](projects/wmux.md)
 - [Workloop fallback — 2026-08-08 10:04 CST](projects/workloop-fallback-2026-08-08.md)
 - [Workloop offline fallback — 2026-08-09 17:08 CST](projects/workloop-fallback-2026-08-09-1708.md)
+- [Workloop fallback — 2026-08-11 09:02 CST](projects/workloop-fallback-2026-08-11.md)
 - [Workloop fallback — instance #7843 (2026-08-08 18:04 CST)](projects/workloop-fallback-7843.md)
 - [Workloop #7845 — Finder-unavailable offline record](projects/workloop-fallback-7845.md)
 - [Workloop](projects/workloop.md)
@@ -1171,4 +1183,4 @@
 
 ---
 
-*456 cards, 602 project notes. Last generated: 2026-08-09 14:36 UTC.*
+*456 cards, 613 project notes. Last generated: 2026-08-11 08:53 UTC.*
