@@ -82,3 +82,9 @@ The emdash team (arnestrickmann) is doing a major SSH overhaul in their current 
 - Wait for current SSH work to land (watch for new releases)
 - Focus on non-SSH issues that appear fresh
 - My 2 existing PRs (#2902, #2885) are very recent — wait for review before adding more
+
+## 2026-08-11 Workloop Follow-up
+- **PR #2885: CLOSED.** The only technical review was Greptile's desktop-ID case finding, already addressed in `1408f1f3`; the PR later became `DIRTY` because upstream refactored the app-identity module and removed the target file.
+- **Lifecycle decision:** after reading the latest comments (including no request to keep it open), closed rather than forcing a rebase onto a changed architecture. A fresh issue/repro against the new identity surface is required before revisiting.
+- **Maintainer/review pattern:** bot feedback identified a packaging/runtime case mismatch; validate Electron-builder output names and runtime desktop IDs together, not just source constants.
+- **Next time:** for a conflicted PR whose primary file no longer exists upstream, use the architecture-refactor rule: assess a fresh implementation quickly or close; do not mechanically resolve the rebase.

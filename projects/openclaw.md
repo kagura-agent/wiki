@@ -402,3 +402,9 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **Reason**: Architectural refactor already covered the same path structurally
 - **Maintainer**: steipete — clean closure, referenced superseding PR+commit
 - **Lesson**: Check `gh pr list --state merged --search "path:<module>"` before opening narrow fixes. openclaw moves fast with architectural refactors — point guards get swallowed.
+
+### 2026-08-11 Workloop Issue Triage
+- **#114084 (session_entries runtime error): no implementation.** Maintainer reopened it solely for a clean failing stack and mixed-build provenance; current-source evidence has no responsible steady-state caller. Do not write a canonical-schema workaround without an actual reproducer.
+- **#114049 (immutable release roots): no implementation.** The service downtime is source- and production-validated, but the needed release-root, atomic-switch, rollback, and GC contract is explicitly maintainer-owned across platform supervisors. Do not choose that contract in an external PR.
+- **#114029 (DeepSeek legacy model): no implementation.** Fresh V4 setup and inline `apiKey` support already exist; the remaining choice is whether and how Doctor migrates an explicitly selected retired model. That changes operator cost/capability and requires maintainer direction.
+- **Selection pattern:** A finder may rank OPEN, unclaimed, non-competitive issues that are nevertheless implementation-blocked by an unresolved maintainer decision. Complete-context reading is the gate; do not treat preflight success as implementation approval. See [[github-contribution]].
