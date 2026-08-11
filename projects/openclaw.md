@@ -408,3 +408,8 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 - **#114049 (immutable release roots): no implementation.** The service downtime is source- and production-validated, but the needed release-root, atomic-switch, rollback, and GC contract is explicitly maintainer-owned across platform supervisors. Do not choose that contract in an external PR.
 - **#114029 (DeepSeek legacy model): no implementation.** Fresh V4 setup and inline `apiKey` support already exist; the remaining choice is whether and how Doctor migrates an explicitly selected retired model. That changes operator cost/capability and requires maintainer direction.
 - **Selection pattern:** A finder may rank OPEN, unclaimed, non-competitive issues that are nevertheless implementation-blocked by an unresolved maintainer decision. Complete-context reading is the gate; do not treat preflight success as implementation approval. See [[github-contribution]].
+
+### 2026-08-11 Workloop Follow-up — #114084 / #114049
+- No PR opened. After full-context verification, **#114084** remains blocked on a clean current-build stack trace and artifact provenance; current source has no `session_entries` hit under `extensions/whatsapp`, while the steady-state accessor uses `session_nodes`.
+- **#114049** is a real operational outage but its immutable release-root, atomic service switch, rollback, and GC semantics are explicitly maintainer-owned. Do not turn steipete's optional no-op-SHA mitigation into an external PR without an approved deployment contract.
+- Maintainer review style: ClawSweeper makes the owner/contract boundary explicit and cites source paths; treat that as a decision-readiness gate, not merely a non-blocking bot comment. [[github-contribution]]
