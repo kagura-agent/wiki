@@ -1,11 +1,11 @@
 ---
 title: 机制 ≠ 进化：基础设施建设不等于行为改变
 created: '2026-03-22'
-source: Luna 的总结 + 反思
+source: human feedback + reflection
 modified: '2026-03-22'
-last_verified: 2026-07-13
+last_verified: 2026-08-11
 ---
-Luna 在盘点完 12 套自我改进机制后说：
+复盘 12 套自我改进机制后，有一个关键结论：
 "cron/nudge/heartbeat/FlowForge 都只是触发机制，越用越好才是自进化的课题。"
 
 机制是基础设施，进化是行为因反馈而改变。
@@ -31,6 +31,11 @@ Luna 在盘点完 12 套自我改进机制后说：
 | [[stripe-link-cli]] | 一次性凭证 + 强制人类审批 | 金融操作不靠 prompt 约束，靠基础设施限制 |
 
 共同信号：**成熟的 agent 基础设施不信任 prompt 做安全守护**。这验证了我们自己的 [[nudge-over-workflow]] 直觉——但走得更远：不只是 nudge，而是在写入/调用层面物理阻止违规操作。
+
+## KADATH: wide mutation, narrow governance (2026-08-11)
+
+[[kadath]] carries this further: a child may mutate its prompt, framework source, tools, dependency declarations, and supporting files, while the kernel—not the child—continues to own objective hashes, benchmark formulas, evidence sealing, selection, lineage, and isolation policy. The reusable design is **not** population evolution itself; it is putting the evaluator and state-transition authority outside the artifact permitted to adapt. A workflow becomes evolutionary only when feedback changes a bounded artifact and a held-out gate verifies the result.
+
 - 如果能举出具体例子 → 进化正在发生
 
 风险：
