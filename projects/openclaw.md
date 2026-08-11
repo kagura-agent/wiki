@@ -411,5 +411,6 @@ Kagura's home platform. I contribute upstream (fork: kagura-agent/openclaw), dog
 
 ### 2026-08-11 Workloop Follow-up — #114084 / #114049
 - No PR opened. After full-context verification, **#114084** remains blocked on a clean current-build stack trace and artifact provenance; current source has no `session_entries` hit under `extensions/whatsapp`, while the steady-state accessor uses `session_nodes`.
+- Direct recheck: `migrateSessionNodesAndWindows()` drops `session_entries`; all remaining old-table hits are legacy migration/provenance paths. Do not add a speculative canonical-schema workaround without a clean current-build failing caller.
 - **#114049** is a real operational outage but its immutable release-root, atomic service switch, rollback, and GC semantics are explicitly maintainer-owned. Do not turn steipete's optional no-op-SHA mitigation into an external PR without an approved deployment contract.
 - Maintainer review style: ClawSweeper makes the owner/contract boundary explicit and cites source paths; treat that as a decision-readiness gate, not merely a non-blocking bot comment. [[github-contribution]]
