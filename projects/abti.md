@@ -192,4 +192,4 @@ ABTI focuses on **observable behavior** rather than internal cognition (which AI
 - [已验证] #869 remains the sole `next` issue and is already covered by PR #870; no review, CI, or state change justified implementation. Its verified delivery state remains review-wait.
 - [已验证] Capacity was Assigned 2 / Open PRs 18. The shared finder ended with `scan_status status=124 timeout=true` and `FINDER_RESULT=UNAVAILABLE` / exit 2; this is unavailable discovery, not a valid empty queue or an attributed infrastructure cause.
 - [已验证] Read-only audit of `action/index.js` confirmed explicit provider routing, including an immediate error for the retired GitHub Models provider. No maintainer preference, test command, or code defect was newly evidenced.
-- **Next:** re-check #870 only on a concrete review, CI, or state transition; retry general discovery only after a structured finder result is available.
+- **Next:** re-check #870 only on a concrete review, CI, or state transition; retry general discovery only after a structured finder result is available. The accompanying endpoint audit is preserved in [[abti-workloop-fallback-2026-08-08]].

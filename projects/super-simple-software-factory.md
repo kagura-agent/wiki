@@ -5,7 +5,7 @@ updated: 2026-08-06
 tags: [deep-dive, workflow, agent-harness, observability, safety]
 tracking: scout
 stars: 432
-last_verified: 2026-08-10
+last_verified: 2026-08-11
 ---
 
 # Super Simple Software Factory (disler/super-simple-software-factory)
@@ -21,7 +21,7 @@ This is closest to [[agentic-sop-to-work]] and [[flowforge]], but is aimed at a 
 ## Architecture observed
 
 - **Three phase kinds**: human `engineer`, model `agent`, and deterministic `code`. Known invocations such as tests and commits are explicitly code phases rather than delegated rediscovery.
-- **Typed seam contract**: an agent final response parses into an `EnvelopeBase` subtype; artifacts, a persisted `envelope.json`, and a next-agent prompt transfer information between phases without relying on conversation continuity.
+- **Typed seam contract**: an agent final response parses into an `EnvelopeBase` subtype; artifacts, a persisted `envelope.json`, and a next-agent prompt transfer information between phases without relying on conversation continuity. [[goal-flow]] applies a related boundary at a graph/agent seam, where a typed adapter owns state updates and routing.
 - **Correction rather than restart**: parse or gate failure re-prompts the same Pi session, preserving working context.
 - **Acceptance has two levels**: individual phases can complete while the overall `run.finish(accepted=...)` still rejects the run. This distinguishes “a red test executed successfully” from “the change is accepted.”
 - **Post-hoc write enforcement**: `permissions.snapshot()` fingerprints the Git worktree before and after every agent call. The harness compares the change set to `writes` and `protected_files`, rolls back unauthorized changes it introduced, then raises a non-retriable breach. It correctly treats a malicious `git checkout` that erases prior dirty work as a change.

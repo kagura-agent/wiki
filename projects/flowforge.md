@@ -26,6 +26,8 @@ index.ts (CLI, commander) → engine.ts (状态机逻辑) → db.ts (SQLite)
 2. `flowforge next [--branch N]` → 读当前节点 → 计算下一节点 → closeHistory + updateNode + addHistory
 3. `flowforge run/advance` → JSON API 模式，供程序化调用
 
+For a contrasting graph-plus-agent design, [[goal-flow]] documents a typed adapter that keeps state updates and routing graph-owned while an inner agent loop returns its result.
+
 ### 设计特点
 - **防跳步**: agent 必须通过 `next` 推进，不能直接跳到任意节点
 - **自动清理**: start 时如果有同名 active instance，自动关闭旧的

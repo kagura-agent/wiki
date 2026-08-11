@@ -1,5 +1,48 @@
 # 自进化管线观察日志
 
+## 🔬 自进化观察日报 2026-08-09
+
+### 管线活跃度
+- **beliefs-candidates：14 条当日 dated entry / 0 条毕业。** 观察窗口（08-08 22:30 至今）有 6 个涉及 `beliefs-candidates.md` 的提交，其中 4 个是新增 gradient commit。14 条条目中已出现同日同义聚集：`study-due-date-branch-selection` 已到第 2 次，且多条 finder-UNAVAILABLE / artifact handoff 表述指向同一工作流失败边界；不能把它们都当作独立、可升级证据。［数据：`git log --since='yesterday 22:30' --all -- beliefs-candidates.md SOUL.md AGENTS.md`；`grep '2026-08-09' beliefs-candidates.md`］
+- **DNA 变更：无已提交变更。** `SOUL.md`、`AGENTS.md` 在窗口内没有 commit；当前工作树虽有未提交 `AGENTS.md` 修改，故不计作完成的 DNA 变更。［数据：同上 git log；`git status --short --branch`］
+- **nudge：触发数与质量未量化。** 指定的 gateway journal 查询没有 `nudge` / `system event enqueued` 行；根据既有结论，空关键词结果不是 0 次触发的有效代理，且 nudge 已确认正常运行。［数据：`journalctl -u openclaw-gateway --since '2026-08-08 22:30:00' | grep -iE 'nudge|system event enqueued'`］
+- **dreaming：运行，Deep Sleep 本轮报告 promote 5 条。** `dream-health.sh` 验证 light/deep/rem 三类报告均存在、最后一次 `memory.dream.completed` 为 08-09 本地 03:15；当日 Deep Sleep 报告写明 ranked 5 / promoted 5。Light Sleep 仍有大量 0.62 的例行巡检候选，REM 的主题为 `cst`、lasting truths 混入旧运维/表情包审计内容；本轮无法从报告追溯这 5 条 promotion 是否来自高质量过滤候选。［数据：`tools/dream-health.sh`；`memory/dreaming/{light,deep,rem}/2026-08-09.md`］
+
+### 闭环追踪
+- **完整闭环：2 个。**
+  1. finder 超时 → 保留脱敏 wrapper artifact → fallback_offline → 将边界写入 gradient / workflow evidence。［数据：08-09 workloop 记录；commits `a5ac7ce`、`3de380a`、`24369e3`］
+  2. duplicate-warning 仍会写入 gradient → 当日修正为非写入 gate outcome → 提交并验证变更已进入记录。［数据：commits `f34f79b`、`873f087`］
+- **断裂处：**同一个 finder-unavailable 边界被拆成多条近义 gradient，独立证据未证明；dreaming 虽恢复 promotion，但 promotion-to-filter-source 的可追溯性仍缺失，尚不能验证 #10(c) 的验收目标。［数据：当日 beliefs 条目；dream-health / Deep Sleep 报告］
+
+### 今日发现
+1. **输入活跃，但语义去重仍是瓶颈。** 同日 14 条条目与 4 个 gradient commits 主要围绕 finder 失败边界、study 工具摩擦和 FlowForge handoff；其中 finder 组不应被误读为多个独立毕业信号。［数据：beliefs 08-09 条目］
+2. **#10 的 dreaming 管线在可用性上健康、质量验收仍未完成。** 系统有 512 candidates、15 个当前满足 promotion eligibility、当日 Deep Sleep 实际 promotion 5 条；但 Light Sleep 的 0.62 例行候选仍占主导，无法证明本地 filter 促成了认知洞察的 promotion。［数据：`tools/dream-health.sh`；08-09 light/deep/rem reports］
+3. **外部反馈没有形成可归因的新增 gradient。** 今日共有 6 个 Kagura-authored PR 更新，但 22:30 观察窗口开始后为 0；未发现人类 review → 当日 gradient 的可验证链路。［数据：`gh search prs --author kagura-agent --updated '>=2026-08-09'`］
+
+### Skill 提取缺口
+- 本日的“结构化发现返回 UNAVAILABLE 时以 artifact 驱动 fallback”的做法已经落在贡献工作流和工具包装中；它目前是项目内 structural guard，而非已跨域验证的独立 skill。不得仅凭同日近义记录升级为通用技能。［数据：08-09 workloop records / beliefs entries］
+
+### 原始数据
+```text
+git log window:
+  beliefs-candidates.md: 6 commits
+  SOUL.md / AGENTS.md: 0 committed changes
+
+08-09 beliefs dated entries: 14
+08-09 committed gradient changes: 4
+PR updates after 22:30 CST: 0
+
+dream-health:
+  candidates=512; promoted=15; currently eligible=15
+  latest memory.dream.completed=2026-08-08T19:15:37.745Z (08-09 03:15 CST)
+  08-09 Deep Sleep: ranked 5; promoted 5
+
+gateway nudge/system-event keyword query: no output
+(not interpreted as zero triggers)
+```
+
+---
+
 ## 🔬 自进化观察日报 2026-08-04
 
 ### 管线活跃度
@@ -7576,4 +7619,43 @@ last dream: 2026-08-08 08:49:24 CST; 10/512 promoted; 12 eligible; light/deep/re
 
 $ gh pr|issue list -R kagura-agent/self-evolving-agent --search 'updated:>=2026-08-08'
 [] / []
+```
+
+---
+
+## 🔬 自进化观察日报 2026-08-10
+
+### 管线活跃度
+- **beliefs-candidates：20 条当日 dated entry / 1 个待独立评估的重复 pattern。** 观察窗口（08-09 22:30 至今）有 4 个涉及 `beliefs-candidates.md` 的提交；文件中有 20 条 08-10 日期条目。`study-due-date-branch-selection` 一处标为第 3 次，但同日另有三条相近条目仍标第 1 次，记录合并/计数口径不一致；其余同日重复集中在 `wiki-lint-worktree-noise`。因此不把它们当作已满足 Triple Verification 的独立毕业证据。［数据：`git log --since='2026-08-09 22:30 +0800' --all -- beliefs-candidates.md SOUL.md AGENTS.md`；`grep '2026-08-10' beliefs-candidates.md`］
+- **DNA 变更：无已提交变更。** `SOUL.md` / `AGENTS.md` 在窗口内无 commit；工作树有未提交 `AGENTS.md`（+6/-7）和 beliefs（+34/-2）差异，按完成口径不计入。［数据：路径过滤 git log；`git diff --numstat -- AGENTS.md beliefs-candidates.md`］
+- **nudge：状态已确认正常，今日无法从指定 journal 关键词量化触发数或质量。** `journalctl -u openclaw-gateway --since '2026-08-10 00:00:00' | grep -iE 'nudge|system event enqueued'` 无输出；依据 #5 后确立的方法论，这不是零触发证据。［数据：gateway journal；历史方法论修正］
+- **dreaming：运行，Deep Sleep 本轮 promote 5 条。** `dream-health.sh` 显示 pipeline HEALTHY，最后 `memory.dream.completed` 是 15:57 CST，light/deep/rem 当日报告均存在；Deep Sleep 记录 ranked 5 / promoted 5。累积统计为 512 candidates、12 promoted、14 个当前满足 promotion eligibility。质量仍混合：REM 有两个有明确当日证据的 reflection（`cst` / `验证`），但 Possible Lasting Truths 同时混入 04-23 和 06-18 的长操作日志，仍不足以确认 5 条 promotion 都是高质量、可复用结论。［数据：`tools/dream-health.sh`；`memory/dreaming/{deep,rem}/2026-08-10.md`］
+
+### 闭环追踪
+- **完整闭环：2 个。**
+  1. 共享 workflow 文件已有脏 diff → 记录 `wrong-branch-commit` gradient → 以 isolated worktree / 精确暂存约束后续提交。［数据：08-10 beliefs 条目；`469474f` 之前的相关 workloop/study 记录］
+  2. workflow 相对命令路径误判 → 定位 canonical workspace path → 补跑并记录 `flowforge-relative-path-preflight`。［数据：commit `e8d9e980`；对应 gradient］
+- **断裂处：**`study-due-date-branch-selection` 在同日既有“第 3 次”又新增多个“第 1 次”近义条目，说明去重/计数到毕业评估的携带不可靠；wiki lint `.worktrees` 噪音以多条近义 gradient 复现，尚未形成结构性 linter 排除修复。［数据：08-10 beliefs 条目］
+
+### 今日发现
+1. **输入高活跃但合并质量不足。** 20 条 dated entry 覆盖 study/workloop/Luna 三类来源，但其中至少两组重复语义会夸大进化输入；本日不宣称任何新毕业。［数据：beliefs 08-10 条目］
+2. **dreaming 的运行可用性已恢复，内容选择仍是质量风险。** 直接健康检查与 Deep Sleep 报告证明该子系统实际运行并 promotion；REM 对旧长日志的混入则说明“已运行”不等于“已产生干净的长期记忆”。［数据：dream-health / REM report］
+3. **未见可归因的人类 PR review → gradient 转化。** 观察窗口内 Kagura-authored PR 更新 4 个：Cove #520/#522 已 merged、Blog #135 与 Finance #1605 open；当日 gradients 标注来源为 study/workloop/Luna，未建立到某条人类 review 的可验证链路。［数据：`gh search prs --author kagura-agent --updated '>=2026-08-09T14:30:00Z'`；beliefs source 标注］
+
+### Skill 提取缺口
+- “基线 lint 噪音 + changed-note 独立验证”与“需要 API fallback 时保留证据边界”已在项目工作流中有可复用形态，但今日证据仍集中于同一 study/workloop 场景；在跨域验证、去重和明确稳定接口前，不升级为独立 reusable skill。［数据：08-10 beliefs 条目］
+
+### 原始数据
+```text
+window commits (beliefs / SOUL / AGENTS): 4
+  e8d9e980  gradient: verify workloop command paths
+  0c5c3258  belief: add clone stall API fallback
+  be73ce9f  gradient: worktree filesystem mode noise
+  469474fc  gradient: capture supervisor interruption
+SOUL.md / AGENTS.md committed changes: 0
+beliefs dated entries (2026-08-10): 20
+PR updates since 08-09 22:30 CST: 4
+  Cove #520 merged; Cove #522 merged; Blog #135 open; Finance #1605 open
+nudge/system-event keyword query: no output (not treated as zero triggers)
+dream-health: HEALTHY; last dream 15:57 CST; Deep Sleep ranked/promoted: 5/5
 ```

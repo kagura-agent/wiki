@@ -959,7 +959,6 @@
 - [OpenClaw-RL (Gen-Verse)](projects/OpenClaw-RL.zh.md)
 - [OpenClaw Voice Call Realtime](projects/openclaw-voice-call-realtime.md)
 - [OpenCLI (jackwener)](projects/opencli.md)
-- [OpenCode ACP service — offline module note (2026-08-07)](projects/opencode-acp-service.md)
 - [OpenCode (anomalyco/opencode)](projects/opencode.md)
 - [open-cowork (OpenCoworkAI/open-cowork)](projects/open-cowork.md)
 - [Open Design (nexu-io)](projects/open-design.md)

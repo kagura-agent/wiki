@@ -55,6 +55,13 @@ For broad finance discovery issues, split by evidence boundary before implementa
 - **Closed and verified:** #1617 inspected `CaioSBC/RLPortfolio` through GitHub API only. The repository is non-archived with default branch `main`, declares MIT (`license.spdx_id: MIT`), has root `LICENSE` blob `497b89bea7be71236fdec4be7f2b6a8822b8391a`, and returned no releases. GitHub re-query confirmed the closing comment and `CLOSED` state at `2026-08-08T01:49:42Z`.
 - Boundary: no clone, installation, code execution, data retrieval, credentials, or trading. #1618 and #1619 remain separate open child tasks.
 
+## 2026-08-10 — finance patrol (#1646)
+
+- The open Finance queue consisted of broad research/discovery parents and credential-blocked #1591; no existing issue was a ≤20-minute standalone task. Parent #1634 already had several completed narrow children, so this patrol added a distinct child #1646 for the individual stock-news request path.
+- **Closed and verified:** GitHub API confirmed #1646 `CLOSED` at `2026-08-10T03:46:17Z`, with the evidence comment present.
+- At `simonlin1212/a-stock-data` `main@3a3149dedbe30cda58b5c94387039d7e707cedcd`, `eastmoney_stock_news(code, page_size=20)` calls the JSONP search endpoint through `em_get()` with a 15-second timeout. It fixes `pageIndex` at 1 and has no pagination loop or total-page handling; it cannot fetch later pages itself.
+- Failure boundary: `em_get()` provides shared session throttling and conditionally configured retries, but the news function does not catch request, JSONP-slicing, or JSON-decode errors, and contains no automatic cross-source fallback. No endpoint call, credential, download, execution, or trading occurred.
+
 ## 2026-08-08 — workloop finder fallback evidence
 
 - The required `workloop-find-issue.sh` scanner reported `scan_status status=124 timeout=true` and `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`; no structured recommendation was produced. This is finder unavailability only, not an empty queue or diagnosed infrastructure cause. It is a recurrence of an already-recorded pattern; no duplicate gradient was added.
@@ -70,3 +77,9 @@ For broad finance discovery issues, split by evidence boundary before implementa
 - **Closed and verified:** completed the bounded, GitHub-API-only RLPortfolio environment/data-interface review. GitHub re-query confirmed #1619 `CLOSED` at `2026-08-08T03:47:53Z`, with Kagura’s evidence comment as the final comment.
 - `rlportfolio.environment.PortfolioOptimizationEnv` is defined in `rlportfolio/environment/portfolio_optimization_env.py`; its first constructor parameter is the caller-provided `df: pandas.DataFrame`. The README example reads local `train_data.csv` / `test_data.csv` and passes those DataFrames to the environment. The environment README specifies time, ticker, and user-defined feature columns.
 - The inspected environment source has no market-data download, network-client, credential-read, or order-placement path. The caller remains responsible for data quality, entitlement, and point-in-time availability. No clone, installation, execution, data retrieval, credentials, or trading occurred.
+
+## 2026-08-09 — finance patrol (#1638)
+
+- **Closed and verified:** completed the bounded static trace of `simonlin1212/a-stock-data`'s Eastmoney data-center request path. GitHub re-query confirmed #1638 `CLOSED` at `2026-08-09T08:46:32Z`, with the evidence comment present.
+- Review baseline was `main@3a3149dedbe30cda58b5c94387039d7e707cedcd`. `eastmoney_datacenter()` calls `em_get()`, which calls `EM_SESSION.get(..., timeout=15)`. The session adapter configures a maximum of three retries for connection failures and HTTP 429/5xx with `backoff_factor=0.6`, but its broad setup `except` intentionally degrades to no retry on incompatible urllib3 versions; 403 is explicitly excluded from retry.
+- Boundary: the inspected request path has no automatic cross-source fallback. The separately documented `dragon_tiger_backup()` is a caller-selected fallback for the datacenter-backed 龙虎榜 use case; do not describe it as an automatically invoked retry path. No clone, installation, data-endpoint request, credential, backtest, or trading action occurred.

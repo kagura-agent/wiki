@@ -488,6 +488,8 @@ if (p.type === "compaction" && p.tail_start_id) {
 - `closeSession` removes in-memory ACP state plus the MCP-registration and directory-snapshot caches *before* attempting to abort the backing OpenCode session. `abortBackingSession()` logs and absorbs abort failure, so local cleanup remains idempotent even if the backing request fails.
 - Configuration mutations validate against the cached directory snapshot: `setSessionConfigOption` returns refreshed options, whereas dedicated `setSessionMode` and `setSessionModel` return empty responses after updating state. Any config-option change must keep those three paths aligned.
 - `listSessions` merges persisted SDK sessions with in-memory ACP-only sessions, excludes duplicates by ID, sorts newest first, and uses updated-at milliseconds as its cursor. Changing session persistence or timestamps must preserve this merge/dedup/pagination behavior.
+- MCP registration deduplicates per ACP session by `name:stableStringify(config)`. Failed `sdk.mcp.add` calls do not enter the registration map, and a separate pending set suppresses duplicate registrations within a single batch.
+- Before changing ACP session lifecycle code, audit all four creation/restore paths, `closeSession`, session-list merging, and live/replay event consumers. For MCP changes, cover both successful-registration bookkeeping and behavior after an ignored registration failure.
 
 ### 2026-08-05 Offline deep read — ACP event metadata recovery
 

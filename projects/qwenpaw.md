@@ -40,4 +40,4 @@
 ## PR History
 | # | Title | Status | Notes |
 |---|-------|--------|-------|
-| 6331 | chore(console): specify Node.js version requirement | pending | First PR; reviewer found website dependency requires Node 22. A bad pointer-file commit was replaced by API-built commit `70d0917` based on current upstream main; remote JSON/.nvmrc/README/workflow structure verified. |
+| 6331 | chore(website): declare Node 22 requirement | pending | First PR; website and deploy requirements aligned to Node 22. Human review found the required website format workflow still used Node 20; fixed in `2b945feb` (`npm-format.yml` website job only). Node 22.23.2 + pnpm 9.15.9 strict frozen install, format check, YAML parse, and diff check passed; remote workflow content re-verified. |

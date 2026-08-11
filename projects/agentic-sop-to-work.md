@@ -5,7 +5,7 @@ updated: 2026-06-15
 tags: [deep-dive, workflow, agent-safety, claude-code-plugin]
 tracking: scout
 stars: 178
-last_verified: 2026-06-15
+last_verified: 2026-08-11
 ---
 
 # agentic-sop-to-work
@@ -69,6 +69,7 @@ Forces every output value to be verbatim traceable to input sources. This is **a
 
 ### What validates our direction
 - Deterministic orchestration with human gates > free-form agent autonomy — we're already on this path
+- [[goal-flow]] provides a complementary graph/agent boundary: its adapter alone converts an inner loop's result into state updates and routing.
 - Single-tool-per-skill decomposition mirrors our skill design
 - Forward-only branching is a safety feature we might want to consider
 

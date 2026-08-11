@@ -1,5 +1,13 @@
 # Workloop
 
+## 2026-08-09 — instance #7879 (finder unavailable)
+
+- **Result:** capacity gate passed (`Assigned: 2 | Open PRs: 19`), but the required wrapped finder exited 2 after the tracked scan timed out (`FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`). Durable, redacted evidence: `github-contribution/offline/evidence/2026-08-09/20260809T120823+0800-find-work.md`. This preserves an unavailable-finder result only—not an empty queue or a diagnosis of network, authentication, or API-limit cause.
+- **Follow-up / review signal:** both assigned issues were fulfilled. The three flagged PR comments remained non-actionable: TencentDB-Agent-Memory #729 is a collaborator acknowledgement, Cove #487 is a staging-preview notification, and Emdash #2902 contains a positive bot summary plus a contributor thank-you. No code, CI, test, or reply action was requested.
+- **Local / source review:** `flowforge` has a pre-existing unstaged edit in `src/index.ts`; `lottie-studio` has only a pre-existing untracked `playwright-report/`; neither checkout has commits ahead of its tracking branch. Reading `flowforge/src/engine.ts` confirmed `next()` stores a trimmed (≤2,000-character) result handoff, so raw failure output belongs in the durable evidence artifact rather than FlowForge history.
+- **Gradient review:** reviewed the 3+ threshold candidates. The repeated finder-evidence behavior is already structurally enforced by the wrapper artifact plus the explicit unavailable branch; no distinct candidate warranted promotion.
+- **Next time:** re-run only the prescribed structured finder in a later workloop; do not select from partial scan output.
+
 ## 2026-08-07 — instance #7741 (no candidate)
 
 - **Result:** no PR was opened. `find_work` received the valid structured-empty result `NO VIABLE ISSUES` (exit 0); `discover` found no suitable new project. This is an empty, verified queue—not a finder failure or a reason to manufacture work.
