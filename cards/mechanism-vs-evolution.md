@@ -36,6 +36,10 @@ last_verified: 2026-08-11
 
 [[kadath]] carries this further: a child may mutate its prompt, framework source, tools, dependency declarations, and supporting files, while the kernel—not the child—continues to own objective hashes, benchmark formulas, evidence sealing, selection, lineage, and isolation policy. The reusable design is **not** population evolution itself; it is putting the evaluator and state-transition authority outside the artifact permitted to adapt. A workflow becomes evolutionary only when feedback changes a bounded artifact and a held-out gate verifies the result.
 
+## Janus: evidence lifecycle before candidate lifecycle (2026-08-11)
+
+[[janus]] reaches the same boundary from a multi-user product direction. It version-controls not only the proposed Skill/Memory overlay but also the evidence that may produce it: source identities are stable, sensitive inputs are quarantined before eligibility, consumed evidence cannot be replayed unchanged, and a personal candidate stays reviewable and rollbackable. Its cohort release path adds source-category thresholds, a per-user weight cap, shadow evaluation, and a real-user canary. The transferable rule is: **an evolution gate is only as meaningful as the provenance and reuse rules of its inputs.**
+
 - 如果能举出具体例子 → 进化正在发生
 
 风险：
