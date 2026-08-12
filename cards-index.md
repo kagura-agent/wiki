@@ -1,14 +1,15 @@
 ---
 title: Wiki Cards Index
 created: 2026-04-10
-updated: 2026-08-03
+updated: 2026-08-12
 ---
 
 # Cards Index
 
-> All cards in wiki/cards/, grouped alphabetically. 445 total.
+> All cards in wiki/cards/, grouped alphabetically. 457 total.
 
 ## A
+
 - [[abort-masks-sink]]
 - [[acp]]
 - [[acp-permission-model]]
@@ -72,12 +73,13 @@ updated: 2026-08-03
 - [[asset-temperature-model]]
 - [[async-agent-transport]]
 - [[atomic-writes]]
+- [[authority-breach-vs-quality-gate]]
 - [[authorization-layer-confusion]]
 - [[auto-close-stale-entries]]
 - [[auto-fix-ci-pipeline]]
 - [[auto-retire-pattern]]
-
 ## B
+
 - [[bash-as-agent-interface]]
 - [[begin-vs-in-phase-memory]]
 - [[belief]]
@@ -88,8 +90,8 @@ updated: 2026-08-03
 - [[browser-automation]]
 - [[browser-mcp]]
 - [[browser-use]]
-
 ## C
+
 - [[cache-miss-cost-optimization]]
 - [[capability-architecture]]
 - [[capability-scoping]]
@@ -115,6 +117,7 @@ updated: 2026-08-03
 - [[codex-plusplus]]
 - [[coding-agent-ecosystem]]
 - [[collaboration-bottleneck]]
+- [[command-approval-context-gap]]
 - [[community-health-tracking-signal]]
 - [[competing-pr-early-check]]
 - [[compiled-truth-plus-timeline]]
@@ -144,6 +147,7 @@ updated: 2026-08-03
 - [[contrastive-memory]]
 - [[contribution-depth-bottleneck]]
 - [[contributor-depth-strategy]]
+- [[convergence-engine]]
 - [[convergent-evolution]]
 - [[cost-of-not-calling]]
 - [[critical-learning]]
@@ -156,8 +160,8 @@ updated: 2026-08-03
 - [[cron-timeout-sizing]]
 - [[cured-tracking-methodology]]
 - [[cynical-deletion]]
-
 ## D
+
 - [[data-discipline]]
 - [[data-fabrication-in-review]]
 - [[db9]]
@@ -171,6 +175,7 @@ updated: 2026-08-03
 - [[delta-mem]]
 - [[dependency-vs-association]]
 - [[deploy-without-verify]]
+- [[deterministic-envelope-for-small-agents]]
 - [[deterministic-vs-llm-compression]]
 - [[diagram-maker]]
 - [[diff-scoped-followup]]
@@ -187,8 +192,10 @@ updated: 2026-08-03
 - [[dreaming-vs-beliefs-candidates]]
 - [[dream-single-phase-consolidation]]
 - [[duplicate-issue-selection]]
-
+- [[durable-agent-runs]]
+- [[durable-state-local-capability-spend-authority]]
 ## E
+
 - [[eat-your-own-dogfood]]
 - [[entity-first-dispatch]]
 - [[ephemera-retention-primitive]]
@@ -206,10 +213,12 @@ updated: 2026-08-03
 - [[exp-self-evolution-audit-202703]]
 - [[extended-thinking]]
 - [[external-contributor-success]]
-
 ## F
+
 - [[fable-mode]]
 - [[fact-decision-separation]]
+- [[failable-verification]]
+- [[failure-scope-recovery]]
 - [[ffn-free-routing]]
 - [[floway]]
 - [[flowforge-workflow-engine]]
@@ -219,19 +228,20 @@ updated: 2026-08-03
 - [[fresh-context-review]]
 - [[frozen-trust-vs-time-decay]]
 - [[functional-area-resolver]]
-
 ## G
+
 - [[gateway-cold-start-optimization]]
 - [[git-backed-agent-memory]]
 - [[git-worktree-isolation]]
 - [[goal-hive-master-duty]]
+- [[graded-agent-guardrails]]
 - [[gradient-pipeline]]
 - [[gradient-scan]]
 - [[graduation-pipeline]]
 - [[graphloom]]
 - [[guard-spec-format]]
-
 ## H
+
 - [[habits-as-hooks]]
 - [[heartbeat]]
 - [[hermes]]
@@ -239,8 +249,8 @@ updated: 2026-08-03
 - [[heuristic-rerank-filter]]
 - [[hn-algolia-api]]
 - [[honcho]]
-
 ## I
+
 - [[idempotent-agent-infrastructure-ops]]
 - [[identity-drift-detection]]
 - [[idle-cached-session-resume]]
@@ -249,11 +259,11 @@ updated: 2026-08-03
 - [[in-session-reflection-gap]]
 - [[intent-aware-retrieval]]
 - [[invariant-gated-verdict]]
-
 ## J
-- [[jaccard-belief-clustering]]
 
+- [[jaccard-belief-clustering]]
 ## K
+
 - [[kagura-canvas]]
 - [[kagura-story]]
 - [[kagura-work-patterns]]
@@ -261,8 +271,8 @@ updated: 2026-08-03
 - [[knowledge-is-a-graph]]
 - [[knowledge-needs-upgrade-path]]
 - [[kronos-agent-os]]
-
 ## L
+
 - [[lazy-classification]]
 - [[learning-as-procrastination]]
 - [[librarian-problem]]
@@ -270,8 +280,8 @@ updated: 2026-08-03
 - [[llm-decision-layer-pattern]]
 - [[llm-wiki-karpathy]]
 - [[loop-detection-comparison]]
-
 ## M
+
 - [[maintainer-merge-pattern]]
 - [[master-skill]]
 - [[mastra-blacklist-agent-pr-backlash]]
@@ -311,12 +321,12 @@ updated: 2026-08-03
 - [[multi-harness-adapter-pattern]]
 - [[multi-model-review]]
 - [[multi-tier-qa-strategy]]
-
 ## N
+
 - [[nudge-audit]]
 - [[nudge-over-workflow]]
-
 ## O
+
 - [[observability]]
 - [[observation-without-investigation]]
 - [[observer-pattern]]
@@ -327,11 +337,12 @@ updated: 2026-08-03
 - [[openhands]]
 - [[openhuman]]
 - [[open-pr-discipline]]
+- [[operational-maturity-agent-tools]]
 - [[oss-contribution-discipline]]
 - [[over-editing]]
 - [[overlap-detection-pattern]]
-
 ## P
+
 - [[pain-driven-product-creation]]
 - [[pain-perception]]
 - [[parse-what-you-execute]]
@@ -342,6 +353,7 @@ updated: 2026-08-03
 - [[platform-limitation]]
 - [[pluggable-sandbox-provider]]
 - [[policy-chain]]
+- [[policy-gate-progress-path]]
 - [[predict-then-verify-calibration]]
 - [[premature-conclusion]]
 - [[pre-push-linter-discipline]]
@@ -356,11 +368,11 @@ updated: 2026-08-03
 - [[prompt-injection]]
 - [[pr-superseded-lessons]]
 - [[pulse-todo]]
-
 ## Q
-- [[query-dilution]]
 
+- [[query-dilution]]
 ## R
+
 - [[ralph-loop]]
 - [[reasoning]]
 - [[recall-frequency-boost]]
@@ -372,11 +384,12 @@ updated: 2026-08-03
 - [[reflection-first-casualty]]
 - [[re_gent]]
 - [[remote-development]]
+- [[reproducible-evaluation-envelope]]
 - [[retire-candidates]]
 - [[retrieval-is-the-bottleneck]]
 - [[rlhf]]
-
 ## S
+
 - [[salient-mining-sop]]
 - [[sandbox-escape-via-git-hooks]]
 - [[sandbox-path-mapping]]
@@ -440,8 +453,8 @@ updated: 2026-08-03
 - [[subagent-usage-patterns]]
 - [[supervisor-pattern]]
 - [[synapse-memory]]
-
 ## T
+
 - [[TACO]]
 - [[taskflow]]
 - [[team-lead]]
@@ -470,17 +483,17 @@ updated: 2026-08-03
 - [[transport-abc]]
 - [[tree-sitter]]
 - [[two-evolution-paths]]
-
 ## U
-- [[ui-spec-failure]]
 
+- [[ui-spec-failure]]
 ## V
+
 - [[verification-discipline-evolution]]
 - [[verify-before-researching]]
 - [[verify-claims]]
 - [[verify-external-ops]]
-
 ## W
+
 - [[warm-start-agents]]
 - [[what-makes-an-agent-me]]
 - [[wiki-as-compiled-knowledge]]
@@ -495,10 +508,11 @@ updated: 2026-08-03
 - [[write-ahead-session-persistence]]
 - [[write-read-gap]]
 - [[write-time-vs-read-time-arbitration]]
-
 ## Y
-- [[yield-curve-and-term-structure]]
 
+- [[yield-curve-and-term-structure]]
 ## Z
+
 - [[zettelkasten]]
 - [[zulip]]
+

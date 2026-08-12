@@ -1,5 +1,53 @@
 # 自进化管线观察日志
 
+## 🔬 自进化观察日报 2026-08-12
+
+### 管线活跃度
+- **beliefs-candidates**: 13 条新增 gradient，均为第1次出现，无待升级项
+  - 数据来源: `git log --since="2026-08-11 22:30" --all -- beliefs-candidates.md` 返回 8 commits，18 条 08-12 gradient 行
+  - 主要主题：workloop finder 边界处理（4 条相关）、gogetajob discover 有效性、clone OOM 策略、openclaw 竞争窗口、PR comment triage
+- **DNA 变更**: 无 — SOUL.md / AGENTS.md 今日无提交
+  - 数据来源: `git log --since="2026-08-11 22:30" --all -- SOUL.md AGENTS.md` 返回空
+- **nudge 触发**: 2 次反射触发（14:13、14:22 CST），均为 cove direct thread；cron session 被正确跳过
+  - 数据来源: `.nudge-audit.log`，今日 08:08–14:31 共记录 9 行（7 skipped + 2 triggered）
+  - 质量: 中等 — 有产出但触发频率偏低（仅 cove direct session 触发），主 session 和 cron 工作流无反射注入
+  - 注: `journalctl | grep nudge` 返回 0 是因为 nudge 插件独立记日志到 `.nudge-audit.log`，正确验证方式是该文件而非 journalctl
+- **dreaming**: ✅ 三相完整运行
+  - light: 48KB，substantial（含大量巡检候选项）
+  - deep: promote 4 candidates → MEMORY.md
+  - rem: 16 行，识别 "cst" 与 "验证" 两个跨记忆主题
+  - 数据来源: `memory/dreaming/*/2026-08-12.md` 三个文件均存在
+- **dream-health**: HEALTHY — 512 candidates / 11 promoted / 14 满足 promotion 阈值
+  - 数据来源: `tools/dream-health.sh` 输出
+
+### 闭环追踪
+- **完整闭环**: 3 个
+  1. finder-unavailable → gradient 记录 → finder 行为修正（3 条 gradient 围绕同一 pattern 迭代）
+  2. handle-feedback generic comments → gradient: triage-before-action → 行为改变已写入
+  3. gogetajob discover 无效 → gradient: discover-topic-redundancy → 改用 gh search
+- **断裂处**:
+  - 13 条新 gradient 全为第1次，无积累到升级阈值（需要 3+ 次重复）
+  - 多条 finder-unavailable 语义相近但分散为独立 gradient（01f30e4, bbf277f, 07811e3）— pattern: finder-unavailable-comment-triage-boundary / finder-unavailable-offline-review-boundary / finder-unavailable-boundary — 已出现语义冗余倾向
+  - nudge 不触发 cron session，意味着 workloop-night 等重度工作流没有反射注入
+  - dreaming REM 反射质量偏低：「cst」和「验证」是从历史归档中捞出的低频词，不是近期实际行为模式
+
+### 今日发现
+1. **gradient 生产积极但去重缺失**: 今日 beliefs-candidates 新增 13 条，但其中有 3 条围绕同一 finder-unavailable 场景的变体。管线缺少「相似 gradient 合并」机制，可能导致同一教训被多次记录而无法达到 3 次升级阈值（因为分散在不同 pattern key 下）。
+2. **nudge 覆盖率有限**: cron session 被 nudge 跳过（按设计），但主 session（agent:kagura）也未见反射触发——可能是 session 不够活跃或间隔未达到。今日仅 cove-direct thread 触发。
+3. **dreaming 输入质量持续性问题**: light sleep 仍混入大量低价值重复巡检条目（ABTI/Lottie/虾信巡检每小时重复完整结论），deep 的 promotion 在质量过滤上比 REM 好（promote 4 vs REM 仅能输出历史低频词反射）。
+4. **DNA 稳定期**: 自 08-05 以来 SOUL.md / AGENTS.md 无变更，但 beliefs-candidates 持续积累。当前 13 条首次 gradient 可能需要 1-2 周才能积累足够证据进入升级。
+5. **workloop 驱动自进化**: 今日全部 13 条 gradient 均来自 workloop 执行，说明代码执行反馈是当前最有效的进化驱动源。非代码交互（对话、review）产生 gradient 的比例偏低。
+
+### 原始数据
+- `git log --since="2026-08-11 22:30" --all -- beliefs-candidates.md`: 8 commits
+- `git log --since="2026-08-11 22:30" --all -- SOUL.md AGENTS.md`: 0 commits
+- `.nudge-audit.log` (today): 7 skipped + 2 triggered
+- `memory/dreaming/light/2026-08-12.md`: 47848 bytes
+- `memory/dreaming/deep/2026-08-12.md`: 5 lines, 4 promoted
+- `memory/dreaming/rem/2026-08-12.md`: 16 lines
+- `tools/dream-health.sh`: HEALTHY, 512 candidates, 11 promoted
+- `gh pr list --author kagura-agent --state open --updated > 2026-08-12`: 0 results (no Kagura PR changes today)
+
 ## 🔬 自进化观察日报 2026-08-09
 
 ### 管线活跃度

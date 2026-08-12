@@ -512,7 +512,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (616)
+## 📁 Project Notes (619)
 
 ### 2
 
@@ -792,6 +792,7 @@
 - [Gensee Crate — Runtime Safety for AI Coding Agents](projects/gensee-crate-runtime-safety.md)
 - [Ghostwork (hvardhan878/ghostwork)](projects/ghostwork.md)
 - [girl-agent](projects/girl-agent.md)
+- [open-gitagent/gitagent](projects/gitagent.md)
 - [GitAgentProtocol (Open GAP)](projects/gitagent-protocol.md)
 - [Gitclaw — Git-Native Agent Framework](projects/gitclaw.md)
 - [GitLost — GitHub Agentic Workflow Prompt Injection](projects/gitlost-prompt-injection.md)
@@ -959,6 +960,7 @@
 - [Omnigent — Meta-Harness for AI Agents](projects/omnigent.md)
 - [OneCLI — Credential Gateway for AI Agents](projects/onecli.md)
 - [OneWill / Wally — WAL for Agent Actions](projects/onewill-wally.md)
+- [darrenhinde/OpenAgentsControl](projects/OpenAgentsControl.md)
 - [OpenChronicle](projects/openchronicle.md)
 - [OpenClaude (Gitlawb/openclaude)](projects/openclaude.md)
 - [OpenClaw 架构概览 — 田野笔记](projects/openclaw-architecture.md)
@@ -975,6 +977,7 @@
 - [Open Design (nexu-io)](projects/open-design.md)
 - [OpenGame](projects/opengame.md)
 - [open-kritt — AI Security Research Platform](projects/open-kritt.md)
+- [openlit/openlit](projects/openlit.md)
 - [OpenLoop — Agent-Agnostic Loop Engineering Framework](projects/openloop-thu.md)
 - [OpenLore — Deterministic Architectural Memory & Governance for AI Coding Agents](projects/openlore.md)
 - [OpenMelon — Content-Creation Agent Runtime](projects/openmelon.md)
@@ -1187,4 +1190,4 @@
 
 ---
 
-*457 cards, 616 project notes. Last generated: 2026-08-12 03:18 UTC.*
+*457 cards, 619 project notes. Last generated: 2026-08-12 14:37 UTC.*

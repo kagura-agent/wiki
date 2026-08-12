@@ -1,8 +1,37 @@
 {
-  "checked_at": "2026-08-11T12:17:00Z",
-  "orphans": 0,
-  "broken_links": 7,
-  "collisions": 1148,
-  "index_drift": 0,
-  "total_cards": 456
+  "timestamp": "2026-08-12T12:10:00Z",
+  "run_date": "2026-08-12",
+  "totals": {
+    "md_files": 1172,
+    "cards": 457,
+    "projects": 619,
+    "wikilinks": 5612
+  },
+  "health": {
+    "errors": 0,
+    "warnings": 60,
+    "broken_links": 0,
+    "orphans": 3,
+    "orphan_projects": ["OpenAgentsControl", "gitagent", "openlit"],
+    "duplicate_slugs": 4,
+    "index_drift": {
+      "missing_from_index": 3,
+      "cards_index_stale": true,
+      "cards_not_indexed": 457
+    },
+    "stale_files": 416,
+    "unicode_suspicious": 25,
+    "stubs": 0,
+    "secrets": 0,
+    "frontmatter_ok": true,
+    "link_density": 5.8,
+    "zero_outbound": 2,
+    "invalid_fact": 0
+  },
+  "error_book": {
+    "new_issues": 6,
+    "recurring_issues": 53,
+    "auto_closed": 2,
+    "total_open": 59
+  }
 }
