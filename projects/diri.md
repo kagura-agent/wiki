@@ -1,9 +1,9 @@
 ---
 title: "diri — Native macOS Orchestrator for Coding Agents"
 created: 2026-08-05
-last_verified: 2026-08-05
+last_verified: 2026-08-12
 source: https://github.com/cristicretu/diri
-stars: 122
+stars: 248
 status: deep-read
 tags: [agent-harness, coding-agent, macos, pty, persistence, mcp, worktree]
 ---
@@ -68,6 +68,16 @@ The repository has broad Swift Testing coverage for PTY lifecycle, output-log pe
 - **Design warning:** local/remote feature parity breaks easily when hooks and MCP config embed local paths. Treat remote injection and identity/reporting as first-class protocol features if parity matters.
 - **Not an adoption target:** macOS-only desktop architecture and Swift/Rust toolchains do not fit our Linux gateway runtime.
 
+## 2026-08-12 follow-up — release hardening distinguishes restart from power loss
+
+GitHub API check: **248⭐ / 21 forks / 26 open issues**, pushed 2026-08-11; the project has 10 unique issue authors, 13 external PRs, and 6 merged-PR authors in the prior 30 days (`tracking-community.sh`: THRIVING 6/6). Its v0.5.0 release is signed/notarized and ships an appcast update feed.
+
+The important engineering change is [PR #31](https://github.com/cristicretu/diri/pull/31): holder adoption already preserved a session across a *daemon* restart, but after a whole-machine power loss an unavailable local holder left persisted `working`/`idle` state falsely live, causing endless reconnect attempts. Restore now reaps only orphaned **local** records into `exited:daemonRestart`, which exposes Resume over the last screen. It deliberately does not reap remote tmux sessions: they may still run on another host, where turning them into Resume could launch duplicate work. Two focused engine tests cover the local-orphan and remote-survival cases.
+
+This sharpens the prior continuity pattern: durable ownership needs an explicit **failure-scope classifier**, not merely a reconnect path. A coordinator restart and a host failure have opposite safe recoveries; remote work must be treated as independently alive until its host says otherwise. That maps directly to our session/handoff design: never infer a remote run has died solely because the local controller restarted.
+
+Other merged work strengthens operator legibility rather than changing this boundary: [PR #25](https://github.com/cristicretu/diri/pull/25) makes sidebar ordering total/persisted and renders spawn lineage, while [PR #47](https://github.com/cristicretu/diri/pull/47) rate-limits status chimes for bursty agent fleets. Issue #44, “Explain agent status decisions in the inspector,” shows the next useful pressure: deterministic reducers also need an inspectable explanation surface.
+
 ## Ecosystem position
 
 The attention is moving from “run several agents” toward **operational integrity**: reliable status, recoverable sessions, worktree isolation, and cross-host identity/usage control. Diri’s non-obvious contribution is making a session survive coordinator failure by separating its PTY lifetime from the daemon lifecycle.
@@ -78,3 +88,5 @@ The attention is moving from “run several agents” toward **operational integ
 - `Tools.swift` / `McpServer.swift`
 - Detection, PTY, session-log, and worktree tests
 - [Issue: two engine tests hang on GitHub runners](https://github.com/cristicretu/diri/issues/1)
+- GitHub REST API: repository, commits, releases, issues (queried 2026-08-12)
+- [PR #25](https://github.com/cristicretu/diri/pull/25), [PR #31](https://github.com/cristicretu/diri/pull/31), [PR #47](https://github.com/cristicretu/diri/pull/47)
