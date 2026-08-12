@@ -1,5 +1,7 @@
 # Workloop fallback — instance #7843 (2026-08-08 18:04 CST)
 
+Related reflection: [[workloop-reflection-7843]] · [[workloop]] · [[github-contribution]]
+
 ## Finder failure evidence [已验证]
 
 - Command: `bash ~/.openclaw/workspace/tools/workloop-find-issue.sh 2>&1`

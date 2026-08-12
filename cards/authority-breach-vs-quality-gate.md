@@ -1,7 +1,7 @@
 ---
 title: "Authority Breach vs Quality Gate"
 created: 2026-08-06
-last_verified: 2026-08-06
+last_verified: 2026-08-12
 tags: [agent-safety, workflow, verification]
 ---
 
@@ -35,5 +35,6 @@ agent action
 - Workflow conditions and output validation may yield bounded retry/fix paths.
 - External sending, writes outside a declared scope, credential use, and irreversible actions need an authorization boundary—not a quality retry.
 - Rollback must be conservative: never “clean up” pre-existing dirty state merely because a breach occurred.
+- [[indusecagent]] is the physical-process counterexample: its README calls for human review and fail-safe handling, while the inspected code does not make either an executable prerequisite to its PLC-connected monitoring path.
 
 Links: [[agent-security]], [[agent-trust-hierarchy]], [[flowforge]], [[super-simple-software-factory]], [[agentic-sop-to-work]], [[deterministic-envelope-for-small-agents]]

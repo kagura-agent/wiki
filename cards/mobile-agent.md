@@ -2,7 +2,7 @@
 title: Mobile Agent
 created: 2026-07-04
 tags: [mobile, agent, on-device, landscape]
-last_verified: 2026-07-05
+last_verified: 2026-08-12
 ---
 
 # Mobile Agent
@@ -23,6 +23,10 @@ Challenges are substantial:
 
 The alternative pattern: run the agent in a cloud VM, access from the phone. [[pocketdev]] takes this approach — cloud box + Tailscale mesh + phone SSH client. The agent runs with full resources; the phone is a thin terminal.
 
+## Mirrored-device transport
+
+A third pattern treats the phone as a remote-controlled surface rather than the agent’s runtime or client. [[phone-harness]] drives an iPhone through macOS iPhone Mirroring using screenshots/OCR and HID input; its boundary is the Mac host plus a human reconnection handoff.
+
 ## Links
 
-[[agent-harness-landscape]], [[capability-architecture]], [[remote-development]], [[napaxi-mobile-agent-sdk]], [[pocketdev]]
+[[agent-harness-landscape]], [[capability-architecture]], [[remote-development]], [[napaxi-mobile-agent-sdk]], [[pocketdev]], [[phone-harness]]
