@@ -4,7 +4,7 @@ source: "https://github.com/richardChenzhihui/OfficeBuddy"
 stars: 50
 studied: 2026-08-05
 status: following
-last_verified: 2026-08-05
+last_verified: 2026-08-12
 ---
 
 # OfficeBuddy — Render-Verified Office Document Agent
@@ -53,3 +53,9 @@ That reinforces our existing verification discipline and provides a concrete pat
 - It declares no GitHub issues at the time of study, so there was no issue-history critique to validate the project’s claimed weak points.
 - Its broad `except Exception` tool-result envelope preserves tool-call/result pairing, but can reduce error specificity; the system depends on later error normalization to recover useful escalation signals.
 - The repository’s README candidly limits Excel round-tripping (existing charts/images), Word tracked changes/comments/footnotes, and certain formatting-sensitive find/replace cases. The fidelity guard is therefore a disclosure and consent mechanism, not a guarantee of lossless editing.
+
+## 2026-08-12 — Follow-up: published an internal visual-evaluation claim, still no external validation
+
+GitHub metadata queried 2026-08-12: **53★, 6 forks, 0 open issues**, last push **2026-08-07**. The latest `8b58105` adds Render-Truth Bench: 9 literal-execution-trap tasks, a 2×2 configuration comparison, three repeats per cell (**108 runs**), and deterministic defect detectors. The reported visual-feedback configuration improves its own defect-delivery rate from 33% to 26% and silent-failure rate from 22% to 15%; those figures are project-authored benchmark evidence, not independent reproduction.
+
+The interesting maturation is that the project now attempts to test the exact surface it says matters—rendered output—rather than merely asserting it. That is a concrete [[failable-verification]] pattern for artifact-producing agents and aligns with [[mechanism-vs-evolution]]: a mechanism is more credible when it is exercised by an adversarial fixture suite. However, zero issue discussion and no external benchmark reports leave the generality of the claim unverified. For our Linux-hosted [[OpenClaw]] workflows, retain the consumer-surface verification pattern, not the macOS-specific automation stack.

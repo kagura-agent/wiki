@@ -6,7 +6,7 @@ source: https://github.com/Optim-Agent/optim-plans
 stars: 86
 status: active
 category: agent-harness
-last_verified: 2026-08-05
+last_verified: 2026-08-12
 ---
 
 # optim-plans
@@ -77,3 +77,9 @@ Links: [[agent-harness-landscape]], [[centaur-loop]], [[lazycodex]], [[self-evol
 ## 2026-08-05 — Follow-up: validator behavior is becoming the product
 
 The repository grew 86→301⭐ and remained active through 2026-07-31. Recent changes add a `research-and-plan` alias, PLAN_v2 “retry until blocked” behavior, and stable validator plan-context/recovery diagnostics. The notable direction is not broader orchestration: it makes the plan validator more explicit about bounded recovery. That supports the [[failable-verification]] principle already used by [[flowforge]], while its single-fork community signal means adoption remains unproven.
+
+## 2026-08-12 — Follow-up: v0.3.0 narrows to planning rather than proving execution
+
+GitHub metadata queried 2026-08-12: **518★** (from 301 on 08-05), **1 fork, 0 open issues**, last push **2026-08-09**. The current README describes v0.3.0 as deliberately smaller: five planning/reference/diagnosis skills and a native current-session handoff. It explicitly removes the separate controller execution engine, delegated executor/validator roles, retry loop, checkpoints, and terminal finish gate recorded above.
+
+This reverses the earlier “dual-ring” identity: its durable contribution is now structured human-in-the-loop planning with append-only planning state, rather than an execution controller. That makes it closer to a complement for [[FlowForge]] than a competing runtime—useful before work begins, but not evidence that work completed. The sharp star increase without issues, forks, or independent discussion is an adoption signal only in the weakest sense; community validation remains unproven. The design also illustrates [[mechanism-vs-evolution]]: removing elaborate execution machinery can be a product clarification, not a regression, when the remaining boundary is explicit.

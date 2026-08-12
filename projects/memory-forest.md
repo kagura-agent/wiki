@@ -3,7 +3,7 @@ title: "Memory Forest — Verifiable Layered Memory for Long-Running Agents"
 created: 2026-07-29
 status: deep-read
 tags: [agent-memory, architecture, provenance, local-first]
-last_verified: 2026-07-29
+last_verified: 2026-08-12
 tracking: warm
 revisit: 2026-08-12
 ---
@@ -126,3 +126,9 @@ A Korean Literature researcher (Jeonju University) uses it for multi-AI research
 - [[optmem-binary-merge-memory]]
 - [[dream-consolidation-pattern]]
 - [[agent-brain-portability]]
+
+## 2026-08-12 — Follow-up: provenance architecture remains intact; ecosystem evidence stayed quiet
+
+GitHub metadata queried 2026-08-12: **20★, 4 forks, 2 open issues**, last push **2026-07-28**. The only recent change is the GPLv3 relicensing commit; the visible open feature request (2026-07-26) comes from a humanities-research user asking for research-pipeline improvements, but there is no subsequent implementation activity. The prior architecture assessment therefore still stands; this round adds no evidence that the structured-sweep or route-first retrieval mechanisms have been exercised by a wider operator community.
+
+This is a useful distinction for [[agent-memory-architecture]] and [[mechanism-vs-evolution]]: a carefully specified provenance mechanism can remain valuable as a design reference even when project evolution stalls. Keep the source-linked promotion and rebuildable-derived-state lessons for our [[OpenClaw]] memory practice; do not infer operational maturity or adopt GPLv3 code from a 20-star, quiet solo project.
