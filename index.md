@@ -512,7 +512,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (615)
+## 📁 Project Notes (616)
 
 ### 2
 
@@ -535,6 +535,7 @@
 - [agentacct — Local-first Agent Work Intelligence](projects/agentacct.md)
 - [Agent Apprenticeship (Forsy-AI)](projects/agent-apprenticeship.md)
 - [Agentara — 24/7 Personal Assistant](projects/agentara.md)
+- [Agent Ecosystem Quick Scan — 2026-08-12](projects/agent-ecosystem-quick-scan-2026-08-12.md)
 - [Agent Ecosystem Scout - March 25 2026](projects/agent-ecosystem-scout-2026-03-25.md)
 - [Agent Ecosystem Scout - March 25 Afternoon](projects/agent-ecosystem-scout-2026-03-25-pm.md)
 - [Agent Ecosystem Scout — 2026-04-05](projects/agent-ecosystem-scout-2026-04-05.md)
@@ -1186,4 +1187,4 @@
 
 ---
 
-*457 cards, 615 project notes. Last generated: 2026-08-12 02:21 UTC.*
+*457 cards, 616 project notes. Last generated: 2026-08-12 03:18 UTC.*

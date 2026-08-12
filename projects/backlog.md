@@ -2,6 +2,7 @@
 ## 2026-08-11 Quick Scan (09:16)
 
 - **Docker Sandboxes for AI agents** — HN 624 points / 349 comments. Disposable, isolated sandbox product is a high-signal security/reliability direction; worth examining its concrete boundary model and whether any independently inspectable implementation or documentation supports the claims.
+- **pi-from-scratch (SaladDay/pi-from-scratch)** — 568⭐, created this week; a compact TypeScript reimplementation of a pi-style agent. Worth a bounded deep read for its minimum viable tool-loop, context/state boundaries, and testability—not as an adoption candidate. The novelty gate later found a fresh test-backed note, so no duplicate review was created; see [[agent-ecosystem-quick-scan-2026-08-12]].
 
 ---
 
