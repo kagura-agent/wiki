@@ -1,7 +1,7 @@
 ---
 title: Temporal Decay Retrieval
 created: 2026-05-19
-last_verified: 2026-06-20
+last_verified: 2026-08-12
 ---
 # Temporal Decay Retrieval
 
@@ -26,4 +26,4 @@ Not all stored knowledge ages equally. A decision made yesterday is more relevan
 
 ## Related
 
-[[auto-retire-pattern]], [[overlap-detection-pattern]], [[progressive-retrieval]], [[memory-complexity-pendulum]]
+[[auto-retire-pattern]], [[overlap-detection-pattern]], [[progressive-retrieval]], [[memory-complexity-pendulum]], [[opencontext]]
