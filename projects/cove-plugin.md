@@ -109,3 +109,10 @@ issue #398 想换的是把这个手写 deliver 换成 framework 的 `sendDurable
 
 - **Anthropic `thinking` block signature**：用 extended thinking 的 session 历史里有 `thinking` block 时，model 切换或签名过期会导致后续 replay 报 `Invalid signature in thinking block`，runtime 显示为 `replay_invalid` —— 这种 session 救不回来，只能 reset
 - **cove staging server REST POST → WS broadcast**：从 `openclaw message send --account kagura` POST 出去的消息，似乎不会广播给同 channel 其他用户的 WS 连接（待验证）。所以测试软糖能不能回，要在 cove web UI 里发消息
+
+## Offline task-tool review — 2026-08-12 [已验证]
+
+- Context: [[workloop]] entered `fallback_offline` after the required structured finder returned `FINDER_RESULT=UNAVAILABLE` (evidence: `github-contribution/offline/evidence/2026-08-12/20260812T100858+0800-find-work.md`). This was source review only, not a task API change or a new contribution selection.
+- At local commit `98e6f5d`, `packages/plugin/src/cove-task-tool.ts` establishes `cove_task` as the supported task boundary and maps supplied camelCase inputs to REST snake_case fields. Normal `create` requires channel/title and a recurrence interval when recurrence is present; normal `update` keeps the deliberate distinction between omitted recurrence (no change), partial fields (patch), and `null` (remove recurrence).
+- Legacy recurring-template actions remain a separate REST surface: `recurring_create` requires a positive interval and validates `same_task`/`new_task`; list/get/update/delete each route to their corresponding client method. `recurring-task-tool.test.ts` covers normal-task recurrence mapping, template routing, and invalid-input rejection.
+- Next time: preserve the normal-task versus legacy-template boundary and exercise omitted/partial/null recurrence behavior with focused tests. The current PR #529 comment is only a successful GitHub Actions staging-preview notice, not maintainer review or a request to alter task behavior.
