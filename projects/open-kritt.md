@@ -1,10 +1,10 @@
 ---
 title: open-kritt — AI Security Research Platform
 created: 2026-07-22
-updated: 2026-07-29
+updated: 2026-08-12
 status: active
-links: [[agent-credential-security]], [[coding-agent-ecosystem]], [[clawpatrol]]
-last_verified: 2026-08-05
+links: [[agent-credential-security]], [[coding-agent-ecosystem]], [[clawpatrol]], [[operational-maturity-agent-tools]]
+last_verified: 2026-08-12
 ---
 
 # open-kritt — AI Security Research Platform
@@ -104,3 +104,11 @@ Category: **Agent-orchestrated domain-specific automation** — not a general co
 ## 2026-08-05 — Follow-up: collaboration becomes privacy-scoped
 
 open-kritt grew 438→1,360⭐ and released v1.3.0 on 2026-08-04. The release adds a **privacy-safe sharing loop** and repairs report-creation context/share-request behavior. The counterintuitive security-tool lesson: growth pushes a research workflow to make sharing safer and clearer, rather than merely increase scan sophistication. Its domain workflow remains distinct from [[flowforge]], but the privacy-by-default collaboration boundary aligns with [[agent-credential-security]].
+
+## 2026-08-12 — Follow-up: preservation boundaries reach the edit path
+
+- GitHub API evidence: 1,669⭐ / 292 forks / 41 open issues; pushed 2026-08-11. `tracking-community.sh` reports 28 unique issue authors, 47 external PRs/30d, and 7 distinct merged-PR authors: **THRIVING (6/6)**.
+- The 2026-08-11 workflow-editor change makes its preservation policy executable: backend `PUT` responds `409` with `code: workflow_in_use` and `scanCount` when an existing scan references a workflow. The UI retains the unsaved draft, explains the conflict, and only creates a duplicate after explicit confirmation; tests cover duplicate acceptance, cancellation, unrelated conflicts, accessibility, and API propagation. This is a stronger boundary than merely disabling edits: historical scans keep their original workflow, while operators can continue safely from a copy.
+- The same release train fixes two operational multi-account cases: pending Codex quota starts are tracked per account rather than in a single global busy slot (PR #69, including a regression test), and editing an in-use workflow becomes a typed recoverable path rather than an opaque error. Those are reliability hardening changes, not evidence of a new scanning architecture.
+- Boundary remains: active reports include provider/setup failures (OpenRouter scan and Windows non-interactive secret input), so multi-provider onboarding is still not proven robust. The project is now a clear [[operational-maturity-agent-tools]] example: preserve provenance-bearing work, expose a safe recovery path, and test concurrent operator state.
+- **Tracking decision:** keep active; revisit 2026-08-26 for resolution of provider/onboarding defects and whether explicit workflow-version provenance appears beyond duplicate-on-edit.
