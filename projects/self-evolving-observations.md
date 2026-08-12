@@ -7659,3 +7659,50 @@ PR updates since 08-09 22:30 CST: 4
 nudge/system-event keyword query: no output (not treated as zero triggers)
 dream-health: HEALTHY; last dream 15:57 CST; Deep Sleep ranked/promoted: 5/5
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-08-11
+
+### 管线活跃度
+- **beliefs-candidates：13 条当日 dated gradient，其中 7 条来自 workloop、4 条来自 study、1 条 Luna correction、1 条 self-correction；观察窗口内有 7 个相关 commits。** 当日新增条目均标记为第 1 次；文件历史仍有 5 个第 3 次以上但本日没有新增、且没有可独立验证的毕业动作。输入集中于 finder / fallback / decision-readiness 与 study 工具摩擦，不能据此把近义记录折算为多份独立证据。**[已验证：路径过滤 git log；`grep '2026-08-11' beliefs-candidates.md`]**
+- **DNA：无已提交的 SOUL.md / AGENTS.md 变更。** 工作树有一处未提交 AGENTS.md 改动（取消把特定编码 CLI 作为必经路径）；因未提交且本轮为观察，不计为已完成演进，也不归因主动/被动。**[已验证：git log / status / diff]**
+- **nudge：至少 1 次可直接验证的触发与入队，质量未量化。** 13:02:35 CST 的 gateway journal 记录 `Triggering reflection`，随后记录 `System event enqueued`；该触发来自 subagent session。此证据确认运行，但无法将后续具体反思产物可靠关联到该次事件，故不将其评为高/中/低质量。**[已验证：gateway journal；未验证：产出质量]**
+- **dreaming：phase reports 存在、健康检查为 HEALTHY；当日运行时点存在日期不一致，不能据此声称本日已完成新一轮 dream。** `memory/dreaming/{light,deep,rem}/2026-08-11.md` 均存在，Deep 报告为 ranked/promoted 5/5；但 health check 的最后 `memory.dream.completed` 是 2026-08-10 23:00:02 CST。今日 daily memory 未记录可归属 dreaming/promote 事件。REM 仍把旧的长操作日志拼入 Possible Lasting Truths，质量为混合，不能将 5 条 promotion 直接认定为高质量长期记忆。**[已验证：dream reports、dream-health、daily memory grep]**
+
+### 闭环追踪
+- **完整闭环：至少 2 个。**
+  1. finder 被 TERM 中断 → wrapper 保留脱敏 interruption artifact → 记录 `partial-finder-result-is-not-selection` gradient → 后续 workloop 以 offline fallback 而非从 cached partial output 选题。**[已验证：commit `5367681`、当日 workloop 记录]**
+  2. 已完整 triage、但仍被 finder 重复推荐的 candidate → 建立按活动状态抑制规则 → 后续记录只把 maintainer-owned 决策边界作为拒绝证据，不做猜测性实现。**[已验证：commits `4748c85`、`6923c3b`]**
+- **断裂处：**(a) finder / fallback 主题在单日 13 条输入中高度集中，仍未见跨表述的语义归并；(b) nudge 有触发/入队证据，但质量与产出链路不可审计；(c) dreaming report 日期与最后完成事件不一致，promotion 的来源/质量不可追溯。**[已验证]**
+
+### Skill 提取缺口
+- “部分 finder 输出不可作为有效选择，必须保留退出证据并转入单次 fallback”已在 workloop 形成项目内 guard，但目前证据高度集中于同一 finder 故障域；尚未跨任务验证为稳定的通用 skill，观察期不提取。**[已验证]**
+
+### 外部反馈利用
+- 今日 GitHub PR activity 为 10 条：2 merged、2 closed、6 open（含一个外部 LangWatch 更新）。13 条 gradient 的 Source 标注仅为 workloop / study / Luna correction / self-correction，未建立某条人类 review 或评论到新增 gradient 的可追溯链路；因此报告为 0 个**可归因** review→gradient 转化，而非声称没有外部活动。**[已验证：`gh search prs --author kagura-agent --updated '>=2026-08-11'`；当日 beliefs Source]**
+
+### 今日发现
+1. **输入量较高，但独立性是主风险。** 13 条均为第 1 次，且 workloop/finder 语义簇占多数；不应以条目数推断毕业准备度。**[已验证]**
+2. **nudge 已从“仅已确认正常”获得了一条当天的触发/入队证据，但可观测性仍止于 transport 层。**[已验证]**
+3. **dreaming 的运行和内容质量必须分开判定。** phase 报告与 HEALTHY 证明组件可用；完成时间、报告日期和 REM 内容则不足以证明本轮 promotion 的质量。**[已验证]**
+4. **本轮仅观察与记录。** 未改机制、scheduler、DNA 或 promotion 规则；#4 早已 CLOSED，本轮不重复关闭。**[已验证]**
+
+### 原始数据
+```text
+$ git log --since='2026-08-10 22:30 +0800' --all -- beliefs-candidates.md SOUL.md AGENTS.md
+7 commits, all beliefs-candidates.md; SOUL.md / AGENTS.md: 0
+
+$ grep '2026-08-11' beliefs-candidates.md
+13 entries: workloop=7, study=4, Luna correction=1, self-correction=1
+
+$ journalctl ... | grep -Ei 'nudge|system event enqueued'
+13:02:35 Triggering reflection; 13:02:35 System event enqueued
+
+$ tools/dream-health.sh
+HEALTHY; last memory.dream.completed: 2026-08-10 23:00:02 CST;
+08-11 light/deep/rem reports present; deep report ranked/promoted 5/5
+
+$ gh search prs --author kagura-agent --updated '>=2026-08-11'
+10 PR updates: 2 merged, 2 closed, 6 open
+```

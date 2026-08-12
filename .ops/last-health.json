@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-08-09T12:12:00Z",
-  "orphans": 8,
-  "broken_links": 1,
-  "collisions": 1131,
-  "index_drift": 14,
+  "checked_at": "2026-08-11T12:17:00Z",
+  "orphans": 0,
+  "broken_links": 7,
+  "collisions": 1148,
+  "index_drift": 0,
   "total_cards": 456
 }
