@@ -357,3 +357,9 @@ Deep-read `flowforge/src/engine.ts` during workloop offline fallback instance `#
 - **Evidence:** the saturation gate was open, and the explicit `tracking-due` criterion was then evaluated against the current date (2026-08-10). Every unchecked `Track:` entry had a future `Revisit` date; the earliest was 08-11. There was no concrete unfinished learning action.
 - **Failure boundary:** `align → todo_task` was nevertheless selected. This is the false-positive path documented in the prior “Study Task Selection Ambiguity” section: an open tracker is portfolio metadata, not an executable task. The `todo_task` node was advanced with a blocked result; no TODO record was removed and no follow-up was fabricated.
 - **Operational conclusion:** the actionable predicate remains `concrete task OR unchecked Revisit ≤ today`; otherwise route to `entry`. The mistake demonstrates why the predicate needs machine enforcement rather than rereading the same rule. This is a [[structural-fix-over-behavioral-rule]] case, not evidence about any tracked project or ecosystem trend.
+
+## Workloop unavailable-finder boundary (2026-08-12)
+
+During workloop #8036, the bounded tracked-repository scan ended with explicit `FINDER_RESULT=UNAVAILABLE` and exit status 2. The wrapper preserved a redacted artifact at `github-contribution/offline/evidence/2026-08-12/20260812T120708+0800-find-work.md`; its partial scan progress did not establish a candidate or a diagnostic root cause.
+
+The workflow's safe route was [[github-contribution]] offline fallback: directly classify followup comments, record one local source review, and defer issue selection until a later structured finder succeeds. Automated preview notices and a collaborator acknowledgement were status evidence, not code work. This protects the state-machine boundary between “no valid finder input” and “no viable issues.”
