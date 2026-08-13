@@ -173,3 +173,15 @@ Applied accumulated lessons from [[pr-superseded-lessons]] into the `check` comm
 - **Operational rule:** Preserve the command, observed status, and unavailable boundary. Do not reinterpret this as an empty queue or infer network, authentication, API-limit, or resource root cause without further evidence. Retry issue selection only after a future run provides the structured result.
 
 Links: [[pr-superseded-lessons]], [[gogetajob]], [[error-handling-in-cli]], [[loope]]
+
+## Finder Scan Timeout — Structural Root Cause (2026-08-13)
+
+- [已验证] `tools/workloop-find-issue.sh` wraps `gogetajob scan --all --skip-recent 12` under a 90s `SCAN_TIMEOUT_SECONDS`. 2026-08-13 12:16 run exited `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`.
+- [已验证] DB 有 90 个 repo，其中 66 个 `last_scanned_at` >12h（`--skip-recent 12` 不跳过）。串行扫描 ~10s/repo（`scan-metric elapsed_ms=11017`；`last_scanned_at` 每 ~10s 前进一个）→ 66×10s ≈ 11 分钟 ≫ 90s。所以每轮只能扫 ~8 个 repo 就超时。
+- [已验证] 串行是**有意的**（2026-04-27 OOM 修复：并发 3→1 避免内存峰值），所以修法不是重开并发，而是**用 `--batch N` 限定每轮扫描规模**。
+- [已验证] `--batch N` 在 `--skip-recent` 过滤**之后** slice top-N by stars（`dist/cli/index.js`），正是为 "cron/time-limited contexts" 设计；但 finder 没传 `--batch`。
+- [已验证] `dist/cli/commands/scan.js`（`--concurrency 3` + pLimit 并行实现）**未被任何文件 import**，是死代码（index.ts 拆分重构进行到一半但没接进 bin 入口）。
+- **Fix 建议**：给 finder 的 scan 调用加 `--batch 8`（或 `SCAN_BATCH_SIZE` env），配合 `--skip-recent 12` 跨轮轮换扫完 90 repo；顺带决定 commands/scan.ts 的并行重构是废弃还是接上。
+- 缓存兜底也失效：`finder-feed.json` `generated_at` 2026-08-12T09:23Z ≈ 19h 前，超过 6h `FINDER_CACHE_MAX_AGE_SECONDS`。
+
+Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
