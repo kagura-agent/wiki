@@ -41,3 +41,7 @@
 - 提交只 add 目标文件：pnpm install 会重写 `pnpm-lock.yaml`（28558 行 diff），**不要**把 lock 文件混进 feature 提交。
 - biome 会自动 reformat（`--write`），改完跑一次 format 保证缩进一致。
 - 修改接口/组件签名后跑 `pnpm run test:types` 确认所有 caller 同步。
+
+## Reflect (2026-08-13)
+- **Greptile 非阻塞建议的正确处理**：bot 给 4/5 + 两条 "non-blocking" 建议（fixed-width panel、缺失标准 warning）。判定为客观问题（与 codebase 现有 pattern 不对齐），直接复用 `react-resizable-panels` 和 `ContextWarningAlert/Badge` 修掉，而不是忽略或回复"不改"。低成本、高质量、降低后续 human review 阻力。
+- **锁文件陷阱**：`pnpm install` 会重写 lock，diff 巨大；提交前必须 `git status` 确认只 add 目标源文件。
