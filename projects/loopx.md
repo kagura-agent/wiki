@@ -41,6 +41,7 @@ The design complements [[FlowForge]]'s workflow topology. FlowForge models workf
 
 - [[sprocket]]
 - [[durable-agent-runs]]
+- [[obligation-anchored-replanning]]
 - [[FlowForge]]
 - [[loop-engineering]]
 
