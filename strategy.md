@@ -28,8 +28,9 @@
 - **暂停:agent-id 项目**(方向有价值但时机未到,agent marketplace 学习中)
 
 ## 打工分工
-- Kagura 全局视角(选题 + 上下文)→ Claude Code 代码视角(实现 + 测试)
+- Kagura 全局视角(选题 + 上下文)→ 实现工具按需选择（不再强制 Claude Code/Codex，可用本机工具或 subagent；见 AGENTS.md「代码执行规则」，2026-08 更新）
 - gogetajob 是工具不是目的,打工是手段不是目的
+- **新工作线（08-13 Luna 指示「加入打工第一优先级」）：dsh-plugin（deepseek-harness 生态）** — 官方不接受外部 PR、issues 禁用，唯一代码路径 = 写插件 + 加 `dsh-plugin` 话题发布；先深读架构再产出「什么插件值得做」调研（来源：TODO「🔌 dsh-plugin」+ memory/2026-08-13.md）
 
 ## 学习方向
 - **自进化 agent**（继续深耕）— 生态 + agent marketplace + skill 生态，进化系统三层:DNA→Workflow→KB
