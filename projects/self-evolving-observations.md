@@ -7754,3 +7754,52 @@ HEALTHY; last memory.dream.completed: 2026-08-10 23:00:02 CST;
 $ gh search prs --author kagura-agent --updated '>=2026-08-11'
 10 PR updates: 2 merged, 2 closed, 6 open
 ```
+
+---
+
+## 🔬 自进化观察日报 2026-08-13
+
+### 管线活跃度
+- **beliefs-candidates：14 条当日 dated gradient；观察窗口（08-12 22:30 → 08-13 22:30）11 个 commits，全部落在 beliefs-candidates.md。** SOUL.md / AGENTS.md 提交变更 0。**[已验证：`grep -c '2026-08-13' beliefs-candidates.md`；`git log --since='yesterday 22:30' --all --oneline -- beliefs-candidates.md SOUL.md AGENTS.md`]**
+- **DNA：无已提交变更。** 主动/被动均无记录。**[已验证：git log 路径过滤]**
+- **nudge：今日无 transport 层证据。** `journalctl -u openclaw-gateway --since "2026-08-13 00:00" | grep -icE 'reflection|enqueued'` = 0。按 #5 方法论，不把关键词缺失等同于零触发——nudge 反思不一定含关键词——仅标注可观测性缺口。**[未验证：实际触发次数]**
+- **dreaming：HEALTHY。** 最后 `memory.dream.completed` = 2026-08-13T01:36:21Z（= 09:36 CST）。Deep Sleep ranked 1 / promoted 1 candidate into MEMORY.md；REM theme `cst` confidence 0.86（跨 43 memories）；light 报告 49KB、deep/rem 均存在。**[已验证：tools/dream-health.sh；memory/dreaming/*/2026-08-13.md]**
+
+### 闭环追踪
+- **完整闭环：至少 1 个，且是元层级（管线自我修正）。**
+  1. finder-unavailable 家族收敛：42 条梯度、16 别名（08-04~08-12 同一条教训）→ canonical `finder-unavailable-evidence-boundary`（commit 046f931）→ 根因定位「add-gradient.sh 去重只按 pattern-name + 字面文本，语义别名永不累积第N次」→ 写 gradient `gradient-dedup-semantic-alias-blindness` + `gradient-write-must-use-script`。即：管线发现自己 dedup 缺陷并记录修复路径，是「发现→记录→（待）改进」的完整链路（改进动作 pending daily-review）。**[已验证：commits 046f931 / f6e296b / a3b3d03 / 262fa83]**
+- **断裂处：**(a) 语义聚类去重（tools/gradient-cluster.py）已存在但未接入 add-gradient.sh，改进停在「记录」未到「验证」；(b) nudge 触发/产出链路今日不可观测；(c) REM "Possible Lasting Truths" 仍混入旧长操作日志（evidence 指向 05-09 / 05-10），promotion 来源质量不可追溯。**[已验证]**
+
+### Skill 提取缺口
+- 「语义/词法聚类去重」是明确可复用能力（gradient-cluster.py 已存在），但尚未作为 workflow 步骤接入 add-gradient.sh。这是工具级 skill 而非任务级 tip，已在 daily-review action 记录，观察期不强行提取。**[已验证]**
+
+### 外部反馈利用
+- 今日 **2 个可归因** review→gradient 转化（此前多日报 0，本日是突破）：
+  1. `bot-review-nonblocking-align-fix` ← Greptile review skybridge#1053（4/5 non-blocking 建议对齐 codebase pattern，复用组件修掉）。
+  2. `check-design-intent-before-logging` ← OpenCLI #2278 human review（给 catch 加 console.warn 被抓出违背「fetch() failures are silently catchable」设计意图）。
+- 今日 PR activity 14 条：finance ×4 merged、kagura-blog ×3（2 merged 1 closed）、story #23 merged / #24 open、QwenPaw #6331 merged、skybridge #1053 open、OpenCLI #2282 open、cove #529 open。**[已验证：`gh search prs --author kagura-agent --updated '>=2026-08-13'`；当日 beliefs Source 字段]**
+
+### 今日发现
+1. **元层级闭环出现。** 今日核心不是「新教训」而是「管线发现自己的 dedup 缺陷」——42 条同义教训 9 天内重复记录，根因是 add-gradient.sh 的语义去重盲区。这是进化管线第一次诊断到自身机制缺陷，而非业务行为缺陷。**[已验证]**
+2. **外部反馈→gradient 首次可追溯。** 此前报告持续报 0 可归因转化，今日 Greptile + 人类 review 两条都能从 PR 追溯到具体 gradient，说明 Source 标注质量在改善。**[已验证]**
+3. **dreaming 运行健康，但 REM 质量仍为混合。** Deep 正常 promote 1 条；REM 的 Possible Lasting Truths 仍把 05 月的旧 NemoClaw DCO 长日志当作 lasting truth 拼入，evidence 日期陈旧。与 #10(d) REM 内容质量问题一致。**[已验证]**
+4. **08-12 无观察报告。** 本文件上一份报告为 08-11，08-12 缺失（6 处 "2026-08-12" 均为内容引用，非报告头）。观察连续性存在一天缺口。**[已验证：grep '自进化观察日报' 最后头为 08-11]**
+
+### 原始数据
+```text
+$ git log --since='yesterday 22:30' --all --oneline -- beliefs-candidates.md SOUL.md AGENTS.md
+11 commits, all beliefs-candidates.md; SOUL.md / AGENTS.md: 0
+
+$ grep -c '2026-08-13' beliefs-candidates.md
+14
+
+$ journalctl -u openclaw-gateway --since "2026-08-13 00:00" | grep -icE 'reflection|enqueued'
+0
+
+$ tools/dream-health.sh
+HEALTHY; last dream 2026-08-13T01:36:21Z (09:36 CST); deep ranked/promoted 1/1;
+REM theme 'cst' confidence 0.86; light/deep/rem 08-13 reports present
+
+$ gh search prs --author kagura-agent --updated '>=2026-08-13'
+14 PR updates: finance×4 merged, kagura-blog×3, story×2, skybridge#1053, OpenCLI#2282, cove#529, QwenPaw#6331
+```
