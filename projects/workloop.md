@@ -1,5 +1,12 @@
 # Workloop
 
+## 2026-08-13 — instance #8075 (finder unavailable → fallback_offline consolidation)
+
+- **Result:** no candidate/PR selected. The wrapped finder exited 2 with `FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124` (Gitlawb/openclaude scan timeout). Durable evidence: `github-contribution/offline/evidence/2026-08-13/20260813T095100+0800-find-work.md`. This is a finder failure boundary, not `NO VIABLE ISSUES` and not a network/auth/rate-limit diagnosis.
+- **Local PR review:** three open PR branches have no orphaned unpushed commits (NemoClaw#7812 ahead 4, Archon#2262 ahead 2, opencode#39425 ahead 1 — all tracking upstream).
+- **Beliefs consolidation:** converged the finder-unavailable gradient family — 42 entries under 16 aliases across 08-04~08-12, all one lesson — to the canonical `finder-unavailable-evidence-boundary` (commit 046f931). Root cause: add-gradient.sh dedup matches only pattern-name + literal text, so semantic aliases never accumulate a 第N次 count and never reach the Promotion Gate.
+- **Next time:** re-run only the prescribed structured finder later; treat "finder UNAVAILABLE" as a single canonical trigger so future occurrences increment the existing entry instead of spawning a new alias. See [[github-contribution]].
+
 ## 2026-08-09 — instance #7879 (finder unavailable)
 
 - **Result:** capacity gate passed (`Assigned: 2 | Open PRs: 19`), but the required wrapped finder exited 2 after the tracked scan timed out (`FINDER_RESULT=UNAVAILABLE reason=tracked_scan status=124`). Durable, redacted evidence: `github-contribution/offline/evidence/2026-08-09/20260809T120823+0800-find-work.md`. This preserves an unavailable-finder result only—not an empty queue or a diagnosis of network, authentication, or API-limit cause.
