@@ -2,7 +2,7 @@
 title: "Qwen-CUA — screenshot-only browser-use reference agent"
 created: 2026-08-06
 tags: [computer-use, browser-agent, safety-gates, replay, verification]
-last_verified: 2026-08-08
+last_verified: 2026-08-13
 ---
 
 # Qwen-CUA (xlang-ai/Qwen-CUA)
@@ -42,3 +42,11 @@ The repository had only two visible issues at review time: a Windows executable 
 ## Checkable prediction
 
 If Qwen-CUA is adopted as an agent-runtime reference rather than merely a model release, its demo will gain explicit defenses for post-navigation/DNS-rebinding network policy or document that this is outside scope by **2026-09-06**. **Confidence: low.**
+
+## Followup 2026-08-13
+
+- **Growth:** 140 → 163⭐ (+16%), 9 forks, 2 open issues. Quiet: last push 08-04, no implementation or community change since the 08-06 NEW scan.
+- No new architecture, no model-weight release, no new verification surface. The two visible issues remain non-architectural.
+- **Tracking decision:** downgrade to warm. The reference-agent pattern (typed actions + approval gates + unverified external outcomes) is already captured above; no fresh signal to extract this round. Next check 08-27.
+
+The checkable prediction logged at NEW (post-navigation/DNS-rebinding network-policy hardening or documented out-of-scope by 2026-09-06, confidence low) remains open and unverified as of this check.

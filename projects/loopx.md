@@ -1,7 +1,7 @@
 ---
 title: "LoopX — local-first control plane for long-running agents"
 created: 2026-08-09
-last_verified: 2026-08-09
+last_verified: 2026-08-13
 tags: [agent-harness, control-plane, durable-runs, loop-engineering, local-first]
 ---
 
@@ -43,3 +43,13 @@ The design complements [[FlowForge]]'s workflow topology. FlowForge models workf
 - [[durable-agent-runs]]
 - [[FlowForge]]
 - [[loop-engineering]]
+
+## Followup 2026-08-13
+
+- **Growth:** 3,608 → 4,399⭐ (+22% since 08-09; +112% since 08-06 NEW), 376 forks, 24 open issues. THRIVING 6/6: 51 external PRs/30d, 18 unique issue authors, 5 merged-PR authors.
+- **v0.4.5 shipped 08-12.** Recent control-plane commits concentrate on *hardening*, not new features: reject shell metacharacters in worker commands, validate goal_id to block path traversal in reward routes, drop `ACAO:*` on unauthenticated read responses, and make evidence-log read enforcement **hard-only with a failure-receipt escape**.
+- **New RFC: goal artifact lifecycle projection v0** + replan reads bound by **"obligation identity"** (`fix(control-plane): bind replan reads by obligation identity`). The kernel is starting to model the *lifecycle of goal artifacts* and tie replanning to a durable obligation, not a free-form retry.
+
+### Insight: governance is moving from "gate the action" to "bind the obligation"
+
+The early LoopX model was a bounded-turn control plane (claim → act → evidence → handoff). The 08-12 work adds a second layer: durable *obligation identity* that replanning must bind against, and *hard-only* evidence-read enforcement with a failure-receipt escape. That mirrors the [[FlowForge]] distinction between workflow topology (transitions) and durable control state (what is safe to execute next) — but now with an explicit notion of *which past obligation a retry is anchored to*. Counterintuitive detail: the failure-receipt escape means the hard gate still records *when* it is bypassed, preserving audit even on the bypass path. This is directly relevant to our [[durable-agent-runs]] and DNA-governance mainline: retries should be anchored to an obligation, and enforcement bypasses should leave a receipt.

@@ -67,3 +67,8 @@ in-toto Statement (subject = commit, predicate = provenance) signed Ed25519. `co
 1. **Probabilistic-OR fusion for multi-signal risk**: `1 - (1-a)(1-p)`. Simple, monotonic, bounded. Better than weighted average for independent risk signals.
 2. **Cumulative drift**: comparing session-cumulative declarations against commit-level actuals. Single-turn comparison produces false positives.
 3. **Secret scanning as ingest filter**: scan + redact before ANY storage/embedding. The right layer to do it.
+
+## Tracking status 2026-08-13 — Dropped
+
+- **Stars DECLINED 397 → 369**, code still stale (last push 07-19, now 25 days), 0 open issues, 14 forks. No code resumption within the "watch for resumption" window set on 07-30.
+- Meets drop criteria: declining stars + dead community + no commits ~25d. The `SafeToDangerous` risk-transition model and drift/DLP-read signals are already extracted above and stay in the wiki as patterns; only the tracking entry is removed.
