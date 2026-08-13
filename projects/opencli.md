@@ -154,3 +154,14 @@ Links: cli-everything, [[agent-as-router]]
 - Note: `vitest run` without `--project unit` hangs locally (browser tests). Use `--project unit --shard=N/2`
 - Lesson: FlowForge plan_review can get stuck if spawned reviewer subagent doesn't advance — manual recovery via `flowforge advance` works
 - v1.8.3 upgrade broke backward compat for user commands — good candidate for this kind of fix (validation + fallback = minimal risk)
+
+### PR #2282 — fix(extension): prevent silent 431 wedge from localhost cookie overflow (2026-08-13)
+- Issue: #2278 — extension silently never connects when daemon /ping returns 431 (localhost cookie overflow)
+- Root cause: localhost cookie jar (17KB) > Node 默认 16KB header limit → daemon 431 → `!res.ok` 分支静默 scheduleReconnect，WebSocket 永不尝试，无日志
+- Fix: (1) background.ts connectAttempt() ping 加 `credentials:'omit'`（阻止 cookie jar 附着）+ `!res.ok` 记 console.warn; (2) daemon-lifecycle.ts resolveDaemonLaunchSpec() 前置 `--max-http-header-size=131072`（daemon 侧防线，保护所有 HTTP 端点 incl /status + WS upgrade）
+- Tests: 2 新测试（background.test.ts 断言 omit+HTTP431+非ok不建WS; daemon-lifecycle.test.ts 断言 header flag 前置）。vitest 73/73
+- CI: 全绿（build x3 + unit-test x2 + bun-test + doc-coverage + docs-build + audit; adapter/smoke SKIPPED）
+- Status: pending review（relationship established，10 merged，无需 full disclosure）
+- Lesson 1: catch 分支的 console.warn 违背原设计注释 "fetch() failures are silently catchable"（daemon 未启动是预期稳态）——fresh-context review 抓出这个回归，已回退为静默，仅 `!res.ok` 分支保留 warn
+- Lesson 2: fresh-context review 的 LOW finding 按"记录不修"放行，避免无限 polish 循环（severity 分类的意义）
+- Pattern: 431/header overflow 类 bug = 客户端 credentials:'omit' + 服务端 --max-http-header-size 双防线
