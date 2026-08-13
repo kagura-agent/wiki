@@ -119,11 +119,16 @@ all_files = []
 slug_to_paths = defaultdict(list)  # slug -> [paths]
 
 for root, dirs, files in os.walk('.'):
-    dirs[:] = [d for d in dirs if d not in ('.git', '.memex', '.worktrees')]
+    dirs[:] = [d for d in dirs if d not in ('.git', '.memex', '.worktrees', '.pytest_cache')]
     for f in files:
         if f.endswith('.md'):
             path = os.path.join(root, f)
             all_files.append(path)
+            # Directory README files (README.md, README.zh.md) are index files,
+            # not wiki cards — exclude from the wikilink slug namespace so they
+            # don't collide with each other or the root README.
+            if f.startswith('README'):
+                continue
             slug = f[:-3]  # remove .md
             slug_to_paths[slug].append(path)
 
