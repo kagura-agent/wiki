@@ -4,7 +4,7 @@ created: 2026-08-11
 tags: [browser, agent-infra, rust, cdp, webdriver, mcp, rendering, verification]
 source: https://github.com/lexmount/moli
 status: deep-read
-last_verified: 2026-08-11
+last_verified: 2026-08-14
 ---
 
 # Moli — DOM-first browser kernel for AI agents
@@ -43,3 +43,10 @@ The repository publishes benchmark snapshots, including a public-web crawl and a
 ## Checkable prediction
 
 Logged as `cal-0811-9e87`: by **2026-08-25**, Moli will have at least one non-maintainer-authored issue or pull request. **Confidence: low.** A miss would be evidence that code velocity has not converted into an external community.
+
+## 2026-08-14 Follow-up — MCP→skills pivot, prediction hit
+
+- **Design reversal: MCP server removed** (commit `145f9c68f5`, 08-13): 1862 lines deleted from `moli/src/mcp_server.rs`. The public surface is now CLI + CDP + WebDriver (Classic/BiDi); MCP is gone, replaced by **skills** (`skills/moli-cdp-server/` + `skills/moli-webfetch/`, each with SKILL.md + agents/openai.yaml + references/). Skills install via new `scripts/install.sh` / `install.ps1` (curl | sh / irm | iex) and connect over CDP — i.e. capability moved from in-kernel protocol server to agent-facing skill layer. Pivot rationale not stated in commit; consistent with avoiding MCP protocol-maintenance burden and keeping the kernel protocol-agnostic.
+- **Prediction `cal-0811-9e87` HIT early**: PR #40 by @Spxg (external, non-maintainer) "Fix font-dependent mouse offset test" merged 2026-08-12. Issue #27 by @freelw is content-free ("hi，ldm0"). External community starting: velocity is converting, slowly.
+- **Velocity/attention**: 60★ → 263★ (+338%) in 3 days (08-11→08-14), all 30+ PRs mostly maintainer-authored, v0.1.2, release installers, 6-language README. Engine hardening continues: subpixel quantization, fixed-table column allocation, WPT layout baselines, xml5ever CDATA/namespace handling, hover-state persistence.
+- **Implication**: Moli's on-demand-rendering thesis is unchanged, but distribution model now targets agent skills (install binary + skill wraps CDP) rather than embedding an MCP server. For our own tooling: the skills-over-CDP pattern (thin skill, prebuilt binary, curl-install) is a cleaner distribution path than maintaining a bespoke protocol server.

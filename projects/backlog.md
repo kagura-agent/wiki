@@ -1,4 +1,30 @@
 
+## 2026-08-14 Quick Scan (12:40)
+
+**GitHub (agent repos created since 08-07, sorted by stars, spam-filtered):**
+- **i3T4AN/KADATH** ⭐349 — **已知**：already tracked (was 172 on 08-11, +103%); followup matter, not new discovery.
+- **lexmount/moli** ⭐263 — **值得深入**：headless browser for AI agents in Rust with on-demand rendering (structure-first, pixels only when needed); CDP/WebDriver BiDi; created 08-10, active (pushed today). Novel architecture angle vs full-Chromium rendering.
+- **0xsline/awesome-deepseek-harness** ⭐229 — **不深入**：awesome list, no architecture signal.
+- **surya-koritala/loomfeed** ⭐212 — **已知**：already tracked (was 157 on 08-11, +35%).
+- **vercel-labs/eve-software-factory-template** ⭐143 — **不深入**：template, derivative.
+- **2998980-hue/surreal-pop-collage** ⭐139 — **不相关**：single-purpose art skill.
+- **fellowgeek/mcp-memory** ⭐118 — **已知**：SQLite long-term-memory MCP, derivative of known memory pattern (mem0/engram family).
+- **nduc99911/repo-context-mcp** ⭐99 — **已知**：code-search MCP, common pattern.
+- **yaojingang/GEOHub** ⭐89 — **不相关**：GEO/SEO skills.
+- **thiientv/godmode** ⭐85 — **不深入**：agent-skills collection, derivative.
+- **evan-steinhilb/md2hd** ⭐84 — **不相关**：markdown mapping CLI.
+- **anymotion-agent/anymotion** ⭐63 — **不相关**：motion-graphics content agent.
+
+**HN (3d, ≥10pts):**
+- Economist "AI agents lie, cheat and steal" (158pts/197💬) — **趋势信号**：user trust/safety sentiment, not a project.
+- Discovered Materials YC P26 (155pts) — **不相关**：materials-science domain.
+- "AI agent hacks gym for pilates spot" (37pts) — **不相关**：anecdote.
+- JamelHammoud/crew (11pts) — **不深入**：multiplayer workspace, low signal.
+
+**Verdict:** one depth candidate: `lexmount/moli`.
+
+---
+
 ## 2026-08-11 Quick Scan (09:16)
 
 - **Docker Sandboxes for AI agents** — HN 624 points / 349 comments. Disposable, isolated sandbox product is a high-signal security/reliability direction; worth examining its concrete boundary model and whether any independently inspectable implementation or documentation supports the claims.
