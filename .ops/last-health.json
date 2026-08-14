@@ -1,25 +1,25 @@
 {
-  "timestamp": "2026-08-13T02:25:00Z",
-  "run_date": "2026-08-13",
+  "timestamp": "2026-08-14T02:10:00Z",
+  "run_date": "2026-08-14",
   "totals": {
-    "md_files": 1174,
+    "md_files": 1175,
     "cards": 458,
-    "projects": 620,
-    "wikilinks": 5637
+    "projects": 622,
+    "wikilinks": 5643
   },
   "health": {
     "errors": 0,
-    "warnings": 57,
+    "warnings": 59,
     "broken_links": 0,
-    "orphans": 1,
-    "orphan_projects": ["lobster0"],
-    "duplicate_slugs": 4,
+    "orphans": 2,
+    "orphan_projects": ["lobster0", "skybridge"],
+    "duplicate_slugs": 0,
     "index_drift": {
-      "missing_from_index": 2,
+      "missing_from_index": 4,
       "cards_index_stale": true,
       "cards_not_indexed": 458
     },
-    "stale_files": 449,
+    "stale_files": 448,
     "unicode_suspicious": 25,
     "stubs": 0,
     "secrets": 0,
@@ -29,9 +29,9 @@
     "invalid_fact": 0
   },
   "error_book": {
-    "new_issues": 3,
-    "recurring_issues": 53,
-    "auto_closed": 0,
-    "total_open": 56
+    "new_issues": 0,
+    "recurring_issues": 58,
+    "auto_closed": 30,
+    "total_open": 58
   }
 }

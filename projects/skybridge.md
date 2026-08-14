@@ -35,12 +35,20 @@
 ## PR 记录
 | PR | 状态 | 备注 |
 |---|---|---|
-| #1053 feat(devtools): add inspect panel toggle in preview mode | open | Greptile 4/5，已按建议改 resizable panel + 标准 warning |
+| #1053 feat(devtools): add inspect panel toggle in preview mode | **closed by maintainer** | Greptile 4/5，已按建议改。maintainer harijoe 关闭："feature 要先讨论，先开 issue"。已改开 issue #1054 |
+
+## 维护者风格（关键）
+- **maintainer: harijoe**。对 feature 类 PR 的流程要求：**先开 issue 讨论，通过后再写代码 PR**。直接提 feature PR 会被关（#1053 教训，2026-08-13）。
+- 开 feature 相关 PR 前，先 `gh search issues` 确认没有现成 discussion，再开 issue 描述动机/范围/设计问题，等 maintainer 点头。
 
 ## 注意事项
 - 提交只 add 目标文件：pnpm install 会重写 `pnpm-lock.yaml`（28558 行 diff），**不要**把 lock 文件混进 feature 提交。
 - biome 会自动 reformat（`--write`），改完跑一次 format 保证缩进一致。
 - 修改接口/组件签名后跑 `pnpm run test:types` 确认所有 caller 同步。
+
+## Reflect (2026-08-13 #1053 被关)
+- **feature 先 issue 后 PR**：maintainer 明确要求 feature 要先讨论。不要默认「直接写代码 PR 更高效」——对强调流程的维护者，这是反向信号。关闭评论只有一句 "This feature as to be discussed first. Please open an issue first."，说明对方希望先对齐 scope，再动手。
+- **被关后正确动作**：尊重关闭 → 不重开 PR 纠缠 → 按 maintainer 指的路走（开 issue #1054 讨论 feature），把已有代码作为背景引用，而不是硬塞代码。
 
 ## Reflect (2026-08-13)
 - **Greptile 非阻塞建议的正确处理**：bot 给 4/5 + 两条 "non-blocking" 建议（fixed-width panel、缺失标准 warning）。判定为客观问题（与 codebase 现有 pattern 不对齐），直接复用 `react-resizable-panels` 和 `ContextWarningAlert/Badge` 修掉，而不是忽略或回复"不改"。低成本、高质量、降低后续 human review 阻力。
