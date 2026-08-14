@@ -5,7 +5,7 @@ status: active
 stars: 101
 repo: thinkany-ai/dscode
 lang: TypeScript
-last_verified: 2026-08-03
+last_verified: 2026-08-14
 ---
 
 # DSCode
@@ -83,3 +83,12 @@ Reads AGENTS.md + CLAUDE.md. Supports MCP servers, agent skills, hooks, project 
 Clean, well-structured implementation. Most interesting for the worktree-isolation pattern and credential-stripping approach. Not revolutionary architecture — more of a well-executed synthesis of existing patterns (Claude Code's agent model + DeepSeek's economics + multi-provider flexibility). Worth monthly revisit to see if community develops.
 
 [[coding-agent-ecosystem]] [[agent-harness-landscape]] [[agent-security]]
+
+## 2026-08-14 Follow-up
+
+- **329⭐** (+226% in 11 days, from 101⭐) — explosive growth, no longer "too new for community signal".
+- Pushed today (08-14). v0.3.6 + desktop-v0.1.0 shipped 08-13.
+- Recent merged PRs: MCP image-tool result fix, desktop personalization, opencode-go login — **3 external PRs in 5 days** (Chal1ce, lihuithe, songlairui), so the solo-dev risk is resolving into a small contributor surface.
+- Watch item: growth is outpacing the safety-boundary review — verify Seatbelt/Docker sandbox + credential stripping survive feature velocity.
+
+Links: [[coding-agent-ecosystem]], [[agent-harness-landscape]], [[agent-security]]

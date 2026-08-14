@@ -91,3 +91,14 @@ Started as `spec-gen` (March 2026, spec generation tool) → evolved into full a
 
 ---
 *Deep read: 2026-08-01 | Scout source: GitHub API + HN (19pts Show HN)*
+
+## 2026-08-14 Follow-up
+
+- **279⭐** (+12% from 249⭐). v2.1.9 released 08-10.
+- Notable security-hygiene work this cycle:
+  - **Redact repository secrets at output boundaries (#342)** — secrets stripped at the MCP/output boundary, not just at ingestion. Directly applicable to our tooling (we handle API keys/relay tokens in tool output paths).
+  - **Disclose stale cited files in MCP (#343)** — memory honesty: tells the agent when a cited file has moved/changed. Aligns with our [[ephemera-retention-primitive]] and "verify before claiming" DNA.
+  - Deterministic load-sensitive test suite (#356) — removes flakiness from load tests, matching their "honest benchmarking" ethos.
+- Still active team (clay-good + laurentftech), deterministic output boundary discipline improving.
+
+Links: [[agent-memory-strategies]], [[mcp-server]], [[ephemera-retention-primitive]]

@@ -3,7 +3,7 @@ title: "BossConsole — JVM-Native Agent Harness"
 created: 2026-07-24
 verified: 2026-07-24
 tags: [agent-harness, jvm, kotlin, microkernel, mcp, deep-read]
-last_verified: 2026-08-08
+last_verified: 2026-08-14
 ---
 
 # BossConsole (risa-labs-inc/BossConsole)
@@ -124,3 +124,11 @@ GitHub API check: 215⭐ / 7 forks, 28 open issues, and three external PR author
 **Track** — novel architecture (only JVM harness), active development, now small-team rather than solo. Revisit 08-14.
 
 Links: [[agent-harness-landscape]], [[metaharness-agent-harness-generator]], [[FlowForge]], [[clawpatrol]]
+
+## 2026-08-14 Follow-up
+
+- **220⭐** (+2% from 215⭐) — star growth flattening. v9.4.6 → v9.4.8 in three days (08-09/10/11): new-tab plugin dialog, kotlin 2.4.10 + netty dep bumps.
+- Still JVM-niche: 7 forks, 35 open issues. Delivery pace is strong but the community surface isn't growing.
+- **Downgraded to warm (14d revisit)** per tracking lifecycle rules — growth plateau + narrow adoption. Direction signal (multi-tenant governable harnesses) already captured; no new architectural insight this round.
+
+Links: [[agent-harness-landscape]], [[FlowForge]], [[clawpatrol]]
