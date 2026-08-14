@@ -110,3 +110,10 @@ Every answer comes with a calibrated confidence interval: "the true value is wit
 - **Project health [verified 2026-08-06]:** 24⭐, pushed 2026-08-02, and GitHub returns no issues. There is still no independent critique or community validation; keep it as a high-quality reference implementation rather than evidence that the approach has been adopted.
 
 Links: [[agent-security]], [[clawpatrol]], [[openclaw]], [[agent-trust-hierarchy]], [[deterministic-envelope-for-small-agents]]
+
+## Followup — 2026-08-14 (warm)
+
+- **QUIET, docs-only phase.** Last code commit 07-30; 08-01 merge (#34) and 07-31 commits are README restructure/rename (`noisegate-dp` distribution) and composition-baseline docs. v1.0.0 shipped 07-23; nothing since.
+- **Stars 24→25 (+4%)** — plateau below the 5% growth threshold; no issue/PR activity, no external contributors. The two known open gaps (spoofable HTTP `X-Identity`, single-tenant only) remain unaddressed.
+- **Signal for the portfolio:** the architecture is stable and complete enough to ship v1.0.0, but the absence of any community/critique surface across 3 checks (08-05, 08-06, 08-14) means it stays a reference implementation, not an adoption signal. No new insight this round — the 08-06 reading still holds.
+- **Downgraded scout→warm; next revisit 08-28.** Drop candidate if 30d+ no code commits and still no external signal.
