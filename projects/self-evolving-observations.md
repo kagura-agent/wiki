@@ -7803,3 +7803,46 @@ REM theme 'cst' confidence 0.86; light/deep/rem 08-13 reports present
 $ gh search prs --author kagura-agent --updated '>=2026-08-13'
 14 PR updates: finance×4 merged, kagura-blog×3, story×2, skybridge#1053, OpenCLI#2282, cove#529, QwenPaw#6331
 ```
+
+## 🔬 自进化观察日报 2026-08-14
+
+### 管线活跃度
+- **beliefs-candidates：5 条当日 dated gradient（study×4 + memory-eval×1），观察窗口 2 个 commits（a22ac7a / 83e0fb4）全部落在 beliefs-candidates.md。** 其中 `memory-search-recency-blindness` 到第 3 次，标注「建议升级结构性修复」。**[已验证：`grep -c '2026-08-14' beliefs-candidates.md` = 5；git log 路径过滤]**
+- **DNA：无已提交 SOUL.md / AGENTS.md 变更。** AGENTS.md 未提交 diff（mtime 08-12 10:20）为历史遗留，非今日动作，不计为完成演进。**[已验证：git log + stat]**
+- **nudge：37 次触发 / 37 次入队（.nudge-audit.log 当日全量），为 08-06 以来可观测单日最高。** 全部 mode=system-event interval=5，cron session 按 pattern 跳过。但当日 5 条 gradient 无一来自 nudge（study 主导）——触发与产出转化仍存差。**[已验证：grep '2026-08-14' .nudge-audit.log | grep -c 'Triggering reflection' = 37]**
+- **dreaming：HEALTHY（dream-health.sh）。** 最后 completed 2026-08-14T07:12 CST；light/deep/rem 08-14 报告齐全；512 candidates / 8 promoted / 16 eligible。⚠️ 手动触发后写入 4 条过期长 promotion，已被移除并留本地备份——自动 promote 选择逻辑仍不过滤旧长操作日志（与 #10(d) 一致）。**[已验证：tools/dream-health.sh；memory/2026-08-14.md 中的手动 dreaming 记录]**
+
+### 闭环追踪
+- **完整闭环（可验证）：**
+  1. **memory_search 恢复验证闭环（最强）**：索引重建 9417→1746 files → date-token 查询 hit@1（vector 0.72）→ 但 generic recency 查询第 3 次失败 → 根因修正（主因是 ranking 无 recency 加权，非 worktree 污染）→ 写 gradient 第 3 次 + 结构性修复建议（提 upstream issue + 修好前用降级路径）。「发现→记录→根因→（待）修复」证据链完整。**[已验证：beliefs-candidates.md 当日 memory-eval 条目]**
+  2. **元闭环**：daily audit 发现 evolution-log 08-05~08-10 历史记录未提交 → 补写 08-14 并顺带提交历史（commit b38f...）。**[已验证：memory/2026-08-14.md]**
+- **断裂处：** (a) `memory-search-recency-blindness` 第 3 次触顶，结构性修复（upstream issue / recency 加权）未执行；(b) study-saturation.sh 两个修复建议（header 计数兼容 + 推荐优先级）均停在「行为改变」未落地；(c) REM promotion 质量需人工清扫（4 条过期长 promotion）。
+
+### 今日发现
+1. **nudge 可观测性突破**：.nudge-audit.log 给出 37 次确切触发计数，与 journalctl 关键词 grep=0 对照——再次验证 #5 方法论结论：关键词法不是有效代理，audit log 才是。
+2. **输入端 5 条 gradient 全部来自 study + memory-eval**：高触发（37）与零 nudge 来源 gradient 并存，转化差仍是观察点。
+3. **memory_search 是今日最强闭环**：从「恢复成功」到「新缺陷发现（recency 第 3 次）→ 结构性修复建议」，是当日唯一完整证据链。
+4. **dreaming 自动选择逻辑缺陷实证**：手动触发即写入 4 条过期长 promotion 需人工清理，说明 #10(d) 不是偶发而是系统性问题。
+
+### 原始数据
+```text
+$ git log --since='2026-08-13 22:30' --all --oneline -- beliefs-candidates.md SOUL.md AGENTS.md
+2 commits, all beliefs-candidates.md (a22ac7a, 83e0fb4); SOUL.md / AGENTS.md: 0
+
+$ grep -c '2026-08-14' beliefs-candidates.md
+5
+
+$ grep '2026-08-14' .nudge-audit.log | grep -c 'Triggering reflection'
+37
+
+$ tools/dream-health.sh
+HEALTHY; last dream 2026-08-13T23:12:02Z (08-14 07:12 CST);
+512 candidates, 8 promoted, 16 eligible (recall≥3 + uniqueQueries≥3)
+
+$ gh search prs --author kagura-agent --updated '>=2026-08-14'
+12 PR updates: cove #554/#550 open, #549/#548/#542/#540/#539/#538/#529 merged,
+abti #870 closed, lottie-studio #782 merged, cove #487 closed
+
+$ tools/graduation-pipeline.sh
+0 patterns ≥6 hits; no graduation today
+```
