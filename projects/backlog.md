@@ -1590,3 +1590,61 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - Paper-trading agent (15pts) — **不相关**：consumer finance application.
 
 **Verdict:** one depth candidate: `0xwilliamortiz/ratchet`.
+
+---
+
+## 2026-08-14 Quick Scan (13:57)
+
+**GitHub (agent repos created since 08-07, spam-filtered CLEAN):**
+- **SaladDay/pi-from-scratch** ⭐921 (was 568 on 08-12) — **已知**：08-10 已有测试支撑的分析，star 增长不构成重复 deep read。
+- **Jaxton07/percho** ⭐112 — pi-desktop GUI，pi 生态衍生客户端。**已知-adjacent**：与 mkagent 同类（thin client over pi runtime），无新架构。
+- **hust-open-atom-club/oh-dsh** ⭐105 — DeepSeek Harness 社区发行版（TUI/桌面/Web 三形态）。**留意**：打包/发行模式，非架构创新。
+- **op7418/guizang-sports-skill** ⭐99 — **不相关**：运动分析 skill。
+- **nduc99911/repo-context-mcp** ⭐99 — **已知**：code-search MCP 常见模式（08-12 已评估）。
+- **OpenSparX/MasterAgent** ⭐93 — **不相关**：NPU on-device 硬件方向。
+- **MkThingsHQ/mkagent** ⭐90 — **已知**：已有 wiki 笔记。
+- **christiangrey922/multi-agent-workflow-lab** ⭐83 (created 08-12, pushed 08-14) — **值得深入**：multi-agent 委托的测试/可观测性框架。任务图、委托事件、权限、沙箱、append-only 事件、replay、确定性规则独立于 model judge。与 FlowForge 证据交接/subagent 监督直接相关。
+- **vlinx-io/VelaTerm** ⭐65 — **不相关**：AI terminal UI。
+- **myYangyunfan/dsh_desktop** ⭐47 — 打包层，无新意。
+- **maximilian-2778/saraswati-agent** ⭐18 — 太小太新，skip。
+- **madebypan/deep-clean-ai-skill** ⭐17 — **不相关**：macOS 存储审计。
+
+**HN (3d, ≥10pts):** 4 条全部**不相关**（Economist 观点文、材料发现垂直应用、gym 娱乐新闻、Crew 低分 12pts 多人工作台）。
+
+**Verdict:** 1 depth candidate: `christiangrey922/multi-agent-workflow-lab`。生态信号：pi 生态继续扩张（percho/dsh_desktop/mkagent），但多为衍生客户端；真新架构来自委托可观测性方向。
+
+## 2026-08-15 quick scan
+- decionis/agent-safe-pipeline (376⭐) — Reference architecture: agents propose actions but cannot authorize them; immutable interceptor. → **值得深入**（审批边界模型直接映射）
+- fellowgeek/mcp-memory (146⭐) — OKF-backed MCP server for persistent long-term memory + SQLite. → 值得关注（记忆系统方向）
+- SaladDay/pi-from-scratch (979⭐) — 600 行 TS 迷你 pi-agent 教学实现。→ 浅看即可
+- 已知: moli, loomfeed, MasterAgent（已跟踪）
+- HN: "AI agents lie, cheat and steal" (163pts) — 用户信任问题，无新项目
+
+---
+
+## 2026-08-15 Quick Scan (11:15)
+
+**GitHub (agent repos created since 08-01, sorted by stars, spam-filtered):**
+- **ShawnPana/phone-harness** ⭐1774 — **已知**：already tracked (was 196 on 08-09).
+- **eternityspring/shuohao-skills** ⭐1442 — **不相关**：AI 短剧制作 skill 集合, content domain.
+- **AMAP-ML/LongHorizon-Harness** ⭐717 — **已知**：tracked (517 on 08-10, revisit 08-17).
+- **vercel-labs/eve-software-factory-template** ⭐606 — **不深入**：template, derivative.
+- **sv-number/mcp-server** ⭐588 — **不相关**：phone-number MCP, niche.
+- **fuxicodex/Fuxi** ⭐550 — **不深入**：terminal coding agent, derivative pattern.
+- **criptogus/HermesOffice** ⭐497 — **不相关**：office suite domain.
+- **DanielPan12/JobHuntBot** ⭐423 — **值得深入**：agent-led job application workflow with local progress dashboard. Directly comparable to our gogetajob project — architecture comparison could improve our own tool.
+- **0xsline/awesome-deepseek-harness** ⭐409 — **不深入**：awesome list.
+- **decionis/agent-safe-pipeline** ⭐379 — **已知**：tracked (376 on 08-15, revisit 08-19).
+- **i3T4AN/KADATH** ⭐352 — **已知**：tracked.
+- **lexmount/moli** ⭐290 — **已知**：tracked (deep read done).
+- **OpenSparX/MasterAgent** ⭐239 — **已知**：tracked.
+- **miqdadbadjuber/anti-slop** ⭐219 — **不深入**：design rules doc, low architecture signal.
+
+**HN (3d, ≥10pts):**
+- Economist "AI agents lie, cheat and steal" (163pts/203💬) — **趋势信号**：trust/safety sentiment, same theme as 08-14 scan; known.
+- Discovered Materials YC P26 (159pts) — **不相关**：materials-science domain.
+- HashAgent — share an AI agent as a URL, runs locally via WebGPU (48pts) — **留意**：novel distribution concept, early (immature); watch, don't invest.
+- "AI agent hacks gym for pilates spot" (37pts) — **不相关**：anecdote.
+- vault-operator "what one looks from inside" (10pts) — **不深入**：low signal.
+
+**Verdict:** one depth candidate: `DanielPan12/JobHuntBot` (direct gogetajob comparison value).
