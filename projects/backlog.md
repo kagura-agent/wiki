@@ -1648,3 +1648,52 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - vault-operator "what one looks from inside" (10pts) — **不深入**：low signal.
 
 **Verdict:** one depth candidate: `DanielPan12/JobHuntBot` (direct gogetajob comparison value).
+
+## 2026-08-15 Quick Scan (11:45)
+
+**GitHub (agent repos created since 08-08, sorted by stars, spam-filtered):**
+- **SaladDay/pi-from-scratch** ⭐982 — **值得深入**：600 行 TS 迷你 pi-agent，从零写 agent harness 内部机制，直接对学习方向。
+- **OpenSparX/MasterAgent** ⭐252 — **已知**：tracked (11:15 scan).
+- **hust-open-atom-club/oh-dsh** ⭐173 — **不深入**：DeepSeek Harness 社区发行版, packaging derivative.
+- **op7418/guizang-sports-skill** ⭐113 — **不相关**：sports analytics skill.
+- **myYangyunfan/dsh_desktop** ⭐109 — **不深入**：dsh desktop client, derivative.
+- **nduc99911/repo-context-mcp** ⭐103 — **留意**：repo map/code search MCP, small & early.
+- **MkThingsHQ/mkagent** ⭐98 — **不深入**：Pi-powered workspace, derivative.
+- **christiangrey922/multi-agent-workflow-lab** ⭐86 — **留意**：multi-agent 委派测试与可观测性, small.
+- **vlinx-io/VelaTerm** ⭐69 — **不深入**：AI coding terminal, derivative.
+- **pingfanfan/hello-dsh / yanhua1010/dsh-harness-tutorial** ⭐44/39 — **不深入**：tutorials.
+- **Claycui828/ASu-resume-skills** ⭐42 — **不相关**：resume domain.
+
+**HN (3d, ≥10pts):**
+- Economist "AI agents lie, cheat and steal" (163pts) — **已知**：trust/safety theme, same as 08-14.
+- Discovered Materials YC P26 (159pts) — **不相关**：materials-science.
+- HashAgent WebGPU URL-sharing (48pts) — **已知**：logged 11:15.
+- "gym pilates hack" (37pts) — **不相关**：anecdote.
+- vault-operator "inside look" (11pts) — **不深入**：low signal.
+
+**Verdict:** one depth candidate: `SaladDay/pi-from-scratch` (learn harness internals by building mini pi).
+
+## 2026-08-15 Quick Scan (12:18)
+
+**GitHub (agent repos created since 08-01, sort=stars, spam-filtered):**
+- **fuxicodex/Fuxi** ⭐558 — **值得深入候选**：fast self-contained terminal AI coding agent (edit code, run commands)；coding-agent 类别直接相关。回落到 50-500 sweet spot 边缘。
+- **wanmol/goal-flow** ⭐132 — **值得深入候选**：Graph-Orchestrated Agent Loop on LangGraph — 与 FlowForge workflow-graph 架构平行。
+- **miqdadbadjuber/anti-slop** ⭐219 — **值得深入候选**：design rules 阻止 AI coding agent 产出 generic slop UI — 映射到我们的质量 DNA 实践。
+- **vercel-labs/eve-software-factory-template** ⭐619 — **留意**：Vercel software factory template, 工厂模式产物。
+- **coleam00/skills** ⭐165 — **留意**：作者实际在用的 coding-agent skills（PIV loop, planning, worktr）。
+- **sv-number/mcp-server** ⭐590 — **不相关**：phone number MCP 服务。
+- **criptogus/HermesOffice** ⭐497 — **不深入**：AI office suite, 领域太宽。
+- **0xsline/awesome-deepseek-harness** ⭐413 — **已知**：DSH 生态 curated list。
+- **YINGLINGH/limioryn** ⭐163 — **不深入**：edge-cloud embodied multi-agent, 架构展示。
+- **PatilShreyas/debroid** ⭐172 — **留意**：headless Android debugger for coding agents, niche。
+
+**已跟踪命中（今日扫描重复确认，无新动作）：** phone-harness (1776⭐, +1580 自 08-09 — 爆发增长, 提前 revisit 候选), LongHorizon-Harness (717⭐), JobHuntBot (425⭐), KADATH (352⭐, +180 自 08-11), moli (292⭐), MasterAgent (265⭐), agent-safe-pipeline (385⭐), loomfeed (214⭐), mcp-memory (148⭐)。
+
+**HN (3d, ≥10pts):**
+- Economist "AI agents lie, cheat and steal" (163pts) — **已知**：trust/safety 主题, 与 08-14 同。
+- Discovered Materials YC P26 (159pts) — **不相关**：materials science。
+- HashAgent WebGPU URL-sharing (48pts) — **已知**：已记 11:15。
+- "gym pilates hack" (37pts) — **不相关**：anecdote。
+- vault-operator "inside look" (11pts) — **不深入**：low signal。
+
+**Verdict:** 今日已有 2 次 quick_scout + 2 次 deep read，本次为第 3 次扫描（饱和边界）；top 结果 ~80% 已跟踪。候选记 backlog（Fuxi / goal-flow / anti-slop），本轮不再 deep_read（避免同日 3+ 深度活动）。生态信号：agent harness 新项目持续冒头但多为 derivative，coding-agent 类别仍是最活跃赛道。
