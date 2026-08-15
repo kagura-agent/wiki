@@ -56,6 +56,7 @@ dashboard/
 
 ## 下一步
 
+- [ ] Track: JobHuntBot (DanielPan12/JobHuntBot) — 423⭐ / 35 forks (08-15 deep read, NEW)。Workflow-as-skill：SKILL.md 契约 + 空模板 + 零依赖 CSV 看板，任何 agent 可跑。可移植模式：证据先于计数（有确认证据才算 Submitted）、结构化列 > notes 正则、写前 verify 行匹配的乐观并发守卫（server.js 409）、写回循环、verbatim JD 捕获。Derivative of ApplyPilot。Red flags：0 issues/0 PRs、无测试（手写 CSV 解析）、安全边界纯建议性、last push 08-08。Revisit 08-22 社区信号 + server 测试 + 上游活跃度。
 - [ ] Revisit 08-22：社区信号（forks/PR 是否出现）、dashboard server.js 是否加测试、ApplyPilot 上游是否活跃。
 - [ ] 考虑把「乐观并发守卫」模式写成 wiki card（[[local-state-concurrent-guard]]），评估移植到 flowforge 状态文件。
 - [ ] 结构化列 vs notes 正则教训 → 检查我们现有追踪工具是否有从自由文本推断状态的路径。
