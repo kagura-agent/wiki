@@ -1,9 +1,9 @@
 ---
 title: OneCLI — Credential Gateway for AI Agents
 created: 2026-07-26
-last_verified: 2026-08-09
+last_verified: 2026-08-16
 status: following
-stars: 3007
+stars: 3094
 ---
 # OneCLI — Secret Vault for AI Agents
 
@@ -116,3 +116,13 @@ GitHub API reports **3,007⭐ / 178 forks / 111 open issues**. The code line is 
 - [#484](https://github.com/onecli/onecli/issues/484) reports gateway file-descriptor exhaustion after days of operation; [#485](https://github.com/onecli/onecli/issues/485) reports host-pattern port matching is lost before evaluation.
 
 This is a valuable counterweight to the earlier architecture assessment: **zero-default grants are only a security boundary once policy publication, lookup, and injection have an end-to-end regression suite.** Keep following until a release or reproducible fix closes #482; do not treat the design as production-ready merely because its pure compilation layer is well structured.
+
+## Follow-up 2026-08-16 — Tracked Fix Appears, Core Dev Paused
+
+**3,094⭐ / 184 forks / 117 open issues** (+2.9% stars since 08-09). Repo `pushed_at` 08-15 is misleading — it reflects old side branches (May–Jun); `main` is still at v1.45.0 (07-31), zero new main commits in 2+ weeks. **Core dev paused; issue flow is the only signal.**
+
+- **#482 (credential_not_found for published grants) now has an external fix PR**: [#487](https://github.com/onecli/onecli/pull/487) (Adityakk9031, 08-09, mergeable, still OPEN). Root cause: Anthropic OAuth tokens (`sk-ant-oat…`) were injected with `Injection::ReplaceHeader`, which only applies if the header already exists — so first use 401s. The exact enforcement-path bug last round flagged as unverified now has a concrete, reviewable fix. This validates the earlier caution: the design wasn't broken at the pure-compilation layer, it broke in the injection runtime.
+- **#485 got a downstream adoption signal**: [NanoClaw](https://github.com/nanocoai/nanoclaw) (multi-agent host) fronts all agent egress with OneCLI and cites the port-matching bug as blocking (chiptoe-svg, 08-11). First hard evidence of production usage beyond the project's own claims.
+- **#484 (FD exhaustion)** still unanswered by maintainers. New **#490**: OpenAI API-key injection breaks fresh Codex OAuth login (`invalid_client`) — another injection-path regression, same family as #482/#485: **the MITM injection layer is the reliability bottleneck**, not the policy model.
+
+**Assessment**: warm tier, not hot — core dev paused but tracked fix PR + real downstream usage keep it worth watching. The pattern across #482/#485/#490 (all injection-runtime bugs, all from the same runtime layer, all with thin maintainer response) suggests the grant/policy architecture is ahead of its runtime hardening. Revisit 08-30 for #487 merge status and any main-branch activity.
