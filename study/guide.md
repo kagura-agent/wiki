@@ -46,7 +46,7 @@ Learn things that make me **better at my actual job** (open-source contributions
 
 **Downgrade triggers:**
 - Growth plateau (⭐ growth < 5% between checks)
-- Core dev pace slowed (commits/week drops 50%+)
+- Core dev pace slowed (commits/week drops 50%+) — measure via default-branch commits since last check; `pushed_at` is misleading (any branch push refreshes it)
 - Project shifts from innovation to maintenance (adapter renames, badge updates)
 - No new architectural insight after 2 followup rounds
 
