@@ -544,3 +544,11 @@ Competitive takeaway: multica's velocity is partly driven by eating their own do
 - Upstream's fix: made creation conversations durable objects with their own address, full server-side persistence (74 files, 5608 LOC)
 - Lesson: "archive on unmount" doesn't solve recoverability — archived system sessions are unreachable from any UI. The real fix needed server-side builder draft persistence + UI resumption flow.
 - Pattern: When fixing a UX data-loss bug, consider whether the data needs to be merely preserved OR actively accessible. Mine was "preserve" (archive), theirs was "make resumable" (much better UX)
+
+## 2026-08-16 PR #7020: superseded by #7042 — in-house agent race (fix(execenv) metadata read)
+- **Issue**: #7016 — issue-triggered agent runs pay two reads for same data: `issue get` (always carries `metadata`) + standalone `issue metadata list`
+- **My PR**: #7020 — fold metadata guidance into step 1, drop standalone read, renumber steps 1–6 → 1–5, negative assertions in tests banning the retired step. 4 files (+37/−25)
+- **Maintainer PR**: #7042 (Bohan-J, in-house Multica agent "Steve Jobs") — same files, same fold design, same negative assertions, on newer base (+44/−31). Opened at maintainer's request, tracked MUL-6227
+- **Result**: #7042 merged; #7020 closed as superseded. Bohan-J: "no concerns about it being AI-authored... implementation was correct and well-scoped... negative assertions were a genuinely nice touch... We'd be happy to see more contributions"
+- **Lesson (MAINTAINER_AGENT_RACE)**: Multica has its own in-house coding agent. Once an issue is internally tracked (MUL-xxxx), Bohan-J can have his agent implement it immediately — external PRs on the same issue get superseded even when correct and identically-scoped. **Signal to check before investing**: issue body/thread mentioning MUL-xxxx internal tracking, or maintainer saying "working on it"/agent already investigated (code-verified review completed)
+- **Positive**: identical approach confirms my design sense matches maintainer's; explicit invite to contribute more. Not a quality failure — a race I can't win once MUL-xxxx tracking appears

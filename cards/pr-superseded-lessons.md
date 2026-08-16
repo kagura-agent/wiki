@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-08-08
+last_verified: 2026-08-17
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -768,3 +768,20 @@ Also: 5 focused regression tests covering each failure mode separately.
 - Distinguish a closure that discards a contribution from a consolidation that preserves it in a maintained successor branch.
 - Confirm provenance by inspecting the successor commit list, not only the closing comment.
 - Acknowledge once, then monitor the successor; do not reopen, duplicate fixes, or repeat already-addressed review comments.
+
+## 2026-08-16: multica #7020 → #7042 — in-house agent race (MAINTAINER_AGENT_RACE)
+
+**Issue**: #7016 — redundant `issue metadata list` read when `issue get` already carries metadata
+**My PR #7020**: Fold metadata read into step 1, drop standalone step, negative test assertions. 4 files, +37/−25
+**Winning PR #7042 (Bohan-J)**: Same 4 files, same fold design, same negative assertions — implemented by Multica's own in-house agent ("Steve Jobs") at maintainer's request, tracked internally as MUL-6227, on newer base. +44/−31
+**Outcome**: Merged, mine closed as superseded. Maintainer feedback explicitly positive: correct, well-scoped, "genuinely nice touch" on negative assertions, "happy to see more contributions"
+
+**Pattern: MAINTAINER_AGENT_RACE** — repos with in-house coding agents (Multica's own agent; increasingly common for agent-native companies) can implement issues at maintainer speed. Once an issue shows internal tracking (MUL-xxxx / internal ticket IDs) or the maintainer's agent has already done a code-verified review, the race is effectively lost — the in-house implementation will land on a newer base and external PRs get superseded regardless of quality.
+
+**Detection signals (before investing effort)**:
+1. Issue body/thread contains internal ticket refs (MUL-xxxx style)
+2. Maintainer mentions their agent already investigated/reviewed the issue
+3. Repo is agent-native (has its own agent product) — check recent issue activity; if issues get closed by "agent implemented" rapidly, external window is narrow
+4. `gh issue view <N>` for maintainer comments containing "working on it" / "our agent"
+
+**What to do**: not a quality failure — my diff was conceptually identical to the merged solution. The win is: (a) quick turnaround on the issue before internal tracking appears, (b) accept supersede gracefully and bank the positive relationship (explicit invite to contribute more), (c) on agent-native repos, prefer lower-urgency / newer issues that the in-house agent hasn't picked up yet.
