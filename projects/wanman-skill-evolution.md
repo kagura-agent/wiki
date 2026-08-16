@@ -2,8 +2,8 @@
 title: wanman Skill Self-Evolution & db9 Brain Adapter
 created: 2026-04-27
 tags: [agent-infrastructure, skill-evolution, multi-agent, deep-read]
-related: [[openclaw-agent-skills]], [[self-evolving-agent-patterns]], [[agent-memory-architecture]], [[idle-cached-session-resume]]
-last_verified: 2026-05-31
+related: [[openclaw-agent-skills]], [[self-evolving-agent-patterns]], [[agent-memory-architecture]], [[idle-cached-session-resume]], [[wanman]]
+last_verified: 2026-08-17
 ---
 
 # wanman Skill Self-Evolution & db9 Brain Adapter

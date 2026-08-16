@@ -4,6 +4,8 @@
 **Created**: 2026-04-22 | **Stars**: 371 (5 days) | **Lang**: TypeScript
 **Tags**: multi-agent, orchestration, Claude Code, Codex, supervisor
 
+> Deep-dive on its skill self-evolution + db9 brain adapter: [[wanman-skill-evolution]]
+
 ## What It Is
 
 Local-mode agent matrix framework. Runs a supervised network of Claude Code or Codex agents on your machine, coordinated through a JSON-RPC supervisor. Name from Japanese ワンマン電車 (one-man train) — the human watches, agents drive.
