@@ -171,3 +171,12 @@ The loop actually closes now (was aspirational in v0.1):
 - **2026-07-11**: v0.2 public release (07-03). Only README updates since. Growth strong but all solo.
 - **2026-07-16**: 1315⭐ (+10.6% from 1189). Still **only README updates** since v0.2.0 (07-03). No new code, no community participation. Passive growth continues but development has stalled post-release. Cooling.
 - **Revisit**: 07-30 (monthly — no active dev to warrant frequent checks)
+
+## 2026-08-16 Followup (1,340⭐, +1.9%)
+
+**Dropped — meets drop triggers.**
+- Second consecutive check with zero activity: 0 commits since 07-06 (41d stale), 0 PRs, 0 issues. 58 forks passive.
+- Stars still drifting up (+25 this month, +1.9%) — pure README/passive growth, no code, no community.
+- Drop triggers hit: solo dev abandoned (no commits 30+ days) + community died (0 PRs/issues in 30d despite decent stars).
+
+**Retained insight:** the portable skill-pack format (JSON/JSONL) and "prompt injection as learning" pattern were already extracted 07-16; nothing new to salvage. Passive star growth on a dormant repo is not a tracking signal — star count alone should never keep a project on the portfolio (this is the 2nd consecutive check confirming it).

@@ -131,3 +131,14 @@ Solo dev, early stage, high architectural interest but uncertain longevity. Chec
 ---
 
 Links: [[claude-code-coordinator]], [[multi-agent-consensus]], [[agent-harness-landscape]], [[oh-my-kimichan]], [[optim-plans]], [[supervisor-pattern]]
+
+## 2026-08-16 Followup (98⭐, +5%)
+
+**Signal: maintainer dormant, community waking up.**
+- Zero default-branch commits since 07-26 (no code at all since we started tracking 08-02). Pushed_at 07-26 confirmed against default branch — dormant.
+- BUT 3 external PRs queued unmerged: macOS compatibility (#2, 08-03), non-localhost console fix (#3, 08-14), POSIX launch instead of powershell shelling (#5, 08-14). External contributors are porting it off Windows-first.
+- Star growth 93→98 (+5%) — slow but positive.
+
+**Anti-pattern worth noting:** PR queue growth while maintainer is silent is the classic "community outpaces maintainer" signal. For solo-dev Windows-first projects (PolyForm NC license), the first external PRs are usually portability fixes — if those sit unmerged >2 weeks, the project either gets forked or stalls. Watch #2/#3/#5 merge status at next check.
+
+**Status: Downgraded to warm (14d).** Revisit 08-30 for PR merge status. If all 3 PRs still unmerged with zero new commits → drop trigger (solo dev abandoned).
