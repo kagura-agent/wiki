@@ -7891,3 +7891,51 @@ $ grep -c 'confidence: 0.62' memory/dreaming/light/2026-08-15.md
 $ gh search prs --author kagura-agent --updated '>=2026-08-15'
 cove #560/#558/#555 merged; langwatch/langwatch#6432 open
 ```
+
+## 🔬 自进化观察日报 2026-08-16
+
+### 管线活跃度
+- **beliefs-candidates：4 条新 gradient（全部 study 来源：pushed-at-misleading、dormant-maintainer-pr-queue-check、fork-network-star-farming-check、tool-output-target-verification），7 条 stale 自动 retract（07-17 批次），0 升级。** 总 1763 行。**[已验证：grep '2026-08-16' beliefs-candidates.md；git log 118deea/d11b835]**
+- **DNA：无变更。** 08-15 的主动 AGENTS.md code-exec 规则更新后今日静止。**[已验证：git log --since="2026-08-15 22:30" 仅 beliefs-candidates + memory]**
+- **nudge：13 次触发 / 53 次跳过（cron/dreaming pattern 正确过滤）。** 触发健康，但今日 4 条 gradient 仍无一条来自 nudge——触发→产出转化差的模式连续第 2 天。**[已验证：grep '2026-08-16' .nudge-audit.log]**
+- **dreaming：HEALTHY（dream 文件齐全）。** light 102 候选（100 @ 0.62 uniform + 2 @ 0.80）；deep **ranked 1 / promoted 1**（昨日 ranked 0/promoted 0，今日恢复消费）；REM Reflections 首次选中高置信主题 `cst`（0.80，evidence 08-12）。**[已验证：memory/dreaming/{light,deep,rem}/2026-08-16.md]**
+- **PR activity：今日活跃。** dsh-plugins #3/#5 open（collab），kagura-mail #452/#454 open，multica #7020 open；昨日 batch 已 merge：cove #560/#558/#555、finance #1605/#1680、abti #871、kagura-mail #448。OpenCLI #2282 仍等 review。**[已验证：gh search prs --updated '>=2026-08-15 22:30']**
+
+### 闭环追踪
+- **完整闭环：QwenPaw nightly CI 三分类收尾**（82ae5a1 contribution-evolve：fork sync 解决 nightly 失败——昨日识别为 upstream 根因 + fork 未同步，今日同步 fork 闭环）。
+- **完整闭环：07-17 gradient 批次 stale 清理**（daily-review d11b835 自动 retract 7 条单次未复发条目，管线自清洁正常）。
+- **断裂处：**
+  - (a) REM Lasting Truths 选择器**第三次实证**捡垃圾：light 产出了 0.80 的 `cst` 主题且 REM Reflections 已选中，但 Possible Lasting Truths 仍挑了 3 条 0.51 的旧 cron 运维日志（daily-audit / github-patrol / agent-safe-pipeline，evidence 全是 08-15）。与 08-13、08-15 完全同 pattern。
+  - (b) 上游 uniform confidence 未动：100/102 @ 0.62（openclaw#87485 仍 OPEN）。
+  - (c) deep promote 恢复但可追溯性仍无：promoted 1 条无法确认来自 [≥70] filtered candidate。
+
+### 今日发现
+1. **REM 半修复实证**：Reflections 层质量跃升（0.80 主题替代 "No strong patterns"），但 Lasting Truths 层仍被 0.51 旧运维日志污染——同一子系统的两个输出层质量分裂。这是 #10(d) 的第 3 次实证，且定位进一步细化到「Lasting Truths 选择器」而非整个 REM。
+2. **Deep Sleep 消费恢复信号**：昨日 ranked 0/promoted 0，今日 ranked 1/promoted 1——8 eligible 候选终于有 1 条被消费。单日数据不足以定性，需连续观察是否趋势。
+3. **gradient 输入单一化连续第 N 天**：study 是唯一活跃来源；nudge 13 触发 0 转化；workloop 今日无 gradient（昨日 2 条）。输入端依赖 study 单渠道的风险在累积。
+4. **主动 DNA 更新未形成趋势**：08-15 的 AGENTS.md 更新是近月首次，今日回归静止——单点事件，暂不视为趋势。
+
+### 原始数据
+```text
+$ git log --since='2026-08-15 22:30' --all --oneline -- beliefs-candidates.md SOUL.md AGENTS.md
+118deea study 08-16: gradient dormant-maintainer-pr-queue-check + TODO followup updates
+d11b835 review: daily review 2026-08-16 (compress 08-15 daily, retract 7 stale beliefs, trim DREAMS)
+
+$ grep '2026-08-16' beliefs-candidates.md | grep -c gradient
+4 new (study ×4)
+
+$ grep '2026-08-16' .nudge-audit.log | grep -c 'Triggering reflection'
+13  (53 skips)
+
+$ grep -o 'confidence: [0-9.]*' memory/2026-08-16.md | sort | uniq -c
+100 × 0.62, 2 × 0.80
+
+$ cat memory/dreaming/deep/2026-08-16.md
+Ranked 1, Promoted 1
+
+$ cat memory/dreaming/rem/2026-08-16.md
+Reflections: theme 'cst' @ 0.80 | Lasting Truths: 3 × 0.51 cron logs
+
+$ gh search prs --author kagura-agent --updated '>=2026-08-15 22:30'
+dsh-plugins #3/#5, kagura-mail #452/#454, multica #7020 open; cove/finance/abti/kagura-mail merged batch
+```
