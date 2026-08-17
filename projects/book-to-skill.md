@@ -40,4 +40,4 @@
 
 - [x] 从 backlog 的 "值得深入" 列表移除（08-17 quick scan 记录已更正为恶意）
 - [ ] 不回填其他推荐渠道（不 star、不 fork、不传播）
-- [ ] 后续 scout 检查清单增加：`git log --oneline | wc -l`（单 commit 即红旗）+ issue 区批评者扫描优先
+- [x] 后续 scout 检查清单增加：`git log --oneline | wc -l`（单 commit 即红旗）+ issue 区批评者扫描优先 → 已落地 tools/scout-precheck.sh v3（gh api 免 clone 查 commit 历史，≤5 commits + 上传式消息 = HIGH-RISK；本 repo 2 commits「Add files via upload」实测命中，dna commit 见 08-17）
