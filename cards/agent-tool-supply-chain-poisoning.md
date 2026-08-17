@@ -21,3 +21,9 @@
 - "收集遥测"要问：收集了什么、发给谁、能否关闭 —— 遥测是合法功能，但 wallet 扩展数据不是遥测
 - 对任何声称"帮你转换/整理"的高星新工具，先假设它会在读你的数据，验证后再假设它不会
 - 关联：[[agent-safe-pipeline]]（fail-closed 边界）、[[agent-credential-security]]、[[fork-network-star-farming-check]]
+
+## 自动化落地（08-17 scout-precheck.sh v3）
+
+- tools/scout-precheck.sh v3 内置 commit-history 检查：owner/repo 候选自动 `gh api repos/O/R/commits?per_page=100`（免 clone），≤5 commits + 上传式消息（"Add files via upload"/"Initial commit"）→ 🔴 HIGH-RISK；≤5 commits 普通 → ⚠️ WARN；否则 ✅。仅 NEW 候选，纯报告不改 exit code。dna commit bbc364e
+- **判定标准教训**：严格 "== 1 commit" 会漏检 —— book-to-skill 实测有 2 commits（"Add files via upload"）。正确信号是**小 commit 数 + 上传式消息**，不是 commit 数 == 1
+- book-to-skill（Leutenegger/book-to-skill）08-17 仍在线上：1158⭐、2 commits、pushed_at 08-14 —— 预测 cal-0817-2d17（删库/私库/<3k⭐ by 09-16）仍在验证期
