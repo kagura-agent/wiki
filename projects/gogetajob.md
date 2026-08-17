@@ -185,3 +185,13 @@ Links: [[pr-superseded-lessons]], [[gogetajob]], [[error-handling-in-cli]], [[lo
 - 缓存兜底也失效：`finder-feed.json` `generated_at` 2026-08-12T09:23Z ≈ 19h 前，超过 6h `FINDER_CACHE_MAX_AGE_SECONDS`。
 
 Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
+
+## Discover Topic Qualifier Silently Dropped + Feed Blocklist Gap (2026-08-17)
+
+- [已验证] `gogetajob discover --topic X` 返回的候选与 `--topic Y` **完全相同**（ai-agent / llm-observability / ai-evaluation 都返回 tsdoc、react-native-linear-gradient、overseerr）。根因不在 gogetajob 逻辑，而在 GitHub search 的限定符顺序行为：`gh search repos "stars:100..5000 topic:ai-agent"` 静默丢弃 topic（结果 == 无 topic 查询），`"topic:ai-agent stars:100..5000"` 才正确过滤（返回 CherryHQ/cherry-studio 等）。
+- [已验证] gogetajob `searchRepos()` 把 `topic:` 追加在 `stars:`/`pushed:` 之后 → 所有带 `--topic` 的 discover 查询实际都在无 topic 过滤下运行。修复：topic 移到 queryParts 最前（keywords 之后）。commit `45e9785`。
+- [已验证] 第二个 gap：`blocklist.ts` 的 `isBlocked()` 从未被接入 feed 管线——`listJobs()` 只按 state/language/type 过滤，导致 blocklisted repo（openclaw/openclaw 等 15 个）的 issue 持续出现在 finder 候选里。本轮 find_work 推荐的前 3 个 issue 全部来自 openclaw（blocklisted），靠人工识别拦截。修复：`listJobs()` 加 `LOWER(c.full_name) NOT IN (blocklist)`。commit `a8c9bde`。
+- **教训**：工具输出与参数不一致（不同参数相同结果）时，先手工 `gh`/`curl` 复现查询验证限定符行为，再修代码——不要接受输出，也不要先怀疑自己的用法。工具代码是最强的知识应用形式（同上一条 pattern）。
+- **Action**：`tools/gradient-scan.sh` 补 `tool-filter-silently-ignored` 的 KEYWORDS；TODO 记录「workloop finder 应加 blocklist 拦截自检（feed 已修，脚本侧可加防御性检查）」。
+
+Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
