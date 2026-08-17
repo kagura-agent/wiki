@@ -1,37 +1,57 @@
 {
-  "timestamp": "2026-08-14T02:10:00Z",
-  "run_date": "2026-08-14",
+  "timestamp": "2026-08-17T02:41:00Z",
+  "run_date": "2026-08-17",
   "totals": {
-    "md_files": 1175,
-    "cards": 458,
-    "projects": 622,
-    "wikilinks": 5643
+    "md_files": 1184,
+    "cards": 459,
+    "projects": 620,
+    "wikilinks": 5698
   },
   "health": {
-    "errors": 0,
-    "warnings": 59,
-    "broken_links": 0,
-    "orphans": 2,
-    "orphan_projects": ["lobster0", "skybridge"],
+    "errors": 14,
+    "warnings": 60,
+    "broken_links": 4,
+    "broken_link_sources": [
+      "projects/prime-agent.md -> [[MetaHarness]]",
+      "projects/prime-agent.md -> [[mawl]]",
+      "projects/qm.md -> [[janus-desktop-human-agent-laboratory]]",
+      "projects/qm.md -> [[mirror-world-experience]]"
+    ],
+    "orphans": 3,
+    "orphan_projects": ["graft", "multi-agent-workflow-lab", "prime-agent"],
     "duplicate_slugs": 0,
     "index_drift": {
-      "missing_from_index": 4,
+      "missing_from_index": 10,
+      "missing_files": [
+        "projects/hitch-terminal-proxy.md",
+        "projects/signet.md",
+        "projects/skill-make.md",
+        "projects/stss.md",
+        "projects/tenshu.md",
+        "projects/tenshu.zh.md",
+        "projects/thoth-personal-ai.md",
+        "projects/thunderbolt.md",
+        "projects/understand-you.md",
+        "projects/voltagent.md"
+      ],
+      "not_in_index": 3,
       "cards_index_stale": true,
-      "cards_not_indexed": 458
+      "cards_not_indexed": 459
     },
-    "stale_files": 448,
+    "stale_files": 530,
     "unicode_suspicious": 25,
     "stubs": 0,
     "secrets": 0,
-    "frontmatter_ok": true,
+    "frontmatter_ok": false,
+    "frontmatter_issues": 1,
     "link_density": 5.8,
     "zero_outbound": 2,
     "invalid_fact": 0
   },
   "error_book": {
-    "new_issues": 0,
-    "recurring_issues": 58,
-    "auto_closed": 30,
-    "total_open": 58
+    "new_issues": 14,
+    "recurring_issues": 59,
+    "auto_closed": 0,
+    "total_open": 73
   }
 }
