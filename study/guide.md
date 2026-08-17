@@ -45,6 +45,7 @@ Learn things that make me **better at my actual job** (open-source contributions
 - Cool (plateau, low signal): 30 days or drop
 
 **Downgrade triggers:**
+- ⚠️ followup-status.sh 的 QUIET 分类基于 pushed_at，可能误标活跃项目（08-17 实测：THRIVING 项目被标 QUIET）。先查 default-branch commits 再决定 skim/bump，不要直接采信 QUIET 推荐
 - Growth plateau (⭐ growth < 5% between checks)
 - Core dev pace slowed (commits/week drops 50%+) — measure via default-branch commits since last check; `pushed_at` is misleading (any branch push refreshes it)
 - Project shifts from innovation to maintenance (adapter renames, badge updates)
