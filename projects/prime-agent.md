@@ -18,9 +18,9 @@ A self-improving RLM (recursive language model) agent for coding and long-runnin
 
 ## Position in the ecosystem
 
-Sits in the [[agent-harness-landscape]] category of self-evolving agents (alongside [[MetaHarness]]-family and [[LoopX]]), but distinct in that it is *recursive* (RLM subagents spawn subagents) and production-grade (daemon-managed, 1,787 forks, real external contributor base — snimu alone has 8 open PRs).
+Sits in the [[agent-harness-landscape]] category of self-evolving agents (alongside [[metaharness-agent-harness-generator]]-family and [[LoopX]]), but distinct in that it is *recursive* (RLM subagents spawn subagents) and production-grade (daemon-managed, 1,787 forks, real external contributor base — snimu alone has 8 open PRs).
 
-Fork network is organic: newest forks are all 0⭐ individual accounts with natural timestamps — no coordinated star-farming accounts (contrast [[mawl]]'s fake fork network). External PRs are real feature work, not drive-by typo fixes: edit-summary diffs (#1392), ACP MCP programs (#1378), fork-session preservation (#1389), capability admission/revocation fixes (#1357).
+Fork network is organic: newest forks are all 0⭐ individual accounts with natural timestamps — no coordinated star-farming accounts (contrast [[multi-agent-workflow-lab]]'s fake fork network). External PRs are real feature work, not drive-by typo fixes: edit-summary diffs (#1392), ACP MCP programs (#1378), fork-session preservation (#1389), capability admission/revocation fixes (#1357).
 
 ## Key insight: supervisor-owned RLM spawn ledger (#1387, merged 08-14)
 

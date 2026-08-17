@@ -58,7 +58,7 @@ External participation is now visible but immature: issue #13 proposes determini
 
 **THRIVING**: 779⭐ / 90 forks / 24 open issues (517→779, +50.7% in 7d). Default-branch commits steady (08-14/12/11/10) — pushed_at 08-14 is real activity, not a stall. Merged since last check: PR #35 DeepSeek harness support, dashboard UI release (#22), Terminal-Bench already in (#15). The dashboard hardening and control-plane boundary from the 08-10 note: external PR #11 (loopback-Host + JSON content-type) is still open, joined by more control-plane work.
 
-**Community is now real, not incidental** — 8 external contributors in 30 days: wang-kaopu (#43 Windows MIME fix, open), izaart95-jpg (#41 Opencode support, open), OrigamiKoala, TON14 (#33 EBADF, #28 guard failures), rajathpi, saikethan27 (#29), lunar-me (typo trio), SashaMIT (dashboard hardening). Fork network organic: newest forks all 0⭐ individual accounts with PR→fork contribution flow (wang-kaopu forked 08-16 then opened #43) — the opposite of [[MAWL]]'s coordinated fake fork network. 208-test suite added by external PR #29, no paid model calls.
+**Community is now real, not incidental** — 8 external contributors in 30 days: wang-kaopu (#43 Windows MIME fix, open), izaart95-jpg (#41 Opencode support, open), OrigamiKoala, TON14 (#33 EBADF, #28 guard failures), rajathpi, saikethan27 (#29), lunar-me (typo trio), SashaMIT (dashboard hardening). Fork network organic: newest forks all 0⭐ individual accounts with PR→fork contribution flow (wang-kaopu forked 08-16 then opened #43) — the opposite of [[multi-agent-workflow-lab]]'s coordinated fake fork network. 208-test suite added by external PR #29, no paid model calls.
 
 ### Pattern extraction from PR #29 — cost-aware executor tiering (deep read)
 

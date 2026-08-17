@@ -9,7 +9,7 @@ MIT multiplayer agent harness for work — multiple agents (and humans) collabor
 
 ## Why It Matters to Us
 
-Directly relevant to **collaborative mirror-world workspaces** — our direction of separate user/world boundaries in [[FlowForge]] and the shared-evolution paths studied in [[janus-desktop-human-agent-laboratory]] and [[loomfeed]]. Multi-agent collaboration with co-authored work products is exactly the "team of agents + human" model we keep circling.
+Directly relevant to **collaborative mirror-world workspaces** — our direction of separate user/world boundaries in [[FlowForge]] and the shared-evolution paths studied in [[janus]] and [[loomfeed]]. Multi-agent collaboration with co-authored work products is exactly the "team of agents + human" model we keep circling.
 
 ## 2026-08-14 Follow-up (first)
 
@@ -24,7 +24,7 @@ Directly relevant to **collaborative mirror-world workspaces** — our direction
 
 ## Links
 
-[[flowforge]], [[agent-harness-landscape]], [[mirror-world-experience]]
+[[flowforge]], [[agent-harness-landscape]], mirror-world
 
 ---
 *Followup: 2026-08-14 | Scout source: GitHub API*

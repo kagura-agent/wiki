@@ -19,7 +19,7 @@ Cost-aware model/executor tiering where **escalation never bypasses the verifica
    - `incomplete` + clean + aligned with a **new** gap each round → ordinary progress, NOT failure
    Lesson: *what counts as a trigger matters more than the trigger mechanism.*
 4. **Trust-labeled escalation briefing.** Episodes are one-shot (no resumable session across a backend swap), so the escalated executor is briefed with the prior attempt **labelled as that executor's own unaudited claim**, while the auditor report is labelled authoritative — same trust boundary drawn by the base manager protocol. Bounded to 3 most recent failures, char-clipped, disable-able.
-5. **Deliberately JSON-free control protocol.** Manager emits plain-language lines (`Next: cli` / `Executor tier: cheap`), never JSON — same convention as [[Lobster0]]'s exact-argv boundary and [[MAWL]]'s rules-over-LLM-judge.
+5. **Deliberately JSON-free control protocol.** Manager emits plain-language lines (`Next: cli` / `Executor tier: cheap`), never JSON — same convention as [[Lobster0]]'s exact-argv boundary and [[multi-agent-workflow-lab]]'s rules-over-LLM-judge.
 
 ## Related
 
