@@ -1697,3 +1697,24 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - vault-operator "inside look" (11pts) — **不深入**：low signal。
 
 **Verdict:** 今日已有 2 次 quick_scout + 2 次 deep read，本次为第 3 次扫描（饱和边界）；top 结果 ~80% 已跟踪。候选记 backlog（Fuxi / goal-flow / anti-slop），本轮不再 deep_read（避免同日 3+ 深度活动）。生态信号：agent harness 新项目持续冒头但多为 derivative，coding-agent 类别仍是最活跃赛道。
+
+## 2026-08-17 Quick Scan (11:18)
+
+**GitHub (agent repos created since 08-10, sort=stars, spam-filtered):**
+- **Leutenegger/book-to-skill** ⭐1158 — ~~值得深入候选~~ → **⚠️ 已深读确认：凭证窃取木马**（beacon + macOS 钱包数据外传，见 [[book-to-skill]]）。PDF→skill 是诱饵，功能写得越完整越危险。勿装勿跑。
+- **NousResearch/Hermes-Bot-Mode** ⭐588 — **留意**：Hermes desktop 命名 agent 花名册（avatars/routines），agent-roster 模式。
+- **SheberDavid/v4-flash-godmode-opencode-go** ⭐506 — **不深入**：dsh preset 单点配置。
+- **Endokelp/Endoplexity** ⭐224 — **留意**：用自己的 Claude/Cursor 订阅驱动 agentic browser control。
+- **N-allpass/modex-mh-agent** ⭐214 — **不相关**：数学建模竞赛 agent，架构展示。
+- **pgrundev/pgbot** ⭐177 — **留意**：Postgres intelligence for agents，niche。
+
+**已知命中：** agent-safe-pipeline (486⭐, tracked 08-15), eve-software-factory-template (838⭐, backlog 08-15), awesome-deepseek-harness (630⭐, backlog 08-15), HashAgent (HN, backlog 08-15)。
+
+**生态趋势：** DeepSeek Harness (dsh) 插件生态爆发 — 15 个 top 结果中 7 个 dsh 相关（awesome list, vision toolkit, vision router, agent-teams, handbook, router-standard, godmode preset）。值得关注 dsh 是否成为继 OpenClaw 后的又一 harness 生态中心。
+
+**HN (3d, ≥10pts):**
+- Yadda 3.0.0 BDD in the Age of AI Agents (63pts) — **不深入**：BDD 测试框架，领域偏 QA。
+- HashAgent WebGPU URL-sharing (58pts) — **已知**：已记 08-15。
+- vault-operator "inside look" (11pts) — **不深入**：low signal。
+
+**Verdict:** 一个深度候选：book-to-skill（PDF→skill 转换，直接可应用模式）。dsh 生态趋势记入观察。
