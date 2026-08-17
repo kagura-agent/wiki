@@ -2,7 +2,7 @@
 title: LongHorizon-Harness — verified-state control loop for computer-use agents
 created: 2026-08-05
 tags: [agent-harness, computer-use, verification, long-horizon, orchestration]
-last_verified: 2026-08-10
+last_verified: 2026-08-17
 source: https://github.com/AMAP-ML/LongHorizon-Harness
 ---
 
@@ -53,3 +53,30 @@ External participation is now visible but immature: issue #13 proposes determini
 
 - Revisit **2026-08-17**: check whether Terminal-Bench ships reproducible results, whether the dashboard hardening lands, and whether user-reported nested-workspace/config inheritance is resolved.
 - Do **not** adopt a new harness now: our FlowForge + evidence gates already cover the principle; a concrete recurring long-running GUI task would be the appropriate trigger for evaluating a small adaptation.
+
+## Follow-up — 2026-08-17
+
+**THRIVING**: 779⭐ / 90 forks / 24 open issues (517→779, +50.7% in 7d). Default-branch commits steady (08-14/12/11/10) — pushed_at 08-14 is real activity, not a stall. Merged since last check: PR #35 DeepSeek harness support, dashboard UI release (#22), Terminal-Bench already in (#15). The dashboard hardening and control-plane boundary from the 08-10 note: external PR #11 (loopback-Host + JSON content-type) is still open, joined by more control-plane work.
+
+**Community is now real, not incidental** — 8 external contributors in 30 days: wang-kaopu (#43 Windows MIME fix, open), izaart95-jpg (#41 Opencode support, open), OrigamiKoala, TON14 (#33 EBADF, #28 guard failures), rajathpi, saikethan27 (#29), lunar-me (typo trio), SashaMIT (dashboard hardening). Fork network organic: newest forks all 0⭐ individual accounts with PR→fork contribution flow (wang-kaopu forked 08-16 then opened #43) — the opposite of [[MAWL]]'s coordinated fake fork network. 208-test suite added by external PR #29, no paid model calls.
+
+### Pattern extraction from PR #29 — cost-aware executor tiering (deep read)
+
+saikethan27's external PR adds a **tier dimension** (`cheap`/`strong`) orthogonal to the existing **type** (`gui`/`cli`), with cost-aware escalation. The genuinely transferable design decisions:
+
+1. **Escalation never bypasses verification.** `cheap → Auditor → FAIL → strong → Auditor`. A passing audit clears the escalation and routing snaps back to cheap — the expensive model is scoped to exactly the stretch that is struggling. No un-audited strong-model shortcut.
+2. **Failure taxonomy is the whole game.** An earlier version escalated on round 1 of every task because `incomplete + clean + aligned` (ordinary mid-run progress) was counted as failure. The fix distinguishes: `blocked`/`suspect`/`needs_revision`/error → `escalate_after_failures`; consecutive clean rounds naming the same unclosed gap → `escalate_after_stalled_rounds`; `incomplete` with a *new* gap each round → progress, not failure. This maps directly to our FlowForge branch-selection logic and the [[study-saturation]] signal taxonomy — *what counts as a trigger matters more than the trigger mechanism*.
+3. **Escalation briefing with trust labels.** Episodes are one-shot (no session to resume across a backend swap), so the escalated executor is briefed with the prior attempt **labelled as that executor's own unaudited claim**, while the Auditor report is labelled authoritative — the same trust boundary our audit-discipline DNA draws. Bounded to 3 most recent failures, char-clipped.
+4. **Shell-free agent path (Windows work, same PR).** Agent commands were POSIX shell strings → `create_subprocess_shell` (cmd.exe on Windows) → `mkdir -p` died instantly. Fix: argv lists + `cwd=`/`env=`/stdin, delete `shlex.quote` entirely — **no model-supplied value can reach a shell parser**. `Environment.exec` kept only as explicit escape hatch. This is the strongest practical confirmation of our [[exec-safety]] direction: remove the shell from the agent path rather than sanitize it. (Our own shell usage is a known debt — see [[shell-free-execution]] candidate.)
+5. **Windows branches document what they can't reproduce.** POSIX `O_NOFOLLOW`/`dir_fd` guarantees get Windows branches that keep what the platform can express (reparse-point refusal, atomic replace) and explicitly document the un-anchorable guarantee (check-then-use window). Honest capability accounting rather than silent degradation.
+6. **JSON-free manager protocol.** Manager emits plain natural language (`Next: cli` / `Executor tier: cheap` lines), never JSON — same convention as [[Lobster0]]'s exact-argv boundary.
+
+PR #33 (TON14) adds tolerant-close discipline: EBADF in a `finally` close shouldn't take down a healthy run — a failed poll costs that poll, not the watcher; a stored watcher error never overrides a finished run's outcome. Small but exactly our kind of robustness rule.
+
+### Relation to our direction
+
+- [[FlowForge]] could adopt the tier concept wholesale: cheap default model + escalate-on-struggle + verified-return, with the failure-taxonomy rule as the guard against spurious escalation.
+- The trust-label briefing (unaudited claim vs authoritative audit) matches our evidence-first audit discipline and could formalize subagent handoff briefings.
+- Shell-free argv execution is a concrete safety upgrade for our own tool paths.
+
+Revisit **2026-08-21**: whether #29/#41 merge, control-plane boundary lands, and whether the tier model survives maintainer review. Track, don't adopt — still no concrete long-running GUI task on our side.
