@@ -1718,3 +1718,9 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - vault-operator "inside look" (11pts) — **不深入**：low signal。
 
 **Verdict:** 一个深度候选：book-to-skill（PDF→skill 转换，直接可应用模式）。dsh 生态趋势记入观察。
+
+## 2026-08-17 quick_scan — DeepSeek Harness 生态波 + 2 个 watch 项
+- **dsh 桌面壳集群**（trend 信号，非 deep-read 目标）：zouyuxuan122/Deepseek-Harness-EAC 577⭐、myYangyunfan/dsh_desktop 397⭐、hust-open-atom-club/oh-dsh 225⭐、deepseek-harness-desktop-app 218⭐、deepseek-harness-studio 181⭐、awesome-deepseek-harness 99⭐ — 一周内 6+ 个 DeepSeek Harness 包装器，属于生态波，底层 dsh 本体才是值得关注的；wrapper 均派生，跳过。
+- **Endoplexity** (Endokelp/Endoplexity, 224⭐) — "bring your own Claude/Cursor subscription" 的 agentic browser control。模式新颖（复用现有订阅做浏览器控制），watch。
+- **repo-context-mcp** (nduc99911, 104⭐) — repo map + code search + token-aware context packs 的 MCP server。⚠️ 与 MAWL (christiangrey922/multi-agent-workflow-lab, 08-16 deep read) 同属 fake-fork 网络：MAWL 作者 fork 了 sibling repo repo-context-mcp，全 0⭐ 协调账号 → star farming 模式。**撤销 watch**，按投毒红旗处理（不深入）。
+- HN: HashAgent（WebGPU 本地 agent 可分享为 URL, 58pts）概念有趣但 0 代码验证前不深入；Yadda 3.0.0 BDD for AI agents (63pts) 记录在案。
