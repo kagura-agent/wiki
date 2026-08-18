@@ -97,3 +97,8 @@ Links: [[metaharness-agent-harness-generator]], [[pmb-memory]], [[agent-memory-e
 - **Health**: NASCENT 1/6. Solo dev, no external contributors.
 - **Assessment**: Slow growth, niche use case. Interesting concept but no community forming.
 - **Recommendation**: Downgrade to scout. Revisit only if external adoption signals appear.
+
+### Followup — 2026-08-18 (dropped)
+- **Stars**: 48 (+5 in 31d). Last commit 07-04 (45d stale). 1 self-filed open PR #2, 1 external issue (stuinfla 06-29) unanswered.
+- **Assessment**: Meets drop triggers — solo dev abandoned 30d+, community dead. CoW-vector-branching concept already extracted; no new architectural signal.
+- **Action**: Dropped from tracking. Concept stays in note; revisit only on external adoption signal.

@@ -62,4 +62,10 @@ The project’s most valuable general contribution is not “autonomous pentesti
 
 The project will either add stronger structured command authorization or attract security criticism once it gets wider review; its current safety proxy is likely to be the first architectural pressure point.
 
+### Followup — 2026-08-18
+- **Stars**: 743 (+557% in 14d, 113→743). Viral growth — but default-branch code silent since 07-28 (only README commits 08-03). 63 forks (organic signal).
+- **Community**: 2 external PRs — Dev9269 #2 (fix clean-training-data under sudo) closed unmerged, Srimi1 #3 (one-tap Wi-Fi connect) open since 08-07. Maintainer not merging → growth outpaces maintainer bandwidth.
+- **Assessment**: Classic marketing-driven star spike (matches [[pi-from-scratch]] pattern). Safety boundary (regex/token) still the known weak point, now with a much bigger audience.
+- **Prediction**: growth cools without code; no code by 08-25 → downgrade cool. Bump revisit 08-25 for PR merge activity + star trajectory.
+
 Links: [[agent-security]], [[clawpatrol]], [[openclaw]], [[flowforge]], [[agent-harness-landscape]]
