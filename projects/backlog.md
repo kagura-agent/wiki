@@ -1724,3 +1724,14 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **Endoplexity** (Endokelp/Endoplexity, 224⭐) — "bring your own Claude/Cursor subscription" 的 agentic browser control。模式新颖（复用现有订阅做浏览器控制），watch。
 - **repo-context-mcp** (nduc99911, 104⭐) — repo map + code search + token-aware context packs 的 MCP server。⚠️ 与 MAWL (christiangrey922/multi-agent-workflow-lab, 08-16 deep read) 同属 fake-fork 网络：MAWL 作者 fork 了 sibling repo repo-context-mcp，全 0⭐ 协调账号 → star farming 模式。**撤销 watch**，按投毒红旗处理（不深入）。
 - HN: HashAgent（WebGPU 本地 agent 可分享为 URL, 58pts）概念有趣但 0 代码验证前不深入；Yadda 3.0.0 BDD for AI agents (63pts) 记录在案。
+
+## 2026-08-18 quick_scan — cumora 候选 + 生态确认
+- **yetone/cumora** ⭐1458 (1 day old, 158 forks) — **值得深入（等成熟）**：agent 团队聊天，agents 作为一等公民，自带或 BYO Claude Code/Codex 大脑。yetone（Avante.nvim / openai-reasoner 作者）出品，质量背书强；但 created 08-17、pushed 08-17，1 天 commits 只能 README 级分析。记 backlog，Revisit 08-22 等架构沉淀。直接相关：多 agent 协作/通信层（映射 subagent 生态）。
+- **vercel-labs/eve-software-factory-template** ⭐884 — **已知**（backlog 08-15），Vercel 官方，持续活跃 commits 至 08-17。真研究目标应是 eve 框架本体而非 template。
+- **memoket/memoket-kite** ⭐81 (5d, vector-free 长期记忆, SOTA LoCoMo/LongMemEval) — **留意**：记忆系统 portfolio 相关，但 81⭐ 小且 0 issues，等社区信号。
+- **seyedehsanhadi/sloptrim** ⭐154 — **留意**：本地 AI 写作模式检测器（纯 stdlib、无网络、无模型），与我们 spam-filter/数据纪律有映射，但小项目。
+- **ryzqi/learn-agent** ⭐236 — **不深入**：中文教程类（20 章 TS 实战），非新颖架构。
+- **repo-context-mcp** ⭐104 — **投毒红旗**：与 MAWL 同属 fake-fork 网络（08-17 已撤销 watch），跳过。
+- HN (3d, ≥10pts)：仅 Yadda 3.0.0 BDD（64pts）——不相关（QA 领域）。
+
+**Verdict:** 无成熟 deep-read 候选（cumora 太新、eve template 已知）。生态稳定期信号：连续两天 trending 无新架构突破，多为 wrapper/教程/已知项。
