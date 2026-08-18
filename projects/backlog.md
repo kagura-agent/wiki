@@ -1735,3 +1735,9 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - HN (3d, ≥10pts)：仅 Yadda 3.0.0 BDD（64pts）——不相关（QA 领域）。
 
 **Verdict:** 无成熟 deep-read 候选（cumora 太新、eve template 已知）。生态稳定期信号：连续两天 trending 无新架构突破，多为 wrapper/教程/已知项。
+
+## 2026-08-18 — LongHorizon-Harness (AMAP-ML/LongHorizon-Harness)
+- 811⭐ / created 08-04 / pushed 08-17 (活跃). Long-horizon computer-use harness: 跨 desktop apps + CLI 长时间运行 agent。
+- 信号: 最近 commit 实质性强 — "Recover from local role timeouts (#50)"、trajectory 去重修复、control request 边界加固、loopback-only + DNS-rebinding 防御 + body cap (安全工程意识好)。
+- 相关性: 直接映射我们 subagent 长任务超时痛点 (Copilot API 60s 流式空闲超时) 与 FlowForge observability。
+- 待办: deep_read 看 timeout recovery 机制 + 控制面安全模型。
