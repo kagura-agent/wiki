@@ -2,7 +2,7 @@
 title: LongHorizon-Harness — verified-state control loop for computer-use agents
 created: 2026-08-05
 tags: [agent-harness, computer-use, verification, long-horizon, orchestration]
-last_verified: 2026-08-17
+last_verified: 2026-08-18
 source: https://github.com/AMAP-ML/LongHorizon-Harness
 ---
 
@@ -80,3 +80,17 @@ PR #33 (TON14) adds tolerant-close discipline: EBADF in a `finally` close should
 - Shell-free argv execution is a concrete safety upgrade for our own tool paths.
 
 Revisit **2026-08-21**: whether #29/#41 merge, control-plane boundary lands, and whether the tier model survives maintainer review. Track, don't adopt — still no concrete long-running GUI task on our side.
+
+## Delta — 2026-08-18 (quick scan catch, 811⭐)
+
+Three of the four open questions from 08-17 resolved within hours: **PR #11 (control-plane boundary: loopback Host + JSON Content-Type + body cap) MERGED 08-17 08:15** (SashaMIT), **PR #41 (Opencode support) MERGED 08-17 03:31**, and new **PR #50 (Recover from local role timeouts) MERGED 08-17 13:48** (Upper9527, 171+/19-, 203 tests). PR #29 (cost-aware escalation) still open.
+
+### PR #50 — timeout misclassification lesson (transferable)
+
+Root cause: `CommandAgentAdapter` correctly returned `EpisodeResult(status="timeout")`, but the generic provider-error classifier matched the adapter's own synthesized `Episode timed out after ...` text against its network-timeout regex → failure kind became `network` → Manager terminated the whole run as provider failure.
+
+Fix: keep local timeout status explicit and authoritative (don't let a synthesized message reclassify it), preserve timeout status + partial Executor output, let the next Manager round inspect the real workspace and recover; regression coverage for Manager/Executor/Auditor all three roles.
+
+**Transferable rule: error taxonomy must key on status fields, not message-pattern matching — a synthetic message colliding with a provider-error regex turns a recoverable event into a fatal one.** Directly maps to our subagent handling: Copilot API ~60s streaming idle timeout is a *local budget* event (recoverable, partial output preserved, main agent takes over) vs genuine provider failure. We already practice "subagent 超时 → 主 agent 接手", but this is the first explicit argument for *preserving partial output as first-class state* rather than discarding the episode. Also: `incomplete + new gap each round` = progress ≠ failure (same taxonomy lesson as PR #29's failure taxonomy).
+
+Revisit **2026-08-21**: #29 merge status + whether timeout-recovery holds in real runs.
