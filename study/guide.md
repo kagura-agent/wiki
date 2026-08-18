@@ -54,6 +54,7 @@ Learn things that make me **better at my actual job** (open-source contributions
 
 **Downgrade triggers:**
 - ⚠️ followup-status.sh 的 QUIET 分类基于 pushed_at，可能误标活跃项目（08-17 实测：THRIVING 项目被标 QUIET）。先查 default-branch commits 再决定 skim/bump，不要直接采信 QUIET 推荐
+- **Growth signal ≠ code signal**（08-18 实证，见 [[growth-signal-vs-code-signal]]）：star 大涨 + default-branch code silent + 外部 PR 未 merge → marketing-driven spike（pi-from-scratch、Nightcrawler 两例），别仅凭 star 数升级 THRIVING；按冷却处理并记预测
 - Growth plateau (⭐ growth < 5% between checks)
 - Core dev pace slowed (commits/week drops 50%+) — measure via default-branch commits since last check; `pushed_at` is misleading (any branch push refreshes it)
 - Project shifts from innovation to maintenance (adapter renames, badge updates)
