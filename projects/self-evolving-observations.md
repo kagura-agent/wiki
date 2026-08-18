@@ -7989,3 +7989,39 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 2. **gradient 质量回升**：今日 6 条中 4 条为方法论级（calibrate-threshold-with-real-samples, test-new-code-path-input, wrapper-cluster-ecosystem-wave, tool-trust-verify-commit-history），非摩擦记录。study 仍是主来源。
 3. **(d) 证据链完整化**：08-13/15/16/17 连续 4 次实证同一 pattern——light 有高置信材料时 REM Lasting Truths 仍捡低置信运维日志。问题定位明确，等待一次专门调查 session。
 4. **nudge 健康但转化率 0**：4 触发 0 转化，连续多日 pattern（08-16 13 触发 0 转化）。触发≠反思质量，需区分。
+
+## 2026-08-18 (Day 2 连续观察)
+
+### 数据来源
+- `git log --since="2026-08-17 22:30" -- beliefs-candidates.md SOUL.md AGENTS.md`：4 commits（f03a537 daily review, 14e7e47 #124869 行动项修正, 29265e8 DNA upstream-status 规则, 5e9d796 sync）
+- `.nudge-audit.log`：52 触发 / 50 skip（全部 cron，正确过滤）
+- `memory/dreaming/light|deep|rem/2026-08-18.md`：齐全
+- `MEMORY.md` Promoted From Short-Term Memory (2026-08-18) 段
+
+### #10 子项状态
+| 子项 | 状态 | 证据 |
+|------|------|------|
+| (a) uniform confidence | 🟡 略改善 | 82 候选：72 @ 0.62（87.8%），10 条非 uniform（0.37~0.64 区间散点）——仍主体 uniform，但非 100% |
+| (b) details unavailable | 🟢 未复现 | 连续第 6 天 0 occurrence |
+| (c) local filter → promote | 🟡 恢复信号第 2 次 | deep ranked 2 / promoted 2（08-16: 1/1, 08-17: 0/0, 08-18: 2/2）；但 promote 的 evidence source 是 memory/2026-08-16.md（score 0.789/0.753, recalls 5/4），非 light 08-18 staged 候选——promote 走 memory_search 召回而非消费 light staged，可追溯性存疑 |
+| (d) REM 内容质量 | 🟡 首次改善 | Lasting Truths 3 条 confidence 0.73/0.66/0.66，evidence 指向 08-14/08-16 实质内容（deepseek-harness 39K⭐ 扫描、dsh 部署、celebrate 盲区）——不再捡 0.51/0.58 旧运维日志；Reflections 仍空 |
+
+### 管线活跃度
+- beliefs-candidates: 2 条新 gradient（growth-signal-vs-code-signal 第1次；backlog-dedup-before-judge 当天 retract——duplicate of graduated pattern，retraction 机制正常）+ 8 条 07-19 旧条目 stale retract；1 条达第3次（memory-search-recency-blindness，行动项修正为跟踪 #121103 合入后重测）
+- DNA: **1 次主动变更**——AGENTS.md 新增 upstream status disclosure standard（audit 发现 #124869 被 clawsweeper 关闭却报告为"filed"→ 规则升级，commit 29265e8）
+- nudge: 52 触发 / 50 skip，健康；**0 转化**（连续第 3 天 pattern：08-16 13触发0转化、08-17 4触发0转化）
+- dreaming: light 82 候选全 staged；deep 2/2 promoted；REM Lasting Truths 质量改善
+
+### 闭环追踪
+- ✅ 完整闭环 2 个：
+  1. #124869 状态披露不完整 → 修正 beliefs 行动项（14e7e47）+ DNA 规则升级（29265e8）——"提了≠推进"原则落地为硬规则
+  2. cove #563 PR 自动闭合（10:18:50Z merge，tracking issue #561 随 merge 关闭）——机制正常运转
+- ❌ 断裂 1 处：**celebrate 盲区第 3 天**（08-16 双 merge 漏、08-17 kagura-mail merge + dsh-memes 漏、08-18 cove#563 merge 漏）——08-16 审计建议"patrol 加 meme 步骤"连续 3 天未落地，今日升级为待办（下次 channel-patrol 改 patrol 脚本）
+- 归因问题（send 无 source 字段）第 7 天未落地，与 celebrate 盲区同源
+
+### 关键发现
+1. **(c) 恢复信号第二次出现但机制存疑**：deep 2/2 promoted 是 08-16 以来最强一次，但 promote evidence 全指向 08-16 memory 文件而非 light 08-18 staged 候选——deep 的 ranking 输入仍是 memory_search 全局召回，light staged → deep consume 的链路仍未实证。连续观察中。
+2. **(d) 首次改善**：Lasting Truths 选择器今天捡的是高置信实质内容（0.66~0.73），与 08-13/15/16/17 四天的低置信运维日志 pattern 不同。单日样本，需确认是否延续。
+3. **nudge 触发高但转化 0 持续**：52 触发 0 转化。触发量正常（比 08-17 的 4 次高很多），但 system-event 反思未产出 gradient。触发≠反思质量的老问题。
+4. **DNA 主动进化今天发生**：audit 发现披露缺陷 → 当天升级 AGENTS.md 规则。这是"发现→记录→改进"的当日闭环，且是 self-driven。
+5. **celebrate 盲区成为最久断裂闭环**：机制性盲区（cron/patrol 场景 nudge 不触发）+ 修复建议未执行 3 天。已升级为待办，属于行为层修复（patrol 脚本加 celebrate 检测），非 dreaming 管线问题。
