@@ -1727,6 +1727,7 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 
 ## 2026-08-18 quick_scan — cumora 候选 + 生态确认
 - **yetone/cumora** ⭐1458 (1 day old, 158 forks) — **值得深入（等成熟）**：agent 团队聊天，agents 作为一等公民，自带或 BYO Claude Code/Codex 大脑。yetone（Avante.nvim / openai-reasoner 作者）出品，质量背书强；但 created 08-17、pushed 08-17，1 天 commits 只能 README 级分析。记 backlog，Revisit 08-22 等架构沉淀。直接相关：多 agent 协作/通信层（映射 subagent 生态）。
+  - **08-19 quick_scan 更新**: ⭐2420 (+66%/d), 266 forks, 12 open issues, pushed 08-18. 代码成熟度加速: 573 tests 通过, CI 双 job (quality+pr), 真实 PR #3/#5/#6/#8 (CVE 依赖修复、nvm-windows shim 修复、Postgres/Redis service), 非 README-only。架构开始沉淀 → 维持 08-22 Revisit，届时可 deep_read。
 - **vercel-labs/eve-software-factory-template** ⭐884 — **已知**（backlog 08-15），Vercel 官方，持续活跃 commits 至 08-17。真研究目标应是 eve 框架本体而非 template。
 - **memoket/memoket-kite** ⭐81 (5d, vector-free 长期记忆, SOTA LoCoMo/LongMemEval) — **留意**：记忆系统 portfolio 相关，但 81⭐ 小且 0 issues，等社区信号。
 - **seyedehsanhadi/sloptrim** ⭐154 — **留意**：本地 AI 写作模式检测器（纯 stdlib、无网络、无模型），与我们 spam-filter/数据纪律有映射，但小项目。
