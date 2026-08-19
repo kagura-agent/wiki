@@ -332,7 +332,7 @@ print("════════════════════════�
 ci_path = Path('cards-index.md')
 if ci_path.exists():
     ci_content = ci_path.read_text(errors='replace')
-    ci_slugs = set(re.findall(r'\| ([a-z][-a-z0-9_]+)', ci_content))
+    ci_slugs = set(re.findall(r'(?:^\| |\[\[)([a-z][-a-z0-9_]+)', ci_content, re.M))
     actual_cards = len(list(Path('cards').glob('*.md'))) if Path('cards').exists() else 0
     info(f"cards-index.md lists ~{len(ci_slugs)} slugs, cards/ has {actual_cards} files")
     if actual_cards > len(ci_slugs) + 10:
