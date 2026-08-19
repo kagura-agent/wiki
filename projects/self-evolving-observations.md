@@ -8025,3 +8025,38 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 3. **nudge 触发高但转化 0 持续**：52 触发 0 转化。触发量正常（比 08-17 的 4 次高很多），但 system-event 反思未产出 gradient。触发≠反思质量的老问题。
 4. **DNA 主动进化今天发生**：audit 发现披露缺陷 → 当天升级 AGENTS.md 规则。这是"发现→记录→改进"的当日闭环，且是 self-driven。
 5. **celebrate 盲区成为最久断裂闭环**：机制性盲区（cron/patrol 场景 nudge 不触发）+ 修复建议未执行 3 天。已升级为待办，属于行为层修复（patrol 脚本加 celebrate 检测），非 dreaming 管线问题。
+
+---
+
+## 🔬 自进化观察日报 2026-08-19
+
+### 管线活跃度
+- **beliefs-candidates**: 3 条新 gradient（calibration-verify-debt / multi-source-theme-convergence / signal-triggered-maturity-check，均第 1 次，Source: study）+ **2 条同日 graduation**（bounded-finder-failure-evidence + study-saturation-quick-header-blindspot，commit b94dfa5——audit 确认结构修复 14d/4x 前已落地，状态管理漏标，补记毕业）
+  - 数据来源: `git log --since="2026-08-18 22:30" --all -- beliefs-candidates.md` 返回 2 commits（b94dfa5, ab1cf80）
+- **DNA 变更**: 无 — `git log -- SOUL.md AGENTS.md` 返回空
+- **nudge**: 18 触发 / 18 enqueued（08-19 00:00~13:28 CST，cron/dreaming session 正确 skip）；今日 3 条 gradient 全部 Source: study → **0 转化**（触发≠反思质量的 pattern 延续第 4 天）
+  - 数据来源: `.nudge-audit.log` 今日段
+- **dreaming**: dream-health.sh HEALTHY — 512 candidates / 7 promoted / 5 eligible；light 121 reports（今日候选全 0.62 uniform，staged）；deep 今日 ranked 1 / promoted 1（含 "repaired recall artifacts: rewrote recall store"）；REM 今日空（"No strong patterns" + "No candidate strong truths"）；**details unavailable 今日 0 occurrence（连续第 7 天）**
+  - 数据来源: `tools/dream-health.sh` + memory/dreaming/{light,deep,rem}/2026-08-19.md
+
+### 闭环追踪
+- ✅ 完整闭环 3 个：
+  1. **unsloth#9198 深评→修复→规则提炼**（最强闭环）：mahiatlinux 8 点深评（row 自相矛盾/Strix Halo GTT 池/classifier 重复/测试无法失败等）→ 全修（c24d077c，36 passed）→ PR 逐点回应 8 点 → 提炼 3 条 guide.md 规则（rule #21 逐条对应回应、rule #10 push 前验证 remote、新 rule #94 pre-commit.ci 并发写入处理，commit c9f7187 已 push github-contribution）——review→学习→规则 全链路
+  2. **2 条 gradient 同日毕业**（b94dfa5）：study-saturation-quick-header-blindspot 结构修复 08-15 已落地（cfbc762），状态管理漏标 4 天，audit 补记毕业——修复先行、标记滞后
+  3. **cove#566 + kagura-mail#456 merged**（今日内部 PR 双 merge）
+- ❌ 断裂 2 处：
+  1. **celebrate 盲区第 4 天**：今天 cove#566/kagura-mail#456 双 merge 仍无 celebrate/meme 记录；昨日升级的待办（patrol 脚本加 celebrate 步骤）今日 memory 未见执行
+  2. **Podbean 发布受阻**：EP130 已写未发布（uploadAuthorize HTTP 200 空 body，06-01 起已知问题）——发布链断裂
+
+### 关键发现
+1. **外部反馈→规则转化达到峰值**：unsloth#9198 一条深评产出 3 条 guide 规则更新，且全部是方法论级（回应粒度、remote 验证、并发写入者）。这是 08 月以来最强的 review→学习闭环，也对应 AGENTS.md 外部反馈利用维度。
+2. **graduation 机制当日修复当日毕业**：b94dfa5 证明 graduation 不是"次数够了才毕业"，而是"结构修复落地即可补记毕业"——评估标准从计数转向实证。
+3. **(c) 恢复信号第 3 次但机制仍存疑**：deep 今日 1/1 promoted（08-16: 1/1 → 08-17: 0/0 → 08-18: 2/2 → 08-19: 1/1），但 light staged 候选依旧全 0.62 uniform 未被 consume；deep ranking 输入仍是 memory_search 全局召回，staged→consume 链路未实证。连续观察。
+4. **(d) REM 改善未延续**：08-18 的高置信 Lasting Truths（0.66~0.73）是单日样本，今日 REM 恢复为空。选择器问题仍在。
+5. **nudge 转化率持续为 0**（第 4 天）：18 触发 0 转化，全部梯度来自 study。触发通道健康，反思→记录的转化通道未打通。
+6. **study 是今日唯一 gradient 源**：3 条全 study 来源；workloop 今天忙于 unsloth 修复（产出进 guide 而非 beliefs）。
+
+### 原始数据
+- git: b94dfa5（beliefs 毕业 2 条）、ab1cf80（multi-source-theme-convergence + ProofRun Track/Watch）、82df036（todo: unsloth 8 点修复）、47464db（fix: never HARD_CLOSE PRs with recent activity）、ec8695b（daily review DREAMS trim 19→14）、08b46e0（fix: dna-overhead-check numstat 科学计数法误解析）、0ab6a4a（compress-memory-metrics）、9c3dc49（todo: study-saturation header blindspot closed）
+- PR 活动: 7 条更新 — unsloth#9198(open, 今日修复+回复) / agno#9615(open) / langwatch#6432(open) / cove#566(merged) / kagura-mail#456(merged) / cove#564(merged 08-18) / cove#563(merged 08-18)
+- memory/2026-08-19.md: 78 行（workloop-night 跟进 + kagura-story 晚间定稿 + daily-summary + contribution-evolve）
