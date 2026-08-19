@@ -1,26 +1,27 @@
 {
-  "timestamp": "2026-08-18T02:13:00Z",
-  "run_date": "2026-08-18",
+  "timestamp": "2026-08-19T02:07:00Z",
+  "run_date": "2026-08-19",
   "totals": {
-    "md_files": 1188,
-    "cards": 461,
-    "projects": 621,
-    "wikilinks": 5736
+    "md_files": 1191,
+    "cards": 462,
+    "projects": 623,
+    "wikilinks": 5745
   },
   "health": {
-    "errors": 15,
-    "warnings": 65,
-    "broken_links": 5,
+    "errors": 16,
+    "warnings": 71,
+    "broken_links": 6,
     "broken_link_sources": [
       "cards/agent-tool-supply-chain-poisoning.md -> [[fork-network-star-farming-check]]",
       "memex/growth-signal-vs-code-signal.md -> [[mawl]]",
       "projects/book-to-skill.md -> [[fork-network-star-farming-check]]",
       "projects/longhorizon-harness.md -> [[exec-safety]]",
-      "projects/longhorizon-harness.md -> [[shell-free-execution]]"
+      "projects/longhorizon-harness.md -> [[shell-free-execution]]",
+      "projects/proofrun.md -> [[pushed-at-misleading]]"
     ],
-    "orphans": 4,
-    "orphan_cards": ["agent-tool-supply-chain-poisoning", "verification-preserving-escalation"],
-    "orphan_projects": ["graft", "prime-agent"],
+    "orphans": 7,
+    "orphan_cards": ["agent-tool-supply-chain-poisoning", "error-taxonomy-status-over-message", "verification-preserving-escalation"],
+    "orphan_projects": ["graft", "prime-agent", "proofrun", "unsloth"],
     "duplicate_slugs": 0,
     "index_drift": {
       "missing_from_index": 10,
@@ -36,24 +37,24 @@
         "projects/understand-you.md",
         "projects/voltagent.md"
       ],
-      "not_in_index": 6,
+      "not_in_index_warn": 9,
       "cards_index_stale": true,
-      "cards_not_indexed": 461
+      "cards_index_listed": 0,
+      "cards_index_total": 462
     },
-    "stale_files": 531,
-    "unicode_suspicious": 20,
-    "stubs": 0,
-    "secrets": 0,
-    "frontmatter_ok": false,
-    "frontmatter_issues": 2,
-    "link_density": 5.8,
-    "zero_outbound": 2,
-    "invalid_fact": 0
+    "stale_files": 532,
+    "frontmatter_issues": ["agent-tool-supply-chain-poisoning", "local-state-concurrent-guard"],
+    "no_outbound_links": ["cards/INDEX.md", "cards/retire-candidates.md"],
+    "unicode_suspect_groups": 6,
+    "stub_files": 0,
+    "secret_scan": "ok",
+    "invalid_facts": 0
   },
-  "error_book": {
-    "new_issues": 1,
-    "recurring_issues": 78,
+  "book": {
+    "new_issues": 3,
+    "recurring": 83,
+    "clean_passes": 0,
     "auto_closed": 0,
-    "total_open": 79
+    "total_open": 86
   }
 }

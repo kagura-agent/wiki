@@ -32,4 +32,4 @@ Marketing spikes without code cool fast. Rule of thumb: **stars ≥ +50% in 7d w
 - Followup tiering: don't upgrade a repo to THRIVING on stars alone; community signal = PRs merged + external issue discussion, not fork count.
 - Safety angle: a regex-boundary project ([[nightcrawler]]) hitting viral audience = the known weakness gets a bigger attack surface. Elevated scrutiny, not celebration.
 
-Links: [[pi-from-scratch]], [[nightcrawler]], [[mawl]], [[agent-harness-landscape]]
+Links: [[pi-from-scratch]], [[nightcrawler]], [[multi-agent-workflow-lab]], [[agent-harness-landscape]]
