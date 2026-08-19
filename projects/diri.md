@@ -1,7 +1,7 @@
 ---
 title: "diri — Native macOS Orchestrator for Coding Agents"
 created: 2026-08-05
-last_verified: 2026-08-12
+last_verified: 2026-08-19
 source: https://github.com/cristicretu/diri
 stars: 248
 status: deep-read
@@ -90,3 +90,11 @@ The attention is moving from “run several agents” toward **operational integ
 - [Issue: two engine tests hang on GitHub runners](https://github.com/cristicretu/diri/issues/1)
 - GitHub REST API: repository, commits, releases, issues (queried 2026-08-12)
 - [PR #25](https://github.com/cristicretu/diri/pull/25), [PR #31](https://github.com/cristicretu/diri/pull/31), [PR #47](https://github.com/cristicretu/diri/pull/47)
+
+## 08-19 Followup — host-failure recovery 补强
+
+- 248→264⭐（+6.5%），default-branch 活跃到 08-15
+- **#140/#141（08-15）**：engine 测整个 session 生命周期 + resilient session recovery/activity history — 上轮问的"host 故障后恢复是否覆盖"得到正面回答：会话存活现在不依赖 daemon 生命周期
+- **#143**：MCP session authorization 加固（信任边界继续收）
+- **#144**：remote PTY 输出按 batch 帧化而非每 read 一帧（降 overhead）
+- #44（status-decision inspection 变 provenance surface）仍未动，继续观察

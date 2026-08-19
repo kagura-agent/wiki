@@ -46,3 +46,15 @@ Agent proposal → IntentCapture → DecionisGate → ALLOW/ESCALATE/BLOCK → S
 ## 跟踪决策
 
 Track（hot，3-7 天后 revisit）。2 天新项目但架构直接相关，值得看社区是否形成。Revisit 08-19：看 issues/PR、Decionis 契约是否公开、package 是否发布、stars 增速。
+
+## 08-19 Followup — 红旗解除，社区开始形成
+
+**数据（gh api 08-19 实测）**：376→533⭐（+42%/4d）、3→58 forks、0→10 open issues、npm `@decionis/agent-safe-pipeline@0.1.2` 已发布 + v0.1.3-rc.1/rc.2（08-16 同日两连发）。
+
+- **package 未发布红旗解除**：npm 已上线 0.1.2，且 CI 加了 reproducible package builds 验证（#61）、keyless release-tag 签名（#60）、依赖生命周期覆盖（#59）、TLS/加密敏捷性 posture 文档（#56）
+- **0 issues 红旗解除**：10 个 open issues 全部来自外部用户 `ocularminds`，且是**质量关注型**（不是 feature 请求）：shadow evaluation 要 failure-isolated、fixture authority 要挪到显式测试入口、release 要 gate 在 API/package 兼容性上、要 e2e 协议契约测试（真实 HTTP authority stub）、要 redacted audit event sink、要建模 grant 消费后的 ambiguous provider outcomes、Presence 异步审批要 bounded polling
+- **信号解读**：外部贡献者提的全是"信任边界怎么测试/怎么防绕过"的问题 → 说明这个架构的核心卖点（可验证的审批边界）被认真对待了。质量关注型 issue > 数量，是严肃性的信号
+
+**残余开放项**：Decionis / Presence 服务端仍闭源（#526 倒是加了 maintainer 强制，方向对）。下轮 08-26 看服务端开放度 + RC→stable 进展。
+
+**预测校准**：08-15 时"2 天新项目 + 0 社区"判 track don't invest 是对的——现在证明 wait-and-see 而不是 chase 是正确姿势，与 [[growth-signal-vs-code-signal]] 一致：注意力（stars）先行，代码/社区信号滞后但会来。

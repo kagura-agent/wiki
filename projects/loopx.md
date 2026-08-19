@@ -1,7 +1,7 @@
 ---
 title: "LoopX — local-first control plane for long-running agents"
 created: 2026-08-09
-last_verified: 2026-08-13
+last_verified: 2026-08-19
 tags: [agent-harness, control-plane, durable-runs, loop-engineering, local-first]
 ---
 
@@ -54,3 +54,10 @@ The design complements [[FlowForge]]'s workflow topology. FlowForge models workf
 ### Insight: governance is moving from "gate the action" to "bind the obligation"
 
 The early LoopX model was a bounded-turn control plane (claim → act → evidence → handoff). The 08-12 work adds a second layer: durable *obligation identity* that replanning must bind against, and *hard-only* evidence-read enforcement with a failure-receipt escape. That mirrors the [[FlowForge]] distinction between workflow topology (transitions) and durable control state (what is safe to execute next) — but now with an explicit notion of *which past obligation a retry is anchored to*. Counterintuitive detail: the failure-receipt escape means the hard gate still records *when* it is bypassed, preserving audit even on the bypass path. This is directly relevant to our [[durable-agent-runs]] and DNA-governance mainline: retries should be anchored to an obligation, and enforcement bypasses should leave a receipt.
+
+## 08-19 Followup — quota 会计继续收紧
+
+- 4,399→4,907⭐（+11.5%/6d），daily commits
+- **#3330-#3334（08-18）**：monitor poll 绑定到 heartbeat receipts（poll 不能脱离 heartbeat 存活）、poll CLI owner 抽取、recorder seam 保留 — 控制面会计从"轮询计数"升级到"事件绑定"
+- smoke 测试 hermetic 化（#3332）、KunlunCode public check 加载（#3331）
+- 与 Prime Agent 的 spawn ledger（single-writer ledger）同一趋势：**运行时事件的第一手记录 > 事后重建**，控制面都在往"不可伪造的事件账本"走

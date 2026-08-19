@@ -8,7 +8,7 @@ stars: 15
 url: https://github.com/agentrust-io/cmcp
 license: MIT
 language: Python
-last_verified: 2026-08-05
+last_verified: 2026-08-19
 ---
 
 # cMCP — Confidential MCP Runtime
@@ -71,3 +71,11 @@ The cost is substantial operational complexity: policy-language compatibility, c
 ## Links
 
 [[tool-execution-policy-enforcement]] · [[makerchecker]] · [[clawpatrol]] · [[agent-harness-landscape]] · [[agent-security]]
+
+## 08-19 Followup — TDX 硬件 attestation 路径推进
+
+- 15→20⭐ / 11 forks，default-branch 活跃到 08-18
+- **#527（08-18）**：TDX MRTD/REPORTDATA 按 ABI 正确位置读取 — 上轮"measurement-bound signing-key sealing + real-hardware validation"开放边界在实打实推进
+- **#523**：catalog 检测 upstream tool-definition drift，scanner 不再 fail-open（又一个 fail-closed 实践）
+- **#519**：verifiable catalog approval provenance；**#513**：initialize 时协商 handshake-era revision
+- 小星但工程密度高，继续 warm track
