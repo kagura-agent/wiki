@@ -3,7 +3,7 @@ title: RealReplicaBench — stateful, reproducible business-workflow benchmark
 created: 2026-08-06
 updated: 2026-08-06
 tags: [agent-evaluation, long-horizon, openclaw, verification, reproducibility]
-last_verified: 2026-08-10
+last_verified: 2026-08-20
 source: https://github.com/Accio-Lab/RealReplicaBench
 ---
 
@@ -43,3 +43,13 @@ It is a high-fidelity complement to static coding benchmarks and broad browser b
 
 - Revisit **2026-08-20**: check whether result bundles receive immutable URLs/checksums, whether independent issues/PRs appear, and whether the pinned image/runtime advances.
 - Do not run the full suite without an explicit evaluation goal: it requires Docker, model and judge credentials, and is materially more expensive than an architecture read.
+
+## 2026-08-20 Follow-up
+
+- **1,193⭐** (+17% from 1,018 in 14d), 100 forks, 1 open issue.
+- **ACTIVE:** default-branch commits daily through 08-20. Notable: rebrand to **Commerce Agent Bench** (non-image rename complete 08-19, leaderboard/logos aligned), frozen benchmark PDF assets restored 08-20 (reproducibility-focused maintenance).
+- **Provenance gap persists:** still **0 releases / no immutable checksum URLs** for reference score bundles — the open question from 08-06 remains unanswered.
+- Community still thin: 1 open issue (deterministic Zendesk Support ticket mock #4, feature request, no external criticism signal).
+- Revisit **2026-08-27** for provenance artifacts (immutable URLs/checksums) + rebrand landing effect on community signal.
+
+**Prediction (08-20, medium):** RealReplicaBench will still lack immutable/checksummed result-bundle URLs at the 2026-08-27 revisit (provenance gap = deliberate non-goal so far, not backlog).

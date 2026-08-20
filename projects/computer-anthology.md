@@ -3,7 +3,7 @@ title: Computer Anthology — continuously evolving terminal-agent benchmark (pu
 created: 2026-08-06
 updated: 2026-08-06
 tags: [agent-evaluation, benchmark, terminal-agents, evidence-quality]
-last_verified: 2026-08-06
+last_verified: 2026-08-20
 source: https://vetto.ai/companies/computer-anthology-terminal-tasks.html
 ---
 
@@ -38,3 +38,9 @@ For [[openclaw|OpenClaw]] and [[flowforge|FlowForge]], the transferable hypothes
 
 - Revisit **2026-08-20**: look for a public paper, task release, repository, executable harness, raw results, and external reproductions/critique.
 - Upgrade only if the benchmark exposes enough artifacts to test its anti-bias and harness-comparison claims. Until then, retain the principle rather than adopting the product.
+
+## 2026-08-20 Follow-up — DROPPED
+
+- **Second check confirms no artifacts:** `gh search repos "Computer Anthology"` returns empty; `gh api users/Vetto/repos` returns no repos; no public paper, code, tasks, results, or issue tracker discoverable.
+- Landing-page-only announcement again — nothing trackable, no external reproduction. **Track dropped 08-20.**
+- Retain the *methodological principle* (harness-comparison + semantic-perturbation + selection-bias analysis as benchmark-maintenance process) in the broader evaluation thinking — it survives independently of the product.

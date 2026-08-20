@@ -102,3 +102,15 @@ Started as `spec-gen` (March 2026, spec generation tool) → evolved into full a
 - Still active team (clay-good + laurentftech), deterministic output boundary discipline improving.
 
 Links: [[agent-memory-strategies]], [[mcp-server]], [[ephemera-retention-primitive]]
+
+## 2026-08-20 Follow-up
+
+- **287⭐** (+3% from 279 in 6d), 35 forks. **v2.2.0 released 08-17.**
+- This cycle's work:
+  - **Complexity language-aware analyzer (#381)** — complexity metrics now language-aware (per-language weighting instead of one-size-fits-all).
+  - **Detect tests across supported languages (#380)** — test discovery generalized beyond a single framework assumption.
+  - **Preserve governance config + bound first-turn startup (#379)** — config survives across runs; startup cost bounded (deterministic-hygiene continuity).
+  - **CodeQL egress triage docs (#378)** — security posturing documented for CI egress review.
+- Steady maintenance pace, but 3 open issues are all dependabot bumps — no external feature/community signal this cycle.
+- Security-hygiene patterns (output-boundary redaction, stale-citation disclosure) remain directly applicable to our tooling; nothing new to adopt this round.
+- Revisit **2026-08-27** for external contributor signal + epistemic-lease evolution.
