@@ -1,48 +1,36 @@
 {
-  "timestamp": "2026-08-19T02:07:00Z",
-  "run_date": "2026-08-19",
+  "timestamp": "2026-08-20T02:06:00Z",
+  "run_date": "2026-08-20",
   "totals": {
-    "md_files": 1191,
-    "cards": 462,
-    "projects": 623,
-    "wikilinks": 5745
+    "md_files": 1197,
+    "cards": 466,
+    "projects": 625,
+    "wikilinks": 5769
   },
   "health": {
-    "errors": 16,
-    "warnings": 71,
-    "broken_links": 6,
+    "errors": 1,
+    "warnings": 59,
+    "broken_links": 1,
     "broken_link_sources": [
-      "cards/agent-tool-supply-chain-poisoning.md -> [[fork-network-star-farming-check]]",
-      "memex/growth-signal-vs-code-signal.md -> [[mawl]]",
-      "projects/book-to-skill.md -> [[fork-network-star-farming-check]]",
-      "projects/longhorizon-harness.md -> [[exec-safety]]",
-      "projects/longhorizon-harness.md -> [[shell-free-execution]]",
       "projects/proofrun.md -> [[pushed-at-misleading]]"
     ],
-    "orphans": 7,
-    "orphan_cards": ["agent-tool-supply-chain-poisoning", "error-taxonomy-status-over-message", "verification-preserving-escalation"],
-    "orphan_projects": ["graft", "prime-agent", "proofrun", "unsloth"],
+    "orphans": 2,
+    "orphan_cards": [],
+    "orphan_projects": ["agent-ecosystem-scout-2026-08-19", "agno"],
     "duplicate_slugs": 0,
     "index_drift": {
-      "missing_from_index": 10,
+      "missing_from_index": 3,
       "missing_files": [
-        "projects/hitch-terminal-proxy.md",
-        "projects/signet.md",
-        "projects/skill-make.md",
-        "projects/stss.md",
-        "projects/tenshu.md",
-        "projects/tenshu.zh.md",
-        "projects/thoth-personal-ai.md",
-        "projects/thunderbolt.md",
-        "projects/understand-you.md",
-        "projects/voltagent.md"
+        "cards/single-writer-spawn-ledger.md",
+        "projects/agent-ecosystem-scout-2026-08-19.md",
+        "projects/agno.md"
       ],
-      "not_in_index_warn": 9,
+      "not_in_index_warn": 3,
       "cards_index_stale": true,
-      "cards_index_listed": 0,
-      "cards_index_total": 462
+      "cards_index_listed": 463,
+      "cards_index_total": 466
     },
-    "stale_files": 532,
+    "stale_files": 545,
     "frontmatter_issues": ["agent-tool-supply-chain-poisoning", "local-state-concurrent-guard"],
     "no_outbound_links": ["cards/INDEX.md", "cards/retire-candidates.md"],
     "unicode_suspect_groups": 6,
@@ -51,10 +39,10 @@
     "invalid_facts": 0
   },
   "book": {
-    "new_issues": 3,
-    "recurring": 83,
+    "new_issues": 1,
+    "recurring": 59,
     "clean_passes": 0,
     "auto_closed": 0,
-    "total_open": 86
+    "total_open": 60
   }
 }
