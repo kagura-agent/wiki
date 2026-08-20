@@ -1,7 +1,7 @@
 ---
 title: "Prime Agent — Self-Improving RLM Agent for Coding"
 created: 2026-08-10
-last_verified: 2026-08-17
+last_verified: 2026-08-20
 source: https://github.com/PrimeIntellect-ai/prime-agent
 stars: 16584
 status: track
@@ -39,9 +39,23 @@ Follow-ups in the same direction: RLM subagent metadata consolidated onto the sp
 - **[[mechanical-enforcement-via-topology]]:** topology derived from a single authoritative ledger is mechanically enforceable; topology inferred from heterogeneous writers is not.
 - **Data discipline:** "authority records out of $TMPDIR" mirrors our own rule that evidence/provenance must live in durable, reviewable locations.
 
-## Open questions / safety boundary (unresolved)
+## Safety boundary review (08-20, mechanism-level)
 
-Original tracking note flagged: state mutation model, evaluator/provenance, and safety boundaries need mechanism-level review before adopting any pattern. The spawn ledger improves provenance but doesn't by itself answer who evaluates RLM child outputs or how recursive mutation is bounded. Worth a mechanism-level read before extracting further.
+Resolved the open questions from the 08-17 note:
+
+- **Recursion depth is bounded**: `rlm-max-depth` with sources default/env/global/inherited/chat — root agents can spawn children by default, deeper recursion requires explicit raising of configured depth.
+- **Autonomous mode has hard limits**: `autonomous.ts` defaults `maxContinuations: 3, maxTurns: 12, maxTokens: 80_000`; gates config with `maxRetries: 3`; failure snapshot includes `GitWorktreeSnapshot`. The continuation prompt explicitly says the host evaluator/verifier decides completion when gates pass — the model cannot self-end.
+- **State mutation is drain-latched**: `mutation-drain-latch.ts` counts in-flight mutating commands; update-restart waits for drain (abort-safe).
+- **Trust model is explicit**: IPython kernel is a durable control environment, **not** a security sandbox — runs with worker's OS permissions. Untrusted repos/instructions require external sandbox. Host bridge keeps credentials/provider execution/transcript writes out of Python (typed `rlm.host_request(...)`).
+- **Who evaluates children**: children reply only via explicit `agent_message` or files, never as `rlm()` return value; parent follows up with retained children. No LLM-judge evaluator in the loop — evaluation is the parent/verifier's job, not a separate component.
+
+**Verdict:** bounds are real (depth/turns/tokens/continuations) and enforced in TS host, not advisory. The ledger is mistake-hardening, not a security boundary (same-user tampering out of scope). Pattern adoption for us: append-only run ledger (see [[single-writer-spawn-ledger]]), not RLM-style code execution.
+
+## Log
+
+- 08-10 NEW: 10,931⭐, self-improving RLM agent, HN 253pts. Revisit 08-17.
+- 08-17 followup: 16,584⭐ (+52%/7d), THRIVING. Spawn ledger pattern extracted. Revisit 08-20 for KB extraction of spawn-ledger pattern + safety-boundary review.
+- 08-20 followup: KB card [[single-writer-spawn-ledger]] created. Safety boundary reviewed (depth/turns/tokens/continuation limits + drain latch + trust model). Growth: +16.6k⭐ steady. Revisit 08-27.
 
 ## Log
 
