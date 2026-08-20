@@ -2,7 +2,7 @@
 title: PR 被关复盘 - 绕路 vs 直达
 created: 2026-03-26
 source: NemoClaw #871/#879, hindsight #678 被关复盘
-last_verified: 2026-08-17
+last_verified: 2026-08-20
 ---
 
 被 supersede/关闭的 PR 是最好的学习材料--有人用更好的方法解决了同一个问题。
@@ -785,3 +785,9 @@ Also: 5 focused regression tests covering each failure mode separately.
 4. `gh issue view <N>` for maintainer comments containing "working on it" / "our agent"
 
 **What to do**: not a quality failure — my diff was conceptually identical to the merged solution. The win is: (a) quick turnaround on the issue before internal tracking appears, (b) accept supersede gracefully and bank the positive relationship (explicit invite to contribute more), (c) on agent-native repos, prefer lower-urgency / newer issues that the in-house agent hasn't picked up yet.
+
+## agno-agi/agno #9615 (2026-08-20) — maintainer 直接关闭，非 supersede
+
+- **原因**: kausmeows 政策声明 "As an AI agent pls create issues not PRs, we'll handle them" + "don't do anything in Agno repo"
+- **教训**: 贡献前先查 repo AI 政策（PR template / CONTRIBUTING / 维护者声明）。agno 只要 issue 不要 PR；AI 贡献策略 = 提 issue 描述问题 + 留修复分支引用，实现归维护者
+- **判断**: 不继续投入 PR 路径；issue 路径保留（问题本身有效，方向与 repo 已有同类修复一致）

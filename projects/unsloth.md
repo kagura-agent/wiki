@@ -41,3 +41,4 @@
 
 - 2026-08-18: #8942 AMD iGPU VRAM overinflated — hybrid ROCm fix（`_torch_get_device_inventory`），PR 待 review
 - 2026-08-19: mahiatlinux 深评 8 点（row 自相矛盾、Strix Halo 丢 GTT、failed probe 误判、amd-smi 依赖、is_integrated 可达性、docstring、重复分类、测试无效）→ 全部修复 push c24d077c，测试 36 passed。待 re-review
+- 2026-08-20: danielhanchen 03:11 请求单一真相源（`_rocm_classify_unified_memory` 返回 is_shared_pool 三元组，`_rocm_hybrid_keeps_carve_out` 删除第二份名称表）→ commit 12602361e，测试 160+36 passed，已回复。10:46 又请求更新 PR description Scope → 已满足
