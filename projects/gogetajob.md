@@ -194,12 +194,12 @@ Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
 - **教训**：工具输出与参数不一致（不同参数相同结果）时，先手工 `gh`/`curl` 复现查询验证限定符行为，再修代码——不要接受输出，也不要先怀疑自己的用法。工具代码是最强的知识应用形式（同上一条 pattern）。
 - **Action**：`tools/gradient-scan.sh` 补 `tool-filter-silently-ignored` 的 KEYWORDS；TODO 记录「workloop finder 应加 blocklist 拦截自检（feed 已修，脚本侧可加防御性检查）」。
 
-## Finder Feed Starvation — Low-Star Repos Structurally Invisible (2026-08-20)
+## Finder Feed Starvation — Low-Star Repos Structurally Invisible (2026-08-20) ✅ 已修
 
-- [已验证] `tools/workloop-find-issue.sh` 的 `write_feed_cache()` 用 `ORDER BY stars DESC LIMIT 200` + per-repo cap 10（`rn <= 10`）生成 finder feed。DB 现有 76 个 tracked repo 有 open jobs；stars 前 20 个 repo（>23K★，如 OpenHands 84K、deer-flow 80K）各自占满 10 条 → 200 槽位全被高 star repo 消耗。
-- [已验证] 低 star repo 完全进不了缓存：pydantic/logfire（4,430★，第 49 位）和 future-agi/future-agi（1,734★，第 61 位）的 50 个 open issues 全被饿死，但 `gogetajob feed`（listJobs()，无 200 限制）能正常显示它们。
-- [已验证] 后果：discover 新加入的低 star 对齐 repo 永远无法被 finder 选中 → discover→find_work 循环在工具层面断裂（本轮 discover 加了 future-agi + logfire，find_work 连续两轮只看到 OpenHands/deer-flow 的 15 个全被 gate 过滤的候选）。
-- **Fix 建议**：(a) 缓存查询按 star 分层轮换（如每 repo 先取 1 条保证覆盖率），或 (b) 排序改为 score/recency 混合而非纯 stars，或 (c) 把 `MAX_CHECK=15` 检查预算改成两阶段（高 star 全 reject 后 fallback 检查低 star）。
-- **教训**：工具内部缓存查询与 CLI 展示命令（`gogetajob feed`）行为不一致时，前者会静默饿死后者能看到的候选——先验证缓存生成逻辑（SQL），不要接受「NO VIABLE ISSUES」的表面结论。
+- [已验证] `tools/workloop-find-issue.sh` 的 `write_feed_cache()` 原用 `ORDER BY stars DESC LIMIT 200` + per-repo cap 10（`rn <= 10`）生成 finder feed。DB 现有 123 个 tracked repo 有 open jobs；stars 前 20 个 repo（>23K★，如 OpenHands 84K、deer-flow 80K）各自占满 10 条 → 200 槽位全被高 star repo 消耗。
+- [已验证] 低 star repo 完全进不了缓存：pydantic/logfire（4,430★）、future-agi/future-agi（1,734★）、keephq/keep（12,229★）的 open issues 全被饿死，但 `gogetajob feed`（listJobs()，无 200 限制）能正常显示它们。
+- [已验证] 后果：discover 新加入的低 star 对齐 repo 永远无法被 finder 选中 → discover→find_work 循环在工具层面断裂（08-20 两轮 workloop 实证：logfire/future-agi discover 后选不到；keep 加入后 MAX_CHECK=15 预算被 OpenHands/deer-flow 占满，filter 日志 grep 不到 keep 行）。
+- **修复（2026-08-20 晚，dna repo）**：`write_feed_cache()` SQL 改两层——**Layer 1** 每 repo 取最新 1 条（rn=1），按 `last_scanned_at` ASC（最近扫描最旧优先）排序 → MAX_CHECK=15 覆盖 15 个不同 repo，且天然跨轮轮换（配合 scan `--batch 8` 的节奏）；**Layer 2** 剩余预算按 stars DESC 补满（rn BETWEEN 2 AND 10，保留高 star backlog）。验证：keep/logfire/future-agi 全部进缓存（修复前不在），前 8 条覆盖 8 个不同 repo；端到端跑脚本 exit 0，filter 覆盖 15 个不同 repo。
+- **教训**：工具内部缓存查询与 CLI 展示命令（`gogetajob feed`）行为不一致时，前者会静默饿死后者能看到的候选——先验证缓存生成逻辑（SQL），不要接受「NO VIABLE ISSUES」的表面结论。排序类 feed 若同时有 `LIMIT` + `ORDER BY stars DESC`，低 star 新候选必然饿死，要按轮换/分层设计而不是纯 top-N。
 
 Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
