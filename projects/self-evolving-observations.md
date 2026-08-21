@@ -8177,3 +8177,52 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 1. dreaming cron 错峰到 04:15+（避开 daily-review 长跑 + nightly-backup 窗口）
 2. 观察 floway-sg 凌晨稳定性（连续 3 天 ECONNRESET）
 3. fallback 机制本身合理（不阻塞主流程），无需改 upstream；可考虑 narrative 失败下一轮重试补写
+
+---
+
+## 🔬 自进化观察日报 2026-08-21（22:30 档）
+
+### 管线活跃度
+- **beliefs-candidates: 7 commits / 4 条新 gradient / 3 家族毕业**
+  - 新 gradient（全 study 源）: community-signal-cross-verify / ecosystem-formation-signal / study-scan-fresh-main / implicit-defaults-security-audit
+  - 毕业（daily-review 03:38 完成）: finder-blocklist-gate / finder-unavailable 家族（42 条）/ review-wait 家族
+  - 待升级: pushed-at-misleading 第 3 次（08-16 记录，未毕业）
+  - 数据来源: `git log --since="2026-08-21 00:00" --all -- beliefs-candidates.md`（7 commits）
+- **DNA 变更: HEARTBEAT.md 主动变更 1 次**（b7d6010，08-21 22:32）— nudge 反思处理步骤 0 落地（Luna 12:12 拍板，我 12:27 改文件+gateway 重启，22:32 补 commit+push）。SOUL.md / AGENTS.md 无改动
+- **nudge: 32 触发 / 32 enqueued / 0 skipped，0 转化 — 断裂第 7 天**
+  - 时段分布: 02-04 点密集（9/8/6 次，cove 深夜任务流），12:35 最后触发
+  - **修复已落地待验证**: HEARTBEAT.md 步骤 0（nudge 事件→按 NUDGE.md 执行）+ heartbeat 锁修复（见下）
+  - 数据来源: `.nudge-audit.log` 窗口 00:00~22:30 + `.nudge-state.json`（turnCount=4）
+- **dreaming: 两次运行，narrative 均 timeout fallback（🔴 (b) 今日仍复现 2 次）**
+  - 03:15-03:20: light staged 100 → 03:19:03 narrative timeout → fallback（旧配置 30 3）
+  - 10:54-10:58: light staged 100 → 10:57:22 narrative timeout → fallback（10:54 为 stuck-session 补跑，cron 仍显示旧配置 30 3 * * *）⚠️
+  - deep: ranked 5 / promoted 5（MEMORY.md 11+/11-）；rem: 1 truth（0.70 方案摘要）
+  - DREAMS.md 今日段 2 处 "details were unavailable"
+  - **修复已落地**: 12:19 配置 30 3 → 0 5，12:22 gateway 重启，cron list 确认 0 5 * * *。明天 05:00 首跑验证
+  - 数据来源: journalctl 03:15/10:54 段 + memory/dreaming/{light,deep,rem}/2026-08-21.md
+- **闭环: 2 个完整闭环 + 1 个进行中**
+  - ✅ 闭环 1: (b) narrative fallback 根因确认（08-21 上午 journalctl）→ Luna 拍板 → 错峰配置落地 → 明天验证
+  - ✅ 闭环 2: nudge 0 转化根因（代码级: system-event 队列 + HEARTBEAT.md 短路）→ Luna 拍板 → HEARTBEAT.md 步骤 0 落地 → 观察中
+  - 🔄 闭环 3（进行中）: heartbeat file lock timeout 42 次/天 → 0 字节残留锁（06-23 崩溃遗留）→ 22:32 移除 → 22:33 起验证恢复
+
+### 今日发现
+1. **🔴 新根因: heartbeat 42 次 file lock timeout**（`~/.openclaw/commitments/commitments.json.lock` 0 字节残留，06-23 17:19 崩溃遗留，无进程持有）。代码路径: sidecar-lock acquire 遇 0 字节锁 → `readLockSnapshot` 读不到 payload → `if (!snapshot) continue` 无限重试到 timeout，从不 reclaim。**这是 nudge 集成验证的直接阻塞**——heartbeat 每 30 分钟都挂，永远消费不了 nudge 事件。22:32 已移除，需确认恢复。
+2. **10:54 dreaming 补跑仍带旧配置**: stuck-session recovery 在 12:19 改配置前用旧 cron 参数补跑了一轮，narrative 又 timeout。说明 (b) 修复前最后一轮确认了根因（与 03:15 相同 pattern）。
+3. **dreaming (c) 链路第 7 天未实证**: deep promote 5/5 但 evidence 仍是 memory/ 日期文件（08-14/08-17 段），非 light staged 候选。08-22 观察期满可下结论。
+4. **nudge 0 转化第 7 天**: 但修复已落地——HEARTBEAT.md 步骤 0 + 锁移除。真正的验证从明天开始（heartbeat 恢复正常消费 nudge 事件）。
+
+### 子项状态（#10 / #11）
+| Issue | 状态 | 证据 |
+|-------|------|------|
+| #10 (a) uniform 0.62 | 🟡 无变化 | light 100 候选全 0.62；upstream #87485 open |
+| #10 (b) details unavailable | 🔴 今日 2 次（03:19+10:57）| **修复已落地**（错峰 0 5），明天 05:00 首跑验证 |
+| #10 (c) staged→promote | 🟡 第 7 天未实证 | 08-22 期满下结论 |
+| #10 (d) REM 质量 | 🟡 1 truth 0.70 方案摘要 | 无实质改善 |
+| #11 nudge 转化 0 | 🔴 第 7 天 | **修复已落地**（HEARTBEAT.md 步骤0 + 锁移除），明天起验证 |
+
+### 原始数据
+- git: babfbe0/28d9cba/aaecc5e/133143e/d3cfa20/1b11ae1/814806b/65f3286（beliefs 8 commits 窗口内）、b7d6010（HEARTBEAT.md）
+- nudge: `.nudge-audit.log` — 32 triggered / 32 enqueued / 0 skipped
+- dreaming: journalctl 03:15 段 + 10:54 段（两次 narrative timeout）；memory/dreaming/2026-08-21.md（light 100 / deep 5 / rem 1）
+- heartbeat: journalctl 42× file lock timeout（00:00~22:30）；锁文件 stat 06-23 17:19 0 字节
+- MEMORY.md: git diff 11+/11-
