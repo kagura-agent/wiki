@@ -8099,3 +8099,53 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 - dreaming: `memory/dreaming/{light,deep,rem}/2026-08-20.md`（light 52KB / deep 5 promoted / rem 3 truths）
 - MEMORY.md: `git diff` 12+/12-（08-19 promotions 归档 → 08-20 promotions 写入）
 - memory/2026-08-20.md: 809 行
+
+---
+
+## 🔬 自进化观察日报 2026-08-21
+
+> 来源：self-evolving-daily task（Cove 1540192179274645505，08-21 22:30 档；本文为补录窗口 08-20 22:30 → 08-21 11:00）
+
+### 管线活跃度
+- **beliefs-candidates: 4 commits / 4 条新 gradient / 3 家族毕业**
+  - 新 gradient: mirror-repo-external-pr-blackhole（08-20 晚）、community-signal-cross-verify（08-21 study）
+  - 毕业: finder-blocklist-gate（结构修复 fdab85c+d1771b2 落地后 audit 补记）、finder-unavailable 家族（42 条/16 别名收敛，结构修复持续生效）、review-wait 家族（green-linked-pr-review-wait + next-green-pr-review-wait + next-issue-pr-dedup，workloop.yaml stale_pr_check 结构落地）
+  - 待升级: `pushed-at-misleading` 第 3 次（08-16），唯一未毕业第 3 次候选
+  - 数据来源: `git log --since="2026-08-20 22:30" --all -- beliefs-candidates.md`（babfbe0/28d9cba/133143e/d3cfa20）
+- **DNA 变更: 无** — `git log -- SOUL.md AGENTS.md` 窗口内为空（AGENTS.md 最后改动 08-18）
+- **nudge: 10 触发 / 10 enqueued / 2 skipped**（窗口 22:30 后），**0 转化 — 断裂第 6 天**
+  - skipped 均为 cron session（正确行为）；触发均来自 cove session（channel/direct）
+  - 数据来源: `.nudge-audit.log`（mtime 08-21 10:58）+ `.nudge-state.json`（turnCount=4, lastNudgeAt=08-21 02:49Z）
+- **dreaming: 三相完整运行**
+  - light: 100 candidates 全 staged（08-20: 91），confidence 全 0.62 uniform（(a) 未变，连续第 9+ 天）
+  - deep: ranked 5 / promoted 5（08-20: 5/5，连续 3 天 1+/天；今日无 recall-store 修复动作）
+  - rem: "No strong patterns" + 1 条 Lasting Truth（0.70, dsh-reloader 方案，仍是运维/方案摘要非认知洞察）— (d) 回落至 08-17 水平
+  - 数据来源: `memory/dreaming/{light,deep,rem}/2026-08-21.md` + `git diff MEMORY.md`
+- **闭环**: 3 个完整闭环（全部 workloop/study 源）：
+  1. finder-blocklist-gate — 08-13 记录 → 08-18/08-20 结构修复 → 08-21 毕业（含 audit 补记，修复先行标记滞后 4 天）
+  2. finder-unavailable 家族 — 42 条收敛 → 结构修复（两层 feed 缓存）持续生效 → 家族毕业
+  3. review-wait 家族 — stale_pr_check Exit 10/11 修复 → 家族合并毕业
+  - **nudge→gradient 断裂第 6 天**，今日全部 gradient 仍来自 workloop/study 源
+
+### 今日发现
+1. **(b) 复现 — details unavailable 再次出现**：08-21 DREAMS.md 2 次 occurrence（08-20: 3、08-19: 6、08-18 无 → 08-16 曾有）。已连续 3 天出现（08-19/20/21），08-19 日报"未复现"结论不成立，需重新评估。与 06-17 首次记录同症状。pattern: 每次 deep 段紧随其后（08-21 deep 后无 diary 补充段，08-19/20 亦如此）——diary "trace surfaced but details unavailable" 疑似 deep 阶段 recall 的占位产物。
+2. **(c) 链路断裂第 6 天，可下结论**：100 candidates 全 0.62 uniform staged，deep promote 的 evidence 指向 memory/ 日期文件而非 light staged 候选。local filter 当前效果仅为质量门，不是 promote 来源选择器。明日（08-22）观察期满可正式下结论。
+3. **毕业机制双轨显式化**（08-21 daily-review 落地 A3）：gradient 管线在 workloop 领域运转健康——3 家族同日毕业全部有结构修复实证。
+4. **REM 质量回落**：今日仅 1 条（0.70）且为 dsh-reloader 方案摘要，08-18 的认知洞察（0.66~0.73 Lasting Truths）未延续。选择器问题仍在。
+5. **外部反馈: 0 条** — 窗口内无 PR 活动（gh pr list 过滤空），今日进化全部 self-driven。
+
+### 子项状态（#10）
+| 子项 | 状态 | 证据 |
+|------|------|------|
+| (a) uniform confidence | 🟡 无变化 | light 今日 100 候选全 0.62 uniform；upstream #87485 open 等 maintainer |
+| (b) details unavailable | 🔴 **复现** | 今日 2 次（08-19: 6 / 08-20: 3 / 08-21: 2），连续 3 天；08-19 "未复现"结论修正 |
+| (c) local filter → promote | 🟡 第 6 天未实证 | deep 5/5 但 promote evidence 仍非 light staged 候选；08-22 期满下结论 |
+| (d) REM 内容质量 | 🔴 回落 | 1 条 0.70 方案摘要，非认知洞察 |
+
+### 原始数据
+- git: babfbe0 / 28d9cba / 133143e / d3cfa20（beliefs 4 commits）、aaecc5e（交班）
+- nudge: `.nudge-audit.log` — 10 triggered / 10 enqueued / 2 skipped（窗口 22:30 后）
+- dreaming: `memory/dreaming/{light,deep,rem}/2026-08-21.md`（light 100 候选 / deep 5 promoted / rem 1 truth 0.70）
+- DREAMS.md: 08-21 段 2 处 "details were unavailable"（awk 计数）
+- MEMORY.md: `git diff`（08-20 promotions 归档 → 08-21 promotions 写入）
+- memory/2026-08-21.md: 61745 字节
