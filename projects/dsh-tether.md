@@ -49,3 +49,17 @@ phone (Tauri app) ⇄ iroh P2P (QUIC/TLS, hole-punch) ⇄ host sidecar (Rust) �
 - [[agent-harness-landscape]] — 生态位：harness 的远程可达层（P2P 隧道），不是 harness 本身
 - [[bossconsole-jvm-harness]] — 同为 sidecar + 协议边界设计，可对比 gRPC IPC vs iroh QUIC
 - [[deepseek-v4]] — dsh 上游模型/生态背景
+
+## Delta — 2026-08-21 apply: identity.key 权限漏洞 → issue #1
+
+深读后应用轮发现真实安全漏洞：`load_or_create_secret()`（tether-core L36-53）用 `std::fs::write` 写身份密钥，Unix 默认权限 `0o666 & ~umask`（umask 0002 下 0o664，组可读）。同一模式存在于 `save_store()`（配对白名单）和 `save_book()`（手机侧主机簿）。
+
+**为什么严重**：身份密钥 = 长期配对凭证（配对后访问权只由 iroh public key 决定）。多用户机器上，**只读**的本地用户（无需代码执行）就能读 `identity.key` 冒充 host——这是 README 已声明的「本机进程可自铸配对码」漏洞的免执行变体。
+
+**行动**：已提 issue zexadev/dsh-tether#1（OPEN，08-21，repo 首个 issue）— ecosystem-formation-signal 的借势闭环：以真实安全反馈进入 dsh 生态，而非只当旁观读者。
+
+**教训**：深读时显式安全设计（read_line_bounded、配对限次）容易抓住注意力，但 `std::fs::write` 的隐式默认权限才是漏洞藏身处——**审查安全设计时要专门扫隐式默认值（文件权限、超时、编码）**。
+
+## 可验证预测
+
+- cal-0821-f6a1: dsh-tether 30 天内破 100★（low）
