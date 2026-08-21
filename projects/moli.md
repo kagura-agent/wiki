@@ -4,7 +4,7 @@ created: 2026-08-11
 tags: [browser, agent-infra, rust, cdp, webdriver, mcp, rendering, verification]
 source: https://github.com/lexmount/moli
 status: deep-read
-last_verified: 2026-08-14
+last_verified: 2026-08-21
 ---
 
 # Moli — DOM-first browser kernel for AI agents
@@ -50,3 +50,11 @@ Logged as `cal-0811-9e87`: by **2026-08-25**, Moli will have at least one non-ma
 - **Prediction `cal-0811-9e87` HIT early**: PR #40 by @Spxg (external, non-maintainer) "Fix font-dependent mouse offset test" merged 2026-08-12. Issue #27 by @freelw is content-free ("hi，ldm0"). External community starting: velocity is converting, slowly.
 - **Velocity/attention**: 60★ → 263★ (+338%) in 3 days (08-11→08-14), all 30+ PRs mostly maintainer-authored, v0.1.2, release installers, 6-language README. Engine hardening continues: subpixel quantization, fixed-table column allocation, WPT layout baselines, xml5ever CDATA/namespace handling, hover-state persistence.
 - **Implication**: Moli's on-demand-rendering thesis is unchanged, but distribution model now targets agent skills (install binary + skill wraps CDP) rather than embedding an MCP server. For our own tooling: the skills-over-CDP pattern (thin skill, prebuilt binary, curl-install) is a cleaner distribution path than maintaining a bespoke protocol server.
+
+## Delta — 2026-08-21 followup (775⭐, +195% in 7d, THRIVING)
+
+- **v1.0.2**, daily default-branch commits (08-20: 6 commits — HTML parser input stack refactor, nested parser order fix, parser early-finish fix, webfetch skill docs).
+- **External contributors converting**: @athul-22 2 PRs merged (incl. `--obey-robots` enforcement against robots.txt in CLI — nice trust-relevant feature). PR #40 (@Spxg) from 08-12 still the early signal; now 48 forks, organic.
+- **Skills-over-CDP distribution winning**: MCP server removal (08-13) followed by steady skill-layer traction (moli-cdp-server/moli-webfetch curl installers); WPT compat suite maintained locally in study/.sources/moli.
+- **Checkable prediction cal-0811-9e87 HIT** (external PR by 08-25 — actually by 08-12); **cal-0721-8224 waggle 3000★ WRONG** (736★ — 21% of target).
+- **Revisit 08-27**: WPT pass-rate progress, skill-layer adoption depth, whether v1.x keeps external PR flow.

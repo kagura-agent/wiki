@@ -2,7 +2,7 @@
 title: LongHorizon-Harness — verified-state control loop for computer-use agents
 created: 2026-08-05
 tags: [agent-harness, computer-use, verification, long-horizon, orchestration]
-last_verified: 2026-08-18
+last_verified: 2026-08-21
 source: https://github.com/AMAP-ML/LongHorizon-Harness
 ---
 
@@ -94,3 +94,11 @@ Fix: keep local timeout status explicit and authoritative (don't let a synthesiz
 **Transferable rule: error taxonomy must key on status fields, not message-pattern matching — a synthetic message colliding with a provider-error regex turns a recoverable event into a fatal one.** Directly maps to our subagent handling: Copilot API ~60s streaming idle timeout is a *local budget* event (recoverable, partial output preserved, main agent takes over) vs genuine provider failure. We already practice "subagent 超时 → 主 agent 接手", but this is the first explicit argument for *preserving partial output as first-class state* rather than discarding the episode. Also: `incomplete + new gap each round` = progress ≠ failure (same taxonomy lesson as PR #29's failure taxonomy).
 
 Revisit **2026-08-21**: #29 merge status + whether timeout-recovery holds in real runs.
+
+## Delta — 2026-08-21 followup (855⭐, +9.8% in 7d, growth decelerating)
+
+- Growth rate decelerated sharply: +50.7% (08-14→17) → +9.8% (08-17→21). Star curve normalizing; community depth still real.
+- **PR #41 (Opencode) MERGED 08-17** ✅ — confirmed; **PR #29 (cost-aware escalation, the core learning pattern) still OPEN** — revisit merge.
+- Activity strong: PR #56 merged 08-20 (dev/0.1.7 branch), 6 external contributors in merged-PR history (TON14 ×4, lunar-me ×3, ssynb, saikethan27, PeterStefanec-prog, aaaazqh). 100 forks, 22 open issues.
+- **Calibration**: cal-0818-319f (PR #29 merge by 08-25) pending — the cost-aware escalation design remains the highest-value transferable pattern (FlowForge tier model), but it's been open since 08-17.
+- **Revisit 08-27**: #29 merge status, whether 0.1.7 brings dashboard conversation-resume (lerogo feat 08-20), growth-vs-depth balance.

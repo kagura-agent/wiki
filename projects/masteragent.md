@@ -65,3 +65,10 @@
 - [[mechanism-vs-evolution]] — UNKNOWN 终结态是机制层信任原语；DP-SGD 学习管线是进化层
 - [[KADATH]] — 同为自报 benchmark 未独立复现，注意同类验证边界
 - [[Lobster0]] — 同为「诚实状态」主题：Lobster0 是命令边界 + 反重放审批，MasterAgent 是副作用三态
+
+## Delta — 2026-08-21 followup (423⭐, +355% in 7d)
+
+- **License resolved**: NOASSERTION → Apache-2.0 (GitHub API now reports `Apache-2.0`) ✅
+- **Community: zero external signal despite star surge**. All 100 recent commits single author (hzp@MacBook-Pro-6.local), contributors API empty, 0 merged PRs. Star growth 93→423 (+355%) is pure star-drive/marketing — no code community. **Growth signal ≠ code signal** (third instance after pi-from-scratch, Nightcrawler).
+- **Prediction cal-0814-b83e → PARTIAL**: solo-dev continuation correct; stars overshot the 100-200 band.
+- **Verdict**: 3 patterns from 08-14 deep read (UNKNOWN+WAL, deterministic-first, DP-SGD) remain valid design references; no new code signal this round. **Downgrade hot → warm**: revisit 08-30; 0 external contributor then → drop.
