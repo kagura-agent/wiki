@@ -522,7 +522,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (625)
+## 📁 Project Notes (627)
 
 ### 2
 
@@ -864,6 +864,7 @@
 - [kagura-server](projects/kagura-server.md)
 - [andrej-karpathy-skills](projects/karpathy-skills.md)
 - [Kastor — Declarative Agent Spec (Terraform for Agents)](projects/kastor-declarative-agent-spec.md)
+- [keephq/keep](projects/keep.md)
 - [Kilocode (Kilo-Org/kilocode)](projects/kilocode.md)
 - [Kimi Code CLI — Moonshot AI's Coding Agent](projects/kimi-code.md)
 - [Kiwifs](projects/kiwifs.md)
@@ -904,6 +905,7 @@
 - [manifest — Smart LLM Routing for OpenClaw](projects/manifest.md)
 - [Mapick — OpenClaw Skill Manager & Privacy Layer](projects/mapick.md)
 - [MarbleOS — File-and-Task GUI for AI Work](projects/marbleos.md)
+- [Marginal — Shadow-first No-Progress Governor](projects/marginal.md)
 - [MasterAgent (OpenSparX) — OAK On-Device Agent Kernel](projects/masteragent.md)
 - [mastra-ai/mastra](projects/mastra.md)
 - [math-project (iamtouchskyer)](projects/math-project.md)
@@ -1206,4 +1208,4 @@
 
 ---
 
-*467 cards, 625 project notes. Last generated: 2026-08-20 04:38 UTC.*
+*467 cards, 627 project notes. Last generated: 2026-08-21 04:38 UTC.*

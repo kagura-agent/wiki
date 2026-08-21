@@ -202,7 +202,7 @@ Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
 - **修复（2026-08-20 晚，dna repo）**：`write_feed_cache()` SQL 改两层——**Layer 1** 每 repo 取最新 1 条（rn=1），按 `last_scanned_at` ASC（最近扫描最旧优先）排序 → MAX_CHECK=15 覆盖 15 个不同 repo，且天然跨轮轮换（配合 scan `--batch 8` 的节奏）；**Layer 2** 剩余预算按 stars DESC 补满（rn BETWEEN 2 AND 10，保留高 star backlog）。验证：keep/logfire/future-agi 全部进缓存（修复前不在），前 8 条覆盖 8 个不同 repo；端到端跑脚本 exit 0，filter 覆盖 15 个不同 repo。
 - **教训**：工具内部缓存查询与 CLI 展示命令（`gogetajob feed`）行为不一致时，前者会静默饿死后者能看到的候选——先验证缓存生成逻辑（SQL），不要接受「NO VIABLE ISSUES」的表面结论。排序类 feed 若同时有 `LIMIT` + `ORDER BY stars DESC`，低 star 新候选必然饿死，要按轮换/分层设计而不是纯 top-N。
 
-Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
+Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]], [[keep]]
 
 ## Repo Rename Creates Duplicate Company Rows — Feed Double-Counts (2026-08-21) ✅ 已修
 

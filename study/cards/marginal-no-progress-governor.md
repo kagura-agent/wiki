@@ -1,5 +1,7 @@
 # Marginal — Shadow-first No-Progress Governor (08-20 deep read)
 
+> 项目笔记：[[marginal]]（study deep read 原文）
+
 - **Repo**: SignalLayerLabs/Marginal (Apache-2.0, Python 3.10-3.13, 3412 KB)
 - **Created**: 2026-08-04 · 12⭐ / 3 forks / 64 commits · pushed 08-20（活跃，issues 全部由 owner 自建 roadmap 驱动，5 个外部贡献者 PR）
 - **主题**: AI coding agent 防空转治理——检测「重复执行但零进展」的动作，shadow 模式先观察、证据充分后才 earn enforcement

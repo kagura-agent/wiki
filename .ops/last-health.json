@@ -1,36 +1,33 @@
 {
-  "timestamp": "2026-08-20T02:06:00Z",
-  "run_date": "2026-08-20",
+  "timestamp": "2026-08-21T02:06:00Z",
+  "run_date": "2026-08-21",
   "totals": {
-    "md_files": 1197,
-    "cards": 466,
-    "projects": 625,
-    "wikilinks": 5769
+    "md_files": 1201,
+    "cards": 467,
+    "projects": 627,
+    "wikilinks": 5783
   },
   "health": {
-    "errors": 1,
-    "warnings": 59,
-    "broken_links": 1,
-    "broken_link_sources": [
-      "projects/proofrun.md -> [[pushed-at-misleading]]"
-    ],
+    "errors": 0,
+    "warnings": 58,
+    "broken_links": 0,
+    "broken_link_sources": [],
     "orphans": 2,
     "orphan_cards": [],
-    "orphan_projects": ["agent-ecosystem-scout-2026-08-19", "agno"],
+    "orphan_projects": ["keep", "marginal"],
     "duplicate_slugs": 0,
     "index_drift": {
-      "missing_from_index": 3,
+      "missing_from_index": 2,
       "missing_files": [
-        "cards/single-writer-spawn-ledger.md",
-        "projects/agent-ecosystem-scout-2026-08-19.md",
-        "projects/agno.md"
+        "projects/keep.md",
+        "projects/marginal.md"
       ],
-      "not_in_index_warn": 3,
+      "not_in_index_warn": 2,
       "cards_index_stale": true,
-      "cards_index_listed": 463,
-      "cards_index_total": 466
+      "cards_index_listed": 465,
+      "cards_index_total": 467
     },
-    "stale_files": 545,
+    "stale_files": 546,
     "frontmatter_issues": ["agent-tool-supply-chain-poisoning", "local-state-concurrent-guard"],
     "no_outbound_links": ["cards/INDEX.md", "cards/retire-candidates.md"],
     "unicode_suspect_groups": 6,
@@ -39,10 +36,10 @@
     "invalid_facts": 0
   },
   "book": {
-    "new_issues": 1,
-    "recurring": 59,
+    "new_issues": 0,
+    "recurring": 58,
     "clean_passes": 0,
-    "auto_closed": 0,
-    "total_open": 60
+    "auto_closed": 30,
+    "total_open": 58
   }
 }
