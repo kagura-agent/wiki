@@ -203,3 +203,14 @@ Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
 - **教训**：工具内部缓存查询与 CLI 展示命令（`gogetajob feed`）行为不一致时，前者会静默饿死后者能看到的候选——先验证缓存生成逻辑（SQL），不要接受「NO VIABLE ISSUES」的表面结论。排序类 feed 若同时有 `LIMIT` + `ORDER BY stars DESC`，低 star 新候选必然饿死，要按轮换/分层设计而不是纯 top-N。
 
 Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
+
+## Repo Rename Creates Duplicate Company Rows — Feed Double-Counts (2026-08-21) ✅ 已修
+
+- [已验证] `gh repo view` 跟随 301 重定向返回 canonical 名（`--json name,owner` → `EKKOLearnAI/hermes-studio`），但 `getRepoInfo()` 一直返回**调用方传入的旧名**。`upsertCompany` 以 `(owner, repo)` 为唯一键 → repo 重命名后旧行不清理、新行插入 → 同一 repo 两个 company 行、两套并行 jobs。
+- [已验证] 实证：EKKOLearnAI/hermes-web-ui（428 jobs，旧名）+ hermes-studio（255 jobs，canonical）双行并存 683 条 jobs，feed 200 预算被同 repo 重复项占 ~60 条（标题完全相同的 issue 成对出现）。
+- [已验证] 根因链：`getRepoInfo` 返回值未用 `gh repo view` 的 canonical name → upsert 无法识别 rename → 无 merge 机制。
+- **修复（gogetajob commit `a44b11e`，2026-08-21）**：① `getRepoInfo`/`getRepoInfoAsync` 返回 canonical `owner.login` + `name`；② JobService 新增 `mergeCompany(canonicalFullName, staleFullName)`：事务内移动非重复 jobs 到 canonical 行（按 issue_number 去重）、重指向 work_log 到 canonical 对应 job、删除重复 jobs + stale company 行；③ `scan` / `scan --all` / `discover --auto-add` 三处检测 `canonicalFullName !== 传入名` 时自动 merge。
+- **验证**：merge-company.test.ts 3 用例全过（重叠 issue 去重 + work_log 重指向 / 单行 no-op / 不相交集合全移动）；真实 DB hermes 683→430 jobs、stale 行删除；feed 重新生成 200 条全 distinct（0 重复、72 repo、hermes-web-ui 消失、hermes-studio 仅 1 条）。
+- **教训**：工具在调用外部 API 时如果丢弃 canonical identity，所有下游键控（unique key、缓存、feed 预算）都会累积幽灵数据。检测信号：feed 中同一 repo 的 issue 成对重复、DB 中同 owner 同名不同 repo 的行 stars 完全相同。修复要落在**源头**（getRepoInfo 返回 canonical 名），而不是消费端过滤。
+
+Links: [[gogetajob]], [[workloop]], [[pr-superseded-lessons]]
