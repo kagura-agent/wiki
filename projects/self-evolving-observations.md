@@ -8149,3 +8149,31 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 - DREAMS.md: 08-21 段 2 处 "details were unavailable"（awk 计数）
 - MEMORY.md: `git diff`（08-20 promotions 归档 → 08-21 promotions 写入）
 - memory/2026-08-21.md: 61745 字节
+
+---
+
+## (b) 根因确认 — 2026-08-21 journalctl 证据链
+
+**结论**："details were unavailable" 占位不是 trace 查找失败，是 **narrative 生成（LLM 调用）超时/断连后的 fallback 占位**。
+
+### 证据（journalctl，08-21 03:15-03:20 窗口）
+1. 03:15:19 memory-core dreaming verbose enabled（cron=30 3 * * *）→ 03:17:21 light staged 100
+2. 03:19:03 `narrative generation ended with status=timeout for light phase; writing fallback diary entry`
+3. 03:19:27 `narrative generation used fallback ... because the narrative run ended with status=timeout` + `error=LLM request failed: network connection was interrupted. rawError=read ECONNRESET`（provider=floway-sg-deepseek）
+4. 源码：`REQUEST_SCOPED_FALLBACK_NARRATIVE` = dist/dreaming-narrative-Cg6Ku5xU.js L70，appendFallbackNarrativeEntry 在 subagent run timeout / 无文本时写入（L544/L571）
+
+### 三天一致 pattern
+- 08-19 03:22:47 timeout → fallback；08-20 03:19:42 timeout → fallback；08-21 03:19:03 timeout → fallback（retry 后 ECONNRESET）
+
+### 并发/饥饿证据
+- 3 点档 cron：daily-review 03:15（长跑 30+ 分钟，日志显示 age 600-1400s 仍在跑）+ dreaming 03:30 + nightly-backup（已错峰到 04:15）
+- 事件循环饥饿：08-19 03:21 `fetch timeout after 2500ms (elapsed 8857ms) timer delayed 6357ms, likely event-loop starvation`；08-20 03:17 `Discord gateway heartbeat ACK timeout`
+- 08-21 retry 也 ECONNRESET → 倾向 floway-sg 侧凌晨连接不稳 + 本地并发放大
+
+### 修正 06-17 原假设
+原 (b) 描述 "trace pointer valid but details lookup fails" 不成立。真实机制：narrative LLM 调用超时/断连 → 占位日记。与 .memexignore、recall store 无关（08-20 recall store 重写是独立自修复动作）。
+
+### 建议（待 Luna 拍板）
+1. dreaming cron 错峰到 04:15+（避开 daily-review 长跑 + nightly-backup 窗口）
+2. 观察 floway-sg 凌晨稳定性（连续 3 天 ECONNRESET）
+3. fallback 机制本身合理（不阻塞主流程），无需改 upstream；可考虑 narrative 失败下一轮重试补写
