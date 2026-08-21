@@ -80,3 +80,18 @@ AMD's open-source framework for running generative AI locally on AMD hardware.
 - Run tests with `PYTHONPATH=src:$PYTHONPATH python3 -m pytest tests/unit/` if not using venv
 - Full venv install is heavy (many deps), minimal approach works for focused tests
 - urllib3 2.0.7 — supports `assert_hostname` on connection pool for TLS hostname override
+
+## 2026-08-21 Session Notes
+
+### PR #3032 — ci(release): require GAIA_HUB_PUBLISH_URL, drop dead fallback (Closes #2937)
+- **Issue**: Publish `--base-url` used 3-level chain `${GAIA_HUB_PUBLISH_URL:-${GAIA_HUB_BASE_URL:-https://hub.amd-gaia.ai}}`; `GAIA_HUB_BASE_URL` doesn't exist in repo (dead branch), hardcoded URL = latent silent-wrong-publish fallback.
+- **Fix**: All 7 publish call sites across 4 workflows (release_components.yml ×3 incl. worker-deploy verify step, release_agent_chat.yml, release_agent_email.yml ×2, release_agent_gaia.yml) now require `${GAIA_HUB_PUBLISH_URL}` + new "Assert hub publish URL present"/"Require the publish URL" fail-loudly steps mirroring existing token asserts. `GAIA_HUB_BASE_URL` kept only for lock/download origin (ver steps, upload_to_r2.sh, HUB-UPLOAD.md).
+- **Key lessons**:
+  - **release_components.yml still exists on main** (added by #3018/#3025) — my first scan ran on a stale branch checkout (fix/hermetic-unit-tests-2499, 5 commits behind) and missed the issue's cited file + release_agent_gaia.yml. Plan-review subagent caught it (4/10 → revised 8/10). **Always scan on fresh upstream/main, not a stale local branch.**
+  - Bot review (github-actions "pr-review") gave real actionable nits: error hint "environment-scoped resolves empty" was copied from worker-deploy context but publish jobs declare agent-publish env where env-scoped vars DO resolve → misleading. Also flagged SKILL.md "didn't land" — false alarm (stale checkout), verified git show HEAD confirms it landed.
+  - CI matrix is heavy (build-apps ×4, integration tests) but fast (~2-5min); pr-review + pr-rereview bot approve with actionable minor nits.
+  - actionlint not in CI; installed to /tmp/actionlint for local check. Only flags pre-existing `if: false` disabled steps.
+- **Maintainer style**: bot review is the gate; human reviewers may follow. Error messages should name the variable, how to set it, AND correct context (env vs repo scope matters).
+
+### PR status
+- PR #3032: OPEN, CI all pass, bot Approve. Awaiting human review/merge.
