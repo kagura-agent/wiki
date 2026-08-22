@@ -8226,3 +8226,35 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 - dreaming: journalctl 03:15 段 + 10:54 段（两次 narrative timeout）；memory/dreaming/2026-08-21.md（light 100 / deep 5 / rem 1）
 - heartbeat: journalctl 42× file lock timeout（00:00~22:30）；锁文件 stat 06-23 17:19 0 字节
 - MEMORY.md: git diff 11+/11-
+
+---
+
+## 🔬 自进化观察日报 2026-08-22（验证日）
+
+### 昨日 3 验证点
+1. ✅ **heartbeat 恢复**：全天 0 次 file lock timeout（journalctl since 00:00 无命中）；22:04 heartbeat 正常记录（memory 08-22 L366）。锁移除生效
+2. ✅ **dreaming 05:00 错峰首跑**：DREAMS.md 05:19 更新；05:00 档有实质 narrative（"At 3:15 the house was quiet..." 散文+Haiku），自动 cron 路径 "details were unavailable" 占位消失；light 14 staged / deep 5 promoted / rem 3 条；阶段文件 mtime 05:01-05:04 证实跑在干净窗口
+3. ❌ **nudge 源 gradient**：8 触发 / 8 enqueued / 0 转化（第 8 天）——修复后第 1 天仍 0，继续观察
+
+### 管线活跃度
+- beliefs-candidates: 1 条 bump（pushed-at-misleading 第 3→4 次，83e9b07，MCP-Memory mirror case）；wiki 卡片已沉淀（545f0be mirror lesson）
+- DNA 变更: 无（b7d6010 为昨日改动）
+- nudge 触发: 8 次（UTC 01:05/02:19/02:26/04:07/06:04/09:01/12:04/14:04 = 北京 09:05~22:04 均匀），质量：事件 enqueued 健康
+- dreaming: 05:00 自动首跑成功；deep 5/5 promote 进 MEMORY.md（补提交 c7f6702）；light 14 staged（13×0.62 + 1×0.68）
+
+### 闭环追踪
+- ✅ **闭环 3 完成**：heartbeat 锁根因（06-23 崩溃残留 0 字节锁）→ 22:32 移除 → 今日 0 timeout 验证通过
+- 🔄 **闭环 2 进行中**：nudge 集成（HEARTBEAT.md 步骤 0 落地 → 观察连续 3 天 gradient，D1 0 转化）
+- 🔄 闭环 1 (b) 部分完成：错峰落地 → 自动路径验证通过；但 03:15 手动触发路径仍有 2 条占位（daily-review 手动触发 managed cron，非回归）
+
+### 今日发现
+1. **03:15 档来源澄清**：08-22 03:15 的 dreaming 记录是 daily-review 手动触发 managed cron（memory L103 `"ok":true,"enqueued":true,"runId":"manual:0df29bb1-..."`），非 cron 自动路径。该路径 2 条 "details unavailable" 占位 ≠ (b) 未修复
+2. **uniform 0.62 仍在**：light 13/14 staged 候选 confidence 0.62 → (a) 未变，upstream openclaw#87485 仍 OPEN
+3. **MEMORY.md deep promote 5/5 未提交**：05:04 dreaming 写入后无 git commit（working tree M），本轮补提交 c7f6702
+4. **nudge 第 8 天 0 转化**：heartbeat 修复后第 1 天，暂无新证据。meme 维度 08-21 已验证 B=3（通道通），gradient 维度待 08-23/24
+
+### 原始数据
+- git: 83e9b07（pushed-at-misleading 第 4 次）、545f0be（wiki 卡片 mirror lesson）、c7f6702（MEMORY.md promote 补提交，本轮）
+- nudge: `.nudge-audit.log` 8× Triggering/enqueued；`.nudge-state.json` turnCount=1
+- dreaming: DREAMS.md mtime 05:19；memory/dreaming/{light,deep,rem}/2026-08-22.md mtime 05:01-05:04
+- heartbeat: journalctl 今日 0× file lock timeout
