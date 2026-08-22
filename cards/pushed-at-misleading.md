@@ -4,7 +4,7 @@ created: 2026-08-20
 source: beliefs-candidates.md (2026-08-16, pattern 第3次) + ProofRun study (2026-08-19)
 tags: [verification, data-discipline, anti-pattern, study]
 links: [[verify-claims]], [[verify-before-researching]]
-last_verified: 2026-08-20
+last_verified: 2026-08-22
 ---
 
 # Pushed-at Misleading
@@ -25,6 +25,10 @@ GitHub 的 `pushed_at` 字段是典型陷阱：**任意分支或引用的推送�
 3. `pushed_at` 只作辅助信号，不作主判据
 
 一般化：**freshness should be derived from state, not asserted**（新鲜度应从状态推导，而非断言）。
+
+## 镜像教训（08-22 实证）
+
+**短窗口停更 ≠ abandoned**：MCP-Memory 08-15 因 `pushed_at` 停更 3 天 + 0 maintainer 回复被标红旗，但 08-16 就 merge 了外部 PR #3——维护节奏慢（PR open→merged 3 天）≠ 项目死了。**红旗判据应是「事件流 + 回复时间」而非「静默天数」**：有 PR 在 review 队列里、issue 有人回、几周内有过 commit → 只是慢，不是死。判断 drop 要等二次检查（如 MAWL 二次 0 信号才 drop），单次静默不构成放弃证据。
 
 ## Related
 
