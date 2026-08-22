@@ -64,3 +64,16 @@ append-only events + SQLite/JSONL 存储 → exact reconstruction / dry run / mo
 ## 状态
 - Revisit 08-22：外部社区信号（真 PR/issue）、是否发布 demo 与 package、fork 网络是否持续膨胀
 - 若仍 0 外部信号 → drop；架构模式已提取完毕
+
+---
+
+## 08-22 Followup Delta（DROP）
+
+> API 2026-08-22 09:00 CST: 85⭐ / 77 forks（stars **-2%**，87→85）/ pushed 08-14 / 仍 0 issues / 0 PRs。
+
+**判定：DROP（二次检查 0 外部信号，按 08-16 预设执行）。**
+- 唯一新 commit：08-14 `feat(security): add prompt injection signal layer` + 一串 CI rename（"Add files via upload" 多次出现，仍是上传式提交模式）
+- 社区信号归零：0 issues、0 PRs、无 demo/package release；fake fork 网络（77 forks 无真实外部互动）未消退，stars 反降
+- **预测 cal-0816-ffb8**（"30 天内不会有真实外部 contributor 的 PR/issue"）保持 pending，due 09-15 — 当前证据方向支持 correct
+
+**沉淀价值保留**：六模式（权限交集/five-part envelope/规则信号/MCP allowlist/三层沙箱/append-only 回放）已提取到 [[multi-agent-consensus]]、[[agent-isolation]] 等卡片，设计参考不随项目 drop 而失效。这是「模式提取完毕 → 项目失去跟进价值」的标准 drop 路径——与 [[growth-signal-vs-code-signal]] 一致：无代码信号 + 无社区信号 → 不值得继续投入观察时间。

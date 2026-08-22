@@ -49,3 +49,19 @@ memory/*.md    .mcp_memory/memories.db
 ## 跟踪决策
 
 Watch 级别（146⭐ 中量级，但与我们记忆实践高度同构 + 有真实安全案例）。Revisit 08-22：PR #3 是否合并、maintainer 是否活跃、OKF 生态是否在涨。
+
+---
+
+## 08-22 Followup Delta
+
+> API 2026-08-22 09:00 CST: 192⭐ / 12 forks（+31% in 7d）/ pushed 08-18 / 1 open issue。Watch → **Track 升级**。
+
+**✅ 红旗全部解除，maintainer 重新活跃：**
+- PR #3（yunaremaia 路径穿越修复）**MERGED 08-16** — 预测 cal-0815-4d18 verified **correct**
+- PR #4 `fix: validate memory path before committing index row`（hampsterx）MERGED 08-17 — 二次防御，写库前再验路径
+- PR #5 `docs: document memory_delete`（hampsterx）MERGED 08-18
+- 新 bug issue #6（"expected an object but got: number"）open — 有真实用户在用
+
+**教训验证**：08-15 时 pushed_at 停更 3 天 + 0 maintainer 回复被标红旗，但项目没死——**短窗口 pushed_at 停更 ≠ abandoned**，PR 从 open→merged 用了 3 天（08-16 merge 说明只是维护节奏慢）。与 [[pushed-at-misleading]] 同类：single push date 不可靠，要看事件流。
+
+**Revisit 08-29**：OKF 生态增长 + issue #6 解决速度 + 外部贡献者是否持续（hampsterx 出现 = 社区开始成形）。

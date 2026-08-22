@@ -62,3 +62,16 @@ dashboard/
 - [ ] 结构化列 vs notes 正则教训 → 检查我们现有追踪工具是否有从自由文本推断状态的路径。
 
 Links: [[gogetajob]], [[pr-superseded-lessons]], [[data-discipline]]
+
+---
+
+## 08-22 Followup Delta
+
+> API 2026-08-22 09:00 CST: 500⭐ / 40 forks（+18% in 7d）/ MIT / pushed 08-08。仍 0 issues / 0 PRs。
+
+**代码演进是真实的**（default-branch 5 commits）：
+- 08-08 `7-day calendar` — 面试阶段调度/追踪看板
+- 08-04 `experience-bank matching step` — 经验库匹配步骤进 workflow
+- 08-02 `mark as ended` interaction + Quick Start 扩展（browser automation setup）
+
+**判定：保持 warm，不升级不降级。** 单作者持续产出（3 次功能迭代）说明项目活着，但 0 issues/0 PRs 的社区黑洞依旧——与 [[growth-signal-vs-code-signal]] 相反方向的镜像：代码活跃 + 社区零信号。模式价值（证据先于计数/乐观并发守卫/verbatim JD）已在 08-15 提取完毕，无新架构洞察。Revisit 08-29：社区信号 + 上游活跃度；仍 0 → cool。
