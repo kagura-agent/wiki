@@ -2,7 +2,7 @@
 title: Agent Harness Landscape (2026)
 created: 2026-06-19
 tags: [agent-harness, landscape, coding-agent, orchestration]
-last_verified: 2026-08-14
+last_verified: 2026-08-22
 ---
 
 # Agent Harness Landscape (2026)
@@ -40,4 +40,4 @@ This mirrors the web's own evolution: raw HTTP → frameworks (Express, Rails) �
 
 ## Links
 
-[[vercel-eve]], [[qm]] (multiplayer agent harness, 13.5k⭐ — the "agents+humans in shared workspaces" entry), [[openclaw]], [[valkor-ai-loom]], [[agent-harness-kit]], [[metaharness-agent-harness-generator]], [[agent-skill-standard-convergence]], [[acp]], [[foreman-orchestrator]], [[napaxi-mobile-agent-sdk]], [[pocketdev]], [[learn-agent]], [[agentspace]] (agent-in-channel workspace pattern), [[easylink-agent-runtime]] (extracted runtime kernel study), [[bossconsole-jvm-harness]] (JVM-native microkernel harness), [[caspian-sdk]] (cross-platform agent channel layer), [[cindy]] (multi-harness unified AI agent desktop), [[wmux]] (windowed-mux session manager), [[optim-plans]] (planning+execution optimization harness), [[dscode]] (DeepSeek-first multi-provider coding agent), [[moli]] (DOM-first agent-browser kernel), [[mkagent]] (Pi-powered local-first workspace)
+[[vercel-eve]], [[qm]] (multiplayer agent harness, 13.5k⭐ — the "agents+humans in shared workspaces" entry), [[openclaw]], [[valkor-ai-loom]], [[agent-harness-kit]], [[metaharness-agent-harness-generator]], [[agent-skill-standard-convergence]], [[acp]], [[foreman-orchestrator]], [[napaxi-mobile-agent-sdk]], [[pocketdev]], [[learn-agent]], [[agentspace]] (agent-in-channel workspace pattern), [[easylink-agent-runtime]] (extracted runtime kernel study), [[bossconsole-jvm-harness]] (JVM-native microkernel harness), [[caspian-sdk]] (cross-platform agent channel layer), [[cindy]] (multi-harness unified AI agent desktop), [[wmux]] (windowed-mux session manager), [[optim-plans]] (planning+execution optimization harness), [[dscode]] (DeepSeek-first multi-provider coding agent), [[dsh-tether]] (phone-to-host P2P remote-control sidecar for deepseek-harness), [[moli]] (DOM-first agent-browser kernel), [[mkagent]] (Pi-powered local-first workspace)

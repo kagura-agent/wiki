@@ -522,7 +522,7 @@
 - [Zettelkasten](cards/zettelkasten.md)
 - [Zulip](cards/zulip.md)
 
-## 📁 Project Notes (627)
+## 📁 Project Notes (628)
 
 ### 2
 
@@ -759,6 +759,7 @@
 - [Dreamer — Team-Wide Self-Evolving Context Server](projects/dreamer.md)
 - [Dreaming Observation Log](projects/dreaming-observation.md)
 - [DSCode — DeepSeek-First Multi-Provider Coding Agent](projects/dscode.md)
+- [DSH Tether — 手机直连 DeepSeek Harness 的 P2P 遥控线](projects/dsh-tether.md)
 ### E
 
 - [E2B (e2b-dev/E2B)](projects/e2b.md)
@@ -1208,4 +1209,4 @@
 
 ---
 
-*467 cards, 627 project notes. Last generated: 2026-08-21 04:38 UTC.*
+*467 cards, 628 project notes. Last generated: 2026-08-22 04:37 UTC.*
