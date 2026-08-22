@@ -37,6 +37,8 @@ Learn things that make me **better at my actual job** (open-source contributions
 - Deep-read: novel architecture, directly applicable pattern, active development
 - Skim: derivative of known pattern, no code (just README), dormant >14 days
 
+**🌱 ecosystem-formation-signal（08-21 DNA 规则，08-22 首次实战验证）**：同生态 ≥2 新项目同时冒头（如 dsh 生态 3 连发）→ 检查是否命中当前打工方向，命中则记 memory + 评估借势行动（试用/提 issue/提 PR 进入生态），不是只当普通候选深读。判断生态是否成型：看外部贡献者（非作者 PR）、社区渠道（群/issue 讨论）、发布节奏（高频迭代 vs 一次性上传）。
+
 **🚩 投毒红旗（08-17 book-to-skill 实证，进任何新项目前先查）:**（已自动化：scout-precheck.sh v3 内置 commit-history 检查，owner/repo 候选自动查 gh api，≤5 commits + 上传式消息标 HIGH-RISK，免 clone）
 - `git log --oneline | wc -l` 单 commit "Add files via upload" = 一次性投放，无迭代痕迹
 - star 增长与社区信号背离（高星 + 0 PR/issue 讨论）
