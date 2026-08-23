@@ -8258,3 +8258,36 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 - nudge: `.nudge-audit.log` 8× Triggering/enqueued；`.nudge-state.json` turnCount=1
 - dreaming: DREAMS.md mtime 05:19；memory/dreaming/{light,deep,rem}/2026-08-22.md mtime 05:01-05:04
 - heartbeat: journalctl 今日 0× file lock timeout
+
+---
+
+## 🔬 自进化观察日报 2026-08-23（验证期 D2）
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增（uncommitted-promote 复发2、silent-config-change），commit 557b061
+- **DNA 变更**: 无（SOUL/AGENTS 无今日提交）；但 MEMORY.md promote 未提交复发第 2 次 → 补提交 26f9134
+- **nudge**: 今日 6 触发/6 enqueued（00:54~03:34 北京）→ **11:34 后完全静默**；0 转化
+- **dreaming**: light 10 staged / deep 5 promoted / rem 有内容；DREAMS.md 05:00 档 2/3 占位
+
+### 🔴 关键发现 1：nudge 插件 12:04 被静默禁用
+- 证据：openclaw.json.bak-20260823-1202（12:02:53）里 `nudge: enabled=true`、heartbeat `every: 30m` target discord kagura-dm；当前 openclaw.json（12:04:44 mtime）里 `nudge: enabled=false`、heartbeat `every: 0m` target none、active-memory `enabled=false`
+- 时间吻合：12:04:55 gateway 重启（process lstart）；work-scan 12:02 轮记录「中途 gateway 重启 2 次」
+- 后果：`.nudge-audit.log` 最后一条 11:34:08，之后 0 触发 → issue #11 验收（连续 3 天 nudge 源 gradient）被中断
+- 归属：memory/TODO 无任何记录（heartbeat TODO 项仍标「待 Luna 拍板」）→ 无授权的静默配置变更
+- 处置：本轮恢复 nudge=true（撤销无记录禁用）；heartbeat 保持 0m（恢复方案待 Luna 拍板，见 TODO:14）
+
+### 🔴 关键发现 2：(b) 错峰修复部分有效，昨日「验证通过」结论需修正
+- 实测 DREAMS.md：08-22 5:00 档 3 条中 **2 条 unavailable** + 1 条实质；08-23 5:00 档同样 **2/3 占位**
+- 修正：错峰从「全占位」改善到「1/3 实质 narrative」，未完全修复；(b) 仍需跟进（narrative LLM 调用仍有失败，可能 floway 凌晨网络或并发残留）
+- 08-22 日报「自动路径无占位」表述不准确，特此修正
+
+### 闭环追踪
+- ✅ 完整闭环：账单质疑修复链（#586/#587/#588 当日闭环，PR #587/#589 MERGED）——非本管线但高价值
+- 🔄 断裂：uncommitted-promote 第 2 次复发（dreaming promote 写入与 git commit 脱节，gradient 已记，待修）
+- 🔄 断裂：silent-config-change（配置变更无留痕，gradient 已记）
+
+### 原始数据
+- git: 26f9134（MEMORY.md promote 补提交）、557b061（2 gradients）
+- nudge: .nudge-audit.log 6× Triggering（00:54/01:19/02:00/02:21/02:28/03:34 UTC），末条 03:34:08Z（= 11:34 北京）
+- 配置: openclaw.json.bak-20260823-1202 vs openclaw.json diff（nudge/heartbeat/active-memory 3 处 false）
+- dreaming: DREAMS.md 08-23 5:00 档 3 条（2 占位 + 1 实质）；memory/dreaming/{light,deep,rem}/2026-08-23.md mtime 05:01-05:05
