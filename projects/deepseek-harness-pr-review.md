@@ -69,3 +69,16 @@ docs WRONG/FABRICATED、claim UNVERIFIED、unresolved questions → 交互式问
 
 - **Track**（dsh 生态优先方向，高频迭代中）。Revisit 08-29：社区信号（外部 contributor/issue）、benchmark 是否出现、与 dsh 官方生态整合进展。
 - 待办：试用跑一个真实 PR review（需要 DEEPSEEK_API_KEY，本地可评估）；评估提 PR 借势（如 docs-rank 加权调参或 benchmark 工具）。
+
+## 生态更新 2026-08-23：dsh 生态成型确认 🌱
+
+08-22~08-23 两天 dsh 生态 6+ 项目批量冒头（scout 轮确认）：
+- [[pilot-harness]]（251⭐，桌面客户端，08-17 创建）
+- dsh-hotplug-hub（热插拔插件管理器，**3 个外部贡献者** 9 PRs merged）
+- dsh-image-gen（135⭐，聊天内生图）
+- deepseek-harness-android-app（84⭐，外部贡献者）
+- dsh-tether（手机远程连接，已跟踪）
+- awesome-deepseek-harness 索引 181⭐ / 2805 条目 / 08-23 仍在更新
+
+**三要素齐备**（外部贡献者 ✅ / 社区渠道 ✅ / 发布节奏 ✅）→ 生态进入扩张期，不是单点爆发。
+打工策略确认：**进生态的方式 = 插件/PR，不是 fork**（pilot-harness 薄壳模式验证：DSH_HOME 私有隔离 + 上游插件树即运行时）。借势候选：pilot-harness 代理 env 透传缺口（issue 可提）。
