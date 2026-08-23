@@ -1,44 +1,55 @@
 {
-  "timestamp": "2026-08-22T02:06:00Z",
-  "run_date": "2026-08-22",
-  "totals": {
-    "md_files": 1203,
-    "cards": 467,
-    "projects": 628,
-    "wikilinks": 5802
-  },
-  "health": {
-    "errors": 0,
-    "warnings": 56,
-    "broken_links": 0,
-    "broken_link_sources": [],
-    "orphans": 1,
-    "orphan_cards": [],
-    "orphan_projects": ["dsh-tether"],
-    "duplicate_slugs": 0,
-    "index_drift": {
-      "missing_from_index": 1,
-      "missing_files": [
-        "projects/dsh-tether.md"
-      ],
-      "not_in_index_warn": 1,
-      "cards_index_stale": true,
-      "cards_index_listed": 465,
-      "cards_index_total": 467
+    "timestamp": "2026-08-23T02:06:00Z",
+    "run_date": "2026-08-23",
+    "totals": {
+        "md_files": 1205,
+        "cards": 468,
+        "projects": 629,
+        "wikilinks": 5806
     },
-    "stale_files": 549,
-    "frontmatter_issues": ["agent-tool-supply-chain-poisoning", "local-state-concurrent-guard"],
-    "no_outbound_links": ["cards/INDEX.md", "cards/retire-candidates.md"],
-    "unicode_suspect_groups": 6,
-    "stub_files": 0,
-    "secret_scan": "ok",
-    "invalid_facts": 0
-  },
-  "book": {
-    "new_issues": 0,
-    "recurring": 56,
-    "clean_passes": 0,
-    "auto_closed": 0,
-    "total_open": 56
-  }
+    "health": {
+        "errors": 0,
+        "warnings": 58,
+        "broken_links": 0,
+        "broken_link_sources": [],
+        "orphans": 2,
+        "orphan_cards": [
+            "disk-slot-mutex"
+        ],
+        "orphan_projects": [
+            "deepseek-harness-pr-review"
+        ],
+        "duplicate_slugs": 0,
+        "index_drift": {
+            "missing_from_index": 2,
+            "missing_files": [
+                "cards/disk-slot-mutex.md",
+                "projects/deepseek-harness-pr-review.md"
+            ],
+            "not_in_index_warn": 2,
+            "cards_index_stale": true,
+            "cards_index_listed": 465,
+            "cards_index_total": 468
+        },
+        "stale_files": 554,
+        "frontmatter_issues": [
+            "agent-tool-supply-chain-poisoning",
+            "local-state-concurrent-guard"
+        ],
+        "no_outbound_links": [
+            "cards/INDEX.md",
+            "cards/retire-candidates.md"
+        ],
+        "unicode_suspect_groups": 6,
+        "stub_files": 0,
+        "secret_scan": "ok",
+        "invalid_facts": 0
+    },
+    "book": {
+        "new_issues": 0,
+        "recurring": 58,
+        "clean_passes": 0,
+        "auto_closed": 30,
+        "total_open": 58
+    }
 }

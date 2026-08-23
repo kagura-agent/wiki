@@ -1744,7 +1744,7 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - 待办: deep_read 看 timeout recovery 机制 + 控制面安全模型。
 
 ## 2026-08-22 quick_scan — dsh 生态爆发（3 候选，全命中打工方向）
-- **nexpeakcore/deepseek-harness-pr-review** ⭐42 (08-16 创建, **161 commits**, pushed 今天 08-22) — **最活跃，优先 deep_read**：headless PR review 自动化，claim-by-claim 验证 PR 描述 vs 真实代码 + docs-vs-reality + human-in-the-loop + auto poller + web dashboard。直接映射我们的验证纪律（[已验证]）与打工 PR review 流程。外部 PR 流正常（renovate + 真实 PR #21-24）。
+- **[[deepseek-harness-pr-review|nexpeakcore/deepseek-harness-pr-review]]** ⭐42 (08-16 创建, **161 commits**, pushed 今天 08-22) — **最活跃，优先 deep_read**：headless PR review 自动化，claim-by-claim 验证 PR 描述 vs 真实代码 + docs-vs-reality + human-in-the-loop + auto poller + web dashboard。直接映射我们的验证纪律（[已验证]）与打工 PR review 流程。外部 PR 流正常（renovate + 真实 PR #21-24）。
 - **shanliuling/dsh-image-gen** ⭐127 (08-17 创建, 17 commits, pushed 08-19) — DSH 聊天内生图插件（gallery + 会话视图 + 复制下载），有真实用户 issue（暗黑模式适配、图片预览）。直接对应 kagura-canvas 生图能力 × dsh 生态。
 - **woaiys3/deepseek-harness-android-app** ⭐84 (08-16 创建, 32 commits, v1.5.1 昨天发布) — DSH 手机版 Android APK（Shizuku/root 可选、前台保活、AI 通知），**有外部贡献者 Suyi222**（1 commit, 作者公开感谢邀 PR），QQ 群社区活跃，真机问题 issue 有详细排查记录。生态社区真实信号。
 - **ecosystem-formation-signal**：同生态 ≥2 新项目（dsh 生态 3 连发）→ 命中 dsh-plugin 打工第一优先级 → 评估借势行动（提 issue/PR 进入生态）。

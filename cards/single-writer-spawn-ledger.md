@@ -5,7 +5,7 @@ tags: [architecture, observability, provenance, subagent, ledger, write-time]
 created: 2026-08-20
 source: https://github.com/PrimeIntellect-ai/prime-agent/pull/1387
 status: verified
-last_verified: 2026-08-20
+last_verified: 2026-08-23
 ---
 
 # Single-Writer Spawn Ledger
@@ -60,4 +60,5 @@ seed 后 ledger 216KB / 600 records；稳态增长 ~340 bytes/spawn。
 - [[write-time-vs-read-time-arbitration]] — 同族思想：写时解决 vs 读时重建
 - [[supervisor-pattern]] — supervisor 观察而不执行；这里 supervisor **记录**它授权的
 - [[observability]] — append-only 日志同时服务 provenance 与查询
+- [[disk-slot-mutex]] — 磁盘槽互斥（O_EXCL 原子创建 + 死 PID 回收），同属不依赖外部服务的并发基础设施，写时记录事实
 - [[prime-agent]] — 来源项目
