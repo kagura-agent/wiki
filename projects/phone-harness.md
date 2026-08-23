@@ -7,7 +7,7 @@ stars: 196
 repo: ShawnPana/phone-harness
 language: Python
 license: MIT
-last_verified: 2026-08-11
+last_verified: 2026-08-23
 ---
 
 # Phone Harness — iPhone Mirroring Agent Transport
@@ -47,5 +47,13 @@ For Kagura, the transferable idea is not the device-control surface. It is the *
 - Verified: 196⭐, 12 forks, 0 issues; created and last pushed 2026-08-07.
 - Risk: two-day-old project with a single observed commit and no regression suite/community feedback.
 - Revisit 2026-08-23: check whether the project has concrete tests, issues, or an externally demonstrated reliability loop.
+
+## Followup 2026-08-23
+
+- **1984⭐** (196→1984, **+912% in 14d**), 183 forks, 25 open issues. Prediction cal-0809-afcb ✅ **CORRECT** (25 open issues 远超「至少 1 个 issue」门槛).
+- 活跃度真实：default-branch commits to 08-18 — 0.2.0 release (PyPI installable, 08-18), android-backend #39 merged, cloud-backend #21 merged-then-reverted, paste-clipboard fix #43, screenshot-coordinate docs #45。pushed_at (08-21) 与 default-branch (08-18) 差距小 = 真实迭代非 marketing spike。
+- Issues 是真实用户反馈：#48 type_text 在预填字段 append 而非 replace、#47 OCR 只认拉丁字符、#46 android keep-awake、#42 cloud-rented iPhone 驱动。
+- ⚠️ **仍无测试文件**（tree 搜索 test/spec/pytest 全空），safety 仍 advisory — growth 快但 verification 未跟上。符合 growth-signal-vs-code-signal 的「快增长 + 验证缺位」形态，但代码信号本身是真实的（区别于 pi-from-scratch 的纯 marketing）。
+- 保持 warm：revisit 08-27 看 regression tests / safety enforcement；无 → cool。
 
 Links: [[mobile-agent]], [[capability-architecture]], [[agent-harness-landscape]], [[agent-security]], [[longhorizon-harness]], [[napaxi-mobile-agent-sdk]], [[pocketdev]], [[nightcrawler]]

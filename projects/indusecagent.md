@@ -2,7 +2,7 @@
 title: InduSecAgent — an industrial anomaly-detection demo with advisory operational safeguards
 created: 2026-08-09
 tags: [industrial-control, anomaly-detection, security, graph-neural-network, safety]
-last_verified: 2026-08-11
+last_verified: 2026-08-23
 source: https://github.com/yuhuangerdi/InduSecAgent
 ---
 
@@ -35,3 +35,10 @@ This is adjacent to [[agent-harness-landscape]] only through assurance design. I
 
 - Revisit **2026-08-23** for a license, reproducible tests, real issue/PR discussion, and whether the PLC/network authorization boundary becomes executable rather than advisory.
 - Treat current README performance and safety claims as **unverified** unless independently reproduced in an isolated simulator.
+
+## Dropped 2026-08-23
+
+- **Repo 404 Not Found**（复查时）：owner yuhuangerdi 现存 3 repos（Auto-Pentest / PaperMatrix / RBlog）均非此项目，gh search 亦无结果。repo 已删除或转私有，无跟踪对象。
+- 原关注点（无授权边界 / 私有 PLC IP 默认值 / advisory safety）随 repo 消失 moot。
+- 教训保留：**stated safety policy ≠ testable mechanism**——这条 transferable rule 已进 agent 生态认知，不随项目消失。
+- 从跟踪表 drop。
