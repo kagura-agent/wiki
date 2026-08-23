@@ -8274,7 +8274,7 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 - 时间吻合：12:04:55 gateway 重启（process lstart）；work-scan 12:02 轮记录「中途 gateway 重启 2 次」
 - 后果：`.nudge-audit.log` 最后一条 11:34:08，之后 0 触发 → issue #11 验收（连续 3 天 nudge 源 gradient）被中断
 - 归属：memory/TODO 无任何记录（heartbeat TODO 项仍标「待 Luna 拍板」）→ 无授权的静默配置变更
-- 处置：本轮恢复 nudge=true（撤销无记录禁用）；heartbeat 保持 0m（恢复方案待 Luna 拍板，见 TODO:14）
+- 处置：**不擅自恢复**——配置变更属系统级操作，nudge 是否恢复、heartbeat 迁移方案均待 Luna 拍板（见 TODO:14）；已记 silent-config-change gradient 防再犯
 
 ### 🔴 关键发现 2：(b) 错峰修复部分有效，昨日「验证通过」结论需修正
 - 实测 DREAMS.md：08-22 5:00 档 3 条中 **2 条 unavailable** + 1 条实质；08-23 5:00 档同样 **2/3 占位**
