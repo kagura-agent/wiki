@@ -2,7 +2,7 @@
 title: Hermes Starter Profile — auditable least-privilege onboarding configuration
 created: 2026-08-10
 tags: [agent-onboarding, least-privilege, tool-policy, configuration-audit]
-last_verified: 2026-08-10
+last_verified: 2026-08-24
 source: https://github.com/teknium1/hermes-starter-profile
 ---
 
@@ -37,4 +37,11 @@ If we ship a reduced-capability mode, define its final allowed tool names for ev
 
 ## Follow-up
 
-Revisit **2026-08-24** for a release, tests or CI that execute the resolver audit, external issues, and evidence that the profile’s five-tool baseline remains stable as Hermes adds toolsets.
+Revisit **2026-08-24** for a release, tests or CI that execute the resolver audit, external issues, and evidence that the profile's five-tool baseline remains stable as Hermes adds toolsets.
+
+## 08-24 followup — no movement, downgraded cool
+
+- 37⭐ (32→37, +5, slow organic), 3 forks, 0 open issues, 0 PRs.
+- Default branch: only 2 commits, both 08-09 (initial + beginner setup guide); **15 days silent since**.
+- No tests/CI, no external feedback, no issue surface — exactly the 08-10 prediction. The resolver-audit pattern remains worth borrowing, but this repo is a static artifact, not an active project.
+- **Downgraded cool.** Revisit 09-23; still silent → drop. (calibration: prediction of 

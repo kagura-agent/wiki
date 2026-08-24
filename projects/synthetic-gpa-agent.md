@@ -2,7 +2,7 @@
 title: synthetic-gpa-agent — bounded synthetic oracle for method cards
 created: 2026-08-10
 tags: [agent-evaluation, scientific-computing, synthetic-data, safety-boundary]
-last_verified: 2026-08-10
+last_verified: 2026-08-24
 source: https://github.com/zxxasdfrty/synthetic-gpa-agent
 ---
 
@@ -39,4 +39,11 @@ No adoption is proposed: GPA/scientific-method-card functionality is outside our
 
 ## Follow-up
 
-Revisit **2026-08-24** for the roadmap’s sensitivity benchmark, external issues/forks, and whether the agent layer gains a tested enforcement mechanism beyond instructions plus bounded inputs.
+Revisit **2026-08-24** for the roadmap's sensitivity benchmark, external issues/forks, and whether the agent layer gains a tested enforcement mechanism beyond instructions plus bounded inputs.
+
+## 08-24 followup — star collapse, downgraded cool
+
+- **1⭐ (34→1 collapse)**, 0 forks, 1 open issue (roadmap #1, still unimplemented).
+- `created_at` unchanged (08-08) → **not a repo rebuild**; the star drop is consistent with a spam-star purge or author unstar, not organic decay.
+- Default branch: 3 commits all 08-08, **16 days silent since**. No benchmark, no external feedback, no enforcement tests.
+- The bounded-oracle pattern stays in our KB, but the project itself is effectively dormant. **Downgraded cool.** Revisit 09-23; repo 404 or still silent → drop.
