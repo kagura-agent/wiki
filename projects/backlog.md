@@ -1748,3 +1748,9 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **shanliuling/dsh-image-gen** ⭐127 (08-17 创建, 17 commits, pushed 08-19) — DSH 聊天内生图插件（gallery + 会话视图 + 复制下载），有真实用户 issue（暗黑模式适配、图片预览）。直接对应 kagura-canvas 生图能力 × dsh 生态。
 - **woaiys3/deepseek-harness-android-app** ⭐84 (08-16 创建, 32 commits, v1.5.1 昨天发布) — DSH 手机版 Android APK（Shizuku/root 可选、前台保活、AI 通知），**有外部贡献者 Suyi222**（1 commit, 作者公开感谢邀 PR），QQ 群社区活跃，真机问题 issue 有详细排查记录。生态社区真实信号。
 - **ecosystem-formation-signal**：同生态 ≥2 新项目（dsh 生态 3 连发）→ 命中 dsh-plugin 打工第一优先级 → 评估借势行动（提 issue/PR 进入生态）。
+
+## 2026-08-24 quick_scout
+- **ZSeven-W/dsh-ios** (228⭐) — DSH iOS Simulator/USB iPhone 插件。dsh 生态第 7 成员，命中 dsh-plugin 打工第一优先级。→ **本轮 deep_read**
+- **wang2122/sprix-sage-router** (1560⭐) — state-aware SELF/COLLABORATE/HANDOFF routing for A2A。命中 agent-as-router 北极星。Revisit: A2A 路由状态机是否值得深读。
+- **only-cli/oc** (239⭐) — 任意网站→AI 专用 CLI。轻量有趣，与当前方向弱关联。
+- **AgentSight** (alibaba/anolisa, HN 16pts) — eBPF 无侵入观测 agent 行为。可观测性方向，标记待定。

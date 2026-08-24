@@ -82,3 +82,10 @@ docs WRONG/FABRICATED、claim UNVERIFIED、unresolved questions → 交互式问
 
 **三要素齐备**（外部贡献者 ✅ / 社区渠道 ✅ / 发布节奏 ✅）→ 生态进入扩张期，不是单点爆发。
 打工策略确认：**进生态的方式 = 插件/PR，不是 fork**（pilot-harness 薄壳模式验证：DSH_HOME 私有隔离 + 上游插件树即运行时）。借势候选：pilot-harness 代理 env 透传缺口（issue 可提）。
+
+## 生态更新 2026-08-24：第 7 成员 dsh-ios 🆕
+
+- **[[dsh-ios]]**（228⭐，2.5 天，MIT，npm 已发布 0.1.0-rc.5）— iOS Simulator/USB 真机 live 插件，22 个 agent 工具。08-19 创建，08-23 仍高频提交（rc.3→rc.5 两天 3 release）。
+- 生态节奏确认：08-22~23 三连发（pr-review/pilot-harness/image-gen）→ 08-24 已见 dsh-ios + dsh-android（README sibling）→ **发布节奏 = 高频迭代，生态扩张期持续**。
+- 外部 issues 开始出现：WDA 视频卡死（可用性问题）、devicectl Reality 误判（分类边界 bug）— 有真实用户在使用。
+- 借势窗口更新：dsh-ios 需 macOS/Xcode 工具链（本机 Linux 不可试），但生态整体仍可用插件/PR 进入（dsh-tether issue #1 已是成功先例）。
