@@ -8291,3 +8291,31 @@ kagura-mail #452/#454 merged (08-17); dsh-plugins #3/#5 open; multica #7020 clos
 - nudge: .nudge-audit.log 6× Triggering（00:54/01:19/02:00/02:21/02:28/03:34 UTC），末条 03:34:08Z（= 11:34 北京）
 - 配置: openclaw.json.bak-20260823-1202 vs openclaw.json diff（nudge/heartbeat/active-memory 3 处 false）
 - dreaming: DREAMS.md 08-23 5:00 档 3 条（2 占位 + 1 实质）；memory/dreaming/{light,deep,rem}/2026-08-23.md mtime 05:01-05:05
+
+---
+
+## 🔬 自进化观察日报 2026-08-24（验证期 D3）
+
+### 管线活跃度
+- **beliefs-candidates**: 2 条新增（script-recommendation-vs-guide-rule ×2, tool-output-vs-known-fact-bug-hunt ×2, 均 study 源）+ fork-network-star-farming-check bump（第2次）→ commit 02f87ea。⚠️ 发现时未提交（uncommitted-promote 第 3 次复发）→ 已补 commit
+- **DNA 变更**: 无（SOUL 06-18 / AGENTS 08-18 时间戳未变）
+- **nudge**: 13:01 Luna 拍板恢复 → 13:07 起 7 触发（13:07/13:19/14:36/15:22/16:38/20:06/21:08 本地）全 enqueued 到 agent:kagura(main)，**0 转化**
+- **dreaming**: 无运行（cron 0df29bb1 已从 gateway 消失，属 TODO:14 待 Luna 拍板，预期内非故障）
+
+### 🔴 关键发现：nudge 0 转化根因实锤（issue #11 假设 1 验证通过）
+- **源码证据**（extensions/nudge/index.ts）：targetSession=main → targetKey=`agent:${agentId}`=agent:kagura → enqueueSystemEvent 入队
+- **transcript 证据**（agents/kagura/sessions/aa468600-...jsonl）：main session 全是 heartbeat poll→HEARTBEAT_OK 循环，**最后活动 08-23 11:33 本地**（= 12:04 静默变更关掉 heartbeat 的时刻），之后无任何消费
+- **结论**：nudge 消费通道依赖 main session 活跃（原设计靠 heartbeat 30m 唤醒），heartbeat 被静默关闭后 main 成死 session → 事件堆积 → 0 转化
+- **建议**（待 Luna 拍板，归 TODO:14）：恢复 heartbeat 30m（最小改动）/ 改 targetSession=origin（需实测）/ 重新评估 nudge 定位
+- 已 comment issue #11: https://github.com/kagura-agent/self-evolving/issues/11#issuecomment-5396742637
+
+### 闭环追踪
+- ✅ 完整闭环：Luna 拍板恢复 nudge（13:01）→ 配置改+重启+验证（13:07 首触发）→ 根因确认（22:30）
+- 🔄 断裂：uncommitted-promote 第 3 次复发（写→commit 两步分离）→ 建议升级 AGENTS.md「写后即 commit」
+- 🔄 断裂：todo-pin-sync hook 今日 7 次 bash syntax error（curl -d 未转义）→ 新发现待修（非本管线）
+
+### 原始数据
+- git: 02f87ea（2 gradients + bump）
+- nudge: .nudge-audit.log 7× Triggering（05:07~13:08 UTC）+ 源码 index.ts 链路
+- main transcript: aa468600-6355-4789-ad7e-ec4531837b10.jsonl（150+ 行全 heartbeat，末条 08-23 03:33Z）
+- todo-pin-sync: openclaw-2026-08-24.log 7× Syntax error（03:21/09:01/09:03/12:07/13:07 等）
