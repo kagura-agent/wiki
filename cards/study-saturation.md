@@ -2,7 +2,7 @@
 title: Study Saturation
 created: 2026-05-31
 tags: [tool, study, structural-gate]
-last_verified: 2026-08-13
+last_verified: 2026-08-24
 status: active
 depth: scout
 ---
@@ -29,3 +29,18 @@ Capacity ("is there room for another round?") ≠ Actionability ("is there actua
 - [[followup-precheck-aggregation]] — the aggregated status script that saturation.sh now queries
 - [[structural-fix-over-behavioral-rule]] — pattern: tool gates > behavioral rules
 - [[self-evolving-observations]] — tracked this bug for observation
+
+## Fix (2026-08-24): header case-sensitivity — `## study-loop` 未被计数
+
+**Bug**: `study-mode-counts.sh` 用 `^## Study`（大小写敏感 + 空格）匹配 memory 标题，但实际标题是 `## study-loop 09:00（#8290 followup 轮）`（小写 + 连字符）→ 当日轮次计数全 0，饱和判断失真（scout/quick/followup 全显示 open，误导向 entry 推荐 scout），影响 8 个历史日期。
+
+**Root cause**: 标题格式从 `## Study Loop ...` 演化为 `## study-loop ...`（cove 任务化后），但脚本只修了「标题内关键词任意位置」没修「大小写 + 连字符」。
+
+**Fix**（3 个脚本，commit dd8c0da）:
+- `study-mode-counts.sh`: 所有 grep 改 `-i`（大小写不敏感）+ `study[- ]`（连字符/空格容忍）
+- `study-saturation.sh` LAST_MODES: 从「正则抓标题首词」改为「按关键词提取」——逐行 grep scout/quick/apply/followup 关键词，不再依赖固定标题格式（`## study-loop` 的 "loop" 不再被当成模式名）
+- `study-saturation-gate.sh`: skip_count 改 `-i`
+
+**验证**: 修复后今天计数 (1 1 0 1) 正确 = 09:00 followup + 14:00 quick+deep；saturation.sh 正确识别 🛑 SOFT SATURATION（修复前误报 OPEN）；regression-gate PASS。
+
+**教训**: 脚本正则匹配自己的 memory 标题时，用 `-i` + 宽松分隔符是默认安全选择；标题格式演化（cove 任务化 → `study-loop`）不会通知脚本作者。
