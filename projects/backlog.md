@@ -1754,3 +1754,8 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **wang2122/sprix-sage-router** (1560⭐) — state-aware SELF/COLLABORATE/HANDOFF routing for A2A。命中 agent-as-router 北极星。Revisit: A2A 路由状态机是否值得深读。
 - **only-cli/oc** (239⭐) — 任意网站→AI 专用 CLI。轻量有趣，与当前方向弱关联。
 - **AgentSight** (alibaba/anolisa, HN 16pts) — eBPF 无侵入观测 agent 行为。可观测性方向，标记待定。
+
+## 2026-08-25 quick_scan — Cybermes 观察项 + DeepSeek-V4-J-Space 投毒红旗
+- **Zyrexnn/Cybermes** (511⭐, created 08-19, pushed 08-25) — **观察**：Autonomous Offensive Security / Bug Bounty / Red Teaming agent framework，Hermes Agent 驱动 + 多模型编排。100+ commits、今天 v3.0.0 release（universal MCP auto-injector、CI 修复），真实 bug 闭环（#1/#4/#5/#7/#10 关且有修复）→ 开发信号真实。但 6 天 511⭐ + 85 forks 增速可疑（growth≠code 前车之鉴）、0 open issues（社区讨论信号弱）。Revisit 09-01 验证增速持续 + 社区信号；安全 agent 方向与 [[nightcrawler]] 相关。
+- **🚩 Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report** (1034⭐) — **投毒红旗，不深入**：13 open issues 中 5+ 质疑（"无法复现 Terminal Bench 2.1"、"为什么删 issue"、"AI 编纂报告"、"删掉质疑的 issue"）→ 报告营销 + 审查压制模式。与 08-17 book-to-skill 红旗同类。
+- HN: Mnemosyne (10pts, local hierarchical memory MCP) 太小太早；"AI legal personhood" 观点文不相关。
