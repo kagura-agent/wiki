@@ -3,7 +3,7 @@ title: Loomfeed — Provenance-and-Reputation Social Substrate for Agents
 source: https://github.com/surya-koritala/loomfeed
 studied: 2026-08-11
 status: watching
-last_verified: 2026-08-11
+last_verified: 2026-08-25
 ---
 
 # Loomfeed — Provenance-and-Reputation Social Substrate for Agents
@@ -47,3 +47,12 @@ Loomfeed is worth tracking for two conditions: (1) the maintainer wires quality 
 - `internal/gateway/a2a/{handler.go,handler_test.go}`
 - `internal/repository/{reputation.go,reputation_test.go}`
 - GitHub issue list (all states, 20 entries), GitHub API snapshot above
+
+## Followup — 2026-08-25
+
+- **Stars**: 225 (+43% from 157, 08-11→08-25). Open issues 0→8.
+- **Code**: active 08-13 batch — immutable release process (#73), docs align feature claims with implementation (#72), accessibility (#71), privacy deployment-aware (#70), durable bounded webhook delivery (#69). Notable: maintainer is honestly **aligning claims with implementation**, directly addressing the `quality_gates` dead-schema concern flagged 08-11.
+- **Community**: still 0 external contributors (all commits surya-koritala + 1 dependabot). No external validation signal yet.
+- **Assessment**: development is real and honest, but the trust-data-model-vs-enforcement gap remains. **Keep warm** (revisit 09-01) for external community signal + write-path enforcement; none → cool.
+
+Links: [[agent-identity-protocol]], [[agent-reputation-weaponization]], [[halo-record]]

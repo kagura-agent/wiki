@@ -69,3 +69,12 @@ The project will either add stronger structured command authorization or attract
 - **Prediction**: growth cools without code; no code by 08-25 → downgrade cool. Bump revisit 08-25 for PR merge activity + star trajectory.
 
 Links: [[agent-security]], [[clawpatrol]], [[openclaw]], [[flowforge]], [[agent-harness-landscape]]
+
+### Followup — 2026-08-25
+- **Stars**: 759 (+2.2% from 743, 08-18→08-25). Growth cooled exactly as predicted — the +557% spike was marketing-driven, not code-driven.
+- **Code**: default-branch still silent since 07-28 (only README 08-03). No substantive commits.
+- **Community**: 2 open issues, no PR merge activity. Maintainer bandwidth unchanged.
+- **Calibration**: cal-0818-e96c ✅ **correct** — "growth cools without code: <+100% by 08-25" → actual +2.2%. Pattern confirmed a second time.
+- **Assessment**: **Downgraded cool** (revisit 09-22). No code by then → drop. Classic [[growth-signal-vs-code-signal]] confirmation: star spikes without code cool fast.
+
+Links: [[growth-signal-vs-code-signal]], [[agent-security]]

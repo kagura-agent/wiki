@@ -3,7 +3,7 @@ title: Janus — governed evolution for a desktop agent laboratory
 created: 2026-08-11
 source: study scout / GitHub API deep read
 tags: [agent-evolution, governance, evidence, desktop, multi-agent]
-last_verified: 2026-08-11
+last_verified: 2026-08-25
 ---
 
 # Janus — Governed Evolution for an Agentic Laboratory
@@ -55,3 +55,13 @@ No direct adoption: Janus is new, unspecific about licensing (`NOASSERTION` in r
 - `cloud/test/evolution-contracts.test.mjs`, `cloud/test/evolution-worker-security.test.mjs`, and `cloud/test/stage8-evolution.test.mjs`.
 - `cloud/src/modules/evolution/worker.mjs` and `stage8.mjs`.
 - First 20 GitHub issues, including #23 maintainer response.
+
+## Followup — 2026-08-25
+
+- **Stars**: 109 (+17% from 93, 08-11→08-25). Open issues 13→9.
+- **License**: still NOASSERTION — clarification never happened.
+- **Code**: default-branch commits README-only (08-16 .gitignore/README, 08-10 README batch). No substantive feature work.
+- **Approval-state**: cal-0811-56ea ✅ **correct** — approval-policy-change-mid-turn continuity issue remains unresolved; no approval-related issues handled.
+- **Assessment**: issue-driven stability moderate (some issue churn) but no code signal. **Downgraded warm** (revisit 09-01); no code → cool. Governance/evidence architecture still worth referencing, but development has stalled into README maintenance.
+
+Links: [[self-evolving-agent-landscape]], [[growth-signal-vs-code-signal]]

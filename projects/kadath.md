@@ -7,7 +7,7 @@ license: Apache-2.0
 created: 2026-08-08
 last_push: 2026-08-09
 status: deep-read
-last_verified: 2026-08-11
+last_verified: 2026-08-25
 tags: [evolutionary-agents, multi-agent, reproducibility, benchmarking, sandboxing, memory]
 ---
 
@@ -57,3 +57,12 @@ FlowForge already has explicit node transitions; KADATH is evidence that adding 
 
 - Revisit **2026-08-25** for a substantive post-launch code change, issue/PR discussion, external reproduction, or published benchmark details.
 - [[KADATH]]
+
+## Followup — 2026-08-25
+
+- **Stars**: 340 (+98% from 172, 08-11→08-25). Star growth impressive — but default-branch still README/docs only (08-08/09: ten-epoch fitness proof README, Mermaid→static diagram swap). 0 issues / 0 PRs / 0 external signal.
+- **Calibration**: cal-0811-9d7b ❌ **wrong** — predicted "substantive code commit, issue/PR discussion, or independent reproduction evidence by 08-25". None materialized. The launch-stage-only stance was right; the prediction of near-term evidence was wrong.
+- **Assessment**: Third confirmed [[growth-signal-vs-code-signal]] instance (after [[pi-from-scratch]], [[nightcrawler]]). **Downgraded cool** (revisit 09-22); still silent → drop. The engineering design remains valuable as reference, but there is no development signal.
+- **Lesson**: launch-stage repos with polished READMEs + fitness charts can attract stars without any code signal. Star count alone never upgrades a THRIVING tier.
+
+Links: [[growth-signal-vs-code-signal]], [[mechanism-vs-evolution]], [[self-evolving-agent-landscape]]
