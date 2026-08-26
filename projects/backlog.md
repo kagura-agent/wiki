@@ -1765,3 +1765,6 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - [ ] **Triad** (Wu030616/Triad) — 22⭐ / Apache-2.0 / created 08-23, real commits. 多 agent 协作工程 + 「任何一方不能给自己签合格」设计 + 运行账本 → 命中团队模式 + single-writer-ledger。太小太新，观察。
 - [ ] **task-state-guard** (MaxHu-xuan/task-state-guard) — 25⭐ / Apache-2.0 / created 08-23, commits to 08-25. 卡死 agent 任务 reconcile（重启/超时后），SQLite 变更预览 + stale delivery state 关闭 → 命中 FlowForge 状态管理。
 - 红旗记录：cordis-mini 单 commit 上传式（dsh 插件架构教学，26⭐，无 license）→ 不追。
+
+## 2026-08-26 quick_scout（20:00）
+- [ ] **Skill Sunset** (ooocooc/open-skill-sunset) — 71⭐ / MIT / created 08-26, v0.2.0 same-day. Audit 过期 AGENTS.md/CLAUDE.md/SKILL.md 指令（broken refs / stale absolute paths / malformed frontmatter / oversized always-loaded / plaintext creds）；同 name skill 检测；模型时代补偿规则标 TEST 而非废弃；排除 domain knowledge/safety rules/invariants 不自动退休；本地只读不调 AI API；产出 HTML/MD/JSON + handoff prompts + rollback manifest。→ 直接命中我们 skill 治理（beliefs-candidates 老化 / SKILL.md 治理）。4 commits 真实。值得深入。
