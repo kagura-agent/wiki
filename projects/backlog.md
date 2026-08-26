@@ -1759,3 +1759,9 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - **Zyrexnn/Cybermes** (511⭐, created 08-19, pushed 08-25) — **观察**：Autonomous Offensive Security / Bug Bounty / Red Teaming agent framework，Hermes Agent 驱动 + 多模型编排。100+ commits、今天 v3.0.0 release（universal MCP auto-injector、CI 修复），真实 bug 闭环（#1/#4/#5/#7/#10 关且有修复）→ 开发信号真实。但 6 天 511⭐ + 85 forks 增速可疑（growth≠code 前车之鉴）、0 open issues（社区讨论信号弱）。Revisit 09-01 验证增速持续 + 社区信号；安全 agent 方向与 [[nightcrawler]] 相关。
 - **🚩 Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report** (1034⭐) — **投毒红旗，不深入**：13 open issues 中 5+ 质疑（"无法复现 Terminal Bench 2.1"、"为什么删 issue"、"AI 编纂报告"、"删掉质疑的 issue"）→ 报告营销 + 审查压制模式。与 08-17 book-to-skill 红旗同类。
 - HN: Mnemosyne (10pts, local hierarchical memory MCP) 太小太早；"AI legal personhood" 观点文不相关。
+
+## 2026-08-26 quick_scout（14:00）
+- [ ] **TabTin** (tabtin-ai/TabTin) — 152⭐ / AGPL-3.0 / created 08-19, active to 08-23, 2 issues. "A workspace where people and multiple AI agents work together" → 直接命中 Loom/chat-infra 赛道（今晨 cumora 同赛道对照第二例）。值得深入：multi-agent workspace 设计。
+- [ ] **Triad** (Wu030616/Triad) — 22⭐ / Apache-2.0 / created 08-23, real commits. 多 agent 协作工程 + 「任何一方不能给自己签合格」设计 + 运行账本 → 命中团队模式 + single-writer-ledger。太小太新，观察。
+- [ ] **task-state-guard** (MaxHu-xuan/task-state-guard) — 25⭐ / Apache-2.0 / created 08-23, commits to 08-25. 卡死 agent 任务 reconcile（重启/超时后），SQLite 变更预览 + stale delivery state 关闭 → 命中 FlowForge 状态管理。
+- 红旗记录：cordis-mini 单 commit 上传式（dsh 插件架构教学，26⭐，无 license）→ 不追。
