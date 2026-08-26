@@ -96,3 +96,9 @@ Aim for: 8-15 tracked items at any time.
 - Check via: `grep -c "^\- \[ \] Track:" TODO.md`
 
 Current active items are weighted toward: agent harnesses, coding tools, memory systems, self-evolving patterns.
+
+## Calibration 教训（08-26 实证）
+
+- **闭源组件不会因外部质量 issue 压力而开源**（cal-0819-75f0 wrong：decionis/agent-safe-pipeline 在 10 个严肃外部 issue 下服务端仍闭源）。预测「X 会开源/公开契约」默认判 wrong，除非维护者有明确 roadmap 承诺；issue 压力是促成条件不是驱动条件
+- **star 增长窗口期不可外推**（cal-0819-63c3 wrong：4d +42% 预测 08-26 到 700+，实际 533 持平）。增长率的 4 天窗口是噪声，预测用更长基准或直接打折
+- 校准失败的价值：2 wrong 都是「外部信号 → 假设项目会回应」的过度乐观，与 star-growth-overoptimism 系列同源
