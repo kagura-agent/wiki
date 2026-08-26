@@ -16,7 +16,7 @@ Safety-harness evolution 把 system prompt 分解为 system prompt / rule bank /
 
 ## 关联
 
-[[dna-self-governance]], [[mechanism-vs-evolution]], safety mainline
+dna-self-governance（AGENTS.md 规则）, [[mechanism-vs-evolution]], safety mainline
 
 ---
 *Tracked: 2026-08-12 | Last followup: 2026-08-26*
