@@ -5,7 +5,7 @@ status: active
 stars: 101
 repo: thinkany-ai/dscode
 lang: TypeScript
-last_verified: 2026-08-14
+last_verified: 2026-08-26
 ---
 
 # DSCode
@@ -92,3 +92,9 @@ Clean, well-structured implementation. Most interesting for the worktree-isolati
 - Watch item: growth is outpacing the safety-boundary review — verify Seatbelt/Docker sandbox + credential stripping survive feature velocity.
 
 Links: [[coding-agent-ecosystem]], [[agent-harness-landscape]], [[agent-security]]
+
+## 08-26 Followup — 降级 cool
+
+- 357→362⭐（+1.4%），default-branch 静默 12d（最后 08-14 #23 Chal1ce merged）
+- 增长完全normalized（+226% spike 退潮），3 open issues，safety boundary 未变
+- **降级 cool**：revisit 09-23；仍静默 → drop

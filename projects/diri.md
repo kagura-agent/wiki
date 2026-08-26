@@ -1,7 +1,7 @@
 ---
 title: "diri — Native macOS Orchestrator for Coding Agents"
 created: 2026-08-05
-last_verified: 2026-08-19
+last_verified: 2026-08-26
 source: https://github.com/cristicretu/diri
 stars: 248
 status: deep-read
@@ -98,3 +98,9 @@ The attention is moving from “run several agents” toward **operational integ
 - **#143**：MCP session authorization 加固（信任边界继续收）
 - **#144**：remote PTY 输出按 batch 帧化而非每 read 一帧（降 overhead）
 - #44（status-decision inspection 变 provenance surface）仍未动，继续观察
+
+## 08-26 Followup
+
+- 264→271⭐（+2.7%），22 open issues
+- ✅ **#44（status-decision inspection）CLOSED 08-12** — 上轮遗留的 provenance surface 问题已关闭
+- MCP session authorization 加固（#143）落地；revisit 09-02 看 MCP auth 细节 + 新架构信号

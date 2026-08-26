@@ -1,7 +1,7 @@
 ---
 title: "ProofRun — Local Verification Receipts for AI Coding Agents"
 created: 2026-08-19
-last_verified: 2026-08-19
+last_verified: 2026-08-26
 source: https://github.com/yebiguo/ProofRun
 stars: 14
 status: track
@@ -69,3 +69,10 @@ Not a harness — a **trust layer for harness claims**. Complementary to [[agent
 ## Follow-up
 - Revisit 08-26: community growth (currently 1 issue — external engagement exists but tiny), GitHub Action maturity, whether it survives real-world "agent fakes receipt" attempts (rollback/replay defense remains open by design).
 - Candidate apply: try ProofRun on one of our repos' test gates; report whether STALE detection catches a real drift (failable verification).
+
+## 08-26 Followup
+
+- ⭐ 14 持平；pushed 08-21（docs 协作层升级 + action.yml 描述修复 #19 merged 08-17）
+- 0 open issues，外部社区无增长
+- **apply candidate**：receipt 式验证（STALE-at-read-time / argv-exact）映射我们的 [已验证] 纪律 + Definition of Done — 候选应用到 flowforge selftest 等自家测试门
+- revisit 09-02 看社区 + apply 决策；0 signal → cool

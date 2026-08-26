@@ -28,3 +28,9 @@ Directly relevant to **collaborative mirror-world workspaces** — our direction
 
 ---
 *Followup: 2026-08-14 | Scout source: GitHub API*
+
+## 08-26 Followup
+
+- 13,889→14,198⭐（+2.2%/7d），318 open issues
+- 新 commit：HiLO release approval 接管 tool-result auto-post quarantine（#676）、slack 多文件帖合并为一条带评论（#657）、动态 OpenRouter 模型（#656）、cron fire history 移出 scheduler scans（#614）
+- 仍在 pre-architecture-review；revisit 08-30

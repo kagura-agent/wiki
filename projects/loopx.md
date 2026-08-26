@@ -1,7 +1,7 @@
 ---
 title: "LoopX — local-first control plane for long-running agents"
 created: 2026-08-09
-last_verified: 2026-08-19
+last_verified: 2026-08-26
 tags: [agent-harness, control-plane, durable-runs, loop-engineering, local-first]
 ---
 
@@ -61,3 +61,9 @@ The early LoopX model was a bounded-turn control plane (claim → act → eviden
 - **#3330-#3334（08-18）**：monitor poll 绑定到 heartbeat receipts（poll 不能脱离 heartbeat 存活）、poll CLI owner 抽取、recorder seam 保留 — 控制面会计从"轮询计数"升级到"事件绑定"
 - smoke 测试 hermetic 化（#3332）、KunlunCode public check 加载（#3331）
 - 与 Prime Agent 的 spawn ledger（single-writer ledger）同一趋势：**运行时事件的第一手记录 > 事后重建**，控制面都在往"不可伪造的事件账本"走
+
+## 08-26 Followup
+
+- 4,907→5,157⭐（+5.1%/7d），daily commits 到 08-26
+- **外部 PR 合并**：#3541（Duang777 codex/core-experience-bug）+ #3611（Alicecooo quota-cli-composition）— 外部贡献者进入控制面
+- quota 会计收紧继续；revisit 09-02 看 goal-artifact-lifecycle RFC + RLM ledger 提取

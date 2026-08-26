@@ -58,3 +58,11 @@ Track（hot，3-7 天后 revisit）。2 天新项目但架构直接相关，值�
 **残余开放项**：Decionis / Presence 服务端仍闭源（#526 倒是加了 maintainer 强制，方向对）。下轮 08-26 看服务端开放度 + RC→stable 进展。
 
 **预测校准**：08-15 时"2 天新项目 + 0 社区"判 track don't invest 是对的——现在证明 wait-and-see 而不是 chase 是正确姿势，与 [[growth-signal-vs-code-signal]] 一致：注意力（stars）先行，代码/社区信号滞后但会来。
+
+## 08-26 Followup — 校准验证：服务端开源预测失败
+
+- ⭐ 533（与 08-19 持平，4d +42% 窗口未延续）
+- ❌ **cal-0819-75f0 WRONG**：Decionis 服务端仍闭源（README 明确 production 用 DecionisGate + server-side credentials，无公开契约/开源）
+- ❌ **cal-0819-63c3 WRONG**：stars 未达 700+（533）
+- 教训：外部质量型 issue 压力 ≠ 会推动闭源服务端开源——「压力已形成」是弱信号，商业化闭源决策不受社区 issue 驱动。校准记录比印象可靠
+- 架构模式价值（propose/decide/execute + single-use grant）保留，revisit 09-02 看 RC→stable

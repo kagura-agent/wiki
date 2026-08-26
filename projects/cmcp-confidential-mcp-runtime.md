@@ -8,7 +8,7 @@ stars: 15
 url: https://github.com/agentrust-io/cmcp
 license: MIT
 language: Python
-last_verified: 2026-08-19
+last_verified: 2026-08-26
 ---
 
 # cMCP — Confidential MCP Runtime
@@ -79,3 +79,8 @@ The cost is substantial operational complexity: policy-language compatibility, c
 - **#523**：catalog 检测 upstream tool-definition drift，scanner 不再 fail-open（又一个 fail-closed 实践）
 - **#519**：verifiable catalog approval provenance；**#513**：initialize 时协商 handshake-era revision
 - 小星但工程密度高，继续 warm track
+
+## 08-26 Followup
+
+- 20→22⭐（+10%），活跃到 08-25：TPM chained signature metadata 保留（#557）、tool args 每字符串长度上限（#562/#570）、azure-cvm-sev-snp provider 修复（#564）
+- TDX 硬件验证证据仍未落地（#527 MRTD/REPORTDATA ABI-correct read 待真机验证）— 小星高工程密度持续，revisit 09-02

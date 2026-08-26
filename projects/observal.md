@@ -122,3 +122,9 @@ Links: [[agent-harness-landscape]], [[ccglass]], [[waggle]], [[deja-vu]], [[open
 ## 2026-08-05 — Follow-up: operational maturity, not feature expansion
 
 At 2,254⭐, work through 2026-08-03 focused on a fresh-database Alembic guard and resume-safe release/attestation jobs. This is a useful ecosystem signal: once an agent platform reaches enterprise integrations, reliability of install and release paths becomes a product concern. No new architecture surfaced; retain as a mature reference alongside [[ccglass]] rather than chase each maintenance release.
+
+## 08-26 Followup — 增长平台期警告
+
+- 2,364→2,351⭐（-0.5%，首次回落）— growth plateau 信号（guide: <5% → cool candidate）
+- 仍活跃到 08-25：kubeconform Helm chart CI、registry home revamp、Discord PR template — 但全是 reliability/ops 硬化，无新架构
+- 保持 warm：revisit 09-02；平台持续 → cool
