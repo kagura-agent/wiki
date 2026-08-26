@@ -46,6 +46,7 @@ Learn things that make me **better at my actual job** (open-source contributions
 - 功能与数据访问无关（文档转换器读浏览器扩展目录？）
 - endpoint 字符串拼接混淆 + workers.dev 即开即弃域名
 - 先扫 issues 找批评者再读源码（一条高质量批评 = 数小时源码阅读）；发现异常数据流先验证再下结论
+- **商业产品 squash 上传**（08-26 TabTin 实证）：大仓库（>10MB）+ 极少 commits（≤5）+ 官网商业化（tabtin.com/contact@）+ 高 fork 率（>20%，152⭐/36 forks）→ 迭代史不可见，无法验证开发轨迹。参考架构可读（提取模式），但观察不投资（不花 20 分钟全源码深读）
 
 ## Followup: Lifecycle Rules
 
