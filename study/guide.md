@@ -98,8 +98,12 @@ Aim for: 8-15 tracked items at any time.
 
 Current active items are weighted toward: agent harnesses, coding tools, memory systems, self-evolving patterns.
 
-## Calibration 教训（08-26 实证）
+## Deep-read 版本锚点（08-27 apply 实证）
 
+- 深读新项目必须锁版本：clone 后记录 `git rev-parse HEAD`，把 commit hash + 日期写进 wiki 笔记头部（`> 源码核对基于 <owner>/<repo> commit <sha>`）。行号是深读笔记的地基，不锁版本无法判断后续漂移是写错还是上游改了（pi-book 教训，source-reading-methodology 实证）。
+- 已落地：study.yaml deep_read 节点 `1b. 锁版本锚点` 步骤（flowforge 4ca57ae）。
+
+## Calibration 教训（08-26 实证）
 - **闭源组件不会因外部质量 issue 压力而开源**（cal-0819-75f0 wrong：decionis/agent-safe-pipeline 在 10 个严肃外部 issue 下服务端仍闭源）。预测「X 会开源/公开契约」默认判 wrong，除非维护者有明确 roadmap 承诺；issue 压力是促成条件不是驱动条件
 - **star 增长窗口期不可外推**（cal-0819-63c3 wrong：4d +42% 预测 08-26 到 700+，实际 533 持平）。增长率的 4 天窗口是噪声，预测用更长基准或直接打折
 - 校准失败的价值：2 wrong 都是「外部信号 → 假设项目会回应」的过度乐观，与 star-growth-overoptimism 系列同源
