@@ -1,55 +1,50 @@
 {
-    "timestamp": "2026-08-23T02:06:00Z",
-    "run_date": "2026-08-23",
+    "timestamp": "2026-08-27T02:06:00Z",
+    "run_date": "2026-08-27",
     "totals": {
-        "md_files": 1205,
-        "cards": 468,
-        "projects": 629,
-        "wikilinks": 5806
+        "md_files": 1212,
+        "cards": 469,
+        "projects": 634,
+        "wikilinks": 5862
     },
     "health": {
-        "errors": 0,
-        "warnings": 58,
-        "broken_links": 0,
-        "broken_link_sources": [],
-        "orphans": 2,
-        "orphan_cards": [
-            "disk-slot-mutex"
+        "errors": 3,
+        "warnings": 62,
+        "broken_links": 3,
+        "broken_link_sources": [
+            "projects/tabtin.md -> [[credential-vault-pattern]]",
+            "projects/tabtin.md -> [[cumora]]",
+            "projects/tabtin.md -> [[workshop]]"
         ],
-        "orphan_projects": [
-            "deepseek-harness-pr-review"
-        ],
+        "orphans": 3,
+        "orphan_cards": [],
+        "orphan_projects": ["she", "skill-sunset", "tabtin"],
         "duplicate_slugs": 0,
         "index_drift": {
-            "missing_from_index": 2,
-            "missing_files": [
-                "cards/disk-slot-mutex.md",
-                "projects/deepseek-harness-pr-review.md"
-            ],
-            "not_in_index_warn": 2,
+            "missing_from_index": 4,
+            "missing_files": ["projects/dsh-ios.md", "projects/she.md", "projects/skill-sunset.md", "projects/tabtin.md"],
+            "not_in_index_warn": 4,
             "cards_index_stale": true,
             "cards_index_listed": 465,
-            "cards_index_total": 468
+            "cards_index_total": 469
         },
-        "stale_files": 554,
+        "stale_files": 583,
         "frontmatter_issues": [
             "agent-tool-supply-chain-poisoning",
+            "ecosystem-formation-signal",
             "local-state-concurrent-guard"
         ],
-        "no_outbound_links": [
-            "cards/INDEX.md",
-            "cards/retire-candidates.md"
-        ],
+        "no_outbound_links": ["cards/INDEX.md", "cards/retire-candidates.md"],
         "unicode_suspect_groups": 6,
         "stub_files": 0,
         "secret_scan": "ok",
         "invalid_facts": 0
     },
     "book": {
-        "new_issues": 0,
-        "recurring": 58,
-        "clean_passes": 0,
-        "auto_closed": 30,
-        "total_open": 58
+        "new_issues": 37,
+        "recurring": 28,
+        "clean_passes": 31,
+        "auto_closed": 0,
+        "total_open": 96
     }
 }

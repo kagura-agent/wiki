@@ -60,7 +60,7 @@ Agent 与 Workspace/设备解耦，组织归属 + owner_user 记录创建者。�
 
 ## Links
 
-[[lemma-platform]], [[cumora]], [[workshop]], [[chat-infra]], [[flowforge]], [[credential-vault-pattern]]
+[[lemma-platform]], cumora（backlog 观察中）, [[loom]], [[chat-infra]], [[flowforge]], [[pass-sops-credential-management]]
 
 ---
 *Tracked: 2026-08-26 quick_scout → deep_read*
