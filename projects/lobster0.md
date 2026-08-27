@@ -87,3 +87,9 @@
 ## Tracking
 
 - 2026-08-13 深读（NEW）。Revisit 08-27：看真实平台 Live Gate 是否落地（尤其飞书 15/15）、Memory Autopilot 晋升/衰减/冲突是否接线、是否出现外部 contributor。
+
+## 08-27 Calibration — cal-0813-5a8c ❌ WRONG
+
+- Prediction: lobster0 still 0 external (non-dependabot) issues/PRs by 08-27 (solo dev, no community forming).
+- Actual: **1 external issue from bio1-aws** (55 author issues vs 1 external). Stars 39→103 (+164%!), pushed still 08-17 (10d silent).
+- Correction: 外部参与从 0 破冰（1 issue），但代码仍 silent。Stars jump without code push = 需查是否 marketing/分享驱动。Keep tracking community.

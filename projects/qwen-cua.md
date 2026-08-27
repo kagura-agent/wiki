@@ -2,7 +2,7 @@
 title: "Qwen-CUA — screenshot-only browser-use reference agent"
 created: 2026-08-06
 tags: [computer-use, browser-agent, safety-gates, replay, verification]
-last_verified: 2026-08-13
+last_verified: 2026-08-27
 ---
 
 # Qwen-CUA (xlang-ai/Qwen-CUA)
@@ -50,3 +50,11 @@ If Qwen-CUA is adopted as an agent-runtime reference rather than merely a model 
 - **Tracking decision:** downgrade to warm. The reference-agent pattern (typed actions + approval gates + unverified external outcomes) is already captured above; no fresh signal to extract this round. Next check 08-27.
 
 The checkable prediction logged at NEW (post-navigation/DNS-rebinding network-policy hardening or documented out-of-scope by 2026-09-06, confidence low) remains open and unverified as of this check.
+
+## Followup 2026-08-27 — 信号反转：weights 发布
+
+- **Growth:** 163 → 178⭐ (+9%), 11 forks, 2 open issues. Still small but signal direction changed.
+- **⚠️ Model weights now available** (08-25 "Announce upcoming model release" → 08-26 "Mark model weights as available"): README updated with HF badge (xlangai/Qwen-CUA, live 200), weights hosted on HF separately from GitHub releases. The biggest gap from 08-13 (weights absent) is now closed.
+- Technical report at arXiv:2608.02352; demo runnable locally. This unlocks independent reproduction/benchmarking — the natural next verification surface.
+- **Upgrade warm → active:** watch adoption + community discussion + independent eval after release.
+- Prediction (08-06, low): network-policy hardening or documented out-of-scope by 09-06 — still open, revisit 09-02.

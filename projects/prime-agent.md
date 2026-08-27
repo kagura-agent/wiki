@@ -1,7 +1,7 @@
 ---
 title: "Prime Agent — Self-Improving RLM Agent for Coding"
 created: 2026-08-10
-last_verified: 2026-08-20
+last_verified: 2026-08-27
 source: https://github.com/PrimeIntellect-ai/prime-agent
 stars: 16584
 status: track
@@ -61,3 +61,10 @@ Resolved the open questions from the 08-17 note:
 
 - 08-10 NEW: 10,931⭐, self-improving RLM agent, HN 253pts. Revisit 08-17.
 - 08-17 followup: 16,584⭐ (+52%/7d), THRIVING. Spawn ledger pattern extracted. Revisit 08-20 for KB extraction of spawn-ledger pattern + safety-boundary review.
+
+## Delta — 2026-08-27 followup (18,645⭐, +12% in 7d)
+
+- **❌ cal-0820-c2ed WRONG:** predicted >20k by 08-27, actual 18,645 — momentum decelerated (52%/7d → 12%/7d), star growth is not linear for this project.
+- THRIVING continues on code signal: daily main-branch commits (08-26), forks 1,787 → 2,008, open issues 73 → 87. External contributors snimu + hallerite still active.
+- Spawn-ledger pattern ([[single-writer-spawn-ledger]]) remains the key extraction; no new architectural insight this round.
+- Revisit 09-03: ledger consolidation progress + whether growth deceleration continues.

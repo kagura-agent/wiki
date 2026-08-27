@@ -4,7 +4,7 @@ created: 2026-08-11
 tags: [browser, agent-infra, rust, cdp, webdriver, mcp, rendering, verification]
 source: https://github.com/lexmount/moli
 status: deep-read
-last_verified: 2026-08-21
+last_verified: 2026-08-27
 ---
 
 # Moli — DOM-first browser kernel for AI agents
@@ -58,3 +58,11 @@ Logged as `cal-0811-9e87`: by **2026-08-25**, Moli will have at least one non-ma
 - **Skills-over-CDP distribution winning**: MCP server removal (08-13) followed by steady skill-layer traction (moli-cdp-server/moli-webfetch curl installers); WPT compat suite maintained locally in study/.sources/moli.
 - **Checkable prediction cal-0811-9e87 HIT** (external PR by 08-25 — actually by 08-12); **cal-0721-8224 waggle 3000★ WRONG** (736★ — 21% of target).
 - **Revisit 08-27**: WPT pass-rate progress, skill-layer adoption depth, whether v1.x keeps external PR flow.
+
+## Delta — 2026-08-27 followup (1230⭐, +59% in 6d, THRIVING)
+
+- **Growth:** 775 → 1230⭐, forks 48 → 72, open issues 25. Daily default-branch commits through 08-26.
+- **Security-hardening direction:** AWS-LC replaces vendored OpenSSL (08-26), HKDF/curve448 moved off OpenSSL to RustCrypto, WebCrypto dispatch check made deterministic, TLS curl AWS-LC root probe. Crypto primitives consolidation = maturity signal.
+- **External contributors growing:** 9 total (athul-22, BibekPathak, XDLCS, Duang777, euyis1019, Spxg, SKTT1Ryze...), beyond the original single signal.
+- **WPT suite active:** frame-ancestors response fixes + full case list refresh — compat suite maintained in study/.sources/moli.
+- cal-0811-9e87 external-PR HIT continues to validate; revisit 09-03 for WPT pass-rate + v1.0.3.

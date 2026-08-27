@@ -3,7 +3,7 @@ title: RealReplicaBench — stateful, reproducible business-workflow benchmark
 created: 2026-08-06
 updated: 2026-08-06
 tags: [agent-evaluation, long-horizon, openclaw, verification, reproducibility]
-last_verified: 2026-08-20
+last_verified: 2026-08-27
 source: https://github.com/Accio-Lab/RealReplicaBench
 ---
 
@@ -53,3 +53,9 @@ It is a high-fidelity complement to static coding benchmarks and broad browser b
 - Revisit **2026-08-27** for provenance artifacts (immutable URLs/checksums) + rebrand landing effect on community signal.
 
 **Prediction (08-20, medium):** RealReplicaBench will still lack immutable/checksummed result-bundle URLs at the 2026-08-27 revisit (provenance gap = deliberate non-goal so far, not backlog).
+
+## 08-27 Calibration — cal-0820-62fb ✅ CORRECT
+
+- Prediction: RealReplicaBench still lacks immutable/checksummed result-bundle URLs at 08-27 (provenance gap persists).
+- Actual: **0 releases** (Accio-Lab/RealReplicaBench releases API empty). Provenance gap confirmed — deliberate non-goal holds.
+- Note: repo path is Accio-Lab/RealReplicaBench (rebranded from earlier name); verification used correct owner.

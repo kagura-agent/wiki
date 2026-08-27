@@ -36,3 +36,10 @@ AI coding agent 防空转治理框架：观察先行、证据驱动、渐进授�
 - 社区信号（外部 contributor 是否持续）
 - benchmark 独立复现（README 声称的 OFF/ON 对比）
 - earned enforcement 是否落地 claude-code adapter
+
+## Followup 2026-08-27
+
+- **✅ cal-0820-4461 CORRECT:** 3 external merged PRs (dchaudhari7177, ralyodio, vibemasshq-dev) — first real community signal, stars flat 12→13.
+- **Open issues 0→29:** mostly dependabot batch, but owner self-built roadmap visible (#59-64: Tool Enforcement boundary research, Earned Evidence requirements, benchmark workload, Marginal Commons evidence integration, structured outcome attribution, privacy boundary hardening) — owner is actively building toward enforcement.
+- Stars still 13, no independent benchmark — architecture value (evidence-invariant no-progress governor) remains the reason to track, not traction.
+- Keep warm; revisit 09-03 for earned-enforcement landing + community continuation.

@@ -7,7 +7,7 @@ stars: 196
 repo: ShawnPana/phone-harness
 language: Python
 license: MIT
-last_verified: 2026-08-23
+last_verified: 2026-08-27
 ---
 
 # Phone Harness — iPhone Mirroring Agent Transport
@@ -57,3 +57,9 @@ For Kagura, the transferable idea is not the device-control surface. It is the *
 - 保持 warm：revisit 08-27 看 regression tests / safety enforcement；无 → cool。
 
 Links: [[mobile-agent]], [[capability-architecture]], [[agent-harness-landscape]], [[agent-security]], [[longhorizon-harness]], [[napaxi-mobile-agent-sdk]], [[pocketdev]], [[nightcrawler]]
+
+## 08-27 Calibration — cal-0823-8cf6 ❌ WRONG
+
+- Prediction: at least one test file (test_*/tests/ pytest) in default branch by 08-27.
+- Actual: **0 test files** (recursive tree search empty). Safety/verification gap persists despite growth.
+- Stars 1,984 → 2,067 (+4%), 25 open issues, pushed 08-26 (active). Growth continues but verification debt accumulates — consistent with growth-signal-vs-code-signal pattern.

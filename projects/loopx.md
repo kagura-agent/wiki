@@ -1,7 +1,7 @@
 ---
 title: "LoopX — local-first control plane for long-running agents"
 created: 2026-08-09
-last_verified: 2026-08-26
+last_verified: 2026-08-27
 tags: [agent-harness, control-plane, durable-runs, loop-engineering, local-first]
 ---
 
@@ -67,3 +67,8 @@ The early LoopX model was a bounded-turn control plane (claim → act → eviden
 - 4,907→5,157⭐（+5.1%/7d），daily commits 到 08-26
 - **外部 PR 合并**：#3541（Duang777 codex/core-experience-bug）+ #3611（Alicecooo quota-cli-composition）— 外部贡献者进入控制面
 - quota 会计收紧继续；revisit 09-02 看 goal-artifact-lifecycle RFC + RLM ledger 提取
+
+## 08-27 Calibration — cal-0813-7952 ❌ WRONG
+
+- Prediction: LoopX >6,000⭐ by 08-27. Actual: **5,207⭐** (from 5,157 on 08-26). Missed by ~13%.
+- 外部 PR 合并继续（#3541 Duang777 + #3611 Alicecooo），quota 会计收紧持续。Growth decelerating but code signal healthy.
