@@ -38,6 +38,10 @@ last_verified: 2026-08-27
 - 零幻觉引用格式（`起始:结束:路径`）可借鉴到我们的 wiki 技术笔记：每条论断带 commit 锚点，对抗知识衰减。
 - 与 [[gread-code-reader]] / [[pi-book]] 同赛道（源码背书精读），此项目把 pi-book 的"pin commit"升级成"全流程机器校验"。
 
-**预测**: cal-0827-xxxx 待记。Revisit 09-03 for 社区信号 + 校验器 test 落地 + 是否被采用（skill 安装路径）。
+**预测**: cal-0827-e873（300⭐ by 09-03, low）。Revisit 09-03 for 社区信号 + 校验器 test 落地 + 是否被采用（skill 安装路径）。
+
+## Apply — 2026-08-27（study-loop 20:00）
+
+- ✅ **版本锚点模式已落地**：flowforge/workflows/study.yaml deep_read 节点新增 `1b. 锁版本锚点` 步骤（commit 4ca57ae）——深读新项目时记录 `git rev-parse HEAD` 并把 commit hash + 日期写进 wiki 笔记头部。行为变化：后续所有 deep_read 笔记将带版本锚点，可区分「行号漂移是写错还是上游改了」（直接解决 pi-book freshness 教训）。
 
 Links: [[source-driven-development]], [[pi-book]], [[claude-code-source-analysis]], [[gread-code-reader]], [[doubt-driven-development]], [[study-saturation]], [[agent-harness-landscape]]
