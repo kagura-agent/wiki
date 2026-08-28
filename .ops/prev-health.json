@@ -1,30 +1,34 @@
 {
-    "timestamp": "2026-08-26T02:06:00Z",
-    "run_date": "2026-08-26",
+    "timestamp": "2026-08-27T02:06:00Z",
+    "run_date": "2026-08-27",
     "totals": {
-        "md_files": 1210,
+        "md_files": 1212,
         "cards": 469,
-        "projects": 632,
-        "wikilinks": 5846
+        "projects": 634,
+        "wikilinks": 5862
     },
     "health": {
-        "errors": 1,
-        "warnings": 58,
-        "broken_links": 1,
-        "broken_link_sources": ["projects/she.md"],
-        "orphans": 1,
+        "errors": 3,
+        "warnings": 62,
+        "broken_links": 3,
+        "broken_link_sources": [
+            "projects/tabtin.md -> [[credential-vault-pattern]]",
+            "projects/tabtin.md -> [[cumora]]",
+            "projects/tabtin.md -> [[workshop]]"
+        ],
+        "orphans": 3,
         "orphan_cards": [],
-        "orphan_projects": ["she"],
+        "orphan_projects": ["she", "skill-sunset", "tabtin"],
         "duplicate_slugs": 0,
         "index_drift": {
-            "missing_from_index": 2,
-            "missing_files": ["projects/dsh-ios.md", "projects/she.md"],
-            "not_in_index_warn": 2,
+            "missing_from_index": 4,
+            "missing_files": ["projects/dsh-ios.md", "projects/she.md", "projects/skill-sunset.md", "projects/tabtin.md"],
+            "not_in_index_warn": 4,
             "cards_index_stale": true,
             "cards_index_listed": 465,
             "cards_index_total": 469
         },
-        "stale_files": 579,
+        "stale_files": 583,
         "frontmatter_issues": [
             "agent-tool-supply-chain-poisoning",
             "ecosystem-formation-signal",
@@ -37,10 +41,10 @@
         "invalid_facts": 0
     },
     "book": {
-        "new_issues": 33,
-        "recurring": 26,
-        "clean_passes": 30,
+        "new_issues": 37,
+        "recurring": 28,
+        "clean_passes": 31,
         "auto_closed": 0,
-        "total_open": 89
+        "total_open": 96
     }
 }
