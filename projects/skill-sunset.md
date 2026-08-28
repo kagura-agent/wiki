@@ -61,3 +61,19 @@ KEEP / MERGE / UPDATE / DEMOTE / RETIRE / TEST。**关键哲学：**
 
 ---
 *Tracked: 2026-08-26 quick_scout → deep_read*
+
+## 08-28 Apply — 实测审计我们的 workspace
+
+**执行**：`npx skill-sunset audit . --lang zh-CN`（2026-08-28 20:00 study apply 轮）
+
+**结果**：健康分 **73/100**（部分完成）；扫描 1213 文件（1005 generic / 1 domain-excluded / 207 manual-review）；1962 发现。Verdict 分布：RETIRE 776 / TEST 394 / DEMOTE 393 / MERGE 390 / UPDATE 9。
+
+**发现质量评估**：
+- **真实可修**（UPDATE high, invalid-frontmatter）：`skills/seedling/SKILL.md`、`skills/moltbook-community/SKILL.md` 缺 frontmatter → **已修复**（skills repo 07894d4，补 name/description）。这直接影响 OpenClaw skill scanner 加载。
+- **噪音为主**：RETIRE 776 几乎全是 `cove/.claude/worktrees/` 下的 worktree 副本（bundle 哈希相同判重）——worktree 本就不在加载范围，误报。扫描根把 `.claude/worktrees`、`node_modules`、`.git` 也扫了，需排除。
+- **低价值**：model-version-coupling（spec-review/code-review/code-refactor 里的 GPT-5.5/Opus 4.7 型号名）——属合理描述，不修。
+- **TEST 合理**：mandatory-subagent 标了 flowforge/skill 和 gogetajob（策略性用 subagent 是设计意图，不是盲从）。
+
+**工具本身验证**：0 依赖、本地只读、路径脱敏、报告含 rollback manifest + codex/claude handoff prompts + A/B 实验模板——工程完整，实测无副作用。CLI 是 `audit [target]`（不是 `--root`）。
+
+**Gradient**：audit 类工具的价值在「过滤噪音后的真实信号」——1962 条发现里 actionable 只有 2 条。跑审计的姿势应该是先配排除（worktrees/node_modules），否则 99% 是重复副本噪音。→ 对应我们 [[study-saturation-gate]] 的噪音门控哲学。
