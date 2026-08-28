@@ -114,3 +114,9 @@ Links: [[agent-memory-strategies]], [[mcp-server]], [[ephemera-retention-primiti
 - Steady maintenance pace, but 3 open issues are all dependabot bumps — no external feature/community signal this cycle.
 - Security-hygiene patterns (output-boundary redaction, stale-citation disclosure) remain directly applicable to our tooling; nothing new to adopt this round.
 - Revisit **2026-08-27** for external contributor signal + epistemic-lease evolution.
+
+## 08-28 Follow-up (289⭐, ⭐ flat)
+
+- ✅ 持续维护: commits 至 08-24, **v3.0.1 release (#408)** + security release-boundary hardening (#404) + overlay language coverage (#403) + watcher edit-breakage verdicts (#402) + mcp standing-context cost bound。
+- 3 open issues 全 dependabot — 无外部社区信号但维护纪律稳定。
+- Security-hygiene 模式 (output-boundary redaction, stale-citation disclosure) 持续适用。Revisit 09-10。

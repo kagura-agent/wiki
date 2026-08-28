@@ -3,7 +3,7 @@ title: SkillForge — Local-First Executable Skill Runtime
 created: 2026-08-06
 source: GitHub HaddenHunter/SkillForge
 status: deep-read
-last_verified: 2026-08-20
+last_verified: 2026-08-28
 tags: [agent-skills, mcp, sandboxing, registry, rust]
 ---
 
@@ -50,3 +50,9 @@ For OpenClaw, the transferable idea is **separating three contracts** that are o
 - Direction change: from hard-coded 3-sample executor → **distributable artifact pipeline**. Distribution problem solved; execution genericity still unverified — implementation moved off the main branch, so the earlier executor claim can't be re-verified from default branch.
 - Key open items unchanged: generic executor dispatch + process/network isolation still not demonstrated externally.
 - Revisit **2026-08-27** for generic-executor evidence + isolation + external package adoption (does anyone actually install from the registry?).
+
+## 08-28 Follow-up (109⭐, ⭐ flat)
+
+- **18d silent**: default-branch 停在 08-10 (signing chain docs SF:c0d444ccdf461a76), 无新 commit/PR。
+- Generic executor + process-network isolation 证据仍未出现 (代码移出 main 后无法验证)。
+- **Downgraded cool** (30d): revisit 09-24; 仍 silent → drop。

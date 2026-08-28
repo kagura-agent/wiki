@@ -2,7 +2,7 @@
 title: LongHorizon-Harness — verified-state control loop for computer-use agents
 created: 2026-08-05
 tags: [agent-harness, computer-use, verification, long-horizon, orchestration]
-last_verified: 2026-08-21
+last_verified: 2026-08-28
 source: https://github.com/AMAP-ML/LongHorizon-Harness
 ---
 
@@ -102,3 +102,10 @@ Revisit **2026-08-21**: #29 merge status + whether timeout-recovery holds in rea
 - Activity strong: PR #56 merged 08-20 (dev/0.1.7 branch), 6 external contributors in merged-PR history (TON14 ×4, lunar-me ×3, ssynb, saikethan27, PeterStefanec-prog, aaaazqh). 100 forks, 22 open issues.
 - **Calibration**: cal-0818-319f (PR #29 merge by 08-25) pending — the cost-aware escalation design remains the highest-value transferable pattern (FlowForge tier model), but it's been open since 08-17.
 - **Revisit 08-27**: #29 merge status, whether 0.1.7 brings dashboard conversation-resume (lerogo feat 08-20), growth-vs-depth balance.
+
+## 08-28 Follow-up (1,348⭐, 855→1348 +57.7% in 7d)
+
+- **growth re-accelerated** (+50.7% → +9.8% → +57.7%) 但 default-branch 停在 08-20 (PR #56 merged 后 8d silent)。
+- **PR #29 (cost-aware escalation) 仍 OPEN** — core learning pattern 未 merge (自 08-17 已 11d)。cal-0818-319f (merge by 08-25) 已到期但未在 calibration due 列表 (检查中)。
+- External contributors 增至 9+ (lerogo 22 commits 领跑, Upper9527 6, zs1314 4, TON14 2...); 5 个 open PRs 队列 (#66-71: UTF-8 tolerance / supervisor crash-path / Windows compat)。
+- **growth spike + code pause** → 按 guide 规则 (growth signal ≠ code signal, 08-18 实证), 等 #29 merge + commit 恢复再判断; 09-03 revisit。

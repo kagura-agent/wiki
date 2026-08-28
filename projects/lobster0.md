@@ -93,3 +93,10 @@
 - Prediction: lobster0 still 0 external (non-dependabot) issues/PRs by 08-27 (solo dev, no community forming).
 - Actual: **1 external issue from bio1-aws** (55 author issues vs 1 external). Stars 39→103 (+164%!), pushed still 08-17 (10d silent).
 - Correction: 外部参与从 0 破冰（1 issue），但代码仍 silent。Stars jump without code push = 需查是否 marketing/分享驱动。Keep tracking community.
+
+## 08-28 Follow-up (103⭐, 39→103 +164%)
+
+- **growth signal ≠ code signal 再实证**: stars +164% (39→103) 但 default-branch 停在 08-14 (docs/fix 多模态丢图 #58-62), 759 commits 全 NEDONION (0 external contributors), pushed 08-17。
+- **cal-0813-5a8c 已验** (08-27): 外部 issue 从 0 破冰 (bio1-aws 1 条), 但代码仍 silent。本轮延续该判断: star 增长无 code 支撑。
+- Live Gate 飞书 15/15 / Memory Autopilot wiring 仍无外部可验证证据。
+- Keep warm → revisit 09-11 for 外部贡献者 + Live Gate; 无 → cool。

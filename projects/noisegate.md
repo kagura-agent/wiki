@@ -117,3 +117,9 @@ Links: [[agent-security]], [[clawpatrol]], [[openclaw]], [[agent-trust-hierarchy
 - **Stars 24→25 (+4%)** — plateau below the 5% growth threshold; no issue/PR activity, no external contributors. The two known open gaps (spoofable HTTP `X-Identity`, single-tenant only) remain unaddressed.
 - **Signal for the portfolio:** the architecture is stable and complete enough to ship v1.0.0, but the absence of any community/critique surface across 3 checks (08-05, 08-06, 08-14) means it stays a reference implementation, not an adoption signal. No new insight this round — the 08-06 reading still holds.
 - **Downgraded scout→warm; next revisit 08-28.** Drop candidate if 30d+ no code commits and still no external signal.
+
+## 08-28 Follow-up (28⭐, 25→28 +12%)
+
+- **26d silent**: default-branch 停在 08-01 (README revision + rename noisegate-dp), v1.0.0 后纯 docs。
+- 0 外部贡献; known gaps (spoofable X-Identity header, single-tenant) 未处理。
+- **Downgraded cool** (30d): revisit 09-28; 仍 silent → drop。
