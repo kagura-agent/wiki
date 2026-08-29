@@ -75,3 +75,18 @@ Links: [[gogetajob]], [[pr-superseded-lessons]], [[data-discipline]]
 - 08-02 `mark as ended` interaction + Quick Start 扩展（browser automation setup）
 
 **判定：保持 warm，不升级不降级。** 单作者持续产出（3 次功能迭代）说明项目活着，但 0 issues/0 PRs 的社区黑洞依旧——与 [[growth-signal-vs-code-signal]] 相反方向的镜像：代码活跃 + 社区零信号。模式价值（证据先于计数/乐观并发守卫/verbatim JD）已在 08-15 提取完毕，无新架构洞察。Revisit 08-29：社区信号 + 上游活跃度；仍 0 → cool。
+
+---
+
+## 08-29 Followup Delta — Downgraded Cool
+
+> API 2026-08-29 09:00 CST: 605⭐ / 47 forks（500→605 +21% in 7d）/ pushed 08-08（21d 静默）/ 0 issues / 0 PRs。
+
+**✅ cal-0822-94a2 CORRECT**：仍 0 issues/0 PRs（issues API 返回空），上游 21 天无 push——社区信号黑洞持续 + 上游停滞。
+
+**判定：downgrade cool（08-22 预定触发条件达成）。**
+- star +21% 与 code/community signal 完全背离 → [[growth-signal-vs-code-signal]] 又一例（这次是反向：star 涨但代码停）
+- 模式价值（证据先于计数/乐观并发守卫/verbatim JD）08-15 已提取完毕，无新架构洞察
+- Revisit 09-27：仍无 signal → drop（30 天观察窗口）
+
+**校准模式**：JobHuntBot 从 08-08 起代码静默，但 star 从 423→605（+43% in 14d）——**star 增长与开发活跃度解耦**在这个项目上是常态，不是异常。

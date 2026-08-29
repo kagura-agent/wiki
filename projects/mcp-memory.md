@@ -65,3 +65,21 @@ Watch 级别（146⭐ 中量级，但与我们记忆实践高度同构 + 有真�
 **教训验证**：08-15 时 pushed_at 停更 3 天 + 0 maintainer 回复被标红旗，但项目没死——**短窗口 pushed_at 停更 ≠ abandoned**，PR 从 open→merged 用了 3 天（08-16 merge 说明只是维护节奏慢）。与 [[pushed-at-misleading]] 同类：single push date 不可靠，要看事件流。
 
 **Revisit 08-29**：OKF 生态增长 + issue #6 解决速度 + 外部贡献者是否持续（hampsterx 出现 = 社区开始成形）。
+
+---
+
+## 08-29 Followup Delta
+
+> API 2026-08-29 09:00 CST: 197⭐ / 12 forks（192→197 +2.6% in 7d）/ pushed 08-18（11d 静默）/ 1 open issue。
+
+**⚠️ maintainer 又静默了：**
+- PR #6（hampsterx, `Run the test suite in CI and move it into a tests package`, 08-17）**仍 open**，0 maintainer 回复——只有 hampsterx 08-23 自 ping「no checks have appeared on this PR: the repo has no prior Actions runs」
+- ❌ **cal-0822-f3ff WRONG**：预测 issue #6 在 08-29 前被修复或至少被 maintainer 回复，未实现（maintainer 活跃窗口 08-16~18 后又静默）
+
+**✅ 但社区成形信号在积累：**
+- hampsterx 连续 3 PR（#4/#5/#6）——外部贡献者持续投入，不只是单次路过
+- OKF 生态角度：CI 工作流 PR 说明真实用户在部署使用
+
+**校准教训（08-26 同源）**：maintainer 活跃窗口是脉冲式的（08-16~18 集中 merge 3 PR），**短窗口活跃 ≠ 持续维护**。预测「活跃会持续/修复会到来」时对单人维护项目默认打折。
+
+**Revisit 09-05**：PR #6 merge + maintainer 活跃恢复；仍静默 → cool（模式价值已提取完毕：files-authoritative-index-derived + containment 教训）。
