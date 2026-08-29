@@ -1,34 +1,32 @@
 {
-    "timestamp": "2026-08-27T02:06:00Z",
-    "run_date": "2026-08-27",
+    "timestamp": "2026-08-28T02:06:00Z",
+    "run_date": "2026-08-28",
     "totals": {
-        "md_files": 1212,
+        "md_files": 1213,
         "cards": 469,
-        "projects": 634,
-        "wikilinks": 5862
+        "projects": 635,
+        "wikilinks": 5874
     },
     "health": {
-        "errors": 3,
-        "warnings": 62,
-        "broken_links": 3,
+        "errors": 1,
+        "warnings": 64,
+        "broken_links": 1,
         "broken_link_sources": [
-            "projects/tabtin.md -> [[credential-vault-pattern]]",
-            "projects/tabtin.md -> [[cumora]]",
-            "projects/tabtin.md -> [[workshop]]"
+            "projects/source-reading-methodology.md -> [[audit-read-tool-counting-canon]]"
         ],
-        "orphans": 3,
+        "orphans": 4,
         "orphan_cards": [],
-        "orphan_projects": ["she", "skill-sunset", "tabtin"],
+        "orphan_projects": ["she", "skill-sunset", "source-reading-methodology", "tabtin"],
         "duplicate_slugs": 0,
         "index_drift": {
-            "missing_from_index": 4,
-            "missing_files": ["projects/dsh-ios.md", "projects/she.md", "projects/skill-sunset.md", "projects/tabtin.md"],
-            "not_in_index_warn": 4,
+            "missing_from_index": 5,
+            "missing_files": ["projects/dsh-ios.md", "projects/she.md", "projects/skill-sunset.md", "projects/source-reading-methodology.md", "projects/tabtin.md"],
+            "not_in_index_warn": 5,
             "cards_index_stale": true,
             "cards_index_listed": 465,
             "cards_index_total": 469
         },
-        "stale_files": 583,
+        "stale_files": 586,
         "frontmatter_issues": [
             "agent-tool-supply-chain-poisoning",
             "ecosystem-formation-signal",
@@ -41,10 +39,10 @@
         "invalid_facts": 0
     },
     "book": {
-        "new_issues": 37,
-        "recurring": 28,
-        "clean_passes": 31,
+        "new_issues": 33,
+        "recurring": 32,
+        "clean_passes": 33,
         "auto_closed": 0,
-        "total_open": 96
+        "total_open": 98
     }
 }

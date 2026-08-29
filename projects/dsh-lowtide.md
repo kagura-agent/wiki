@@ -32,7 +32,7 @@ DeepSeek Harness（dsh）的**错峰任务调度插件**：忙时随手把任务
 - **命中 dsh-plugin 打工线**（08-13 Luna 指示第一优先级）：dsh 生态第 8 成员，验证生态扩张期持续。但 **solo dev（14 commits 全 KelaoHu）+ 23⭐ 太小 + 0 issues → 观察不投资**（08-17 红旗规则：先看 commit 史，docs-heavy 起步但代码真实）。
 - **错峰调度 → 我们的成本优化直接参考**：我们用 floway 的 deepseek-v4-flash，peak/off 价差同样存在；pulse-todo 的"定时任务"可借鉴窗口 + once-per-window guard 语义。
 - **Human-adjudicated gate** = 我们 workloop 的 review 节点 / Cove task in_review 状态同构；intercept card（忙时弹卡提示"现在跑高峰价，今晚一半"）是优秀的 UX 模式，可移植到我们的任务系统。
-- **诚实账本纪律**（未知模型报 0 不编 savings）→ 我们的 [[数据纪律]] 一致性确认：宁可无数字不可假数字。
+- **诚实账本纪律**（未知模型报 0 不编 savings）→ 我们的 [[data-fabrication-in-review|数据纪律]] 一致性确认：宁可无数字不可假数字。
 
 ## 红旗 / 风险
 

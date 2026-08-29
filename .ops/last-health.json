@@ -1,48 +1,67 @@
 {
-    "timestamp": "2026-08-28T02:06:00Z",
-    "run_date": "2026-08-28",
-    "totals": {
-        "md_files": 1213,
-        "cards": 469,
-        "projects": 635,
-        "wikilinks": 5874
+  "timestamp": "2026-08-29T02:08:00Z",
+  "run_date": "2026-08-29",
+  "totals": {
+    "md_files": 1217,
+    "cards": 470,
+    "projects": 638,
+    "wikilinks": 5900
+  },
+  "health": {
+    "errors": 2,
+    "warnings": 68,
+    "broken_links": 2,
+    "broken_link_sources": [
+      "projects/dsh-lowtide.md -> [[数据纪律]]",
+      "projects/solo-skills.md -> [[opc]]"
+    ],
+    "orphans": 4,
+    "orphan_cards": [],
+    "orphan_projects": [
+      "alego",
+      "she",
+      "skill-sunset",
+      "tabtin"
+    ],
+    "duplicate_slugs": 0,
+    "index_drift": {
+      "missing_from_index": 9,
+      "missing_files": [
+        "cards/audit-read-tool-counting-canon.md",
+        "projects/alego.md",
+        "projects/dsh-ios.md",
+        "projects/dsh-lowtide.md",
+        "projects/she.md",
+        "projects/skill-sunset.md",
+        "projects/solo-skills.md",
+        "projects/source-reading-methodology.md",
+        "projects/tabtin.md"
+      ],
+      "not_in_index_warn": 9,
+      "cards_index_stale": true,
+      "cards_index_listed": 465,
+      "cards_index_total": 470
     },
-    "health": {
-        "errors": 1,
-        "warnings": 64,
-        "broken_links": 1,
-        "broken_link_sources": [
-            "projects/source-reading-methodology.md -> [[audit-read-tool-counting-canon]]"
-        ],
-        "orphans": 4,
-        "orphan_cards": [],
-        "orphan_projects": ["she", "skill-sunset", "source-reading-methodology", "tabtin"],
-        "duplicate_slugs": 0,
-        "index_drift": {
-            "missing_from_index": 5,
-            "missing_files": ["projects/dsh-ios.md", "projects/she.md", "projects/skill-sunset.md", "projects/source-reading-methodology.md", "projects/tabtin.md"],
-            "not_in_index_warn": 5,
-            "cards_index_stale": true,
-            "cards_index_listed": 465,
-            "cards_index_total": 469
-        },
-        "stale_files": 586,
-        "frontmatter_issues": [
-            "agent-tool-supply-chain-poisoning",
-            "ecosystem-formation-signal",
-            "local-state-concurrent-guard"
-        ],
-        "no_outbound_links": ["cards/INDEX.md", "cards/retire-candidates.md"],
-        "unicode_suspect_groups": 6,
-        "stub_files": 0,
-        "secret_scan": "ok",
-        "invalid_facts": 0
-    },
-    "book": {
-        "new_issues": 33,
-        "recurring": 32,
-        "clean_passes": 33,
-        "auto_closed": 0,
-        "total_open": 98
-    }
+    "stale_files": 587,
+    "frontmatter_issues": [
+      "agent-tool-supply-chain-poisoning",
+      "ecosystem-formation-signal",
+      "local-state-concurrent-guard"
+    ],
+    "no_outbound_links": [
+      "cards/INDEX.md",
+      "cards/retire-candidates.md"
+    ],
+    "unicode_suspect_groups": 6,
+    "stub_files": 0,
+    "secret_scan": "ok",
+    "invalid_facts": 0
+  },
+  "book": {
+    "new_issues": 37,
+    "recurring": 33,
+    "clean_passes": 32,
+    "auto_closed": 0,
+    "total_open": 102
+  }
 }
