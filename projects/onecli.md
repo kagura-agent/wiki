@@ -1,7 +1,7 @@
 ---
 title: OneCLI — Credential Gateway for AI Agents
 created: 2026-07-26
-last_verified: 2026-08-16
+last_verified: 2026-08-30
 status: following
 stars: 3094
 ---
@@ -126,3 +126,13 @@ This is a valuable counterweight to the earlier architecture assessment: **zero-
 - **#484 (FD exhaustion)** still unanswered by maintainers. New **#490**: OpenAI API-key injection breaks fresh Codex OAuth login (`invalid_client`) — another injection-path regression, same family as #482/#485: **the MITM injection layer is the reliability bottleneck**, not the policy model.
 
 **Assessment**: warm tier, not hot — core dev paused but tracked fix PR + real downstream usage keep it worth watching. The pattern across #482/#485/#490 (all injection-runtime bugs, all from the same runtime layer, all with thin maintainer response) suggests the grant/policy architecture is ahead of its runtime hardening. Revisit 08-30 for #487 merge status and any main-branch activity.
+
+## 08-30 Followup — main branch 复活, upgrade active
+
+- 3,094→3,427⭐（+10.8%/14d），212 forks / 132 open issues
+- **核心 dev 恢复**：v2.3.0 (08-28) + v2.3.1 (08-29) 双 release：
+  - nonce-based CSP + enterprise-default E2E suites + chat-first onboarding (#531)
+  - openai host expansion 限缩到 oauth secrets only (#525) — 针对 #490 同族 injection 问题的收敛
+  - Snowflake integration + platform Anthropic trial credit + Slack CDN redirect fix (#528)
+- #487（Anthropic OAuth token injection fix, Adityakk9031）**仍 open unmerged**（updated 08-09，mergeable）
+- **Verdict**: 此前「core dev paused, issue flow 是唯一信号」的判断被推翻——主分支活跃恢复 + 注入层持续收紧 → **upgrade warm → active**。Revisit 09-06 for #487 merge + 2.3.x 稳定性。

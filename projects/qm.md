@@ -34,3 +34,9 @@ Directly relevant to **collaborative mirror-world workspaces** — our direction
 - 13,889→14,198⭐（+2.2%/7d），318 open issues
 - 新 commit：HiLO release approval 接管 tool-result auto-post quarantine（#676）、slack 多文件帖合并为一条带评论（#657）、动态 OpenRouter 模型（#656）、cron fire history 移出 scheduler scans（#614）
 - 仍在 pre-architecture-review；revisit 08-30
+
+## 08-30 Followup
+
+- 14,198→14,333⭐（+1.0%/4d），1,723 forks / 342 open issues
+- 新 commit：playground HTML inspection 加固 + revert interactive web-thread playgrounds（08-27/28）、release 自选版本 + semver preflight 收紧、移除 per-PR CLI version bump gate、MicroVM GH CLI install fix
+- 仍 pre-architecture-review；社区 scaling 持续。Revisit 09-06

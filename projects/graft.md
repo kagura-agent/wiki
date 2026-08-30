@@ -46,3 +46,14 @@ Builds a codebase understanding **once** and writes it into the repo as a folder
 
 ---
 *Scout: 2026-08-16 | Source: GitHub API (readme, issues, trees) — no clone*
+
+## 08-30 Follow-up (5,088⭐, 2864→5088 +78% in 14d)
+
+- ✅ **cal-0816-e132 CORRECT 提前达成**：5k⭐ 目标在 09-16 前 17 天实现
+- Default-branch 活跃恢复：**0.15.0 release (08-27)** + 一批实质 commit：
+  - Reuse PageRank topology across scopes (#203) + stop tracking node_modules symlink
+  - opt-in indexing of nested git clones (#232) — 直击此前「OOM on 大 repo」blocker 的缓解路径
+  - Node 24 WASM compatibility pin (#136)、openai 400s reasoning-default 模型协商 fix (#188)
+  - app comments name areas/tag reviewers (#255)
+- 72 open issues（社区规模扩大），determinism/OOM 仍有挑战但 build 侧在动
+- **Verdict**: community growth 加速 + build 基础设施补强 → 保持 active。Revisit 09-06 for OOM ceiling fix + determinism 落地。

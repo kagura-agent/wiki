@@ -6,7 +6,7 @@ tags: [agent-harness, coding-agent, typescript, education]
 source: https://github.com/SaladDay/pi-from-scratch
 stars: 982
 status: following
-last_verified: 2026-08-15
+last_verified: 2026-08-30
 ---
 
 # PI from Scratch — Minimal TypeScript Coding-Agent Tutorial
@@ -60,3 +60,9 @@ Growth is **marketing-driven, not feature-driven**: LINUX DO 社区推广 + Open
 - Tests read before source: `test/agent.test.ts`, `test/llm.test.ts`, `test/tools.test.ts`, `test/e2e.ts`
 - `gh issue list --state all --limit 20`: no issues returned (2026-08-10)
 - Delta: `gh api repos/SaladDay/pi-from-scratch/commits?since=2026-08-10` + issue #1 comments (2026-08-15, API evidence boundary)
+
+## 08-30 Follow-up (1,143⭐, 982→1143 +16% in 15d)
+
+- ✅ **cal-0815-2b31 CORRECT**（growth slowed <+50%，08-29 已验证）
+- 08-15 后仅 2 个 docs fix commits（#5 compaction message count、#3 LAN dev origins），代码仍 ~750L 未动，pushed 08-18（12d silent）——**无真实 feature evolution，纯营销增长持续**。
+- **Verdict**: **Downgrade → cool**。中文 dev 社区传播机制（赞助+社区+star chart）已消化，无新学习价值。Revisit 09-27; 仍纯营销无 code → drop。

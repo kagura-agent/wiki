@@ -72,3 +72,9 @@
 - **Community: zero external signal despite star surge**. All 100 recent commits single author (hzp@MacBook-Pro-6.local), contributors API empty, 0 merged PRs. Star growth 93→423 (+355%) is pure star-drive/marketing — no code community. **Growth signal ≠ code signal** (third instance after pi-from-scratch, Nightcrawler).
 - **Prediction cal-0814-b83e → PARTIAL**: solo-dev continuation correct; stars overshot the 100-200 band.
 - **Verdict**: 3 patterns from 08-14 deep read (UNKNOWN+WAL, deterministic-first, DP-SGD) remain valid design references; no new code signal this round. **Downgrade hot → warm**: revisit 08-30; 0 external contributor then → drop.
+
+## Delta — 2026-08-30 followup (391⭐, 423→391 -7.6%)
+
+- **❌ cal-0821-d375 WRONG**: 预测「08-30 仍 0 external merged PRs」落空——**PiloBi #2 merged 08-22**（首个外部合并 PR）。
+- Stars 由 423 回落至 391（-7.6%）——star-drive 消退；solo dev 延续（commits 仍全 hzp）。
+- **Verdict**: 唯一外部信号是 1 个 merged PR，但 stars 下跌 + 无持续社区 → growth signal ≠ code signal 再确认。**Downgrade warm → cool**: revisit 09-27; 无更多外部贡献 → drop。

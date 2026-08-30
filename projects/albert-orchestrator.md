@@ -142,3 +142,9 @@ Links: [[claude-code-coordinator]], [[multi-agent-consensus]], [[agent-harness-l
 **Anti-pattern worth noting:** PR queue growth while maintainer is silent is the classic "community outpaces maintainer" signal. For solo-dev Windows-first projects (PolyForm NC license), the first external PRs are usually portability fixes — if those sit unmerged >2 weeks, the project either gets forked or stalls. Watch #2/#3/#5 merge status at next check.
 
 **Status: Downgraded to warm (14d).** Revisit 08-30 for PR merge status. If all 3 PRs still unmerged with zero new commits → drop trigger (solo dev abandoned).
+
+## 08-30 Follow-up
+
+- ✅ **cal-0816-a1d7 CORRECT**: 3 个外部 PR（#2/#3/#5）仍全 open unmerged。
+- Default-branch 自 07-26 后有 2 commits（08-16 时 zero）——微弱 activity，maintainer 仍 dormant。
+- **Verdict**: 保持 warm。Revisit 09-13; 3 PRs 仍 unmerged + 0 maintainer 回复 → drop（solo dev abandoned）。

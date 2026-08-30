@@ -7,7 +7,7 @@ stars: 251
 repo: op7418/pilot-harness
 language: TypeScript
 license: MIT
-last_verified: 2026-08-28
+last_verified: 2026-08-30
 ---
 
 # Pilot Harness — DSH 桌面客户端
@@ -83,3 +83,9 @@ Links: [[deepseek-harness-pr-review]], [[dsh-tether]], [[deepseek-v4]], [[agent-
 - Commits 至 08-20 (release 0.1.0-rc.7-pilot.2: checkout scripts fix, CI SUID sandbox fix)。
 - **cal-0823-6d8a (08-30 前超 500⭐, medium) 大概率 WRONG** — 当前 262⭐, 2 天内翻倍无望 → 08-30 到期验证。
 - 会话导入 / 代理 env 透传 issue 未见采纳。Revisit 09-03 for prediction verify + release 稳定性。
+
+## 08-30 Follow-up (260⭐, 262→260)
+
+- **❌ cal-0823-6d8a WRONG**（未超 500⭐）；✅ **cal-0828-4a8e CORRECT**（同批对冲预测，260⭐ 确认）。
+- Commits 停 08-20；会话导入 / 代理 env 透传 issue 未采纳。
+- **Verdict**: 保持 warm。Revisit 09-03 for release 稳定性。
