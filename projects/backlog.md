@@ -1768,3 +1768,9 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 
 ## 2026-08-26 quick_scout（20:00）
 - [ ] **Skill Sunset** (ooocooc/open-skill-sunset) — 71⭐ / MIT / created 08-26, v0.2.0 same-day. Audit 过期 AGENTS.md/CLAUDE.md/SKILL.md 指令（broken refs / stale absolute paths / malformed frontmatter / oversized always-loaded / plaintext creds）；同 name skill 检测；模型时代补偿规则标 TEST 而非废弃；排除 domain knowledge/safety rules/invariants 不自动退休；本地只读不调 AI API；产出 HTML/MD/JSON + handoff prompts + rollback manifest。→ 直接命中我们 skill 治理（beliefs-candidates 老化 / SKILL.md 治理）。4 commits 真实。值得深入。
+## 2026-08-30 quick_scout
+- **lemmalog** (JordyZomer/lemmalog, 156⭐) — Datalog engine for LLM agent memory: stratified rules, provenance-tracked facts, incremental derivation. 对齐北极星记忆层方向，morning-briefing + quick_scout 双重标记 → **deep_read 候选**
+- headcount (cbrock84/headcount, 354⭐) — agent organization for Claude Code (15+ departments, 125+ skills) — agent 组织化模式
+- acryl (acryldev/acryl, 226⭐) — Agent Context Relay Yielding Lifecycles, persistent workspace + canonical context
+- miniEvoAgent (TunaaaAaaaa/miniEvoAgent, 101⭐) — self-evolving agent 复现学习
+- Talos (HN Show, 14pts) — permission kernel between model and shell — 安全边界方向
