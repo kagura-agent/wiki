@@ -1774,3 +1774,10 @@ Ecosystem stable this scan — most results are known patterns or tracked items
 - acryl (acryldev/acryl, 226⭐) — Agent Context Relay Yielding Lifecycles, persistent workspace + canonical context
 - miniEvoAgent (TunaaaAaaaa/miniEvoAgent, 101⭐) — self-evolving agent 复现学习
 - Talos (HN Show, 14pts) — permission kernel between model and shell — 安全边界方向
+
+## 2026-08-31 quick_scout 候选
+- **cbrock84/headcount** (743⭐, 3d) — Claude Code agent 组织（15+ depts, 125+ skills, 公司结构），活跃 commits（08-30 深夜仍在迭代，Merge PR 模式）→ **值得深入**（与我们团队模式 Kagura/Haru/Ren 直接相关）
+- sapientinc/PRAXIST (4809⭐, 4d) — Autonomous research 系统，但仅 7 commits docs-only + 公司官网 → 商业产品 open-source，观察不投资（同 TabTin 模式）
+- XiaoDuoYa/codex-with-chatgpt (1512⭐, 3d) — ChatGPT 规划 + Codex 执行 wrapper，真实 commits 但模式已知 → 浅读
+- jprx/darwin-vm (638⭐, 3d) — iOS/macOS Qemu 模拟，2 commits 早期 → 观察
+- HN: Talos (permission kernel between model and shell) — 权限内核方向，14pts，可关注
