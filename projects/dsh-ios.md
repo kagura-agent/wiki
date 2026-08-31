@@ -2,7 +2,7 @@
 title: dsh-ios — DSH 的 iOS Simulator/真机 live 插件
 created: 2026-08-24
 tags: [dsh-ecosystem, mobile-agent, ios-simulator, plugin, deepseek-harness]
-last_verified: 2026-08-24
+last_verified: 2026-08-31
 source: https://github.com/ZSeven-W/dsh-ios
 ---
 
@@ -40,6 +40,14 @@ source: https://github.com/ZSeven-W/dsh-ios
 
 "设备操控类 agent 工具"的信任模型：**凡有真实后果的动作（真机 tap、不可逆操作）必须有 identity 验证前置 + 明确拒绝路径**；验证做进工具而非靠 prompt 提醒。这是 [[default-fail-gate]] 在移动设备域的具体化。
 
-## Follow-up
+## Follow-up 08-31 验证
+
+- **⭐ 228→269（+18% in 7d）**——❌ cal-0824-9000（破 500★）WRONG，增长未达预期但方向仍对（dsh 生态扩张期判断本身没错，量化过于激进）。
+- **Code signal 真实（非营销）**：default-branch commits 08-23/24 密集——`fix(wda): a busy device should slow us down, not lock us out`（对应 issue #2「调试的时候画面卡死」的修复，rc.5 已发）、`fix(devicectl): a simulator devicectl lists is still a simulator`（issue #1 分类边界修复）、`docs: iOS demo video`。
+- **issue 面**：#1 devicectl 误判已 closed（修复验证），#2 WDA 卡死仍 open 但 fix 已发布待用户验证——修复闭环符合「验证做进工具」模式。
+- **判定**：growth moderate + code signal 持续 → **keep warm**，revisit **09-07**（看 300★ + WDA fix 用户验证）。
+- **新预测** cal-0831-0512：09-07 破 300★（medium）。
+
+## Follow-up 原条目
 
 Revisit **08-31**：dsh-ios 增长是否持续（<3d 228⭐ 快但需看是否 code signal）、WDA 卡死 issue 修复、生态成员是否继续 +（借势窗口：dsh-plugin 打工线）。
