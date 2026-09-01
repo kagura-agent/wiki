@@ -1,3 +1,10 @@
+---
+title: Lemmalog — Datalog 引擎作为 LLM agent 记忆
+created: 2026-08-30
+tags: [datalog, agent-memory, deductive-db, memory-architecture]
+last_verified: 2026-09-01
+source: https://github.com/JordyZomer/lemmalog
+---
 # Lemmalog — Datalog 引擎作为 LLM agent 记忆
 
 > 源码核对基于 `JordyZomer/lemmalog` commit `7d6f154` (2026-08-30, 16 commits, 8,037 LOC Rust)

@@ -1,48 +1,43 @@
 {
-  "timestamp": "2026-08-30T02:08:00Z",
-  "run_date": "2026-08-30",
+  "timestamp": "2026-09-01T02:06:00Z",
+  "run_date": "2026-09-01",
   "totals": {
-    "md_files": 1219,
-    "cards": 471,
-    "projects": 639,
-    "wikilinks": 5918
+    "md_files": 1223,
+    "cards": 472,
+    "projects": 641,
+    "wikilinks": 5937
   },
   "health": {
-    "errors": 0,
-    "warnings": 70,
-    "broken_links": 0,
-    "broken_link_sources": [],
-    "orphans": 4,
-    "orphan_cards": [],
+    "errors": 2,
+    "warnings": 61,
+    "broken_links": 2,
+    "broken_link_sources": [
+      "projects/lemmalog.md -> [[datalog-context-engine]]",
+      "projects/lemmalog.md -> [[scallop]]"
+    ],
+    "orphans": 2,
+    "orphan_cards": [
+      "agent-org-checkable-boundary"
+    ],
     "orphan_projects": [
-      "alego",
-      "pentest-harness",
-      "she",
-      "skill-sunset"
+      "lemmalog"
     ],
     "duplicate_slugs": 0,
     "index_drift": {
-      "missing_from_index": 11,
+      "missing_from_index": 3,
       "missing_files": [
-        "cards/audit-read-tool-counting-canon.md",
-        "cards/opc.md",
-        "projects/alego.md",
-        "projects/dsh-ios.md",
-        "projects/dsh-lowtide.md",
-        "projects/pentest-harness.md",
-        "projects/she.md",
-        "projects/skill-sunset.md",
-        "projects/solo-skills.md",
-        "projects/source-reading-methodology.md",
-        "projects/tabtin.md"
+        "cards/agent-org-checkable-boundary.md",
+        "projects/headcount.md",
+        "projects/lemmalog.md"
       ],
-      "not_in_index_warn": 11,
+      "not_in_index_warn": 3,
       "cards_index_stale": true,
       "cards_index_listed": 465,
-      "cards_index_total": 471
+      "cards_index_total": 472
     },
-    "stale_files": 589,
+    "stale_files": 595,
     "frontmatter_issues": [
+      "agent-org-checkable-boundary",
       "agent-tool-supply-chain-poisoning",
       "ecosystem-formation-signal",
       "local-state-concurrent-guard"
@@ -57,10 +52,10 @@
     "invalid_facts": 0
   },
   "book": {
-    "new_issues": 0,
-    "recurring": 70,
-    "clean_passes": 0,
-    "auto_closed": 33,
-    "total_open": 70
+    "new_issues": 34,
+    "recurring": 29,
+    "clean_passes": 30,
+    "auto_closed": 0,
+    "total_open": 93
   }
 }

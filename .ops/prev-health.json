@@ -1,48 +1,37 @@
 {
-  "timestamp": "2026-08-29T02:08:00Z",
-  "run_date": "2026-08-29",
+  "timestamp": "2026-08-31T02:06:00Z",
+  "run_date": "2026-08-31",
   "totals": {
-    "md_files": 1217,
-    "cards": 470,
-    "projects": 638,
-    "wikilinks": 5900
+    "md_files": 1221,
+    "cards": 471,
+    "projects": 640,
+    "wikilinks": 5923
   },
   "health": {
     "errors": 2,
-    "warnings": 68,
+    "warnings": 57,
     "broken_links": 2,
     "broken_link_sources": [
-      "projects/dsh-lowtide.md -> [[数据纪律]]",
-      "projects/solo-skills.md -> [[opc]]"
+      "projects/lemmalog.md -> [[datalog-context-engine]]",
+      "projects/lemmalog.md -> [[scallop]]"
     ],
-    "orphans": 4,
+    "orphans": 1,
     "orphan_cards": [],
     "orphan_projects": [
-      "alego",
-      "she",
-      "skill-sunset",
-      "tabtin"
+      "lemmalog"
     ],
     "duplicate_slugs": 0,
     "index_drift": {
-      "missing_from_index": 9,
+      "missing_from_index": 1,
       "missing_files": [
-        "cards/audit-read-tool-counting-canon.md",
-        "projects/alego.md",
-        "projects/dsh-ios.md",
-        "projects/dsh-lowtide.md",
-        "projects/she.md",
-        "projects/skill-sunset.md",
-        "projects/solo-skills.md",
-        "projects/source-reading-methodology.md",
-        "projects/tabtin.md"
+        "projects/lemmalog.md"
       ],
-      "not_in_index_warn": 9,
+      "not_in_index_warn": 1,
       "cards_index_stale": true,
       "cards_index_listed": 465,
-      "cards_index_total": 470
+      "cards_index_total": 471
     },
-    "stale_files": 587,
+    "stale_files": 592,
     "frontmatter_issues": [
       "agent-tool-supply-chain-poisoning",
       "ecosystem-formation-signal",
@@ -58,10 +47,10 @@
     "invalid_facts": 0
   },
   "book": {
-    "new_issues": 37,
-    "recurring": 33,
-    "clean_passes": 32,
-    "auto_closed": 0,
-    "total_open": 102
+    "new_issues": 0,
+    "recurring": 59,
+    "clean_passes": 0,
+    "auto_closed": 45,
+    "total_open": 59
   }
 }
