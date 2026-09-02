@@ -43,7 +43,7 @@
 - [Agent Memory Strategies](cards/agent-memory-strategies.md)
 - [Agent Memory Taxonomy (Forms-Functions-Dynamics)](cards/agent-memory-taxonomy.md)
 - [Agent-Native Code Search](cards/agent-native-code-search.md)
-- [agent-org-checkable-boundary](cards/agent-org-checkable-boundary.md)
+- [Agent 组织的可检查边界（surface × class × authority 三轴）](cards/agent-org-checkable-boundary.md)
 - [Agent Perception Gap](cards/agent-perception-gap.md)
 - [Agent Proactivity](cards/agent-proactivity.md)
 - [Agent Publishing Identity](cards/agent-publishing-identity.md)
@@ -1229,4 +1229,4 @@
 
 ---
 
-*474 cards, 641 project notes. Last generated: 2026-09-01 04:39 UTC.*
+*474 cards, 641 project notes. Last generated: 2026-09-02 04:39 UTC.*

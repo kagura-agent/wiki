@@ -1,3 +1,11 @@
+---
+title: Agent 组织的可检查边界（surface × class × authority 三轴）
+created: 2026-08-31
+type: concept
+tags: [multi-agent, agent-organization, write-surface, reviewer-class, authority]
+last_verified: 2026-09-02
+---
+
 # Agent 组织的可检查边界（surface × class × authority 三轴）
 
 > 来源：[[headcount]] deep-read 2026-08-31。跨项目通用模式：多 agent 协作的组织学。

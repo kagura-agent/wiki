@@ -2,7 +2,7 @@
 title: headcount — Claude Code 的 agent 组织（16 部门 / 146 skills / CI 强制 surface map）
 created: 2026-08-31
 tags: [agent-organization, claude-code, multi-agent, write-surface, reviewer-class, plugin-ecosystem]
-last_verified: 2026-08-31
+last_verified: 2026-09-02
 source: https://github.com/cbrock84/headcount
 ---
 
@@ -50,6 +50,7 @@ source: https://github.com/cbrock84/headcount
 - 与 [[team-lead]]（我们的 multi-agent 管理 skill）直接同方向：都是「producer/auditor 分离 + 范围控制 + human 最终批准」
 - 与 [[multi-agent-quality-gate]]、[[single-writer-spawn-ledger]]（Prime Agent）同族：agent 协作的机器可验证边界
 - 与 [[supervisor-pattern]] 的关系：headcount 把 supervisor 细化为「orchestrator（唯一 committer）+ 部门 builder + reviewer」三层
+- 三轴模型的独立凝练（含 Kagura/Haru/Ren 角色映射与落地候选）：[[agent-org-checkable-boundary]]
 
 ## 与我们方向的关联（高价值）
 
