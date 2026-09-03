@@ -1,3 +1,10 @@
+---
+title: Ecosystem Formation Signal
+created: 2026-08-21
+tags: [pattern, ecosystem, signal, study-method]
+last_verified: 2026-09-03
+---
+
 # Ecosystem Formation Signal
 
 > 生态成型信号 — 08-21 定义 DNA 规则，08-22 首次实战验证

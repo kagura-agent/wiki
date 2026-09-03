@@ -198,7 +198,7 @@
 ### E
 
 - [Eat Your Own Dogfood](cards/eat-your-own-dogfood.md)
-- [ecosystem-formation-signal](cards/ecosystem-formation-signal.md)
+- [Ecosystem Formation Signal](cards/ecosystem-formation-signal.md)
 - [Entity First Dispatch](cards/entity-first-dispatch.md)
 - [Ephemera Retention Primitive](cards/ephemera-retention-primitive.md)
 - [Error Handling In Cli](cards/error-handling-in-cli.md)
@@ -1229,4 +1229,4 @@
 
 ---
 
-*474 cards, 641 project notes. Last generated: 2026-09-02 04:39 UTC.*
+*474 cards, 641 project notes. Last generated: 2026-09-03 04:38 UTC.*

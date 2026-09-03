@@ -1,41 +1,30 @@
 {
-  "timestamp": "2026-09-01T02:06:00Z",
-  "run_date": "2026-09-01",
+  "timestamp": "2026-09-02T02:06:00Z",
+  "run_date": "2026-09-02",
   "totals": {
-    "md_files": 1223,
-    "cards": 472,
+    "md_files": 1225,
+    "cards": 474,
     "projects": 641,
-    "wikilinks": 5937
+    "wikilinks": 5942
   },
   "health": {
-    "errors": 2,
-    "warnings": 61,
-    "broken_links": 2,
-    "broken_link_sources": [
-      "projects/lemmalog.md -> [[datalog-context-engine]]",
-      "projects/lemmalog.md -> [[scallop]]"
-    ],
-    "orphans": 2,
-    "orphan_cards": [
-      "agent-org-checkable-boundary"
-    ],
-    "orphan_projects": [
-      "lemmalog"
-    ],
+    "errors": 0,
+    "warnings": 56,
+    "broken_links": 0,
+    "broken_link_sources": [],
+    "orphans": 0,
+    "orphan_cards": [],
+    "orphan_projects": [],
     "duplicate_slugs": 0,
     "index_drift": {
-      "missing_from_index": 3,
-      "missing_files": [
-        "cards/agent-org-checkable-boundary.md",
-        "projects/headcount.md",
-        "projects/lemmalog.md"
-      ],
-      "not_in_index_warn": 3,
-      "cards_index_stale": true,
+      "missing_from_index": 0,
+      "missing_files": [],
+      "not_in_index_warn": 0,
+      "cards_index_stale": false,
       "cards_index_listed": 465,
-      "cards_index_total": 472
+      "cards_index_total": 474
     },
-    "stale_files": 595,
+    "stale_files": 637,
     "frontmatter_issues": [
       "agent-org-checkable-boundary",
       "agent-tool-supply-chain-poisoning",
@@ -52,9 +41,9 @@
     "invalid_facts": 0
   },
   "book": {
-    "new_issues": 34,
-    "recurring": 29,
-    "clean_passes": 30,
+    "new_issues": 30,
+    "recurring": 26,
+    "clean_passes": 37,
     "auto_closed": 0,
     "total_open": 93
   }
