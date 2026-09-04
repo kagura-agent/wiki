@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-03T02:06:00Z",
-  "run_date": "2026-09-03",
+  "timestamp": "2026-09-04T02:06:00Z",
+  "run_date": "2026-09-04",
   "totals": {
     "md_files": 1225,
     "cards": 474,
@@ -9,7 +9,7 @@
   },
   "health": {
     "errors": 0,
-    "warnings": 55,
+    "warnings": 54,
     "broken_links": 0,
     "broken_link_sources": [],
     "orphans": 0,
@@ -24,10 +24,9 @@
       "cards_index_listed": 465,
       "cards_index_total": 474
     },
-    "stale_files": 639,
+    "stale_files": 642,
     "frontmatter_issues": [
       "agent-tool-supply-chain-poisoning",
-      "ecosystem-formation-signal",
       "local-state-concurrent-guard"
     ],
     "no_outbound_links": [
@@ -41,9 +40,9 @@
   },
   "book": {
     "new_issues": 30,
-    "recurring": 25,
+    "recurring": 24,
     "clean_passes": 30,
-    "auto_closed": 1,
-    "total_open": 85
+    "auto_closed": 0,
+    "total_open": 84
   }
 }

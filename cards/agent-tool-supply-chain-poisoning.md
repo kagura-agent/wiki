@@ -1,3 +1,9 @@
+---
+title: Agent 工具供应链投毒模式（supply-chain poisoning via fake agent tools）
+created: 2026-08-17
+last_verified: 2026-09-04
+---
+
 # Agent 工具供应链投毒模式（supply-chain poisoning via fake agent tools）
 
 > 2026-08-17 从 [[book-to-skill]] 实证提取（[已验证] 源码逐函数核对）

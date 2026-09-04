@@ -1,3 +1,9 @@
+---
+title: Local-State Concurrent Guard
+created: 2026-08-15
+last_verified: 2026-09-04
+---
+
 # Local-State Concurrent Guard
 
 > 2026-08-15, extracted from JobHuntBot deep read.
