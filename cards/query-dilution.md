@@ -3,6 +3,7 @@ title: Query Dilution
 created: 2026-04-17
 source: Memory search eval 04-17 — systematic failure analysis
 modified: 2026-04-17
+last_verified: 2026-09-06
 ---
 
 # Query Dilution

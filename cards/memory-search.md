@@ -2,6 +2,7 @@
 title: "Memory Search"
 created: 2026-04-16
 tags: [memory, search, openclaw]
+last_verified: 2026-09-06
 ---
 
 # Memory Search

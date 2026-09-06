@@ -4,6 +4,7 @@ type: card
 created: 2026-04-25
 updated: 2026-05-10
 status: active
+last_verified: 2026-09-06
 ---
 
 # Frozen Trust vs Time Decay
