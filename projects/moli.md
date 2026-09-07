@@ -4,7 +4,7 @@ created: 2026-08-11
 tags: [browser, agent-infra, rust, cdp, webdriver, mcp, rendering, verification]
 source: https://github.com/lexmount/moli
 status: deep-read
-last_verified: 2026-08-27
+last_verified: 2026-09-07
 ---
 
 # Moli — DOM-first browser kernel for AI agents
@@ -66,3 +66,10 @@ Logged as `cal-0811-9e87`: by **2026-08-25**, Moli will have at least one non-ma
 - **External contributors growing:** 9 total (athul-22, BibekPathak, XDLCS, Duang777, euyis1019, Spxg, SKTT1Ryze...), beyond the original single signal.
 - **WPT suite active:** frame-ancestors response fixes + full case list refresh — compat suite maintained in study/.sources/moli.
 - cal-0811-9e87 external-PR HIT continues to validate; revisit 09-03 for WPT pass-rate + v1.0.3.
+
+## Delta — 2026-09-07 followup (1,766⭐, v1.1.3)
+
+- **Release and compatibility cadence:** Moli shipped v1.1.0, v1.1.1, v1.1.2, and v1.1.3 between 09-01 and 09-05, then merged further main-branch compatibility fixes through 09-07 (iframe CSP reflection, async clipboard, Web Audio, popover/tree behavior, table layout, and WPT-observation CI). This is not a feature-direction pivot; it is sustained browser-kernel correctness work.
+- **External PR signal persists but does not dominate:** recent merged work includes @BibekPathak’s canvas rasterization (#268) and several browser-behavior fixes (#317/#331/#334/#338), plus @Duang777’s network-blocking fix (#177). The maintainer still authors the bulk of rapid merges, so Moli has crossed the “single external signal” threshold without yet distributing core stewardship.
+- **Agent-ecosystem position:** this makes Moli a stronger execution substrate for [[openclaw]]-style browser automation, while preserving the lesson from [[qwen-cua]]: DOM-first access is a performance/interface choice, not a trust boundary. Its WPT- and compatibility-led release cadence is a concrete example of [[mechanism-vs-evolution]]—the renderer’s architectural claim is being stress-tested by observable browser behavior rather than feature-count marketing.
+- **Calibration:** `cal-0827-6e32` was **correct**: 1,230→1,766⭐ exceeded the 1,500 target by 09-03. Next check: 09-14, focused on whether v1.1’s cadence persists and whether external merge share increases.
