@@ -1,7 +1,7 @@
 ---
 title: "LoopX — local-first control plane for long-running agents"
 created: 2026-08-09
-last_verified: 2026-08-27
+last_verified: 2026-09-08
 tags: [agent-harness, control-plane, durable-runs, loop-engineering, local-first]
 ---
 
@@ -72,3 +72,11 @@ The early LoopX model was a bounded-turn control plane (claim → act → eviden
 
 - Prediction: LoopX >6,000⭐ by 08-27. Actual: **5,207⭐** (from 5,157 on 08-26). Missed by ~13%.
 - 外部 PR 合并继续（#3541 Duang777 + #3611 Alicecooo），quota 会计收紧持续。Growth decelerating but code signal healthy.
+
+## 09-08 Followup
+
+- **5,157→5,729⭐（+11.1%/13d）**，518 forks / 63 open issues，社区继续 6/6 THRIVING：30 天 56 个外部 PR；最近 30 个关闭 PR 中 27 个合并、覆盖 8 位作者；同时 14 天 issue 22 open / 2 closed，需要观察 triage 是否跟得上。
+- **Lifecycle authority is being consolidated rather than hidden:** RFC #3930 proposes `loopxd`, with the OS user service manager as the sole owner of each explicit local service profile. Desktop can attach, request typed repair, and read back readiness/identity, but must not start a competing process. Goal/Todo/gate/quota/evidence authority stays out of daemon-local mutable state. This is a concrete refinement of [[durable-agent-runs]]: one lifecycle owner does not imply one undifferentiated source of domain truth.
+- **Readiness needs a proof, not a liveness claim:** merged external PR #4078 adds readiness consumption without restart (39 lines of service tests and 68 lines of fast-path tests). The RFC requires post-update identity readback and component-level partial readiness, explicitly rejecting a single health boolean.
+- **Supply-chain identity remains a gap:** open issue #4082 shows user-level workflow skills carry no LoopX version marker, so hosts pinned to a different LoopX runtime can load incompatible skills. The report links the mismatch to 100+ repeated failed attempts. Shared skill directories therefore need producer version/digest metadata plus host-side compatibility checks.
+- **Relevance:** FlowForge/Cove-style durable coordination should preserve a sole lifecycle owner, explicit profile identity, and post-operation readback while keeping workflow truth separate; any shared skill delivery must bind its source/runtime version. Revisit 09-15 for RFC #3930 progress, #4082 response, and issue throughput.
