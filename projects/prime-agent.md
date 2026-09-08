@@ -1,9 +1,9 @@
 ---
 title: "Prime Agent — Self-Improving RLM Agent for Coding"
 created: 2026-08-10
-last_verified: 2026-08-27
+last_verified: 2026-09-08
 source: https://github.com/PrimeIntellect-ai/prime-agent
-stars: 16584
+stars: 20175
 status: track
 tags: [agent-harness, self-evolution, rlm, subagent, provenance, ledger, observability]
 ---
@@ -68,3 +68,10 @@ Resolved the open questions from the 08-17 note:
 - THRIVING continues on code signal: daily main-branch commits (08-26), forks 1,787 → 2,008, open issues 73 → 87. External contributors snimu + hallerite still active.
 - Spawn-ledger pattern ([[single-writer-spawn-ledger]]) remains the key extraction; no new architectural insight this round.
 - Revisit 09-03: ledger consolidation progress + whether growth deceleration continues.
+
+## Delta — 2026-09-08 followup (20,175⭐, +8.2% in 12d)
+
+- **Code signal remains strong:** main received 15 commits in 4 days and v0.9.0–v0.9.3 shipped 01–06 Sep. Recent changes harden daemon/session lifecycle: session persistence + worker recovery (#2028), bounded kernel stderr retention (#1947), a single visited-walk for RLM subtree cancellation (#2027), and structured provider-auth recovery (#2045).
+- **Community signal is asymmetric:** 100 external PRs were opened in 30 days, but only 7 of the latest 30 closed PRs merged and all seven were authored by `snimu`; 30 unique issue authors filed reports and 23 issues closed in 14 days. The project is receptive at the bug-report layer while its merged code path remains maintainer-led.
+- **Direction impact:** the earlier [[single-writer-spawn-ledger]] extraction still holds, and this delta adds a complementary operational lesson: durable agent runtimes need bounded diagnostic retention and explicit recovery paths, not only durable topology records.
+- Revisit 09-15: check whether non-maintainer PRs begin merging and whether the v0.9.x recovery work stabilizes the issue stream.
