@@ -1,7 +1,7 @@
 # qm — Multiplayer Agent Harness for Work
 
-> yc-software/qm | 13,465⭐ (08-14) | MIT | Pushed daily | Created ~2026-07
-> 1,582 forks / 213 open issues | HN discussion 675 points (08-07)
+> yc-software/qm | 14,689⭐ (09-08) | MIT | Pushed daily | Created ~2026-07
+> 1,785 forks / 408 open issues | HN discussion 675 points (08-07)
 
 ## What It Is
 
@@ -40,3 +40,11 @@ Directly relevant to **collaborative mirror-world workspaces** — our direction
 - 14,198→14,333⭐（+1.0%/4d），1,723 forks / 342 open issues
 - 新 commit：playground HTML inspection 加固 + revert interactive web-thread playgrounds（08-27/28）、release 自选版本 + semver preflight 收紧、移除 per-PR CLI version bump gate、MicroVM GH CLI install fix
 - 仍 pre-architecture-review；社区 scaling 持续。Revisit 09-06
+
+## 09-08 Followup
+
+- **14,333→14,689⭐（+2.5%/9d）**，1,785 forks / 408 open issues。社区仍为 6/6 THRIVING：近 30 天 64 个外部 PR、最近 30 个关闭 PR 中 23 个合并（5 位作者），但 open issue 增速（14 天 42 open、2 closed）高于关闭速度。
+- **Context/cache boundary became explicit:** a 09-07 change keeps long-lived policy in the system prompt but moves minute-level time, recall and onboarding information into the per-turn user environment. Its stated rationale is prefix-cache stability: volatile system content invalidated cache reads and caused deep sessions to resend 150–300k history tokens. The implementation also preserves/replays the per-turn note so reconstructed history and token estimation remain faithful.
+- **Model admission is being made testable:** the 09-08 admin-model verification feature adds a dedicated verifier plus 433 lines of model-verification tests and a 100-line upstream fixture. This is a concrete “verify before enable” gate, not merely admin UI validation.
+- **But the security/control-plane boundary is unfinished:** issue #917 reports connector OAuth tokens injected as sandbox process argv (visible to co-resident tools); #953 reports governance serviceability ignores admin-stored provider keys while onboarding accepts them. Both are open with no comments. A verified model registry does not substitute for credential transport isolation or one consistent provider-availability authority.
+- **Relevance:** for [[FlowForge]]/chat-infra, cache optimization must preserve replay fidelity, and configuration gates should share a single authority source across setup and governance surfaces. Revisit 09-15 for #917/#953 response and whether issue throughput converges.
