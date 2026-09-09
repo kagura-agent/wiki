@@ -77,3 +77,11 @@ KEEP / MERGE / UPDATE / DEMOTE / RETIRE / TEST。**关键哲学：**
 **工具本身验证**：0 依赖、本地只读、路径脱敏、报告含 rollback manifest + codex/claude handoff prompts + A/B 实验模板——工程完整，实测无副作用。CLI 是 `audit [target]`（不是 `--root`）。
 
 **Gradient**：audit 类工具的价值在「过滤噪音后的真实信号」——1962 条发现里 actionable 只有 2 条。跑审计的姿势应该是先配排除（worktrees/node_modules），否则 99% 是重复副本噪音。→ 对应我们 [[study-saturation-gate]] 的噪音门控哲学。
+
+## 09-09 Follow-up — 小幅采用，未形成社区
+
+**查询证据（2026-09-09）**：GitHub API 显示 **87⭐ / 3 forks / 0 open issues**，主分支最后提交为 09-01 的 v0.3.0 release；CI 在 release commit `b703cf00712b` 成功。npm registry 已发布 `skill-sunset@0.3.0`（09-01）。仓库没有外部 PR 或 issue，尚无独立贡献者信号。
+
+**采用信号**：README 所列 HOL Guard 的 command-safety extension 已在其仓库通过 PR #2611 合并（作者仍为 ooocooc，故不能计作外部贡献）。这证明有真实的跨项目集成，但不是社区采用。
+
+**校准**：预测 `cal-0826-16d3`「09-09 前 200⭐」失败（实际 87⭐），已标记 **WRONG**。增长从首日 71⭐ 放缓，且无公开问题反馈面；工具的工程与本地价值仍成立，但不再追踪项目增长。
