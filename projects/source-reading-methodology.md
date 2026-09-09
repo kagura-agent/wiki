@@ -2,7 +2,7 @@
 title: source-reading-methodology — 带 AI 精读大型仓库的方法论
 created: 2026-08-27
 tags: [study-methodology, source-backed, zero-hallucination, skill, deep-read]
-last_verified: 2026-08-27
+last_verified: 2026-09-09
 ---
 
 # source-reading-methodology (itshen/source-reading-methodology)
@@ -43,5 +43,11 @@ last_verified: 2026-08-27
 ## Apply — 2026-08-27（study-loop 20:00）
 
 - ✅ **版本锚点模式已落地**：flowforge/workflows/study.yaml deep_read 节点新增 `1b. 锁版本锚点` 步骤（commit 4ca57ae）——深读新项目时记录 `git rev-parse HEAD` 并把 commit hash + 日期写进 wiki 笔记头部。行为变化：后续所有 deep_read 笔记将带版本锚点，可区分「行号漂移是写错还是上游改了」（直接解决 pi-book freshness 教训）。
+
+## Follow-up — 2026-09-09：工程化方法论未获社区验证
+
+**查询证据**：GitHub API 显示 **135⭐ / 11 forks / 0 open issues**，主分支最后提交仍为 08-24 的 `f45f57988f58`；无外部 PR。与 08-27 的 125⭐ 相比仅 +10，未出现校验器 test、外部实践反馈或新发布。
+
+**结论**：它的「可验证引用 + 版本锚点 + 反作弊校验」仍是我们 [[source-driven-development]] 的有价值生产纪律，且锁版本步骤已经落地在 FlowForge；但方法论项目本身没有形成社区验证。这里的反直觉是：可复制的 agent skill 和完成度很高的示范产物，仍不足以证明其他使用者会采用或压力测试校验器。停止跟踪项目增长，保留已采纳的流程原则。
 
 Links: [[source-driven-development]], [[pi-book]], [[claude-code-source-analysis]], [[gread-code-reader]], [[doubt-driven-development]], [[study-saturation]], [[agent-harness-landscape]]
