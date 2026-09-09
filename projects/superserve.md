@@ -102,3 +102,11 @@ Sandtrace explicitly supports E2B/Daytona as providers → positioning as audit 
 ## 2026-08-05 — Follow-up: operator UX follows infrastructure breadth
 
 At 438⭐, Superserve shipped multi-region team creation/switching and then a console affordance to copy a complete sandbox ID (2026-08-04). This is unglamorous but consistent with a sandbox product moving from core isolation toward operating many sandboxes. It reinforces the positioning described in [[agent-credential-security]]: secure agent execution needs usable operator controls, not only a strong containment boundary.
+
+## 2026-09-09 — Follow-up: security telemetry begins as a reversible observation layer
+
+GitHub API query: **460⭐ / 53 forks / 23 open issues**. The main branch is active: PR #317 merged 09-09, following reCAPTCHA Enterprise (#314), Google OAuth signup proof (#315), and Fingerprint-based observation (#316). The new Cloudflare telemetry creates a Superserve-owned `signup_attempt_id` to correlate provider observations, configuration/version context, and later user association.
+
+**Architecture decision:** all three device/anti-abuse providers begin as **observe-only**; provider outages explicitly fail open and a runtime kill switch is independent. This is a useful complement to [[agent-credential-security]] and [[failable-verification]]: collect evidence first, preserve the established authorization path, then decide whether a signal earns enforcement. It avoids turning an uncalibrated anti-abuse classifier into a signup outage.
+
+**Ecosystem/strategy:** this is operational hardening of a persistent sandbox control plane, not a new sandbox primitive. Superserve’s direction remains relevant to agent infrastructure—safe execution requires operator-facing telemetry and recoverable rollouts alongside Firecracker isolation—but offers no new direct implementation action for our chat-infra/FlowForge line. The completed tracking item was removed rather than extending a low-yield watch cycle.
