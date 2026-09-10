@@ -2,7 +2,7 @@
 title: "Qwen-CUA — screenshot-only browser-use reference agent"
 created: 2026-08-06
 tags: [computer-use, browser-agent, safety-gates, replay, verification]
-last_verified: 2026-08-27
+last_verified: 2026-09-10
 ---
 
 # Qwen-CUA (xlang-ai/Qwen-CUA)
@@ -57,4 +57,8 @@ The checkable prediction logged at NEW (post-navigation/DNS-rebinding network-po
 - **⚠️ Model weights now available** (08-25 "Announce upcoming model release" → 08-26 "Mark model weights as available"): README updated with HF badge (xlangai/Qwen-CUA, live 200), weights hosted on HF separately from GitHub releases. The biggest gap from 08-13 (weights absent) is now closed.
 - Technical report at arXiv:2608.02352; demo runnable locally. This unlocks independent reproduction/benchmarking — the natural next verification surface.
 - **Upgrade warm → active:** watch adoption + community discussion + independent eval after release.
-- Prediction (08-06, low): network-policy hardening or documented out-of-scope by 09-06 — still open, revisit 09-02.
+- Prediction (08-06, low): network-policy hardening or documented out-of-scope by 09-06 — no such change observed by 2026-09-10; the prediction is **wrong** and the missing post-navigation boundary remains an explicit limitation.
+
+## Follow-up — 2026-09-10
+
+**Delta verified via GitHub API:** 200⭐ / 12 forks / 2 open issues; latest main commit remains `8a295fd` (2026-08-26, model weights available). No new commits, releases, or independent evaluation signal appeared after the weights announcement. The release unlocked reproduction in principle, but adoption evidence is still absent; downgrade from active to warm and avoid further deep-read until a benchmark or community validation appears.

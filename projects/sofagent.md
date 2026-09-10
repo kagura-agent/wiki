@@ -137,3 +137,7 @@ Links: [[structural-fix-over-behavioral-rule]], [[self-evolving-observations]], 
 ## 2026-08-05 — Follow-up: the release gate is now the active surface
 
 sofagent reached 31⭐ and was active through 2026-08-04, but the newest changes are v1.2.6 acceptance-script false-positive fixes and release-checklist documentation. There is no new orchestration architecture this round. The useful confirmation is narrower: governance systems need their gates calibrated, or they become noise generators—exactly the failure [[dna-preflight]] is designed to expose. Retain at a longer revisit interval because the project remains solo and low-traction.
+
+## Follow-up — 2026-09-10
+
+**Delta verified via GitHub API:** 43⭐ / 5 forks / 4 open issues; v1.4.6 released 2026-09-09 after a dense release-process/documentation cycle. Main has recent commits through the release, including explicit version/checklist/hash closure. External merged PR history exists (HyperGroups), but current activity is still dominated by the maintainer and release SOP work; no new architecture or independent adoption evidence surfaced. Keep at monthly observation; the due revisit is complete.

@@ -46,3 +46,7 @@ DeepSeek Harness（dsh）的**错峰任务调度插件**：忙时随手把任务
 - Revisit 09-04：代码是否继续推进（T1.4/T2.7 stub 填充？）、star 是否过 50、dsh 官方是否收录（awesome-deepseek-harness）。
 
 Links: [[deepseek-harness-pr-review]], [[pilot-harness]], [[dsh-ios]], [[ecosystem-formation-signal]], [[noisegate]], [[FlowForge]], [[solo-skills]]
+
+## Follow-up — 2026-09-10
+
+**Delta verified via GitHub API:** 148⭐ / 8 forks / 0 open issues; main advanced from the 08-28 snapshot to commit `0171b56` on 2026-09-01. v0.2.0 added structure/hardening and v0.2.1 fixed a stale marketplace tarball install path; intervening commits also repaired missing `taskMeta.ts` and the `Task` type fields. The project is no longer a static stub, but remains solo with no external PR signal. Keep as **observe, not invest**; the original 09-04 check is now closed.

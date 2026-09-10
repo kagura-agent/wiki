@@ -2,7 +2,7 @@
 title: LongHorizon-Harness — verified-state control loop for computer-use agents
 created: 2026-08-05
 tags: [agent-harness, computer-use, verification, long-horizon, orchestration]
-last_verified: 2026-08-28
+last_verified: 2026-09-10
 source: https://github.com/AMAP-ML/LongHorizon-Harness
 ---
 
@@ -109,3 +109,7 @@ Revisit **2026-08-21**: #29 merge status + whether timeout-recovery holds in rea
 - **PR #29 (cost-aware escalation) 仍 OPEN** — core learning pattern 未 merge (自 08-17 已 11d)。cal-0818-319f (merge by 08-25) 已到期但未在 calibration due 列表 (检查中)。
 - External contributors 增至 9+ (lerogo 22 commits 领跑, Upper9527 6, zs1314 4, TON14 2...); 5 个 open PRs 队列 (#66-71: UTF-8 tolerance / supervisor crash-path / Windows compat)。
 - **growth spike + code pause** → 按 guide 规则 (growth signal ≠ code signal, 08-18 实证), 等 #29 merge + commit 恢复再判断; 09-03 revisit。
+
+## Delta — 2026-09-10
+
+**Delta verified via GitHub API:** 1,486⭐ / 161 forks / 43 open issues; main is still at `a1dd930` from 2026-08-20. PR #29 (cost-aware escalation) remains OPEN, as do newer external PRs #75 (strict MCP config) and #72 (run-identity event IDs). The project retains strong community activity in the PR/issue queue, but the default branch has been quiet for 21 days. This is a confirmed **growth-signal ≠ code-signal** case; keep tracking without adopting until the core PR or a new release lands.
