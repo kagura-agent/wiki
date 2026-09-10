@@ -2,7 +2,7 @@
 title: headcount — Claude Code 的 agent 组织（16 部门 / 146 skills / CI 强制 surface map）
 created: 2026-08-31
 tags: [agent-organization, claude-code, multi-agent, write-surface, reviewer-class, plugin-ecosystem]
-last_verified: 2026-09-02
+last_verified: 2026-09-10
 source: https://github.com/cbrock84/headcount
 ---
 
@@ -67,4 +67,6 @@ source: https://github.com/cbrock84/headcount
 
 ## Follow-up
 
-Revisit **09-07**：外部 PR #18（Codex 打包）是否 merge、star 增长是否持续（当前 743⭐/3d）、是否有更多外部贡献者（当前 31 commits 大部分 cbrock84 自己 + PR 模式）。预测 cal-0831-e59b：09-14 破 2k★（medium）。
+**2026-09-10 核验：**1337⭐ / 206 forks；main 最近提交为 2026-09-03，仍有产品维护。PR #18（adi-dibra 的 Codex GUI installer）仍 OPEN；但 PR #35 已由外部贡献者 VishnuVuggepalli 合并，社区信号不再只停留在待审 PR。增长和维护都成立，但 743→1337 仍不足以支持 09-14 达 2k★的原预测。
+
+Revisit **09-14**：核验 cal-0831-e59b，并继续观察 #18 处理与非作者贡献是否持续。
